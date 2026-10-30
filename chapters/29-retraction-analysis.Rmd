@@ -46,7 +46,7 @@ Bibliometric analysis of retractions must be approached carefully. The goal is t
 ```{r}
 #| label: 29-fetch-retraction-data
 #| cache: true
-retracted <- oa_fetch(
+retracted <- fetch_openalex(
   entity = "works",
   is_retracted = "true",
   from_publication_date = "2010-01-01",

@@ -64,7 +64,7 @@ We fetch works published in 2021-2022 and count citations received during 2022-2
 #| cache: true
 fetch_journal_works <- function(source_id, from_year, to_year) {
   res <- tryCatch(
-    oa_fetch(
+    fetch_openalex(
       entity = "works",
       primary_location.source.id = source_id,
       from_publication_date = paste0(from_year, "-01-01"),

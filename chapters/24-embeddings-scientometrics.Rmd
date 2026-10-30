@@ -52,7 +52,7 @@ The trade-off is interpretability: while TF-IDF features are directly readable (
 ```{r}
 #| label: 24-fetch-embed-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2019-01-01",

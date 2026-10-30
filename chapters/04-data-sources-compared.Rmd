@@ -93,7 +93,7 @@ dois <- c(
 ```{r}
 #| label: 04-fetch-openalex
 #| cache: true
-oa_results <- oa_fetch(
+oa_results <- fetch_openalex(
   entity = "works",
   doi = dois
 )

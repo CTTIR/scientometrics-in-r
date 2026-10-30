@@ -31,7 +31,7 @@ source(here::here("R", "sci_palette.R"))
 ```{r}
 #| label: cs01-fetch-crispr
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   search = "CRISPR",
   from_publication_date = "2010-01-01",

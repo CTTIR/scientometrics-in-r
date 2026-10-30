@@ -53,4 +53,4 @@ RUN R -e 'renv::restore(prompt = FALSE)'
 COPY . .
 
 # Default command: render the book
-CMD ["quarto", "render"]
+CMD ["R", "-e", "bookdown::render_book(\"index.Rmd\", output_format = \"all\")"]

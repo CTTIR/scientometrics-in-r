@@ -46,7 +46,7 @@ Documented gender disparities include: women are underrepresented as first and l
 ```{r}
 #| label: 28-fetch-gender-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2020-01-01",

@@ -70,7 +70,7 @@ We search for works whose title or abstract mentions "scientometrics", published
 ```{r}
 #| label: 01-fetch-sample
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   search = "scientometrics",
   from_publication_date = "2014-01-01",

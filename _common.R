@@ -1,3 +1,8 @@
+source("R/api_helpers.R")
+if (nzchar(Sys.getenv("OPENALEX_API_KEY"))) {
+  options(openalexR.apikey = Sys.getenv("OPENALEX_API_KEY"))
+}
+
 knitr::opts_chunk$set(
   echo       = TRUE,
   message    = FALSE,
@@ -17,8 +22,7 @@ options(
   scipen = 999,
   digits = 3,
   knitr.kable.NA = "—",
-  # Identify to OpenAlex to join the polite pool (faster, more reliable
-  # responses and fewer transient failures during CI renders).
+  # Contact metadata does not replace the API key required for cursor paging.
   openalexR.mailto = "raban.heller@outlook.com"
 )
 

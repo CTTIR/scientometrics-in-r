@@ -49,7 +49,7 @@ We use a corpus of works from the journal *Scientometrics* to demonstrate each l
 ```{r}
 #| label: 02-fetch-theory-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2015-01-01",
@@ -104,7 +104,7 @@ We count how many articles each journal source contributes (across a broader que
 ```{r}
 #| label: 02-bradford-data
 #| cache: true
-broad_works <- oa_fetch(
+broad_works <- fetch_openalex(
   entity = "works",
   search = "bibliometrics",
   from_publication_date = "2020-01-01",

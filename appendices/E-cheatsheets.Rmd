@@ -10,7 +10,7 @@
 library(openalexR)
 
 # Fetch works by journal (source)
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2020-01-01",
@@ -19,7 +19,7 @@ works <- oa_fetch(
 )
 
 # Fetch works by institution
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   authorships.institutions.id = "I63966007",
   from_publication_date = "2022-01-01",
@@ -27,20 +27,20 @@ works <- oa_fetch(
 )
 
 # Fetch works by topic
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   topics.id = "T10102",
   from_publication_date = "2023-01-01"
 )
 
 # Fetch author profile
-author <- oa_fetch(entity = "authors", id = "A5023888391")
+author <- fetch_openalex(entity = "authors", id = "A5023888391")
 
 # Fetch institution profile
-inst <- oa_fetch(entity = "institutions", id = "I63966007")
+inst <- fetch_openalex(entity = "institutions", id = "I63966007")
 
 # Sampling
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   options = list(sample = 500, seed = 42)

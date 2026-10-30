@@ -50,7 +50,7 @@ Topic models have been widely used in scientometrics to map research fields, tra
 ```{r}
 #| label: 22-fetch-topic-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2018-01-01",

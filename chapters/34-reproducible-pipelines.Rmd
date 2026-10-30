@@ -53,7 +53,7 @@ tar_option_set(packages = c("tidyverse", "openalexR", "igraph"))
 
 list(
   tar_target(raw_works, {
-    oa_fetch(
+    fetch_openalex(
       entity = "works",
       primary_location.source.id = "S148561398",
       from_publication_date = "2020-01-01",

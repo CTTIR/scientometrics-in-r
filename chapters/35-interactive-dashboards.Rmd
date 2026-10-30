@@ -47,7 +47,7 @@ The key design principle for dashboards is **progressive disclosure**: show the 
 ```{r}
 #| label: 35-fetch-dashboard-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2019-01-01",

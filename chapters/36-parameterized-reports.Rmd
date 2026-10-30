@@ -71,7 +71,7 @@ end_year <- 2023
 ```{r}
 #| label: 36-fetch-param-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = journal_id,
   from_publication_date = paste0(start_year, "-01-01"),

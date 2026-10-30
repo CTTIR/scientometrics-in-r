@@ -51,7 +51,7 @@ We construct a base map from citation flows between journals in a multidisciplin
 ```{r}
 #| label: 19-fetch-basemap-data
 #| cache: true
-works_multi <- oa_fetch(
+works_multi <- fetch_openalex(
   entity = "works",
   from_publication_date = "2022-01-01",
   to_publication_date = "2022-12-31",
@@ -147,7 +147,7 @@ We overlay the publication profile of an institution.
 ```{r}
 #| label: 19-fetch-overlay-data
 #| cache: true
-inst_works <- oa_fetch(
+inst_works <- fetch_openalex(
   entity = "works",
   authorships.institutions.id = "I40120149",
   from_publication_date = "2022-01-01",

@@ -49,7 +49,7 @@ We fetch a sample of works from the *Scientometrics* journal via OpenAlex and co
 ```{r}
 #| label: 09-fetch-desc-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2018-01-01",

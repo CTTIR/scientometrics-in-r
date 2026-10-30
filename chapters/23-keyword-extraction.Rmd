@@ -25,6 +25,7 @@ library(gt)
 set.seed(20260509)
 
 source(here::here("R", "api_helpers.R"))
+source(here::here("R", "rake_keywords.R"))
 source(here::here("R", "utils.R"))
 source(here::here("R", "sci_palette.R"))
 ```
@@ -37,13 +38,13 @@ Keywords serve as compact descriptors of a document's content. In bibliometrics,
 2. **Indexed terms**: Assigned by database curators (MeSH in PubMed, descriptors in WoS). Consistent but labour-intensive and available only in some databases.
 3. **Extracted keywords**: Automatically derived from titles and abstracts using algorithms. Scalable and consistent but may miss domain nuance.
 
-**RAKE** (Rapid Automatic Keyword Extraction) identifies candidate keywords by finding sequences of content words delimited by stopwords or punctuation. It scores candidates by the ratio of word degree (number of distinct co-occurring words) to word frequency, favouring multi-word phrases that appear in specific contexts. RAKE is fast and unsupervised but does not consider document-level or corpus-level statistics.
+**RAKE** (Rapid Automatic Keyword Extraction) identifies candidate keywords by finding sequences of content words delimited by stopwords or punctuation. It scores candidates by the ratio of word weighted degree (including the word itself within candidate phrases) to word frequency, favouring multi-word phrases that appear in specific contexts. RAKE is fast and unsupervised but does not consider document-level or corpus-level statistics.
 
 **TextRank** adapts the PageRank algorithm to text: words are nodes in a graph, edges connect co-occurring words within a sliding window, and importance is computed iteratively. High-ranking words are selected as keywords. TextRank captures contextual importance better than frequency-based methods but is more computationally expensive.
 
 Both methods extract keywords from individual documents. **TF-IDF** (\@ref(textmine-background)) provides a complementary corpus-level view, identifying terms that distinguish a document from the broader collection.
 
-Evaluating keyword extraction requires ground truth. Author keywords are the most common benchmark, but they are imperfect: authors may omit obvious keywords or include overly specific terms. Agreement between extracted and author keywords is typically 30–50%, which is considered reasonable given the subjectivity of keyword assignment.
+Evaluating keyword extraction requires ground truth. Author keywords are the most common benchmark, but they are imperfect: authors may omit obvious keywords or include overly specific terms. Agreement depends on the corpus, matching rules, number of keywords, and reference annotation. Define these choices before evaluation and report observed precision and recall; no universal acceptance percentage is assumed here.
 
 ## Worked example {#kwextract-example}
 
@@ -52,7 +53,7 @@ Evaluating keyword extraction requires ground truth. Author keywords are the mos
 ```{r}
 #| label: 23-fetch-keyword-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2021-01-01",
@@ -77,13 +78,8 @@ cat(glue("Documents with abstracts: {nrow(text_df)}\n"))
 ```{r}
 #| label: 23-rake-extraction
 rake_extract <- function(text, n_keywords = 10) {
-  toks <- tokens(text, remove_punct = TRUE, remove_numbers = TRUE) |>
-    tokens_tolower() |>
-    tokens_remove(stopwords("en"))
-
-  dfmat <- dfm(toks)
-  freq <- topfeatures(dfmat, n = n_keywords)
-  names(freq)
+  rake_keywords(text, stopwords = quanteda::stopwords("en"),
+                n_keywords = n_keywords)$keyword
 }
 
 text_df <- text_df |>
@@ -169,7 +165,7 @@ tibble(jaccard = overlap) |>
 
 ## Diagnostics and interpretation {#kwextract-diagnostics}
 
-- **Extraction quality**: Compare extracted keywords against author keywords for a random sample of 20–30 papers. Precision above 30% is typical.
+- **Extraction quality**: Compare extracted keywords against author keywords for a random sample of 20–30 papers. Specify exact or normalized matching, report precision and recall, and inspect disagreements rather than applying an unsupported universal threshold.
 - **Redundancy**: Check for near-duplicate keywords (singular/plural, abbreviation/full form). Post-processing to merge variants improves quality.
 - **Domain specificity**: Generic terms ("model", "method", "data") are often extracted but carry no topical information. Consider a domain-specific stopword list.
 - **Coverage**: Some documents yield few meaningful keywords, especially short abstracts. Flag documents where fewer than 3 keywords were extracted.

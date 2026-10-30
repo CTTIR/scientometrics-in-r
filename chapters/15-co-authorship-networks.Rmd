@@ -48,7 +48,7 @@ We fetch works from a journal and extract the author pairs.
 ```{r}
 #| label: 15-fetch-coauth-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2021-01-01",

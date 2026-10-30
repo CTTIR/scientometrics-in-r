@@ -30,7 +30,7 @@ source(here::here("R", "sci_palette.R"))
 ```{r}
 #| label: cs05-fetch-emerging-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2015-01-01",

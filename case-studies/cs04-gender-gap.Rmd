@@ -26,7 +26,7 @@ source(here::here("R", "sci_palette.R"))
 ```{r}
 #| label: cs04-fetch-gender-data
 #| cache: true
-works_sciento <- oa_fetch(
+works_sciento <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2019-01-01",
@@ -35,7 +35,7 @@ works_sciento <- oa_fetch(
   options = list(sample = 300, seed = 42)
 ) |> mutate(journal = "Scientometrics")
 
-works_plos <- oa_fetch(
+works_plos <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S202381698",
   from_publication_date = "2019-01-01",

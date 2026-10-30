@@ -45,7 +45,7 @@ We fetch a sample of works and their citation counts from OpenAlex.
 ```{r}
 #| label: 10-fetch-indicator-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2018-01-01",

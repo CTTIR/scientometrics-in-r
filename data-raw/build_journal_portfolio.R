@@ -1,3 +1,4 @@
+# Synthetic teaching fixture: not downloaded provider records or empirical evidence.
 # Build journal_portfolio_demo dataset
 # A small journal portfolio dataset for case study 3 examples.
 # Run this script from the project root to regenerate data/journal_portfolio_demo.rda

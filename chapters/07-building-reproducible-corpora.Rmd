@@ -44,7 +44,7 @@ Raw bibliographic data is messy. Records from different sources may describe the
 ```{r}
 #| label: 07-fetch-corpus-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   search = "bibliometrics",
   from_publication_date = "2021-01-01",
@@ -111,7 +111,9 @@ top_institutions
 corpus_clean <- works_deduped |>
   select(id, display_name, publication_date, cited_by_count, doi, source_display_name, abstract)
 
-out_path <- here::here("inst", "extdata", "corpus_sample.parquet")
+out_dir <- here::here("_freeze", "exports")
+dir.create(out_dir, recursive = TRUE, showWarnings = FALSE)
+out_path <- file.path(out_dir, "corpus_sample.parquet")
 write_parquet(corpus_clean, out_path)
 cat(glue("Saved {nrow(corpus_clean)} records to {out_path}\n"))
 ```

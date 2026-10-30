@@ -104,6 +104,8 @@ jobs:
           echo "RETICULATE_PYTHON=/opt/scientometrics-py/bin/python" >> $GITHUB_ENV
 
       - name: Render book (HTML + PDF + EPUB)
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: Rscript -e 'bookdown::render_book("index.Rmd", output_format = "all")'
 
       - name: Render per-chapter PDFs

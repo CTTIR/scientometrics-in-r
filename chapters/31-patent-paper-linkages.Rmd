@@ -44,7 +44,7 @@ OpenAlex records whether a work has been cited in patents and provides the count
 ```{r}
 #| label: 31-fetch-patent-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   from_publication_date = "2015-01-01",
   to_publication_date = "2020-12-31",

@@ -61,3 +61,12 @@ render-test.log
 *.orig
 .Rproj.user
 *.Rcheck/
+
+# Temporary merged source left by an interrupted book render
+/scientometrics-in-r.Rmd
+
+.Renviron
+
+.env
+
+.env.*

@@ -1,3 +1,4 @@
+# Synthetic teaching fixture: not downloaded provider records or empirical evidence.
 # Build openalex_sample dataset
 # A small sample of OpenAlex works for use in book examples.
 # Run this script from the project root to regenerate data/openalex_sample.rda

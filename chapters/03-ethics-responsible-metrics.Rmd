@@ -94,7 +94,7 @@ We fetch a sample of authors associated with scientometrics research who have at
 ```{r}
 #| label: 03-fetch-authors
 #| cache: true
-authors_raw <- oa_fetch(
+authors_raw <- fetch_openalex(
   entity = "authors",
   topics.id = "T10102",
   works_count = ">50",
@@ -124,7 +124,7 @@ authors_sample <- authors |>
 estimate_self_citation <- function(author_id, author_name) {
   # Fetch up to 50 recent works by this author
   works <- tryCatch(
-    oa_fetch(
+    fetch_openalex(
       entity = "works",
       author.id = author_id,
       from_publication_date = "2018-01-01",

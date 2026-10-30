@@ -10,7 +10,7 @@ Description: Helper functions and bundled datasets for the book
     Evaluation'. Provides utilities for fetching OpenAlex data, computing
     bibliometric indicators, building co-authorship networks, and
     detecting emerging topics.
-License: MIT + file LICENSE-CODE
+License: MIT + file LICENCE
 URL: https://r-heller.github.io/scientometrics-in-r/,
     https://github.com/r-heller/scientometrics-in-r
 BugReports: https://github.com/r-heller/scientometrics-in-r/issues
@@ -35,4 +35,4 @@ Config/testthat/edition: 3
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+Config/roxygen2/version: 8.0.0

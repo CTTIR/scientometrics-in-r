@@ -1,3 +1,4 @@
+# Synthetic teaching fixture: not downloaded provider records or empirical evidence.
 # Build crispr_corpus_mini dataset
 # A small CRISPR-related corpus for case study examples.
 # Run this script from the project root to regenerate data/crispr_corpus_mini.rda

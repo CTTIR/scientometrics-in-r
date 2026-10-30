@@ -48,7 +48,7 @@ We retrieve the OpenAlex profile for a well-known scientometrician.
 ```{r}
 #| label: 12-fetch-author
 #| cache: true
-author_entity <- oa_fetch(
+author_entity <- fetch_openalex(
   entity = "authors",
   search = "Ludo Waltman",
   options = list(sort = "cited_by_count:desc")
@@ -67,7 +67,7 @@ cat(glue("Cited by count: {author_info$cited_by_count}\n"))
 ```{r}
 #| label: 12-fetch-author-works
 #| cache: true
-author_works <- oa_fetch(
+author_works <- fetch_openalex(
   entity = "works",
   author.id = author_info$id,
   from_publication_date = "2010-01-01",

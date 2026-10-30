@@ -26,7 +26,7 @@ journal concentration.
 library(openalexR)
 library(tidyverse)
 
-works_ml <- oa_fetch(
+works_ml <- fetch_openalex(
  entity = "works",
  search = "machine learning",
  from_publication_date = "2013-01-01",
@@ -251,7 +251,7 @@ library(tidyverse)
 
 fields <- c("bibliometrics", "genomics")
 results <- map(fields, \(term) {
- w <- oa_fetch(entity = "works", search = term,
+ w <- fetch_openalex(entity = "works", search = term,
                from_publication_date = "2020-01-01",
                to_publication_date = "2023-12-31") |>
    slice_sample(n = 200)
@@ -322,7 +322,7 @@ library(tidyverse)
 dois <- works |> slice_sample(n = 20) |> pull(doi) |> na.omit()
 
 oa_results <- map(dois, \(d) {
- tryCatch(oa_fetch(entity = "works", doi = d), error = \(e) NULL)
+ tryCatch(fetch_openalex(entity = "works", doi = d), error = \(e) NULL)
 }) |> compact()
 oa_found <- length(oa_results)
 
@@ -354,7 +354,7 @@ fields <- list(
 )
 
 coverage <- imap(fields, \(concept_id, name) {
- oa_fetch(entity = "works", concept.id = concept_id,
+ fetch_openalex(entity = "works", concept.id = concept_id,
           count_only = TRUE) |>
    mutate(field = name)
 }) |> list_rbind()
@@ -410,7 +410,7 @@ biorxiv_dois <- c(
 
 preprint_status <- map(biorxiv_dois, \(d) {
  tryCatch({
-   w <- oa_fetch(entity = "works", doi = d)
+   w <- fetch_openalex(entity = "works", doi = d)
    tibble(doi = d, found = TRUE,
           has_published = !is.null(w$ids$doi))
  }, error = \(e) tibble(doi = d, found = FALSE, has_published = FALSE))
@@ -459,12 +459,12 @@ library(openalexR)
 library(tidyverse)
 
 # Step 1: find the institution
-my_inst <- oa_fetch(entity = "institutions",
+my_inst <- fetch_openalex(entity = "institutions",
                     search = "University of Example")
 my_inst_id <- my_inst$id[1]
 
 # Step 2: fetch works
-inst_works <- oa_fetch(entity = "works",
+inst_works <- fetch_openalex(entity = "works",
                        authorships.institutions.lineage = my_inst_id,
                        from_publication_date = "2020-01-01")
 
@@ -485,7 +485,7 @@ library(rcrossref)
 
 sample_doi <- inst_works$doi[1]
 
-oa_meta <- oa_fetch(entity = "works", doi = sample_doi)
+oa_meta <- fetch_openalex(entity = "works", doi = sample_doi)
 cr_meta <- cr_works(sample_doi)$data
 
 tibble(
@@ -506,7 +506,7 @@ Fetch all works from a journal across multiple years.
 ```{r}
 #| label: E-sol-ch05-3
 #| eval: false
-journal_works <- oa_fetch(
+journal_works <- fetch_openalex(
  entity = "works",
  primary_location.source.id = "S4210174107",  # example journal ID
  from_publication_date = "2015-01-01",
@@ -792,7 +792,7 @@ Identify core, mid, and peripheral journal zones.
 library(openalexR)
 library(bibliometrix)
 
-ml_works <- oa_fetch(entity = "works", search = "machine learning",
+ml_works <- fetch_openalex(entity = "works", search = "machine learning",
                      from_publication_date = "2020-01-01",
                      to_publication_date = "2023-12-31") |>
  slice_sample(n = 500)
@@ -853,7 +853,7 @@ Compute h-index, g-index, and m-quotient for a specific author.
 library(openalexR)
 library(tidyverse)
 
-author_works <- oa_fetch(
+author_works <- fetch_openalex(
  entity = "works",
  author.id = "A5023888391",  # replace with target author
  per_page = 200
@@ -894,7 +894,7 @@ Pseudocode for removing self-citations from the h-index.
 # Implementation sketch (expensive API calls):
 # author_id <- "A5023888391"
 # adjusted_cites <- map_int(author_works$id, \(work_id) {
-#   citing <- oa_fetch(entity = "works", cites = work_id)
+#   citing <- fetch_openalex(entity = "works", cites = work_id)
 #   citing |>
 #     unnest(author) |>
 #     filter(au_id != author_id) |>
@@ -967,7 +967,7 @@ journal_id <- "S4210174107"  # example journal
 target_year <- 2023
 
 # Fetch articles published in the 4-year window
-window_works <- oa_fetch(
+window_works <- fetch_openalex(
  entity = "works",
  primary_location.source.id = journal_id,
  from_publication_date = paste0(target_year - 4, "-01-01"),
@@ -1012,7 +1012,7 @@ physics_journals <- c("S137773608", "S71048024")
 sociology_journals <- c("S64468286", "S128732326")
 
 compute_jif <- function(jid) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                primary_location.source.id = jid,
                from_publication_date = "2021-01-01",
                to_publication_date = "2022-12-31")
@@ -1040,7 +1040,7 @@ Estimate the proportion of journal self-citations.
 #| eval: false
 # Approximation: among citing works of this journal's papers,
 # how many are also published in the same journal?
-journal_works <- oa_fetch(
+journal_works <- fetch_openalex(
  entity = "works",
  primary_location.source.id = journal_id,
  from_publication_date = "2021-01-01",
@@ -1052,7 +1052,7 @@ sample_ids <- journal_works |> slice_sample(n = 20) |> pull(id)
 
 self_cite_rates <- map_dbl(sample_ids, \(wid) {
  citing <- tryCatch(
-   oa_fetch(entity = "works", cites = wid),
+   fetch_openalex(entity = "works", cites = wid),
    error = \(e) tibble()
  )
  if (nrow(citing) == 0) return(NA_real_)
@@ -1079,7 +1079,7 @@ library(tidyverse)
 ids <- c("A5023888391", "A5048491430")  # two author IDs
 
 profiles <- map(ids, \(aid) {
- w <- oa_fetch(entity = "works", author.id = aid)
+ w <- fetch_openalex(entity = "works", author.id = aid)
  cites <- sort(w$cited_by_count, decreasing = TRUE)
  tibble(
    author_id = aid,
@@ -1102,10 +1102,10 @@ Compare works fetched by OpenAlex ID vs. ORCID filtering.
 ```{r}
 #| label: E-sol-ch12-2
 #| eval: false
-oa_by_id <- oa_fetch(entity = "works",
+oa_by_id <- fetch_openalex(entity = "works",
                      author.id = "A5023888391")
 
-oa_by_orcid <- oa_fetch(entity = "works",
+oa_by_orcid <- fetch_openalex(entity = "works",
                         author.orcid = "0000-0001-2345-6789")
 
 cat("By ID:", nrow(oa_by_id), "works\n")
@@ -1127,7 +1127,7 @@ Search for a common name and assess disambiguation.
 ```{r}
 #| label: E-sol-ch12-3
 #| eval: false
-wang_wei <- oa_fetch(entity = "authors",
+wang_wei <- fetch_openalex(entity = "authors",
                      search = "Wang Wei")
 
 nrow(wang_wei)  # many entities
@@ -1153,7 +1153,7 @@ Recompute productivity using fractional counting.
 ```{r}
 #| label: E-sol-ch12-4
 #| eval: false
-author_works <- oa_fetch(entity = "works",
+author_works <- fetch_openalex(entity = "works",
                          author.id = "A5023888391")
 
 fractional <- author_works |>
@@ -1186,7 +1186,7 @@ sample_works <- author_works |> slice_sample(n = 10)
 
 self_cite_frac <- map_dbl(sample_works$id, \(wid) {
  citing <- tryCatch(
-   oa_fetch(entity = "works", cites = wid),
+   fetch_openalex(entity = "works", cites = wid),
    error = \(e) tibble()
  )
  if (nrow(citing) == 0) return(NA_real_)
@@ -1324,7 +1324,7 @@ library(openalexR)
 library(tidyverse)
 
 fetch_half_life <- function(journal_id, label) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                primary_location.source.id = journal_id,
                from_publication_date = "2015-01-01",
                to_publication_date = "2018-12-31")
@@ -1363,7 +1363,7 @@ sample_papers <- works |>
 
 price_indices <- map_dbl(sample_papers$id, \(wid) {
  refs <- tryCatch(
-   oa_fetch(entity = "works", cited_by = wid),
+   fetch_openalex(entity = "works", cited_by = wid),
    error = \(e) tibble()
  )
  if (nrow(refs) == 0) return(NA_real_)
@@ -1974,7 +1974,7 @@ library(ggrepel)
 inst_ids <- c("I123456789", "I987654321")
 
 profiles <- map(inst_ids, \(iid) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                authorships.institutions.lineage = iid,
                from_publication_date = "2020-01-01")
  w |>
@@ -2004,7 +2004,7 @@ periods <- list(
 )
 
 temporal_profiles <- imap(periods, \(dates, label) {
- oa_fetch(entity = "works",
+ fetch_openalex(entity = "works",
           authorships.institutions.lineage = "I123456789",
           from_publication_date = dates[1],
           to_publication_date   = dates[2]) |>
@@ -2033,7 +2033,7 @@ Compare a small and a large country's publication profiles.
 countries <- c("SG", "US")  # Singapore vs. United States
 
 country_profiles <- map(countries, \(cc) {
- oa_fetch(entity = "works",
+ fetch_openalex(entity = "works",
           authorships.countries = cc,
           from_publication_date = "2022-01-01",
           to_publication_date = "2022-12-31") |>
@@ -2810,7 +2810,7 @@ library(tidyverse)
 journal_ids <- c("S4210174107", "S137773608")
 
 oa_advantage <- map(journal_ids, \(jid) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                primary_location.source.id = jid,
                from_publication_date = "2019-01-01",
                to_publication_date = "2022-12-31")
@@ -2871,13 +2871,13 @@ Compare citation distributions and reference list lengths across fields.
 ```{r}
 #| label: E-sol-ch26-3
 #| eval: false
-biomed <- oa_fetch(entity = "works",
+biomed <- fetch_openalex(entity = "works",
                    primary_location.source.id = "S49861241",
                    from_publication_date = "2020-01-01") |>
  mutate(field = "Biomedicine") |>
  slice_sample(n = 200)
 
-math <- oa_fetch(entity = "works",
+math <- fetch_openalex(entity = "works",
                  primary_location.source.id = "S154589771",
                  from_publication_date = "2020-01-01") |>
  mutate(field = "Mathematics") |>
@@ -2921,7 +2921,7 @@ journals <- list(
 )
 
 oa_rates <- imap(journals, \(jid, field) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                primary_location.source.id = jid,
                from_publication_date = "2020-01-01",
                to_publication_date = "2023-12-31")
@@ -2993,7 +2993,7 @@ library(tidyverse)
 journal_ids <- c("S4210174107", "S49861241", "S154589771")
 
 gender_by_journal <- map(journal_ids, \(jid) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                primary_location.source.id = jid,
                from_publication_date = "2020-01-01") |>
    slice_sample(n = 200)
@@ -3083,10 +3083,10 @@ library(tidyverse)
 fields <- c("biomedicine", "computer science")
 
 retraction_rates <- map(fields, \(f) {
- all_works <- oa_fetch(entity = "works", search = f,
+ all_works <- fetch_openalex(entity = "works", search = f,
                        from_publication_date = "2015-01-01",
                        count_only = TRUE)
- retracted <- oa_fetch(entity = "works", search = f,
+ retracted <- fetch_openalex(entity = "works", search = f,
                        type = "retraction",
                        from_publication_date = "2015-01-01",
                        count_only = TRUE)
@@ -3111,7 +3111,7 @@ Examine when a retracted paper's citations were received.
 ```{r}
 #| label: E-sol-ch29-2
 #| eval: false
-retracted_paper <- oa_fetch(entity = "works",
+retracted_paper <- fetch_openalex(entity = "works",
                             doi = "10.xxxx/retracted-example")
 
 if (!is.null(retracted_paper$counts_by_year)) {
@@ -3193,7 +3193,7 @@ library(tidyverse)
 funder_ids <- c("F123456", "F789012")  # OpenAlex funder IDs
 
 funder_profiles <- map(funder_ids, \(fid) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                grants.funder = fid,
                from_publication_date = "2020-01-01") |>
    slice_sample(n = 300)
@@ -3249,13 +3249,13 @@ Compare the proportion of highly cited papers across fields.
 library(openalexR)
 library(tidyverse)
 
-biomed <- oa_fetch(entity = "works",
+biomed <- fetch_openalex(entity = "works",
                    search = "drug delivery",
                    from_publication_date = "2018-01-01",
                    to_publication_date = "2020-12-31") |>
  slice_sample(n = 200) |> mutate(field = "Biomedical")
 
-socsci <- oa_fetch(entity = "works",
+socsci <- fetch_openalex(entity = "works",
                    search = "social inequality",
                    from_publication_date = "2018-01-01",
                    to_publication_date = "2020-12-31") |>
@@ -3316,7 +3316,7 @@ Compare the proportion of top-cited papers across institutions.
 inst_ids <- c("I123456789", "I987654321")
 
 inst_top_papers <- map(inst_ids, \(iid) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                authorships.institutions.lineage = iid,
                from_publication_date = "2018-01-01",
                to_publication_date = "2020-12-31")
@@ -3467,7 +3467,7 @@ Compare metadata completeness and OA rates across journals.
 journal_ids <- c("S4210174107", "S49861241", "S137773608")
 
 journal_quality <- map(journal_ids, \(jid) {
- w <- oa_fetch(entity = "works",
+ w <- fetch_openalex(entity = "works",
                primary_location.source.id = jid,
                from_publication_date = "2020-01-01") |>
    slice_sample(n = 200)
@@ -3528,7 +3528,7 @@ tar_option_set(packages = c("openalexR", "tidyverse"))
 
 list(
  tar_target(raw_data, {
-   oa_fetch(entity = "works", search = "bibliometrics",
+   fetch_openalex(entity = "works", search = "bibliometrics",
             from_publication_date = "2020-01-01")
  }),
 
@@ -3605,7 +3605,7 @@ list(
             c("S4210174107", "S137773608", "S49861241")),
 
  tar_target(journal_data,
-   oa_fetch(entity = "works",
+   fetch_openalex(entity = "works",
             primary_location.source.id = journal_ids,
             from_publication_date = "2020-01-01"),
    pattern = map(journal_ids)
@@ -3745,7 +3745,7 @@ Create a parameterized report for institutional profiles.
 # library(openalexR)
 # library(tidyverse)
 #
-# works <- oa_fetch(
+# works <- fetch_openalex(
 #   entity = "works",
 #   authorships.institutions.lineage = params$inst_id,
 #   from_publication_date = paste0(params$start_year, "-01-01"),
@@ -3897,7 +3897,7 @@ library(memoise)
 
 # Create a cached version of the data fetching function
 fetch_cached <- memoise(function(journal_id, start_date, end_date) {
- oa_fetch(
+ fetch_openalex(
    entity = "works",
    primary_location.source.id = journal_id,
    from_publication_date = start_date,

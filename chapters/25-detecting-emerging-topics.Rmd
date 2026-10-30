@@ -49,7 +49,7 @@ An **emerging topic** is a research area experiencing rapid growth in attention 
 ```{r}
 #| label: 25-fetch-emerging-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2015-01-01",

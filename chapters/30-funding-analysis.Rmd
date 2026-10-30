@@ -44,7 +44,7 @@ The fundamental challenge is **attribution**: a paper acknowledging three funder
 ```{r}
 #| label: 30-fetch-funding-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2020-01-01",

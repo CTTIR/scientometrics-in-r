@@ -42,12 +42,12 @@ We build a small corpus of recent scientometrics research, demonstrating the ful
 
 ### Querying works from OpenAlex
 
-The core function is `oa_fetch()`. We search for works published in the journal *Scientometrics* between 2020 and 2023, sampling 200 records for a manageable demonstration.
+The provider function is `openalexR::oa_fetch()`. Runnable examples use the book's `fetch_openalex()` wrapper, sourced above, to cache responses by their exact arguments. Set `SCIENTOMETRICS_OFFLINE=1` to reuse existing OpenAlex caches without requesting new data; a missing cache stops with an explicit error. Other providers have their own network requirements. We search for works published in the journal *Scientometrics* between 2020 and 2023, sampling 200 records for a manageable demonstration.
 
 ```{r}
 #| label: 05-fetch-works
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2020-01-01",
@@ -77,7 +77,7 @@ We can also retrieve author-level data. Let us look up authors associated with s
 ```{r}
 #| label: 05-fetch-authors
 #| cache: true
-authors <- oa_fetch(
+authors <- fetch_openalex(
   entity = "authors",
   topics.id = "T10102",
   works_count = ">50",

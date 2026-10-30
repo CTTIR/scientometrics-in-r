@@ -48,7 +48,7 @@ Text mining complements network-based methods (\@ref(coword-background)). Co-wor
 ```{r}
 #| label: 21-fetch-textmine-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2019-01-01",

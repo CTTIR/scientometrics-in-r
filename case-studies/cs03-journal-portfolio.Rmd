@@ -38,7 +38,7 @@ journals <- tribble(
 #| label: cs03-fetch-journal-data
 #| cache: true
 fetch_journal <- function(sid) {
-  oa_fetch(
+  fetch_openalex(
     entity = "works",
     primary_location.source.id = sid,
     from_publication_date = "2018-01-01",

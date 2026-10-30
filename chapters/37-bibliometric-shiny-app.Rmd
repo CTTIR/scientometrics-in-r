@@ -94,7 +94,7 @@ server <- function(input, output, session) {
 
   works_data <- eventReactive(input$fetch, {
     withProgress(message = "Fetching from OpenAlex...", {
-      oa_fetch(
+      fetch_openalex(
         entity = "works",
         primary_location.source.id = input$journal_id,
         from_publication_date = paste0(input$year_range[1], "-01-01"),

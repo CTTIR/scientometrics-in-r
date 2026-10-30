@@ -48,7 +48,7 @@ These practices are measurable proxies for reproducibility, but they are not rep
 ```{r}
 #| label: 33-fetch-repro-data
 #| cache: true
-works <- oa_fetch(
+works <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2018-01-01",

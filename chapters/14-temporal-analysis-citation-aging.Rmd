@@ -52,7 +52,7 @@ We fetch works from two journals with different expected aging profiles.
 #| label: 14-fetch-temporal-data
 #| cache: true
 # Scientometrics (social science, moderate aging)
-works_sciento <- oa_fetch(
+works_sciento <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S148561398",
   from_publication_date = "2013-01-01",
@@ -62,7 +62,7 @@ works_sciento <- oa_fetch(
 )
 
 # PLOS ONE (multidisciplinary, faster aging)
-works_plos <- oa_fetch(
+works_plos <- fetch_openalex(
   entity = "works",
   primary_location.source.id = "S202381698",
   from_publication_date = "2013-01-01",

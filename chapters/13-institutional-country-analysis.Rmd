@@ -64,7 +64,7 @@ institutions <- tribble(
 #| cache: true
 fetch_inst_works <- function(inst_id) {
   res <- tryCatch(
-    oa_fetch(
+    fetch_openalex(
       entity = "works",
       authorships.institutions.id = inst_id,
       from_publication_date = "2020-01-01",

@@ -21,9 +21,11 @@ A free, open-source book by **Raban Heller**.
 The book is a hands-on guide to scientometrics in R. It covers the
 full workflow from data acquisition (OpenAlex, Crossref, PubMed)
 through core bibliometric indicators, network analysis, text mining,
-and production reporting. All examples are fully reproducible using
-free, open data sources — no Web of Science or Scopus subscription is
-required.
+and production reporting. Examples use free, open data sources. Live API
+results change, some operations require credentials, and exact reproduction
+requires the same cached corpus and software environment. No Web of Science or
+Scopus subscription is required. The bundled companion datasets are **synthetic
+teaching fixtures**, not measured OpenAlex records or empirical evidence.
 
 It is written for researchers, librarians, research administrators,
 and data scientists who already know R at a tidyverse level and want
@@ -75,6 +77,25 @@ The book has eight parts plus appendices:
   publisher = {Self-published}
 }
 ```
+
+## Build status and API access
+
+The companion R package passes local build and check. The full book is not yet
+release-qualified: the 30 October 2026 HTML run reached Chapter 12 and stopped
+when OpenAlex required authentication for cursor paging. Later chapters and all
+publication formats remain to be validated. See `MAINTENANCE.md`.
+
+OpenAlex's [authentication documentation](https://help.openalex.org/api/authentication/)
+requires a free, activated key for paging beyond the first page. Keep it outside
+Git. This book accepts `OPENALEX_API_KEY`; existing `openalexR.apikey` environment
+or R-option configuration also works. Neither the key nor a live corpus should
+be placed in a commit. Supplying a key enables requests against its account budget.
+
+Chapter code uses `fetch_openalex()` with exact-argument RDS caches in
+`_freeze/openalex_cache/`. Set `SCIENTOMETRICS_OFFLINE=1` to require existing
+OpenAlex caches, including stale ones; a missing/unreadable cache fails explicitly.
+This mode does not make Crossref, PubMed, or other providers offline.
+Do not reuse old knitr caches when validating changed analysis code.
 
 ## Reproducibility
 
