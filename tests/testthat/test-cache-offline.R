@@ -32,3 +32,25 @@ test_that("cache control arguments are checked", {
   expect_error(fetch_openalex(offline=NA),"offline")
   expect_error(fetch_openalex(cache_dir=character()),"cache_dir")
 })
+
+test_that("exhausted provider HTTP warnings cannot become empty successful datasets", {
+  cache <- tempfile("sci-stale-cache-")
+  dir.create(cache)
+  on.exit(unlink(cache, recursive=TRUE), add=TRUE)
+  fixture <- tibble::tibble(id="preserved-corpus")
+  file <- file.path(cache,paste0(rlang::hash(list(entity="works")),".rds"))
+  saveRDS(fixture,file)
+  Sys.setFileTime(file,Sys.time()-3600*24*30)
+  calls <- 0L
+  local_mocked_bindings(.fetch_openalex_remote=function(...) {
+    calls <<- calls+1L
+    warning(structure(list(message="HTTP status 429: retries exhausted",call=NULL),
+                      class=c("openalexR_http_warning","warning","condition")))
+    tibble::tibble()
+  },sci_rate_limit=function(...) invisible(NULL))
+  expect_error(fetch_openalex(entity="works",cache_dir=cache),
+               class="scientometrics_provider_unavailable")
+  expect_identical(readRDS(file),fixture)
+  expect_equal(calls,1L)
+  expect_length(list.files(cache),1L)
+})

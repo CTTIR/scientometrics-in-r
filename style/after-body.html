@@ -25,70 +25,55 @@
   })();
 </script>
 
-<!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
--->
+<!-- Links are limited to nonempty artifacts inventoried after rendering. -->
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
-
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        var firstChild = extraList.firstElementChild;
+        var header = document.createElement("li");
+        header.className = "book-extra-section";
+        var heading = document.createElement("strong");
+        heading.textContent = "Download";
+        header.appendChild(heading);
+        extraList.insertBefore(header, firstChild);
+        links.forEach(function (link) {
+          var item = document.createElement("li");
+          var anchor = document.createElement("a");
+          anchor.id = link[0];
+          anchor.href = link[1];
+          anchor.textContent = link[2];
+          item.appendChild(anchor);
+          extraList.insertBefore(item, firstChild);
+        });
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script>
 

@@ -5,9 +5,9 @@
 After completing this chapter, you will be able to:
 
 - Distinguish causal from correlational claims in bibliometric research
-- Apply difference-in-differences to evaluate the effect of a policy change
-- Use propensity score matching to create comparable treatment and control groups
-- Interpret regression discontinuity designs for threshold-based interventions
+- Explain the intervention and outcome data required for difference-in-differences
+- Compute descriptive OA-by-publication-cohort comparisons without assigning a causal interpretation
+- Distinguish a within-year comparison from validated matching or a regression-discontinuity design
 - Recognise the assumptions underlying causal inference in observational bibliometric data
 
 ## Setup {#causal-setup}
@@ -41,7 +41,11 @@ All three methods require strong assumptions. In bibliometrics, violations are c
 
 ## Worked example {#causal-example}
 
-### Setting up a DiD analysis: OA status and citations
+### A descriptive OA-by-publication-cohort comparison
+
+This example samples papers from one journal and compares their current cumulative citation counts. The 2020 split is an arbitrary publication-cohort boundary, not a documented intervention. OA status is observed at retrieval, not recorded treatment assignment. Different publication years contain different papers with different citation exposure. Consequently, neither the interaction regression nor the cohort plot identifies a policy effect or tests a DiD parallel-trends assumption. DiD requires a defensible intervention, comparison design and outcome histories; see [Callaway and Sant’Anna (2021)](https://doi.org/10.1016/j.jeconom.2020.12.001).
+
+The sample and citation snapshot describe the fetched data only; they are not journal totals or a frozen historical citation panel.
 
 ```{r}
 #| label: 32-fetch-causal-data
@@ -55,64 +59,76 @@ works <- fetch_openalex(
   options = list(sample = 500, seed = 42)
 )
 
-did_data <- works |>
+cohort_data <- works |>
   transmute(
     id, year = year(publication_date),
     cited_by_count,
-    is_oa = oa_status != "closed",
-    post_2020 = year >= 2020,
+    is_oa = case_when(
+      oa_status %in% c("gold", "green", "hybrid", "bronze", "diamond") ~ TRUE,
+      oa_status == "closed" ~ FALSE,
+      TRUE ~ NA
+    ),
+    recent_cohort = year >= 2020,
     referenced_works_count
   )
 
-cat(glue("Papers: {nrow(did_data)}\n"))
-cat(glue("OA: {sum(did_data$is_oa)}, Closed: {sum(!did_data$is_oa)}\n"))
+excluded_records <- sum(!complete.cases(cohort_data))
+cohort_data <- cohort_data |> drop_na()
+stopifnot(!anyDuplicated(cohort_data$id), nrow(cohort_data) > 0)
+cat(glue("Excluded incomplete records: {excluded_records}\n"))
+cat(glue("Sampled complete records: {nrow(cohort_data)}\n"))
+cat(glue("OA: {sum(cohort_data$is_oa)}, Closed: {sum(!cohort_data$is_oa)}\n"))
 ```
 
 ### Descriptive comparison
 
 ```{r}
 #| label: 32-fig-causal-descriptive
-#| fig-cap: "Mean citations by OA status and time period."
-#| fig-alt: "Grouped bar chart showing mean citation counts for OA and closed-access papers, split into pre-2020 and 2020+ periods."
+#| fig-cap: "Current cumulative citations in sampled papers, grouped by OA status and publication cohort; not a policy-effect estimate."
+#| fig-alt: "Grouped bar chart of current cumulative citations for OA and closed-access papers published in 2016–2019 or 2020–2023."
 #| fig-width: 5
 #| fig-height: 4
-did_summary <- did_data |>
-  group_by(is_oa, post_2020) |>
+cohort_summary <- cohort_data |>
+  group_by(is_oa, recent_cohort) |>
   summarise(mean_cites = mean(cited_by_count), n = n(), .groups = "drop") |>
-  mutate(period = ifelse(post_2020, "2020-2023", "2016-2019"),
+  mutate(period = ifelse(recent_cohort, "2020-2023", "2016-2019"),
          group = ifelse(is_oa, "Open access", "Closed"))
 
-ggplot(did_summary, aes(x = period, y = mean_cites, fill = group)) +
+ggplot(cohort_summary, aes(x = period, y = mean_cites, fill = group)) +
   geom_col(position = "dodge") +
   scale_fill_manual(values = palette_sci(2)) +
-  labs(x = "Period", y = "Mean citations", fill = "Access") +
+  labs(x = "Publication cohort", y = "Mean cumulative citations at retrieval", fill = "Access") +
   theme_sci()
 ```
 
-### DiD regression
+### Descriptive interaction regression
+
+The interaction describes how the conditional OA/closed citation difference varies between the two sampled publication cohorts. Adding reference count is statistical adjustment, not an identification strategy. The fitted coefficients and conventional linear-model uncertainty summaries must not be reported as causal effects.
 
 ```{r}
 #| label: 32-did-regression
-did_model <- lm(cited_by_count ~ is_oa * post_2020 + referenced_works_count,
-                data = did_data)
+interaction_model <- lm(cited_by_count ~ is_oa * recent_cohort + referenced_works_count,
+                data = cohort_data)
 
-tidy_did <- broom::tidy(did_model)
-tidy_did |>
+tidy_interaction <- broom::tidy(interaction_model)
+tidy_interaction |>
   mutate(across(where(is.numeric), \(x) round(x, 3))) |>
   gt()
 ```
 
-### Simple matching comparison
+### Within-year sampling comparison
+
+For each sampled OA paper, select one closed-access paper from the same publication year. Controls can be reused, and OA papers in years with no closed-access candidate are omitted. This is sampling with replacement within year, not propensity-score matching; it does not establish covariate balance or remove confounding.
 
 ```{r}
 #| label: 32-matching
-oa_papers <- did_data |> filter(is_oa)
-closed_papers <- did_data |> filter(!is_oa)
+oa_papers <- cohort_data |> filter(is_oa)
+closed_papers <- cohort_data |> filter(!is_oa)
 
 matched <- oa_papers |>
   mutate(match_year = year) |>
   inner_join(
-    closed_papers |> select(year, cited_by_count_closed = cited_by_count),
+    closed_papers |> select(year, control_id = id, cited_by_count_closed = cited_by_count),
     by = "year",
     relationship = "many-to-many"
   ) |>
@@ -120,20 +136,23 @@ matched <- oa_papers |>
   slice_sample(n = 1) |>
   ungroup()
 
-cat(glue("Matched pairs: {nrow(matched)}\n"))
+cat(glue("Within-year pairs: {nrow(matched)} / {nrow(oa_papers)} OA papers\n"))
+cat(glue("Distinct closed-access controls: {n_distinct(matched$control_id)}\n"))
 cat(glue("Mean cites (OA): {round(mean(matched$cited_by_count), 1)}\n"))
 cat(glue("Mean cites (closed match): {round(mean(matched$cited_by_count_closed), 1)}\n"))
 ```
 
-### Visualising the parallel trends assumption
+### Publication-cohort profile
+
+The horizontal axis is publication year. Each point summarises different papers' cumulative citations at one retrieval time. These are not citations received annually by fixed treated and control groups.
 
 ```{r}
 #| label: 32-fig-causal-trends
-#| fig-cap: "Citation trends by OA status over time (checking parallel trends)."
-#| fig-alt: "Line chart showing mean annual citation counts for OA and closed-access papers. If the pre-intervention trends are parallel, DiD assumptions are supported."
+#| fig-cap: "Current cumulative citations by OA status and publication year in the sample. This cohort profile does not test parallel trends."
+#| fig-alt: "Line chart comparing cumulative citation averages across publication cohorts for OA and closed-access papers; older cohorts have had longer to accrue citations."
 #| fig-width: 6
 #| fig-height: 4
-trends <- did_data |>
+trends <- cohort_data |>
   group_by(year, is_oa) |>
   summarise(mean_cites = mean(cited_by_count), .groups = "drop") |>
   mutate(group = ifelse(is_oa, "OA", "Closed"))
@@ -143,26 +162,26 @@ ggplot(trends, aes(x = year, y = mean_cites, colour = group)) +
   geom_point(size = 2) +
   geom_vline(xintercept = 2019.5, linetype = "dashed", colour = "grey50") +
   scale_colour_manual(values = palette_sci(2)) +
-  labs(x = "Year", y = "Mean citations", colour = "Access") +
+  labs(x = "Publication year", y = "Mean cumulative citations at retrieval", colour = "Access") +
   theme_sci()
 ```
 
 ## Diagnostics and interpretation {#causal-diagnostics}
 
-- **Parallel trends**: Inspect pre-treatment trends visually. If OA and closed papers had diverging trends before 2020, the DiD estimate is biased.
-- **Covariate balance**: After matching, check that matched pairs have similar observable characteristics (year, reference count, journal).
-- **Effect size interpretation**: A statistically significant DiD coefficient does not mean the effect is practically important. Report effect sizes alongside p-values.
-- **Robustness checks**: Run the analysis with different control groups, time windows, and matching criteria. Consistent results increase confidence.
+- **Selection and exposure**: Report the sampling query, retrieval date, exclusions and group sizes. Older publication cohorts have longer citation exposure; snapshot OA status may differ from status at publication.
+- **Interpret the actual model**: The OA-by-cohort coefficient is a descriptive conditional association. The arbitrary 2020 boundary supplies no intervention and no causal estimand.
+- **Assess the comparison**: Check years without eligible controls, control reuse and covariate differences. One sampled same-year control does not make papers exchangeable.
+- **Causal designs need additional evidence**: Define intervention timing and assignment, comparable outcomes over time, the target effect and identifying assumptions before choosing a DiD, RDD or matching analysis. A non-significant pre-trend test alone does not establish parallel counterfactual trends.
 
 ## Limitations and responsible use {#causal-limitations}
 
 <div class="callout callout-warn">
 ## Limitations and responsible use
 
-- **Observational data cannot prove causation.** All causal inference methods applied to bibliometric data make assumptions that cannot be fully tested. Report assumptions explicitly.
+- **This example is descriptive.** It has no documented intervention or identified causal design. Observational causal designs can support causal interpretation under explicit, defensible assumptions; fitting the shown regression does not supply them.
 - **Unmeasured confounders.** Paper quality, author reputation, and marketing effort are rarely observable in bibliometric data but strongly affect citations.
 - **Treatment definition.** "OA" is not a single treatment — it encompasses gold, green, hybrid, and bronze, each with different mechanisms.
-- **Generalisability.** Causal estimates from one journal, field, or time period may not generalise to others.
+- **Generalisability.** This sampled single-journal comparison does not establish an OA effect in this journal or elsewhere.
 - **Policy implications require judgement.** Even a well-estimated causal effect is one input into policy decisions, not a sufficient basis for mandates [@hicks2015; @dora2012].
 </div>
 
@@ -172,21 +191,21 @@ ggplot(trends, aes(x = year, y = mean_cites, colour = group)) +
 ## Common pitfalls
 
 - **Claiming causation from regression coefficients.** A positive OA coefficient in a regression does not prove OA *causes* more citations without addressing confounders.
-- **Ignoring parallel trends violations.** If pre-treatment trends are not parallel, DiD estimates are biased. Do not ignore this in reporting.
-- **Matching on too few covariates.** Matching on year alone leaves many confounders unaddressed. Include as many relevant covariates as possible.
+- **Calling a cohort profile a pre-trend test.** Current cumulative citations in different publication cohorts do not measure treated/control outcome paths around a policy change.
+- **Treating matching as automatic identification.** Choose covariates from the causal question and timing, evaluate overlap/balance, and avoid conditioning indiscriminately on post-treatment variables.
 - **Over-interpreting p-values.** A p < 0.05 does not mean the result is practically significant or that the causal assumptions hold.
 </div>
 
 ## Exercises {#causal-exercises}
 
-1. **Extended DiD.** Add additional covariates (document type, number of authors) to the DiD regression. Does the OA interaction term change?
+1. **Interaction sensitivity.** Compare the OA-by-cohort coefficient with and without adjustment for reference count. Explain why a changed coefficient does not itself diagnose a causal effect or quantify omitted-variable bias.
 
-2. **Placebo test.** Run the DiD analysis using 2018 as the treatment year instead of 2020. If the interaction term is significant, the parallel trends assumption may be violated.
+2. **Boundary sensitivity.** Repeat the descriptive interaction using a 2018 publication-cohort boundary. Explain why this is not a placebo intervention test and why a non-significant coefficient cannot establish parallel trends.
 
-3. **Matched comparison.** Implement propensity score matching (using the `MatchIt` package) with year, reference count, and document type as covariates. Compare the matched OA effect to the unmatched effect.
+3. **Comparison audit.** Count reused closed-access controls and unmatched OA records in the within-year comparison. Specify the intervention, assignment information and longitudinal outcomes needed for an actual policy-effect study.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#32-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>
@@ -196,6 +215,7 @@ Solutions are provided in \@ref(solutions).
 - @hicks2015 --- The Leiden Manifesto: caution against mechanistic application of quantitative metrics.
 - @dora2012 --- DORA: responsible assessment requires understanding causation.
 - @waltman2016 --- Review of citation indicators and their interpretation challenges.
+- [Callaway and Sant’Anna (2021)](https://doi.org/10.1016/j.jeconom.2020.12.001) --- Identification, estimation and inference for DiD with multiple periods.
 
 ## Session info {#causal-sessioninfo}
 

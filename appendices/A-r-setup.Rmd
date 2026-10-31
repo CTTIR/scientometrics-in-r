@@ -4,13 +4,48 @@
      Setup-instruction snippets are reference code shown to readers, not
      run at build time. -->
 
-## R installation
+## R installation and current first-use path
 
-Install the latest R release from [CRAN](https://cran.r-project.org/). This book was developed with R 4.4.x. We recommend [RStudio](https://posit.co/download/rstudio-desktop/) or [VS Code with the R extension](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) as your IDE.
+Install R from [CRAN](https://cran.r-project.org/). The current candidate was
+locally validated with R 4.6.1. An IDE such as
+[RStudio](https://posit.co/download/rstudio-desktop/) is optional. Rendering also
+requires Pandoc; PDF output additionally needs XeLaTeX/TinyTeX and R with Cairo support. Compiled packages
+may require a C/C++ toolchain and system libraries; the Linux dependencies are
+listed in `.github/workflows/render.yml`.
+
+From the repository root, install and check the book's R dependencies:
+
+```bash
+RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla scripts/install-book-deps.R
+RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla scripts/install-book-deps.R --check
+```
+
+The installer installs missing packages from current CRAN and checks that their
+namespaces load. It does not restore historical versions or certify an immutable
+software environment. `--check` performs no installation or network access;
+`--list` prints the package inventory. Use `--library=/path/to/library` to select
+an R library, or `--include-optional` for packages used only by unevaluated
+examples and exercises. Optional Python, SQL, OCR and deployment prerequisites
+must be configured separately.
+
+Internet access is required for installation and uncached provider requests.
+Configure an activated OpenAlex key locally as `OPENALEX_API_KEY`, outside Git,
+for requests that need authenticated paging. `SCIENTOMETRICS_OFFLINE=1` requires
+existing exact-query OpenAlex caches in `_freeze/openalex_cache/`; it does not
+make other providers offline and cannot supply missing cache entries. See the
+repository `README.md` for the companion package's separate installation path.
 
 ## Package management with renv
 
-This project uses **renv** for reproducible package management. After cloning the repository:
+**renv** can record and restore a project's R package versions. This repository
+retains a historical `renv.lock` and automatic activation in `.Rprofile`, but that
+lockfile has **not been qualified for the current book**. The first-use commands
+above bypass project startup and use the dependency installer. Do not assume
+that restoring the historical lockfile will reproduce the current validated
+candidate.
+
+The following is an optional restoration example for a project whose lockfile
+you have independently validated, rather than a required setup step for this book:
 
 ```{r}
 #| eval: false
@@ -18,13 +53,19 @@ install.packages("renv")
 renv::restore()
 ```
 
-This installs the exact package versions recorded in `renv.lock`. To update the lockfile after adding a new package:
+Restoration attempts to install the recorded versions; success also depends on
+compatible R, system libraries and available package sources. In a development
+environment, add a package and deliberately update the lockfile only after
+validating the resulting environment:
 
 ```{r}
 #| eval: false
-renv::install("newpackage")
+renv::install("newpackage") # Replace with the intended package name.
 renv::snapshot()
 ```
+
+A software lockfile does not freeze live API results. Exact reproduction also
+requires the same licensed input snapshots and analysis configuration.
 
 ## Core packages
 
@@ -50,21 +91,50 @@ The table below lists the primary packages used throughout the book.
 
 ## Docker environment
 
-A `Dockerfile` is provided at the repository root. It builds on `rocker/verse:4.4.1` and installs all required system libraries and R packages.
+The repository's `Dockerfile` is an **optional historical recipe**, based on
+`rocker/verse:4.4.1` and `renv::restore()`. Its restore path has not been qualified
+for the current book. It also downloads an amd64 Quarto package, so other
+architectures need a compatible recipe. Docker does not remove the need to
+validate the lockfile, system dependencies, API access and resulting outputs.
+
+For a deliberate evaluation of that recipe, build it and inspect its R version:
 
 ```bash
 docker build -t scientometrics-in-r .
-docker run --rm -p 8787:8787 -e DISABLE_AUTH=true scientometrics-in-r
+docker run --rm scientometrics-in-r R --version
 ```
 
-Then open `http://localhost:8787` in your browser to access RStudio Server with all dependencies pre-installed.
+The image's default command calls `bookdown::render_book()` for all formats; it
+does not launch RStudio Server. Successful construction and execution of this
+historical image are not claimed here. Use the current first-use path above
+for the locally validated candidate.
 
-## Quarto
+## Render the book
 
-Install [Quarto CLI](https://quarto.org/docs/get-started/) version 1.4 or later. To render the book locally:
+This repository is configured for **bookdown**, with `_bookdown.yml` and
+`_output.yml`. From the repository root, render HTML and refresh its download
+manifest:
 
 ```bash
-quarto render
+SCIENTOMETRICS_REBUILD_CHUNKS=1 RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla -e 'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'
+Rscript --vanilla scripts/build-download-manifest.R
 ```
 
-Rendered output appears in `_book/`. For iterative development, use `quarto preview` to get live-reloading in the browser.
+`SCIENTOMETRICS_REBUILD_CHUNKS=1` re-executes analysis chunks while retaining
+exact-query provider caches. Missing provider caches still require API access.
+The configured output directory is `docs/`. Serve it locally, for example:
+
+```bash
+python3 -m http.server 8000 --directory docs
+```
+
+Then visit `http://localhost:8000`. PDF additionally needs XeLaTeX/TinyTeX;
+`output_format = "all"` requests HTML, PDF and EPUB. Before distribution, run
+`Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub` to validate
+the ebook's internal links and bundle its citation and licence files, then run
+`Rscript --vanilla scripts/build-download-manifest.R`. Local outputs do not
+update the published site. The README lists the PDF font prerequisites.
+
+Quarto appears in optional examples elsewhere in the book, but `quarto render`
+is not the build command for this repository. A Quarto CLI is needed only when
+working through those separate examples.

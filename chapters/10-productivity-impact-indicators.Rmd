@@ -4,9 +4,9 @@
 
 After completing this chapter, you will be able to:
 
-- Compute the h-index, g-index, and m-quotient from a vector of citation counts
+- Compute sample h- and g-indices and distinguish a corpus publication span from an author career
 - Explain the difference between size-dependent and size-independent indicators
-- Calculate field-normalized indicators (MNCS, PP(top 10%)) and explain why normalization matters
+- Explain the external reference sets needed for MNCS and PP(top 10%), and diagnose misleading within-sample normalization
 - Articulate the limitations of each indicator and the risks of misuse, citing the Leiden Manifesto
 
 ## Setup {#indicators-setup}
@@ -32,7 +32,7 @@ Quantitative indicators are central to research evaluation — and among the mos
 
 The **g-index** [@egghe2006] addresses the insensitivity to top-cited papers by requiring that the top *g* papers have together received at least *g*² citations. The **m-quotient** divides the h-index by career length, offering a rough age correction.
 
-These are all *raw* indicators. Comparing them across fields is meaningless without **field normalization**. A citation count of 50 is exceptional in mathematics but ordinary in biomedical research. The **Mean Normalized Citation Score** (MNCS) divides each paper's citations by the world average for its field and publication year [@waltman2012mncs]. The **PP(top 10%)** — the proportion of an entity's papers in the top 10% most cited in their field — is a percentile-based indicator recommended by the Leiden Ranking.
+These are all *raw* indicators. Citation distributions differ across fields, so comparisons require a justified reference and **field normalization**. The **Mean Normalized Citation Score** (MNCS) divides each paper's citations by the world average for its field and publication year [@waltman2012mncs]. The **PP(top 10%)** — the proportion of an entity's papers in the top 10% most cited in their field — is a percentile-based indicator recommended by the Leiden Ranking.
 
 The Leiden Manifesto [@hicks2015] and the San Francisco Declaration on Research Assessment [@dora2012] both caution against mechanical use of any single indicator. Indicators should support, not replace, qualitative judgement.
 
@@ -68,7 +68,7 @@ h <- compute_h_index(works_slim$cited_by_count)
 cat(glue("h-index for this corpus: {h}\n"))
 ```
 
-The h-index tells us that {h} papers in this sample have each been cited at least {h} times.
+The sample h-index means that at least `r h` sampled papers each have at least `r h` citations. It is not an author career h-index.
 
 ### Computing the g-index
 
@@ -86,9 +86,11 @@ g <- compute_g_index(works_slim$cited_by_count)
 cat(glue("g-index for this corpus: {g}\n"))
 ```
 
-### The m-quotient
+### Publication span is not career length
 
-The m-quotient normalizes the h-index by career length (here, publication span).
+A proper m-quotient needs an identified author and a justified career-start date.
+This corpus contains many authors, so its publication span cannot supply that
+denominator. The following h/span ratio is only a descriptive calculation.
 
 ```{r}
 #| label: 10-compute-m-quotient
@@ -98,31 +100,38 @@ career_years <- as.numeric(
            units = "days")
 ) / 365.25
 
-m_quotient <- h / career_years
-cat(glue("m-quotient: {round(m_quotient, 3)} (over {round(career_years, 1)} years)\n"))
+h_per_span <- if (is.finite(career_years) && career_years > 0) h / career_years else NA_real_
+cat(glue("Sample h/publication-span ratio: {round(h_per_span, 3)} (span {round(career_years, 1)} years)\n"))
 ```
 
-### Field-normalized indicators: MNCS
+### A normalization diagnostic: using the sample as its own reference
 
-To compute MNCS, we need field averages. We simulate field means here; in a real analysis these would come from the OpenAlex snapshot or a reference dataset.
+MNCS requires a justified field/year reference with compatible document types
+and citation windows. The live corpus here supplies no such reference. To show
+why that matters, compute a mean within each sample year and divide the same
+records by it. Every usable year must average to 1 by construction. These are
+observed sample means, not simulated field means or world averages.
 
 ```{r}
 #| label: 10-compute-mncs
-field_means_by_year <- works_slim |>
+sample_means_by_year <- works_slim |>
   group_by(year) |>
-  summarise(field_mean = mean(cited_by_count), .groups = "drop")
+  summarise(sample_mean = mean(cited_by_count, na.rm = TRUE), .groups = "drop")
 
 works_normalized <- works_slim |>
-  left_join(field_means_by_year, by = "year") |>
-  mutate(ncs = field_normalize(cited_by_count, field_mean))
+  left_join(sample_means_by_year, by = "year") |>
+  mutate(ncs = field_normalize(cited_by_count, sample_mean))
 
-mncs <- mean(works_normalized$ncs, na.rm = TRUE)
-cat(glue("MNCS: {round(mncs, 3)}\n"))
+sample_ratio <- mean(works_normalized$ncs, na.rm = TRUE)
+cat(glue("Mean within-sample/year ratio: {round(sample_ratio, 3)}\n"))
 ```
 
-An MNCS of 1.0 means the entity performs at exactly the world average. Values above 1.0 indicate above-average citation impact.
+A value of 1 here is an arithmetic identity, not evidence of world-average
+impact. Zero-mean years have undefined ratios and are excluded. An actual MNCS
+interpretation requires an independently justified field/year reference
+[@waltman2012mncs].
 
-### PP(top 10%)
+### Within-sample upper-percentile membership
 
 ```{r}
 #| label: 10-compute-pp-top10
@@ -134,9 +143,13 @@ works_with_pct <- works_normalized |>
   ) |>
   ungroup()
 
-pp_top10 <- mean(works_with_pct$is_top10)
-cat(glue("PP(top 10%): {scales::percent(pp_top10, accuracy = 0.1)}\n"))
+pp_top10 <- mean(works_with_pct$is_top10, na.rm = TRUE)
+cat(glue("Share at or above the sample/year 90th percentile rank: {scales::percent(pp_top10, accuracy = 0.1)}\n"))
 ```
+
+The ranks use only sampled works in each year. Ties and small groups can make
+the selected share differ from 10%; a singleton has no percentile rank. This
+is not field-normalized PP(top 10%). Report the ranking and tie rule explicitly.
 
 ### Visualization
 
@@ -158,18 +171,18 @@ works_slim |>
 
 ```{r}
 #| label: 10-fig-indicators-mncs-by-year
-#| fig-cap: "Mean Normalized Citation Score by publication year."
-#| fig-alt: "Line chart showing the MNCS trend across publication years, with a horizontal reference line at 1.0 representing the world average."
+#| fig-cap: "Diagnostic: each usable sample/year normalizes to its own mean of one."
+#| fig-alt: "Line chart at one across usable years, demonstrating the arithmetic identity created by normalizing each sample year to itself."
 #| fig-width: 6
 #| fig-height: 4
 works_normalized |>
   group_by(year) |>
-  summarise(mncs = mean(ncs, na.rm = TRUE), .groups = "drop") |>
-  ggplot(aes(x = year, y = mncs)) +
+  summarise(sample_ratio = mean(ncs, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(x = year, y = sample_ratio)) +
   geom_line(color = palette_sci(1), linewidth = 1) +
   geom_point(color = palette_sci(1), size = 3) +
   geom_hline(yintercept = 1, linetype = "dashed", color = "grey50") +
-  labs(x = "Publication year", y = "MNCS") +
+  labs(x = "Publication year", y = "Within-sample/year ratio") +
   theme_sci()
 ```
 
@@ -179,20 +192,20 @@ works_normalized |>
 #| label: 10-tbl-indicators-summary
 #| tbl-cap: "Summary of computed indicators."
 tibble(
-  Indicator = c("h-index", "g-index", "m-quotient", "MNCS", "PP(top 10%)"),
+  Indicator = c("Sample h-index", "Sample g-index", "Sample h/span", "Mean sample/year ratio", "Sample upper-percentile share"),
   Value = c(
     as.character(h),
     as.character(g),
-    round(m_quotient, 3) |> as.character(),
-    round(mncs, 3) |> as.character(),
+    round(h_per_span, 3) |> as.character(),
+    round(sample_ratio, 3) |> as.character(),
     scales::percent(pp_top10, accuracy = 0.1)
   ),
   Interpretation = c(
     glue("{h} papers with >= {h} citations each"),
     glue("Top {g} papers have >= {g}^2 = {g^2} cumulative citations"),
-    glue("h-index per year of publication activity"),
-    glue("{ifelse(mncs > 1, 'Above', 'Below')} world average"),
-    glue("{scales::percent(pp_top10, accuracy = 0.1)} of papers in the top decile")
+    "Not a career m-quotient",
+    "One by construction; not MNCS",
+    "Within-sample rank rule; not world PP(top 10%)"
   )
 ) |>
   gt()
@@ -242,12 +255,12 @@ The h-index in particular can be gamed through self-citation, salami slicing, or
 
 2. **Self-citation sensitivity.** If you could identify self-citations (e.g., via author overlap in the reference list), how would removing them affect the h-index? Write pseudocode for this analysis.
 
-3. **Bootstrap uncertainty for MNCS.** Use `replicate()` and `sample()` to compute a 95% confidence interval for the MNCS of your sample. How wide is the interval?
+3. **Empirical resampling.** Resample the within-sample/year ratios while holding their empirical reference fixed. Explain why the resulting interval does not measure uncertainty about world-normalized MNCS.
 
-4. **PP(top 10%) vs. MNCS.** For the sample data, plot PP(top 10%) against MNCS by year. Do they always agree on which years performed best?
+4. **Normalization and ranks.** Compare each year's mean sample ratio with its upper-percentile share. Explain why the ratio is fixed at one and why ties can change the percentile share; neither ranks world-normalized impact.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#10-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

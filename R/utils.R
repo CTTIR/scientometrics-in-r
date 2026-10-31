@@ -76,55 +76,60 @@ compute_mncs <- function(df) {
 #' Constructs an undirected, weighted co-authorship graph from a data frame
 #' of works with author information.
 #'
-#' @param works A data frame of works. Must contain columns `id` and
-#'   `authorships` (a list-column with `au_id` and `au_display_name` fields).
-#' @return An [igraph::graph] object with author name and ID as vertex
-#'   attributes and co-authorship frequency as edge weight.
+#' @param works A data frame with `id` and an `authorships` list-column.
+#'   Nested author data may use current OpenAlex `id`/`display_name`, legacy
+#'   `au_id`/`au_display_name`, or flattened `author.id`/`author.display_name`.
+#' @return An undirected [igraph::graph] with stable author IDs in the `name`
+#'   vertex attribute, display names in `label` and `display_name`, and distinct
+#'   jointly authored work counts in the `weight` edge attribute. Use `label`
+#'   for human-readable plot labels; different authors may share a display name.
 #' @export
 build_coauth_graph <- function(works) {
   stopifnot("id" %in% names(works), "authorships" %in% names(works))
-
-  authors <- dplyr::select(works, work_id = "id", "authorships")
-  authors <- tidyr::unnest(authors, "authorships", names_sep = "_")
-
-  id_col <- if ("authorships_au_id" %in% names(authors)) {
-    "authorships_au_id"
-  } else {
-    intersect(
-      c("authorships_author.id", "authorships_au_id"),
-      names(authors)
-    )[1]
+  authors <- tidyr::unnest(dplyr::select(works, work_id = "id", "authorships"),
+    "authorships",
+    names_sep = "_"
+  )
+  if (!nrow(authors)) {
+    return(igraph::make_empty_graph(directed = FALSE))
   }
-  name_col <- if ("authorships_au_display_name" %in% names(authors)) {
-    "authorships_au_display_name"
-  } else {
-    intersect(
-      c("authorships_author.display_name", "authorships_au_display_name"),
-      names(authors)
-    )[1]
-  }
-
-  authors <- dplyr::filter(authors, !is.na(.data[[id_col]]))
-
-  edges <- dplyr::inner_join(
-    dplyr::select(authors, "work_id", a1 = dplyr::all_of(id_col)),
-    dplyr::select(authors, "work_id", a2 = dplyr::all_of(id_col)),
+  id_col <- intersect(
+    c("authorships_id", "authorships_au_id", "authorships_author.id"),
+    names(authors)
+  )[1]
+  name_col <- intersect(c(
+    "authorships_display_name", "authorships_au_display_name",
+    "authorships_author.display_name"
+  ), names(authors))[1]
+  if (is.na(id_col)) stop("Authorships need a supported author ID field.", call. = FALSE)
+  authors <- tibble::tibble(
+    work_id = authors$work_id,
+    author_id = as.character(authors[[id_col]]),
+    display_name = if (is.na(name_col)) {
+      NA_character_
+    } else {
+      as.character(authors[[name_col]])
+    }
+  )
+  authors <- dplyr::filter(
+    authors, !is.na(.data$work_id), !is.na(.data$author_id),
+    nzchar(.data$author_id)
+  )
+  membership <- dplyr::distinct(authors, .data$work_id, .data$author_id)
+  edges <- dplyr::inner_join(membership, membership,
     by = "work_id",
-    relationship = "many-to-many"
+    suffix = c("_a", "_b"), relationship = "many-to-many"
   )
-  edges <- dplyr::filter(edges, .data$a1 < .data$a2)
-  edges <- dplyr::count(edges, .data$a1, .data$a2, name = "weight")
-
-  node_lookup <- dplyr::distinct(
-    authors,
-    id = .data[[id_col]], name = .data[[name_col]]
-  )
-
-  g <- igraph::graph_from_data_frame(edges,
-    directed = FALSE,
-    vertices = node_lookup
-  )
-  g
+  edges <- dplyr::filter(edges, .data$author_id_a < .data$author_id_b)
+  edges <- dplyr::count(edges, .data$author_id_a, .data$author_id_b, name = "weight")
+  ids <- unique(authors$author_id)
+  labels <- vapply(ids, function(id) {
+    names <- authors$display_name[authors$author_id == id]
+    names <- names[!is.na(names) & nzchar(names)]
+    if (length(names)) names[1] else id
+  }, character(1), USE.NAMES = FALSE)
+  vertices <- data.frame(name = ids, label = labels, display_name = labels)
+  igraph::graph_from_data_frame(edges, directed = FALSE, vertices = vertices)
 }
 
 #' Detect Kleinberg keyword bursts

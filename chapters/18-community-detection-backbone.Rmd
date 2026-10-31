@@ -250,7 +250,7 @@ ggraph(layout) +
 4. **Weighted vs. unweighted community detection.** Remove edge weights from the backbone and run Leiden again. How much does the community structure change?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#18-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

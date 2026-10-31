@@ -222,10 +222,10 @@ ggplot(cum_aging, aes(x = age, y = cum_pct, colour = journal)) +
 
 4. **Median vs. mean aging.** Replot the aging curves using median instead of mean citations. How does the shape change, and why?
 
-5. **Citation window sensitivity.** For a single journal, compute a JIF-like proxy using 2-year, 3-year, and 5-year windows. How much does the value change?
+5. **Publication-cohort sensitivity.** Using the fetched Scientometrics sample, compare current cumulative citation summaries for the 2-, 3- and 5-year publication cohorts ending in 2018. Report observed denominators and explain why changing the publication cohort does not establish a citation-receipt window or compute JIF.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#14-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

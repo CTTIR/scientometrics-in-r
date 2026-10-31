@@ -2,7 +2,16 @@
 
 ## Objective
 
-Compare gender representation in authorship across a biomedical journal and an information-science journal, demonstrating both the methods and their substantial limitations.
+Examine why a name lookup cannot establish a gender gap, using an explicitly
+synthetic example of two fictional journals. We compare arbitrary lookup
+categories, retain unmatched records in every denominator, and track lookup
+coverage by recorded authorship position and year. None of the records represents
+a real person, paper or journal; no gender identity is observed or inferred.
+
+An actual study of gender equity requires a defensible demographic variable and
+its provenance, a defined population, appropriate data governance, and a plan
+for validation and missing data. A list of names is not a substitute for those
+observations. Chapter \@ref(gender-objectives) develops these distinctions.
 
 ## Setup
 
@@ -10,169 +19,178 @@ Compare gender representation in authorship across a biomedical journal and an i
 #| label: cs04-setup
 #| message: false
 library(tidyverse)
-library(openalexR)
 library(glue)
 library(gt)
 
-set.seed(20260509)
-
-source(here::here("R", "api_helpers.R"))
-source(here::here("R", "utils.R"))
 source(here::here("R", "sci_palette.R"))
 ```
 
-## Data acquisition
+## Synthetic teaching records
+
+The six invented papers have explicit publication years and ordered name lists.
+The names are placeholders, and repeated names do not establish shared author
+identity. Each row created below is an authorship record, not a distinct person.
+This example makes no API request.
 
 ```{r}
-#| label: cs04-fetch-gender-data
-#| cache: true
-works_sciento <- fetch_openalex(
-  entity = "works",
-  primary_location.source.id = "S148561398",
-  from_publication_date = "2019-01-01",
-  to_publication_date = "2023-12-31",
-  type = "article",
-  options = list(sample = 300, seed = 42)
-) |> mutate(journal = "Scientometrics")
-
-works_plos <- fetch_openalex(
-  entity = "works",
-  primary_location.source.id = "S202381698",
-  from_publication_date = "2019-01-01",
-  to_publication_date = "2023-12-31",
-  type = "article",
-  options = list(sample = 300, seed = 42)
-) |> mutate(journal = "PLOS ONE")
-
-works_all <- bind_rows(works_sciento, works_plos)
+#| label: cs04-synthetic-records
+works_example <- tibble(
+  work_id = c("example-a1", "example-a2", "example-a3",
+              "example-b1", "example-b2", "example-b3"),
+  journal = rep(c("Example journal A", "Example journal B"), each = 3),
+  year = rep(2019:2021, 2),
+  first_names = list(c("aria", "jordan", "lee"), c("noor", "ari"), "morgan",
+                     c("aria", "nuri", "sam", "alex"), c("ari", "noor"),
+                     c("lee", "jordan", "morgan"))
+)
 ```
 
-## Gender inference
+## Arbitrary lookup and complete denominators
+
+For teaching purposes only, assign `aria` and `ari` to A, and `jordan` and
+`morgan` to B. These arbitrary categories have **no demographic meaning**.
+Every other name is explicitly unmatched. Dropping unmatched records would
+change both the denominator and the question answered by a proportion.
 
 ```{r}
-#| label: cs04-gender-classification
-common_female <- c("maria", "anna", "li", "sarah", "jennifer", "jessica",
-                   "elena", "nina", "laura", "julia", "diana", "sandra",
-                   "lisa", "emily", "rachel", "amy", "kate", "megan")
-common_male <- c("john", "david", "michael", "james", "robert", "peter",
-                 "mark", "thomas", "paul", "daniel", "andreas", "martin",
-                 "chris", "matthew", "andrew", "william", "kevin", "brian")
-
-authors <- works_all |>
-  select(work_id = id, journal, authorships) |>
-  unnest(authorships, names_sep = "_") |>
+#| label: cs04-name-lookup
+authors_example <- works_example |>
+  unnest_longer(first_names, values_to = "first_name", indices_to = "author_order") |>
   group_by(work_id) |>
   mutate(
     n_authors = n(),
     position = case_when(
-      row_number() == 1 ~ "first",
-      row_number() == n() & n() > 1 ~ "last",
+      n_authors == 1 ~ "single",
+      author_order == 1 ~ "first",
+      author_order == n_authors ~ "last",
       TRUE ~ "middle"
     )
   ) |>
   ungroup() |>
   mutate(
-    first_name = str_to_lower(str_extract(authorships_display_name, "^\\S+")),
-    gender = case_when(
-      first_name %in% common_female ~ "female",
-      first_name %in% common_male ~ "male",
-      TRUE ~ NA_character_
-    )
-  ) |>
-  filter(!is.na(gender))
+    lookup_category = case_when(
+      first_name %in% c("aria", "ari") ~ "A",
+      first_name %in% c("jordan", "morgan") ~ "B",
+      TRUE ~ "Unmatched"
+    ),
+    lookup_category = factor(lookup_category, levels = c("A", "B", "Unmatched")),
+    position = factor(position, levels = c("first", "middle", "last", "single"))
+  )
 
-cat(glue("Classified authors: {nrow(authors)}\n"))
+coverage_summary <- authors_example |>
+  group_by(journal) |>
+  summarise(records = n(), matched = sum(lookup_category != "Unmatched"),
+            coverage = matched / records, .groups = "drop")
+coverage_summary |> gt() |> fmt_percent(columns = coverage, decimals = 1)
 ```
 
-## Gender representation by journal
+## Lookup categories by fictional journal
 
 ```{r}
 #| label: cs04-fig-cs04-journal
-#| fig-cap: "Gender representation by journal."
-#| fig-alt: "Grouped bar chart comparing the proportion of male and female author names across two journals."
-#| fig-width: 5
+#| fig-cap: "Arbitrary lookup categories among all synthetic authorship records in two fictional journals; these are not gender proportions."
+#| fig-alt: "Grouped bars show A, B and Unmatched shares using every synthetic record in each fictional journal as the denominator."
+#| fig-width: 6
 #| fig-height: 3.5
-authors |>
-  count(journal, gender) |>
+journal_summary <- authors_example |>
+  count(journal, lookup_category, .drop = FALSE) |>
   group_by(journal) |>
   mutate(pct = n / sum(n)) |>
-  ggplot(aes(x = journal, y = pct, fill = gender)) +
+  ungroup()
+
+ggplot(journal_summary, aes(x = journal, y = pct, fill = lookup_category)) +
   geom_col(position = "dodge") +
   scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = palette_sci(2)) +
-  labs(x = NULL, y = "Proportion", fill = "Gender") +
+  scale_fill_manual(values = palette_sci(3), drop = FALSE) +
+  labs(x = NULL, y = "Share of all synthetic records", fill = "Lookup category") +
   theme_sci()
 ```
 
-## Authorship position analysis
+## Recorded authorship position
+
+Single-author papers receive their own position label. In a real corpus,
+recorded order does not by itself establish seniority or contribution: the
+interpretation depends on authorship conventions. The following proportions
+retain unmatched records within every observed journal/position group.
 
 ```{r}
 #| label: cs04-fig-cs04-position
-#| fig-cap: "Gender representation by authorship position and journal."
-#| fig-alt: "Faceted bar chart showing male/female proportions in first, middle, and last author positions for each journal."
+#| fig-cap: "Arbitrary lookup categories by recorded position in the synthetic fixture, including unmatched records. Empty positions have no observations."
+#| fig-alt: "Faceted bars compare A, B and Unmatched shares by first, middle, last and single-author positions in two fictional journals."
 #| fig-width: 7
 #| fig-height: 4
-position_summary <- authors |>
-  count(journal, position, gender) |>
+position_summary_example <- authors_example |>
+  count(journal, position, lookup_category) |>
   group_by(journal, position) |>
   mutate(pct = n / sum(n)) |>
   ungroup()
 
-ggplot(position_summary, aes(x = position, y = pct, fill = gender)) +
+ggplot(position_summary_example, aes(x = position, y = pct, fill = lookup_category)) +
   geom_col(position = "dodge") +
   facet_wrap(~ journal) +
+  scale_x_discrete(drop = FALSE) +
   scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = palette_sci(2)) +
-  labs(x = "Author position", y = "Proportion", fill = "Gender") +
+  scale_fill_manual(values = palette_sci(3), drop = FALSE) +
+  labs(x = "Recorded position", y = "Share of synthetic records", fill = "Lookup category") +
   theme_sci()
 ```
 
-## Temporal trends
+## Coverage by recorded year
+
+The year comes from the fixture's explicit publication-year column, never from
+an identifier. For each fictional journal/year, the denominator includes all
+first- or single-author records. Each group has only one such record here, so
+coverage is either zero or one. This illustrates denominator accounting; it
+supplies no evidence about a demographic trend.
 
 ```{r}
 #| label: cs04-fig-cs04-temporal
-#| fig-cap: "Proportion of female first authors by year."
-#| fig-alt: "Line chart tracking the proportion of female first authors over time for each journal."
+#| fig-cap: "Lookup coverage among first- or single-author records by explicit fixture year. Each fictional journal/year has one record; no demographic trend is measured."
+#| fig-alt: "Lines show whether the one first-or-single-author record in each fictional journal/year matches an arbitrary lookup category."
 #| fig-width: 6
 #| fig-height: 4
-first_authors <- authors |>
-  filter(position == "first") |>
-  mutate(year = year(as.Date(paste0(
-    str_extract(work_id, "\\d{4}$"), "-01-01"
-  ))))
-
-works_all_year <- works_all |>
-  transmute(work_id = id, year = year(publication_date))
-
-first_authors_year <- first_authors |>
-  select(-year) |>
-  left_join(works_all_year, by = "work_id")
-
-first_authors_year |>
+coverage_by_year <- authors_example |>
+  filter(position %in% c("first", "single")) |>
   group_by(journal, year) |>
-  summarise(female_pct = mean(gender == "female"), .groups = "drop") |>
-  ggplot(aes(x = year, y = female_pct, colour = journal)) +
+  summarise(records = n(), matched = sum(lookup_category != "Unmatched"),
+            coverage = matched / records, .groups = "drop")
+
+ggplot(coverage_by_year, aes(x = year, y = coverage, colour = journal)) +
   geom_line(linewidth = 1) +
   geom_point(size = 2) +
-  scale_y_continuous(labels = scales::percent) +
+  scale_x_continuous(breaks = 2019:2021) +
+  scale_y_continuous(labels = scales::percent, limits = c(0, 1)) +
   scale_colour_manual(values = palette_sci(2)) +
-  labs(x = "Year", y = "Female first-author proportion", colour = "Journal") +
+  labs(x = "Recorded fixture year", y = "Lookup coverage", colour = "Fictional journal") +
   theme_sci()
 ```
 
-## Key findings
+## What the fixture establishes
 
-1. **Persistent gap**: Male names are overrepresented in both journals, particularly in last-author positions.
-2. **Disciplinary differences**: The gender balance differs between journals, likely reflecting field-specific demographics.
-3. **Temporal progress**: Some evidence of increasing female representation over time, but trends are noisy due to small sample sizes.
+1. **Denominators change the result.** The fixture contains 15 authorship records:
+   four A, four B and seven unmatched. Removing unmatched records would make A
+   and B each half of the retained records, concealing that almost half of all
+   records had no lookup match.
+2. **Coverage differs by construction.** Example journal A has four matched
+   records out of six; Example journal B has four out of nine. These differences
+   follow from the invented name lists, not disciplinary or demographic evidence.
+3. **Identity and contribution remain unobserved.** Neither the labels, the
+   recorded positions nor their changes across fixture years support a claim
+   about a gender gap, seniority or progress toward equity.
 
-## Critical caveats
+## Requirements for an actual study
 
 <div class="callout callout-warn">
-These results must be interpreted with extreme caution:
+A real study needs a scientific question, a defined population and suitable
+observations of the demographic variable of interest. Document their provenance,
+ethical basis, categories, missingness and validation. Names cannot determine a
+person's self-identified gender; a name-classification service, if used for a
+carefully justified question, still needs context-specific validation and an
+explicit account of what its labels measure. A confidence score alone does not
+validate the resulting equity estimate. See Chapter \@ref(gender-limitations) and
+[Santamaría and Mihaljević (2018)](https://doi.org/10.7717/peerj-cs.156).
 
-- **Name-based inference enforces a binary** that excludes non-binary researchers.
-- **Coverage is biased**: names from East Asia, South Asia, and Africa are poorly classified.
-- **The unclassified names are not random** — they are systematically different from classified names.
-- **This is a methodological demonstration, not a definitive study.** Production gender analysis requires validated tools with confidence scores and country context [@lariviere2013].
+This fixture contains no demographic observations or real journal comparison.
+No conclusion about a persistent gender gap, disciplinary differences or
+temporal progress can be drawn from it.
 </div>

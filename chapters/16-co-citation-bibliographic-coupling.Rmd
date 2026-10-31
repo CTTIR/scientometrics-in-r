@@ -242,7 +242,7 @@ comparison |> gt()
 4. **Identifying research fronts.** Use bibliographic coupling communities to identify research fronts. For each community, list the three most frequent keywords or title words. Do the fronts correspond to recognisable subfields?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#16-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

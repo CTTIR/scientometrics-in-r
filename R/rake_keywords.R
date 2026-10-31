@@ -26,17 +26,26 @@ rake_keywords <- function(text, stopwords, n_keywords = 10L) {
   if (!is.character(stopwords) || anyNA(stopwords)) {
     stop("`stopwords` must be a non-missing character vector.", call. = FALSE)
   }
-  if (!is.numeric(n_keywords) || length(n_keywords) != 1L ||
+  if (
+    !is.numeric(n_keywords) || length(n_keywords) != 1L ||
       !is.finite(n_keywords) || n_keywords < 1 || n_keywords != floor(n_keywords) ||
-      n_keywords > .Machine$integer.max) {
+      n_keywords > .Machine$integer.max
+  ) {
     stop("`n_keywords` must be a positive integer.", call. = FALSE)
   }
   empty <- tibble::tibble(keyword = character(), score = numeric(), frequency = integer())
-  tokens <- regmatches(tolower(text), gregexpr("[[:alpha:]]+(?:[-'][[:alpha:]]+)*|[^[:space:]]", tolower(text), perl = TRUE))[[1]]
-  if (!length(tokens)) return(empty)
+  tokens <- regmatches(tolower(text), gregexpr(
+    "[[:alpha:]]+(?:[-'][[:alpha:]]+)*|[^[:space:]]", tolower(text),
+    perl = TRUE
+  ))[[1]]
+  if (!length(tokens)) {
+    return(empty)
+  }
   boundary <- !grepl("^[[:alpha:]]", tokens) | tokens %in% tolower(stopwords)
   phrases <- split(tokens[!boundary], cumsum(boundary)[!boundary])
-  if (!length(phrases)) return(empty)
+  if (!length(phrases)) {
+    return(empty)
+  }
   counts <- table(unlist(phrases, use.names = FALSE))
   degree <- stats::setNames(numeric(length(counts)), names(counts))
   for (phrase in phrases) {
@@ -48,8 +57,10 @@ rake_keywords <- function(text, stopwords, n_keywords = 10L) {
   occurrences <- table(labels)
   distinct <- !duplicated(labels)
   scores <- vapply(phrases[distinct], function(words) sum(word_score[words]), numeric(1))
-  result <- tibble::tibble(keyword = unname(labels[distinct]), score = unname(scores),
-                          frequency = as.integer(occurrences[labels[distinct]]))
+  result <- tibble::tibble(
+    keyword = unname(labels[distinct]), score = unname(scores),
+    frequency = as.integer(occurrences[labels[distinct]])
+  )
   result <- result[order(-result$score, result$keyword), , drop = FALSE]
   utils::head(result, n_keywords)
 }

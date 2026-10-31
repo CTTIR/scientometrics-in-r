@@ -4,10 +4,12 @@
 \alias{theme_sci}
 \title{Minimal ggplot2 theme for the book}
 \usage{
-theme_sci(base_size = 11)
+theme_sci(base_size = 11, base_family = getOption("sci.pdf_family", ""))
 }
 \arguments{
 \item{base_size}{Base font size (default 11).}
+\item{base_family}{Font family. Defaults to the PDF rendering font when set,
+otherwise the graphics device's default family.}
 }
 \value{
 A ggplot2 theme object.

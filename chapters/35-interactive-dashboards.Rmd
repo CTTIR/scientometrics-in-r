@@ -181,7 +181,7 @@ ggplotly(p3)
 3. **Custom tooltips.** Modify the trend chart to show "Year: 2023, Papers: 87, Mean cites: 12.3" on hover instead of the default tooltip.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#35-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

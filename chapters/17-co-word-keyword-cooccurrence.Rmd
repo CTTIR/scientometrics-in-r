@@ -49,7 +49,7 @@ Co-word analysis complements citation-based methods (\@ref(cocit-background)). C
 
 ### Extracting keywords
 
-We extract author keywords from a sample of scientometrics research.
+We use OpenAlex-assigned topic labels as terms in a sample of scientometrics research. These are algorithmic labels, not author-supplied keywords. The flattened topic table also includes parent subfields, fields, and domains; retain only topic identifiers (`T...`) and count each term once per work.
 
 ```{r}
 #| label: 17-fetch-coword-data
@@ -68,10 +68,12 @@ works <- fetch_openalex(
 keywords <- works |>
   select(id, topics) |>
   unnest(topics, names_sep = "_") |>
+  filter(str_detect(topics_id, "(^|/)T[0-9]+$")) |>
   filter(topics_display_name != "") |>
   select(work_id = id, keyword = topics_display_name) |>
   mutate(keyword = str_to_lower(str_trim(keyword))) |>
-  filter(!is.na(keyword), nchar(keyword) >= 3)
+  filter(!is.na(keyword), nchar(keyword) >= 3) |>
+  distinct(work_id, keyword)
 
 kw_counts <- keywords |>
   count(keyword, sort = TRUE)
@@ -82,8 +84,8 @@ cat(glue("Unique keywords: {n_distinct(keywords$keyword)}\n"))
 
 ```{r}
 #| label: 17-fig-coword-topkeywords
-#| fig-cap: "Top 20 most frequent keywords in the Scientometrics sample."
-#| fig-alt: "Horizontal bar chart showing the 20 most frequently occurring keywords, with frequency counts on the x-axis."
+#| fig-cap: "Top 20 most frequent assigned topics used as terms in the Scientometrics sample."
+#| fig-alt: "Horizontal bar chart showing the 20 most frequent assigned topic labels, counted once per work."
 #| fig-width: 6
 #| fig-height: 5
 kw_counts |>
@@ -223,7 +225,7 @@ ggraph(layout) +
 4. **Normalisation comparison.** Build two networks from the same data: one with raw co-occurrence counts and one with association strength normalisation. How do the most central keywords differ?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#17-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

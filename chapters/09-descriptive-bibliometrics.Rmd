@@ -200,7 +200,7 @@ When reviewing descriptive output, check the following:
 4. **Annual growth rate.** Compute the compound annual growth rate (CAGR) of publications in the sample. Is the field accelerating?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#09-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

@@ -172,7 +172,7 @@ retracted |>
 3. **Retraction-citation correlation.** Is there a relationship between a paper's citation count at the time of retraction and the number of post-retraction citations it receives?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#29-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

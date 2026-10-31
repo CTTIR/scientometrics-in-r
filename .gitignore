@@ -7,6 +7,7 @@ _freeze/
 .Rhistory
 .Rdata
 .RData
+Rplots.pdf
 *.Rproj.user
 .Rproj.user/
 
@@ -64,9 +65,26 @@ render-test.log
 
 # Temporary merged source left by an interrupted book render
 /scientometrics-in-r.Rmd
+/scientometrics-in-r.knit.md
+/scientometrics-in-r.utf8.md
+/scientometrics-in-r.tex
+/scientometrics-in-r.pdf
+/scientometrics-in-r.epub
+/*.html
 
 .Renviron
 
 .env
 
 .env.*
+/scientometrics-in-r.aux
+/scientometrics-in-r.bbl
+/scientometrics-in-r.blg
+/scientometrics-in-r.toc
+/scientometrics-in-r.out
+/scientometrics-in-r.lof
+/scientometrics-in-r.lot
+/scientometrics-in-r.fls
+/scientometrics-in-r.fdb_latexmk
+/scientometrics-in-r.xdv
+/scientometrics-in-r.synctex.gz

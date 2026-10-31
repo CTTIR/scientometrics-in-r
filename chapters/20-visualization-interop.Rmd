@@ -272,7 +272,7 @@ ggraph(tg, layout = "fr") +
 4. **Colour-blind check.** Render the network figure with 3, 5, and 10 communities. At what point do the viridis colours become hard to distinguish? Test with a colour-blindness simulator.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#20-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

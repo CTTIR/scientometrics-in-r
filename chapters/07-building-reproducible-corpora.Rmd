@@ -173,7 +173,7 @@ After cleaning:
 3. **ROR lookup.** Use the ROR API to resolve the top 5 institutions in your corpus to their official ROR identifiers.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#07-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

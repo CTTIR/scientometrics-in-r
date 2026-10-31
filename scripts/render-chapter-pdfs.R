@@ -9,6 +9,7 @@ suppressPackageStartupMessages({
 # render. bookdown's full-book render does this via before_chapter_script;
 # rmarkdown::render() doesn't, so we do it here once.
 source("_common.R", local = FALSE)
+repo_root <- normalizePath(".", mustWork = TRUE)
 
 chapters <- c(
   dir_ls("chapters",     glob = "*.Rmd"),
@@ -46,6 +47,7 @@ for (ch in chapters) {
       output_format = pdf_fmt,
       output_file   = out_file,
       output_dir    = out_dir,
+      knit_root_dir = repo_root,
       envir         = new.env(),
       quiet         = TRUE
     )
@@ -60,6 +62,7 @@ for (ch in chapters) {
 if (length(failed)) {
   message("\n", length(failed), " of ", length(chapters), " chapter PDFs failed:")
   message(paste("  -", failed, collapse = "\n"))
+  quit(status = 1)
 } else {
   message("All ", length(chapters), " chapter PDFs rendered cleanly.")
 }

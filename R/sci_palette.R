@@ -10,10 +10,12 @@ palette_sci <- function(n = 6) {
 #' Minimal ggplot2 theme for the book
 #'
 #' @param base_size Base font size (default 11).
+#' @param base_family Font family. Defaults to the PDF rendering font when set,
+#'   otherwise the graphics device's default family.
 #' @return A ggplot2 theme object.
 #' @export
-theme_sci <- function(base_size = 11) {
-  ggplot2::theme_minimal(base_size = base_size) +
+theme_sci <- function(base_size = 11, base_family = getOption("sci.pdf_family", "")) {
+  ggplot2::theme_minimal(base_size = base_size, base_family = base_family) +
     ggplot2::theme(
       plot.title = ggplot2::element_text(face = "bold"),
       strip.text = ggplot2::element_text(face = "bold"),

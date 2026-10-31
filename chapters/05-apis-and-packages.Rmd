@@ -203,7 +203,7 @@ cat(glue("Date range: {min(works$publication_date)} to {max(works$publication_da
 3. **Build a multi-year corpus.** Fetch all works from a journal of your choice for 2015–2023 (without sampling). Plot the annual publication count and the median citation count per year. What trends do you observe?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#05-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

@@ -18,6 +18,12 @@ on:
       - "DESCRIPTION"
       - "NAMESPACE"
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Publish the checked package site to GitHub Pages"
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -67,7 +73,9 @@ jobs:
         shell: Rscript {0}
 
       - name: Deploy pkgdown to GitHub Pages
-        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        if: >-
+          github.ref == 'refs/heads/main' && github.event_name != 'pull_request' &&
+          (github.event_name != 'workflow_dispatch' || inputs.deploy == true)
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -5,7 +5,7 @@
 The book is structured so that you can read it linearly — front to back —
 or jump straight to the chapter that answers your current question.
 If you do not yet know which method fits your problem, start with the
-*Find Your Method* navigator (Chapter \@ref(find-your-method)). It maps
+[Find Your Method navigator](#find-your-method). It maps
 typical research questions ("evaluate a journal portfolio", "detect
 emerging topics", "study collaboration patterns") to the chapters and
 case studies that demonstrate the relevant techniques.

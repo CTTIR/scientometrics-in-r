@@ -173,7 +173,7 @@ works_oa |>
 3. **OA and collaboration.** Is there a relationship between the number of authors on a paper and its OA status? Hypothesise why.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#27-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

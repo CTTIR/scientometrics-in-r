@@ -268,7 +268,7 @@ cat(glue("Transitivity (global): {round(transitivity(giant, type = 'global'), 3)
 4. **Resolution parameter.** Run Leiden community detection with resolution parameters of 0.5, 1.0, and 2.0. How does the number of communities change? Which resolution produces the most interpretable results?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#15-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

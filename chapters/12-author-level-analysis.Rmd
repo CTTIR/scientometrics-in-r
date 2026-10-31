@@ -208,7 +208,7 @@ When building author profiles, verify the following:
 5. **Self-citation ratio.** For an author's works, estimate the fraction of citations that come from the author's own other papers. *(Hint: check if cited works share the same author ID.)*
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#12-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

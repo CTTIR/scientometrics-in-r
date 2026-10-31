@@ -190,7 +190,7 @@ renv::restore()
 3. **Branching.** Use `tar_target()` with dynamic branching to run the same analysis across multiple journals in parallel.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#34-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

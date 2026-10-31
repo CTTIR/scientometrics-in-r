@@ -46,10 +46,9 @@ This book has been built using [**{rmarkdown}**](https://rmarkdown.rstudio.com/d
 
 ---
 
-- **Linear or lookup.** Read front to back, or use the *Find Your Method* navigator (Chapter \@ref(find-your-method)) to jump to the chapter that answers your question.
+- **Linear or lookup.** Read front to back, or use the [Find Your Method navigator](#find-your-method) to jump to the chapter that answers your question.
 - **Code.** Reusable helpers live in the companion R package `scientometricsInR` and in `R/` in the source repository; every chapter shows the full chunk it depends on.
-- **Per-chapter PDFs.** Each chapter page has a *Download this chapter (PDF)* button at the top right.
-- **Whole-book downloads.** Use the *Download* menu in the top navigation bar for PDF and EPUB.
+- **Downloads.** The side panel lists whole-book and chapter files that are available in the current build.
 - **Corrections.** Please file an issue at <https://github.com/r-heller/scientometrics-in-r/issues>.
 
 <br></br>

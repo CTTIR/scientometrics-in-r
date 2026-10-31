@@ -4,11 +4,11 @@
 
 After completing this chapter, you will be able to:
 
-- Describe how the Journal Impact Factor, CiteScore, SNIP, SJR, and Eigenfactor are computed
+- Explain the citation windows and data requirements of JIF, CiteScore and SNIP
 - Explain why network-based journal metrics differ from simple citation ratios
-- Compute JIF-like and SNIP-like proxies from OpenAlex data
-- Articulate why proxy values differ from official proprietary metrics
-- Evaluate journals using multiple indicators rather than a single number
+- Summarise current cumulative citations and recorded references in journal cohorts
+- Distinguish those descriptive summaries from official journal metrics
+- Evaluate journals using appropriate evidence rather than a single number
 
 ## Setup {#jmetrics-setup}
 
@@ -29,148 +29,204 @@ source(here::here("R", "sci_palette.R"))
 
 ## Conceptual background {#jmetrics-background}
 
-Journal-level metrics aim to summarise a journal's citation performance. The most famous is the **Journal Impact Factor** (JIF), introduced by @garfield1955 and commercialised by Clarivate. The two-year JIF for year *t* equals the citations received in year *t* by articles published in years *t*-1 and *t*-2, divided by the number of "citable items" published in those two years. Its simplicity is both its appeal and its weakness: the numerator includes citations to all document types, but the denominator often excludes editorials and letters, inflating the ratio [@hicks2015].
+Journal-level metrics summarise particular aspects of a journal's citation
+record. The two-year **Journal Impact Factor** (JIF) for year *t* counts citations
+received in year *t* to the journal's content from years *t*-1 and *t*-2, divided
+by its citable items from those two publication years. The numerator can include
+citations to document types excluded from the denominator. The citation year,
+publication cohort and document-type rules are distinct parts of the definition;
+see [Clarivate's calculation explanation](https://clarivate.libguides.com/jcr/).
 
-**CiteScore** (Elsevier) uses a four-year window and counts all document types in both numerator and denominator, making it more transparent. **SNIP** (Source-Normalized Impact per Paper) normalises by citation potential --- the average number of references in citing articles' reference lists --- so that journals in fields with longer reference lists are not automatically advantaged [@waltman2016]. **SJR** (SCImago Journal Rank) and the **Eigenfactor** use iterative algorithms inspired by PageRank: a citation from a prestigious journal carries more weight than one from a low-impact source. This makes them network-based indicators, conceptually similar to eigenvector centrality in graph theory.
+**CiteScore** uses a four-year publication window and counts citations received
+within that same four-year interval. Its eligible document types include articles,
+reviews, conference papers, book chapters and data papers in both the numerator
+and denominator; it does not simply include every document type. See
+[Elsevier's metric definitions](https://www.elsevier.com/en-gb/researcher/author/tools-and-resources/measuring-a-journals-impact).
 
-All of these official metrics are tied to proprietary databases (Web of Science or Scopus). With OpenAlex [@priem2022], we can compute **proxy** values from fully open data. Proxies will not match official figures exactly --- differences in coverage, document-type classification, and citation linking guarantee some divergence [@visser2021] --- but they are transparent, reproducible, and free.
+**SNIP** (Source-Normalized Impact per Paper) adjusts for citation practices using
+information from the *citing* side, with specified reference and weighting rules.
+It is not a journal's citation average divided by the median reference count in
+its own papers. The revised method is described by
+[Waltman et al. (2013)](https://doi.org/10.1016/j.joi.2012.11.011).
+**SJR** (SCImago Journal Rank) and **Eigenfactor** use citation networks to weight
+citations according to their source; a simple citation count does not reproduce
+those network calculations [@waltman2016].
 
-DORA [@dora2012] explicitly warns against using the JIF as a proxy for individual article quality. The Leiden Manifesto [@hicks2015] echoes this: journal metrics describe *average* journal performance and say nothing about any specific paper.
+The published indicators use specified database coverage, document eligibility,
+time windows and methods. An alternative calculation needs its own explicit
+definition and validation [@visser2021]. The OpenAlex example below computes
+current cumulative citation and recorded-reference summaries only. It neither
+implements nor estimates JIF, CiteScore, SNIP, SJR or Eigenfactor.
+
+DORA [@dora2012] warns against using a journal metric as a measure of an individual
+article's quality. Journal averages cannot establish the quality of a particular
+paper, and citation distributions within journals can be highly uneven [@hicks2015].
 
 ## Worked example {#jmetrics-example}
 
 ### Selecting journals
 
-We analyse five well-known journals in information science and scientometrics.
+We use five journals in information science and research evaluation. Source
+identities were checked against OpenAlex on 30 October 2026. The JASIST record
+below is the current *Journal of the Association for Information Science and
+Technology*, appropriate to the 2021–2022 publication cohort; historical titles
+can have separate source records.
 
 ```{r}
 #| label: 11-define-journals
 journals <- tribble(
   ~short_name,        ~source_id,
   "Scientometrics",   "S148561398",
-  "J Informetrics",   "S205038879",
-  "Quant Sci Stud",   "S4210178031",
-  "J Am Soc Inf Sci", "S145342767",
-  "Res Evaluation",   "S100532675"
+  "J Informetrics",   "S205292342",
+  "Quant Sci Stud",   "S4210195326",
+  "JASIST",           "S4210197613",
+  "Res Evaluation",   "S16793705"
 )
 ```
 
-### Fetching citation data
+### Fetching a publication cohort
 
-We fetch works published in 2021-2022 and count citations received during 2022-2023 to construct a two-year JIF-like proxy.
+Fetch records classified as articles and published in 2021–2022. Their
+`cited_by_count` values are **cumulative citations at retrieval**, not citations
+received in a specified historical year. The query restricts publication dates;
+it does not restrict the dates on which citations were received. Results describe
+the retrieved records and require coverage checks before being treated as complete
+journal output.
 
 ```{r}
 #| label: 11-fetch-journal-data
 #| cache: true
 fetch_journal_works <- function(source_id, from_year, to_year) {
-  res <- tryCatch(
-    fetch_openalex(
-      entity = "works",
-      primary_location.source.id = source_id,
-      from_publication_date = paste0(from_year, "-01-01"),
-      to_publication_date = paste0(to_year, "-12-31"),
-      type = "article"
-    ),
-    error = function(e) NULL
+  res <- fetch_openalex(
+    entity = "works",
+    primary_location.source.id = source_id,
+    from_publication_date = paste0(from_year, "-01-01"),
+    to_publication_date = paste0(to_year, "-12-31"),
+    type = "article"
   )
-  if (is.null(res)) tibble() else res
+  if (!is.data.frame(res) || !nrow(res)) {
+    stop(glue("No usable records for {source_id}; check the query and provider response before comparing journals."))
+  }
+  res
 }
 
 journal_works <- journals |>
-  mutate(data = map2(source_id, 2021, \(sid, yr) {
-    fetch_journal_works(sid, yr, yr + 1)
-  }))
+  mutate(data = map(source_id, \(sid) fetch_journal_works(sid, 2021, 2022)))
 ```
 
-### Computing JIF-like proxies
+Provider errors propagate instead of being converted to zero publications or
+citations. An empty result stops the worked comparison; it is not evidence that
+a journal has no output.
+
+### Cumulative citation summaries
+
+The citation mean uses only observed citation counts, with that denominator
+reported. Missing counts are not zero. A total over observed values is not a
+complete journal total when records or counts are missing.
 
 ```{r}
-#| label: 11-compute-jif-proxy
-jif_proxy <- journal_works |>
-  mutate(
-    n_articles = map_int(data, nrow),
-    total_cites = map_dbl(data, \(d) sum(d$cited_by_count, na.rm = TRUE))
-  ) |>
-  mutate(jif_proxy = total_cites / pmax(n_articles, 1)) |>
-  select(short_name, n_articles, total_cites, jif_proxy) |>
-  arrange(desc(jif_proxy))
-
-jif_proxy |>
-  gt() |>
-  fmt_number(columns = jif_proxy, decimals = 2) |>
-  cols_label(
-    short_name = "Journal",
-    n_articles = "Articles (2021-22)",
-    total_cites = "Total citations",
-    jif_proxy = "JIF proxy"
+#| label: 11-citation-summary
+summarise_journal_records <- function(d) {
+  required <- c("id", "cited_by_count", "referenced_works_count")
+  if (!is.data.frame(d) || !nrow(d) || !all(required %in% names(d))) {
+    stop("Journal summaries need nonempty records with IDs, citation counts and reference counts.")
+  }
+  if (anyNA(d$id) || any(!nzchar(d$id)) || anyDuplicated(d$id)) {
+    stop("Journal work IDs must be present and unique.")
+  }
+  for (column in c("cited_by_count", "referenced_works_count")) {
+    values <- d[[column]]
+    if (!is.numeric(values) || any(!is.na(values) & (!is.finite(values) | values < 0))) {
+      stop("Citation and reference counts must be finite nonnegative numbers or missing.")
+    }
+  }
+  citations <- d$cited_by_count[!is.na(d$cited_by_count)]
+  references <- d$referenced_works_count[!is.na(d$referenced_works_count)]
+  tibble(
+    n_articles = nrow(d), n_citations_observed = length(citations),
+    observed_citation_sum = if (length(citations)) sum(citations) else NA_real_,
+    mean_cumulative_citations = if (length(citations)) mean(citations) else NA_real_,
+    median_cumulative_citations = if (length(citations)) median(citations) else NA_real_,
+    n_references_observed = length(references),
+    median_recorded_references = if (length(references)) median(references) else NA_real_
   )
+}
+
+journal_summary <- journal_works |>
+  mutate(summary = map(data, summarise_journal_records)) |>
+  unnest(summary) |>
+  select(-data) |>
+  arrange(short_name)
+
+journal_summary |>
+  select(short_name, n_articles, n_citations_observed, observed_citation_sum,
+         mean_cumulative_citations, median_cumulative_citations) |>
+  gt() |>
+  fmt_number(columns = c(mean_cumulative_citations, median_cumulative_citations), decimals = 2) |>
+  cols_label(short_name = "Journal", n_articles = "Retrieved articles (2021–22)",
+             n_citations_observed = "Observed citation counts",
+             observed_citation_sum = "Sum of observed cumulative citations",
+             mean_cumulative_citations = "Mean cumulative citations",
+             median_cumulative_citations = "Median cumulative citations")
 ```
 
-### Computing a SNIP-like proxy
+### Recorded reference counts
 
-SNIP normalises by citation potential. We approximate this by dividing each journal's mean citations per paper by the median reference-list length of its citing works.
+`referenced_works_count` describes the references recorded for the fetched
+journal articles. It is not the reference-list information for papers citing
+those articles, and it need not capture every reference in the original texts.
+We report it separately rather than dividing citations by it or calling it
+citation potential.
 
 ```{r}
-#| label: 11-compute-snip-proxy
-snip_proxy <- journal_works |>
-  mutate(
-    mean_cites = map_dbl(data, \(d) if (nrow(d) == 0) NA_real_ else mean(d$cited_by_count, na.rm = TRUE)),
-    median_refs = map_dbl(data, \(d) {
-      if (nrow(d) == 0) return(NA_real_)
-      median(d$referenced_works_count, na.rm = TRUE)
-    })
-  ) |>
-  mutate(
-    citation_potential = pmax(median_refs, 1),
-    snip_proxy = mean_cites / citation_potential
-  ) |>
-  select(short_name, mean_cites, citation_potential, snip_proxy) |>
-  arrange(desc(snip_proxy))
-
-snip_proxy |>
+#| label: 11-reference-summary
+journal_summary |>
+  select(short_name, n_articles, n_references_observed, median_recorded_references) |>
   gt() |>
-  fmt_number(columns = c(mean_cites, snip_proxy), decimals = 2)
+  cols_label(short_name = "Journal", n_articles = "Retrieved articles",
+             n_references_observed = "Observed reference counts",
+             median_recorded_references = "Median recorded references")
 ```
 
 ### Visualization
 
 ```{r}
 #| label: 11-fig-jmetrics-comparison
-#| fig-cap: "Comparison of JIF proxy and SNIP proxy across five journals."
-#| fig-alt: "Dot plot showing JIF proxy and SNIP proxy values side by side for five information science journals, illustrating how normalisation changes relative rankings."
-#| fig-width: 6
+#| fig-cap: "Current cumulative citations and recorded references for the retrieved 2021–2022 article cohorts, shown as separate descriptive quantities."
+#| fig-alt: "Two panels show journal mean cumulative citations at retrieval and median recorded references in those same journal articles; neither panel is an official journal metric."
+#| fig-width: 7
 #| fig-height: 4
-combined <- jif_proxy |>
-  select(short_name, jif_proxy) |>
-  left_join(snip_proxy |> select(short_name, snip_proxy), by = "short_name") |>
-  pivot_longer(cols = c(jif_proxy, snip_proxy), names_to = "metric", values_to = "value") |>
-  mutate(metric = recode(metric, jif_proxy = "JIF proxy", snip_proxy = "SNIP proxy"))
+combined <- journal_summary |>
+  select(short_name, mean_cumulative_citations, median_recorded_references) |>
+  pivot_longer(-short_name, names_to = "summary", values_to = "value") |>
+  mutate(summary = recode(summary,
+    mean_cumulative_citations = "Mean cumulative citations",
+    median_recorded_references = "Median recorded references"))
 
-ggplot(combined, aes(x = value, y = reorder(short_name, value), colour = metric)) +
-  geom_point(size = 3) +
-  labs(x = "Metric value", y = NULL, colour = "Metric") +
-  scale_colour_manual(values = palette_sci(2)) +
+ggplot(combined, aes(x = value, y = short_name)) +
+  geom_point(size = 3, colour = palette_sci(1)) +
+  facet_wrap(~ summary, scales = "free_x") +
+  labs(x = "Descriptive value (see panel)", y = NULL) +
   theme_sci()
 ```
 
 ## Diagnostics and interpretation {#jmetrics-diagnostics}
 
-When evaluating journal metric proxies:
-
-- **Coverage gaps**: OpenAlex may miss some document types or citations present in Scopus/WoS. Compare article counts with known totals.
-- **Document-type classification**: The JIF denominator famously excludes editorials and letters. Our proxy counts all articles; this may lower the ratio compared to official JIF values.
-- **Temporal alignment**: Ensure citation windows match the intended metric definition exactly (two years for JIF, four for CiteScore).
-- **Rank correlation**: Even if absolute values differ from official metrics, the *rank order* of journals often agrees, which is sufficient for many analyses.
+- **Coverage**: Report source IDs, publication filters, retrieval dates and the number of retrieved records. Reconcile these with the intended corpus before interpreting output counts.
+- **Missing data**: Compare the retrieved-record count with each observed denominator. An all-missing citation column produces missing summaries, not a zero-citation journal.
+- **Time**: Older papers have had longer to accumulate citations. A publication-date filter cannot create an annual citation window from a current cumulative count.
+- **Scope**: References in the journal's own articles describe those records; they do not supply the citing-side data needed for SNIP.
+- **Comparisons**: Differences can reflect field mix, document classification, coverage and citation exposure. Agreement between descriptive rankings does not validate an official metric or justify an evaluation decision.
 
 ## Limitations and responsible use {#jmetrics-limitations}
 
 <div class="callout callout-warn">
 ## Limitations and responsible use
 
-- **Journal metrics are not article metrics.** The distribution of citations within a journal is highly skewed; the mean says little about any individual paper [@dora2012].
-- **Goodhart's law applies.** When a metric becomes a target, it ceases to be a good metric [@goodhart1984]. Editors may game the JIF through citation stacking, coercive citation, or manipulating the denominator.
-- **Proxy ≠ official.** Our OpenAlex-based proxies are transparent and reproducible, but they will differ from Clarivate JIF or Elsevier CiteScore. Never present proxies as official values.
-- **Field dependence persists.** Even SNIP does not fully eliminate field effects. Comparing SNIP values across distant disciplines requires caution [@waltman2016].
+- **Journal summaries are not article-quality measures.** Means can conceal skewed citation distributions and do not establish a particular paper's quality [@dora2012].
+- **Targets can distort behaviour.** Citation stacking, coercive citation and denominator manipulation are risks when metrics become targets [@goodhart1984].
+- **These are descriptive snapshots.** They are not JIF, CiteScore, SNIP or substitutes for those indicators. Reusing a familiar label does not supply the missing citation windows or methodology.
+- **Field dependence and metadata coverage remain.** The example performs no field normalisation and cannot establish a fair ranking across disciplines [@waltman2016].
 </div>
 
 ## Common pitfalls {#jmetrics-pitfalls}
@@ -178,37 +234,37 @@ When evaluating journal metric proxies:
 <div class="callout callout-stop">
 ## Common pitfalls
 
-- **Treating the JIF as a measure of article quality.** The JIF describes the journal, not the paper. A paper in a high-JIF journal may have zero citations.
-- **Ignoring the citation window.** Computing a "JIF" using lifetime citations instead of a two-year window produces a different and non-comparable number.
-- **Conflating numerator and denominator document types.** Mixing reviews (which inflate the numerator) with a denominator that excludes them inflates the ratio.
-- **Ranking journals by a single metric.** Always use multiple indicators and consider disciplinary context.
+- **Relabeling cumulative citations as annual citations.** JIF needs citations received in one specified year to the preceding two publication years.
+- **Using the wrong side of a citation link.** The cited journal's own reference counts do not describe the reference lists of its citing works.
+- **Treating absence as zero.** Failed requests, empty responses and missing values require explicit handling before computing a denominator.
+- **Ranking journals by a single number.** Indicator definitions, distributions, coverage and disciplinary context matter alongside any numerical comparison.
 </div>
 
 ## Exercises {#jmetrics-exercises}
 
-1. **Four-year CiteScore proxy.** Modify the worked example to compute a four-year CiteScore proxy (citations in year *t* to articles published in years *t*-1 to *t*-4, divided by all documents in those years). How does the ranking change?
+1. **Cohort sensitivity.** Fetch 2019–2022 articles for one of the verified source IDs and compare their cumulative citation summary with the 2021–2022 cohort. Explain why widening the publication cohort does not compute CiteScore.
 
-2. **Rank correlation.** Compute Spearman's rank correlation between your JIF proxy and SNIP proxy. Is the agreement high or low?
+2. **Descriptive association.** Compute Spearman correlation between the journal means of cumulative citations and medians of recorded references, using complete pairs. Explain why any association does not validate SNIP or establish field normalisation.
 
-3. **Field comparison.** Pick five journals from two different fields (e.g., physics and sociology). Compute JIF proxies for both groups. Does SNIP normalisation reduce the between-field gap?
+3. **Missing-data denominator.** For three invented records with citation counts 0, 20 and missing, calculate the observed citation sum and mean using the helper. Compare that mean with dividing the observed sum by all three records. Also check a cohort whose citation counts are all missing.
 
-4. **Self-citation share.** For one journal, estimate the proportion of citations that come from the journal itself. How would excluding self-citations change the JIF proxy?
+4. **Self-citation design.** Specify the citation edges, citing-journal identities, time window and denominator needed to measure a journal self-citation share. Explain why the fetched cumulative counts and reference counts are insufficient.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#11-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>
 
 ## Further reading {#jmetrics-reading}
 
-- @garfield1955 --- The original proposal for citation indexes, from which the JIF eventually emerged.
-- @waltman2016 --- Comprehensive review of citation impact indicators, including journal-level metrics.
-- @hicks2015 --- The Leiden Manifesto, with specific guidance on responsible use of journal metrics.
-- @dora2012 --- DORA: explicitly warns against using the JIF for individual evaluation.
-- @goodhart1984 --- Goodhart's law: when a measure becomes a target, it ceases to be a good measure.
-- @visser2021 --- Database comparison showing how coverage affects computed metrics.
-- @priem2022 --- OpenAlex as a fully open data source for computing metric proxies.
+- @garfield1955 --- The original proposal for citation indexes.
+- @waltman2016 --- Review of citation impact indicators and their data requirements.
+- [Clarivate's JIF calculation](https://clarivate.libguides.com/jcr/) and [Elsevier's metric definitions](https://www.elsevier.com/en-gb/researcher/author/tools-and-resources/measuring-a-journals-impact) --- Provider definitions of citation windows and eligible documents.
+- [Waltman et al. (2013)](https://doi.org/10.1016/j.joi.2012.11.011) --- The revised SNIP methodology.
+- @hicks2015; @dora2012 --- Responsible use of journal-level metrics.
+- @visser2021 --- Database coverage differences.
+- @priem2022 --- OpenAlex as an open bibliographic data source.
 
 ## Session info {#jmetrics-sessioninfo}
 

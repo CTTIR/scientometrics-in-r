@@ -43,7 +43,12 @@ These practices are measurable proxies for reproducibility, but they are not rep
 
 ## Worked example {#repro-example}
 
-### Analysing data availability patterns
+### Analysing access status and metadata coverage
+
+The example below measures article access status and abstract coverage in
+OpenAlex. It does not detect data/code availability, RRIDs, badges, or successful
+replication. Those questions require separate full-text/resource extraction
+and validation; OA status is not a validated substitute for them.
 
 ```{r}
 #| label: 33-fetch-repro-data
@@ -64,18 +69,18 @@ works_repro <- works |>
     cited_by_count,
     oa_status,
     type,
-    has_abstract = !is.na(abstract)
+    has_abstract = !is.na(abstract) & nzchar(trimws(abstract))
   )
 
 cat(glue("Works: {nrow(works_repro)}\n"))
 ```
 
-### OA as a transparency proxy
+### Observed article access status
 
 ```{r}
 #| label: 33-fig-repro-oa-trend
-#| fig-cap: "Proportion of open access articles by year as a transparency indicator."
-#| fig-alt: "Line chart showing the proportion of OA articles over time, used as a proxy for transparency practices."
+#| fig-cap: "Open-access share among sampled articles with observed access status, by year."
+#| fig-alt: "Line chart of recorded article access status by publication year; it does not measure open data or code."
 #| fig-width: 5
 #| fig-height: 3.5
 works_repro |>
@@ -109,12 +114,12 @@ works_repro |>
   theme_sci()
 ```
 
-### Transparency and citation impact
+### Access status and cumulative citations
 
 ```{r}
 #| label: 33-fig-repro-impact
-#| fig-cap: "Citation count by OA status, a proxy for the transparency–impact relationship."
-#| fig-alt: "Box plot comparing citation counts for OA vs. closed papers, illustrating whether transparent papers receive more citations."
+#| fig-cap: "Current cumulative citation counts by recorded article access status."
+#| fig-alt: "Box plot comparing cumulative citations for OA and closed papers without estimating a causal effect or data-sharing relationship."
 #| fig-width: 5
 #| fig-height: 3.5
 works_repro |>
@@ -144,9 +149,9 @@ works_repro |>
 
 ## Diagnostics and interpretation {#repro-diagnostics}
 
-- **Proxy vs. reality**: OA status and abstract availability are proxies for transparency, not direct measures of reproducibility. Actual data and code sharing require checking external repositories.
-- **Journal policies**: Changes in journal policies (mandatory DAS, badge adoption) can cause step changes in transparency indicators. Control for journal when comparing across time.
-- **Selection effects**: Papers with open data may be of higher quality (authors confident enough to share), creating a spurious transparency–citation correlation.
+- **Different constructs**: Article access status and abstract coverage do not measure data/code sharing, RRID use, badge adoption or reproducibility. Check full texts and linked resources for those outcomes.
+- **Coverage over time**: Changes in recorded access status or abstract coverage can reflect provider coverage and publication cohorts. The example does not evaluate a DAS or badge policy.
+- **Selection and exposure**: Current cumulative citations mix publication ages, article selection and other confounders. The comparison cannot establish an OA effect or a relationship with open data.
 - **Field differences**: Data sharing norms vary enormously. Genomics shares data routinely; clinical research often cannot due to privacy. Compare within fields.
 
 ## Limitations and responsible use {#repro-limitations}
@@ -177,10 +182,10 @@ works_repro |>
 
 2. **Cross-journal comparison.** Compare abstract availability and OA rates for three journals. Do journals with higher OA rates also have better metadata completeness?
 
-3. **Temporal trends.** Track the proportion of papers with abstracts, OA status, and high citation counts over time. Are transparency proxies correlated with citation impact within years?
+3. **Temporal trends.** Track recorded OA status and abstract coverage by publication cohort. Report the usable denominators and explain why these measures do not establish data/code sharing or reproducibility.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#33-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

@@ -225,7 +225,7 @@ The value of these laws is not predictive precision but the insight that **skewe
 4. **Matthew Effect simulation.** Write a simple simulation: start 100 authors with 1 paper each. At each time step, an author gains a new paper with probability proportional to their current count. After 50 steps, plot the distribution. Does it resemble Lotka's law?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#02-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

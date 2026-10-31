@@ -18,7 +18,7 @@ bookdown::bs4_book:
     toc:
       collapse: section
       scroll_highlight: yes
-    download: ["pdf", "epub"]
+    download: null
 bookdown::pdf_book:
   latex_engine: xelatex
   citation_package: natbib
@@ -26,7 +26,7 @@ bookdown::pdf_book:
   toc_depth: 3
   includes:
     in_header: style/preamble.tex
-  pandoc_args: ["--top-level-division=chapter"]
+  pandoc_args: ["--top-level-division=chapter", "--lua-filter=scripts/pdf-table-code.lua"]
 bookdown::epub_book:
   cover_image: "images/cover.png"
   stylesheet: style/style.css

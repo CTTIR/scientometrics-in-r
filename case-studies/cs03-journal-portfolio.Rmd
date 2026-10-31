@@ -2,7 +2,7 @@
 
 ## Objective
 
-Compare three information-science journals on citation impact, aging patterns, and topical coverage to inform collection management decisions.
+Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection review.
 
 ## Setup
 
@@ -24,6 +24,8 @@ source(here::here("R", "sci_palette.R"))
 
 ## Data acquisition
 
+The source identifiers resolve to [Scientometrics](https://api.openalex.org/sources/S148561398), [Journal of Informetrics](https://api.openalex.org/sources/S205292342), and the [Journal of the Association for Information Science and Technology](https://api.openalex.org/sources/S4210197613) (JASIST). These OpenAlex source records were checked on 2026-10-30. Historical titles of JASIST have separate source records and should not be substituted for this recent publication window.
+
 ```{r}
 #| label: cs03-define-journals
 journals <- tribble(
@@ -34,11 +36,13 @@ journals <- tribble(
 )
 ```
 
+Request up to 300 randomly sampled articles per journal from 2018-2023, using a fixed seed. These samples do not measure the journals' total output. The seed stabilises sampling within an OpenAlex snapshot; later database updates can change the returned records and citation counts. Preserve the returned works and cache files with any reported analysis.
+
 ```{r}
 #| label: cs03-fetch-journal-data
 #| cache: true
 fetch_journal <- function(sid) {
-  fetch_openalex(
+  works <- fetch_openalex(
     entity = "works",
     primary_location.source.id = sid,
     from_publication_date = "2018-01-01",
@@ -46,18 +50,32 @@ fetch_journal <- function(sid) {
     type = "article",
     options = list(sample = 300, seed = 42)
   )
+  required <- c("id", "publication_year", "cited_by_count", "topics")
+  if (!is.data.frame(works) || nrow(works) == 0L ||
+      !all(required %in% names(works))) {
+    stop("No usable journal sample returned for ", sid)
+  }
+  if (anyNA(works$id) || anyDuplicated(works$id) ||
+      anyNA(works$publication_year) ||
+      any(!works$publication_year %in% 2018:2023) ||
+      any(!is.finite(works$cited_by_count)) || any(works$cited_by_count < 0)) {
+    stop("Invalid or duplicate records in journal sample for ", sid)
+  }
+  works
 }
 
 journal_data <- journals |>
   mutate(works = map(source_id, fetch_journal))
 ```
 
-## Citation impact comparison
+## Citation distributions in the samples
+
+`cited_by_count` is the cumulative number of citations recorded when the data were retrieved, including citations received after 2023. It does not restrict citing papers to the sampled publication years. The h-index below describes only the returned sample, and all summaries remain unnormalised for field and publication year.
 
 ```{r}
 #| label: cs03-fig-cs03-impact
-#| fig-cap: "Citation count distributions by journal."
-#| fig-alt: "Box plots comparing citation distributions across three information-science journals."
+#| fig-cap: "Cumulative citation distributions in the sampled articles, with one added before log scaling."
+#| fig-alt: "Box plots comparing cumulative citations plus one across the three journal samples."
 #| fig-width: 6
 #| fig-height: 4
 all_works <- journal_data |>
@@ -68,7 +86,7 @@ all_works <- journal_data |>
 ggplot(all_works, aes(x = journal, y = cited_by_count + 1)) +
   geom_boxplot(fill = palette_sci(1), alpha = 0.7) +
   scale_y_log10() +
-  labs(x = NULL, y = "Citations (log scale)") +
+  labs(x = NULL, y = "Cumulative citations + 1 (log10 scale)") +
   theme_sci()
 ```
 
@@ -77,78 +95,90 @@ ggplot(all_works, aes(x = journal, y = cited_by_count + 1)) +
 all_works |>
   group_by(journal) |>
   summarise(
-    n = n(),
+    sampled_articles = n(),
     mean_cites = round(mean(cited_by_count), 1),
     median_cites = median(cited_by_count),
-    h_index = compute_h_index(cited_by_count),
+    sample_h_index = compute_h_index(cited_by_count),
     .groups = "drop"
   ) |>
-  gt()
+  gt() |>
+  cols_label(
+    journal = "Journal", sampled_articles = "Sampled articles",
+    mean_cites = "Mean cumulative citations", median_cites = "Median cumulative citations",
+    sample_h_index = "Sample h-index"
+  )
 ```
 
-## Citation aging
+## Publication-cohort comparison
+
+The following plot compares different publication cohorts at retrieval. Older cohorts have had more time to receive citations, and their composition may also differ. It is not a trajectory following the same articles over time, so it cannot establish citation-aging curves or citation half-lives. That requires time-resolved citation counts and an explicit observation window.
 
 ```{r}
 #| label: cs03-fig-cs03-aging
-#| fig-cap: "Mean citations by article age for each journal."
-#| fig-alt: "Line chart showing how citation accumulation differs across journals as articles age."
+#| fig-cap: "Mean cumulative citations by publication year in each journal sample; point size shows cohort sample size."
+#| fig-alt: "Lines compare mean cumulative citations for different publication cohorts, with larger points indicating more sampled articles."
 #| fig-width: 6
 #| fig-height: 4
-aging <- all_works |>
-  mutate(age = 2024 - year(publication_date)) |>
-  group_by(journal, age) |>
-  summarise(mean_cites = mean(cited_by_count, na.rm = TRUE), .groups = "drop")
+cohorts <- all_works |>
+  group_by(journal, publication_year) |>
+  summarise(mean_cites = mean(cited_by_count), sampled_articles = n(), .groups = "drop")
 
-ggplot(aging, aes(x = age, y = mean_cites, colour = journal)) +
+ggplot(cohorts, aes(x = publication_year, y = mean_cites, colour = journal)) +
   geom_line(linewidth = 1) +
-  geom_point(size = 2) +
+  geom_point(aes(size = sampled_articles)) +
+  scale_x_continuous(breaks = 2018:2023) +
   scale_colour_manual(values = palette_sci(3)) +
-  labs(x = "Years since publication", y = "Mean citations", colour = "Journal") +
+  labs(x = "Publication year", y = "Mean cumulative citations",
+       colour = "Journal", size = "Sampled articles") +
   theme_sci()
 ```
 
 ## Topical coverage
+
+Count each article once per assigned topic. The flattened `topics` table also contains the topics' parent subfields, fields, and domains; retain only topic identifiers (`T...`). An article can contribute to several topics, while articles without topic assignments do not contribute to this chart; topic counts therefore need not sum to the number of sampled articles.
 
 ```{r}
 #| label: cs03-topics
 topic_data <- all_works |>
   select(id, journal, topics) |>
   unnest(topics, names_sep = "_") |>
-  select(journal, topic = topics_display_name) |>
+  filter(str_detect(topics_id, "(^|/)T[0-9]+$")) |>
+  select(id, journal, topic = topics_display_name) |>
   mutate(topic = str_to_lower(str_trim(topic))) |>
-  filter(!is.na(topic), nchar(topic) >= 3)
+  filter(!is.na(topic), nchar(topic) >= 3) |>
+  distinct(id, journal, topic)
 
 top_topics <- topic_data |>
   count(journal, topic, sort = TRUE) |>
   group_by(journal) |>
-  slice_max(n, n = 10) |>
+  slice_max(n, n = 10, with_ties = FALSE) |>
   ungroup()
 ```
 
 ```{r}
 #| label: cs03-fig-cs03-topics
-#| fig-cap: "Top 10 topics by journal."
-#| fig-alt: "Faceted bar chart showing the most frequent topics for each journal, revealing different thematic emphases."
+#| fig-cap: "Up to 10 most frequent assigned topics in each journal sample."
+#| fig-alt: "Faceted bar chart comparing numbers of sampled articles assigned to the most frequent topics in each journal."
 #| fig-width: 8
-#| fig-height: 5
+#| fig-height: 9
 top_topics |>
   mutate(topic = reorder_within(topic, n, journal)) |>
   ggplot(aes(x = n, y = topic)) +
   geom_col(fill = palette_sci(1)) +
-  facet_wrap(~ journal, scales = "free_y") +
+  facet_wrap(~ journal, scales = "free_y", ncol = 1) +
   scale_y_reordered() +
-  labs(x = "Frequency", y = NULL) +
+  labs(x = "Sampled articles assigned to topic", y = NULL) +
   theme_sci(base_size = 9)
 ```
 
-## Key findings
+## Reading the results
 
-1. **Impact variation**: Citation distributions differ across journals, with some showing higher medians and others higher means (driven by a few highly cited papers).
-2. **Aging patterns**: All three journals show similar aging curves, consistent with the same broad discipline.
-3. **Topical differentiation**: Despite overlapping coverage, each journal has distinct topical emphases.
+1. **Citation distributions**: Compare the plotted medians with the sample means. A large gap can indicate that a few highly cited articles dominate the mean; journal rankings should be reported only from the observed results.
+2. **Publication cohorts**: Compare cohorts alongside their sample sizes. Differences can reflect time available for citations, article composition, or sampling variation; they do not demonstrate a common aging curve.
+3. **Assigned topics**: Inspect overlap and differences in the displayed topics, then review representative articles before drawing conclusions about collection coverage.
 
 ## Lessons learned
 
 - Journal comparison requires multiple dimensions; no single metric tells the full story.
-- Sample-based analysis is illustrative. For production-quality journal evaluation, use complete data and field-normalised indicators [@waltman2016].
-- Citation aging patterns are remarkably consistent within a discipline but would differ dramatically between, say, biomedicine and humanities.
+- Sample-based analysis is illustrative. Dependable journal evaluation requires a defined corpus, justified sampling or complete coverage, appropriate observation windows, and field-normalised indicators where relevant [@waltman2016].
+- Collection decisions also depend on local readership, access, cost, and subject needs; citation and topic summaries alone do not measure a journal's value to a library.

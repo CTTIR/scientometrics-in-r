@@ -4,6 +4,12 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      deploy:
+        description: "Publish the validated book to GitHub Pages"
+        type: boolean
+        required: false
+        default: false
   schedule:
     - cron: "0 2 * * 0"
 
@@ -16,9 +22,10 @@ concurrency:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      SCIENTOMETRICS_REBUILD_CHUNKS: "1"
 
     steps:
       - uses: actions/checkout@v4
@@ -34,88 +41,85 @@ jobs:
             libfontconfig1-dev libharfbuzz-dev libfribidi-dev \
             libpoppler-cpp-dev libtesseract-dev libleptonica-dev \
             libudunits2-dev libgdal-dev libmagick++-dev default-jdk \
-            libglpk-dev libnode-dev libv8-dev cmake libgsl-dev libjq-dev
+            libglpk-dev libnode-dev libv8-dev cmake libgsl-dev libjq-dev \
+            fonts-noto-cjk fonts-dejavu-core fonts-dejavu-mono
 
       - uses: r-lib/actions/setup-pandoc@v2
 
       - uses: r-lib/actions/setup-r@v2
         with:
-          r-version: "4.4.1"
+          r-version: "4.6.1"
           use-public-rspm: true
 
       - name: Cache R library
         uses: actions/cache@v4
         with:
           path: /home/runner/work/_temp/Library
-          key: rlib-Linux-r4.4.1-renvlock-${{ hashFiles('renv.lock') }}
+          key: rlib-Linux-r4.6.1-book-${{ hashFiles('scripts/install-book-deps.R', 'DESCRIPTION') }}
           restore-keys: |
-            rlib-Linux-r4.4.1-renvlock-
+            rlib-Linux-r4.6.1-book-
 
-      - name: Install lockfile package names via install.packages
-        # pak's dependency solver rejects the lockfile (version conflicts
-        # against RSPM heads). Use plain install.packages, which is
-        # permissive: it'll pull the current RSPM-compatible version of
-        # every name in renv.lock, plus deps. We give up strict version
-        # pinning vs. renv.lock — acceptable in CI for a docs site.
+      - name: Install executable book dependencies
+        # The reader-facing installer is also the CI inventory. This uses
+        # current repository packages; it does not restore historical renv.lock.
         run: |
-          options(
-            install.packages.check.source = "no",
-            repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/noble/latest"),
-            Ncpus = parallel::detectCores()
-          )
-          install.packages("jsonlite")
-          lock <- jsonlite::fromJSON("renv.lock", simplifyVector = FALSE)
-          pkgs <- names(lock$Packages)
-          # Drop base + recommended (already on .libPaths(), can't reinstall
-          # over them anyway).
-          base_rec <- rownames(installed.packages(
-            lib.loc = .Library, priority = c("base", "recommended")
-          ))
-          # Packages used by chapters but not pinned in renv.lock —
-          # quanteda extras, OCR / PDF / SQL / NLP utilities the lockfile
-          # missed. Discovered by grep-ing library() calls in chapters/.
-          extras <- c(
-            "quanteda.textstats", "quanteda.textplots",
-            "stopwords", "wordcloud", "textstem", "textrecipes",
-            "RPostgres", "tabulapdf", "udpipe", "word2vec",
-            "networkD3", "gender"
-          )
-          pkgs <- setdiff(unique(c(pkgs, extras)), c("renv", base_rec))
-          cat("Installing", length(pkgs), "packages\n")
-          install.packages(pkgs, dependencies = TRUE, lib = .libPaths()[1])
-          cat("--- .libPaths() ---\n"); print(.libPaths())
-          cat("--- bookdown ---\n")
-          print(find.package("bookdown", quiet = TRUE))
-        shell: Rscript {0}
+          Rscript --vanilla scripts/install-book-deps.R \
+            --repos=https://packagemanager.posit.co/cran/__linux__/noble/latest
 
       - uses: r-lib/actions/setup-tinytex@v2
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
+      - name: Check PDF, HTML and EPUB format isolation
+        run: Rscript --vanilla scripts/verify-render-formats.R
 
-      - name: Create Python venv
-        run: |
-          python -m venv /opt/scientometrics-py
-          /opt/scientometrics-py/bin/pip install --upgrade pip
-          /opt/scientometrics-py/bin/pip install \
-            sentence-transformers bertopic umap-learn hdbscan
-          echo "RETICULATE_PYTHON=/opt/scientometrics-py/bin/python" >> $GITHUB_ENV
+      - name: Check EPUB packaging and failure handling
+        run: Rscript --vanilla scripts/test-epub-packaging.R
 
       - name: Render book (HTML + PDF + EPUB)
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: Rscript -e 'bookdown::render_book("index.Rmd", output_format = "all")'
 
+      - name: Package and verify EPUB
+        run: Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub
+
+      - name: Validate EPUB conformance
+        run: |
+          epubcheck_dir="$RUNNER_TEMP/scientometrics-epubcheck"
+          mkdir -p "$epubcheck_dir"
+          curl --fail --location --retry 3 \
+            https://github.com/w3c/epubcheck/releases/download/v5.4.0/epubcheck-5.4.0.zip \
+            --output "$epubcheck_dir/epubcheck.zip"
+          printf '%s  %s\n' \
+            '33350c61038e71dfb3d45a76aed04bf5481e6d5500cb780f6e98db8bbd15a28c' \
+            "$epubcheck_dir/epubcheck.zip" | sha256sum --check -
+          unzip -q "$epubcheck_dir/epubcheck.zip" -d "$epubcheck_dir"
+          java -jar "$epubcheck_dir/epubcheck-5.4.0/epubcheck.jar" \
+            --failonwarnings docs/scientometrics-in-r.epub
+
       - name: Render per-chapter PDFs
         # Nice-to-have; the full book PDF/EPUB/HTML are already built.
         # Don't block deploy on a single chapter's LaTeX hiccup.
         continue-on-error: true
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: Rscript scripts/render-chapter-pdfs.R
 
+      - name: Inventory available downloads
+        run: Rscript scripts/build-download-manifest.R
+
+      - name: Upload manual build for review
+        if: success() && github.event_name == 'workflow_dispatch'
+        uses: actions/upload-artifact@v4
+        with:
+          name: scientometrics-book-${{ github.run_id }}
+          path: docs/
+          retention-days: 7
+          if-no-files-found: error
+
       - name: Deploy to gh-pages
-        if: github.event_name != 'pull_request'
+        if: >-
+          github.event_name != 'pull_request' &&
+          (github.event_name != 'workflow_dispatch' || inputs.deploy == true)
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages

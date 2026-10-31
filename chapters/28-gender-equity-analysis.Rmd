@@ -4,11 +4,10 @@
 
 After completing this chapter, you will be able to:
 
-- Explain the challenges of gender inference from author names
-- Apply name-based gender classification and assess its limitations
-- Analyse gender representation in authorship positions (first, last, corresponding)
-- Compute gender-disaggregated citation and productivity statistics
-- Articulate why gender is not binary and why name-based inference introduces systematic bias
+- Distinguish a name-lookup category from a person's gender identity
+- Measure lookup coverage and explain how excluding unmatched records changes a denominator
+- Summarise explicitly synthetic authorship records by recorded position
+- Identify the data, validation and consent questions required for an actual equity study
 
 ## Setup {#gender-setup}
 
@@ -16,131 +15,102 @@ After completing this chapter, you will be able to:
 #| label: 28-setup
 #| message: false
 library(tidyverse)
-library(openalexR)
 library(glue)
 library(gt)
 
-set.seed(20260509)
-
-source(here::here("R", "api_helpers.R"))
-source(here::here("R", "utils.R"))
 source(here::here("R", "sci_palette.R"))
 ```
 
 ## Conceptual background {#gender-background}
 
-Research on gender disparities in science has documented persistent gaps in publication rates, citation counts, funding success, and career progression. Bibliometric analysis can quantify these gaps at scale, but the methods used raise serious ethical and technical concerns.
+Research such as @lariviere2013 examines gender disparities in scientific authorship. Its findings concern particular data, operational definitions and study periods; they are not measurements supplied by this chapter.
 
-**Gender inference from names** is the most common approach. Services like genderize.io, Gender API, and the R package `gender` assign a probabilistic gender (typically male/female) based on first names and country of origin. This approach has fundamental limitations: it enforces a binary classification, it fails for names common across genders, it has low accuracy for non-Western names, and it misclassifies non-binary and transgender researchers. Despite these limitations, name-based inference remains widely used because self-reported gender data is rarely available in bibliometric databases.
+Names are not observations of gender identity. A name-classification service produces a model or lookup output, and its coverage and errors depend on its reference data and target population. [Santamaría and Mihaljević (2018)](https://doi.org/10.7717/peerj-cs.156) compare such services and examine their differing performance. A small hand-written dictionary has no demonstrated accuracy for a scholarly population. Increasing its coverage would not establish validity.
 
-**Authorship position** carries different significance across disciplines. In biomedical sciences, the last author is typically the senior researcher and the first author the primary contributor. In other fields, authorship is alphabetical. Gender analysis of authorship positions must account for these disciplinary conventions.
-
-Documented gender disparities include: women are underrepresented as first and last authors in most fields [@lariviere2013]; women's papers receive fewer citations on average, even after controlling for field and year; and women are less likely to be invited as reviewers or editors. These patterns reflect systemic inequities, not differences in research quality.
-
-@hicks2015 and @dora2012 both emphasise that metrics should not be used in ways that perpetuate existing biases. Gender analysis in bibliometrics should aim to *reveal* disparities for policy intervention, not to evaluate individual researchers.
+Authorship order is also context-dependent. A recorded first or last position does not establish contribution or seniority, and alphabetical conventions differ from contribution-based conventions. Gender-equity analysis therefore requires an explicit population, defensible demographic measurement, appropriate handling of unavailable information, and interpretation of the authorship conventions actually used. Responsible research assessment should not reduce individuals to such categories [@hicks2015; @dora2012].
 
 ## Worked example {#gender-example}
 
-### Extracting author data
+### Explicitly synthetic records
+
+The following records are invented for a data-handling exercise. They do not describe real authors, papers, journals or gender identities. The lookup categories **A** and **B** are arbitrary labels with no demographic meaning. No OpenAlex records or external classification service are used in this example.
 
 ```{r}
-#| label: 28-fetch-gender-data
-#| cache: true
-works <- fetch_openalex(
-  entity = "works",
-  primary_location.source.id = "S148561398",
-  from_publication_date = "2020-01-01",
-  to_publication_date = "2023-12-31",
-  options = list(sample = 300, seed = 42)
+#| label: 28-synthetic-name-records
+#| cache: false
+synthetic_authors <- tibble(
+  work_id = c(rep("example-1", 3), rep("example-2", 2), "example-3",
+              rep("example-4", 4), rep("example-5", 2)),
+  author_order = c(1:3, 1:2, 1, 1:4, 1:2),
+  first_name = c("aria", "jordan", "lee", "noor", "ari", "morgan",
+                 "aria", "nuri", "sam", "alex", "ari", "noor")
 )
 
-authors <- works |>
-  select(work_id = id, authorships) |>
-  unnest(authorships, names_sep = "_") |>
-  select(work_id, author_name = authorships_display_name,
-         position = authorships_id) |>
-  mutate(
-    first_name = str_extract(author_name, "^\\S+"),
-    first_name = str_to_lower(first_name)
-  ) |>
-  filter(!is.na(first_name), nchar(first_name) >= 2)
-
-cat(glue("Author records: {nrow(authors)}\n"))
-cat(glue("Unique first names: {n_distinct(authors$first_name)}\n"))
+cat(glue("Synthetic author records: {nrow(synthetic_authors)}\n"))
+cat(glue("Distinct example names: {n_distinct(synthetic_authors$first_name)}\n"))
 ```
 
-### Simple name-based gender proxy
-
-We use a minimal heuristic for demonstration. In production work, use a validated gender-inference service with probabilistic output and country context.
+### Lookup coverage, not gender classification
 
 ```{r}
-#| label: 28-gender-proxy
-common_female <- c("maria", "anna", "li", "sarah", "jennifer", "jessica",
-                   "elena", "nina", "laura", "julia", "diana", "sandra")
-common_male <- c("john", "david", "michael", "james", "robert", "peter",
-                 "mark", "thomas", "paul", "daniel", "andreas", "martin")
+#| label: 28-name-lookup
+#| cache: false
+example_lookup <- tibble(
+  first_name = c("aria", "ari", "jordan", "morgan"),
+  lookup_category = c("A", "A", "B", "B")
+)
 
-authors <- authors |>
-  mutate(
-    gender_proxy = case_when(
-      first_name %in% common_female ~ "female",
-      first_name %in% common_male ~ "male",
-      TRUE ~ NA_character_
-    )
-  )
+lookup_records <- synthetic_authors |>
+  left_join(example_lookup, by = "first_name", relationship = "many-to-one") |>
+  mutate(lookup_category = replace_na(lookup_category, "Unmatched"))
 
-classified <- authors |> filter(!is.na(gender_proxy))
-cat(glue("Classified: {nrow(classified)} / {nrow(authors)} ({scales::percent(nrow(classified)/nrow(authors))})\n"))
+coverage <- mean(lookup_records$lookup_category != "Unmatched")
+cat(glue("Lookup coverage in this invented fixture: {scales::percent(coverage)}\n"))
 ```
 
-### Gender representation
+### Keeping the full denominator
 
 ```{r}
 #| label: 28-fig-gender-proportion
-#| fig-cap: "Gender representation among classifiable author names."
-#| fig-alt: "Bar chart showing the proportion of male and female author names in the sample, based on name-based gender inference."
+#| fig-cap: "Arbitrary lookup categories in invented records, retaining unmatched names in the denominator. These are not gender proportions."
+#| fig-alt: "Bar chart with arbitrary categories A, B and Unmatched for a synthetic name-lookup exercise."
 #| fig-width: 5
 #| fig-height: 3.5
-classified |>
-  count(gender_proxy) |>
-  mutate(pct = n / sum(n)) |>
-  ggplot(aes(x = gender_proxy, y = pct, fill = gender_proxy)) +
+lookup_summary <- lookup_records |>
+  count(lookup_category) |>
+  mutate(pct = n / sum(n))
+
+ggplot(lookup_summary, aes(x = lookup_category, y = pct, fill = lookup_category)) +
   geom_col(show.legend = FALSE) +
   scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = palette_sci(2)) +
-  labs(x = "Inferred gender", y = "Proportion") +
+  scale_fill_manual(values = palette_sci(3)) +
+  labs(x = "Arbitrary lookup category", y = "Share of all synthetic records") +
   theme_sci()
 ```
 
-### Authorship position analysis
+### Recorded authorship positions
+
+The invented order is recorded explicitly. Single-author records are kept separate from first, middle and last positions in multi-author records. These positions are not inferred contribution roles.
 
 ```{r}
 #| label: 28-authorship-position
-position_data <- works |>
-  select(work_id = id, authorships) |>
-  unnest(authorships, names_sep = "_") |>
+#| cache: false
+position_data <- lookup_records |>
   group_by(work_id) |>
+  arrange(author_order, .by_group = TRUE) |>
   mutate(
     n_authors = n(),
     author_position = case_when(
+      n_authors == 1 ~ "single",
       row_number() == 1 ~ "first",
-      row_number() == n() & n() > 1 ~ "last",
+      row_number() == n_authors ~ "last",
       TRUE ~ "middle"
     )
   ) |>
-  ungroup() |>
-  mutate(first_name = str_to_lower(str_extract(authorships_display_name, "^\\S+"))) |>
-  mutate(
-    gender_proxy = case_when(
-      first_name %in% common_female ~ "female",
-      first_name %in% common_male ~ "male",
-      TRUE ~ NA_character_
-    )
-  ) |>
-  filter(!is.na(gender_proxy))
+  ungroup()
 
 position_summary <- position_data |>
-  count(author_position, gender_proxy) |>
+  count(author_position, lookup_category) |>
   group_by(author_position) |>
   mutate(pct = n / sum(n)) |>
   ungroup()
@@ -150,35 +120,31 @@ position_summary |> gt()
 
 ```{r}
 #| label: 28-fig-gender-position
-#| fig-cap: "Gender representation by authorship position."
-#| fig-alt: "Grouped bar chart comparing the proportion of male and female names in first, middle, and last author positions."
+#| fig-cap: "Arbitrary lookup categories by recorded position in invented authorship lists. Unmatched records remain in each position's denominator."
+#| fig-alt: "Grouped bar chart of categories A, B and Unmatched in synthetic first, middle, last and single-author positions."
 #| fig-width: 6
 #| fig-height: 4
-ggplot(position_summary, aes(x = author_position, y = pct, fill = gender_proxy)) +
+ggplot(position_summary, aes(x = author_position, y = pct, fill = lookup_category)) +
   geom_col(position = "dodge") +
   scale_y_continuous(labels = scales::percent) +
-  scale_fill_manual(values = palette_sci(2)) +
-  labs(x = "Author position", y = "Proportion", fill = "Inferred gender") +
+  scale_fill_manual(values = palette_sci(3)) +
+  labs(x = "Recorded position", y = "Share of synthetic records", fill = "Lookup category") +
   theme_sci()
 ```
 
 ## Diagnostics and interpretation {#gender-diagnostics}
 
-- **Classification rate**: A low classification rate (< 40%) means results may not be representative. Names from East Asia, South Asia, and Africa are particularly poorly served by English-trained gender classifiers.
-- **Confidence thresholds**: Use probabilistic classifiers with confidence thresholds (e.g., only classify names with > 90% probability). Report the threshold and the proportion of unclassified names.
-- **Disciplinary norms**: Authorship order conventions vary. In fields with alphabetical ordering, "first author" has no special significance.
-- **Sample size**: Gender disparities may be small. Ensure sample sizes are sufficient for meaningful comparisons.
+- **Coverage and validity are different.** Coverage is the proportion assigned a dictionary label. This exercise has no observed gender variable against which accuracy could be estimated.
+- **Denominators matter.** Report unmatched records rather than silently excluding them. In this fixture, half the records are unmatched; the plotted A/B proportions would change if they were discarded.
+- **Units matter.** These are authorship records, not distinct people. Repeated invented names do not establish repeated identity.
+- **Position is descriptive.** Check ordering, single-author records and local authorship conventions before interpreting positions.
 
 ## Limitations and responsible use {#gender-limitations}
 
 <div class="callout callout-warn">
 ## Limitations and responsible use
 
-- **Gender is not binary.** Name-based inference forces a male/female classification that excludes non-binary, genderqueer, and gender-non-conforming researchers. This is a fundamental limitation, not merely a technical one.
-- **Name-based inference is systematically biased.** Accuracy is lower for non-Western names, transliterated names, and unisex names. Results should always report classification accuracy and unclassified rates by name origin.
-- **Correlation is not causation.** If women receive fewer citations, this may reflect systemic bias in citing behaviour, differences in subfield distribution, career interruptions, or other structural factors — not differences in research quality.
-- **Privacy and consent.** Inferring gender from names without consent raises ethical concerns. Report aggregate statistics, never individual-level gender assignments.
-- **Use for equity, not evaluation.** Gender analysis should identify systemic disparities for policy intervention, never evaluate individual researchers [@hicks2015; @dora2012].
+This synthetic example establishes no gender distribution, citation gap or equity finding. A real study needs a defensible demographic variable, clearly stated categories and missingness, appropriate consent and data governance, and validation for the population under study. Self-described gender data and the research question may require categories beyond a binary model; a name dictionary cannot supply those observations. Avoid publishing individual demographic assignments inferred from names, and distinguish observed disparity from an explanation of its causes.
 </div>
 
 ## Common pitfalls {#gender-pitfalls}
@@ -186,31 +152,32 @@ ggplot(position_summary, aes(x = author_position, y = pct, fill = gender_proxy))
 <div class="callout callout-stop">
 ## Common pitfalls
 
-- **Reporting gender ratios without uncertainty.** Name-based inference is probabilistic. Report confidence intervals or sensitivity analyses.
-- **Ignoring unclassified names.** Dropping unclassified names biases the sample toward Western, easily classified names.
-- **Assuming authorship order is universal.** Alphabetical ordering in mathematics and economics means authorship position analysis is meaningless.
-- **Conflating gender with sex.** Bibliometric gender analysis infers social gender from names, not biological sex. The two are distinct concepts.
+- Treating lookup output as measured gender identity or biological sex.
+- Calling high classification coverage evidence of accuracy.
+- Removing unmatched names and presenting the remainder as representative.
+- Counting authorship records as unique researchers without identity linkage.
+- Inferring contribution or seniority from author order without supporting information.
 </div>
 
 ## Exercises {#gender-exercises}
 
-1. **Cross-journal comparison.** Compare gender representation across three journals in different fields. Are there differences in the proportion of female first authors?
+1. **Denominator comparison.** Recompute the A/B proportions after excluding unmatched records. Explain why those proportions differ from the chart without establishing demographic representation.
 
-2. **Temporal trends.** Track the proportion of female first authors by year. Is there evidence of increasing representation over time?
+2. **Position audit.** Check that the fixture has four first, four last, three middle and one single-author record. Verify that each position's proportions sum to one and still include unmatched records.
 
-3. **Citation gap.** Compare mean citations for papers with female vs. male first authors, controlling for publication year. What does the gap look like?
+3. **Study design.** Specify the population, demographic measurement, consent/missingness plan and authorship conventions needed for a real equity study. Explain which required variables are absent from this fixture.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#28-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>
 
 ## Further reading {#gender-reading}
 
-- @lariviere2013 --- Large-scale analysis of gender disparities in scientific authorship.
-- @hicks2015 --- The Leiden Manifesto: responsible metrics that do not perpetuate bias.
-- @dora2012 --- DORA: recommendations against metrics-based evaluation that disadvantages underrepresented groups.
+- @lariviere2013 --- An empirical study of gender disparities in scientific authorship, with its own population and operational definitions.
+- [Santamaría and Mihaljević (2018)](https://doi.org/10.7717/peerj-cs.156) --- Comparison and benchmark of name-to-gender inference services.
+- @hicks2015 and @dora2012 --- Responsible interpretation of research metrics.
 
 ## Session info {#gender-sessioninfo}
 

@@ -23,6 +23,7 @@ Imports:
     igraph,
     openalexR,
     rlang,
+    stats,
     tibble,
     tidyr,
     utils,

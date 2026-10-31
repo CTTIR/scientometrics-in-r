@@ -2,7 +2,7 @@
 
 ## Objective
 
-Compare publication output, citation impact, and research profiles of five universities using size-independent and field-normalised indicators.
+Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total productivity or field-normalised impact.
 
 ## Setup
 
@@ -19,9 +19,15 @@ set.seed(20260509)
 source(here::here("R", "api_helpers.R"))
 source(here::here("R", "utils.R"))
 source(here::here("R", "sci_palette.R"))
+source(here::here("R", "institutional_samples.R"))
 ```
 
 ## Data acquisition
+
+Institution IDs were checked against OpenAlex on 30 October 2026, including the
+[University of São Paulo record](https://openalex.org/institutions/I17974374). Each
+request retrieves at most 300 articles; these are samples, not output totals.
+A failed or empty request stops the comparison instead of silently dropping an institution.
 
 ```{r}
 #| label: cs02-define-institutions
@@ -29,9 +35,9 @@ institutions <- tribble(
   ~short_name,    ~oa_id,
   "MIT",          "I63966007",
   "Oxford",       "I40120149",
-  "ETH Zurich",   "I202697423",
-  "U São Paulo",  "I66491032",
-  "U Cape Town",  "I173603587"
+  "ETH Zurich",   "I35440088",
+  "U São Paulo",  "I17974374",
+  "U Cape Town",  "I157614274"
 )
 ```
 
@@ -39,23 +45,23 @@ institutions <- tribble(
 #| label: cs02-fetch-inst-data
 #| cache: true
 fetch_works <- function(inst_id) {
-  res <- tryCatch(
-    fetch_openalex(
-      entity = "works",
-      authorships.institutions.id = inst_id,
-      from_publication_date = "2020-01-01",
-      to_publication_date = "2022-12-31",
-      type = "article",
-      options = list(sample = 300, seed = 42)
-    ),
-    error = function(e) NULL
+  res <- fetch_openalex(
+    entity = "works",
+    authorships.institutions.id = inst_id,
+    from_publication_date = "2020-01-01",
+    to_publication_date = "2022-12-31",
+    type = "article",
+    options = list(sample = 300, seed = 42)
   )
-  if (is.null(res)) tibble() else res
+  if (!is.data.frame(res) || !nrow(res)) {
+    stop(glue("No usable works returned for {inst_id}; check the request."))
+  }
+  res
 }
 
 inst_data <- institutions |>
-  mutate(works = map(oa_id, fetch_works)) |>
-  filter(map_int(works, nrow) > 0)
+  mutate(works = map(oa_id, fetch_works))
+
 ```
 
 ## Publication volume
@@ -74,54 +80,53 @@ inst_data |>
   theme_sci()
 ```
 
-## Citation impact
+## Citation summaries
+
+As in Chapter 13, the citation ratio uses a common year reference from the union
+of the five samples, de-duplicated by work ID. It adjusts for year only, not
+field mix or a common citation window. Missing citation counts and undefined
+ratios are excluded with their usable denominators shown.
 
 ```{r}
 #| label: cs02-impact
+citation_reference <- sci_pooled_year_reference(inst_data$works)
 impact <- inst_data |>
-  mutate(
-    mean_cites = map_dbl(works, \(w) mean(w$cited_by_count, na.rm = TRUE)),
-    median_cites = map_dbl(works, \(w) median(w$cited_by_count, na.rm = TRUE)),
-    h_index = map_int(works, \(w) compute_h_index(w$cited_by_count))
-  ) |>
-  select(short_name, mean_cites, median_cites, h_index) |>
-  arrange(desc(mean_cites))
+  mutate(summary = map(works, sci_sample_citation_summary,
+                       reference = citation_reference)) |>
+  unnest(summary) |>
+  select(short_name, n_sampled, n_citation_observed, mean_cites,
+         median_cites, n_ratio_observed, pooled_year_ratio) |>
+  arrange(short_name)
 
 impact |>
   gt() |>
-  fmt_number(columns = mean_cites, decimals = 1)
+  fmt_number(columns = c(mean_cites, median_cites, pooled_year_ratio), decimals = 2)
+
 ```
 
 ## Full vs. fractional counting
 
+Count each distinct affiliation once per work and divide its credit equally.
+Incomplete affiliations make the fractional total unavailable; the coverage
+column shows how many sampled works have usable data. This is bibliometric
+credit, not an estimate of each institution's contribution.
+
 ```{r}
 #| label: cs02-counting
 counting <- inst_data |>
-  mutate(
-    full_count = map_int(works, nrow),
-    frac_count = map_dbl(works, function(w) {
-      w |>
-        select(id, authorships) |>
-        unnest(authorships, names_sep = "_") |>
-        unnest(authorships_affiliations, names_sep = "_") |>
-        group_by(id) |>
-        summarise(n_inst = n_distinct(authorships_affiliations_id),
-                  .groups = "drop") |>
-        mutate(frac = 1 / pmax(n_inst, 1)) |>
-        pull(frac) |>
-        sum()
-    })
-  ) |>
-  select(short_name, full_count, frac_count) |>
+  mutate(counts = map2(works, oa_id, sci_institution_sample_counts)) |>
+  unnest(counts) |>
+  select(short_name, full_count, affiliation_covered, frac_count) |>
   mutate(ratio = round(frac_count / full_count, 2))
 
 counting |> gt()
+
 ```
 
 ```{r}
 #| label: cs02-fig-cs02-counting
-#| fig-cap: "Full vs. fractional publication counts."
-#| fig-alt: "Grouped bar chart showing how fractional counting reduces output for highly collaborative institutions."
+#| fig-cap: "Full and fractional credits within the retrieved samples."
+#| fig-alt: "Grouped bar chart comparing full sample counts with fractional credits where affiliation coverage is complete."
 #| fig-width: 6
 #| fig-height: 4
 counting |>
@@ -138,8 +143,8 @@ counting |>
 
 ```{r}
 #| label: cs02-fig-cs02-oa
-#| fig-cap: "Open access rate by institution."
-#| fig-alt: "Bar chart comparing OA rates across five universities."
+#| fig-cap: "Open-access share among sampled articles with observed OA status."
+#| fig-alt: "Bar chart comparing observed open-access shares in the five university samples."
 #| fig-width: 5
 #| fig-height: 3.5
 inst_data |>
@@ -151,15 +156,16 @@ inst_data |>
   theme_sci()
 ```
 
-## Key findings
+## Reading the results
 
-1. **Size vs. impact**: Raw publication counts favour larger institutions. Fractional counting and h-index provide size-independent comparisons.
-2. **Collaboration intensity**: Institutions with lower fractional/full ratios have more inter-institutional collaborations.
-3. **OA variation**: OA rates differ substantially, reflecting different national mandates and institutional policies.
-4. **No single ranking**: Different indicators produce different orderings. This illustrates the Leiden Manifesto principle that multiple indicators are needed for fair comparison [@hicks2015].
+1. **Sample size**: Counts are capped by the request and cannot rank institutional productivity.
+2. **Citation summaries**: Means and pooled sample/year ratios describe the retrieved records. Neither is field-normalised; an h-index would also depend on sample size and is omitted here.
+3. **Fractional credit**: A lower fractional/full ratio means less credit is retained under this equal-institution counting rule, subject to complete affiliation coverage. It does not by itself rank the average affiliation count or collaboration quality.
+4. **OA metadata**: Differences in observed OA shares do not establish the effects of national mandates or institutional policies.
+5. **No single ranking**: Report coverage, sample design and indicator definitions alongside any comparison [@hicks2015].
 
 ## Lessons learned
 
-- Sampling introduces uncertainty: these are illustrative comparisons, not definitive rankings.
-- Field mix confounds all comparisons: a medical university and a technical university are not directly comparable without field normalisation.
-- Responsible benchmarking requires reporting the counting method, normalisation approach, and sample size transparently.
+- Treat these outputs as illustrative sampled comparisons, not population rankings.
+- Field mix and differing citation windows confound comparisons.
+- Responsible benchmarking requires a justified reference set, transparent counting rules, missing-data coverage and uncertainty analysis.

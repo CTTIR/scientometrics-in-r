@@ -236,7 +236,7 @@ ggraph(layout_overlay) +
 3. **Country-level overlay.** Instead of an institution, overlay a country's publication profile. How does a small specialised country (e.g., Singapore) compare to a large diversified one (e.g., the United States)?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#19-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

@@ -7,7 +7,7 @@ After completing this chapter, you will be able to:
 - Aggregate bibliometric data at institutional and country levels using OpenAlex
 - Explain the difference between full counting and fractional counting and when each is appropriate
 - Use ROR (Research Organization Registry) identifiers for reliable institutional matching
-- Compute size-independent indicators (MNCS, PP(top 10%)) at the institutional level
+- Compute descriptive citation summaries and a shared sample/year citation ratio, while explaining why it is not MNCS
 - Interpret institutional rankings critically, accounting for size, field mix, and counting method
 
 ## Setup {#instcountry-setup}
@@ -25,17 +25,18 @@ set.seed(20260509)
 source(here::here("R", "api_helpers.R"))
 source(here::here("R", "utils.R"))
 source(here::here("R", "sci_palette.R"))
+source(here::here("R", "institutional_samples.R"))
 ```
 
 ## Conceptual background {#instcountry-background}
 
 Comparing research performance across institutions and countries is one of the most common --- and most contentious --- applications of bibliometrics. University rankings, national R&D assessments, and funding allocation decisions all rely on aggregate bibliometric statistics. Getting the aggregation right matters enormously.
 
-The fundamental choice is between **full counting** and **fractional counting**. Under full counting, each institution listed on a paper receives one full credit for that paper. A paper with authors from five institutions thus generates five institutional publications. Under fractional counting, credit is divided: each institution receives 1/5 of a publication count. Full counting inflates the output of institutions that frequently collaborate, while fractional counting better reflects each entity's proportional contribution [@glanzel2004; @waltman2012mncs].
+The fundamental choice is between **full counting** and **fractional counting**. Under full counting, each institution listed on a paper receives one full credit for that paper. A paper with authors from five institutions thus generates five institutional publications. Under fractional counting, credit is divided: each institution receives 1/5 of a publication count. Full counting inflates the output of institutions that frequently collaborate, while this fractional rule divides bibliometric credit equally among the listed institutions; it does not measure their actual contribution [@glanzel2004; @waltman2012mncs].
 
 **ROR** (Research Organization Registry) identifiers provide a stable, open system for identifying institutions, analogous to DOIs for publications and ORCID for researchers. OpenAlex maps institutional affiliations to ROR IDs, though coverage varies by discipline and geography. Using ROR avoids the pitfalls of string matching on institution names, which are notoriously inconsistent (e.g., "MIT", "Massachusetts Institute of Technology", "Mass. Inst. Tech.").
 
-Size-independent indicators are essential for fair comparison. Raw publication counts favour large universities. The **Mean Normalised Citation Score** (MNCS) [@waltman2012mncs] and **PP(top 10%)** --- the proportion of papers in the top 10% most cited in their field and year --- allow meaningful comparison between a small specialised institute and a large comprehensive university. The Leiden Ranking uses these indicators with fractional counting as its default, offering a model of responsible institutional benchmarking.
+Size-independent indicators are essential for fair comparison. Raw publication counts favour large universities. The **Mean Normalised Citation Score** (MNCS) [@waltman2012mncs] and **PP(top 10%)** --- the proportion of papers in the top 10% most cited in their field and year --- are designed to account for differences in reference sets. Their interpretation still depends on reference-set construction, coverage, attribution and the citation window. The Leiden Ranking uses these indicators with fractional counting as its default, offering a model of responsible institutional benchmarking.
 
 Country-level analysis faces the same choices. Additionally, linguistic bias in databases means that countries where English is not the primary research language may appear less productive than they truly are [@visser2021].
 
@@ -43,17 +44,17 @@ Country-level analysis faces the same choices. Additionally, linguistic bias in 
 
 ### Selecting institutions
 
-We compare five research-intensive universities.
+We use five institutions to demonstrate summaries of equally capped samples. The identifiers below are **OpenAlex institution IDs**, not ROR IDs. Their names, countries and ROR mappings were checked against the OpenAlex institution records on 30 October 2026. Subsidiary coverage still needs checking before an actual assessment.
 
 ```{r}
 #| label: 13-define-institutions
 institutions <- tribble(
-  ~short_name,  ~ror_id,
+  ~short_name,  ~openalex_id,
   "MIT",        "I63966007",
   "Oxford",     "I40120149",
-  "ETH Zurich", "I202697423",
-  "U Tokyo",    "I39804265",
-  "U Cape Town", "I173603587"
+  "ETH Zurich", "I35440088",
+  "U Tokyo",    "I74801974",
+  "U Cape Town", "I157614274"
 )
 ```
 
@@ -63,99 +64,105 @@ institutions <- tribble(
 #| label: 13-fetch-inst-data
 #| cache: true
 fetch_inst_works <- function(inst_id) {
-  res <- tryCatch(
-    fetch_openalex(
-      entity = "works",
-      authorships.institutions.id = inst_id,
-      from_publication_date = "2020-01-01",
-      to_publication_date = "2022-12-31",
-      type = "article",
-      options = list(sample = 400, seed = 42)
-    ),
-    error = function(e) NULL
+  res <- fetch_openalex(
+    entity = "works",
+    authorships.institutions.id = inst_id,
+    from_publication_date = "2020-01-01",
+    to_publication_date = "2022-12-31",
+    type = "article",
+    options = list(sample = 400, seed = 42)
   )
-  if (is.null(res)) tibble() else res
+  if (!is.data.frame(res) || !nrow(res)) {
+    stop(glue("No usable works returned for {inst_id}; check the request before comparing institutions."))
+  }
+  res
 }
 
 inst_data <- institutions |>
-  mutate(works = map(ror_id, fetch_inst_works)) |>
-  filter(map_int(works, nrow) > 0)
+  mutate(works = map(openalex_id, fetch_inst_works))
+
 ```
+
+These requests retrieve at most 400 sampled articles per institution from 2020–2022,
+not each institution's complete output. Counts below describe the retrieved samples;
+the cap prevents interpreting them as comparative institutional productivity.
+Provider failures stop the example rather than removing an institution silently.
 
 ### Full counting vs. fractional counting
 
 ```{r}
 #| label: 13-counting-methods
-compute_counts <- function(works_df, inst_id) {
-  if (is.null(works_df) || nrow(works_df) == 0) {
-    return(tibble(full_count = 0L, frac_count = 0))
-  }
-  # Full count: each paper counts as 1
-  full_count <- nrow(works_df)
-
-  # Fractional count: 1 / number of distinct institutions per paper
-  frac <- works_df |>
-    select(id, authorships) |>
-    unnest(authorships, names_sep = "_") |>
-    unnest(authorships_affiliations, names_sep = "_") |>
-    group_by(id) |>
-    summarise(n_inst = n_distinct(authorships_affiliations_id), .groups = "drop") |>
-    mutate(frac_credit = 1 / pmax(n_inst, 1))
-
-  frac_count <- sum(frac$frac_credit)
-
-  tibble(full_count = full_count, frac_count = round(frac_count, 1))
-}
+# Equal institutional credit per sampled work: 1 / number of distinct affiliations.
+# The helper requires the queried institution to be among those affiliations.
+# Incomplete affiliations leave the fractional total missing, with coverage shown.
+compute_counts <- sci_institution_sample_counts
 
 counting_comparison <- inst_data |>
-  mutate(counts = map2(works, ror_id, compute_counts)) |>
+  mutate(counts = map2(works, openalex_id, compute_counts)) |>
   unnest(counts) |>
-  select(short_name, full_count, frac_count) |>
+  select(short_name, full_count, affiliation_covered, frac_count) |>
   mutate(ratio = round(frac_count / full_count, 2))
 
 counting_comparison |>
   gt() |>
   cols_label(
     short_name = "Institution",
-    full_count = "Full count",
-    frac_count = "Fractional count",
+    full_count = "Sampled works",
+    affiliation_covered = "Works with usable affiliations",
+    frac_count = "Fractional sample credit",
     ratio = "Frac / Full"
   )
 ```
 
-### Normalised citation impact
+### Descriptive citation comparison using a shared reference
+
+A separate mean for each institution/year would make its mean citation ratio equal
+to 1 by construction. Instead, combine the retrieved samples, de-duplicate shared
+work IDs, and compute a **common mean for each publication year**. For an eligible
+work, divide its citation count by that pooled year mean, then average those ratios
+within each institution's sample. Shared works enter the reference once. Conflicting
+snapshots of a shared work cause an error rather than an arbitrary choice.
+
+This is a descriptive **pooled sample/year ratio**, not field-normalized MNCS.
+The reference is the union of five capped institutional samples, not all world
+publications. It adjusts for publication year only; current cumulative citation
+counts do not impose a common post-publication citation window. Missing counts,
+missing years, and zero-mean reference years are excluded from the ratio, with
+its usable denominator reported separately.
 
 ```{r}
 #| label: 13-compute-mncs-inst
+citation_reference <- sci_pooled_year_reference(inst_data$works)
+
 inst_impact <- inst_data |>
-  mutate(
-    mean_cites = map_dbl(works, \(w) mean(w$cited_by_count, na.rm = TRUE)),
-    median_cites = map_dbl(works, \(w) median(w$cited_by_count, na.rm = TRUE)),
-    mncs_approx = map_dbl(works, \(w) {
-      w |>
-        mutate(year = year(publication_date)) |>
-        group_by(year) |>
-        mutate(field_mean = mean(cited_by_count)) |>
-        ungroup() |>
-        mutate(ncs = cited_by_count / pmax(field_mean, 0.01)) |>
-        pull(ncs) |>
-        mean(na.rm = TRUE)
-    })
-  ) |>
-  select(short_name, mean_cites, median_cites, mncs_approx) |>
-  arrange(desc(mncs_approx))
+  mutate(summary = map(works, sci_sample_citation_summary,
+                       reference = citation_reference)) |>
+  unnest(summary) |>
+  select(short_name, n_sampled, n_citation_observed, mean_cites,
+         median_cites, n_ratio_observed, pooled_year_ratio) |>
+  arrange(short_name)
 
 inst_impact |>
   gt() |>
-  fmt_number(columns = c(mean_cites, mncs_approx), decimals = 2)
+  fmt_number(columns = c(mean_cites, pooled_year_ratio), decimals = 2) |>
+  cols_label(
+    short_name = "Institution", n_sampled = "Sampled works",
+    n_citation_observed = "Observed citation counts",
+    mean_cites = "Mean citations", median_cites = "Median citations",
+    n_ratio_observed = "Works in ratio",
+    pooled_year_ratio = "Pooled sample/year ratio"
+  )
 ```
+
+The helper implementations in `R/institutional_samples.R` make the de-duplication,
+reference construction and missing-data denominators explicit.
 
 ### Visualization
 
 ```{r}
 #| label: 13-fig-instcountry-comparison
-#| fig-cap: "Full count vs. fractional count publication output for five institutions."
-#| fig-alt: "Grouped bar chart comparing full-count and fractional-count publication numbers for five universities, showing how fractional counting reduces output for highly collaborative institutions."
+#| fig-cap: "Full and fractional institutional credits in the retrieved article samples; these are not institutional output totals."
+#| fig-alt: "Grouped bar chart of sampled-work counts and fractional sample credits, with unavailable fractional totals omitted when affiliations are incomplete."
 #| fig-width: 6
 #| fig-height: 4
 counting_long <- counting_comparison |>
@@ -169,29 +176,29 @@ ggplot(counting_long, aes(x = count, y = reorder(short_name, count),
                           fill = method)) +
   geom_col(position = "dodge", width = 0.7) +
   scale_fill_manual(values = palette_sci(2)) +
-  labs(x = "Publication count", y = NULL, fill = "Method") +
+  labs(x = "Credit within the retrieved sample", y = NULL, fill = "Method") +
   theme_sci()
 ```
 
 ```{r}
 #| label: 13-fig-instcountry-mncs
-#| fig-cap: "Approximate MNCS for each institution (within-sample normalisation)."
-#| fig-alt: "Horizontal bar chart showing the mean normalised citation score for each of the five institutions, with a vertical reference line at 1.0 representing the sample average."
+#| fig-cap: "Mean citation ratios relative to the shared pooled sample in each publication year. This is not field-normalized MNCS."
+#| fig-alt: "Horizontal bars show each institutional sample's mean ratio to the pooled publication-year reference; the dashed line denotes a ratio of one."
 #| fig-width: 6
 #| fig-height: 3.5
-ggplot(inst_impact, aes(x = mncs_approx, y = reorder(short_name, mncs_approx))) +
+ggplot(inst_impact, aes(x = pooled_year_ratio, y = short_name)) +
   geom_col(fill = palette_sci(1)) +
   geom_vline(xintercept = 1, linetype = "dashed", colour = "grey50") +
-  labs(x = "MNCS (approx.)", y = NULL) +
+  labs(x = "Citation ratio to pooled sample/year reference", y = NULL) +
   theme_sci()
 ```
 
 ## Diagnostics and interpretation {#instcountry-diagnostics}
 
-- **Size vs. impact**: A large university may rank highly on total output but poorly on per-paper impact. Always report both size-dependent and size-independent indicators.
+- **Sample counts are not size**: Capping each sample at 400 articles removes information about institutional output. The full/fractional comparison illustrates counting rules within those samples only.
 - **Field mix**: A medical university will appear more productive (and highly cited) than a social-science institute due to field-level citation norms. True normalisation requires field-level data.
-- **Sample vs. population**: Our sample of 400 works per institution is illustrative. For real benchmarking, use the full population or report confidence intervals.
-- **Fractional/full ratio**: A ratio near 1.0 indicates few collaborations beyond the institution; a ratio well below 1.0 indicates extensive inter-institutional collaboration.
+- **Sample vs. population**: The reference depends on which institutions and works were sampled. For a genuine assessment, define the target population and reference set, document inclusion probabilities, and use uncertainty methods appropriate to that design.
+- **Fractional/full ratio**: With complete affiliations, the ratio summarizes how institutional credit is divided in the retrieved works. Missing affiliations leave the fractional total unavailable; they are not treated as single-institution papers.
 
 ## Limitations and responsible use {#instcountry-limitations}
 
@@ -202,7 +209,7 @@ ggplot(inst_impact, aes(x = mncs_approx, y = reorder(short_name, mncs_approx))) 
 - **Affiliation data quality.** Not all papers have complete or correct institutional affiliations. OpenAlex coverage depends on publisher metadata quality.
 - **Counting method changes conclusions.** The same data can yield different institutional rankings depending on whether full or fractional counting is used. Always report the method.
 - **Language and geographic bias.** Databases undercount research published in non-English languages, disadvantaging countries in Latin America, Asia, and Africa [@visser2021; @singh2021].
-- **Do not compare across fields without normalisation.** A biomedical research university will always outperform a humanities-focused institution on raw citation indicators.
+- **Do not compare across fields without normalisation.** Raw citation differences can reflect disciplinary citation practices as well as other differences; the sample/year ratio does not remove field mix.
 </div>
 
 ## Common pitfalls {#instcountry-pitfalls}
@@ -211,7 +218,7 @@ ggplot(inst_impact, aes(x = mncs_approx, y = reorder(short_name, mncs_approx))) 
 ## Common pitfalls
 
 - **Using full counting when fractional is more appropriate.** Full counting double-credits collaborative work, inflating output for institutions with many international partnerships.
-- **Ignoring field normalisation.** Comparing raw MNCS across institutions with very different disciplinary profiles is misleading.
+- **Ignoring field normalisation.** The pooled sample/year ratio adjusts for year only. It must not be relabeled as MNCS or used as a field-adjusted ranking.
 - **String-matching institution names.** Never match institutions by name strings alone. Use ROR or OpenAlex institution IDs.
 - **Treating samples as populations.** If you sampled 400 works per institution, the resulting metrics have uncertainty. Report this.
 - **Forgetting subsidiary institutions.** Large universities may have hospitals, research institutes, or campuses with separate ROR IDs. Decide on the unit of analysis upfront.
@@ -221,12 +228,12 @@ ggplot(inst_impact, aes(x = mncs_approx, y = reorder(short_name, mncs_approx))) 
 
 1. **Country-level analysis.** Aggregate publications by author country (using `authorships.countries`) instead of institution. Compute full and fractional counts for the top 10 countries in your corpus. Which countries are most affected by the counting method?
 
-2. **PP(top 10%) by institution.** For each institution, compute the proportion of papers in the top 10% most cited within the sample (by year). How does this correlate with MNCS?
+2. **Top-decile sample share.** Using the same de-duplicated pooled year reference, define a top-decile threshold and an explicit rule for ties. Compute each sample's share above that threshold. Explain why this is not the field-normalized PP(top 10%) indicator.
 
 3. **Collaboration intensity.** Compute the mean number of distinct institutional affiliations per paper for each institution. Is there a relationship between collaboration intensity and the full/fractional count ratio?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#13-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

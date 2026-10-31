@@ -100,12 +100,16 @@ if ("citation" %in% rownames(as.matrix(model))) {
 
 ### Computing document embeddings via mean pooling
 
+Apply the same text preprocessing used for training: lowercase before removing
+characters outside the vocabulary alphabet. This preserves capitalised words and
+acronyms when matching them to the learned word vectors.
+
 ```{r}
 #| label: 24-document-embeddings
 word_matrix <- as.matrix(model)
 
 doc_embed <- function(text, wm) {
-  words <- str_split(str_to_lower(str_replace_all(text, "[^a-z ]", " ")),
+  words <- str_split(str_replace_all(str_to_lower(text), "[^a-z ]", " "),
                      "\\s+")[[1]]
   matched <- words[words %in% rownames(wm)]
   if (length(matched) == 0) return(rep(NA_real_, ncol(wm)))
@@ -224,7 +228,7 @@ ggplot(text_df_valid, aes(x = umap_x, y = umap_y,
 4. **Analogy test.** Test whether the word2vec model captures analogical relationships (e.g., "journal" - "article" + "book" ≈ "publisher"). What does the result tell you about the model?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#24-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

@@ -5,8 +5,8 @@
 After completing this chapter, you will be able to:
 
 - Explain the significance of patent–paper citations for understanding research impact
-- Identify OpenAlex works that have been cited in patent documents
-- Analyse which journals, fields, and institutions produce patent-cited research
+- Specify the paper and patent identifiers needed to establish an observed linkage
+- Explore scholarly citation metadata without treating it as patent-citation evidence
 - Discuss the limitations of patent citations as indicators of technological impact
 - Distinguish between direct citation (paper cited in patent) and indirect influence
 
@@ -35,11 +35,13 @@ Patent citations serve a legal function: they define the prior art against which
 
 The biomedical and chemical sciences dominate patent–paper linkages because pharmaceutical and chemical patents routinely cite scientific literature. Physics and engineering have moderate linkages. Social sciences and humanities are rarely cited in patents, not because they lack impact, but because their impact operates through different channels (policy, education, culture).
 
-OpenAlex records whether a work has been cited in patents and provides the count, though the source and completeness of this data varies. The Lens.org database provides the most comprehensive open mapping of patent–paper citations.
+The OpenAlex fields retrieved in this example describe scholarly works and scholarly citations. They contain no citing patent identifiers, patent citation dates, or patent-family identifiers. Establishing a patent–paper linkage requires a separate, documented source of patent references and a validated match to the cited paper. The analysis below does not perform that linkage.
 
 ## Worked example {#patent-example}
 
-### Identifying patent-cited papers
+This executable example explores a 500-article scholarly-citation sample. It is preparation for a possible future linkage analysis, not a substitute for patent data. A high scholarly citation count does not identify a patent-cited paper. No patent-citation prevalence, rate, or technological impact is estimated here.
+
+### Preparing a scholarly-citation sample
 
 ```{r}
 #| label: 31-fetch-patent-data
@@ -52,7 +54,7 @@ works <- fetch_openalex(
   options = list(sample = 500, seed = 42)
 )
 
-works_patent <- works |>
+works_citations <- works |>
   transmute(
     id, display_name, source_display_name,
     year = year(publication_date),
@@ -61,52 +63,52 @@ works_patent <- works |>
     type
   )
 
-cat(glue("Total works: {nrow(works_patent)}\n"))
+cat(glue("Total works: {nrow(works_citations)}\n"))
 ```
 
-### Citation distribution analysis
+### Scholarly citation distribution
 
 ```{r}
 #| label: 31-fig-patent-citedist
-#| fig-cap: "Citation count distribution, highlighting the most-cited papers as potential patent-cited candidates."
-#| fig-alt: "Histogram of citation counts with a vertical line marking the 90th percentile, indicating the most-cited papers that are most likely to appear in patent references."
+#| fig-cap: "Scholarly citation counts in the sample, with the sample 90th percentile marked."
+#| fig-alt: "Histogram of scholarly citation counts with a vertical line at the sample 90th percentile. The figure contains no patent-citation information."
 #| fig-width: 5
 #| fig-height: 3.5
-p90 <- quantile(works_patent$cited_by_count, 0.90)
+p90 <- quantile(works_citations$cited_by_count, 0.90)
 
-ggplot(works_patent, aes(x = cited_by_count)) +
+ggplot(works_citations, aes(x = cited_by_count)) +
   geom_histogram(binwidth = 10, fill = palette_sci(1), colour = "white") +
   geom_vline(xintercept = p90, linetype = "dashed", colour = "red") +
   annotate("text", x = p90 + 20, y = Inf, label = "90th percentile",
            vjust = 2, colour = "red", size = 3) +
-  labs(x = "Citation count", y = "Papers") +
+  labs(x = "Scholarly citation count", y = "Papers") +
   theme_sci()
 ```
 
-### Journals producing highly cited papers
+### Journals represented among highly cited sampled papers
 
 ```{r}
 #| label: 31-fig-patent-journals
-#| fig-cap: "Top 15 journals by number of highly cited papers (above 90th percentile)."
-#| fig-alt: "Horizontal bar chart of the journals with the most papers above the citation 90th percentile — these are the journals most likely to be cited in patents."
+#| fig-cap: "Up to 15 journals with the most sampled papers at or above the sample scholarly-citation 90th percentile."
+#| fig-alt: "Horizontal bar chart counting sampled papers at or above the scholarly-citation threshold, grouped by journal. This is not a ranking of patent-cited research."
 #| fig-width: 7
 #| fig-height: 5
-works_patent |>
+works_citations |>
   filter(cited_by_count >= p90, !is.na(source_display_name)) |>
   count(source_display_name, sort = TRUE) |>
   head(15) |>
   mutate(source_display_name = fct_reorder(source_display_name, n)) |>
   ggplot(aes(x = n, y = source_display_name)) +
   geom_col(fill = palette_sci(1)) +
-  labs(x = "Highly cited papers", y = NULL) +
+  labs(x = "Highly cited sampled papers", y = NULL) +
   theme_sci()
 ```
 
-### Citation impact by document characteristics
+### Descriptive characteristics by scholarly-citation group
 
 ```{r}
 #| label: 31-patent-characteristics
-works_patent |>
+works_citations |>
   mutate(high_cite = cited_by_count >= p90) |>
   group_by(high_cite) |>
   summarise(
@@ -120,9 +122,11 @@ works_patent |>
 
 ## Diagnostics and interpretation {#patent-diagnostics}
 
-- **Patent citation coverage**: Not all databases provide patent citation data. OpenAlex's coverage varies by field and time period. Cross-reference with Lens.org for comprehensive data.
+- **Measured quantity**: `cited_by_count` in this analysis counts scholarly citations. Neither the threshold nor the journal plot measures patent citations.
+- **Sample and threshold**: Counts refer only to the retrieved sample, not total journal output. Ties at the 90th percentile can place more than 10% of papers in the high-citation group.
+- **Citation window**: Current cumulative counts give older publication cohorts more time to receive citations. They are not a fixed-window impact measure.
 - **Field normalisation**: Biomedical papers are far more likely to be cited in patents than social science papers. Compare patent citation rates within fields, not across them.
-- **Time lag**: The median time from paper publication to patent citation is 5–10 years. Recent papers have not had time to accumulate patent citations.
+- **Time lag**: Estimating a paper-to-patent citation delay requires both dates from actual linked records and a stated observation cutoff; current scholarly citation counts cannot supply it.
 - **Examiner vs. inventor citations**: Patent examiners add citations that inventors may not have used. This inflates apparent science–technology linkage.
 
 ## Limitations and responsible use {#patent-limitations}
@@ -131,7 +135,7 @@ works_patent |>
 ## Limitations and responsible use
 
 - **Patent citations are a narrow measure of impact.** Much research influences technology without being cited in patents — through consulting, training, open-source software, or informal knowledge transfer.
-- **Field bias is extreme.** Humanities, social sciences, and mathematics are effectively invisible in patent citation analysis. Using patent citations as an impact indicator systematically disadvantages these fields [@hicks2015].
+- **Field coverage differs.** Patent citations capture only some forms of influence. Comparing fields without considering these differences can misrepresent their contributions [@hicks2015].
 - **Geographic bias.** Patent systems vary by country. US and European patents have different citation practices. Analyses based on one patent office may not generalise.
 - **Not evaluative for individuals.** A researcher whose paper is cited in a patent may have had no involvement with the technology. Patent citation reflects relevance of the knowledge, not the researcher's intent to innovate.
 </div>
@@ -144,19 +148,19 @@ works_patent |>
 - **Equating patent citations with commercialisation.** A patent citation means the paper is prior art, not that the research led to a product.
 - **Ignoring time lags.** Comparing patent citation rates for papers published in 2023 vs. 2010 is meaningless — the 2023 papers have not had time to be cited in patents.
 - **Double-counting across patent families.** The same invention may be patented in multiple countries. Count at the patent family level, not the individual patent level.
-- **Using patent counts as a metric for basic science.** Basic research is by definition distant from application. Low patent citation counts for fundamental research are expected, not a failure.
+- **Substituting scholarly citations for patent linkages.** High scholarly citation counts do not establish that a paper was cited by a patent. Require an observed patent–paper reference before classifying a paper as patent-cited.
 </div>
 
 ## Exercises {#patent-exercises}
 
-1. **Field comparison.** Fetch papers from biomedical and social science journals. Compare the proportion of highly cited papers in each field. What does this suggest about differential patent citation potential?
+1. **Scholarly-citation comparison.** Compare citation distributions in two journal samples, reporting sample sizes, field differences, publication years, retrieval date and threshold choice. Explain why the result does not estimate patent-citation potential.
 
-2. **Time lag estimation.** For a set of papers published in 2015, estimate the median citation count trajectory over years. At what age do papers typically peak in citation accumulation?
+2. **Linkage data specification.** Design a table containing a paper identifier, citing patent identifier, patent-family identifier, citation date, source and match status. Describe how you would verify ambiguous references and retain unmatched records. This exercise requires actual patent-reference data before any linkage rates can be calculated.
 
-3. **Institutional patent linkage.** For two universities, compare the proportion of papers above the citation 90th percentile. Does a higher proportion suggest greater technological relevance?
+3. **Institutional patent linkage.** Given an independently validated patent–paper dataset, define the publication denominator, observation window and patent-family deduplication rule for two institutions. Report coverage and uncertainty. If those data are unavailable, identify the missing inputs rather than using scholarly citation percentiles as a proxy.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#31-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>
@@ -165,7 +169,7 @@ Solutions are provided in \@ref(solutions).
 
 - @narin1997 --- Foundational analysis of the linkage between science and technology through patent citations.
 - @hicks2015 --- Responsible metrics: why patent citations should not be the sole indicator of research impact.
-- @priem2022 --- OpenAlex metadata coverage for patent-related indicators.
+- @priem2022 --- OpenAlex scholarly-work metadata; this example does not establish patent-citation coverage.
 
 ## Session info {#patent-sessioninfo}
 

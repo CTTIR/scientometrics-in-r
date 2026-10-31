@@ -1,10 +1,9 @@
-# Exercise Solutions
+# Exercise Solutions {#solutions}
 
 <!-- verify_chunks: skip-file
      Every chunk in this appendix is intentionally not evaluated; solutions
      reference data built during the corresponding chapter. -->
 
-# Exercise Solutions {#solutions}
 
 This appendix provides suggested solutions for all chapter exercises.
 The code sketches below are meant to guide you toward a working answer; they are
@@ -866,11 +865,12 @@ h <- sum(cites >= seq_along(cites))
 
 # g-index
 cum_cites <- cumsum(cites)
-g <- max(which(cum_cites >= seq_along(cites)^2))
+g_candidates <- which(cum_cites >= seq_along(cites)^2)
+g <- if (length(g_candidates)) max(g_candidates) else 0L
 
 # m-quotient
-career_years <- max(author_works$publication_year) -
-               min(author_works$publication_year) + 1
+career_years <- max(lubridate::year(author_works$publication_date)) -
+               min(lubridate::year(author_works$publication_date)) + 1
 m <- h / career_years
 
 tibble(h_index = h, g_index = g, m_quotient = round(m, 2))
@@ -905,165 +905,124 @@ Pseudocode for removing self-citations from the h-index.
 #                   seq_along(adjusted_cites))
 ```
 
-*Key insight:* Self-citation removal typically reduces the h-index by 1-3 points
-for most researchers but can have large effects for prolific self-citers.
+*Key insight:* Removing citations cannot increase the h-index. Its actual change
+requires verified author matches and citation records; no universal change is assumed.
 
-**3. Bootstrap uncertainty for MNCS.**
-Use bootstrap resampling to compute a confidence interval for MNCS.
+**3. Empirical resampling of sample ratios.**
+Hold the empirical year reference fixed and resample its observed ratios.
 
 ```{r}
 #| label: E-sol-ch10-3
 #| eval: false
 set.seed(20260509)
-
-mncs_boot <- replicate(1000, {
- idx <- sample(nrow(works), replace = TRUE)
- boot_sample <- works[idx, ]
- compute_mncs(boot_sample$cited_by_count,
-              boot_sample$publication_year)
-})
-
-quantile(mncs_boot, c(0.025, 0.975))
+ratios <- works_normalized$ncs[is.finite(works_normalized$ncs)]
+stopifnot(length(ratios) > 1L)
+ratio_boot <- replicate(1000, mean(sample(ratios, replace = TRUE)))
+quantile(ratio_boot, c(0.025, 0.975))
 ```
 
-*Key insight:* Small samples produce wide confidence intervals; MNCS values
-should always be reported with uncertainty estimates.
+*Key insight:* This interval describes resampling variation conditional on the
+chosen empirical reference. It ignores uncertainty in that reference and does
+not establish world-normalized impact or a population confidence interval.
 
-**4. PP(top 10%) vs. MNCS.**
-Compare two indicators by year.
+**4. Normalization and ranks.**
+Compare the within-sample mean ratio and percentile selection share by year.
 
 ```{r}
 #| label: E-sol-ch10-4
 #| eval: false
-yearly_indicators <- works |>
- group_by(publication_year) |>
+yearly_indicators <- works_with_pct |>
+ group_by(year) |>
  summarise(
-   mncs = compute_mncs(cited_by_count, publication_year),
-   pp_top10 = mean(cited_by_count >= quantile(cited_by_count, 0.9))
+   mean_sample_ratio = mean(ncs, na.rm = TRUE),
+   ranked_works = sum(!is.na(is_top10)),
+   upper_percentile_share = mean(is_top10, na.rm = TRUE),
+   .groups = "drop"
  )
-
-ggplot(yearly_indicators, aes(mncs, pp_top10)) +
- geom_point() +
- geom_text(aes(label = publication_year), nudge_y = 0.01) +
- labs(x = "MNCS", y = "PP(top 10%)",
-      title = "MNCS vs PP(top 10%) by year")
+yearly_indicators
 ```
 
-*Key insight:* The two indicators usually agree but can diverge when a few
-extremely highly cited papers inflate MNCS without affecting the 10% threshold.
+*Key insight:* The mean ratio is one for each usable year by construction.
+Ties and small groups affect the percentile share. These sample summaries do
+not rank field-normalized impact; that requires a justified external reference.
 
 ## Chapter 11 --- Journal Metrics {-}
 
-**1. Four-year CiteScore proxy.**
-Extend the citation window to four years.
+**1. Cohort sensitivity.**
+Use the verified source table and helper from Chapter 11. This code performs a
+new provider request unless that exact query is already cached.
 
 ```{r}
 #| label: E-sol-ch11-1
 #| eval: false
-library(openalexR)
-library(tidyverse)
-
-journal_id <- "S4210174107"  # example journal
-target_year <- 2023
-
-# Fetch articles published in the 4-year window
-window_works <- fetch_openalex(
- entity = "works",
- primary_location.source.id = journal_id,
- from_publication_date = paste0(target_year - 4, "-01-01"),
- to_publication_date   = paste0(target_year - 1, "-12-31")
-)
-
-citescore_4yr <- sum(window_works$cited_by_count) / nrow(window_works)
-cat(sprintf("4-year CiteScore proxy: %.2f\n", citescore_4yr))
+wider_cohort <- fetch_journal_works(journals$source_id[1], 2019, 2022)
+summarise_journal_records(wider_cohort)
+journal_summary |> filter(source_id == journals$source_id[1])
 ```
 
-*Key insight:* A wider window captures slower-to-cite fields more fairly but
-dilutes the signal for fast-moving fields.
+The summaries concern cumulative citations at retrieval. A wider publication
+cohort changes composition and citation exposure; the result need not move in
+one direction. CiteScore requires citations received within its specified
+four-year interval and eligible document types in both numerator and denominator.
+Changing a publication-date filter alone supplies neither requirement.
 
-**2. Rank correlation.**
-Compare JIF and SNIP proxies with Spearman correlation.
+**2. Descriptive association.**
 
 ```{r}
 #| label: E-sol-ch11-2
 #| eval: false
-journal_metrics <- works |>
- group_by(so) |>
- summarise(
-   jif_proxy  = mean(cited_by_count[publication_year >= 2021]),
-   snip_proxy = jif_proxy / mean(cited_by_count)  # simplified
- ) |>
- filter(!is.na(jif_proxy), !is.na(snip_proxy))
-
-cor(journal_metrics$jif_proxy, journal_metrics$snip_proxy,
-    method = "spearman")
+complete_pairs <- journal_summary |>
+  select(mean_cumulative_citations, median_recorded_references) |>
+  drop_na()
+rho <- if (nrow(complete_pairs) >= 3 &&
+           n_distinct(complete_pairs$mean_cumulative_citations) > 1 &&
+           n_distinct(complete_pairs$median_recorded_references) > 1) {
+  cor(complete_pairs$mean_cumulative_citations,
+      complete_pairs$median_recorded_references, method = "spearman")
+} else NA_real_
+rho
 ```
 
-*Key insight:* Rank correlation is typically positive but imperfect, showing that
-field normalisation reorders journals.
+The coefficient describes the complete journal pairs only; insufficient or
+constant observations leave it unavailable. Its sign and magnitude depend on
+the retrieved data. It neither measures citation potential on the citing side
+nor demonstrates field normalisation or agreement with SNIP.
 
-**3. Field comparison.**
-Compare journals across two disciplines.
+**3. Missing-data denominator.**
 
 ```{r}
 #| label: E-sol-ch11-3
 #| eval: false
-physics_journals <- c("S137773608", "S71048024")
-sociology_journals <- c("S64468286", "S128732326")
-
-compute_jif <- function(jid) {
- w <- fetch_openalex(entity = "works",
-               primary_location.source.id = jid,
-               from_publication_date = "2021-01-01",
-               to_publication_date = "2022-12-31")
- sum(w$cited_by_count) / nrow(w)
-}
-
-tibble(
- journal = c(physics_journals, sociology_journals),
- field = c(rep("Physics", 2), rep("Sociology", 2)),
- jif_proxy = map_dbl(journal, compute_jif)
-) |>
- ggplot(aes(field, jif_proxy)) +
- geom_boxplot() +
- labs(title = "Raw JIF proxy by field")
-```
-
-*Key insight:* Raw JIF values are much higher in fields with faster citation
-accumulation; SNIP-style normalisation reduces this gap.
-
-**4. Self-citation share.**
-Estimate the proportion of journal self-citations.
-
-```{r}
-#| label: E-sol-ch11-4
-#| eval: false
-# Approximation: among citing works of this journal's papers,
-# how many are also published in the same journal?
-journal_works <- fetch_openalex(
- entity = "works",
- primary_location.source.id = journal_id,
- from_publication_date = "2021-01-01",
- to_publication_date = "2022-12-31"
+invented_records <- tibble(
+  id = c("example-1", "example-2", "example-3"),
+  cited_by_count = c(0, 20, NA_real_),
+  referenced_works_count = c(10, NA_real_, 30)
 )
-
-# Sample a subset and check citing works
-sample_ids <- journal_works |> slice_sample(n = 20) |> pull(id)
-
-self_cite_rates <- map_dbl(sample_ids, \(wid) {
- citing <- tryCatch(
-   fetch_openalex(entity = "works", cites = wid),
-   error = \(e) tibble()
- )
- if (nrow(citing) == 0) return(NA_real_)
- mean(citing$so == journal_works$so[1], na.rm = TRUE)
-})
-
-mean(self_cite_rates, na.rm = TRUE)
+summarise_journal_records(invented_records)
+summarise_journal_records(mutate(invented_records, cited_by_count = NA_real_))
 ```
 
-*Key insight:* Journal self-citation rates above 20-30% are considered unusually
-high and may warrant investigation.
+There are three records but two observed citation counts. Their sum is 20 and
+the observed-count mean is 10. Dividing 20 by all three records would give about
+6.67 and implicitly count the missing value as zero. When all citation counts
+are missing, the observed denominator is zero and the sum, mean and median are
+reported as missing. A zero observed count is retained as a valid observation.
+
+**4. Self-citation design.**
+
+Define the publication cohort and citation-receipt window first. Obtain the
+citing–cited work links within that scope and identify each citing work's journal
+using validated source IDs. Count each citation edge once. A journal self-citation
+share can then use within-journal citation edges in the numerator and all observed
+citation edges to the cohort in the denominator, with missing source identities
+reported separately. Distinguish a genuinely empty eligible edge set from a failed
+request; a zero denominator makes the share undefined.
+
+An average of per-paper self-citation shares weights papers equally and generally
+differs from the edge-level share. Neither current cumulative counts nor references
+recorded for the cited papers identify the journals that cited them. No fixed
+self-citation threshold or empirical result follows from this chapter's data.
+
 
 ## Chapter 12 --- Author-Level Analysis {-}
 
@@ -1435,30 +1394,40 @@ ggplot(aging_comparison, aes(age, value, colour = stat)) +
 *Key insight:* The median curve is lower and flatter because the mean is pulled
 up by highly cited outliers. Median is more robust for skewed distributions.
 
-**5. Citation window sensitivity.**
-Compute JIF-like proxies with different window lengths.
+**5. Publication-cohort sensitivity.**
+Use the Scientometrics sample fetched in Chapter 14. Its publication dates span
+2013–2018; the following cohorts end in 2018 and remain within that retrieved
+range. These are current cumulative citation summaries for subsets of a sample.
 
 ```{r}
 #| label: E-sol-ch14-5
 #| eval: false
-windows <- c(2, 3, 5)
+cohort_end <- 2018
+cohort_lengths <- c(2, 3, 5)
+cohort_summaries <- map_dfr(cohort_lengths, function(length_years) {
+  cohort <- works_sciento |>
+    mutate(publication_year = lubridate::year(publication_date)) |>
+    filter(publication_year >= cohort_end - length_years + 1,
+           publication_year <= cohort_end)
+  observed <- cohort$cited_by_count[!is.na(cohort$cited_by_count)]
+  tibble(cohort_years = length_years, n_records = nrow(cohort),
+         n_citations_observed = length(observed),
+         mean_cumulative_citations = if (length(observed)) mean(observed) else NA_real_)
+})
+cohort_summaries
 
-jif_by_window <- map(windows, \(w) {
- journal_works |>
-   filter(publication_year >= (2023 - w),
-          publication_year <= 2022) |>
-   summarise(jif = sum(cited_by_count) / n()) |>
-   mutate(window = w)
-}) |> list_rbind()
-
-ggplot(jif_by_window, aes(factor(window), jif)) +
- geom_col() +
- labs(x = "Citation window (years)", y = "JIF proxy",
-      title = "JIF sensitivity to citation window")
+ggplot(cohort_summaries, aes(factor(cohort_years), mean_cumulative_citations)) +
+  geom_col() +
+  labs(x = "Publication-cohort length (years)",
+       y = "Mean cumulative citations at retrieval",
+       title = "Descriptive sensitivity to publication-cohort selection")
 ```
 
-*Key insight:* Longer windows generally produce higher values and favour fields
-with slower citation accumulation.
+Changing the publication cohort changes the included papers and their citation
+exposure. The mean may rise or fall; it is not guaranteed to increase with cohort
+length. A publication-date filter does not restrict citation-receipt dates.
+These calculations therefore do not estimate JIF or compare fixed post-publication
+citation windows. Missing citation counts remain outside the observed denominator.
 
 ## Chapter 15 --- Co-authorship Networks {-}
 
@@ -2981,93 +2950,51 @@ mandate it.
 
 ## Chapter 28 --- Gender and Equity Analysis {-}
 
-**1. Cross-journal comparison.**
-Compare gender representation in first authorship across journals.
+**1. Denominator comparison.**
+Use the explicitly synthetic `lookup_records` from Chapter 28.
 
 ```{r}
 #| label: E-sol-ch28-1
 #| eval: false
-library(openalexR)
-library(tidyverse)
-
-journal_ids <- c("S4210174107", "S49861241", "S154589771")
-
-gender_by_journal <- map(journal_ids, \(jid) {
- w <- fetch_openalex(entity = "works",
-               primary_location.source.id = jid,
-               from_publication_date = "2020-01-01") |>
-   slice_sample(n = 200)
-
- w |>
-   mutate(first_author = map_chr(author, \(a) a$au_display_name[1])) |>
-   # Gender inference would use genderize.io or similar
-   mutate(journal = jid)
-}) |> list_rbind()
-
-# After gender inference:
-# gender_by_journal |>
-#   group_by(journal, inferred_gender) |>
-#   summarise(n = n()) |>
-#   mutate(pct = n / sum(n))
+all_records <- lookup_records |>
+  count(lookup_category) |>
+  mutate(share = n / sum(n))
+matched_only <- lookup_records |>
+  filter(lookup_category != "Unmatched") |>
+  count(lookup_category) |>
+  mutate(share = n / sum(n))
+all_records
+matched_only
 ```
 
-*Key insight:* Gender representation varies significantly by field. STEM
-journals typically have lower female first-author rates than social sciences.
+The fixture has 12 records: four A, two B and six Unmatched. Among all records,
+A is one third and B one sixth; among matched records, A is two thirds and B one
+third. None of these arbitrary category shares measures gender representation.
 
-**2. Temporal trends.**
-Track the proportion of female first authors over time.
+**2. Position audit.**
 
 ```{r}
 #| label: E-sol-ch28-2
 #| eval: false
-# After gender inference has been performed:
-gender_trend <- works_gendered |>
- group_by(publication_year, inferred_gender) |>
- summarise(n = n(), .groups = "drop_last") |>
- mutate(pct = n / sum(n))
-
-ggplot(gender_trend |> filter(inferred_gender == "female"),
-      aes(publication_year, pct)) +
- geom_line() +
- geom_point() +
- scale_y_continuous(labels = scales::percent) +
- labs(title = "Female first-author share over time",
-      x = "Year", y = "Proportion female")
+position_data |> count(author_position)
+position_summary |>
+  group_by(author_position) |>
+  summarise(proportion_sum = sum(pct), records = sum(n), .groups = "drop")
 ```
 
-*Key insight:* Most fields show a gradual increase in female representation,
-though the rate of change varies considerably by discipline and region.
+The invented lists produce four first, four last, three middle and one
+single-author record. Each position's proportions sum to one because unmatched
+records remain included. Recorded position does not establish a contribution role.
 
-**3. Citation gap.**
-Compare citations by inferred gender, controlling for year.
+**3. Study design.**
 
-```{r}
-#| label: E-sol-ch28-3
-#| eval: false
-# After gender inference:
-citation_gap <- works_gendered |>
- group_by(publication_year, inferred_gender) |>
- summarise(
-   mean_cites = mean(cited_by_count),
-   median_cites = median(cited_by_count),
-   n = n(),
-   .groups = "drop"
- )
-
-ggplot(citation_gap, aes(publication_year, mean_cites,
-                          colour = inferred_gender)) +
- geom_line() +
- labs(title = "Mean citations by inferred gender",
-      x = "Year", y = "Mean citations")
-
-# Statistical test (controlling for year)
-summary(lm(cited_by_count ~ inferred_gender + publication_year,
-           data = works_gendered))
-```
-
-*Key insight:* A persistent citation gap may reflect systemic biases, network
-effects, or confounding factors (e.g., team size, field). Observational data
-alone cannot establish causation.
+Specify the scientific question and population before defining an analysis.
+A real study would need a defensible demographic variable and its provenance,
+a consent/data-governance plan, categories appropriate to that question,
+missing-data and validation procedures, and evidence about authorship conventions.
+The fixture supplies none of those demographic observations, nor real identity
+linkage, publication years or citation outcomes. Changing a name dictionary cannot
+recover them. No citation-gap or gender-equity conclusion follows from this exercise.
 
 ## Chapter 29 --- Retraction Analysis {-}
 
@@ -3167,54 +3094,51 @@ Identify frequently co-occurring funder pairs.
 #| eval: false
 library(tidyverse)
 
-funder_pairs <- works |>
- unnest(grants) |>
- group_by(id) |>
- filter(n_distinct(funder) >= 2) |>
- reframe(pair = combn(funder, 2, simplify = FALSE)) |>
- unnest_wider(pair, names_sep = "_") |>
- count(pair_1, pair_2, sort = TRUE)
+funder_pairs <- inner_join(
+  select(funder_data, work_id, funder_a = funder_id),
+  select(funder_data, work_id, funder_b = funder_id),
+  by = "work_id", relationship = "many-to-many"
+) |>
+  filter(funder_a < funder_b) |>
+  distinct(work_id, funder_a, funder_b) |>
+  count(funder_a, funder_b, sort = TRUE)
 
 funder_pairs |> head(10)
 ```
 
-*Key insight:* National funders frequently co-occur with international
-organisations (e.g., NIH + EU), reflecting collaborative funding models.
+This uses the cleaned, observed funder IDs from Chapter 30 and counts each pair
+once per sampled work. An empty result means no co-funding pair was observed in
+this sample; it is not evidence that the funders never collaborate.
 
 **2. Funder portfolios.**
-Compare topical profiles of two major funders.
+Prepare a bounded comparison for two funders observed in the sample.
 
 ```{r}
 #| label: E-sol-ch30-2
 #| eval: false
-library(openalexR)
 library(tidyverse)
 
-funder_ids <- c("F123456", "F789012")  # OpenAlex funder IDs
-
-funder_profiles <- map(funder_ids, \(fid) {
- w <- fetch_openalex(entity = "works",
-               grants.funder = fid,
-               from_publication_date = "2020-01-01") |>
-   slice_sample(n = 300)
- w |>
-   unnest(keywords) |>
-   count(keyword, sort = TRUE) |>
-   mutate(funder = fid)
-}) |> list_rbind()
-
-# Compare top keywords
-funder_profiles |>
- group_by(funder) |>
- slice_head(n = 15) |>
- ggplot(aes(reorder(keyword, n), n, fill = funder)) +
- geom_col(position = "dodge") +
- coord_flip() +
- labs(title = "Funder portfolio comparison")
+funder_ids <- head(funder_counts$funder_id, 2)
+if (length(funder_ids) < 2L) {
+  cat("A two-funder comparison is unavailable in this sample.\n")
+} else {
+  portfolio_sample <- funder_data |>
+    filter(funder_id %in% funder_ids) |>
+    select(work_id, funder_id) |>
+    distinct() |>
+    left_join(select(works, id, display_name, abstract),
+              by = c("work_id" = "id"))
+  portfolio_sample |> count(funder_id, name = "n_sampled_works")
+}
 ```
 
-*Key insight:* Different funders support different thematic areas; comparing
-portfolios reveals strategic funding priorities.
+Apply the text-processing workflow from Chapter 20 to the available titles and
+abstracts, reporting text coverage per funder. This corpus contains only the
+sampled journal's papers, so it is not either funder's full portfolio. Completing
+the exercise for whole portfolios requires a documented retrieval for validated
+funder IDs, the same publication window, and verified funding metadata coverage.
+Do not substitute invented identifiers or infer strategic priorities from a
+small journal sample.
 
 **3. Temporal trends.**
 Track funding acknowledgement coverage over time.
@@ -3222,217 +3146,171 @@ Track funding acknowledgement coverage over time.
 ```{r}
 #| label: E-sol-ch30-3
 #| eval: false
-funding_trend <- works |>
- mutate(has_funding = map_lgl(grants, \(g) length(g) > 0)) |>
+funding_trend <- funding_works |>
+ mutate(publication_year = lubridate::year(publication_date)) |>
  group_by(publication_year) |>
- summarise(funding_rate = mean(has_funding, na.rm = TRUE))
+ summarise(n_sampled = n(),
+           n_with_funder = sum(has_funder_metadata),
+           funding_rate = mean(has_funder_metadata), .groups = "drop")
 
 ggplot(funding_trend, aes(publication_year, funding_rate)) +
  geom_line() +
  geom_point() +
  scale_y_continuous(labels = scales::percent) +
- labs(title = "Papers with funding acknowledgements over time",
-      x = "Year", y = "Share with funding data")
+ labs(title = "Observed funder metadata by publication year in the sample",
+      x = "Publication year", y = "Share with observed funder IDs")
 ```
 
-*Key insight:* Funding metadata coverage has increased as publishers and
-databases improve structured acknowledgement parsing.
+The rate describes metadata observed at retrieval, grouped by publication year.
+It does not measure the prevalence of financial support or establish how the
+database's coverage changed historically. Keep the annual sample denominators
+and report sparse groups and missing publication years.
 
 ## Chapter 31 --- Patent-Paper Linkages {-}
 
-**1. Field comparison.**
-Compare the proportion of highly cited papers across fields.
+**1. Scholarly-citation comparison.**
+Use two journals represented in the Chapter 31 sample. Keep the common sample
+threshold when comparing them, and report the publication years and observed
+sample sizes. These are descriptive sample summaries, not journal rankings.
 
 ```{r}
 #| label: E-sol-ch31-1
 #| eval: false
-library(openalexR)
 library(tidyverse)
 
-biomed <- fetch_openalex(entity = "works",
-                   search = "drug delivery",
-                   from_publication_date = "2018-01-01",
-                   to_publication_date = "2020-12-31") |>
- slice_sample(n = 200) |> mutate(field = "Biomedical")
+selected_journals <- works_citations |>
+  filter(!is.na(source_display_name)) |>
+  count(source_display_name, sort = TRUE) |>
+  slice_head(n = 2) |>
+  pull(source_display_name)
 
-socsci <- fetch_openalex(entity = "works",
-                   search = "social inequality",
-                   from_publication_date = "2018-01-01",
-                   to_publication_date = "2020-12-31") |>
- slice_sample(n = 200) |> mutate(field = "Social Science")
+stopifnot(length(selected_journals) == 2)
+common_p90 <- quantile(works_citations$cited_by_count, 0.9, na.rm = TRUE)
 
-combined <- bind_rows(biomed, socsci)
-
-combined |>
- group_by(field) |>
- summarise(
-   pct_top10 = mean(cited_by_count >=
-                     quantile(cited_by_count, 0.9)),
-   mean_cites = mean(cited_by_count)
- )
+works_citations |>
+  filter(source_display_name %in% selected_journals) |>
+  group_by(source_display_name, year) |>
+  summarise(
+    n_sampled = n(),
+    n_citation_observed = sum(!is.na(cited_by_count)),
+    median_cites = median(cited_by_count, na.rm = TRUE),
+    mean_cites = mean(cited_by_count, na.rm = TRUE),
+    proportion_at_or_above_common_p90 =
+      mean(cited_by_count >= common_p90, na.rm = TRUE),
+    .groups = "drop"
+  )
 ```
 
-*Key insight:* Biomedical research is more likely to be cited in patents because
-it has more direct translational applications. Higher citation rates do not
-automatically imply greater technological relevance.
+Record the original retrieval date from the data provenance; a cached result's
+render date is not its retrieval date. Document field classifications separately
+before attributing differences to fields: the worked sample does not supply a
+field classification for this comparison. The common threshold is the sample's
+90th percentile of current cumulative scholarly citations; ties may put more
+than 10% of works at or above it. A separate 90th percentile for each journal
+would put approximately 10% of each journal above its own threshold by
+construction. None of these quantities measures patent citations or predicts
+technological impact.
 
-**2. Time lag estimation.**
-Estimate the citation accumulation trajectory for a cohort of papers.
+**2. Linkage data specification.**
+The linkage table needs actual source records, with at least these fields:
 
-```{r}
-#| label: E-sol-ch31-2
-#| eval: false
-cohort_2015 <- works |>
- filter(publication_year == 2015, !is.null(counts_by_year))
+| Field | Purpose |
+|:--|:--|
+| `paper_id` | Stable identifier for the matched scholarly work, such as a DOI or OpenAlex work ID. |
+| `patent_id` | Identifier for the citing patent document, including the patent office. |
+| `patent_family_id` | Documented family identifier for deduplicating related patent documents. |
+| `paper_publication_date` | Starting date for a clearly defined paper-to-patent interval. |
+| `citation_date` | Date associated with the citation in the source, with its meaning documented; if only patent publication date is available, identify it as that proxy. |
+| `source` and `retrieved_at` | Patent-reference source, version or snapshot, and retrieval date. |
+| `raw_reference` | Original reference text or source record identifier for verification. |
+| `match_status` | Verified, ambiguous or unmatched, with the matching method and review evidence retained. |
 
-trajectory <- cohort_2015 |>
- unnest(counts_by_year) |>
- mutate(age = year - 2015) |>
- filter(age >= 0) |>
- group_by(age) |>
- summarise(median_cites = median(cited_by_count))
-
-ggplot(trajectory, aes(age, median_cites)) +
- geom_line() +
- geom_point() +
- labs(title = "Citation trajectory for 2015 cohort",
-      x = "Age (years since publication)",
-      y = "Median annual citations")
-
-# Peak year
-peak_age <- trajectory$age[which.max(trajectory$median_cites)]
-cat(sprintf("Peak citation year: age %d\n", peak_age))
-```
-
-*Key insight:* Papers typically peak in citation accumulation at age 2-4 years,
-depending on the field. This lag matters for evaluating recent research.
+Keep ambiguous and unmatched references in the source table. Review candidate
+matches against the original bibliographic record, and report matching coverage
+before restricting an analysis to verified links. Missing identifiers or dates
+must remain missing rather than being inferred from scholarly citation counts.
+No patent-reference dataset is supplied by the worked example, so it cannot
+yield an observed linkage rate or lag distribution.
 
 **3. Institutional patent linkage.**
-Compare the proportion of top-cited papers across institutions.
+Define an eligible publication set for each institution using the same years,
+document types, affiliation rule and data coverage. Deduplicate publications by
+paper identifier, and specify how shared publications are credited. Use a common
+patent observation cutoff and, where possible, equal follow-up time for each
+publication cohort. Count a paper as observed patent-cited only when at least one
+verified patent-family link falls in that window; repeated documents within a
+family must not inflate linkage counts.
 
-```{r}
-#| label: E-sol-ch31-3
-#| eval: false
-inst_ids <- c("I123456789", "I987654321")
+The observed linked-paper proportion is the number of distinct eligible papers
+with a verified in-window patent-family link divided by the number of eligible
+papers. Report the numerator, denominator, source coverage, unmatched and
+ambiguous records, and sensitivity to matching and follow-up choices. A paper
+without a link in the observed source is not proof that no patent cites it.
 
-inst_top_papers <- map(inst_ids, \(iid) {
- w <- fetch_openalex(entity = "works",
-               authorships.institutions.lineage = iid,
-               from_publication_date = "2018-01-01",
-               to_publication_date = "2020-12-31")
- p90 <- quantile(w$cited_by_count, 0.9)
- tibble(
-   institution = iid,
-   n_papers = nrow(w),
-   pct_above_p90 = mean(w$cited_by_count >= p90)
- )
-}) |> list_rbind()
-
-inst_top_papers
-```
-
-*Key insight:* A higher proportion of top-percentile papers may suggest greater
-potential for technological impact, but causation cannot be established without
-actual patent citation data.
+Without the independently validated patent-reference data, the missing inputs
+are the citing patent and family identifiers, reference matches, dates and
+coverage information. Report the analysis as unavailable. The scholarly-citation
+sample and institutional top-decile shares cannot replace those inputs.
 
 ## Chapter 32 --- Causal Inference in Scientometrics {-}
 
-**1. Extended DiD.**
-Add covariates to the difference-in-differences regression.
+**1. Interaction sensitivity.**
+Use the complete sampled records in `cohort_data` from Chapter 32.
 
 ```{r}
 #| label: E-sol-ch32-1
 #| eval: false
-library(tidyverse)
-
-# Assuming works_did has: cited_by_count, is_oa, post_treatment,
-# type, n_authors, referenced_works_count
-did_extended <- lm(
- cited_by_count ~ is_oa * post_treatment +
-   type + n_authors + referenced_works_count,
- data = works_did
-)
-
-summary(did_extended)
-
-# Compare with simple model
-did_simple <- lm(cited_by_count ~ is_oa * post_treatment,
-                 data = works_did)
-
-cat(sprintf("Simple interaction: %.2f\n",
-            coef(did_simple)["is_oaTRUE:post_treatmentTRUE"]))
-cat(sprintf("Extended interaction: %.2f\n",
-            coef(did_extended)["is_oaTRUE:post_treatmentTRUE"]))
+unadjusted <- lm(cited_by_count ~ is_oa * recent_cohort, data = cohort_data)
+adjusted <- lm(cited_by_count ~ is_oa * recent_cohort + referenced_works_count,
+               data = cohort_data)
+broom::tidy(unadjusted)
+broom::tidy(adjusted)
 ```
 
-*Key insight:* If the interaction term changes substantially with added
-covariates, the simple model suffers from omitted variable bias.
+The interaction coefficients describe associations in two conditional-mean
+specifications. A difference between them indicates specification sensitivity;
+it does not identify an OA treatment effect or by itself establish the size or
+direction of omitted-variable bias.
 
-**2. Placebo test.**
-Use a false treatment date to test the parallel trends assumption.
+**2. Boundary sensitivity.**
 
 ```{r}
 #| label: E-sol-ch32-2
 #| eval: false
-# Placebo: pretend treatment happened in 2018 instead of 2020
-works_placebo <- works_did |>
- filter(publication_year <= 2019) |>  # pre-treatment only
- mutate(post_placebo = publication_year >= 2018)
-
-did_placebo <- lm(cited_by_count ~ is_oa * post_placebo,
-                  data = works_placebo)
-
-summary(did_placebo)
-
-# If the interaction is NOT significant, parallel trends hold
-cat(sprintf("Placebo p-value: %.4f\n",
-            summary(did_placebo)$coefficients[
-             "is_oaTRUE:post_placeboTRUE", "Pr(>|t|)"
-            ]))
+alternative <- cohort_data |> mutate(cohort_2018 = year >= 2018)
+alternative_model <- lm(cited_by_count ~ is_oa * cohort_2018 +
+                         referenced_works_count, data = alternative)
+broom::tidy(alternative_model)
 ```
 
-*Key insight:* A non-significant placebo interaction (p > 0.05) supports the
-parallel trends assumption. A significant result suggests pre-existing
-divergence between OA and non-OA papers.
+There is no identified intervention at either date. This changes an arbitrary
+publication-cohort partition, so it is a descriptive sensitivity check, not a
+placebo intervention test. Neither a significant nor a non-significant interaction
+establishes parallel counterfactual trends; these data contain different cohorts'
+cumulative citations at retrieval, not annual outcomes around a policy change.
 
-**3. Matched comparison.**
-Use propensity score matching to estimate the OA effect.
+**3. Comparison audit.**
 
 ```{r}
 #| label: E-sol-ch32-3
 #| eval: false
-library(MatchIt)
-library(tidyverse)
-
-# Propensity score matching
-matched <- matchit(
- is_oa ~ publication_year + referenced_works_count + type,
- data = works_did,
- method = "nearest",
- ratio = 1
-)
-
-summary(matched)
-matched_data <- match.data(matched)
-
-# Estimate treatment effect on matched sample
-did_matched <- lm(cited_by_count ~ is_oa, data = matched_data)
-summary(did_matched)
-
-cat(sprintf("Unmatched OA effect: %.2f\n",
-            coef(did_simple)["is_oaTRUE"]))
-cat(sprintf("Matched OA effect: %.2f\n",
-            coef(did_matched)["is_oaTRUE"]))
+matched |> count(control_id, name = "times_used") |> arrange(desc(times_used))
+nrow(oa_papers) - nrow(matched)
 ```
 
-*Key insight:* Matching reduces selection bias by creating comparable groups.
-If the matched and unmatched effects differ substantially, selection on
-observables was important.
+The original within-year draw can reuse a closed-access paper for multiple OA
+papers. OA papers from years lacking a closed-access candidate are omitted. Such
+selection changes the comparison population and does not establish exchangeability.
+An actual policy study must first define treatment assignment and timing, a target
+causal effect, outcome measurement over comparable exposure periods, and a defensible
+comparison design. It also needs relevant pre-treatment covariates and an explicit
+account of identification and inference assumptions.
 
 ## Chapter 33 --- Reproducibility, RRIDs, and Badges {-}
 
 **1. DAS detection.**
-Search abstracts for data/code availability statements.
+Screen available abstracts for candidate data/code availability mentions, then
+manually validate candidates against full texts and linked resources.
 
 ```{r}
 #| label: E-sol-ch33-1
@@ -3446,17 +3324,18 @@ das_keywords <- c("data availability", "code availability",
 das_pattern <- paste(das_keywords, collapse = "|")
 
 works |>
- filter(!is.na(ab)) |>
- mutate(has_das = str_detect(tolower(ab), das_pattern)) |>
+ filter(!is.na(abstract), nzchar(trimws(abstract))) |>
+ mutate(candidate_mention = str_detect(tolower(abstract), das_pattern)) |>
  summarise(
    total = n(),
-   with_das = sum(has_das),
-   das_rate = mean(has_das)
+   candidate_mentions = sum(candidate_mention),
+   candidate_rate = mean(candidate_mention)
  )
 ```
 
-*Key insight:* DAS detection via abstract text is a lower bound; many statements
-appear only in dedicated sections not captured by abstracts.
+*Key insight:* Abstract screening can miss statements and produce false positives,
+so the match rate is neither a validated DAS rate nor a guaranteed lower bound.
+Inspect full texts and validate precision/recall on an annotated sample.
 
 **2. Cross-journal comparison.**
 Compare metadata completeness and OA rates across journals.
@@ -3464,17 +3343,19 @@ Compare metadata completeness and OA rates across journals.
 ```{r}
 #| label: E-sol-ch33-2
 #| eval: false
-journal_ids <- c("S4210174107", "S49861241", "S137773608")
+journal_ids <- c("S148561398", "S205292342", "S4210197613")
 
 journal_quality <- map(journal_ids, \(jid) {
  w <- fetch_openalex(entity = "works",
                primary_location.source.id = jid,
-               from_publication_date = "2020-01-01") |>
-   slice_sample(n = 200)
+               from_publication_date = "2020-01-01",
+               options = list(sample = 200, seed = 42))
+ stopifnot(is.data.frame(w), nrow(w) > 0)
  tibble(
    journal = jid,
-   abstract_rate = mean(!is.na(w$ab)),
-   oa_rate = mean(w$is_oa, na.rm = TRUE),
+   abstract_rate = mean(!is.na(w$abstract) & nzchar(trimws(w$abstract))),
+   oa_observed = sum(!is.na(w$oa_status)),
+   oa_rate = mean(w$oa_status != "closed", na.rm = TRUE),
    doi_rate = mean(!is.na(w$doi))
  )
 }) |> list_rbind()
@@ -3482,36 +3363,35 @@ journal_quality <- map(journal_ids, \(jid) {
 journal_quality
 ```
 
-*Key insight:* Journals with higher OA rates tend to have better metadata
-completeness, but the correlation is not perfect.
+*Key insight:* Access status and metadata completeness describe different
+properties. Inspect actual output and coverage; no association is assumed.
 
 **3. Temporal trends.**
-Track transparency proxies over time.
+Track recorded access status and abstract coverage by publication cohort.
 
 ```{r}
 #| label: E-sol-ch33-3
 #| eval: false
-transparency_trends <- works |>
- group_by(publication_year) |>
+metadata_trends <- works_repro |>
+ group_by(year) |>
  summarise(
-   abstract_rate = mean(!is.na(ab)),
-   oa_rate = mean(is_oa, na.rm = TRUE),
-   high_cite_rate = mean(cited_by_count >= 10)
+   abstract_rate = mean(has_abstract),
+   oa_rate = mean(oa_status != "closed", na.rm = TRUE),
+   .groups = "drop"
  ) |>
- pivot_longer(-publication_year, names_to = "metric",
+ pivot_longer(-year, names_to = "metric",
               values_to = "value")
 
-ggplot(transparency_trends, aes(publication_year, value,
+ggplot(metadata_trends, aes(year, value,
                                  colour = metric)) +
  geom_line() +
  scale_y_continuous(labels = scales::percent) +
- labs(title = "Transparency and impact proxies over time",
+ labs(title = "Access status and metadata coverage by cohort",
       x = "Year", y = "Proportion")
 ```
 
-*Key insight:* Transparency proxies and citation impact may be weakly correlated
-within years, but confounding factors (field, journal prestige) complicate
-interpretation.
+*Key insight:* These are current recorded properties of publication cohorts,
+not adoption histories or measures of data/code sharing and reproducibility.
 
 ## Chapter 34 --- Reproducible Pipelines {-}
 

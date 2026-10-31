@@ -14,7 +14,8 @@ A free, open-source book by **Raban Heller**.
 
 - 📄 [Whole book (PDF)](https://r-heller.github.io/scientometrics-in-r/scientometrics-in-r.pdf)
 - 📚 [EPUB](https://r-heller.github.io/scientometrics-in-r/scientometrics-in-r.epub)
-- 📑 Per-chapter PDFs: every chapter page has a download button at the top right.
+The reading site lists only downloads present in its build. Local candidate files
+do not update the published site until an authorized deployment.
 
 ## What this book covers
 
@@ -80,10 +81,10 @@ The book has eight parts plus appendices:
 
 ## Build status and API access
 
-The companion R package passes local build and check. The full book is not yet
-release-qualified: the 30 October 2026 HTML run reached Chapter 12 and stopped
-when OpenAlex required authentication for cursor paging. Later chapters and all
-publication formats remain to be validated. See `MAINTENANCE.md`.
+Local verification and remaining release boundaries are recorded in
+[`MAINTENANCE.md`](MAINTENANCE.md). The authenticated build and source-package
+checks use an isolated R 4.6.1 library; remote CI and the published site are
+separate from this local candidate.
 
 OpenAlex's [authentication documentation](https://help.openalex.org/api/authentication/)
 requires a free, activated key for paging beyond the first page. Keep it outside
@@ -95,22 +96,64 @@ Chapter code uses `fetch_openalex()` with exact-argument RDS caches in
 `_freeze/openalex_cache/`. Set `SCIENTOMETRICS_OFFLINE=1` to require existing
 OpenAlex caches, including stale ones; a missing/unreadable cache fails explicitly.
 This mode does not make Crossref, PubMed, or other providers offline.
-Do not reuse old knitr caches when validating changed analysis code.
+Set `SCIENTOMETRICS_REBUILD_CHUNKS=1` to re-execute analysis chunks after changing
+source or helpers. This bypasses knitr results while retaining exact-query
+provider caches. Missing provider caches still need API access.
 
-## Reproducibility
+## Install and build
 
-Built with [bookdown](https://bookdown.org/), R, and `renv`. To
-rebuild locally:
+Prerequisites: R 4.6.1 was used for local validation, a C/C++ toolchain when source
+packages are required, and Pandoc (bundled with RStudio or available separately).
+PDF additionally needs XeLaTeX/TinyTeX and R with Cairo support. For multilingual
+PDF text and figures, install Noto Sans CJK (`fonts-noto-cjk` on Ubuntu) and
+DejaVu Sans Mono (`fonts-dejavu-mono`); macOS can use its Arial Unicode MS and
+Menlo fonts. The remaining Linux system-library prerequisites are listed in
+`.github/workflows/render.yml`. Internet access is needed for
+package installation and uncached provider requests; OpenAlex needs an activated
+key configured locally as `OPENALEX_API_KEY`.
+
+From this candidate checkout:
 
 ```bash
-git clone https://github.com/r-heller/scientometrics-in-r.git
-cd scientometrics-in-r
-R -e 'renv::restore()'
-R -e 'bookdown::render_book("index.Rmd", output_format = "all")'
+RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla scripts/install-book-deps.R
+RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla scripts/install-book-deps.R --check
+SCIENTOMETRICS_REBUILD_CHUNKS=1 RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla -e 'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'
+Rscript --vanilla scripts/build-download-manifest.R
 ```
 
-A Docker image (`Dockerfile`) is provided for fully reproducible
-builds.
+Open `docs/index.html` through a local web server, for example
+`python3 -m http.server 8000 --directory docs`, then visit
+<http://localhost:8000>. To build the whole-book PDF and EPUB, install TinyTeX
+with `tinytex::install_tinytex()` if needed and render with
+`output_format = "all"`. Complete EPUB packaging and regenerate the download
+manifest before distributing these files:
+
+```bash
+Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub
+Rscript --vanilla scripts/build-download-manifest.R
+```
+
+EPUB packaging validates internal links and bundles the citation and licence files.
+Per-chapter PDFs are optional: run `Rscript --vanilla scripts/render-chapter-pdfs.R`
+and regenerate the manifest. Its nonzero exit reports incomplete chapter builds.
+
+For the companion package, from the checkout:
+
+```bash
+RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla -e 'install.packages("remotes", repos="https://cloud.r-project.org"); remotes::install_deps(dependencies=TRUE); remotes::install_local(".", dependencies=FALSE)'
+Rscript --vanilla -e 'library(scientometricsInR); data(openalex_sample); print(dim(openalex_sample)); print(rake_keywords("red blue red", stopwords=character()))'
+```
+
+`build_coauth_graph()` uses stable author IDs in the igraph `name` attribute;
+use `label` or `display_name` for human-readable labels. This prevents homonyms
+from merging and name variants from splitting one author.
+
+The historical `renv.lock` and Docker restore path have not been qualified for
+the current book. The dependency script installs missing package names rather
+than claiming an exact historical restore. Pin the validated software and archive
+licensed input snapshots for an immutable release; live API samples can change.
+Optional Python embeddings and SQL/OCR/deployment exercises are distinguished
+in the installer and are not required by the default executed book.
 
 ## Use of LLM tools
 

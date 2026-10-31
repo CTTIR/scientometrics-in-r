@@ -24,6 +24,7 @@ set.seed(20260509)
 
 source(here::here("R", "api_helpers.R"))
 source(here::here("R", "utils.R"))
+source(here::here("R", "funding_helpers.R"))
 source(here::here("R", "sci_palette.R"))
 ```
 
@@ -52,35 +53,50 @@ works <- fetch_openalex(
   options = list(sample = 400, seed = 42)
 )
 
-funded <- works |>
-  select(id, display_name, cited_by_count, funders) |>
-  filter(map_lgl(funders, \(g) !is.null(g) && length(g) > 0))
+funding_works <- works |>
+  mutate(funders = map(funders, sci_funder_rows),
+         has_funder_metadata = map_int(funders, nrow) > 0)
 
-cat(glue("Works with funder data: {nrow(funded)} / {nrow(works)} ({scales::percent(nrow(funded)/nrow(works))})\n"))
+funded <- funding_works |>
+  filter(has_funder_metadata) |>
+  select(id, display_name, cited_by_count, funders)
+
+cat(glue("Works with observed funder IDs: {nrow(funded)} / {nrow(works)} ({scales::percent(nrow(funded)/nrow(works))})\n"))
+if (!nrow(funded)) {
+  cat("No usable funder records occur in this sample. Funder summaries are unavailable; missing metadata does not establish that the papers were unfunded.\n")
+}
 ```
 
 ```{r}
 #| label: 30-unnest-funders
-funder_data <- funded |>
-  unnest(funders, names_sep = "_") |>
-  select(work_id = id, funder = funders_display_name,
-         cited_by_count)
+funder_data <- if (nrow(funded)) {
+  funded |>
+    unnest(funders, names_sep = "_") |>
+    select(work_id = id, funder_id = funders_id,
+           funder = funders_display_name, cited_by_count)
+} else {
+  tibble(work_id = character(), funder_id = character(),
+         funder = character(), cited_by_count = numeric())
+}
 
 cat(glue("Funder-work pairs: {nrow(funder_data)}\n"))
-cat(glue("Unique funders: {n_distinct(funder_data$funder)}\n"))
+cat(glue("Unique funders: {n_distinct(funder_data$funder_id)}\n"))
 ```
 
 ### Top funders by publication count
 
 ```{r}
 #| label: 30-fig-funding-top
-#| fig-cap: "Top 15 funders by number of supported publications."
+#| fig-cap: "Up to 15 funders by the number of sampled publications with observed funder metadata."
 #| fig-alt: "Horizontal bar chart showing the 15 funders with the most publications in the sample."
 #| fig-width: 7
 #| fig-height: 5
 funder_counts <- funder_data |>
-  count(funder, sort = TRUE)
+  group_by(funder_id) |>
+  summarise(funder = first(funder), n = n_distinct(work_id), .groups = "drop") |>
+  arrange(desc(n))
 
+if (nrow(funder_counts)) {
 funder_counts |>
   head(15) |>
   mutate(funder = fct_reorder(funder, n)) |>
@@ -88,6 +104,9 @@ funder_counts |>
   geom_col(fill = palette_sci(1)) +
   labs(x = "Publications supported", y = NULL) +
   theme_sci()
+} else {
+  cat("No funder publication-count plot: no observed funder records.\n")
+}
 ```
 
 ### Citation impact by funder
@@ -95,8 +114,9 @@ funder_counts |>
 ```{r}
 #| label: 30-funder-impact
 funder_impact <- funder_data |>
-  group_by(funder) |>
+  group_by(funder_id) |>
   summarise(
+    funder = first(funder),
     n_pubs = n(),
     mean_cites = round(mean(cited_by_count), 1),
     median_cites = median(cited_by_count),
@@ -105,31 +125,40 @@ funder_impact <- funder_data |>
   filter(n_pubs >= 5) |>
   arrange(desc(mean_cites))
 
-funder_impact |> head(10) |> gt()
+if (nrow(funder_impact)) {
+  funder_impact |> head(10) |> gt()
+} else {
+  cat("No funder has at least five sampled publications with usable metadata; no funder citation summary is reported.\n")
+}
 ```
 
-### Funded vs. unfunded comparison
+### Comparison by observed funder metadata
 
 ```{r}
 #| label: 30-fig-funding-comparison
-#| fig-cap: "Citation distribution for funded vs. unfunded papers."
-#| fig-alt: "Box plot comparing citation counts for papers with and without funding acknowledgements."
+#| fig-cap: "Citation distribution by presence of observed funder metadata; missing metadata does not establish absence of funding."
+#| fig-alt: "Box plot comparing scholarly citation counts for papers with and without observed funder identifiers in the retrieved metadata."
 #| fig-width: 5
 #| fig-height: 3.5
-works |>
-  mutate(has_funding = map_lgl(funders, \(g) !is.null(g) && length(g) > 0)) |>
-  ggplot(aes(x = has_funding, y = cited_by_count + 1)) +
+if (n_distinct(funding_works$has_funder_metadata) == 2L) {
+funding_works |>
+  mutate(funder_metadata = if_else(has_funder_metadata,
+                                  "Observed funder", "No observed funder")) |>
+  ggplot(aes(x = funder_metadata, y = cited_by_count + 1)) +
   geom_boxplot(fill = palette_sci(1), alpha = 0.7) +
   scale_y_log10() +
-  labs(x = "Has funding acknowledgement", y = "Citations (log scale)") +
+  labs(x = "Funder metadata", y = "Citations (log scale)") +
   theme_sci()
+} else {
+  cat("No two-group citation comparison: only one funder-metadata group is observed.\n")
+}
 ```
 
 ## Diagnostics and interpretation {#funding-diagnostics}
 
 - **Coverage rate**: The fraction of papers with funder data depends on the journal, publisher, and field. Report this rate before interpreting funder statistics.
 - **Funder name normalisation**: The same funder may appear under different names ("NSF", "National Science Foundation", "US NSF"). Merge variants using funder IDs where available.
-- **Selection bias**: Papers with funding acknowledgements may be systematically different from unfunded papers (larger teams, more resources). The funded/unfunded citation gap reflects this selection, not necessarily the causal effect of funding.
+- **Selection and metadata coverage**: Papers with observed funder records may differ systematically from papers without them. Their citation gap can reflect selection and publisher reporting; it does not identify the causal effect of funding or compare confirmed funded and unfunded groups.
 - **Multi-funder attribution**: Papers acknowledging multiple funders inflate the publication count for each. Consider fractional counting.
 
 ## Limitations and responsible use {#funding-limitations}
@@ -163,7 +192,7 @@ works |>
 3. **Temporal trends.** Track the number of papers with funding acknowledgements by year. Is the coverage rate increasing over time?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#30-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

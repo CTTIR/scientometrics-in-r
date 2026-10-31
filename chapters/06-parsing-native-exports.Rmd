@@ -163,7 +163,7 @@ After parsing, always check:
 3. **Standardization function.** Write a function that takes a data frame from `convert2df()` and returns a tibble with columns: `doi`, `title`, `authors`, `year`, `journal`, `cited_by`.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#06-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

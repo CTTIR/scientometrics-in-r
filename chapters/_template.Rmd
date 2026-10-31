@@ -100,7 +100,7 @@ set.seed(20260509)
 3. **Exercise 3.** Description of task.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#_template-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

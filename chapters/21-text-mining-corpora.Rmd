@@ -214,7 +214,7 @@ ggplot(freq_by_year, aes(x = year, y = rel_freq, colour = term)) +
 4. **Preprocessing sensitivity.** Run the same analysis with and without stemming. How do the top terms differ? Which version is more interpretable?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#21-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

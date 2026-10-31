@@ -289,7 +289,7 @@ The key takeaway is that no single source is complete or definitive. Cross-valid
 5. **Source selection exercise.** A colleague asks you to conduct a bibliometric analysis of nursing research in Sub-Saharan Africa. Which data source(s) would you recommend and why? Write a brief justification considering coverage, cost, and reproducibility.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#04-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

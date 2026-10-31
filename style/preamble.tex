@@ -4,16 +4,48 @@
 \usepackage{float}
 \usepackage{xcolor}
 \usepackage{hyperref}
+% Permit long DOI/URL tokens to wrap without inserting visible hyphens.
+\usepackage{xurl}
+\urlstyle{same}
 \definecolor{linkblue}{HTML}{1565C0}
 \hypersetup{colorlinks=true,linkcolor=linkblue,citecolor=linkblue,urlcolor=linkblue}
 \setcounter{secnumdepth}{4}
 \setcounter{tocdepth}{3}
+% The complete book has three-digit pages. Reserve room for up to four digits
+% instead of the standard class's narrow page-number box and right margin.
+\makeatletter
+\renewcommand{\@pnumwidth}{3em}
+\renewcommand{\@tocrmarg}{4em}
+\makeatother
 \usepackage{fontspec}
-% Inter / JetBrains Mono are not installed on the CI TinyTeX runner.
-% Fall back silently to the default xelatex font (Latin Modern) when
-% the system can't find the requested family.
-\IfFontExistsTF{Inter}{\setmainfont{Inter}[Scale=1.0]}{}
-\IfFontExistsTF{JetBrains Mono}{\setmonofont{JetBrains Mono}[Scale=0.92]}{}
+% Match the Unicode-capable PDF figure font selected in _common.R. These
+% families preserve author names, Greek letters, and comparison operators.
+\IfFontExistsTF{Noto Sans CJK KR}{
+  \setmainfont{Noto Sans CJK KR}
+  \setsansfont{Noto Sans CJK KR}
+}{\IfFontExistsTF{Noto Sans CJK JP}{
+  \setmainfont{Noto Sans CJK JP}
+  \setsansfont{Noto Sans CJK JP}
+}{\IfFontExistsTF{Arial Unicode MS}{
+  \setmainfont{Arial Unicode MS}[AutoFakeBold=1.5,AutoFakeSlant=0.2]
+  \setsansfont{Arial Unicode MS}[AutoFakeBold=1.5,AutoFakeSlant=0.2]
+}{\PackageError{scientometrics}{Install Noto Sans CJK fonts before rendering PDF}{The PDF must preserve non-Latin author names.}}}}
+\IfFontExistsTF{DejaVu Sans Mono}{
+  \setmonofont{DejaVu Sans Mono}[Scale=MatchLowercase]
+}{\IfFontExistsTF{Menlo}{
+  \setmonofont{Menlo}[Scale=MatchLowercase]
+}{\PackageError{scientometrics}{Install DejaVu Sans Mono before rendering PDF}{A Unicode monospace font is required for code examples.}}}
+
+% Wrap both highlighted source and plain output within the text area.
+\usepackage{fvextra}
+\fvset{breaklines=true,breakanywhere=true}
+% Apply after package loading: tcolorbox loads verbatim and can otherwise undo
+% the lowercase override. Define also handles excerpts without source chunks,
+% where Pandoc has not created a Highlighting environment in its template.
+\AtBeginDocument{
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\},breaklines=true,breakanywhere=true,fontsize=\small}
+  \RecustomVerbatimEnvironment{verbatim}{Verbatim}{breaklines=true,breakanywhere=true,fontsize=\small}
+}
 
 % --- Callout-box environments for {block, type='box...'} chunks ---------------
 % The bs4_book HTML target maps these block types to <div class="...">.

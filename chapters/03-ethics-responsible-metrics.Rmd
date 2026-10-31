@@ -296,7 +296,7 @@ Self-citation rates vary enormously across disciplines, career stages, and resea
 4. **Goodhart's Law thought experiment.** Propose a new indicator for measuring research quality that is not currently in wide use. Then, write a brief analysis of how researchers might game this indicator if it were adopted for promotion decisions. *(Hint: think about both the numerator and denominator of any ratio-based metric.)*
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#03-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

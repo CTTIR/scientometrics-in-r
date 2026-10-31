@@ -7,12 +7,15 @@
 build_coauth_graph(works)
 }
 \arguments{
-\item{works}{A data frame of works. Must contain columns \code{id} and
-\code{authorships} (a list-column with \code{au_id} and \code{au_display_name} fields).}
+\item{works}{A data frame with \code{id} and an \code{authorships} list-column.
+Nested author data may use current OpenAlex \code{id}/\code{display_name}, legacy
+\code{au_id}/\code{au_display_name}, or flattened \code{author.id}/\code{author.display_name}.}
 }
 \value{
-An \link[igraph:graph]{igraph::graph} object with author name and ID as vertex
-attributes and co-authorship frequency as edge weight.
+An undirected \link[igraph:graph]{igraph::graph} with stable author IDs in the \code{name}
+vertex attribute, display names in \code{label} and \code{display_name}, and distinct
+jointly authored work counts in the \code{weight} edge attribute. Use \code{label}
+for human-readable plot labels; different authors may share a display name.
 }
 \description{
 Constructs an undirected, weighted co-authorship graph from a data frame

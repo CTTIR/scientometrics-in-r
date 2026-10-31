@@ -113,6 +113,14 @@ img.cover {
 }
 
 /* ---------- Figures ---------- */
+.mermaid {
+  overflow-x: auto;
+}
+
+.mermaid svg {
+  min-width: 40rem;
+}
+
 p.caption,
 .caption {
   color: var(--grey-color);

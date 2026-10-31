@@ -184,7 +184,7 @@ walk2(journals$journal_id, journals$journal_name, function(jid, jname) {
 3. **Conditional content.** Add conditional logic: if the sample has fewer than 50 papers, display a warning message instead of the citation distribution figure.
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#36-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

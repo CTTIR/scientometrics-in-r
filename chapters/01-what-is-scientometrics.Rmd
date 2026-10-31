@@ -231,7 +231,7 @@ cat(glue("Unique journals: {n_distinct(works$source_display_name, na.rm = TRUE)}
 4. **Growth curve.** Extend the publication trend analysis to 2000--2023. Does the annual publication count follow an exponential growth pattern, as @price1963 predicted? *(Hint: plot on a log-scaled y-axis and check for linearity.)*
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#01-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>

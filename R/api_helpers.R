@@ -14,7 +14,10 @@
 fetch_openalex <- function(..., cache_dir = "_freeze/openalex_cache",
                            cache_days = 7,
                            offline = identical(Sys.getenv("SCIENTOMETRICS_OFFLINE"), "1")) {
-  if (!is.character(cache_dir) || length(cache_dir) != 1L || is.na(cache_dir) || !nzchar(cache_dir)) {
+  if (
+    !is.character(cache_dir) || length(cache_dir) != 1L ||
+      is.na(cache_dir) || !nzchar(cache_dir)
+  ) {
     stop("`cache_dir` must be one nonempty path.", call. = FALSE)
   }
   if (!is.numeric(cache_days) || length(cache_days) != 1L || is.na(cache_days) || cache_days < 0) {
@@ -29,13 +32,23 @@ fetch_openalex <- function(..., cache_dir = "_freeze/openalex_cache",
     age <- as.numeric(difftime(Sys.time(), file.mtime(cache_file), units = "days"))
     if (offline || (!is.na(age) && age < cache_days)) {
       cached <- tryCatch(readRDS(cache_file), error = function(e) {
-        stop("OpenAlex cache is unreadable; preserve it and obtain a verified replacement: ", cache_file, call. = FALSE)
+        stop(
+          "OpenAlex cache is unreadable; preserve it and obtain a verified replacement: ",
+          cache_file,
+          call. = FALSE
+        )
       })
       if (offline) message("Using existing OpenAlex cache without network: ", cache_file)
       return(cached)
     }
   }
-  if (offline) stop("Offline OpenAlex cache missing for these exact arguments: ", cache_file, call. = FALSE)
+  if (offline) {
+    stop(
+      "Offline OpenAlex cache missing for these exact arguments: ",
+      cache_file,
+      call. = FALSE
+    )
+  }
   if (!dir.exists(cache_dir) && !dir.create(cache_dir, recursive = TRUE)) {
     stop("Cannot create OpenAlex cache directory.", call. = FALSE)
   }
@@ -44,8 +57,16 @@ fetch_openalex <- function(..., cache_dir = "_freeze/openalex_cache",
   result <- NULL
   for (attempt in seq_len(max_tries)) {
     sci_rate_limit()
-    result <- tryCatch(.fetch_openalex_remote(...), error = function(e) {
-      if (attempt == max_tries) stop(e)
+    result <- tryCatch(withCallingHandlers(.fetch_openalex_remote(...),
+      warning = function(w) {
+        if (inherits(w, "openalexR_http_warning")) {
+          rlang::abort("OpenAlex did not complete the request; no result was cached.",
+            class = "scientometrics_provider_unavailable", parent = w
+          )
+        }
+      }
+    ), error = function(e) {
+      if (inherits(e, "scientometrics_provider_unavailable") || attempt == max_tries) stop(e)
       NULL
     })
     if (!is.null(result) && NROW(result) > 0) break
@@ -56,7 +77,10 @@ fetch_openalex <- function(..., cache_dir = "_freeze/openalex_cache",
     on.exit(unlink(pending), add = TRUE)
     saveRDS(result, pending)
     if (!file.rename(pending, cache_file)) {
-      stop("Could not atomically replace the OpenAlex cache; existing cache retained.", call. = FALSE)
+      stop(
+        "Could not atomically replace the OpenAlex cache; existing cache retained.",
+        call. = FALSE
+      )
     }
   }
   result

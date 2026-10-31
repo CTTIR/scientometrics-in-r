@@ -1,12 +1,14 @@
-# Find Your Method
+# Find Your Method {-}
 
 Use this decision tree to navigate to the chapter or case study most relevant to your research question.
+On narrow screens, scroll the diagram horizontally. The quick reference table
+below provides the same routes in a compact format.
 
 ```{mermaid}
 %%| fig-cap: "Decision tree for selecting a scientometric method."
 %%| label: fig-decision-tree
 
-flowchart TD
+flowchart LR
     A["What is your<br>research question?"] --> B["Map a research field"]
     A --> C["Evaluate research<br>performance"]
     A --> D["Detect emerging<br>topics or trends"]

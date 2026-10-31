@@ -167,7 +167,7 @@ cat(glue("Pearson correlation (references vs. citations): {round(cor_val, 3)}\n"
 3. **Cross-field comparison.** Fetch samples from a biomedical journal and a mathematics journal. Compare their citation distributions and reference list lengths. What does this suggest about field-specific attention patterns?
 
 <div class="callout callout-ok">
-## Solutions
+## Solutions {#26-solutions}
 
 Solutions are provided in \@ref(solutions).
 </div>
