@@ -1,4 +1,4 @@
-# Maintenance review — 30–31 October 2026
+# Maintenance review — 30 October–2 November 2026
 
 ## Purpose and acceptance criteria
 
@@ -56,7 +56,9 @@ adding more methods was outside this repair pass.
   restored before subsequent HTML/EPUB renders in the same R session. The method navigator
   is readable, keyboard-scrollable and unnumbered; chapter numbering is consistent.
   Available-file inventories replace unconditional download links. Optional chapter
-  PDF generation reports failure through its exit status.
+  PDF generation reports failure through its exit status. The download list is
+  also available in mobile navigation; it no longer depends on a desktop-only
+  sidebar.
 - **Medium — EPUB packaging.** The rendered EPUB contained malformed XHTML,
   missing citation/licence files and cross-chapter links that pointed into the
   wrong chapter. The explicit packaging step repairs only deterministic targets,
@@ -74,21 +76,25 @@ adding more methods was outside this repair pass.
 
 ## Observed verification
 
-The final lint pass found formatting failures and two new internal helper names
-longer than the repository permits. Those names and their callers were
-updated without relaxing either lint or style checks. All seven R files now pass
-lintr with zero findings and styler without changes. Parsed expressions are
-equivalent apart from the two explicit helper renames and single-statement braces. The distribution evidence
-below precedes those exact identifier changes; fresh builds from the committed
-source revision are required before the final handover.
+All seven R files pass lintr with zero findings and styler without changes. The
+style repairs preserve parsed expressions apart from two explicit internal-helper
+renames and single-statement braces; neither check was relaxed. The final HTML,
+PDF and EPUB were rebuilt on 31 October from source commit `b050100` in separate
+worktrees and fresh R processes. Every analysis chunk was re-executed with copies
+of the verified provider caches. All three builds succeeded, and every tracked
+source file still matched its committed Git blob. Final artifact review and local
+distribution assembly completed on 2 November. The subsequent HTML-only mobile
+download fix was synchronized from `style/after-body.html` into all 59 reading
+pages. Reversing that exact fragment restores every pre-update byte; analysis,
+search content, PDF and EPUB were unchanged. The preserved full-build outputs
+and fragment hashes document this final UI update separately.
 
 R 4.6.1 on macOS arm64. Authentication and a cursor request returned HTTP 200;
 no credential was placed in source. An initial render stopped at Chapter 22 on
 missing `reshape2`; this was installed in the audit library and added to the
 shared dependency inventory. Earlier failures are retained in the audit logs.
 
-- The final companion source archive passed `R CMD check --no-manual
-  --no-vignettes`, Status OK, with **126 passing assertions**, no warnings or
+- The final companion source archive passed `R CMD check --no-manual --no-vignettes`, Status OK, with **126 passing assertions**, no warnings or
   skips. It contains 43 members (29,468 bytes), and every source-backed member
   matches this checkout. No generated or live-data files are included. A
   separate build during active PDF compilation also excluded all TeX auxiliary
@@ -102,7 +108,11 @@ shared dependency inventory. Earlier failures are retained in the audit logs.
   institution/journal/topic workflows and repaired solution snippets.
 - Download inventory and browser visibility cases pass. Desktop/mobile search,
   navigation, corrected content and the readable method diagram were observed.
-  The final site has 59 HTML pages and 7,936 checked local references, with no
+  Final desktop and mobile download responses match the qualified file hashes;
+  mobile EPUB click/save and PDF navigation passed. Missing inventories show no
+  download links, and there are no duplicate download IDs or advertised missing
+  chapter PDFs.
+  The final site has 59 HTML pages and 8,013 checked local references, with no
   broken targets or visible unresolved references. Search contains 866 sections
   across 58 content pages. `scripts/verify-render-formats.R` also passes PDF,
   repeated-PDF, HTML and EPUB transitions without leaking table/device settings.
@@ -110,16 +120,40 @@ shared dependency inventory. Earlier failures are retained in the audit logs.
   The final ebook has 161 archive members, 65 XHTML documents and 8,620 checked
   internal references. Official EPUBCheck 5.4.0 with `--failonwarnings` reports
   zero findings. Independent comparison preserves all 92 other original assets
-  byte-for-byte and all 62 original XHTML text sequences except the approved
-  build-instructions update. Representative tables and citation/licence fallback
+  byte-for-byte and all 62 original XHTML text sequences without substitutions. Representative tables and citation/licence fallback
   pages were visually checked, including a 390-pixel viewport. These are XHTML
   rendering checks, not acceptance in every dedicated ebook reader.
 - The PDF typography specimens and 11 format regression groups pass, including
   exact DOI/header/code content, repeated spaces, Unicode names, grouped tables,
-  hidden columns and plain-output wrapping. The pre-formatting 607-page PDF
-  completed with no missing glyphs, replacement characters or words outside
-  the page; both repaired table classes were visually inspected. Fresh committed-
-  source PDF/HTML/EPUB builds remain required before final handover.
+  hidden columns and plain-output wrapping. The final **609-page PDF** has no
+  missing glyphs, undefined references, replacement characters or extracted words
+  outside the page. Eleven representative final pages were independently viewed,
+  including repaired tables, qualified scientific claims, Unicode labels and the
+  `b050100` colophon. This is representative inspection, not page-by-page proofing.
+- Manual publication controls passed YAML parsing and deployment/artifact event
+  checks. Manual workflows default to validation without publication; hosted
+  execution remains unobserved.
+
+The final local distribution contains the fresh HTML and these qualified files:
+
+| Artifact | Bytes | SHA256 |
+|---|---:|---|
+| `docs/scientometrics-in-r.pdf` | 6,041,651 | `894f6649a87576a5cf61c42f6a9d4c5ff36eea45cbc532284e2103540262c2b3` |
+| `docs/scientometrics-in-r.epub` | 33,044,709 | `8ff30dcdc238d61340b73b23ae0a74111e46b7debe23fb2b6201c8f28183e913` |
+
+The previous distribution and raw EPUB were preserved in the audit directory.
+The source fixtures, reference bibliography and executable generator contents are
+unchanged; three generator files retain only their previously documented
+synthetic-provenance comment. Final download checks passed and all four owned
+preview servers were stopped.
+
+The exact credential scan checked 5,136 files and 1,291 compressed streams,
+including current source, caches and distribution files, with zero matches and
+zero current-candidate extraction errors. Eleven historical incomplete audit
+PDFs could not be text-extracted; their raw bytes were scanned and the exceptions
+remain listed. The credential process was then closed. The later mobile-only
+fragment update used no credentials, and its exact-byte preservation check
+confirms the other artifact content remained unchanged.
 
 Detailed command receipts, source hashes, failures and independent review notes
 are retained under the workspace's
@@ -141,12 +175,15 @@ packages into an otherwise empty machine, optional Python/SQL/OCR backends and
 live Shiny/deployment exercises remain unqualified. Exercise-solution chunks are
 intentionally unevaluated by the book renderer; repaired snippets were checked
 independently, but not every solution was executed. Minor upstream deprecation
-messages and front-matter subsection numbering are deferred. This pass does not
+messages, front-matter subsection numbering and repeated callout headings are
+deferred. The PDF retains 152 minor overfull-box warnings (contents, running heads
+and body/table margins; maximum 29.03 pt); representative affected content remains
+readable. This pass does not
 constitute independent scientific or editorial acceptance of the entire text.
 
-Next release action: review the candidate and rendered books, configure the
-GitHub `OPENALEX_API_KEY` secret, and run the manual book/package workflows on the
-reviewed revision with `deploy` unchecked. Review their results and the book
+Next release action: review the candidate and rendered books. After authorization,
+push the review branch, configure the GitHub `OPENALEX_API_KEY` secret, and run
+the manual book/package workflows on that revision with `deploy` unchecked. Review their results and the book
 artifact before an authorized publication. The existing main-push and scheduled
 workflows still deploy automatically, so a push to main is a publication step.
 No push, merge, deployment or submission occurred.

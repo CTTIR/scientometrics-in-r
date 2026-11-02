@@ -54,22 +54,33 @@
         }
         if (!links.length) return;
 
-        var firstChild = extraList.firstElementChild;
-        var header = document.createElement("li");
-        header.className = "book-extra-section";
-        var heading = document.createElement("strong");
-        heading.textContent = "Download";
-        header.appendChild(heading);
-        extraList.insertBefore(header, firstChild);
-        links.forEach(function (link) {
-          var item = document.createElement("li");
-          var anchor = document.createElement("a");
-          anchor.id = link[0];
-          anchor.href = link[1];
-          anchor.textContent = link[2];
-          item.appendChild(anchor);
-          extraList.insertBefore(item, firstChild);
-        });
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
+
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
       })
       .catch(function () {
         // A missing or unreadable inventory offers no unverified downloads.
