@@ -80,15 +80,13 @@
 <ul>
 <li>📄 <a href="https://r-heller.github.io/scientometrics-in-r/scientometrics-in-r.pdf" class="external-link">Whole book (PDF)</a>
 </li>
-<li>📚 <a href="https://r-heller.github.io/scientometrics-in-r/scientometrics-in-r.epub" class="external-link">EPUB</a>
-</li>
-<li>📑 Per-chapter PDFs: every chapter page has a download button at the top right.</li>
+<li>📚 <a href="https://r-heller.github.io/scientometrics-in-r/scientometrics-in-r.epub" class="external-link">EPUB</a> The reading site lists only downloads present in its build. Local candidate files do not update the published site until an authorized deployment.</li>
 </ul>
 </div>
 <div class="section level2">
 <h2 id="what-this-book-covers">What this book covers<a class="anchor" aria-label="anchor" href="#what-this-book-covers"></a>
 </h2>
-<p>The book is a hands-on guide to scientometrics in R. It covers the full workflow from data acquisition (OpenAlex, Crossref, PubMed) through core bibliometric indicators, network analysis, text mining, and production reporting. All examples are fully reproducible using free, open data sources — no Web of Science or Scopus subscription is required.</p>
+<p>The book is a hands-on guide to scientometrics in R. It covers the full workflow from data acquisition (OpenAlex, Crossref, PubMed) through core bibliometric indicators, network analysis, text mining, and production reporting. Examples use free, open data sources. Live API results change, some operations require credentials, and exact reproduction requires the same cached corpus and software environment. No Web of Science or Scopus subscription is required. The bundled companion datasets are <strong>synthetic teaching fixtures</strong>, not measured OpenAlex records or empirical evidence.</p>
 <p>It is written for researchers, librarians, research administrators, and data scientists who already know R at a tidyverse level and want to add bibliometric methods to their toolkit. The book is unusually explicit about <em>limitations and responsible use</em>: every quantitative chapter ends with a callout grounded in the Leiden Manifesto and DORA.</p>
 <p>What it does <em>not</em> cover: proprietary platforms (InCites, SciVal), manual screening workflows for systematic reviews, and qualitative sociology of science.</p>
 </div>
@@ -130,14 +128,30 @@
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>}</span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="reproducibility">Reproducibility<a class="anchor" aria-label="anchor" href="#reproducibility"></a>
+<h2 id="build-status-and-api-access">Build status and API access<a class="anchor" aria-label="anchor" href="#build-status-and-api-access"></a>
 </h2>
-<p>Built with <a href="https://bookdown.org/" class="external-link">bookdown</a>, R, and <code>renv</code>. To rebuild locally:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/r-heller/scientometrics-in-r.git</span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="bu">cd</span> scientometrics-in-r</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">'renv::restore()'</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">R</span> <span class="at">-e</span> <span class="st">'bookdown::render_book("index.Rmd", output_format = "all")'</span></span></code></pre></div>
-<p>A Docker image (<code>Dockerfile</code>) is provided for fully reproducible builds.</p>
+<p>Local verification and remaining release boundaries are recorded in <a href="MAINTENANCE.html"><code>MAINTENANCE.md</code></a>. The authenticated build and source-package checks use an isolated R 4.6.1 library; remote CI and the published site are separate from this local candidate.</p>
+<p>OpenAlex’s <a href="https://help.openalex.org/api/authentication/" class="external-link">authentication documentation</a> requires a free, activated key for paging beyond the first page. Keep it outside Git. This book accepts <code>OPENALEX_API_KEY</code>; existing <code>openalexR.apikey</code> environment or R-option configuration also works. Neither the key nor a live corpus should be placed in a commit. Supplying a key enables requests against its account budget.</p>
+<p>Chapter code uses <code><a href="reference/fetch_openalex.html">fetch_openalex()</a></code> with exact-argument RDS caches in <code>_freeze/openalex_cache/</code>. Set <code>SCIENTOMETRICS_OFFLINE=1</code> to require existing OpenAlex caches, including stale ones; a missing/unreadable cache fails explicitly. This mode does not make Crossref, PubMed, or other providers offline. Set <code>SCIENTOMETRICS_REBUILD_CHUNKS=1</code> to re-execute analysis chunks after changing source or helpers. This bypasses knitr results while retaining exact-query provider caches. Missing provider caches still need API access.</p>
+</div>
+<div class="section level2">
+<h2 id="install-and-build">Install and build<a class="anchor" aria-label="anchor" href="#install-and-build"></a>
+</h2>
+<p>Prerequisites: R 4.6.1 was used for local validation, a C/C++ toolchain when source packages are required, and Pandoc (bundled with RStudio or available separately). PDF additionally needs XeLaTeX/TinyTeX and R with Cairo support. For multilingual PDF text and figures, install Noto Sans CJK (<code>fonts-noto-cjk</code> on Ubuntu) and DejaVu Sans Mono (<code>fonts-dejavu-mono</code>); macOS can use its Arial Unicode MS and Menlo fonts. The remaining Linux system-library prerequisites are listed in <code>.github/workflows/render.yml</code>. Internet access is needed for package installation and uncached provider requests; OpenAlex needs an activated key configured locally as <code>OPENALEX_API_KEY</code>.</p>
+<p>From this candidate checkout:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R <span class="at">--check</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="va">SCIENTOMETRICS_REBUILD_CHUNKS</span><span class="op">=</span>1 <span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/build-download-manifest.R</span></code></pre></div>
+<p>Open <code>docs/index.html</code> through a local web server, for example <code>python3 -m http.server 8000 --directory docs</code>, then visit <a href="http://localhost:8000" class="external-link uri">http://localhost:8000</a>. To build the whole-book PDF and EPUB, install TinyTeX with <code><a href="https://rdrr.io/pkg/tinytex/man/install_tinytex.html" class="external-link">tinytex::install_tinytex()</a></code> if needed and render with <code>output_format = "all"</code>. Complete EPUB packaging and regenerate the download manifest before distributing these files:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/repair-epub.R docs/scientometrics-in-r.epub</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/build-download-manifest.R</span></code></pre></div>
+<p>EPUB packaging validates internal links and bundles the citation and licence files. Per-chapter PDFs are optional: run <code>Rscript --vanilla scripts/render-chapter-pdfs.R</code> and regenerate the manifest. Its nonzero exit reports incomplete chapter builds.</p>
+<p>For the companion package, from the checkout:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'install.packages("remotes", repos="https://cloud.r-project.org"); remotes::install_deps(dependencies=TRUE); remotes::install_local(".", dependencies=FALSE)'</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'library(scientometricsInR); data(openalex_sample); print(dim(openalex_sample)); print(rake_keywords("red blue red", stopwords=character()))'</span></span></code></pre></div>
+<p><code><a href="reference/build_coauth_graph.html">build_coauth_graph()</a></code> uses stable author IDs in the igraph <code>name</code> attribute; use <code>label</code> or <code>display_name</code> for human-readable labels. This prevents homonyms from merging and name variants from splitting one author.</p>
+<p>The historical <code>renv.lock</code> and Docker restore path have not been qualified for the current book. The dependency script installs missing package names rather than claiming an exact historical restore. Pin the validated software and archive licensed input snapshots for an immutable release; live API samples can change. Optional Python embeddings and SQL/OCR/deployment exercises are distinguished in the installer and are not required by the default executed book.</p>
 </div>
 <div class="section level2">
 <h2 id="use-of-llm-tools">Use of LLM tools<a class="anchor" aria-label="anchor" href="#use-of-llm-tools"></a>
@@ -172,7 +186,8 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>
-<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>-CODE</li>
+<a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENCE</a>
+</li>
 </ul>
 </div>
 
