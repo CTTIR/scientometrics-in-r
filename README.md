@@ -123,7 +123,7 @@ Rscript --vanilla scripts/build-download-manifest.R
 
 Open `docs/index.html` through a local web server, for example
 `python3 -m http.server 8000 --directory docs`, then visit
-<http://localhost:8000>. To build the whole-book PDF and EPUB, install TinyTeX
+`http://localhost:8000`. To build the whole-book PDF and EPUB, install TinyTeX
 with `tinytex::install_tinytex()` if needed and render with
 `output_format = "all"`. Complete EPUB packaging and regenerate the download
 manifest before distributing these files:
@@ -170,7 +170,7 @@ was verified against its DOI, arXiv ID, or ISBN.
 
 ## License
 
-The prose of this book is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); all code (scripts, chunks, examples) is licensed under the [MIT License](LICENSE-CODE).
+The prose of this book is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); all code (scripts, chunks, examples) is licensed under the [MIT License](https://github.com/r-heller/scientometrics-in-r/blob/main/LICENSE-CODE).
 
 ## Contributing
 
