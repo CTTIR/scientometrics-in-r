@@ -33,10 +33,20 @@ jobs:
       - name: Disable renv autoloader in CI
         run: rm -f .Rprofile
 
-      - name: Install system dependencies
+      - name: Verify the executable book credential is configured
+        env:
+          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
         run: |
-          sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
+          if [ -z "$OPENALEX_API_KEY" ]; then
+            echo "::error::Configure the OPENALEX_API_KEY repository secret before rendering the executable book."
+            exit 1
+          fi
+
+      - name: Install system dependencies
+        timeout-minutes: 30
+        run: |
+          sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=60 -o Acquire::https::Timeout=60 update
+          sudo env DEBIAN_FRONTEND=noninteractive apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=60 -o Acquire::https::Timeout=60 install -y --no-install-recommends \
             libcurl4-openssl-dev libssl-dev libxml2-dev libgit2-dev \
             libfontconfig1-dev libharfbuzz-dev libfribidi-dev \
             libpoppler-cpp-dev libtesseract-dev libleptonica-dev \
