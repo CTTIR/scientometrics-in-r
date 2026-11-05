@@ -4,6 +4,7 @@ subtitle: "Bibliometrics, Network Science, and Research Evaluation"
 author: "R. Heller"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
+lang: en
 documentclass: book
 bibliography: [references.bib, packages.bib]
 biblio-style: apalike
