@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 3 Theoretical Underpinnings | Scientometrics in R</title>
+<title>Chapter 2 Theoretical Underpinnings | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="3.1 Learning objectives After completing this chapter, you will be able to: State Lotka’s, Bradford’s, and Zipf’s laws and explain the empirical patterns they describe Test whether a corpus of...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 3 Theoretical Underpinnings | Scientometrics in R">
+<meta name="description" content="2.1 Learning objectives After completing this chapter, you will be able to: State Lotka’s, Bradford’s, and Zipf’s laws and explain the empirical patterns they describe Test whether a corpus of...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Theoretical Underpinnings | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/theoretical-underpinnings.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="3.1 Learning objectives After completing this chapter, you will be able to: State Lotka’s, Bradford’s, and Zipf’s laws and explain the empirical patterns they describe Test whether a corpus of...">
+<meta property="og:description" content="2.1 Learning objectives After completing this chapter, you will be able to: State Lotka’s, Bradford’s, and Zipf’s laws and explain the empirical patterns they describe Test whether a corpus of...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 3 Theoretical Underpinnings | Scientometrics in R">
-<meta name="twitter:description" content="3.1 Learning objectives After completing this chapter, you will be able to: State Lotka’s, Bradford’s, and Zipf’s laws and explain the empirical patterns they describe Test whether a corpus of...">
+<meta name="twitter:title" content="Chapter 2 Theoretical Underpinnings | Scientometrics in R">
+<meta name="twitter:description" content="2.1 Learning objectives After completing this chapter, you will be able to: State Lotka’s, Bradford’s, and Zipf’s laws and explain the empirical patterns they describe Test whether a corpus of...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="active" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="active" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,13 +163,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="theoretical-underpinnings" class="section level1" number="3">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="theoretical-underpinnings" class="section level1" number="2">
 <h1>
-<span class="header-section-number">3</span> Theoretical Underpinnings<a class="anchor" aria-label="anchor" href="#theoretical-underpinnings"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2</span> Theoretical Underpinnings<a class="anchor" aria-label="anchor" href="#theoretical-underpinnings"><i class="fas fa-link"></i></a>
 </h1>
-<div id="theory-objectives" class="section level2" number="3.1">
+<div id="theory-objectives" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">3.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#theory-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#theory-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -181,11 +180,11 @@
 <li>Recognise power-law-like distributions in bibliometric data</li>
 </ul>
 </div>
-<div id="theory-setup" class="section level2" number="3.2">
+<div id="theory-setup" class="section level2" number="2.2">
 <h2>
-<span class="header-section-number">3.2</span> Setup<a class="anchor" aria-label="anchor" href="#theory-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.2</span> Setup<a class="anchor" aria-label="anchor" href="#theory-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://juliasilge.github.io/tidytext/">tidytext</a></span><span class="op">)</span></span>
@@ -196,9 +195,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"api_helpers.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="theory-background" class="section level2" number="3.3">
+<div id="theory-background" class="section level2" number="2.3">
 <h2>
-<span class="header-section-number">3.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#theory-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#theory-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Scientometrics rests on a small number of empirical regularities discovered across decades of studying scholarly communication:</p>
 <p><strong>Lotka’s Law</strong> <span class="citation">(<a href="references.html#ref-lotka1926">Lotka 1926</a>)</span> observes that the number of authors producing <em>n</em> papers is approximately proportional to 1/<em>n</em>². A few prolific authors generate a large share of output, while most researchers publish only one or two papers.</p>
@@ -207,17 +206,17 @@
 <p><strong>Price’s Law</strong> <span class="citation">(<a href="references.html#ref-price1963">Solla Price 1963</a>)</span> generalises these observations: the cumulative output of science grows exponentially, doubling roughly every 10–15 years. Price also noted that the square root of all contributors produce half of all contributions.</p>
 <p>The <strong>Matthew Effect</strong> <span class="citation">(<a href="references.html#ref-merton1968">Merton 1968</a>)</span> — named after the Gospel of Matthew (“to those who have, more shall be given”) — describes cumulative advantage in science. Well-known researchers attract disproportionate credit and resources, amplifying initial differences in visibility. This mechanism helps explain the skewed distributions observed by Lotka and Price.</p>
 </div>
-<div id="theory-example" class="section level2" number="3.4">
+<div id="theory-example" class="section level2" number="2.4">
 <h2>
-<span class="header-section-number">3.4</span> Worked example<a class="anchor" aria-label="anchor" href="#theory-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4</span> Worked example<a class="anchor" aria-label="anchor" href="#theory-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>We use a corpus of works from the journal <em>Scientometrics</em> to demonstrate each law.</p>
-<div id="fetching-the-data" class="section level3" number="3.4.1">
+<div id="fetching-the-data" class="section level3" number="2.4.1">
 <h3>
-<span class="header-section-number">3.4.1</span> Fetching the data<a class="anchor" aria-label="anchor" href="#fetching-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.1</span> Fetching the data<a class="anchor" aria-label="anchor" href="#fetching-the-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2015-01-01"</span>,</span>
@@ -225,12 +224,12 @@
 <span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">500</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="lotkas-law" class="section level3" number="3.4.2">
+<div id="lotkas-law" class="section level3" number="2.4.2">
 <h3>
-<span class="header-section-number">3.4.2</span> Lotka’s Law<a class="anchor" aria-label="anchor" href="#lotkas-law"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.2</span> Lotka’s Law<a class="anchor" aria-label="anchor" href="#lotkas-law"><i class="fas fa-link"></i></a>
 </h3>
 <p>We unnest authors and count the number of papers per author in this sample.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">author_prod</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">authorships</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">authorships</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -242,16 +241,16 @@
 <pre><code>#&gt; # A tibble: 9 × 2
 #&gt;   n_papers n_authors
 #&gt;      &lt;int&gt;     &lt;int&gt;
-#&gt; 1        1      1189
-#&gt; 2        2        80
-#&gt; 3        3        13
-#&gt; 4        4         6
+#&gt; 1        1       870
+#&gt; 2        2       138
+#&gt; 3        3        30
+#&gt; 4        4        13
 #&gt; 5        5         2
 #&gt; 6        6         3
-#&gt; 7        7         1
-#&gt; 8       11         1
-#&gt; 9       14         1</code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+#&gt; 7        9         1
+#&gt; 8       10         1
+#&gt; 9       11         1</code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lotka_c</span> <span class="op">&lt;-</span> <span class="va">author_prod</span><span class="op">$</span><span class="va">n_authors</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">author_prod</span> <span class="op">|&gt;</span></span>
@@ -268,18 +267,18 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:02-fig-theory-lotka"></span>
 <img src="scientometrics-in-r_files/figure-html/02-fig-theory-lotka-1.png" alt="Log-log scatter plot of the number of authors versus the number of papers they published, with a dashed reference line showing the inverse-square law." width="90%"><p class="caption">
-Figure 3.1: Author productivity distribution. The dashed line shows the inverse-square law predicted by Lotka.
+Figure 2.1: Author productivity distribution. The dashed line shows the inverse-square law predicted by Lotka.
 </p>
 </div>
 <p>The data approximate the inverse-square pattern, though real distributions often deviate from the exact exponent of 2.</p>
 </div>
-<div id="bradfords-law" class="section level3" number="3.4.3">
+<div id="bradfords-law" class="section level3" number="2.4.3">
 <h3>
-<span class="header-section-number">3.4.3</span> Bradford’s Law<a class="anchor" aria-label="anchor" href="#bradfords-law"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.3</span> Bradford’s Law<a class="anchor" aria-label="anchor" href="#bradfords-law"><i class="fas fa-link"></i></a>
 </h3>
 <p>We count how many articles each journal source contributes (across a broader query).</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">broad_works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">broad_works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  search <span class="op">=</span> <span class="st">"bibliometrics"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2020-01-01"</span>,</span>
@@ -294,7 +293,7 @@ Figure 3.1: Author productivity distribution. The dashed line shows the inverse-
 <span>    cum_articles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">articles</span><span class="op">)</span>,</span>
 <span>    rank <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journal_counts</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rank</span>, y <span class="op">=</span> <span class="va">cum_articles</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>colour <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
@@ -304,23 +303,23 @@ Figure 3.1: Author productivity distribution. The dashed line shows the inverse-
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:02-fig-theory-bradford"></span>
 <img src="scientometrics-in-r_files/figure-html/02-fig-theory-bradford-1.png" alt="Line plot showing cumulative article count on the y-axis versus journal rank on a logarithmic x-axis. The characteristic S-shaped Bradford curve is visible, with a steep rise for core journals." width="90%"><p class="caption">
-Figure 3.2: Bradford plot: cumulative articles vs. log journal rank.
+Figure 2.2: Bradford plot: cumulative articles vs. log journal rank.
 </p>
 </div>
 </div>
-<div id="zipfs-law" class="section level3" number="3.4.4">
+<div id="zipfs-law" class="section level3" number="2.4.4">
 <h3>
-<span class="header-section-number">3.4.4</span> Zipf’s Law<a class="anchor" aria-label="anchor" href="#zipfs-law"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.4</span> Zipf’s Law<a class="anchor" aria-label="anchor" href="#zipfs-law"><i class="fas fa-link"></i></a>
 </h3>
 <p>We extract title words and examine their frequency distribution.</p>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">word_freq</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">display_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://juliasilge.github.io/tidytext/reference/unnest_tokens.html">unnest_tokens</a></span><span class="op">(</span><span class="va">word</span>, <span class="va">display_name</span>, token <span class="op">=</span> <span class="st">"words"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter-joins.html">anti_join</a></span><span class="op">(</span><span class="fu">tidytext</span><span class="fu">::</span><span class="fu"><a href="https://juliasilge.github.io/tidytext/reference/get_stopwords.html">get_stopwords</a></span><span class="op">(</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"word"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">word</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>rank <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">word_freq</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">200</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">rank</span>, y <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -332,15 +331,15 @@ Figure 3.2: Bradford plot: cumulative articles vs. log journal rank.
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:02-fig-theory-zipf"></span>
 <img src="scientometrics-in-r_files/figure-html/02-fig-theory-zipf-1.png" alt="Log-log scatter plot of word frequency versus rank, showing an approximately linear relationship consistent with Zipf's law." width="90%"><p class="caption">
-Figure 3.3: Word frequency vs. rank for article titles, approximating Zipf’s law.
+Figure 2.3: Word frequency vs. rank for article titles, approximating Zipf’s law.
 </p>
 </div>
 </div>
-<div id="prices-growth-law" class="section level3" number="3.4.5">
+<div id="prices-growth-law" class="section level3" number="2.4.5">
 <h3>
-<span class="header-section-number">3.4.5</span> Price’s growth law<a class="anchor" aria-label="anchor" href="#prices-growth-law"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.4.5</span> Price’s growth law<a class="anchor" aria-label="anchor" href="#prices-growth-law"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -351,14 +350,14 @@ Figure 3.3: Word frequency vs. rank for article titles, approximating Zipf’s 
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:02-fig-theory-growth"></span>
 <img src="scientometrics-in-r_files/figure-html/02-fig-theory-growth-1.png" alt="Bar chart showing increasing annual publication counts from 2015 to 2023." width="90%"><p class="caption">
-Figure 3.4: Annual publication counts for sampled works, illustrating the growth of bibliometrics literature.
+Figure 2.4: Annual publication counts for sampled works, illustrating the growth of bibliometrics literature.
 </p>
 </div>
 </div>
 </div>
-<div id="theory-diagnostics" class="section level2" number="3.5">
+<div id="theory-diagnostics" class="section level2" number="2.5">
 <h2>
-<span class="header-section-number">3.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#theory-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#theory-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>These laws are <em>empirical regularities</em>, not physical laws. They describe approximate patterns:</p>
 <ul>
@@ -369,14 +368,14 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
 </ul>
 <p>The value of these laws is not predictive precision but the insight that <strong>skewed distributions are the norm, not the exception</strong>, in scholarly communication.</p>
 </div>
-<div id="theory-limitations" class="section level2" number="3.6">
+<div id="theory-limitations" class="section level2" number="2.6">
 <h2>
-<span class="header-section-number">3.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#theory-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#theory-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-1" class="section level2 callout callout-warn" number="3.7">
+<div id="limitations-and-responsible-use-1" class="section level2 callout callout-warn" number="2.7">
 <h2>
-<span class="header-section-number">3.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>These laws describe aggregate patterns, not individual behaviour. A researcher publishing one paper is not “less productive” in any evaluative sense — Lotka’s law is a statistical observation, not a performance standard.</li>
@@ -384,14 +383,14 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
 <li>Power-law fitting is notoriously difficult. Many distributions that “look” power-law on a log-log plot are better described by lognormal or stretched exponential models. Rigorous fitting requires maximum-likelihood methods and goodness-of-fit tests <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="theory-pitfalls" class="section level2" number="3.8">
+<div id="theory-pitfalls" class="section level2" number="2.8">
 <h2>
-<span class="header-section-number">3.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#theory-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#theory-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-1" class="section level2 callout callout-stop" number="3.9">
+<div id="common-pitfalls-1" class="section level2 callout callout-stop" number="2.9">
 <h2>
-<span class="header-section-number">3.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -404,9 +403,9 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
 <strong>Assuming stationarity.</strong> These patterns can shift over time as publication norms change (e.g., the rise of mega-journals).</li>
 </ul>
 </div>
-<div id="theory-exercises" class="section level2" number="3.10">
+<div id="theory-exercises" class="section level2" number="2.10">
 <h2>
-<span class="header-section-number">3.10</span> Exercises<a class="anchor" aria-label="anchor" href="#theory-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.10</span> Exercises<a class="anchor" aria-label="anchor" href="#theory-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Lotka exponent.</strong> Fit a linear model to the log-log author productivity data. What exponent do you estimate? How does it compare to Lotka’s original value of 2?</p></li>
@@ -415,15 +414,15 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
 <li><p><strong>Matthew Effect simulation.</strong> Write a simple simulation: start 100 authors with 1 paper each. At each time step, an author gains a new paper with probability proportional to their current count. After 50 steps, plot the distribution. Does it resemble Lotka’s law?</p></li>
 </ol>
 </div>
-<div id="solutions-1" class="section level2 callout callout-ok" number="3.11">
+<div id="id_02-solutions" class="section level2 callout callout-ok" number="2.11">
 <h2>
-<span class="header-section-number">3.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_02-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="theory-reading" class="section level2" number="3.12">
+<div id="theory-reading" class="section level2" number="2.12">
 <h2>
-<span class="header-section-number">3.12</span> Further reading<a class="anchor" aria-label="anchor" href="#theory-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.12</span> Further reading<a class="anchor" aria-label="anchor" href="#theory-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -440,15 +439,15 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
 <span class="citation">Waltman (<a href="references.html#ref-waltman2016">2016</a>)</span> — A modern review contextualising these classical laws within citation impact measurement.</li>
 </ul>
 </div>
-<div id="theory-sessioninfo" class="section level2" number="3.13">
+<div id="theory-sessioninfo" class="section level2" number="2.13">
 <h2>
-<span class="header-section-number">3.13</span> Session info<a class="anchor" aria-label="anchor" href="#theory-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.13</span> Session info<a class="anchor" aria-label="anchor" href="#theory-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -467,28 +466,27 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] tidytext_0.4.3  glue_1.8.1      openalexR_3.0.1 lubridate_1.9.5
+#&gt;  [1] tidytext_0.4.3  glue_1.8.1      openalexR_3.1.2 lubridate_1.9.5
 #&gt;  [5] forcats_1.0.1   stringr_1.6.0   dplyr_1.2.1     purrr_1.2.2    
 #&gt;  [9] readr_2.2.0     tidyr_1.3.2     tibble_3.3.1    ggplot2_4.0.3  
 #&gt; [13] tidyverse_2.0.0
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;  [1] gtable_0.3.6       xfun_0.57          bslib_0.11.0       lattice_0.22-6    
-#&gt;  [5] tzdb_0.5.0         vctrs_0.7.3        tools_4.4.1        generics_0.1.4    
-#&gt;  [9] curl_7.1.0         janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
-#&gt; [13] Matrix_1.7-0       RColorBrewer_1.1-3 S7_0.2.2           lifecycle_1.0.5   
-#&gt; [17] compiler_4.4.1     farver_2.1.2       codetools_0.2-20   SnowballC_0.7.1   
-#&gt; [21] htmltools_0.5.9    sass_0.4.10        yaml_2.3.12        pillar_1.11.1     
-#&gt; [25] jquerylib_0.1.4    cachem_1.1.0       viridis_0.6.5      stopwords_2.3     
-#&gt; [29] tidyselect_1.2.1   digest_0.6.39      stringi_1.8.7      bookdown_0.46     
-#&gt; [33] labeling_0.4.3     rprojroot_2.1.1    fastmap_1.2.0      grid_4.4.1        
-#&gt; [37] here_1.0.2         cli_3.6.6          magrittr_2.0.5     dichromat_2.0-0.1 
-#&gt; [41] utf8_1.2.6         withr_3.0.2        scales_1.4.0       timechange_0.4.0  
-#&gt; [45] rmarkdown_2.31     httr_1.4.8         otel_0.2.0         gridExtra_2.3     
-#&gt; [49] hms_1.1.4          memoise_2.0.1      evaluate_1.0.5     knitr_1.51        
-#&gt; [53] viridisLite_0.4.3  rlang_1.2.0        Rcpp_1.1.1-1.1     downlit_0.4.5     
-#&gt; [57] brand.yml_0.1.0    xml2_1.5.2         rstudioapi_0.18.0  jsonlite_2.0.0    
-#&gt; [61] R6_2.6.1           fs_2.1.0</code></pre>
+#&gt;  [1] gtable_0.3.6       xfun_0.62          bslib_0.12.0       lattice_0.22-9    
+#&gt;  [5] tzdb_0.5.0         vctrs_0.7.3        tools_4.6.1        generics_0.1.4    
+#&gt;  [9] curl_8.1.0         janeaustenr_1.0.0  pkgconfig_2.0.3    tokenizers_0.3.0  
+#&gt; [13] Matrix_1.7-5       RColorBrewer_1.1-3 S7_0.2.2           lifecycle_1.0.5   
+#&gt; [17] compiler_4.6.1     farver_2.1.2       SnowballC_0.7.1    htmltools_0.5.9   
+#&gt; [21] sass_0.4.10        yaml_2.3.12        pillar_1.11.1      jquerylib_0.1.4   
+#&gt; [25] cachem_1.1.0       viridis_0.6.5      stopwords_2.3      tidyselect_1.2.1  
+#&gt; [29] digest_0.6.39      stringi_1.8.9      bookdown_0.48      labeling_0.4.3    
+#&gt; [33] rprojroot_2.1.1    fastmap_1.2.0      grid_4.6.1         here_1.0.2        
+#&gt; [37] cli_3.6.6          magrittr_2.0.5     utf8_1.2.6         withr_3.0.3       
+#&gt; [41] scales_1.4.0       timechange_0.4.0   rmarkdown_2.32     httr_1.4.9        
+#&gt; [45] otel_0.2.0         gridExtra_2.3.1    hms_1.1.4          memoise_2.0.1     
+#&gt; [49] evaluate_1.0.5     knitr_1.52         viridisLite_0.4.3  rlang_1.3.0       
+#&gt; [53] Rcpp_1.1.2         downlit_0.4.5      xml2_1.6.0         rstudioapi_0.19.0 
+#&gt; [57] jsonlite_2.0.0     R6_2.6.1           fs_2.1.0</code></pre>
 
 </div>
 </div>
@@ -517,101 +515,97 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></div>
-<div class="next"><a href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></div>
+<div class="prev"><a href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></div>
+<div class="next"><a href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#theoretical-underpinnings"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="nav-link" href="#theory-objectives"><span class="header-section-number">3.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#theory-setup"><span class="header-section-number">3.2</span> Setup</a></li>
-<li><a class="nav-link" href="#theory-background"><span class="header-section-number">3.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#theoretical-underpinnings"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="nav-link" href="#theory-objectives"><span class="header-section-number">2.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#theory-setup"><span class="header-section-number">2.2</span> Setup</a></li>
+<li><a class="nav-link" href="#theory-background"><span class="header-section-number">2.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#theory-example"><span class="header-section-number">3.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#fetching-the-data"><span class="header-section-number">3.4.1</span> Fetching the data</a></li>
-<li><a class="nav-link" href="#lotkas-law"><span class="header-section-number">3.4.2</span> Lotka’s Law</a></li>
-<li><a class="nav-link" href="#bradfords-law"><span class="header-section-number">3.4.3</span> Bradford’s Law</a></li>
-<li><a class="nav-link" href="#zipfs-law"><span class="header-section-number">3.4.4</span> Zipf’s Law</a></li>
-<li><a class="nav-link" href="#prices-growth-law"><span class="header-section-number">3.4.5</span> Price’s growth law</a></li>
+<a class="nav-link" href="#theory-example"><span class="header-section-number">2.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#fetching-the-data"><span class="header-section-number">2.4.1</span> Fetching the data</a></li>
+<li><a class="nav-link" href="#lotkas-law"><span class="header-section-number">2.4.2</span> Lotka’s Law</a></li>
+<li><a class="nav-link" href="#bradfords-law"><span class="header-section-number">2.4.3</span> Bradford’s Law</a></li>
+<li><a class="nav-link" href="#zipfs-law"><span class="header-section-number">2.4.4</span> Zipf’s Law</a></li>
+<li><a class="nav-link" href="#prices-growth-law"><span class="header-section-number">2.4.5</span> Price’s growth law</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#theory-diagnostics"><span class="header-section-number">3.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#theory-limitations"><span class="header-section-number">3.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-1"><span class="header-section-number">3.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#theory-pitfalls"><span class="header-section-number">3.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-1"><span class="header-section-number">3.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#theory-exercises"><span class="header-section-number">3.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-1"><span class="header-section-number">3.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#theory-reading"><span class="header-section-number">3.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#theory-sessioninfo"><span class="header-section-number">3.13</span> Session info</a></li>
+<li><a class="nav-link" href="#theory-diagnostics"><span class="header-section-number">2.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#theory-limitations"><span class="header-section-number">2.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-1"><span class="header-section-number">2.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#theory-pitfalls"><span class="header-section-number">2.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-1"><span class="header-section-number">2.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#theory-exercises"><span class="header-section-number">2.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_02-solutions"><span class="header-section-number">2.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#theory-reading"><span class="header-section-number">2.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#theory-sessioninfo"><span class="header-section-number">2.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -629,7 +623,7 @@ Figure 3.4: Annual publication counts for sampled works, illustrating the growth
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -6,25 +6,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>A R Setup, renv, and Docker | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="A.1 R installation Install the latest R release from CRAN. This book was developed with R 4.4.x. We recommend RStudio or VS Code with the R extension as your IDE.  A.2 Package management with renv...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
+<meta name="description" content="A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such as RStudio is optional. Rendering also requires Pandoc; PDF...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
 <meta property="og:title" content="A R Setup, renv, and Docker | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/r-setup-renv-and-docker.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="A.1 R installation Install the latest R release from CRAN. This book was developed with R 4.4.x. We recommend RStudio or VS Code with the R extension as your IDE.  A.2 Package management with renv...">
+<meta property="og:description" content="A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such as RStudio is optional. Rendering also requires Pandoc; PDF...">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A R Setup, renv, and Docker | Scientometrics in R">
-<meta name="twitter:description" content="A.1 R installation Install the latest R release from CRAN. This book was developed with R 4.4.x. We recommend RStudio or VS Code with the R extension as your IDE.  A.2 Package management with renv...">
+<meta name="twitter:description" content="A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such as RStudio is optional. Rendering also requires Pandoc; PDF...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="active" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,33 +163,66 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r-setup-renv-and-docker" class="section level1" number="44">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="r-setup-renv-and-docker" class="section level1" number="43">
 <h1>
 <span class="header-section-number">A</span> R Setup, renv, and Docker<a class="anchor" aria-label="anchor" href="#r-setup-renv-and-docker"><i class="fas fa-link"></i></a>
 </h1>
 <!-- verify_chunks: skip-file
      Setup-instruction snippets are reference code shown to readers, not
      run at build time. -->
-<div id="r-installation" class="section level2" number="44.1">
+<div id="r-installation-and-current-first-use-path" class="section level2" number="43.1">
 <h2>
-<span class="header-section-number">A.1</span> R installation<a class="anchor" aria-label="anchor" href="#r-installation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">A.1</span> R installation and current first-use path<a class="anchor" aria-label="anchor" href="#r-installation-and-current-first-use-path"><i class="fas fa-link"></i></a>
 </h2>
-<p>Install the latest R release from <a href="https://cran.r-project.org/">CRAN</a>. This book was developed with R 4.4.x. We recommend <a href="https://posit.co/download/rstudio-desktop/">RStudio</a> or <a href="https://marketplace.visualstudio.com/items?itemName=REditorSupport.r">VS Code with the R extension</a> as your IDE.</p>
+<p>Install R from <a href="https://cran.r-project.org/">CRAN</a>. The current candidate was
+locally validated with R 4.6.1. An IDE such as
+<a href="https://posit.co/download/rstudio-desktop/">RStudio</a> is optional. Rendering also
+requires Pandoc; PDF output additionally needs XeLaTeX/TinyTeX and R with Cairo support. Compiled packages
+may require a C/C++ toolchain and system libraries; the Linux dependencies are
+listed in <code>.github/workflows/render.yml</code>.</p>
+<p>From the repository root, install and check the book’s R dependencies:</p>
+<div class="sourceCode" id="cb577"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb577-1"><a href="r-setup-renv-and-docker.html#cb577-1" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R</span>
+<span id="cb577-2"><a href="r-setup-renv-and-docker.html#cb577-2" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R <span class="at">--check</span></span></code></pre></div>
+<p>The installer installs missing packages from current CRAN and checks that their
+namespaces load. It does not restore historical versions or certify an immutable
+software environment. <code>--check</code> performs no installation or network access;
+<code>--list</code> prints the package inventory. Use <code>--library=/path/to/library</code> to select
+an R library, or <code>--include-optional</code> for packages used only by unevaluated
+examples and exercises. Optional Python, SQL, OCR and deployment prerequisites
+must be configured separately.</p>
+<p>Internet access is required for installation and uncached provider requests.
+Configure an activated OpenAlex key locally as <code>OPENALEX_API_KEY</code>, outside Git,
+for requests that need authenticated paging. <code>SCIENTOMETRICS_OFFLINE=1</code> requires
+existing exact-query OpenAlex caches in <code>_freeze/openalex_cache/</code>; it does not
+make other providers offline and cannot supply missing cache entries. See the
+repository <code>README.md</code> for the companion package’s separate installation path.</p>
 </div>
-<div id="package-management-with-renv" class="section level2" number="44.2">
+<div id="package-management-with-renv" class="section level2" number="43.2">
 <h2>
 <span class="header-section-number">A.2</span> Package management with renv<a class="anchor" aria-label="anchor" href="#package-management-with-renv"><i class="fas fa-link"></i></a>
 </h2>
-<p>This project uses <strong>renv</strong> for reproducible package management. After cloning the repository:</p>
-<div class="sourceCode" id="cb574"><pre class="downlit sourceCode r">
+<p><strong>renv</strong> can record and restore a project’s R package versions. This repository
+retains a historical <code>renv.lock</code> and automatic activation in <code>.Rprofile</code>, but that
+lockfile has <strong>not been qualified for the current book</strong>. The first-use commands
+above bypass project startup and use the dependency installer. Do not assume
+that restoring the historical lockfile will reproduce the current validated
+candidate.</p>
+<p>The following is an optional restoration example for a project whose lockfile
+you have independently validated, rather than a required setup step for this book:</p>
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"renv"</span><span class="op">)</span></span>
-<span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/restore.html">restore</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>This installs the exact package versions recorded in <code>renv.lock</code>. To update the lockfile after adding a new package:</p>
-<div class="sourceCode" id="cb575"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/install.html">install</a></span><span class="op">(</span><span class="st">"newpackage"</span><span class="op">)</span></span>
-<span><span class="fu">renv</span><span class="fu">::</span><span class="fu"><a href="https://rstudio.github.io/renv/reference/snapshot.html">snapshot</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">renv</span><span class="fu">::</span><span class="fu">restore</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>Restoration attempts to install the recorded versions; success also depends on
+compatible R, system libraries and available package sources. In a development
+environment, add a package and deliberately update the lockfile only after
+validating the resulting environment:</p>
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"newpackage"</span><span class="op">)</span> <span class="co"># Replace with the intended package name.</span></span>
+<span><span class="fu">renv</span><span class="fu">::</span><span class="fu">snapshot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>A software lockfile does not freeze live API results. Exact reproduction also
+requires the same licensed input snapshots and analysis configuration.</p>
 </div>
-<div id="core-packages" class="section level2" number="44.3">
+<div id="core-packages" class="section level2" number="43.3">
 <h2>
 <span class="header-section-number">A.3</span> Core packages<a class="anchor" aria-label="anchor" href="#core-packages"><i class="fas fa-link"></i></a>
 </h2>
@@ -280,22 +312,45 @@
 </tbody>
 </table></div>
 </div>
-<div id="docker-environment" class="section level2" number="44.4">
+<div id="docker-environment" class="section level2" number="43.4">
 <h2>
 <span class="header-section-number">A.4</span> Docker environment<a class="anchor" aria-label="anchor" href="#docker-environment"><i class="fas fa-link"></i></a>
 </h2>
-<p>A <code>Dockerfile</code> is provided at the repository root. It builds on <code>rocker/verse:4.4.1</code> and installs all required system libraries and R packages.</p>
-<div class="sourceCode" id="cb576"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb576-1"><a href="r-setup-renv-and-docker.html#cb576-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> scientometrics-in-r .</span>
-<span id="cb576-2"><a href="r-setup-renv-and-docker.html#cb576-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> <span class="at">-p</span> 8787:8787 <span class="at">-e</span> DISABLE_AUTH=true scientometrics-in-r</span></code></pre></div>
-<p>Then open <code>http://localhost:8787</code> in your browser to access RStudio Server with all dependencies pre-installed.</p>
+<p>The repository’s <code>Dockerfile</code> is an <strong>optional historical recipe</strong>, based on
+<code>rocker/verse:4.4.1</code> and <code>renv::restore()</code>. Its restore path has not been qualified
+for the current book. It also downloads an amd64 Quarto package, so other
+architectures need a compatible recipe. Docker does not remove the need to
+validate the lockfile, system dependencies, API access and resulting outputs.</p>
+<p>For a deliberate evaluation of that recipe, build it and inspect its R version:</p>
+<div class="sourceCode" id="cb580"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb580-1"><a href="r-setup-renv-and-docker.html#cb580-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> scientometrics-in-r .</span>
+<span id="cb580-2"><a href="r-setup-renv-and-docker.html#cb580-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> scientometrics-in-r R <span class="at">--version</span></span></code></pre></div>
+<p>The image’s default command calls <code><a href="https://pkgs.rstudio.com/bookdown/reference/render_book.html">bookdown::render_book()</a></code> for all formats; it
+does not launch RStudio Server. Successful construction and execution of this
+historical image are not claimed here. Use the current first-use path above
+for the locally validated candidate.</p>
 </div>
-<div id="quarto" class="section level2" number="44.5">
+<div id="render-the-book" class="section level2" number="43.5">
 <h2>
-<span class="header-section-number">A.5</span> Quarto<a class="anchor" aria-label="anchor" href="#quarto"><i class="fas fa-link"></i></a>
+<span class="header-section-number">A.5</span> Render the book<a class="anchor" aria-label="anchor" href="#render-the-book"><i class="fas fa-link"></i></a>
 </h2>
-<p>Install <a href="https://quarto.org/docs/get-started/">Quarto CLI</a> version 1.4 or later. To render the book locally:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb577-1"><a href="r-setup-renv-and-docker.html#cb577-1" tabindex="-1"></a><span class="ex">quarto</span> render</span></code></pre></div>
-<p>Rendered output appears in <code>_book/</code>. For iterative development, use <code>quarto preview</code> to get live-reloading in the browser.</p>
+<p>This repository is configured for <strong>bookdown</strong>, with <code>_bookdown.yml</code> and
+<code>_output.yml</code>. From the repository root, render HTML and refresh its download
+manifest:</p>
+<div class="sourceCode" id="cb581"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb581-1"><a href="r-setup-renv-and-docker.html#cb581-1" tabindex="-1"></a><span class="va">SCIENTOMETRICS_REBUILD_CHUNKS</span><span class="op">=</span>1 <span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'</span></span>
+<span id="cb581-2"><a href="r-setup-renv-and-docker.html#cb581-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/build-download-manifest.R</span></code></pre></div>
+<p><code>SCIENTOMETRICS_REBUILD_CHUNKS=1</code> re-executes analysis chunks while retaining
+exact-query provider caches. Missing provider caches still require API access.
+The configured output directory is <code>docs/</code>. Serve it locally, for example:</p>
+<div class="sourceCode" id="cb582"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb582-1"><a href="r-setup-renv-and-docker.html#cb582-1" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8000 <span class="at">--directory</span> docs</span></code></pre></div>
+<p>Then visit <code>http://localhost:8000</code>. PDF additionally needs XeLaTeX/TinyTeX;
+<code>output_format = "all"</code> requests HTML, PDF and EPUB. Before distribution, run
+<code>Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub</code> to validate
+the ebook’s internal links and bundle its citation and licence files, then run
+<code>Rscript --vanilla scripts/build-download-manifest.R</code>. Local outputs do not
+update the published site. The README lists the PDF font prerequisites.</p>
+<p>Quarto appears in optional examples elsewhere in the book, but <code>quarto render</code>
+is not the build command for this repository. A Quarto CLI is needed only when
+working through those separate examples.</p>
 
 </div>
 </div>
@@ -324,85 +379,81 @@
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></div>
+<div class="prev"><a href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></div>
 <div class="next"><a href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#r-setup-renv-and-docker"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
-<li><a class="nav-link" href="#r-installation"><span class="header-section-number">A.1</span> R installation</a></li>
+<li><a class="nav-link" href="#r-installation-and-current-first-use-path"><span class="header-section-number">A.1</span> R installation and current first-use path</a></li>
 <li><a class="nav-link" href="#package-management-with-renv"><span class="header-section-number">A.2</span> Package management with renv</a></li>
 <li><a class="nav-link" href="#core-packages"><span class="header-section-number">A.3</span> Core packages</a></li>
 <li><a class="nav-link" href="#docker-environment"><span class="header-section-number">A.4</span> Docker environment</a></li>
-<li><a class="nav-link" href="#quarto"><span class="header-section-number">A.5</span> Quarto</a></li>
+<li><a class="nav-link" href="#render-the-book"><span class="header-section-number">A.5</span> Render the book</a></li>
 </ul>
 
       <div class="book-extra">
@@ -420,7 +471,7 @@
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

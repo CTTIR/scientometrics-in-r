@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 4 Ethics and Responsible Metrics | Scientometrics in R</title>
+<title>Chapter 3 Ethics and Responsible Metrics | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="4.1 Learning objectives After completing this chapter, you will be able to: Summarize the ten principles of the Leiden Manifesto and explain their implications for research evaluation Describe the...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 4 Ethics and Responsible Metrics | Scientometrics in R">
+<meta name="description" content="3.1 Learning objectives After completing this chapter, you will be able to: Summarize the ten principles of the Leiden Manifesto and explain their implications for research evaluation Describe the...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 3 Ethics and Responsible Metrics | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/ethics-and-responsible-metrics.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="4.1 Learning objectives After completing this chapter, you will be able to: Summarize the ten principles of the Leiden Manifesto and explain their implications for research evaluation Describe the...">
+<meta property="og:description" content="3.1 Learning objectives After completing this chapter, you will be able to: Summarize the ten principles of the Leiden Manifesto and explain their implications for research evaluation Describe the...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 4 Ethics and Responsible Metrics | Scientometrics in R">
-<meta name="twitter:description" content="4.1 Learning objectives After completing this chapter, you will be able to: Summarize the ten principles of the Leiden Manifesto and explain their implications for research evaluation Describe the...">
+<meta name="twitter:title" content="Chapter 3 Ethics and Responsible Metrics | Scientometrics in R">
+<meta name="twitter:description" content="3.1 Learning objectives After completing this chapter, you will be able to: Summarize the ten principles of the Leiden Manifesto and explain their implications for research evaluation Describe the...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="active" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="active" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,13 +163,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ethics-and-responsible-metrics" class="section level1" number="4">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ethics-and-responsible-metrics" class="section level1" number="3">
 <h1>
-<span class="header-section-number">4</span> Ethics and Responsible Metrics<a class="anchor" aria-label="anchor" href="#ethics-and-responsible-metrics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3</span> Ethics and Responsible Metrics<a class="anchor" aria-label="anchor" href="#ethics-and-responsible-metrics"><i class="fas fa-link"></i></a>
 </h1>
-<div id="ethics-objectives" class="section level2" number="4.1">
+<div id="ethics-objectives" class="section level2" number="3.1">
 <h2>
-<span class="header-section-number">4.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#ethics-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#ethics-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -182,11 +181,11 @@
 <li>Apply a responsible-use framework when designing or reviewing bibliometric analyses</li>
 </ul>
 </div>
-<div id="ethics-setup" class="section level2" number="4.2">
+<div id="ethics-setup" class="section level2" number="3.2">
 <h2>
-<span class="header-section-number">4.2</span> Setup<a class="anchor" aria-label="anchor" href="#ethics-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.2</span> Setup<a class="anchor" aria-label="anchor" href="#ethics-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -198,14 +197,14 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="ethics-background" class="section level2" number="4.3">
+<div id="ethics-background" class="section level2" number="3.3">
 <h2>
-<span class="header-section-number">4.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#ethics-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#ethics-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Metrics shape behaviour. When a number is used to judge researchers, departments, or journals, people adjust their actions to improve that number — regardless of whether the number actually captures what it was meant to measure. This insight, often called <strong>Goodhart’s Law</strong>, is the intellectual foundation for the responsible metrics movement: “When a measure becomes a target, it ceases to be a good measure” <span class="citation">(<a href="references.html#ref-goodhart1984">Goodhart 1984</a>)</span>.</p>
-<div id="the-leiden-manifesto" class="section level3" number="4.3.1">
+<div id="the-leiden-manifesto" class="section level3" number="3.3.1">
 <h3>
-<span class="header-section-number">4.3.1</span> The Leiden Manifesto<a class="anchor" aria-label="anchor" href="#the-leiden-manifesto"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.1</span> The Leiden Manifesto<a class="anchor" aria-label="anchor" href="#the-leiden-manifesto"><i class="fas fa-link"></i></a>
 </h3>
 <p>In 2015, <span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> published the <strong>Leiden Manifesto for Research Metrics</strong> — ten principles distilled from decades of experience in bibliometric practice. The principles are:</p>
 <ol style="list-style-type: decimal">
@@ -231,9 +230,9 @@
 <strong>Scrutinize indicators regularly and update them.</strong> The research landscape evolves; indicators must evolve with it.</li>
 </ol>
 </div>
-<div id="the-san-francisco-declaration-dora" class="section level3" number="4.3.2">
+<div id="the-san-francisco-declaration-dora" class="section level3" number="3.3.2">
 <h3>
-<span class="header-section-number">4.3.2</span> The San Francisco Declaration (DORA)<a class="anchor" aria-label="anchor" href="#the-san-francisco-declaration-dora"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.2</span> The San Francisco Declaration (DORA)<a class="anchor" aria-label="anchor" href="#the-san-francisco-declaration-dora"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <strong>San Francisco Declaration on Research Assessment</strong> <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> emerged from the 2012 Annual Meeting of the American Society for Cell Biology. Its central demand is straightforward: do not use journal-level metrics — especially the Journal Impact Factor — as a proxy for the quality of individual research articles. DORA’s key commitments include:</p>
 <ul>
@@ -246,15 +245,15 @@
 </ul>
 <p>As of 2026, DORA has been signed by over 3,000 organisations and 20,000 individuals. Many major funders — including the European Commission, Wellcome Trust, and the Dutch Research Council (NWO) — have formally adopted DORA principles.</p>
 </div>
-<div id="the-metric-tide" class="section level3" number="4.3.3">
+<div id="the-metric-tide" class="section level3" number="3.3.3">
 <h3>
-<span class="header-section-number">4.3.3</span> The Metric Tide<a class="anchor" aria-label="anchor" href="#the-metric-tide"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.3</span> The Metric Tide<a class="anchor" aria-label="anchor" href="#the-metric-tide"><i class="fas fa-link"></i></a>
 </h3>
 <p>The UK’s independent review of metrics in research assessment, <em>The Metric Tide</em> <span class="citation">(<a href="references.html#ref-wilsdon2015">Wilsdon et al. 2015</a>)</span>, reinforced these principles with a systematic evidence base. The report concluded that no metric can substitute for expert peer review, and recommended that the UK research system adopt a framework of “responsible metrics” built on five dimensions: robustness, humility, transparency, diversity, and reflexivity.</p>
 </div>
-<div id="goodharts-law-in-practice" class="section level3" number="4.3.4">
+<div id="goodharts-law-in-practice" class="section level3" number="3.3.4">
 <h3>
-<span class="header-section-number">4.3.4</span> Goodhart’s Law in practice<a class="anchor" aria-label="anchor" href="#goodharts-law-in-practice"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.4</span> Goodhart’s Law in practice<a class="anchor" aria-label="anchor" href="#goodharts-law-in-practice"><i class="fas fa-link"></i></a>
 </h3>
 <p>When metrics are attached to career consequences, the incentive to game them becomes powerful <span class="citation">(<a href="references.html#ref-goodhart1984">Goodhart 1984</a>)</span>. Common forms of metric manipulation include:</p>
 <ul>
@@ -269,9 +268,9 @@
 </ul>
 <p>These practices are not merely hypothetical. Clarivate has repeatedly suspended journals from the Journal Citation Reports for citation stacking, and several high-profile cases of self-citation manipulation have led to editorial sanctions.</p>
 </div>
-<div id="publish-or-perish" class="section level3" number="4.3.5">
+<div id="publish-or-perish" class="section level3" number="3.3.5">
 <h3>
-<span class="header-section-number">4.3.5</span> Publish or perish<a class="anchor" aria-label="anchor" href="#publish-or-perish"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.3.5</span> Publish or perish<a class="anchor" aria-label="anchor" href="#publish-or-perish"><i class="fas fa-link"></i></a>
 </h3>
 <p>The systemic root of metric gaming is the <strong>“publish or perish”</strong> culture that dominates academic career structures worldwide. When hiring, promotion, and tenure decisions are driven by publication volume and citation counts, researchers face relentless pressure to produce more papers, chase high-impact journals, and avoid risky long-term projects. The consequences include:</p>
 <ul>
@@ -287,18 +286,18 @@
 <p>These dynamics make the responsible use of metrics not merely a technical concern but an ethical imperative.</p>
 </div>
 </div>
-<div id="ethics-example" class="section level2" number="4.4">
+<div id="ethics-example" class="section level2" number="3.4">
 <h2>
-<span class="header-section-number">4.4</span> Worked example<a class="anchor" aria-label="anchor" href="#ethics-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4</span> Worked example<a class="anchor" aria-label="anchor" href="#ethics-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>We now demonstrate a practical analysis: computing self-citation rates for a sample of researchers in the field of scientometrics. This illustrates how OpenAlex data can be used to flag potential self-citation inflation — and the care required to interpret such analysis responsibly.</p>
-<div id="acquiring-author-data" class="section level3" number="4.4.1">
+<div id="acquiring-author-data" class="section level3" number="3.4.1">
 <h3>
-<span class="header-section-number">4.4.1</span> Acquiring author data<a class="anchor" aria-label="anchor" href="#acquiring-author-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.1</span> Acquiring author data<a class="anchor" aria-label="anchor" href="#acquiring-author-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch a sample of authors associated with scientometrics research who have at least 50 works, ensuring we have enough output to compute meaningful self-citation rates.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">authors_raw</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">authors_raw</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"authors"</span>,</span>
 <span>  topics.id <span class="op">=</span> <span class="st">"T10102"</span>,</span>
 <span>  works_count <span class="op">=</span> <span class="st">"&gt;50"</span>,</span>
@@ -312,17 +311,17 @@
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">authors</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Rows: 30
 #&gt; Columns: 4
-#&gt; $ id             &lt;chr&gt; "https://openalex.org/A5042065248", "https://openalex.o…
-#&gt; $ display_name   &lt;chr&gt; "Don A. Moore", "Manghi P.", "Kieron Flanagan", "Chiara…
-#&gt; $ works_count    &lt;int&gt; 307, 145, 81, 79, 56, 231, 66, 990, 114, 185, 105, 150,…
-#&gt; $ cited_by_count &lt;int&gt; 15702, 1, 3683, 9, 3576, 15044, 1820, 4392, 484, 2, 498…</code></pre>
+#&gt; $ id             &lt;chr&gt; "https://openalex.org/A5063251000", "https://openalex.o…
+#&gt; $ display_name   &lt;chr&gt; "Eva María Mora Valentín", "Alireza Isfandyari‐Moghadda…
+#&gt; $ works_count    &lt;int&gt; 74, 109, 143, 54, 56, 59, 56, 74, 71, 122, 73, 100, 83,…
+#&gt; $ cited_by_count &lt;int&gt; 1308, 638, 0, 696, 610, 0, 1811, 292, 89, 1532, 510, 60…</code></pre>
 </div>
-<div id="fetching-works-and-computing-self-citations" class="section level3" number="4.4.2">
+<div id="fetching-works-and-computing-self-citations" class="section level3" number="3.4.2">
 <h3>
-<span class="header-section-number">4.4.2</span> Fetching works and computing self-citations<a class="anchor" aria-label="anchor" href="#fetching-works-and-computing-self-citations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.2</span> Fetching works and computing self-citations<a class="anchor" aria-label="anchor" href="#fetching-works-and-computing-self-citations"><i class="fas fa-link"></i></a>
 </h3>
 <p>For each author, we retrieve a sample of their recent works and examine how many of the citations come from the author’s own papers. OpenAlex provides <code>cited_by_count</code> at the work level and allows us to query an author’s works directly.</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For a manageable demonstration, pick 10 authors</span></span>
 <span><span class="va">authors_sample</span> <span class="op">&lt;-</span> <span class="va">authors</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">authors</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -331,7 +330,7 @@
 <span><span class="va">estimate_self_citation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">author_id</span>, <span class="va">author_name</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Fetch up to 50 recent works by this author</span></span>
 <span>  <span class="va">works</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<span>    <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>      entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>      author.id <span class="op">=</span> <span class="va">author_id</span>,</span>
 <span>      from_publication_date <span class="op">=</span> <span class="st">"2018-01-01"</span>,</span>
@@ -384,11 +383,11 @@
 <span>  <span class="va">estimate_self_citation</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="summarizing-results" class="section level3" number="4.4.3">
+<div id="summarizing-results" class="section level3" number="3.4.3">
 <h3>
-<span class="header-section-number">4.4.3</span> Summarizing results<a class="anchor" aria-label="anchor" href="#summarizing-results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.3</span> Summarizing results<a class="anchor" aria-label="anchor" href="#summarizing-results"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">self_cite_results</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">self_cite_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">self_cite_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -858,10 +857,10 @@
 <div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_title gt_font_normal" style>Self-citation rates among sampled scientometrics authors</td>
+<td colspan="5" class="gt_heading gt_title gt_font_normal" style>Self-citation rates among sampled scientometrics authors</td>
     </tr>
 <tr class="gt_heading">
-<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Based on references in up to 50 recent works per author</td>
+<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Based on references in up to 50 recent works per author</td>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="author_name">Author</th>
@@ -869,101 +868,88 @@
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total_references">Total references</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="self_references">Self-references</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="self_cite_rate">Self-citation rate</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total_citations">total_citations</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="self_citations">self_citations</th>
     </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="author_name" class="gt_row gt_left">Mark Oromaner</td>
-<td headers="n_works" class="gt_row gt_right">7</td>
-<td headers="total_references" class="gt_row gt_right">12</td>
-<td headers="self_references" class="gt_row gt_right">2</td>
-<td headers="self_cite_rate" class="gt_row gt_right">16.7%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
+<td headers="author_name" class="gt_row gt_left">Daniel García-Costa</td>
+<td headers="n_works" class="gt_row gt_right">49</td>
+<td headers="total_references" class="gt_row gt_right">823</td>
+<td headers="self_references" class="gt_row gt_right">29</td>
+<td headers="self_cite_rate" class="gt_row gt_right">3.5%</td>
 </tr>
 <tr>
-<td headers="author_name" class="gt_row gt_left">Lai Ma</td>
-<td headers="n_works" class="gt_row gt_right">50</td>
-<td headers="total_references" class="gt_row gt_right">789</td>
-<td headers="self_references" class="gt_row gt_right">17</td>
-<td headers="self_cite_rate" class="gt_row gt_right">2.2%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Cameron Neylon</td>
-<td headers="n_works" class="gt_row gt_right">50</td>
-<td headers="total_references" class="gt_row gt_right">309</td>
+<td headers="author_name" class="gt_row gt_left">N. S. Harinarayana</td>
+<td headers="n_works" class="gt_row gt_right">49</td>
+<td headers="total_references" class="gt_row gt_right">646</td>
 <td headers="self_references" class="gt_row gt_right">6</td>
-<td headers="self_cite_rate" class="gt_row gt_right">1.9%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.9%</td>
 </tr>
 <tr>
-<td headers="author_name" class="gt_row gt_left">Alan Ehrlich</td>
-<td headers="n_works" class="gt_row gt_right">18</td>
-<td headers="total_references" class="gt_row gt_right">255</td>
+<td headers="author_name" class="gt_row gt_left">Shmatko Natalia Anatolyevna</td>
+<td headers="n_works" class="gt_row gt_right">27</td>
+<td headers="total_references" class="gt_row gt_right">737</td>
+<td headers="self_references" class="gt_row gt_right">6</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.8%</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Ying Chen</td>
+<td headers="n_works" class="gt_row gt_right">31</td>
+<td headers="total_references" class="gt_row gt_right">1116</td>
+<td headers="self_references" class="gt_row gt_right">9</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.8%</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Vanash Patel</td>
+<td headers="n_works" class="gt_row gt_right">15</td>
+<td headers="total_references" class="gt_row gt_right">498</td>
 <td headers="self_references" class="gt_row gt_right">4</td>
-<td headers="self_cite_rate" class="gt_row gt_right">1.6%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.8%</td>
 </tr>
 <tr>
-<td headers="author_name" class="gt_row gt_left">Patrick Gaulé</td>
-<td headers="n_works" class="gt_row gt_right">47</td>
-<td headers="total_references" class="gt_row gt_right">1165</td>
-<td headers="self_references" class="gt_row gt_right">16</td>
-<td headers="self_cite_rate" class="gt_row gt_right">1.4%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
+<td headers="author_name" class="gt_row gt_left">Catherine Liu</td>
+<td headers="n_works" class="gt_row gt_right">34</td>
+<td headers="total_references" class="gt_row gt_right">941</td>
+<td headers="self_references" class="gt_row gt_right">1</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.1%</td>
 </tr>
 <tr>
-<td headers="author_name" class="gt_row gt_left">Kiera Tauro</td>
-<td headers="n_works" class="gt_row gt_right">43</td>
-<td headers="total_references" class="gt_row gt_right">73</td>
-<td headers="self_references" class="gt_row gt_right">0</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.0%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
+<td headers="author_name" class="gt_row gt_left">Zhuo Yang</td>
+<td headers="n_works" class="gt_row gt_right">33</td>
+<td headers="total_references" class="gt_row gt_right">1258</td>
+<td headers="self_references" class="gt_row gt_right">1</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.1%</td>
 </tr>
 <tr>
-<td headers="author_name" class="gt_row gt_left">Robin Lockerby</td>
+<td headers="author_name" class="gt_row gt_left">Răzvan V. Florian</td>
 <td headers="n_works" class="gt_row gt_right">5</td>
-<td headers="total_references" class="gt_row gt_right">5</td>
+<td headers="total_references" class="gt_row gt_right">128</td>
 <td headers="self_references" class="gt_row gt_right">0</td>
 <td headers="self_cite_rate" class="gt_row gt_right">0.0%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
 </tr>
 <tr>
-<td headers="author_name" class="gt_row gt_left">Chiara Di Giambattista</td>
-<td headers="n_works" class="gt_row gt_right">50</td>
-<td headers="total_references" class="gt_row gt_right">55</td>
+<td headers="author_name" class="gt_row gt_left">N. Radhakrishnan</td>
+<td headers="n_works" class="gt_row gt_right">24</td>
+<td headers="total_references" class="gt_row gt_right">212</td>
 <td headers="self_references" class="gt_row gt_right">0</td>
 <td headers="self_cite_rate" class="gt_row gt_right">0.0%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
 </tr>
 <tr>
-<td headers="author_name" class="gt_row gt_left">James L. Wood</td>
-<td headers="n_works" class="gt_row gt_right">5</td>
-<td headers="total_references" class="gt_row gt_right">25</td>
+<td headers="author_name" class="gt_row gt_left">Yong Huang</td>
+<td headers="n_works" class="gt_row gt_right">38</td>
+<td headers="total_references" class="gt_row gt_right">1252</td>
 <td headers="self_references" class="gt_row gt_right">0</td>
 <td headers="self_cite_rate" class="gt_row gt_right">0.0%</td>
-<td headers="total_citations" class="gt_row gt_right">NA</td>
-<td headers="self_citations" class="gt_row gt_right">NA</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="visualization" class="section level3" number="4.4.4">
+<div id="visualization" class="section level3" number="3.4.4">
 <h3>
-<span class="header-section-number">4.4.4</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.4</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">self_cite_clean</span> <span class="op">&lt;-</span> <span class="va">self_cite_results</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">self_cite_rate</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -988,15 +974,15 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:03-fig-ethics-self-citation"></span>
 <img src="scientometrics-in-r_files/figure-html/03-fig-ethics-self-citation-1.png" alt="Histogram showing the distribution of self-citation rates for sampled authors. A dashed vertical line indicates the median self-citation rate." width="90%"><p class="caption">
-Figure 4.1: Distribution of self-citation rates across sampled scientometrics authors. The dashed line marks the sample median.
+Figure 3.1: Distribution of self-citation rates across sampled scientometrics authors. The dashed line marks the sample median.
 </p>
 </div>
 </div>
-<div id="a-per-author-comparison" class="section level3" number="4.4.5">
+<div id="a-per-author-comparison" class="section level3" number="3.4.5">
 <h3>
-<span class="header-section-number">4.4.5</span> A per-author comparison<a class="anchor" aria-label="anchor" href="#a-per-author-comparison"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.4.5</span> A per-author comparison<a class="anchor" aria-label="anchor" href="#a-per-author-comparison"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">self_cite_clean</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">self_cite_clean</span> <span class="op">|&gt;</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>author_name <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">author_name</span>, <span class="va">self_cite_rate</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1009,14 +995,14 @@ Figure 4.1: Distribution of self-citation rates across sampled scientometrics au
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:03-fig-ethics-self-cite-bar"></span>
 <img src="scientometrics-in-r_files/figure-html/03-fig-ethics-self-cite-bar-1.png" alt="Horizontal bar chart showing each sampled author's self-citation rate, ordered from highest to lowest." width="90%"><p class="caption">
-Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
+Figure 3.2: Self-citation rates by author, sorted from highest to lowest.
 </p>
 </div>
 </div>
 </div>
-<div id="ethics-diagnostics" class="section level2" number="4.5">
+<div id="ethics-diagnostics" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">4.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#ethics-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#ethics-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>Self-citation rates vary enormously across disciplines, career stages, and research specialities. When interpreting these results, keep the following in mind:</p>
 <ul>
@@ -1032,14 +1018,14 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
 <strong>Never use self-citation rates alone to accuse individuals of misconduct.</strong> As the Leiden Manifesto insists, quantitative indicators must support — not replace — qualitative judgement <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="ethics-limitations" class="section level2" number="4.6">
+<div id="ethics-limitations" class="section level2" number="3.6">
 <h2>
-<span class="header-section-number">4.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#ethics-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#ethics-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-2" class="section level2 callout callout-warn" number="4.7">
+<div id="limitations-and-responsible-use-2" class="section level2 callout callout-warn" number="3.7">
 <h2>
-<span class="header-section-number">4.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-2"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1051,17 +1037,17 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
 <li>
 <strong>Snapshot bias.</strong> Our analysis uses a sample of works from a particular time window. Conclusions should not be generalised beyond that window without further analysis.</li>
 <li>
-<strong>The Leiden Manifesto applies here too.</strong> Every principle in <a href="ethics-and-responsible-metrics.html#ethics-background">4.3</a> applies to <em>our own</em> analysis. We must be transparent about methods, allow those evaluated to verify data, and avoid false precision <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
+<strong>The Leiden Manifesto applies here too.</strong> Every principle in <a href="ethics-and-responsible-metrics.html#ethics-background">3.3</a> applies to <em>our own</em> analysis. We must be transparent about methods, allow those evaluated to verify data, and avoid false precision <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="ethics-pitfalls" class="section level2" number="4.8">
+<div id="ethics-pitfalls" class="section level2" number="3.8">
 <h2>
-<span class="header-section-number">4.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#ethics-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#ethics-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-2" class="section level2 callout callout-stop" number="4.9">
+<div id="common-pitfalls-2" class="section level2 callout callout-stop" number="3.9">
 <h2>
-<span class="header-section-number">4.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-2"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1076,9 +1062,9 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
 <strong>Forgetting Goodhart’s Law.</strong> If you propose a new indicator for evaluation purposes, consider how rational actors will respond to being measured by it. Every metric creates incentives, and those incentives may not align with the goals of good research <span class="citation">(<a href="references.html#ref-goodhart1984">Goodhart 1984</a>)</span>.</li>
 </ul>
 </div>
-<div id="ethics-exercises" class="section level2" number="4.10">
+<div id="ethics-exercises" class="section level2" number="3.10">
 <h2>
-<span class="header-section-number">4.10</span> Exercises<a class="anchor" aria-label="anchor" href="#ethics-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.10</span> Exercises<a class="anchor" aria-label="anchor" href="#ethics-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Leiden Manifesto audit.</strong> Select a recent hiring or promotion policy document from a university (many are publicly available). Evaluate it against all ten Leiden Manifesto principles. Which principles does it satisfy? Which does it violate? Write a one-page assessment.</p></li>
@@ -1087,15 +1073,15 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
 <li><p><strong>Goodhart’s Law thought experiment.</strong> Propose a new indicator for measuring research quality that is not currently in wide use. Then, write a brief analysis of how researchers might game this indicator if it were adopted for promotion decisions. <em>(Hint: think about both the numerator and denominator of any ratio-based metric.)</em></p></li>
 </ol>
 </div>
-<div id="solutions-2" class="section level2 callout callout-ok" number="4.11">
+<div id="id_03-solutions" class="section level2 callout callout-ok" number="3.11">
 <h2>
-<span class="header-section-number">4.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_03-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="ethics-reading" class="section level2" number="4.12">
+<div id="ethics-reading" class="section level2" number="3.12">
 <h2>
-<span class="header-section-number">4.12</span> Further reading<a class="anchor" aria-label="anchor" href="#ethics-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.12</span> Further reading<a class="anchor" aria-label="anchor" href="#ethics-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1114,15 +1100,15 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
 <span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> — The foundational paper on citation indexing. Essential for understanding the origins of the system we now critique.</li>
 </ul>
 </div>
-<div id="ethics-sessioninfo" class="section level2" number="4.13">
+<div id="ethics-sessioninfo" class="section level2" number="3.13">
 <h2>
-<span class="header-section-number">4.13</span> Session info<a class="anchor" aria-label="anchor" href="#ethics-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.13</span> Session info<a class="anchor" aria-label="anchor" href="#ethics-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -1141,28 +1127,27 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] gt_1.3.0        tidytext_0.4.3  glue_1.8.1      openalexR_3.0.1
+#&gt;  [1] gt_1.4.0        tidytext_0.4.3  glue_1.8.1      openalexR_3.1.2
 #&gt;  [5] lubridate_1.9.5 forcats_1.0.1   stringr_1.6.0   dplyr_1.2.1    
 #&gt;  [9] purrr_1.2.2     readr_2.2.0     tidyr_1.3.2     tibble_3.3.1   
 #&gt; [13] ggplot2_4.0.3   tidyverse_2.0.0
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;  [1] gtable_0.3.6       xfun_0.57          bslib_0.11.0       lattice_0.22-6    
-#&gt;  [5] tzdb_0.5.0         vctrs_0.7.3        tools_4.4.1        generics_0.1.4    
-#&gt;  [9] curl_7.1.0         janeaustenr_1.0.0  tokenizers_0.3.0   pkgconfig_2.0.3   
-#&gt; [13] Matrix_1.7-0       RColorBrewer_1.1-3 S7_0.2.2           lifecycle_1.0.5   
-#&gt; [17] compiler_4.4.1     farver_2.1.2       codetools_0.2-20   SnowballC_0.7.1   
-#&gt; [21] htmltools_0.5.9    sass_0.4.10        yaml_2.3.12        pillar_1.11.1     
-#&gt; [25] jquerylib_0.1.4    cachem_1.1.0       viridis_0.6.5      stopwords_2.3     
-#&gt; [29] tidyselect_1.2.1   digest_0.6.39      stringi_1.8.7      bookdown_0.46     
-#&gt; [33] labeling_0.4.3     rprojroot_2.1.1    fastmap_1.2.0      grid_4.4.1        
-#&gt; [37] here_1.0.2         cli_3.6.6          magrittr_2.0.5     dichromat_2.0-0.1 
-#&gt; [41] utf8_1.2.6         withr_3.0.2        scales_1.4.0       timechange_0.4.0  
-#&gt; [45] rmarkdown_2.31     httr_1.4.8         otel_0.2.0         gridExtra_2.3     
-#&gt; [49] hms_1.1.4          memoise_2.0.1      evaluate_1.0.5     knitr_1.51        
-#&gt; [53] viridisLite_0.4.3  rlang_1.2.0        Rcpp_1.1.1-1.1     downlit_0.4.5     
-#&gt; [57] brand.yml_0.1.0    xml2_1.5.2         rstudioapi_0.18.0  jsonlite_2.0.0    
-#&gt; [61] R6_2.6.1           fs_2.1.0</code></pre>
+#&gt;  [1] gtable_0.3.6       xfun_0.62          bslib_0.12.0       lattice_0.22-9    
+#&gt;  [5] tzdb_0.5.0         vctrs_0.7.3        tools_4.6.1        generics_0.1.4    
+#&gt;  [9] curl_8.1.0         janeaustenr_1.0.0  pkgconfig_2.0.3    tokenizers_0.3.0  
+#&gt; [13] Matrix_1.7-5       RColorBrewer_1.1-3 S7_0.2.2           lifecycle_1.0.5   
+#&gt; [17] compiler_4.6.1     farver_2.1.2       SnowballC_0.7.1    htmltools_0.5.9   
+#&gt; [21] sass_0.4.10        yaml_2.3.12        pillar_1.11.1      jquerylib_0.1.4   
+#&gt; [25] cachem_1.1.0       viridis_0.6.5      stopwords_2.3      tidyselect_1.2.1  
+#&gt; [29] digest_0.6.39      stringi_1.8.9      bookdown_0.48      labeling_0.4.3    
+#&gt; [33] rprojroot_2.1.1    fastmap_1.2.0      grid_4.6.1         here_1.0.2        
+#&gt; [37] cli_3.6.6          magrittr_2.0.5     utf8_1.2.6         withr_3.0.3       
+#&gt; [41] scales_1.4.0       timechange_0.4.0   rmarkdown_2.32     httr_1.4.9        
+#&gt; [45] otel_0.2.0         gridExtra_2.3.1    hms_1.1.4          memoise_2.0.1     
+#&gt; [49] evaluate_1.0.5     knitr_1.52         viridisLite_0.4.3  rlang_1.3.0       
+#&gt; [53] Rcpp_1.1.2         downlit_0.4.5      xml2_1.6.0         rstudioapi_0.19.0 
+#&gt; [57] jsonlite_2.0.0     R6_2.6.1           fs_2.1.0</code></pre>
 
 </div>
 </div>
@@ -1191,109 +1176,105 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></div>
-<div class="next"><a href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></div>
+<div class="prev"><a href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></div>
+<div class="next"><a href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#ethics-and-responsible-metrics"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="nav-link" href="#ethics-objectives"><span class="header-section-number">4.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#ethics-setup"><span class="header-section-number">4.2</span> Setup</a></li>
+<li><a class="nav-link" href="#ethics-and-responsible-metrics"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="nav-link" href="#ethics-objectives"><span class="header-section-number">3.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#ethics-setup"><span class="header-section-number">3.2</span> Setup</a></li>
 <li>
-<a class="nav-link" href="#ethics-background"><span class="header-section-number">4.3</span> Conceptual background</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#the-leiden-manifesto"><span class="header-section-number">4.3.1</span> The Leiden Manifesto</a></li>
-<li><a class="nav-link" href="#the-san-francisco-declaration-dora"><span class="header-section-number">4.3.2</span> The San Francisco Declaration (DORA)</a></li>
-<li><a class="nav-link" href="#the-metric-tide"><span class="header-section-number">4.3.3</span> The Metric Tide</a></li>
-<li><a class="nav-link" href="#goodharts-law-in-practice"><span class="header-section-number">4.3.4</span> Goodhart’s Law in practice</a></li>
-<li><a class="nav-link" href="#publish-or-perish"><span class="header-section-number">4.3.5</span> Publish or perish</a></li>
+<a class="nav-link" href="#ethics-background"><span class="header-section-number">3.3</span> Conceptual background</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#the-leiden-manifesto"><span class="header-section-number">3.3.1</span> The Leiden Manifesto</a></li>
+<li><a class="nav-link" href="#the-san-francisco-declaration-dora"><span class="header-section-number">3.3.2</span> The San Francisco Declaration (DORA)</a></li>
+<li><a class="nav-link" href="#the-metric-tide"><span class="header-section-number">3.3.3</span> The Metric Tide</a></li>
+<li><a class="nav-link" href="#goodharts-law-in-practice"><span class="header-section-number">3.3.4</span> Goodhart’s Law in practice</a></li>
+<li><a class="nav-link" href="#publish-or-perish"><span class="header-section-number">3.3.5</span> Publish or perish</a></li>
 </ul>
 </li>
 <li>
-<a class="nav-link" href="#ethics-example"><span class="header-section-number">4.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#acquiring-author-data"><span class="header-section-number">4.4.1</span> Acquiring author data</a></li>
-<li><a class="nav-link" href="#fetching-works-and-computing-self-citations"><span class="header-section-number">4.4.2</span> Fetching works and computing self-citations</a></li>
-<li><a class="nav-link" href="#summarizing-results"><span class="header-section-number">4.4.3</span> Summarizing results</a></li>
-<li><a class="nav-link" href="#visualization"><span class="header-section-number">4.4.4</span> Visualization</a></li>
-<li><a class="nav-link" href="#a-per-author-comparison"><span class="header-section-number">4.4.5</span> A per-author comparison</a></li>
+<a class="nav-link" href="#ethics-example"><span class="header-section-number">3.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#acquiring-author-data"><span class="header-section-number">3.4.1</span> Acquiring author data</a></li>
+<li><a class="nav-link" href="#fetching-works-and-computing-self-citations"><span class="header-section-number">3.4.2</span> Fetching works and computing self-citations</a></li>
+<li><a class="nav-link" href="#summarizing-results"><span class="header-section-number">3.4.3</span> Summarizing results</a></li>
+<li><a class="nav-link" href="#visualization"><span class="header-section-number">3.4.4</span> Visualization</a></li>
+<li><a class="nav-link" href="#a-per-author-comparison"><span class="header-section-number">3.4.5</span> A per-author comparison</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#ethics-diagnostics"><span class="header-section-number">4.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#ethics-limitations"><span class="header-section-number">4.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-2"><span class="header-section-number">4.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#ethics-pitfalls"><span class="header-section-number">4.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-2"><span class="header-section-number">4.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#ethics-exercises"><span class="header-section-number">4.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-2"><span class="header-section-number">4.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#ethics-reading"><span class="header-section-number">4.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#ethics-sessioninfo"><span class="header-section-number">4.13</span> Session info</a></li>
+<li><a class="nav-link" href="#ethics-diagnostics"><span class="header-section-number">3.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#ethics-limitations"><span class="header-section-number">3.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-2"><span class="header-section-number">3.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#ethics-pitfalls"><span class="header-section-number">3.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-2"><span class="header-section-number">3.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#ethics-exercises"><span class="header-section-number">3.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_03-solutions"><span class="header-section-number">3.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#ethics-reading"><span class="header-section-number">3.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#ethics-sessioninfo"><span class="header-section-number">3.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1311,7 +1292,7 @@ Figure 4.2: Self-citation rates by author, sorted from highest to lowest.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

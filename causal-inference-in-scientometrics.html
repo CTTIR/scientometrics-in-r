@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 33 Causal Inference in Scientometrics | Scientometrics in R</title>
+<title>Chapter 32 Causal Inference in Scientometrics | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="33.1 Learning objectives After completing this chapter, you will be able to: Distinguish causal from correlational claims in bibliometric research Apply difference-in-differences to evaluate the...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 33 Causal Inference in Scientometrics | Scientometrics in R">
+<meta name="description" content="32.1 Learning objectives After completing this chapter, you will be able to: Distinguish causal from correlational claims in bibliometric research Explain the intervention and outcome data...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 32 Causal Inference in Scientometrics | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/causal-inference-in-scientometrics.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="33.1 Learning objectives After completing this chapter, you will be able to: Distinguish causal from correlational claims in bibliometric research Apply difference-in-differences to evaluate the...">
+<meta property="og:description" content="32.1 Learning objectives After completing this chapter, you will be able to: Distinguish causal from correlational claims in bibliometric research Explain the intervention and outcome data...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 33 Causal Inference in Scientometrics | Scientometrics in R">
-<meta name="twitter:description" content="33.1 Learning objectives After completing this chapter, you will be able to: Distinguish causal from correlational claims in bibliometric research Apply difference-in-differences to evaluate the...">
+<meta name="twitter:title" content="Chapter 32 Causal Inference in Scientometrics | Scientometrics in R">
+<meta name="twitter:description" content="32.1 Learning objectives After completing this chapter, you will be able to: Distinguish causal from correlational claims in bibliometric research Explain the intervention and outcome data...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="active" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="active" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,26 +163,26 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="causal-inference-in-scientometrics" class="section level1" number="33">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="causal-inference-in-scientometrics" class="section level1" number="32">
 <h1>
-<span class="header-section-number">33</span> Causal Inference in Scientometrics<a class="anchor" aria-label="anchor" href="#causal-inference-in-scientometrics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32</span> Causal Inference in Scientometrics<a class="anchor" aria-label="anchor" href="#causal-inference-in-scientometrics"><i class="fas fa-link"></i></a>
 </h1>
-<div id="causal-objectives" class="section level2" number="33.1">
+<div id="causal-objectives" class="section level2" number="32.1">
 <h2>
-<span class="header-section-number">33.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#causal-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#causal-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
 <li>Distinguish causal from correlational claims in bibliometric research</li>
-<li>Apply difference-in-differences to evaluate the effect of a policy change</li>
-<li>Use propensity score matching to create comparable treatment and control groups</li>
-<li>Interpret regression discontinuity designs for threshold-based interventions</li>
+<li>Explain the intervention and outcome data required for difference-in-differences</li>
+<li>Compute descriptive OA-by-publication-cohort comparisons without assigning a causal interpretation</li>
+<li>Distinguish a within-year comparison from validated matching or a regression-discontinuity design</li>
 <li>Recognise the assumptions underlying causal inference in observational bibliometric data</li>
 </ul>
 </div>
-<div id="causal-setup" class="section level2" number="33.2">
+<div id="causal-setup" class="section level2" number="32.2">
 <h2>
-<span class="header-section-number">33.2</span> Setup<a class="anchor" aria-label="anchor" href="#causal-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.2</span> Setup<a class="anchor" aria-label="anchor" href="#causal-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb466"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -197,9 +196,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="causal-background" class="section level2" number="33.3">
+<div id="causal-background" class="section level2" number="32.3">
 <h2>
-<span class="header-section-number">33.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#causal-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#causal-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Bibliometrics is rich in correlations: OA papers are more cited than closed-access papers; funded research receives more citations; papers in prestigious journals are cited more. But correlation does not imply causation. The OA citation advantage may reflect self-selection (better papers are more likely to be made OA), not the causal effect of open access. Separating cause from confound is essential for evidence-based science policy.</p>
 <p><strong>Difference-in-differences (DiD)</strong> exploits policy changes as natural experiments. If a funder mandates OA starting in year T, papers from that funder before and after T serve as the treatment group, while papers from a similar funder without the mandate serve as the control. The causal effect is estimated as the difference in trends between treatment and control groups. The key assumption is <em>parallel trends</em>: absent the intervention, both groups would have followed the same trajectory.</p>
@@ -207,16 +206,18 @@
 <p><strong>Matching methods</strong> create comparable groups from observational data. Propensity score matching pairs treated units (e.g., OA papers) with control units (closed-access papers) that have similar observable characteristics (field, journal, year, team size). This reduces confounding but cannot eliminate unmeasured confounders.</p>
 <p>All three methods require strong assumptions. In bibliometrics, violations are common: the parallel trends assumption may fail because of concurrent policy changes; the RDD threshold may be manipulable; matching cannot address unmeasured confounders like paper quality. <span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> emphasise that quantitative analysis, however sophisticated, cannot replace expert judgement in research evaluation.</p>
 </div>
-<div id="causal-example" class="section level2" number="33.4">
+<div id="causal-example" class="section level2" number="32.4">
 <h2>
-<span class="header-section-number">33.4</span> Worked example<a class="anchor" aria-label="anchor" href="#causal-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.4</span> Worked example<a class="anchor" aria-label="anchor" href="#causal-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="setting-up-a-did-analysis-oa-status-and-citations" class="section level3" number="33.4.1">
+<div id="a-descriptive-oa-by-publication-cohort-comparison" class="section level3" number="32.4.1">
 <h3>
-<span class="header-section-number">33.4.1</span> Setting up a DiD analysis: OA status and citations<a class="anchor" aria-label="anchor" href="#setting-up-a-did-analysis-oa-status-and-citations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.4.1</span> A descriptive OA-by-publication-cohort comparison<a class="anchor" aria-label="anchor" href="#a-descriptive-oa-by-publication-cohort-comparison"><i class="fas fa-link"></i></a>
 </h3>
+<p>This example samples papers from one journal and compares their current cumulative citation counts. The 2020 split is an arbitrary publication-cohort boundary, not a documented intervention. OA status is observed at retrieval, not recorded treatment assignment. Different publication years contain different papers with different citation exposure. Consequently, neither the interaction regression nor the cohort plot identifies a policy effect or tests a DiD parallel-trends assumption. DiD requires a defensible intervention, comparison design and outcome histories; see <a href="https://doi.org/10.1016/j.jeconom.2020.12.001">Callaway and Sant’Anna (2021)</a>.</p>
+<p>The sample and citation snapshot describe the fetched data only; they are not journal totals or a frozen historical citation panel.</p>
 <div class="sourceCode" id="cb467"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2016-01-01"</span>,</span>
@@ -225,54 +226,65 @@
 <span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">500</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">did_data</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
+<span><span class="va">cohort_data</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span></span>
 <span>    <span class="va">id</span>, year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span>,</span>
 <span>    <span class="va">cited_by_count</span>,</span>
-<span>    is_oa <span class="op">=</span> <span class="va">oa_status</span> <span class="op">!=</span> <span class="st">"closed"</span>,</span>
-<span>    post_2020 <span class="op">=</span> <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2020</span>,</span>
+<span>    is_oa <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">oa_status</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"gold"</span>, <span class="st">"green"</span>, <span class="st">"hybrid"</span>, <span class="st">"bronze"</span>, <span class="st">"diamond"</span><span class="op">)</span> <span class="op">~</span> <span class="cn">TRUE</span>,</span>
+<span>      <span class="va">oa_status</span> <span class="op">==</span> <span class="st">"closed"</span> <span class="op">~</span> <span class="cn">FALSE</span>,</span>
+<span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="cn">NA</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    recent_cohort <span class="op">=</span> <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2020</span>,</span>
 <span>    <span class="va">referenced_works_count</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Papers: {nrow(did_data)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Papers: 500</code></pre>
+<span><span class="va">excluded_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/stats/complete.cases.html">complete.cases</a></span><span class="op">(</span><span class="va">cohort_data</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">cohort_data</span> <span class="op">&lt;-</span> <span class="va">cohort_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">anyDuplicated</a></span><span class="op">(</span><span class="va">cohort_data</span><span class="op">$</span><span class="va">id</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">cohort_data</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Excluded incomplete records: {excluded_records}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Excluded incomplete records: 0</code></pre>
 <div class="sourceCode" id="cb469"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"OA: {sum(did_data$is_oa)}, Closed: {sum(!did_data$is_oa)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sampled complete records: {nrow(cohort_data)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Sampled complete records: 500</code></pre>
+<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"OA: {sum(cohort_data$is_oa)}, Closed: {sum(!cohort_data$is_oa)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; OA: 207, Closed: 293</code></pre>
 </div>
-<div id="descriptive-comparison" class="section level3" number="33.4.2">
+<div id="descriptive-comparison" class="section level3" number="32.4.2">
 <h3>
-<span class="header-section-number">33.4.2</span> Descriptive comparison<a class="anchor" aria-label="anchor" href="#descriptive-comparison"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.4.2</span> Descriptive comparison<a class="anchor" aria-label="anchor" href="#descriptive-comparison"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb471"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">did_summary</span> <span class="op">&lt;-</span> <span class="va">did_data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">is_oa</span>, <span class="va">post_2020</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">cohort_summary</span> <span class="op">&lt;-</span> <span class="va">cohort_data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">is_oa</span>, <span class="va">recent_cohort</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_cites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cited_by_count</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">post_2020</span>, <span class="st">"2020-2023"</span>, <span class="st">"2016-2019"</span><span class="op">)</span>,</span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>period <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">recent_cohort</span>, <span class="st">"2020-2023"</span>, <span class="st">"2016-2019"</span><span class="op">)</span>,</span>
 <span>         group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">is_oa</span>, <span class="st">"Open access"</span>, <span class="st">"Closed"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">did_summary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">period</span>, y <span class="op">=</span> <span class="va">mean_cites</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">cohort_summary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">period</span>, y <span class="op">=</span> <span class="va">mean_cites</span>, fill <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Period"</span>, y <span class="op">=</span> <span class="st">"Mean citations"</span>, fill <span class="op">=</span> <span class="st">"Access"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Publication cohort"</span>, y <span class="op">=</span> <span class="st">"Mean cumulative citations at retrieval"</span>, fill <span class="op">=</span> <span class="st">"Access"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:32-fig-causal-descriptive"></span>
-<img src="scientometrics-in-r_files/figure-html/32-fig-causal-descriptive-1.png" alt="Grouped bar chart showing mean citation counts for OA and closed-access papers, split into pre-2020 and 2020+ periods." width="90%"><p class="caption">
-Figure 33.1: Mean citations by OA status and time period.
+<img src="scientometrics-in-r_files/figure-html/32-fig-causal-descriptive-1.png" alt="Grouped bar chart of current cumulative citations for OA and closed-access papers published in 2016–2019 or 2020–2023." width="90%"><p class="caption">
+Figure 32.1: Current cumulative citations in sampled papers, grouped by OA status and publication cohort; not a policy-effect estimate.
 </p>
 </div>
 </div>
-<div id="did-regression" class="section level3" number="33.4.3">
+<div id="descriptive-interaction-regression" class="section level3" number="32.4.3">
 <h3>
-<span class="header-section-number">33.4.3</span> DiD regression<a class="anchor" aria-label="anchor" href="#did-regression"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.4.3</span> Descriptive interaction regression<a class="anchor" aria-label="anchor" href="#descriptive-interaction-regression"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb472"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">did_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cited_by_count</span> <span class="op">~</span> <span class="va">is_oa</span> <span class="op">*</span> <span class="va">post_2020</span> <span class="op">+</span> <span class="va">referenced_works_count</span>,</span>
-<span>                data <span class="op">=</span> <span class="va">did_data</span><span class="op">)</span></span>
+<p>The interaction describes how the conditional OA/closed citation difference varies between the two sampled publication cohorts. Adding reference count is statistical adjustment, not an identification strategy. The fitted coefficients and conventional linear-model uncertainty summaries must not be reported as causal effects.</p>
+<div class="sourceCode" id="cb474"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">interaction_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cited_by_count</span> <span class="op">~</span> <span class="va">is_oa</span> <span class="op">*</span> <span class="va">recent_cohort</span> <span class="op">+</span> <span class="va">referenced_works_count</span>,</span>
+<span>                data <span class="op">=</span> <span class="va">cohort_data</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">tidy_did</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">did_model</span><span class="op">)</span></span>
-<span><span class="va">tidy_did</span> <span class="op">|&gt;</span></span>
+<span><span class="va">tidy_interaction</span> <span class="op">&lt;-</span> <span class="fu">broom</span><span class="fu">::</span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html">tidy</a></span><span class="op">(</span><span class="va">interaction_model</span><span class="op">)</span></span>
+<span><span class="va">tidy_interaction</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html">where</a></span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, \<span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">x</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div id="wuolgkrdww" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -735,55 +747,56 @@ Figure 33.1: Mean citations by OA status and time period.
 <tbody class="gt_table_body">
 <tr>
 <td headers="term" class="gt_row gt_left">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_right">20.163</td>
-<td headers="std.error" class="gt_row gt_right">3.204</td>
-<td headers="statistic" class="gt_row gt_right">6.29</td>
-<td headers="p.value" class="gt_row gt_right">0.000</td>
+<td headers="estimate" class="gt_row gt_right">23.705</td>
+<td headers="std.error" class="gt_row gt_right">13.632</td>
+<td headers="statistic" class="gt_row gt_right">1.739</td>
+<td headers="p.value" class="gt_row gt_right">0.083</td>
 </tr>
 <tr>
 <td headers="term" class="gt_row gt_left">is_oaTRUE</td>
-<td headers="estimate" class="gt_row gt_right">18.375</td>
-<td headers="std.error" class="gt_row gt_right">3.977</td>
-<td headers="statistic" class="gt_row gt_right">4.62</td>
-<td headers="p.value" class="gt_row gt_right">0.000</td>
-</tr>
-<tr>
-<td headers="term" class="gt_row gt_left">post_2020TRUE</td>
-<td headers="estimate" class="gt_row gt_right">-13.082</td>
-<td headers="std.error" class="gt_row gt_right">3.598</td>
-<td headers="statistic" class="gt_row gt_right">-3.64</td>
-<td headers="p.value" class="gt_row gt_right">0.000</td>
-</tr>
-<tr>
-<td headers="term" class="gt_row gt_left">referenced_works_count</td>
-<td headers="estimate" class="gt_row gt_right">0.149</td>
-<td headers="std.error" class="gt_row gt_right">0.047</td>
-<td headers="statistic" class="gt_row gt_right">3.15</td>
+<td headers="estimate" class="gt_row gt_right">57.393</td>
+<td headers="std.error" class="gt_row gt_right">18.609</td>
+<td headers="statistic" class="gt_row gt_right">3.084</td>
 <td headers="p.value" class="gt_row gt_right">0.002</td>
 </tr>
 <tr>
-<td headers="term" class="gt_row gt_left">is_oaTRUE:post_2020TRUE</td>
-<td headers="estimate" class="gt_row gt_right">-11.609</td>
-<td headers="std.error" class="gt_row gt_right">5.571</td>
-<td headers="statistic" class="gt_row gt_right">-2.08</td>
-<td headers="p.value" class="gt_row gt_right">0.038</td>
+<td headers="term" class="gt_row gt_left">recent_cohortTRUE</td>
+<td headers="estimate" class="gt_row gt_right">-16.089</td>
+<td headers="std.error" class="gt_row gt_right">16.459</td>
+<td headers="statistic" class="gt_row gt_right">-0.978</td>
+<td headers="p.value" class="gt_row gt_right">0.329</td>
+</tr>
+<tr>
+<td headers="term" class="gt_row gt_left">referenced_works_count</td>
+<td headers="estimate" class="gt_row gt_right">0.152</td>
+<td headers="std.error" class="gt_row gt_right">0.199</td>
+<td headers="statistic" class="gt_row gt_right">0.766</td>
+<td headers="p.value" class="gt_row gt_right">0.444</td>
+</tr>
+<tr>
+<td headers="term" class="gt_row gt_left">is_oaTRUE:recent_cohortTRUE</td>
+<td headers="estimate" class="gt_row gt_right">-47.790</td>
+<td headers="std.error" class="gt_row gt_right">25.499</td>
+<td headers="statistic" class="gt_row gt_right">-1.874</td>
+<td headers="p.value" class="gt_row gt_right">0.061</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="simple-matching-comparison" class="section level3" number="33.4.4">
+<div id="within-year-sampling-comparison" class="section level3" number="32.4.4">
 <h3>
-<span class="header-section-number">33.4.4</span> Simple matching comparison<a class="anchor" aria-label="anchor" href="#simple-matching-comparison"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.4.4</span> Within-year sampling comparison<a class="anchor" aria-label="anchor" href="#within-year-sampling-comparison"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb473"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">oa_papers</span> <span class="op">&lt;-</span> <span class="va">did_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">is_oa</span><span class="op">)</span></span>
-<span><span class="va">closed_papers</span> <span class="op">&lt;-</span> <span class="va">did_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_oa</span><span class="op">)</span></span>
+<p>For each sampled OA paper, select one closed-access paper from the same publication year. Controls can be reused, and OA papers in years with no closed-access candidate are omitted. This is sampling with replacement within year, not propensity-score matching; it does not establish covariate balance or remove confounding.</p>
+<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">oa_papers</span> <span class="op">&lt;-</span> <span class="va">cohort_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">is_oa</span><span class="op">)</span></span>
+<span><span class="va">closed_papers</span> <span class="op">&lt;-</span> <span class="va">cohort_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="va">is_oa</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">matched</span> <span class="op">&lt;-</span> <span class="va">oa_papers</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>match_year <span class="op">=</span> <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span></span>
-<span>    <span class="va">closed_papers</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span>, cited_by_count_closed <span class="op">=</span> <span class="va">cited_by_count</span><span class="op">)</span>,</span>
+<span>    <span class="va">closed_papers</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">year</span>, control_id <span class="op">=</span> <span class="va">id</span>, cited_by_count_closed <span class="op">=</span> <span class="va">cited_by_count</span><span class="op">)</span>,</span>
 <span>    by <span class="op">=</span> <span class="st">"year"</span>,</span>
 <span>    relationship <span class="op">=</span> <span class="st">"many-to-many"</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -791,21 +804,25 @@ Figure 33.1: Mean citations by OA status and time period.
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_sample</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Matched pairs: {nrow(matched)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Matched pairs: 207</code></pre>
-<div class="sourceCode" id="cb475"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean cites (OA): {round(mean(matched$cited_by_count), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Mean cites (OA): 31.4</code></pre>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Within-year pairs: {nrow(matched)} / {nrow(oa_papers)} OA papers\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Within-year pairs: 207 / 207 OA papers</code></pre>
 <div class="sourceCode" id="cb477"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean cites (closed match): {round(mean(matched$cited_by_count_closed), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Mean cites (closed match): 24.5</code></pre>
-</div>
-<div id="visualising-the-parallel-trends-assumption" class="section level3" number="33.4.5">
-<h3>
-<span class="header-section-number">33.4.5</span> Visualising the parallel trends assumption<a class="anchor" aria-label="anchor" href="#visualising-the-parallel-trends-assumption"><i class="fas fa-link"></i></a>
-</h3>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Distinct closed-access controls: {n_distinct(matched$control_id)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Distinct closed-access controls: 138</code></pre>
 <div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">trends</span> <span class="op">&lt;-</span> <span class="va">did_data</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean cites (OA): {round(mean(matched$cited_by_count), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Mean cites (OA): 48.9</code></pre>
+<div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean cites (closed match): {round(mean(matched$cited_by_count_closed), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Mean cites (closed match): 22.1</code></pre>
+</div>
+<div id="publication-cohort-profile" class="section level3" number="32.4.5">
+<h3>
+<span class="header-section-number">32.4.5</span> Publication-cohort profile<a class="anchor" aria-label="anchor" href="#publication-cohort-profile"><i class="fas fa-link"></i></a>
+</h3>
+<p>The horizontal axis is publication year. Each point summarises different papers’ cumulative citations at one retrieval time. These are not citations received annually by fixed treated and control groups.</p>
+<div class="sourceCode" id="cb483"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">trends</span> <span class="op">&lt;-</span> <span class="va">cohort_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">is_oa</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_cites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cited_by_count</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>group <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span><span class="op">(</span><span class="va">is_oa</span>, <span class="st">"OA"</span>, <span class="st">"Closed"</span><span class="op">)</span><span class="op">)</span></span>
@@ -815,92 +832,92 @@ Figure 33.1: Mean citations by OA status and time period.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">2019.5</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, y <span class="op">=</span> <span class="st">"Mean citations"</span>, colour <span class="op">=</span> <span class="st">"Access"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Publication year"</span>, y <span class="op">=</span> <span class="st">"Mean cumulative citations at retrieval"</span>, colour <span class="op">=</span> <span class="st">"Access"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:32-fig-causal-trends"></span>
-<img src="scientometrics-in-r_files/figure-html/32-fig-causal-trends-1.png" alt="Line chart showing mean annual citation counts for OA and closed-access papers. If the pre-intervention trends are parallel, DiD assumptions are supported." width="90%"><p class="caption">
-Figure 33.2: Citation trends by OA status over time (checking parallel trends).
+<img src="scientometrics-in-r_files/figure-html/32-fig-causal-trends-1.png" alt="Line chart comparing cumulative citation averages across publication cohorts for OA and closed-access papers; older cohorts have had longer to accrue citations." width="90%"><p class="caption">
+Figure 32.2: Current cumulative citations by OA status and publication year in the sample. This cohort profile does not test parallel trends.
 </p>
 </div>
 </div>
 </div>
-<div id="causal-diagnostics" class="section level2" number="33.5">
+<div id="causal-diagnostics" class="section level2" number="32.5">
 <h2>
-<span class="header-section-number">33.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#causal-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#causal-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<strong>Parallel trends</strong>: Inspect pre-treatment trends visually. If OA and closed papers had diverging trends before 2020, the DiD estimate is biased.</li>
+<strong>Selection and exposure</strong>: Report the sampling query, retrieval date, exclusions and group sizes. Older publication cohorts have longer citation exposure; snapshot OA status may differ from status at publication.</li>
 <li>
-<strong>Covariate balance</strong>: After matching, check that matched pairs have similar observable characteristics (year, reference count, journal).</li>
+<strong>Interpret the actual model</strong>: The OA-by-cohort coefficient is a descriptive conditional association. The arbitrary 2020 boundary supplies no intervention and no causal estimand.</li>
 <li>
-<strong>Effect size interpretation</strong>: A statistically significant DiD coefficient does not mean the effect is practically important. Report effect sizes alongside p-values.</li>
+<strong>Assess the comparison</strong>: Check years without eligible controls, control reuse and covariate differences. One sampled same-year control does not make papers exchangeable.</li>
 <li>
-<strong>Robustness checks</strong>: Run the analysis with different control groups, time windows, and matching criteria. Consistent results increase confidence.</li>
+<strong>Causal designs need additional evidence</strong>: Define intervention timing and assignment, comparable outcomes over time, the target effect and identifying assumptions before choosing a DiD, RDD or matching analysis. A non-significant pre-trend test alone does not establish parallel counterfactual trends.</li>
 </ul>
 </div>
-<div id="causal-limitations" class="section level2" number="33.6">
+<div id="causal-limitations" class="section level2" number="32.6">
 <h2>
-<span class="header-section-number">33.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#causal-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#causal-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-31" class="section level2 callout callout-warn" number="33.7">
+<div id="limitations-and-responsible-use-31" class="section level2 callout callout-warn" number="32.7">
 <h2>
-<span class="header-section-number">33.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-31"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-31"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<strong>Observational data cannot prove causation.</strong> All causal inference methods applied to bibliometric data make assumptions that cannot be fully tested. Report assumptions explicitly.</li>
+<strong>This example is descriptive.</strong> It has no documented intervention or identified causal design. Observational causal designs can support causal interpretation under explicit, defensible assumptions; fitting the shown regression does not supply them.</li>
 <li>
 <strong>Unmeasured confounders.</strong> Paper quality, author reputation, and marketing effort are rarely observable in bibliometric data but strongly affect citations.</li>
 <li>
 <strong>Treatment definition.</strong> “OA” is not a single treatment — it encompasses gold, green, hybrid, and bronze, each with different mechanisms.</li>
 <li>
-<strong>Generalisability.</strong> Causal estimates from one journal, field, or time period may not generalise to others.</li>
+<strong>Generalisability.</strong> This sampled single-journal comparison does not establish an OA effect in this journal or elsewhere.</li>
 <li>
 <strong>Policy implications require judgement.</strong> Even a well-estimated causal effect is one input into policy decisions, not a sufficient basis for mandates <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>; <a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span>.</li>
 </ul>
 </div>
-<div id="causal-pitfalls" class="section level2" number="33.8">
+<div id="causal-pitfalls" class="section level2" number="32.8">
 <h2>
-<span class="header-section-number">33.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#causal-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#causal-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-31" class="section level2 callout callout-stop" number="33.9">
+<div id="common-pitfalls-31" class="section level2 callout callout-stop" number="32.9">
 <h2>
-<span class="header-section-number">33.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-31"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-31"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
 <strong>Claiming causation from regression coefficients.</strong> A positive OA coefficient in a regression does not prove OA <em>causes</em> more citations without addressing confounders.</li>
 <li>
-<strong>Ignoring parallel trends violations.</strong> If pre-treatment trends are not parallel, DiD estimates are biased. Do not ignore this in reporting.</li>
+<strong>Calling a cohort profile a pre-trend test.</strong> Current cumulative citations in different publication cohorts do not measure treated/control outcome paths around a policy change.</li>
 <li>
-<strong>Matching on too few covariates.</strong> Matching on year alone leaves many confounders unaddressed. Include as many relevant covariates as possible.</li>
+<strong>Treating matching as automatic identification.</strong> Choose covariates from the causal question and timing, evaluate overlap/balance, and avoid conditioning indiscriminately on post-treatment variables.</li>
 <li>
 <strong>Over-interpreting p-values.</strong> A p &lt; 0.05 does not mean the result is practically significant or that the causal assumptions hold.</li>
 </ul>
 </div>
-<div id="causal-exercises" class="section level2" number="33.10">
+<div id="causal-exercises" class="section level2" number="32.10">
 <h2>
-<span class="header-section-number">33.10</span> Exercises<a class="anchor" aria-label="anchor" href="#causal-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.10</span> Exercises<a class="anchor" aria-label="anchor" href="#causal-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><p><strong>Extended DiD.</strong> Add additional covariates (document type, number of authors) to the DiD regression. Does the OA interaction term change?</p></li>
-<li><p><strong>Placebo test.</strong> Run the DiD analysis using 2018 as the treatment year instead of 2020. If the interaction term is significant, the parallel trends assumption may be violated.</p></li>
-<li><p><strong>Matched comparison.</strong> Implement propensity score matching (using the <code>MatchIt</code> package) with year, reference count, and document type as covariates. Compare the matched OA effect to the unmatched effect.</p></li>
+<li><p><strong>Interaction sensitivity.</strong> Compare the OA-by-cohort coefficient with and without adjustment for reference count. Explain why a changed coefficient does not itself diagnose a causal effect or quantify omitted-variable bias.</p></li>
+<li><p><strong>Boundary sensitivity.</strong> Repeat the descriptive interaction using a 2018 publication-cohort boundary. Explain why this is not a placebo intervention test and why a non-significant coefficient cannot establish parallel trends.</p></li>
+<li><p><strong>Comparison audit.</strong> Count reused closed-access controls and unmatched OA records in the within-year comparison. Specify the intervention, assignment information and longitudinal outcomes needed for an actual policy-effect study.</p></li>
 </ol>
 </div>
-<div id="solutions-31" class="section level2 callout callout-ok" number="33.11">
+<div id="id_32-solutions" class="section level2 callout callout-ok" number="32.11">
 <h2>
-<span class="header-section-number">33.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-31"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_32-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="causal-reading" class="section level2" number="33.12">
+<div id="causal-reading" class="section level2" number="32.12">
 <h2>
-<span class="header-section-number">33.12</span> Further reading<a class="anchor" aria-label="anchor" href="#causal-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.12</span> Further reading<a class="anchor" aria-label="anchor" href="#causal-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -909,17 +926,19 @@ Figure 33.2: Citation trends by OA status over time (checking parallel trends).
 <span class="citation">American Society for Cell Biology (<a href="references.html#ref-dora2012">2012</a>)</span> — DORA: responsible assessment requires understanding causation.</li>
 <li>
 <span class="citation">Waltman (<a href="references.html#ref-waltman2016">2016</a>)</span> — Review of citation indicators and their interpretation challenges.</li>
+<li>
+<a href="https://doi.org/10.1016/j.jeconom.2020.12.001">Callaway and Sant’Anna (2021)</a> — Identification, estimation and inference for DiD with multiple periods.</li>
 </ul>
 </div>
-<div id="causal-sessioninfo" class="section level2" number="33.13">
+<div id="causal-sessioninfo" class="section level2" number="32.13">
 <h2>
-<span class="header-section-number">33.13</span> Session info<a class="anchor" aria-label="anchor" href="#causal-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">32.13</span> Session info<a class="anchor" aria-label="anchor" href="#causal-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb480"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb484"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -938,17 +957,17 @@ Figure 33.2: Citation trends by OA status over time (checking parallel trends).
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] uwot_0.2.4                Matrix_1.7-0             
+#&gt;  [1] uwot_0.2.5                Matrix_1.7-5             
 #&gt;  [3] word2vec_0.4.1            stm_1.3.8                
 #&gt;  [5] topicmodels_0.2-17        quanteda.textstats_0.97.2
 #&gt;  [7] visNetwork_2.1.4          ggraph_2.2.2             
-#&gt;  [9] tidygraph_1.3.1           igraph_2.3.2             
-#&gt; [11] quanteda_4.4              pdftools_3.9.0           
-#&gt; [13] arrow_24.0.0              bibliometrix_5.4.0       
+#&gt;  [9] tidygraph_1.3.1           igraph_2.3.4             
+#&gt; [11] quanteda_4.5.1            pdftools_3.9.1           
+#&gt; [13] arrow_26.0.0              bibliometrix_5.5.0       
 #&gt; [15] RefManageR_1.4.0          bib2df_1.1.2.0           
-#&gt; [17] rcrossref_1.2.1           gt_1.3.0                 
+#&gt; [17] rcrossref_1.2.1           gt_1.4.0                 
 #&gt; [19] tidytext_0.4.3            glue_1.8.1               
-#&gt; [21] openalexR_3.0.1           lubridate_1.9.5          
+#&gt; [21] openalexR_3.1.2           lubridate_1.9.5          
 #&gt; [23] forcats_1.0.1             stringr_1.6.0            
 #&gt; [25] dplyr_1.2.1               purrr_1.2.2              
 #&gt; [27] readr_2.2.0               tidyr_1.3.2              
@@ -956,49 +975,47 @@ Figure 33.2: Citation trends by OA status over time (checking parallel trends).
 #&gt; [31] tidyverse_2.0.0          
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         modeltools_0.2-24     
-#&gt;   [7] farver_2.1.2           rmarkdown_2.31         fs_2.1.0              
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
+#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         modeltools_0.2-25     
+#&gt;   [7] farver_2.1.2           rmarkdown_2.32         fs_2.1.0              
 #&gt;  [10] vctrs_0.7.3            memoise_2.0.1          askpass_1.2.1         
-#&gt;  [13] base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.0.0 
-#&gt;  [16] curl_7.1.0             broom_1.0.12           janeaustenr_1.0.0     
-#&gt;  [19] cellranger_1.1.0       sass_0.4.10            bslib_0.11.0          
+#&gt;  [13] base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1 
+#&gt;  [16] curl_8.1.0             broom_1.0.13           janeaustenr_1.0.0     
+#&gt;  [19] cellranger_1.1.0       sass_0.4.10            bslib_0.12.0          
 #&gt;  [22] htmlwidgets_1.6.4      tokenizers_0.3.0       plyr_1.8.9            
-#&gt;  [25] httr2_1.2.2            plotly_4.12.0          cachem_1.1.0          
+#&gt;  [25] httr2_1.3.0            plotly_4.12.1          cachem_1.1.0          
 #&gt;  [28] dimensionsR_0.0.3      mime_0.13              lifecycle_1.0.5       
 #&gt;  [31] pkgconfig_2.0.3        R6_2.6.1               fastmap_1.2.0         
-#&gt;  [34] shiny_1.13.0           digest_0.6.39          patchwork_1.3.2       
+#&gt;  [34] shiny_1.14.0           digest_0.6.39          patchwork_1.3.2       
 #&gt;  [37] shinycssloaders_1.1.0  rprojroot_2.1.1        RSpectra_0.16-2       
 #&gt;  [40] SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1      
-#&gt;  [43] timechange_0.4.0       mgcv_1.9-1             polyclip_1.10-7       
-#&gt;  [46] httr_1.4.8             compiler_4.4.1         here_1.0.2            
-#&gt;  [49] bit64_4.8.0            withr_3.0.2            S7_0.2.2              
-#&gt;  [52] backports_1.5.1        viridis_0.6.5          ggforce_0.5.0         
-#&gt;  [55] MASS_7.3-60.2          rappdirs_0.3.4         bibliometrixData_0.3.0
-#&gt;  [58] tools_4.4.1            otel_0.2.0             stopwords_2.3         
-#&gt;  [61] zip_2.3.3              httpuv_1.6.17          rentrez_1.2.4         
-#&gt;  [64] nlme_3.1-164           promises_1.5.0         grid_4.4.1            
-#&gt;  [67] stringdist_0.9.17      reshape2_1.4.5         generics_0.1.4        
-#&gt;  [70] gtable_0.3.6           tzdb_0.5.0             rscopus_0.9.0         
-#&gt;  [73] ca_0.71.1              data.table_1.18.4      hms_1.1.4             
-#&gt;  [76] xml2_1.5.2             utf8_1.2.6             ggrepel_0.9.8         
-#&gt;  [79] pillar_1.11.1          nsyllable_1.0.1        vroom_1.7.1           
-#&gt;  [82] later_1.4.8            splines_4.4.1          tweenr_2.0.3          
-#&gt;  [85] brand.yml_0.1.0        lattice_0.22-6         FNN_1.1.4.1           
-#&gt;  [88] bit_4.6.0              tidyselect_1.2.1       tm_0.7-18             
-#&gt;  [91] miniUI_0.1.2           downlit_0.4.5          knitr_1.51            
-#&gt;  [94] gridExtra_2.3          NLP_0.3-2              bookdown_0.46         
-#&gt;  [97] stats4_4.4.1           crul_1.6.0             xfun_0.57             
-#&gt; [100] graphlayouts_1.2.3     matrixStats_1.5.0      DT_0.34.0             
-#&gt; [103] humaniformat_0.6.0     stringi_1.8.7          lazyeval_0.2.3        
-#&gt; [106] qpdf_1.4.1             yaml_2.3.12            evaluate_1.0.5        
-#&gt; [109] codetools_0.2-20       httpcode_0.3.0         cli_3.6.6             
-#&gt; [112] xtable_1.8-8           jquerylib_0.1.4        dichromat_2.0-0.1     
-#&gt; [115] Rcpp_1.1.1-1.1         readxl_1.4.5           triebeard_0.4.1       
-#&gt; [118] XML_3.99-0.23          parallel_4.4.1         assertthat_0.2.1      
-#&gt; [121] pubmedR_1.0.2          slam_0.1-55            viridisLite_0.4.3     
-#&gt; [124] scales_1.4.0           crayon_1.5.3           openxlsx_4.2.8.1      
-#&gt; [127] rlang_1.2.0            fastmatch_1.1-8</code></pre>
+#&gt;  [43] timechange_0.4.0       mgcv_1.9-4             polyclip_1.10-7       
+#&gt;  [46] httr_1.4.9             compiler_4.6.1         here_1.0.2            
+#&gt;  [49] bit64_4.8.6            withr_3.0.3            backports_1.5.1       
+#&gt;  [52] S7_0.2.2               viridis_0.6.5          ggforce_0.5.0         
+#&gt;  [55] MASS_7.3-65            bibliometrixData_0.3.0 tools_4.6.1           
+#&gt;  [58] otel_0.2.0             stopwords_2.3          zip_3.0.2             
+#&gt;  [61] httpuv_1.6.17          rentrez_1.2.4          nlme_3.1-169          
+#&gt;  [64] promises_1.5.0         grid_4.6.1             stringdist_0.9.17     
+#&gt;  [67] reshape2_1.4.5         generics_0.1.4         gtable_0.3.6          
+#&gt;  [70] tzdb_0.5.0             rscopus_0.9.0          ca_0.72               
+#&gt;  [73] data.table_1.18.6.1    hms_1.1.4              xml2_1.6.0            
+#&gt;  [76] utf8_1.2.6             ggrepel_0.9.8          pillar_1.11.1         
+#&gt;  [79] nsyllable_1.0.1        vroom_1.7.1            later_1.4.8           
+#&gt;  [82] splines_4.6.1          tweenr_2.0.3           lattice_0.22-9        
+#&gt;  [85] FNN_1.1.4.1            bit_4.6.0              tidyselect_1.2.1      
+#&gt;  [88] tm_0.7-20              miniUI_0.1.2           downlit_0.4.5         
+#&gt;  [91] knitr_1.52             gridExtra_2.3.1        NLP_0.3-3             
+#&gt;  [94] bookdown_0.48          stats4_4.6.1           crul_1.6.0            
+#&gt;  [97] xfun_0.62              graphlayouts_1.2.5     matrixStats_1.5.0     
+#&gt; [100] DT_0.34.0              humaniformat_0.6.0     stringi_1.8.9         
+#&gt; [103] qpdf_1.4.1             yaml_2.3.12            evaluate_1.0.5        
+#&gt; [106] httpcode_0.3.0         cli_3.6.6              xtable_1.8-8          
+#&gt; [109] jquerylib_0.1.4        Rcpp_1.1.2             readxl_1.6.0          
+#&gt; [112] triebeard_0.4.1        XML_3.99-0.25          parallel_4.6.1        
+#&gt; [115] assertthat_0.2.1       pubmedR_1.0.2          slam_0.1-56           
+#&gt; [118] viridisLite_0.4.3      scales_1.4.0           crayon_1.5.3          
+#&gt; [121] openxlsx_4.2.9         rlang_1.3.0            fastmatch_1.1-8</code></pre>
 
 </div>
 </div>
@@ -1027,101 +1044,97 @@ Figure 33.2: Citation trends by OA status over time (checking parallel trends).
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></div>
-<div class="next"><a href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></div>
+<div class="prev"><a href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></div>
+<div class="next"><a href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#causal-inference-in-scientometrics"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="nav-link" href="#causal-objectives"><span class="header-section-number">33.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#causal-setup"><span class="header-section-number">33.2</span> Setup</a></li>
-<li><a class="nav-link" href="#causal-background"><span class="header-section-number">33.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#causal-inference-in-scientometrics"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="nav-link" href="#causal-objectives"><span class="header-section-number">32.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#causal-setup"><span class="header-section-number">32.2</span> Setup</a></li>
+<li><a class="nav-link" href="#causal-background"><span class="header-section-number">32.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#causal-example"><span class="header-section-number">33.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#setting-up-a-did-analysis-oa-status-and-citations"><span class="header-section-number">33.4.1</span> Setting up a DiD analysis: OA status and citations</a></li>
-<li><a class="nav-link" href="#descriptive-comparison"><span class="header-section-number">33.4.2</span> Descriptive comparison</a></li>
-<li><a class="nav-link" href="#did-regression"><span class="header-section-number">33.4.3</span> DiD regression</a></li>
-<li><a class="nav-link" href="#simple-matching-comparison"><span class="header-section-number">33.4.4</span> Simple matching comparison</a></li>
-<li><a class="nav-link" href="#visualising-the-parallel-trends-assumption"><span class="header-section-number">33.4.5</span> Visualising the parallel trends assumption</a></li>
+<a class="nav-link" href="#causal-example"><span class="header-section-number">32.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#a-descriptive-oa-by-publication-cohort-comparison"><span class="header-section-number">32.4.1</span> A descriptive OA-by-publication-cohort comparison</a></li>
+<li><a class="nav-link" href="#descriptive-comparison"><span class="header-section-number">32.4.2</span> Descriptive comparison</a></li>
+<li><a class="nav-link" href="#descriptive-interaction-regression"><span class="header-section-number">32.4.3</span> Descriptive interaction regression</a></li>
+<li><a class="nav-link" href="#within-year-sampling-comparison"><span class="header-section-number">32.4.4</span> Within-year sampling comparison</a></li>
+<li><a class="nav-link" href="#publication-cohort-profile"><span class="header-section-number">32.4.5</span> Publication-cohort profile</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#causal-diagnostics"><span class="header-section-number">33.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#causal-limitations"><span class="header-section-number">33.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-31"><span class="header-section-number">33.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#causal-pitfalls"><span class="header-section-number">33.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-31"><span class="header-section-number">33.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#causal-exercises"><span class="header-section-number">33.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-31"><span class="header-section-number">33.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#causal-reading"><span class="header-section-number">33.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#causal-sessioninfo"><span class="header-section-number">33.13</span> Session info</a></li>
+<li><a class="nav-link" href="#causal-diagnostics"><span class="header-section-number">32.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#causal-limitations"><span class="header-section-number">32.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-31"><span class="header-section-number">32.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#causal-pitfalls"><span class="header-section-number">32.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-31"><span class="header-section-number">32.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#causal-exercises"><span class="header-section-number">32.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_32-solutions"><span class="header-section-number">32.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#causal-reading"><span class="header-section-number">32.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#causal-sessioninfo"><span class="header-section-number">32.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1139,7 +1152,7 @@ Figure 33.2: Citation trends by OA status over time (checking parallel trends).
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

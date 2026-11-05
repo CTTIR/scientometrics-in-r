@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 23 Topic Modeling | Scientometrics in R</title>
+<title>Chapter 22 Topic Modeling | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="23.1 Learning objectives After completing this chapter, you will be able to: Explain the generative assumptions of LDA and STM Prepare a document-feature matrix suitable for topic modelling Fit...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 23 Topic Modeling | Scientometrics in R">
+<meta name="description" content="22.1 Learning objectives After completing this chapter, you will be able to: Explain the generative assumptions of LDA and STM Prepare a document-feature matrix suitable for topic modelling Fit...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 22 Topic Modeling | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/topic-modeling.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="23.1 Learning objectives After completing this chapter, you will be able to: Explain the generative assumptions of LDA and STM Prepare a document-feature matrix suitable for topic modelling Fit...">
+<meta property="og:description" content="22.1 Learning objectives After completing this chapter, you will be able to: Explain the generative assumptions of LDA and STM Prepare a document-feature matrix suitable for topic modelling Fit...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 23 Topic Modeling | Scientometrics in R">
-<meta name="twitter:description" content="23.1 Learning objectives After completing this chapter, you will be able to: Explain the generative assumptions of LDA and STM Prepare a document-feature matrix suitable for topic modelling Fit...">
+<meta name="twitter:title" content="Chapter 22 Topic Modeling | Scientometrics in R">
+<meta name="twitter:description" content="22.1 Learning objectives After completing this chapter, you will be able to: Explain the generative assumptions of LDA and STM Prepare a document-feature matrix suitable for topic modelling Fit...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="active" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="active" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,13 +163,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="topic-modeling" class="section level1" number="23">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="topic-modeling" class="section level1" number="22">
 <h1>
-<span class="header-section-number">23</span> Topic Modeling<a class="anchor" aria-label="anchor" href="#topic-modeling"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22</span> Topic Modeling<a class="anchor" aria-label="anchor" href="#topic-modeling"><i class="fas fa-link"></i></a>
 </h1>
-<div id="topicmodel-objectives" class="section level2" number="23.1">
+<div id="topicmodel-objectives" class="section level2" number="22.1">
 <h2>
-<span class="header-section-number">23.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#topicmodel-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#topicmodel-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -181,11 +180,11 @@
 <li>Interpret and label topics using top words and representative documents</li>
 </ul>
 </div>
-<div id="topicmodel-setup" class="section level2" number="23.2">
+<div id="topicmodel-setup" class="section level2" number="22.2">
 <h2>
-<span class="header-section-number">23.2</span> Setup<a class="anchor" aria-label="anchor" href="#topicmodel-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.2</span> Setup<a class="anchor" aria-label="anchor" href="#topicmodel-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb343"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda</a></span><span class="op">)</span></span>
@@ -201,9 +200,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="topicmodel-background" class="section level2" number="23.3">
+<div id="topicmodel-background" class="section level2" number="22.3">
 <h2>
-<span class="header-section-number">23.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#topicmodel-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#topicmodel-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>A <strong>topic model</strong> is an unsupervised statistical model that discovers latent themes (topics) in a collection of documents. Each topic is a probability distribution over words; each document is a mixture of topics. The model “reverse-engineers” the writing process: given only the observed word frequencies, it infers which topics exist and how they are distributed across documents.</p>
 <p><strong>Latent Dirichlet Allocation</strong> (LDA) <span class="citation">(<a href="references.html#ref-blei2003">Blei et al. 2003</a>)</span> is the foundational topic model. It assumes a generative process: for each document, draw a topic mixture from a Dirichlet prior; for each word position, draw a topic from that mixture, then draw a word from the topic’s word distribution. Inference (fitting the model) recovers the topic-word and document-topic distributions that best explain the observed data.</p>
@@ -211,16 +210,16 @@
 <p><strong>Choosing the number of topics (K)</strong> is the most consequential modelling decision. Too few topics produce overly broad themes; too many fragment coherent themes into noise. Quantitative approaches include held-out log-likelihood, semantic coherence, and exclusivity metrics. In practice, running models at multiple K values and inspecting the resulting topics is essential.</p>
 <p>Topic models have been widely used in scientometrics to map research fields, track thematic evolution, identify emerging areas, and compare the topical focus of journals, institutions, or countries.</p>
 </div>
-<div id="topicmodel-example" class="section level2" number="23.4">
+<div id="topicmodel-example" class="section level2" number="22.4">
 <h2>
-<span class="header-section-number">23.4</span> Worked example<a class="anchor" aria-label="anchor" href="#topicmodel-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4</span> Worked example<a class="anchor" aria-label="anchor" href="#topicmodel-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="preparing-the-corpus" class="section level3" number="23.4.1">
+<div id="preparing-the-corpus" class="section level3" number="22.4.1">
 <h3>
-<span class="header-section-number">23.4.1</span> Preparing the corpus<a class="anchor" aria-label="anchor" href="#preparing-the-corpus"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4.1</span> Preparing the corpus<a class="anchor" aria-label="anchor" href="#preparing-the-corpus"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb345"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb344"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2018-01-01"</span>,</span>
@@ -237,8 +236,8 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents for topic modelling: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents for topic modelling: 92</code></pre>
-<div class="sourceCode" id="cb347"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Documents for topic modelling: 93</code></pre>
+<div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/corpus.html">corpus</a></span><span class="op">(</span><span class="va">text_df</span>, docid_field <span class="op">=</span> <span class="st">"doc_id"</span>, text_field <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://quanteda.io/reference/docvars.html">docvars</a></span><span class="op">(</span><span class="va">corp</span>, <span class="st">"year"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">text_df</span><span class="op">$</span><span class="va">year</span></span>
 <span></span>
@@ -252,13 +251,13 @@
 <span>  <span class="fu"><a href="https://quanteda.io/reference/dfm_trim.html">dfm_trim</a></span><span class="op">(</span>min_termfreq <span class="op">=</span> <span class="fl">5</span>, min_docfreq <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"DFM: {nrow(dfmat)} docs x {ncol(dfmat)} features\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; DFM: 92 docs x 553 features</code></pre>
+<pre><code>#&gt; DFM: 93 docs x 504 features</code></pre>
 </div>
-<div id="fitting-lda" class="section level3" number="23.4.2">
+<div id="fitting-lda" class="section level3" number="22.4.2">
 <h3>
-<span class="header-section-number">23.4.2</span> Fitting LDA<a class="anchor" aria-label="anchor" href="#fitting-lda"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4.2</span> Fitting LDA<a class="anchor" aria-label="anchor" href="#fitting-lda"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb349"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb348"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dtm</span> <span class="op">&lt;-</span> <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/convert.html">convert</a></span><span class="op">(</span><span class="va">dfmat</span>, to <span class="op">=</span> <span class="st">"topicmodels"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">lda_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/topicmodels/man/lda.html">LDA</a></span><span class="op">(</span><span class="va">dtm</span>, k <span class="op">=</span> <span class="fl">8</span>, control <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span>
@@ -268,7 +267,7 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"LDA fitted with K = 8 topics\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; LDA fitted with K = 8 topics</code></pre>
-<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb350"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lda_top_terms</span> <span class="op">&lt;-</span> <span class="va">lda_topics</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">topic</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">beta</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -285,15 +284,15 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:22-fig-topicmodel-lda"></span>
 <img src="scientometrics-in-r_files/figure-html/22-fig-topicmodel-lda-1.png" alt="Faceted bar chart showing the 10 highest-probability terms for each of the 8 LDA topics. Each facet represents one topic." width="90%"><p class="caption">
-Figure 23.1: Top 10 terms per LDA topic.
+Figure 22.1: Top 10 terms per LDA topic.
 </p>
 </div>
 </div>
-<div id="fitting-stm-with-year-covariate" class="section level3" number="23.4.3">
+<div id="fitting-stm-with-year-covariate" class="section level3" number="22.4.3">
 <h3>
-<span class="header-section-number">23.4.3</span> Fitting STM with year covariate<a class="anchor" aria-label="anchor" href="#fitting-stm-with-year-covariate"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4.3</span> Fitting STM with year covariate<a class="anchor" aria-label="anchor" href="#fitting-stm-with-year-covariate"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb352"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb351"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stm_dfm</span> <span class="op">&lt;-</span> <span class="fu">quanteda</span><span class="fu">::</span><span class="fu"><a href="https://quanteda.io/reference/convert.html">convert</a></span><span class="op">(</span><span class="va">dfmat</span>, to <span class="op">=</span> <span class="st">"stm"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">stm_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/stm.html">stm</a></span><span class="op">(</span></span>
@@ -308,21 +307,21 @@ Figure 23.1: Top 10 terms per LDA topic.
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"STM fitted with K = 8 topics, year as prevalence covariate\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; STM fitted with K = 8 topics, year as prevalence covariate</code></pre>
-<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb353"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">stm_model</span>, type <span class="op">=</span> <span class="st">"summary"</span>, n <span class="op">=</span> <span class="fl">5</span>,</span>
 <span>     main <span class="op">=</span> <span class="st">"STM Topic Proportions and Top FREX Terms"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:22-fig-topicmodel-stm"></span>
 <img src="scientometrics-in-r_files/figure-html/22-fig-topicmodel-stm-1.png" alt="Labelled list showing the top FREX terms for each of 8 STM topics. FREX terms are both frequent within and exclusive to each topic." width="90%"><p class="caption">
-Figure 23.2: Top terms per STM topic, showing FREX (frequent and exclusive) words.
+Figure 22.2: Top terms per STM topic, showing FREX (frequent and exclusive) words.
 </p>
 </div>
 </div>
-<div id="topic-prevalence-over-time" class="section level3" number="23.4.4">
+<div id="topic-prevalence-over-time" class="section level3" number="22.4.4">
 <h3>
-<span class="header-section-number">23.4.4</span> Topic prevalence over time<a class="anchor" aria-label="anchor" href="#topic-prevalence-over-time"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4.4</span> Topic prevalence over time<a class="anchor" aria-label="anchor" href="#topic-prevalence-over-time"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb354"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">effect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/estimateEffect.html">estimateEffect</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span> <span class="op">~</span> <span class="va">year</span>, <span class="va">stm_model</span>, meta <span class="op">=</span> <span class="va">stm_dfm</span><span class="op">$</span><span class="va">meta</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">effect_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">8</span>, <span class="kw">function</span><span class="op">(</span><span class="va">k</span><span class="op">)</span> <span class="op">{</span></span>
@@ -346,15 +345,15 @@ Figure 23.2: Top terms per STM topic, showing FREX (frequent and exclusive) word
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:22-fig-topicmodel-temporal"></span>
 <img src="scientometrics-in-r_files/figure-html/22-fig-topicmodel-temporal-1.png" alt="Line chart showing how the estimated proportion of each topic changes across publication years. Some topics grow while others decline." width="90%"><p class="caption">
-Figure 23.3: Estimated topic prevalence by publication year (STM).
+Figure 22.3: Estimated topic prevalence by publication year (STM).
 </p>
 </div>
 </div>
-<div id="model-diagnostics" class="section level3" number="23.4.5">
+<div id="model-diagnostics" class="section level3" number="22.4.5">
 <h3>
-<span class="header-section-number">23.4.5</span> Model diagnostics<a class="anchor" aria-label="anchor" href="#model-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.4.5</span> Model diagnostics<a class="anchor" aria-label="anchor" href="#model-diagnostics"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb355"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coherence</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/semanticCoherence.html">semanticCoherence</a></span><span class="op">(</span><span class="va">stm_model</span>, <span class="va">stm_dfm</span><span class="op">$</span><span class="va">documents</span><span class="op">)</span></span>
 <span><span class="va">exclusivity</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/exclusivity.html">exclusivity</a></span><span class="op">(</span><span class="va">stm_model</span><span class="op">)</span></span>
 <span></span>
@@ -365,23 +364,23 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">diag_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="pxmvqsaqnc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#pxmvqsaqnc table {
+<div id="quxmfqmcre" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#quxmfqmcre table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#pxmvqsaqnc thead, #pxmvqsaqnc tbody, #pxmvqsaqnc tfoot, #pxmvqsaqnc tr, #pxmvqsaqnc td, #pxmvqsaqnc th {
+#quxmfqmcre thead, #quxmfqmcre tbody, #quxmfqmcre tfoot, #quxmfqmcre tr, #quxmfqmcre td, #quxmfqmcre th {
   border-style: none;
 }
 
-#pxmvqsaqnc p {
+#quxmfqmcre p {
   margin: 0;
   padding: 0;
 }
 
-#pxmvqsaqnc .gt_table {
+#quxmfqmcre .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -407,12 +406,12 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-left-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_caption {
+#quxmfqmcre .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#pxmvqsaqnc .gt_title {
+#quxmfqmcre .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -424,7 +423,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-bottom-width: 0;
 }
 
-#pxmvqsaqnc .gt_subtitle {
+#quxmfqmcre .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -436,7 +435,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-top-width: 0;
 }
 
-#pxmvqsaqnc .gt_heading {
+#quxmfqmcre .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -448,13 +447,13 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_bottom_border {
+#quxmfqmcre .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_col_headings {
+#quxmfqmcre .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -469,7 +468,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_col_heading {
+#quxmfqmcre .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -489,7 +488,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   overflow-x: hidden;
 }
 
-#pxmvqsaqnc .gt_column_spanner_outer {
+#quxmfqmcre .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -501,15 +500,15 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   padding-right: 4px;
 }
 
-#pxmvqsaqnc .gt_column_spanner_outer:first-child {
+#quxmfqmcre .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#pxmvqsaqnc .gt_column_spanner_outer:last-child {
+#quxmfqmcre .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#pxmvqsaqnc .gt_column_spanner {
+#quxmfqmcre .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -521,11 +520,11 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   width: 100%;
 }
 
-#pxmvqsaqnc .gt_spanner_row {
+#quxmfqmcre .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#pxmvqsaqnc .gt_group_heading {
+#quxmfqmcre .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -551,7 +550,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   text-align: left;
 }
 
-#pxmvqsaqnc .gt_empty_group_heading {
+#quxmfqmcre .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -566,15 +565,15 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   vertical-align: middle;
 }
 
-#pxmvqsaqnc .gt_from_md > :first-child {
+#quxmfqmcre .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#pxmvqsaqnc .gt_from_md > :last-child {
+#quxmfqmcre .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#pxmvqsaqnc .gt_row {
+#quxmfqmcre .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -593,7 +592,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   overflow-x: hidden;
 }
 
-#pxmvqsaqnc .gt_stub {
+#quxmfqmcre .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -606,7 +605,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#pxmvqsaqnc .gt_stub_row_group {
+#quxmfqmcre .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -620,15 +619,15 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   vertical-align: top;
 }
 
-#pxmvqsaqnc .gt_row_group_first td {
+#quxmfqmcre .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#pxmvqsaqnc .gt_row_group_first th {
+#quxmfqmcre .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#pxmvqsaqnc .gt_summary_row {
+#quxmfqmcre .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -638,16 +637,16 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#pxmvqsaqnc .gt_first_summary_row {
+#quxmfqmcre .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_first_summary_row.thick {
+#quxmfqmcre .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#pxmvqsaqnc .gt_last_summary_row {
+#quxmfqmcre .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -657,7 +656,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-bottom-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_grand_summary_row {
+#quxmfqmcre .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -667,7 +666,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#pxmvqsaqnc .gt_first_grand_summary_row {
+#quxmfqmcre .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -677,7 +676,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-top-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_last_grand_summary_row_top {
+#quxmfqmcre .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -687,11 +686,11 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-bottom-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_striped {
+#quxmfqmcre .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#pxmvqsaqnc .gt_table_body {
+#quxmfqmcre .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -700,7 +699,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-bottom-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_footnotes {
+#quxmfqmcre .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -714,7 +713,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_footnote {
+#quxmfqmcre .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -723,7 +722,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#pxmvqsaqnc .gt_sourcenotes {
+#quxmfqmcre .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -737,7 +736,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#pxmvqsaqnc .gt_sourcenote {
+#quxmfqmcre .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -745,72 +744,72 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#pxmvqsaqnc .gt_left {
+#quxmfqmcre .gt_left {
   text-align: left;
 }
 
-#pxmvqsaqnc .gt_center {
+#quxmfqmcre .gt_center {
   text-align: center;
 }
 
-#pxmvqsaqnc .gt_right {
+#quxmfqmcre .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#pxmvqsaqnc .gt_font_normal {
+#quxmfqmcre .gt_font_normal {
   font-weight: normal;
 }
 
-#pxmvqsaqnc .gt_font_bold {
+#quxmfqmcre .gt_font_bold {
   font-weight: bold;
 }
 
-#pxmvqsaqnc .gt_font_italic {
+#quxmfqmcre .gt_font_italic {
   font-style: italic;
 }
 
-#pxmvqsaqnc .gt_super {
+#quxmfqmcre .gt_super {
   font-size: 65%;
 }
 
-#pxmvqsaqnc .gt_footnote_marks {
+#quxmfqmcre .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#pxmvqsaqnc .gt_asterisk {
+#quxmfqmcre .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#pxmvqsaqnc .gt_indent_1 {
+#quxmfqmcre .gt_indent_1 {
   text-indent: 5px;
 }
 
-#pxmvqsaqnc .gt_indent_2 {
+#quxmfqmcre .gt_indent_2 {
   text-indent: 10px;
 }
 
-#pxmvqsaqnc .gt_indent_3 {
+#quxmfqmcre .gt_indent_3 {
   text-indent: 15px;
 }
 
-#pxmvqsaqnc .gt_indent_4 {
+#quxmfqmcre .gt_indent_4 {
   text-indent: 20px;
 }
 
-#pxmvqsaqnc .gt_indent_5 {
+#quxmfqmcre .gt_indent_5 {
   text-indent: 25px;
 }
 
-#pxmvqsaqnc .katex-display {
+#quxmfqmcre .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#pxmvqsaqnc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#quxmfqmcre div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -823,52 +822,52 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <tbody class="gt_table_body">
 <tr>
 <td headers="topic" class="gt_row gt_right">1</td>
-<td headers="coherence" class="gt_row gt_right">-99.2</td>
-<td headers="exclusivity" class="gt_row gt_right">9.24</td>
+<td headers="coherence" class="gt_row gt_right">-77.1</td>
+<td headers="exclusivity" class="gt_row gt_right">9.45</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">2</td>
-<td headers="coherence" class="gt_row gt_right">-64.1</td>
-<td headers="exclusivity" class="gt_row gt_right">8.96</td>
-</tr>
-<tr>
-<td headers="topic" class="gt_row gt_right">3</td>
-<td headers="coherence" class="gt_row gt_right">-108.8</td>
-<td headers="exclusivity" class="gt_row gt_right">9.36</td>
-</tr>
-<tr>
-<td headers="topic" class="gt_row gt_right">4</td>
-<td headers="coherence" class="gt_row gt_right">-57.4</td>
-<td headers="exclusivity" class="gt_row gt_right">9.21</td>
-</tr>
-<tr>
-<td headers="topic" class="gt_row gt_right">5</td>
-<td headers="coherence" class="gt_row gt_right">-100.2</td>
+<td headers="coherence" class="gt_row gt_right">-54.6</td>
 <td headers="exclusivity" class="gt_row gt_right">9.31</td>
 </tr>
 <tr>
+<td headers="topic" class="gt_row gt_right">3</td>
+<td headers="coherence" class="gt_row gt_right">-64.5</td>
+<td headers="exclusivity" class="gt_row gt_right">8.63</td>
+</tr>
+<tr>
+<td headers="topic" class="gt_row gt_right">4</td>
+<td headers="coherence" class="gt_row gt_right">-79.9</td>
+<td headers="exclusivity" class="gt_row gt_right">8.81</td>
+</tr>
+<tr>
+<td headers="topic" class="gt_row gt_right">5</td>
+<td headers="coherence" class="gt_row gt_right">-154.8</td>
+<td headers="exclusivity" class="gt_row gt_right">9.16</td>
+</tr>
+<tr>
 <td headers="topic" class="gt_row gt_right">6</td>
-<td headers="coherence" class="gt_row gt_right">-94.0</td>
-<td headers="exclusivity" class="gt_row gt_right">9.21</td>
+<td headers="coherence" class="gt_row gt_right">-106.7</td>
+<td headers="exclusivity" class="gt_row gt_right">9.09</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">7</td>
-<td headers="coherence" class="gt_row gt_right">-74.7</td>
-<td headers="exclusivity" class="gt_row gt_right">9.44</td>
+<td headers="coherence" class="gt_row gt_right">-78.2</td>
+<td headers="exclusivity" class="gt_row gt_right">9.40</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">8</td>
-<td headers="coherence" class="gt_row gt_right">-108.7</td>
-<td headers="exclusivity" class="gt_row gt_right">9.29</td>
+<td headers="coherence" class="gt_row gt_right">-136.0</td>
+<td headers="exclusivity" class="gt_row gt_right">9.77</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
 </div>
-<div id="topicmodel-diagnostics" class="section level2" number="23.5">
+<div id="topicmodel-diagnostics" class="section level2" number="22.5">
 <h2>
-<span class="header-section-number">23.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#topicmodel-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#topicmodel-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -881,14 +880,14 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <strong>Human validation</strong>: Always read sample documents assigned to each topic. If a topic cannot be labelled by a domain expert, it may not represent a meaningful theme.</li>
 </ul>
 </div>
-<div id="topicmodel-limitations" class="section level2" number="23.6">
+<div id="topicmodel-limitations" class="section level2" number="22.6">
 <h2>
-<span class="header-section-number">23.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#topicmodel-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#topicmodel-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-21" class="section level2 callout callout-warn" number="23.7">
+<div id="limitations-and-responsible-use-21" class="section level2 callout callout-warn" number="22.7">
 <h2>
-<span class="header-section-number">23.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-21"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-21"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -903,14 +902,14 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <strong>Replication.</strong> Topic models are sensitive to preprocessing and random initialisation. Report all parameters and fix seeds for reproducibility.</li>
 </ul>
 </div>
-<div id="topicmodel-pitfalls" class="section level2" number="23.8">
+<div id="topicmodel-pitfalls" class="section level2" number="22.8">
 <h2>
-<span class="header-section-number">23.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#topicmodel-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#topicmodel-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-21" class="section level2 callout callout-stop" number="23.9">
+<div id="common-pitfalls-21" class="section level2 callout callout-stop" number="22.9">
 <h2>
-<span class="header-section-number">23.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-21"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-21"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -923,9 +922,9 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <strong>Comparing topics across models.</strong> LDA and STM may number and define topics differently. Align topics by content, not by index.</li>
 </ul>
 </div>
-<div id="topicmodel-exercises" class="section level2" number="23.10">
+<div id="topicmodel-exercises" class="section level2" number="22.10">
 <h2>
-<span class="header-section-number">23.10</span> Exercises<a class="anchor" aria-label="anchor" href="#topicmodel-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.10</span> Exercises<a class="anchor" aria-label="anchor" href="#topicmodel-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>K selection.</strong> Fit LDA models with K = 5, 8, 12, and 15. Compute coherence for each. Plot coherence against K and select the best value. How sensitive are the results?</p></li>
@@ -934,15 +933,15 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <li><p><strong>LDA vs. STM comparison.</strong> Compare the topics from LDA and STM for the same K. Are they similar? What does the STM’s year covariate add?</p></li>
 </ol>
 </div>
-<div id="solutions-21" class="section level2 callout callout-ok" number="23.11">
+<div id="id_22-solutions" class="section level2 callout callout-ok" number="22.11">
 <h2>
-<span class="header-section-number">23.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-21"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_22-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="topicmodel-reading" class="section level2" number="23.12">
+<div id="topicmodel-reading" class="section level2" number="22.12">
 <h2>
-<span class="header-section-number">23.12</span> Further reading<a class="anchor" aria-label="anchor" href="#topicmodel-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.12</span> Further reading<a class="anchor" aria-label="anchor" href="#topicmodel-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -955,15 +954,15 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <span class="citation">Aria and Cuccurullo (<a href="references.html#ref-aria2017">2017</a>)</span> — <code>bibliometrix</code> topic analysis features.</li>
 </ul>
 </div>
-<div id="topicmodel-sessioninfo" class="section level2" number="23.13">
+<div id="topicmodel-sessioninfo" class="section level2" number="22.13">
 <h2>
-<span class="header-section-number">23.13</span> Session info<a class="anchor" aria-label="anchor" href="#topicmodel-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">22.13</span> Session info<a class="anchor" aria-label="anchor" href="#topicmodel-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb357"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb356"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -985,12 +984,12 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 #&gt;  [1] stm_1.3.8                 topicmodels_0.2-17       
 #&gt;  [3] quanteda.textstats_0.97.2 visNetwork_2.1.4         
 #&gt;  [5] ggraph_2.2.2              tidygraph_1.3.1          
-#&gt;  [7] igraph_2.3.2              quanteda_4.4             
-#&gt;  [9] pdftools_3.9.0            arrow_24.0.0             
-#&gt; [11] bibliometrix_5.4.0        RefManageR_1.4.0         
+#&gt;  [7] igraph_2.3.4              quanteda_4.5.1           
+#&gt;  [9] pdftools_3.9.1            arrow_26.0.0             
+#&gt; [11] bibliometrix_5.5.0        RefManageR_1.4.0         
 #&gt; [13] bib2df_1.1.2.0            rcrossref_1.2.1          
-#&gt; [15] gt_1.3.0                  tidytext_0.4.3           
-#&gt; [17] glue_1.8.1                openalexR_3.0.1          
+#&gt; [15] gt_1.4.0                  tidytext_0.4.3           
+#&gt; [17] glue_1.8.1                openalexR_3.1.2          
 #&gt; [19] lubridate_1.9.5           forcats_1.0.1            
 #&gt; [21] stringr_1.6.0             dplyr_1.2.1              
 #&gt; [23] purrr_1.2.2               readr_2.2.0              
@@ -998,47 +997,45 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 #&gt; [27] ggplot2_4.0.3             tidyverse_2.0.0          
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         modeltools_0.2-24     
-#&gt;   [7] farver_2.1.2           rmarkdown_2.31         fs_2.1.0              
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
+#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         modeltools_0.2-25     
+#&gt;   [7] farver_2.1.2           rmarkdown_2.32         fs_2.1.0              
 #&gt;  [10] vctrs_0.7.3            memoise_2.0.1          askpass_1.2.1         
-#&gt;  [13] base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.0.0 
-#&gt;  [16] curl_7.1.0             janeaustenr_1.0.0      cellranger_1.1.0      
-#&gt;  [19] sass_0.4.10            bslib_0.11.0           htmlwidgets_1.6.4     
-#&gt;  [22] tokenizers_0.3.0       plyr_1.8.9             httr2_1.2.2           
-#&gt;  [25] plotly_4.12.0          cachem_1.1.0           dimensionsR_0.0.3     
+#&gt;  [13] base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1 
+#&gt;  [16] curl_8.1.0             janeaustenr_1.0.0      cellranger_1.1.0      
+#&gt;  [19] sass_0.4.10            bslib_0.12.0           htmlwidgets_1.6.4     
+#&gt;  [22] tokenizers_0.3.0       plyr_1.8.9             httr2_1.3.0           
+#&gt;  [25] plotly_4.12.1          cachem_1.1.0           dimensionsR_0.0.3     
 #&gt;  [28] mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
-#&gt;  [31] Matrix_1.7-0           R6_2.6.1               fastmap_1.2.0         
-#&gt;  [34] shiny_1.13.0           digest_0.6.39          patchwork_1.3.2       
+#&gt;  [31] Matrix_1.7-5           R6_2.6.1               fastmap_1.2.0         
+#&gt;  [34] shiny_1.14.0           digest_0.6.39          patchwork_1.3.2       
 #&gt;  [37] shinycssloaders_1.1.0  rprojroot_2.1.1        SnowballC_0.7.1       
 #&gt;  [40] labeling_0.4.3         urltools_1.7.3.1       timechange_0.4.0      
-#&gt;  [43] polyclip_1.10-7        httr_1.4.8             compiler_4.4.1        
-#&gt;  [46] here_1.0.2             bit64_4.8.0            withr_3.0.2           
-#&gt;  [49] S7_0.2.2               backports_1.5.1        viridis_0.6.5         
-#&gt;  [52] ggforce_0.5.0          MASS_7.3-60.2          rappdirs_0.3.4        
-#&gt;  [55] bibliometrixData_0.3.0 tools_4.4.1            otel_0.2.0            
-#&gt;  [58] stopwords_2.3          zip_2.3.3              httpuv_1.6.17         
-#&gt;  [61] rentrez_1.2.4          promises_1.5.0         grid_4.4.1            
-#&gt;  [64] stringdist_0.9.17      reshape2_1.4.5         generics_0.1.4        
-#&gt;  [67] gtable_0.3.6           tzdb_0.5.0             rscopus_0.9.0         
-#&gt;  [70] ca_0.71.1              data.table_1.18.4      hms_1.1.4             
-#&gt;  [73] xml2_1.5.2             utf8_1.2.6             ggrepel_0.9.8         
-#&gt;  [76] pillar_1.11.1          nsyllable_1.0.1        vroom_1.7.1           
-#&gt;  [79] later_1.4.8            tweenr_2.0.3           brand.yml_0.1.0       
-#&gt;  [82] lattice_0.22-6         bit_4.6.0              tidyselect_1.2.1      
-#&gt;  [85] tm_0.7-18              miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [88] knitr_1.51             gridExtra_2.3          NLP_0.3-2             
-#&gt;  [91] bookdown_0.46          stats4_4.4.1           crul_1.6.0            
-#&gt;  [94] xfun_0.57              graphlayouts_1.2.3     matrixStats_1.5.0     
-#&gt;  [97] DT_0.34.0              humaniformat_0.6.0     stringi_1.8.7         
-#&gt; [100] lazyeval_0.2.3         qpdf_1.4.1             yaml_2.3.12           
-#&gt; [103] evaluate_1.0.5         codetools_0.2-20       httpcode_0.3.0        
-#&gt; [106] cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
-#&gt; [109] dichromat_2.0-0.1      Rcpp_1.1.1-1.1         readxl_1.4.5          
-#&gt; [112] triebeard_0.4.1        XML_3.99-0.23          parallel_4.4.1        
-#&gt; [115] assertthat_0.2.1       pubmedR_1.0.2          slam_0.1-55           
-#&gt; [118] viridisLite_0.4.3      scales_1.4.0           crayon_1.5.3          
-#&gt; [121] openxlsx_4.2.8.1       rlang_1.2.0            fastmatch_1.1-8</code></pre>
+#&gt;  [43] polyclip_1.10-7        httr_1.4.9             compiler_4.6.1        
+#&gt;  [46] here_1.0.2             bit64_4.8.6            withr_3.0.3           
+#&gt;  [49] S7_0.2.2               viridis_0.6.5          ggforce_0.5.0         
+#&gt;  [52] MASS_7.3-65            bibliometrixData_0.3.0 tools_4.6.1           
+#&gt;  [55] otel_0.2.0             stopwords_2.3          zip_3.0.2             
+#&gt;  [58] httpuv_1.6.17          rentrez_1.2.4          promises_1.5.0        
+#&gt;  [61] grid_4.6.1             stringdist_0.9.17      reshape2_1.4.5        
+#&gt;  [64] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
+#&gt;  [67] rscopus_0.9.0          ca_0.72                data.table_1.18.6.1   
+#&gt;  [70] hms_1.1.4              xml2_1.6.0             utf8_1.2.6            
+#&gt;  [73] ggrepel_0.9.8          pillar_1.11.1          nsyllable_1.0.1       
+#&gt;  [76] vroom_1.7.1            later_1.4.8            tweenr_2.0.3          
+#&gt;  [79] lattice_0.22-9         bit_4.6.0              tidyselect_1.2.1      
+#&gt;  [82] tm_0.7-20              miniUI_0.1.2           downlit_0.4.5         
+#&gt;  [85] knitr_1.52             gridExtra_2.3.1        NLP_0.3-3             
+#&gt;  [88] bookdown_0.48          stats4_4.6.1           crul_1.6.0            
+#&gt;  [91] xfun_0.62              graphlayouts_1.2.5     matrixStats_1.5.0     
+#&gt;  [94] DT_0.34.0              humaniformat_0.6.0     stringi_1.8.9         
+#&gt;  [97] qpdf_1.4.1             yaml_2.3.12            evaluate_1.0.5        
+#&gt; [100] httpcode_0.3.0         cli_3.6.6              xtable_1.8-8          
+#&gt; [103] jquerylib_0.1.4        Rcpp_1.1.2             readxl_1.6.0          
+#&gt; [106] triebeard_0.4.1        XML_3.99-0.25          parallel_4.6.1        
+#&gt; [109] assertthat_0.2.1       pubmedR_1.0.2          slam_0.1-56           
+#&gt; [112] viridisLite_0.4.3      scales_1.4.0           crayon_1.5.3          
+#&gt; [115] openxlsx_4.2.9         rlang_1.3.0            fastmatch_1.1-8</code></pre>
 
 </div>
 </div>
@@ -1067,101 +1064,97 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></div>
-<div class="next"><a href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></div>
+<div class="prev"><a href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></div>
+<div class="next"><a href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#topic-modeling"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="nav-link" href="#topicmodel-objectives"><span class="header-section-number">23.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#topicmodel-setup"><span class="header-section-number">23.2</span> Setup</a></li>
-<li><a class="nav-link" href="#topicmodel-background"><span class="header-section-number">23.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#topic-modeling"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="nav-link" href="#topicmodel-objectives"><span class="header-section-number">22.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#topicmodel-setup"><span class="header-section-number">22.2</span> Setup</a></li>
+<li><a class="nav-link" href="#topicmodel-background"><span class="header-section-number">22.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#topicmodel-example"><span class="header-section-number">23.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#preparing-the-corpus"><span class="header-section-number">23.4.1</span> Preparing the corpus</a></li>
-<li><a class="nav-link" href="#fitting-lda"><span class="header-section-number">23.4.2</span> Fitting LDA</a></li>
-<li><a class="nav-link" href="#fitting-stm-with-year-covariate"><span class="header-section-number">23.4.3</span> Fitting STM with year covariate</a></li>
-<li><a class="nav-link" href="#topic-prevalence-over-time"><span class="header-section-number">23.4.4</span> Topic prevalence over time</a></li>
-<li><a class="nav-link" href="#model-diagnostics"><span class="header-section-number">23.4.5</span> Model diagnostics</a></li>
+<a class="nav-link" href="#topicmodel-example"><span class="header-section-number">22.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preparing-the-corpus"><span class="header-section-number">22.4.1</span> Preparing the corpus</a></li>
+<li><a class="nav-link" href="#fitting-lda"><span class="header-section-number">22.4.2</span> Fitting LDA</a></li>
+<li><a class="nav-link" href="#fitting-stm-with-year-covariate"><span class="header-section-number">22.4.3</span> Fitting STM with year covariate</a></li>
+<li><a class="nav-link" href="#topic-prevalence-over-time"><span class="header-section-number">22.4.4</span> Topic prevalence over time</a></li>
+<li><a class="nav-link" href="#model-diagnostics"><span class="header-section-number">22.4.5</span> Model diagnostics</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#topicmodel-diagnostics"><span class="header-section-number">23.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#topicmodel-limitations"><span class="header-section-number">23.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-21"><span class="header-section-number">23.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#topicmodel-pitfalls"><span class="header-section-number">23.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-21"><span class="header-section-number">23.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#topicmodel-exercises"><span class="header-section-number">23.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-21"><span class="header-section-number">23.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#topicmodel-reading"><span class="header-section-number">23.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#topicmodel-sessioninfo"><span class="header-section-number">23.13</span> Session info</a></li>
+<li><a class="nav-link" href="#topicmodel-diagnostics"><span class="header-section-number">22.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#topicmodel-limitations"><span class="header-section-number">22.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-21"><span class="header-section-number">22.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#topicmodel-pitfalls"><span class="header-section-number">22.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-21"><span class="header-section-number">22.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#topicmodel-exercises"><span class="header-section-number">22.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_22-solutions"><span class="header-section-number">22.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#topicmodel-reading"><span class="header-section-number">22.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#topicmodel-sessioninfo"><span class="header-section-number">22.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1179,7 +1172,7 @@ Figure 23.3: Estimated topic prevalence by publication year (STM).
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

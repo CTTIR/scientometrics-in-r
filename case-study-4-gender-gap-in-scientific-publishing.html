@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 42 Case Study 4: Gender Gap in Scientific Publishing | Scientometrics in R</title>
+<title>Chapter 41 Case Study 4: Gender Gap in Scientific Publishing | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="42.1 Objective Compare gender representation in authorship across a biomedical journal and an information-science journal, demonstrating both the methods and their substantial limitations.  42.2...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 42 Case Study 4: Gender Gap in Scientific Publishing | Scientometrics in R">
+<meta name="description" content="41.1 Objective Examine why a name lookup cannot establish a gender gap, using an explicitly synthetic example of two fictional journals. We compare arbitrary lookup categories, retain unmatched...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 41 Case Study 4: Gender Gap in Scientific Publishing | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/case-study-4-gender-gap-in-scientific-publishing.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="42.1 Objective Compare gender representation in authorship across a biomedical journal and an information-science journal, demonstrating both the methods and their substantial limitations.  42.2...">
+<meta property="og:description" content="41.1 Objective Examine why a name lookup cannot establish a gender gap, using an explicitly synthetic example of two fictional journals. We compare arbitrary lookup categories, retain unmatched...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 42 Case Study 4: Gender Gap in Scientific Publishing | Scientometrics in R">
-<meta name="twitter:description" content="42.1 Objective Compare gender representation in authorship across a biomedical journal and an information-science journal, demonstrating both the methods and their substantial limitations.  42.2...">
+<meta name="twitter:title" content="Chapter 41 Case Study 4: Gender Gap in Scientific Publishing | Scientometrics in R">
+<meta name="twitter:description" content="41.1 Objective Examine why a name lookup cannot establish a gender gap, using an explicitly synthetic example of two fictional journals. We compare arbitrary lookup categories, retain unmatched...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="active" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="active" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,206 +163,685 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="case-study-4-gender-gap-in-scientific-publishing" class="section level1" number="42">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="case-study-4-gender-gap-in-scientific-publishing" class="section level1" number="41">
 <h1>
-<span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing<a class="anchor" aria-label="anchor" href="#case-study-4-gender-gap-in-scientific-publishing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing<a class="anchor" aria-label="anchor" href="#case-study-4-gender-gap-in-scientific-publishing"><i class="fas fa-link"></i></a>
 </h1>
-<div id="objective-3" class="section level2" number="42.1">
+<div id="objective-3" class="section level2" number="41.1">
 <h2>
-<span class="header-section-number">42.1</span> Objective<a class="anchor" aria-label="anchor" href="#objective-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.1</span> Objective<a class="anchor" aria-label="anchor" href="#objective-3"><i class="fas fa-link"></i></a>
 </h2>
-<p>Compare gender representation in authorship across a biomedical journal and an information-science journal, demonstrating both the methods and their substantial limitations.</p>
+<p>Examine why a name lookup cannot establish a gender gap, using an explicitly
+synthetic example of two fictional journals. We compare arbitrary lookup
+categories, retain unmatched records in every denominator, and track lookup
+coverage by recorded authorship position and year. None of the records represents
+a real person, paper or journal; no gender identity is observed or inferred.</p>
+<p>An actual study of gender equity requires a defensible demographic variable and
+its provenance, a defined population, appropriate data governance, and a plan
+for validation and missing data. A list of names is not a substitute for those
+observations. Chapter <a href="gender-and-equity-analysis.html#gender-objectives">28.1</a> develops these distinctions.</p>
 </div>
-<div id="setup-3" class="section level2" number="42.2">
+<div id="setup-3" class="section level2" number="41.2">
 <h2>
-<span class="header-section-number">42.2</span> Setup<a class="anchor" aria-label="anchor" href="#setup-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.2</span> Setup<a class="anchor" aria-label="anchor" href="#setup-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20260509</span><span class="op">)</span></span>
-<span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"api_helpers.R"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="data-acquisition-3" class="section level2" number="42.3">
+<div id="synthetic-teaching-records" class="section level2" number="41.3">
 <h2>
-<span class="header-section-number">42.3</span> Data acquisition<a class="anchor" aria-label="anchor" href="#data-acquisition-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.3</span> Synthetic teaching records<a class="anchor" aria-label="anchor" href="#synthetic-teaching-records"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works_sciento</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
-<span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
-<span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
-<span>  from_publication_date <span class="op">=</span> <span class="st">"2019-01-01"</span>,</span>
-<span>  to_publication_date <span class="op">=</span> <span class="st">"2023-12-31"</span>,</span>
-<span>  type <span class="op">=</span> <span class="st">"article"</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">300</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>journal <span class="op">=</span> <span class="st">"Scientometrics"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">works_plos</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
-<span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
-<span>  primary_location.source.id <span class="op">=</span> <span class="st">"S202381698"</span>,</span>
-<span>  from_publication_date <span class="op">=</span> <span class="st">"2019-01-01"</span>,</span>
-<span>  to_publication_date <span class="op">=</span> <span class="st">"2023-12-31"</span>,</span>
-<span>  type <span class="op">=</span> <span class="st">"article"</span>,</span>
-<span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">300</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
-<span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>journal <span class="op">=</span> <span class="st">"PLOS ONE"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">works_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind_rows.html">bind_rows</a></span><span class="op">(</span><span class="va">works_sciento</span>, <span class="va">works_plos</span><span class="op">)</span></span></code></pre></div>
+<p>The six invented papers have explicit publication years and ordered name lists.
+The names are placeholders, and repeated names do not establish shared author
+identity. Each row created below is an authorship record, not a distinct person.
+This example makes no API request.</p>
+<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">works_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>  work_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"example-a1"</span>, <span class="st">"example-a2"</span>, <span class="st">"example-a3"</span>,</span>
+<span>              <span class="st">"example-b1"</span>, <span class="st">"example-b2"</span>, <span class="st">"example-b3"</span><span class="op">)</span>,</span>
+<span>  journal <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Example journal A"</span>, <span class="st">"Example journal B"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
+<span>  year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">2019</span><span class="op">:</span><span class="fl">2021</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  first_names <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aria"</span>, <span class="st">"jordan"</span>, <span class="st">"lee"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"noor"</span>, <span class="st">"ari"</span><span class="op">)</span>, <span class="st">"morgan"</span>,</span>
+<span>                     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aria"</span>, <span class="st">"nuri"</span>, <span class="st">"sam"</span>, <span class="st">"alex"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"ari"</span>, <span class="st">"noor"</span><span class="op">)</span>,</span>
+<span>                     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lee"</span>, <span class="st">"jordan"</span>, <span class="st">"morgan"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="gender-inference" class="section level2" number="42.4">
+<div id="arbitrary-lookup-and-complete-denominators" class="section level2" number="41.4">
 <h2>
-<span class="header-section-number">42.4</span> Gender inference<a class="anchor" aria-label="anchor" href="#gender-inference"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.4</span> Arbitrary lookup and complete denominators<a class="anchor" aria-label="anchor" href="#arbitrary-lookup-and-complete-denominators"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">common_female</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"maria"</span>, <span class="st">"anna"</span>, <span class="st">"li"</span>, <span class="st">"sarah"</span>, <span class="st">"jennifer"</span>, <span class="st">"jessica"</span>,</span>
-<span>                   <span class="st">"elena"</span>, <span class="st">"nina"</span>, <span class="st">"laura"</span>, <span class="st">"julia"</span>, <span class="st">"diana"</span>, <span class="st">"sandra"</span>,</span>
-<span>                   <span class="st">"lisa"</span>, <span class="st">"emily"</span>, <span class="st">"rachel"</span>, <span class="st">"amy"</span>, <span class="st">"kate"</span>, <span class="st">"megan"</span><span class="op">)</span></span>
-<span><span class="va">common_male</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"john"</span>, <span class="st">"david"</span>, <span class="st">"michael"</span>, <span class="st">"james"</span>, <span class="st">"robert"</span>, <span class="st">"peter"</span>,</span>
-<span>                 <span class="st">"mark"</span>, <span class="st">"thomas"</span>, <span class="st">"paul"</span>, <span class="st">"daniel"</span>, <span class="st">"andreas"</span>, <span class="st">"martin"</span>,</span>
-<span>                 <span class="st">"chris"</span>, <span class="st">"matthew"</span>, <span class="st">"andrew"</span>, <span class="st">"william"</span>, <span class="st">"kevin"</span>, <span class="st">"brian"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">authors</span> <span class="op">&lt;-</span> <span class="va">works_all</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>work_id <span class="op">=</span> <span class="va">id</span>, <span class="va">journal</span>, <span class="va">authorships</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">authorships</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<p>For teaching purposes only, assign <code>aria</code> and <code>ari</code> to A, and <code>jordan</code> and
+<code>morgan</code> to B. These arbitrary categories have <strong>no demographic meaning</strong>.
+Every other name is explicitly unmatched. Dropping unmatched records would
+change both the denominator and the question answered by a proportion.</p>
+<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">authors_example</span> <span class="op">&lt;-</span> <span class="va">works_example</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_longer.html">unnest_longer</a></span><span class="op">(</span><span class="va">first_names</span>, values_to <span class="op">=</span> <span class="st">"first_name"</span>, indices_to <span class="op">=</span> <span class="st">"author_order"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">work_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
 <span>    n_authors <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    position <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">~</span> <span class="st">"first"</span>,</span>
-<span>      <span class="fu"><a href="https://dplyr.tidyverse.org/reference/row_number.html">row_number</a></span><span class="op">(</span><span class="op">)</span> <span class="op">==</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&amp;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span> <span class="op">~</span> <span class="st">"last"</span>,</span>
+<span>      <span class="va">n_authors</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">~</span> <span class="st">"single"</span>,</span>
+<span>      <span class="va">author_order</span> <span class="op">==</span> <span class="fl">1</span> <span class="op">~</span> <span class="st">"first"</span>,</span>
+<span>      <span class="va">author_order</span> <span class="op">==</span> <span class="va">n_authors</span> <span class="op">~</span> <span class="st">"last"</span>,</span>
 <span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"middle"</span></span>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    first_name <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">authorships_display_name</span>, <span class="st">"^\\S+"</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    gender <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
-<span>      <span class="va">first_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">common_female</span> <span class="op">~</span> <span class="st">"female"</span>,</span>
-<span>      <span class="va">first_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="va">common_male</span> <span class="op">~</span> <span class="st">"male"</span>,</span>
-<span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="cn">NA_character_</span></span>
-<span>    <span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">gender</span><span class="op">)</span><span class="op">)</span></span>
+<span>    lookup_category <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/case-and-replace-when.html">case_when</a></span><span class="op">(</span></span>
+<span>      <span class="va">first_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"aria"</span>, <span class="st">"ari"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"A"</span>,</span>
+<span>      <span class="va">first_name</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"jordan"</span>, <span class="st">"morgan"</span><span class="op">)</span> <span class="op">~</span> <span class="st">"B"</span>,</span>
+<span>      <span class="cn">TRUE</span> <span class="op">~</span> <span class="st">"Unmatched"</span></span>
+<span>    <span class="op">)</span>,</span>
+<span>    lookup_category <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">lookup_category</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"Unmatched"</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    position <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="va">position</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"first"</span>, <span class="st">"middle"</span>, <span class="st">"last"</span>, <span class="st">"single"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Classified authors: {nrow(authors)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Classified authors: 219</code></pre>
+<span><span class="va">coverage_summary</span> <span class="op">&lt;-</span> <span class="va">authors_example</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>records <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, matched <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lookup_category</span> <span class="op">!=</span> <span class="st">"Unmatched"</span><span class="op">)</span>,</span>
+<span>            coverage <span class="op">=</span> <span class="va">matched</span> <span class="op">/</span> <span class="va">records</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
+<span><span class="va">coverage_summary</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_percent.html">fmt_percent</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">coverage</span>, decimals <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<div id="vhdvwtvjrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#vhdvwtvjrx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#vhdvwtvjrx thead, #vhdvwtvjrx tbody, #vhdvwtvjrx tfoot, #vhdvwtvjrx tr, #vhdvwtvjrx td, #vhdvwtvjrx th {
+  border-style: none;
+}
+
+#vhdvwtvjrx p {
+  margin: 0;
+  padding: 0;
+}
+
+#vhdvwtvjrx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#vhdvwtvjrx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#vhdvwtvjrx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#vhdvwtvjrx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#vhdvwtvjrx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#vhdvwtvjrx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#vhdvwtvjrx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#vhdvwtvjrx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#vhdvwtvjrx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#vhdvwtvjrx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#vhdvwtvjrx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#vhdvwtvjrx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#vhdvwtvjrx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#vhdvwtvjrx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#vhdvwtvjrx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhdvwtvjrx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#vhdvwtvjrx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#vhdvwtvjrx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#vhdvwtvjrx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhdvwtvjrx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#vhdvwtvjrx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhdvwtvjrx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#vhdvwtvjrx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhdvwtvjrx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#vhdvwtvjrx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#vhdvwtvjrx .gt_left {
+  text-align: left;
+}
+
+#vhdvwtvjrx .gt_center {
+  text-align: center;
+}
+
+#vhdvwtvjrx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#vhdvwtvjrx .gt_font_normal {
+  font-weight: normal;
+}
+
+#vhdvwtvjrx .gt_font_bold {
+  font-weight: bold;
+}
+
+#vhdvwtvjrx .gt_font_italic {
+  font-style: italic;
+}
+
+#vhdvwtvjrx .gt_super {
+  font-size: 65%;
+}
+
+#vhdvwtvjrx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#vhdvwtvjrx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#vhdvwtvjrx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#vhdvwtvjrx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#vhdvwtvjrx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#vhdvwtvjrx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#vhdvwtvjrx .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#vhdvwtvjrx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#vhdvwtvjrx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead><tr class="gt_col_headings">
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="journal">journal</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="records">records</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="matched">matched</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="coverage">coverage</th>
+    </tr></thead>
+<tbody class="gt_table_body">
+<tr>
+<td headers="journal" class="gt_row gt_left">Example journal A</td>
+<td headers="records" class="gt_row gt_right">6</td>
+<td headers="matched" class="gt_row gt_right">4</td>
+<td headers="coverage" class="gt_row gt_right">66.7%</td>
+</tr>
+<tr>
+<td headers="journal" class="gt_row gt_left">Example journal B</td>
+<td headers="records" class="gt_row gt_right">9</td>
+<td headers="matched" class="gt_row gt_right">4</td>
+<td headers="coverage" class="gt_row gt_right">44.4%</td>
+</tr>
+</tbody>
+</table></div>
 </div>
-<div id="gender-representation-by-journal" class="section level2" number="42.5">
+</div>
+<div id="lookup-categories-by-fictional-journal" class="section level2" number="41.5">
 <h2>
-<span class="header-section-number">42.5</span> Gender representation by journal<a class="anchor" aria-label="anchor" href="#gender-representation-by-journal"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.5</span> Lookup categories by fictional journal<a class="anchor" aria-label="anchor" href="#lookup-categories-by-fictional-journal"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">authors</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">gender</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">journal_summary</span> <span class="op">&lt;-</span> <span class="va">authors_example</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">lookup_category</span>, .drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">journal</span>, y <span class="op">=</span> <span class="va">pct</span>, fill <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">journal_summary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">journal</span>, y <span class="op">=</span> <span class="va">pct</span>, fill <span class="op">=</span> <span class="va">lookup_category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Proportion"</span>, fill <span class="op">=</span> <span class="st">"Gender"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Share of all synthetic records"</span>, fill <span class="op">=</span> <span class="st">"Lookup category"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:cs04-fig-cs04-journal"></span>
-<img src="scientometrics-in-r_files/figure-html/cs04-fig-cs04-journal-1.png" alt="Grouped bar chart comparing the proportion of male and female author names across two journals." width="90%"><p class="caption">
-Figure 42.1: Gender representation by journal.
+<img src="scientometrics-in-r_files/figure-html/cs04-fig-cs04-journal-1.png" alt="Grouped bars show A, B and Unmatched shares using every synthetic record in each fictional journal as the denominator." width="90%"><p class="caption">
+Figure 41.1: Arbitrary lookup categories among all synthetic authorship records in two fictional journals; these are not gender proportions.
 </p>
 </div>
 </div>
-<div id="authorship-position-analysis-1" class="section level2" number="42.6">
+<div id="recorded-authorship-position" class="section level2" number="41.6">
 <h2>
-<span class="header-section-number">42.6</span> Authorship position analysis<a class="anchor" aria-label="anchor" href="#authorship-position-analysis-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.6</span> Recorded authorship position<a class="anchor" aria-label="anchor" href="#recorded-authorship-position"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">position_summary</span> <span class="op">&lt;-</span> <span class="va">authors</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">position</span>, <span class="va">gender</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<p>Single-author papers receive their own position label. In a real corpus,
+recorded order does not by itself establish seniority or contribution: the
+interpretation depends on authorship conventions. The following proportions
+retain unmatched records within every observed journal/position group.</p>
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">position_summary_example</span> <span class="op">&lt;-</span> <span class="va">authors_example</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">position</span>, <span class="va">lookup_category</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">position</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>pct <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">position_summary</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">position</span>, y <span class="op">=</span> <span class="va">pct</span>, fill <span class="op">=</span> <span class="va">gender</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">position_summary_example</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">position</span>, y <span class="op">=</span> <span class="va">pct</span>, fill <span class="op">=</span> <span class="va">lookup_category</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">journal</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_discrete.html">scale_x_discrete</a></span><span class="op">(</span>drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Author position"</span>, y <span class="op">=</span> <span class="st">"Proportion"</span>, fill <span class="op">=</span> <span class="st">"Gender"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">3</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Recorded position"</span>, y <span class="op">=</span> <span class="st">"Share of synthetic records"</span>, fill <span class="op">=</span> <span class="st">"Lookup category"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:cs04-fig-cs04-position"></span>
-<img src="scientometrics-in-r_files/figure-html/cs04-fig-cs04-position-1.png" alt="Faceted bar chart showing male/female proportions in first, middle, and last author positions for each journal." width="90%"><p class="caption">
-Figure 42.2: Gender representation by authorship position and journal.
+<img src="scientometrics-in-r_files/figure-html/cs04-fig-cs04-position-1.png" alt="Faceted bars compare A, B and Unmatched shares by first, middle, last and single-author positions in two fictional journals." width="90%"><p class="caption">
+Figure 41.2: Arbitrary lookup categories by recorded position in the synthetic fixture, including unmatched records. Empty positions have no observations.
 </p>
 </div>
 </div>
-<div id="temporal-trends" class="section level2" number="42.7">
+<div id="coverage-by-recorded-year" class="section level2" number="41.7">
 <h2>
-<span class="header-section-number">42.7</span> Temporal trends<a class="anchor" aria-label="anchor" href="#temporal-trends"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.7</span> Coverage by recorded year<a class="anchor" aria-label="anchor" href="#coverage-by-recorded-year"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">first_authors</span> <span class="op">&lt;-</span> <span class="va">authors</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">position</span> <span class="op">==</span> <span class="st">"first"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/as.Date.html">as.Date</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_extract.html">str_extract</a></span><span class="op">(</span><span class="va">work_id</span>, <span class="st">"\\d{4}$"</span><span class="op">)</span>, <span class="st">"-01-01"</span></span>
-<span>  <span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">works_all_year</span> <span class="op">&lt;-</span> <span class="va">works_all</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span>work_id <span class="op">=</span> <span class="va">id</span>, year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">first_authors_year</span> <span class="op">&lt;-</span> <span class="va">first_authors</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">works_all_year</span>, by <span class="op">=</span> <span class="st">"work_id"</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">first_authors_year</span> <span class="op">|&gt;</span></span>
+<p>The year comes from the fixture’s explicit publication-year column, never from
+an identifier. For each fictional journal/year, the denominator includes all
+first- or single-author records. Each group has only one such record here, so
+coverage is either zero or one. This illustrates denominator accounting; it
+supplies no evidence about a demographic trend.</p>
+<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">coverage_by_year</span> <span class="op">&lt;-</span> <span class="va">authors_example</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">position</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"first"</span>, <span class="st">"single"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>female_pct <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">gender</span> <span class="op">==</span> <span class="st">"female"</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">female_pct</span>, colour <span class="op">=</span> <span class="va">journal</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>records <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, matched <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">lookup_category</span> <span class="op">!=</span> <span class="st">"Unmatched"</span><span class="op">)</span>,</span>
+<span>            coverage <span class="op">=</span> <span class="va">matched</span> <span class="op">/</span> <span class="va">records</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">coverage_by_year</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">coverage</span>, colour <span class="op">=</span> <span class="va">journal</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_x_continuous</a></span><span class="op">(</span>breaks <span class="op">=</span> <span class="fl">2019</span><span class="op">:</span><span class="fl">2021</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span><span class="op">(</span>labels <span class="op">=</span> <span class="fu">scales</span><span class="fu">::</span><span class="va"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span>, limits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, y <span class="op">=</span> <span class="st">"Female first-author proportion"</span>, colour <span class="op">=</span> <span class="st">"Journal"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Recorded fixture year"</span>, y <span class="op">=</span> <span class="st">"Lookup coverage"</span>, colour <span class="op">=</span> <span class="st">"Fictional journal"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:cs04-fig-cs04-temporal"></span>
-<img src="scientometrics-in-r_files/figure-html/cs04-fig-cs04-temporal-1.png" alt="Line chart tracking the proportion of female first authors over time for each journal." width="90%"><p class="caption">
-Figure 42.3: Proportion of female first authors by year.
+<img src="scientometrics-in-r_files/figure-html/cs04-fig-cs04-temporal-1.png" alt="Lines show whether the one first-or-single-author record in each fictional journal/year matches an arbitrary lookup category." width="90%"><p class="caption">
+Figure 41.3: Lookup coverage among first- or single-author records by explicit fixture year. Each fictional journal/year has one record; no demographic trend is measured.
 </p>
 </div>
 </div>
-<div id="key-findings-3" class="section level2" number="42.8">
+<div id="what-the-fixture-establishes" class="section level2" number="41.8">
 <h2>
-<span class="header-section-number">42.8</span> Key findings<a class="anchor" aria-label="anchor" href="#key-findings-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.8</span> What the fixture establishes<a class="anchor" aria-label="anchor" href="#what-the-fixture-establishes"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>
-<strong>Persistent gap</strong>: Male names are overrepresented in both journals, particularly in last-author positions.</li>
+<strong>Denominators change the result.</strong> The fixture contains 15 authorship records:
+four A, four B and seven unmatched. Removing unmatched records would make A
+and B each half of the retained records, concealing that almost half of all
+records had no lookup match.</li>
 <li>
-<strong>Disciplinary differences</strong>: The gender balance differs between journals, likely reflecting field-specific demographics.</li>
+<strong>Coverage differs by construction.</strong> Example journal A has four matched
+records out of six; Example journal B has four out of nine. These differences
+follow from the invented name lists, not disciplinary or demographic evidence.</li>
 <li>
-<strong>Temporal progress</strong>: Some evidence of increasing female representation over time, but trends are noisy due to small sample sizes.</li>
+<strong>Identity and contribution remain unobserved.</strong> Neither the labels, the
+recorded positions nor their changes across fixture years support a claim
+about a gender gap, seniority or progress toward equity.</li>
 </ol>
 </div>
-<div id="critical-caveats" class="section level2" number="42.9">
+<div id="requirements-for-an-actual-study" class="section level2" number="41.9">
 <h2>
-<span class="header-section-number">42.9</span> Critical caveats<a class="anchor" aria-label="anchor" href="#critical-caveats"><i class="fas fa-link"></i></a>
+<span class="header-section-number">41.9</span> Requirements for an actual study<a class="anchor" aria-label="anchor" href="#requirements-for-an-actual-study"><i class="fas fa-link"></i></a>
 </h2>
 <div class="callout callout-warn">
-<p>These results must be interpreted with extreme caution:</p>
-<ul>
-<li>
-<strong>Name-based inference enforces a binary</strong> that excludes non-binary researchers.</li>
-<li>
-<strong>Coverage is biased</strong>: names from East Asia, South Asia, and Africa are poorly classified.</li>
-<li>
-<strong>The unclassified names are not random</strong> — they are systematically different from classified names.</li>
-<li>
-<strong>This is a methodological demonstration, not a definitive study.</strong> Production gender analysis requires validated tools with confidence scores and country context <span class="citation">(<a href="references.html#ref-lariviere2013">Larivière et al. 2013</a>)</span>.</li>
-</ul>
+<p>A real study needs a scientific question, a defined population and suitable
+observations of the demographic variable of interest. Document their provenance,
+ethical basis, categories, missingness and validation. Names cannot determine a
+person’s self-identified gender; a name-classification service, if used for a
+carefully justified question, still needs context-specific validation and an
+explicit account of what its labels measure. A confidence score alone does not
+validate the resulting equity estimate. See Chapter <a href="gender-and-equity-analysis.html#gender-limitations">28.6</a> and
+<a href="https://doi.org/10.7717/peerj-cs.156">Santamaría and Mihaljević (2018)</a>.</p>
+<p>This fixture contains no demographic observations or real journal comparison.
+No conclusion about a persistent gender gap, disciplinary differences or
+temporal progress can be drawn from it.</p>
 </div>
 
 </div>
@@ -393,89 +871,85 @@ Figure 42.3: Proportion of female first authors by year.
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></div>
-<div class="next"><a href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></div>
+<div class="prev"><a href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></div>
+<div class="next"><a href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#case-study-4-gender-gap-in-scientific-publishing"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="nav-link" href="#objective-3"><span class="header-section-number">42.1</span> Objective</a></li>
-<li><a class="nav-link" href="#setup-3"><span class="header-section-number">42.2</span> Setup</a></li>
-<li><a class="nav-link" href="#data-acquisition-3"><span class="header-section-number">42.3</span> Data acquisition</a></li>
-<li><a class="nav-link" href="#gender-inference"><span class="header-section-number">42.4</span> Gender inference</a></li>
-<li><a class="nav-link" href="#gender-representation-by-journal"><span class="header-section-number">42.5</span> Gender representation by journal</a></li>
-<li><a class="nav-link" href="#authorship-position-analysis-1"><span class="header-section-number">42.6</span> Authorship position analysis</a></li>
-<li><a class="nav-link" href="#temporal-trends"><span class="header-section-number">42.7</span> Temporal trends</a></li>
-<li><a class="nav-link" href="#key-findings-3"><span class="header-section-number">42.8</span> Key findings</a></li>
-<li><a class="nav-link" href="#critical-caveats"><span class="header-section-number">42.9</span> Critical caveats</a></li>
+<li><a class="nav-link" href="#case-study-4-gender-gap-in-scientific-publishing"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="nav-link" href="#objective-3"><span class="header-section-number">41.1</span> Objective</a></li>
+<li><a class="nav-link" href="#setup-3"><span class="header-section-number">41.2</span> Setup</a></li>
+<li><a class="nav-link" href="#synthetic-teaching-records"><span class="header-section-number">41.3</span> Synthetic teaching records</a></li>
+<li><a class="nav-link" href="#arbitrary-lookup-and-complete-denominators"><span class="header-section-number">41.4</span> Arbitrary lookup and complete denominators</a></li>
+<li><a class="nav-link" href="#lookup-categories-by-fictional-journal"><span class="header-section-number">41.5</span> Lookup categories by fictional journal</a></li>
+<li><a class="nav-link" href="#recorded-authorship-position"><span class="header-section-number">41.6</span> Recorded authorship position</a></li>
+<li><a class="nav-link" href="#coverage-by-recorded-year"><span class="header-section-number">41.7</span> Coverage by recorded year</a></li>
+<li><a class="nav-link" href="#what-the-fixture-establishes"><span class="header-section-number">41.8</span> What the fixture establishes</a></li>
+<li><a class="nav-link" href="#requirements-for-an-actual-study"><span class="header-section-number">41.9</span> Requirements for an actual study</a></li>
 </ul>
 
       <div class="book-extra">
@@ -493,7 +967,7 @@ Figure 42.3: Proportion of female first authors by year.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

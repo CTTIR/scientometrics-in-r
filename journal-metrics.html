@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 12 Journal Metrics | Scientometrics in R</title>
+<title>Chapter 11 Journal Metrics | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="12.1 Learning objectives After completing this chapter, you will be able to: Describe how the Journal Impact Factor, CiteScore, SNIP, SJR, and Eigenfactor are computed Explain why network-based...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 12 Journal Metrics | Scientometrics in R">
+<meta name="description" content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 11 Journal Metrics | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/journal-metrics.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="12.1 Learning objectives After completing this chapter, you will be able to: Describe how the Journal Impact Factor, CiteScore, SNIP, SJR, and Eigenfactor are computed Explain why network-based...">
+<meta property="og:description" content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 12 Journal Metrics | Scientometrics in R">
-<meta name="twitter:description" content="12.1 Learning objectives After completing this chapter, you will be able to: Describe how the Journal Impact Factor, CiteScore, SNIP, SJR, and Eigenfactor are computed Explain why network-based...">
+<meta name="twitter:title" content="Chapter 11 Journal Metrics | Scientometrics in R">
+<meta name="twitter:description" content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="active" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="active" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,28 +163,28 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="journal-metrics" class="section level1" number="12">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="journal-metrics" class="section level1" number="11">
 <h1>
-<span class="header-section-number">12</span> Journal Metrics<a class="anchor" aria-label="anchor" href="#journal-metrics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11</span> Journal Metrics<a class="anchor" aria-label="anchor" href="#journal-metrics"><i class="fas fa-link"></i></a>
 </h1>
-<div id="jmetrics-objectives" class="section level2" number="12.1">
+<div id="jmetrics-objectives" class="section level2" number="11.1">
 <h2>
-<span class="header-section-number">12.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#jmetrics-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#jmetrics-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
-<li>Describe how the Journal Impact Factor, CiteScore, SNIP, SJR, and Eigenfactor are computed</li>
+<li>Explain the citation windows and data requirements of JIF, CiteScore and SNIP</li>
 <li>Explain why network-based journal metrics differ from simple citation ratios</li>
-<li>Compute JIF-like and SNIP-like proxies from OpenAlex data</li>
-<li>Articulate why proxy values differ from official proprietary metrics</li>
-<li>Evaluate journals using multiple indicators rather than a single number</li>
+<li>Summarise current cumulative citations and recorded references in journal cohorts</li>
+<li>Distinguish those descriptive summaries from official journal metrics</li>
+<li>Evaluate journals using appropriate evidence rather than a single number</li>
 </ul>
 </div>
-<div id="jmetrics-setup" class="section level2" number="12.2">
+<div id="jmetrics-setup" class="section level2" number="11.2">
 <h2>
-<span class="header-section-number">12.2</span> Setup<a class="anchor" aria-label="anchor" href="#jmetrics-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Setup<a class="anchor" aria-label="anchor" href="#jmetrics-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -197,82 +196,143 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="jmetrics-background" class="section level2" number="12.3">
+<div id="jmetrics-background" class="section level2" number="11.3">
 <h2>
-<span class="header-section-number">12.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#jmetrics-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#jmetrics-background"><i class="fas fa-link"></i></a>
 </h2>
-<p>Journal-level metrics aim to summarise a journal’s citation performance. The most famous is the <strong>Journal Impact Factor</strong> (JIF), introduced by <span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> and commercialised by Clarivate. The two-year JIF for year <em>t</em> equals the citations received in year <em>t</em> by articles published in years <em>t</em>-1 and <em>t</em>-2, divided by the number of “citable items” published in those two years. Its simplicity is both its appeal and its weakness: the numerator includes citations to all document types, but the denominator often excludes editorials and letters, inflating the ratio <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</p>
-<p><strong>CiteScore</strong> (Elsevier) uses a four-year window and counts all document types in both numerator and denominator, making it more transparent. <strong>SNIP</strong> (Source-Normalized Impact per Paper) normalises by citation potential — the average number of references in citing articles’ reference lists — so that journals in fields with longer reference lists are not automatically advantaged <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>. <strong>SJR</strong> (SCImago Journal Rank) and the <strong>Eigenfactor</strong> use iterative algorithms inspired by PageRank: a citation from a prestigious journal carries more weight than one from a low-impact source. This makes them network-based indicators, conceptually similar to eigenvector centrality in graph theory.</p>
-<p>All of these official metrics are tied to proprietary databases (Web of Science or Scopus). With OpenAlex <span class="citation">(<a href="references.html#ref-priem2022">Priem et al. 2022</a>)</span>, we can compute <strong>proxy</strong> values from fully open data. Proxies will not match official figures exactly — differences in coverage, document-type classification, and citation linking guarantee some divergence <span class="citation">(<a href="references.html#ref-visser2021">Visser et al. 2021</a>)</span> — but they are transparent, reproducible, and free.</p>
-<p>DORA <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> explicitly warns against using the JIF as a proxy for individual article quality. The Leiden Manifesto <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span> echoes this: journal metrics describe <em>average</em> journal performance and say nothing about any specific paper.</p>
+<p>Journal-level metrics summarise particular aspects of a journal’s citation
+record. The two-year <strong>Journal Impact Factor</strong> (JIF) for year <em>t</em> counts citations
+received in year <em>t</em> to the journal’s content from years <em>t</em>-1 and <em>t</em>-2, divided
+by its citable items from those two publication years. The numerator can include
+citations to document types excluded from the denominator. The citation year,
+publication cohort and document-type rules are distinct parts of the definition;
+see <a href="https://clarivate.libguides.com/jcr/">Clarivate’s calculation explanation</a>.</p>
+<p><strong>CiteScore</strong> uses a four-year publication window and counts citations received
+within that same four-year interval. Its eligible document types include articles,
+reviews, conference papers, book chapters and data papers in both the numerator
+and denominator; it does not simply include every document type. See
+<a href="https://www.elsevier.com/en-gb/researcher/author/tools-and-resources/measuring-a-journals-impact">Elsevier’s metric definitions</a>.</p>
+<p><strong>SNIP</strong> (Source-Normalized Impact per Paper) adjusts for citation practices using
+information from the <em>citing</em> side, with specified reference and weighting rules.
+It is not a journal’s citation average divided by the median reference count in
+its own papers. The revised method is described by
+<a href="https://doi.org/10.1016/j.joi.2012.11.011">Waltman et al. (2013)</a>.
+<strong>SJR</strong> (SCImago Journal Rank) and <strong>Eigenfactor</strong> use citation networks to weight
+citations according to their source; a simple citation count does not reproduce
+those network calculations <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>.</p>
+<p>The published indicators use specified database coverage, document eligibility,
+time windows and methods. An alternative calculation needs its own explicit
+definition and validation <span class="citation">(<a href="references.html#ref-visser2021">Visser et al. 2021</a>)</span>. The OpenAlex example below computes
+current cumulative citation and recorded-reference summaries only. It neither
+implements nor estimates JIF, CiteScore, SNIP, SJR or Eigenfactor.</p>
+<p>DORA <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> warns against using a journal metric as a measure of an individual
+article’s quality. Journal averages cannot establish the quality of a particular
+paper, and citation distributions within journals can be highly uneven <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</p>
 </div>
-<div id="jmetrics-example" class="section level2" number="12.4">
+<div id="jmetrics-example" class="section level2" number="11.4">
 <h2>
-<span class="header-section-number">12.4</span> Worked example<a class="anchor" aria-label="anchor" href="#jmetrics-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Worked example<a class="anchor" aria-label="anchor" href="#jmetrics-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="selecting-journals" class="section level3" number="12.4.1">
+<div id="selecting-journals" class="section level3" number="11.4.1">
 <h3>
-<span class="header-section-number">12.4.1</span> Selecting journals<a class="anchor" aria-label="anchor" href="#selecting-journals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.1</span> Selecting journals<a class="anchor" aria-label="anchor" href="#selecting-journals"><i class="fas fa-link"></i></a>
 </h3>
-<p>We analyse five well-known journals in information science and scientometrics.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<p>We use five journals in information science and research evaluation. Source
+identities were checked against OpenAlex on 30 October 2026. The JASIST record
+below is the current <em>Journal of the Association for Information Science and
+Technology</em>, appropriate to the 2021–2022 publication cohort; historical titles
+can have separate source records.</p>
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">short_name</span>,        <span class="op">~</span><span class="va">source_id</span>,</span>
 <span>  <span class="st">"Scientometrics"</span>,   <span class="st">"S148561398"</span>,</span>
-<span>  <span class="st">"J Informetrics"</span>,   <span class="st">"S205038879"</span>,</span>
-<span>  <span class="st">"Quant Sci Stud"</span>,   <span class="st">"S4210178031"</span>,</span>
-<span>  <span class="st">"J Am Soc Inf Sci"</span>, <span class="st">"S145342767"</span>,</span>
-<span>  <span class="st">"Res Evaluation"</span>,   <span class="st">"S100532675"</span></span>
+<span>  <span class="st">"J Informetrics"</span>,   <span class="st">"S205292342"</span>,</span>
+<span>  <span class="st">"Quant Sci Stud"</span>,   <span class="st">"S4210195326"</span>,</span>
+<span>  <span class="st">"JASIST"</span>,           <span class="st">"S4210197613"</span>,</span>
+<span>  <span class="st">"Res Evaluation"</span>,   <span class="st">"S16793705"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="fetching-citation-data" class="section level3" number="12.4.2">
+<div id="fetching-a-publication-cohort" class="section level3" number="11.4.2">
 <h3>
-<span class="header-section-number">12.4.2</span> Fetching citation data<a class="anchor" aria-label="anchor" href="#fetching-citation-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.2</span> Fetching a publication cohort<a class="anchor" aria-label="anchor" href="#fetching-a-publication-cohort"><i class="fas fa-link"></i></a>
 </h3>
-<p>We fetch works published in 2021-2022 and count citations received during 2022-2023 to construct a two-year JIF-like proxy.</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<p>Fetch records classified as articles and published in 2021–2022. Their
+<code>cited_by_count</code> values are <strong>cumulative citations at retrieval</strong>, not citations
+received in a specified historical year. The query restricts publication dates;
+it does not restrict the dates on which citations were received. Results describe
+the retrieved records and require coverage checks before being treated as complete
+journal output.</p>
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fetch_journal_works</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">source_id</span>, <span class="va">from_year</span>, <span class="va">to_year</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
-<span>      entity <span class="op">=</span> <span class="st">"works"</span>,</span>
-<span>      primary_location.source.id <span class="op">=</span> <span class="va">source_id</span>,</span>
-<span>      from_publication_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">from_year</span>, <span class="st">"-01-01"</span><span class="op">)</span>,</span>
-<span>      to_publication_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">to_year</span>, <span class="st">"-12-31"</span><span class="op">)</span>,</span>
-<span>      type <span class="op">=</span> <span class="st">"article"</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="cn">NULL</span></span>
+<span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
+<span>    entity <span class="op">=</span> <span class="st">"works"</span>,</span>
+<span>    primary_location.source.id <span class="op">=</span> <span class="va">source_id</span>,</span>
+<span>    from_publication_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">from_year</span>, <span class="st">"-01-01"</span><span class="op">)</span>,</span>
+<span>    to_publication_date <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span><span class="op">(</span><span class="va">to_year</span>, <span class="st">"-12-31"</span><span class="op">)</span>,</span>
+<span>    type <span class="op">=</span> <span class="st">"article"</span></span>
 <span>  <span class="op">)</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="kw">else</span> <span class="va">res</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">is.data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">||</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"No usable records for {source_id}; check the query and provider response before comparing journals."</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">res</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">journal_works</span> <span class="op">&lt;-</span> <span class="va">journals</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">source_id</span>, <span class="fl">2021</span>, \<span class="op">(</span><span class="va">sid</span>, <span class="va">yr</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu">fetch_journal_works</span><span class="op">(</span><span class="va">sid</span>, <span class="va">yr</span>, <span class="va">yr</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span></span>
-<span>  <span class="op">}</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>data <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">source_id</span>, \<span class="op">(</span><span class="va">sid</span><span class="op">)</span> <span class="fu">fetch_journal_works</span><span class="op">(</span><span class="va">sid</span>, <span class="fl">2021</span>, <span class="fl">2022</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Provider errors propagate instead of being converted to zero publications or
+citations. An empty result stops the worked comparison; it is not evidence that
+a journal has no output.</p>
 </div>
-<div id="computing-jif-like-proxies" class="section level3" number="12.4.3">
+<div id="cumulative-citation-summaries" class="section level3" number="11.4.3">
 <h3>
-<span class="header-section-number">12.4.3</span> Computing JIF-like proxies<a class="anchor" aria-label="anchor" href="#computing-jif-like-proxies"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.3</span> Cumulative citation summaries<a class="anchor" aria-label="anchor" href="#cumulative-citation-summaries"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">jif_proxy</span> <span class="op">&lt;-</span> <span class="va">journal_works</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    n_articles <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">nrow</span><span class="op">)</span>,</span>
-<span>    total_cites <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">data</span>, \<span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">cited_by_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>jif_proxy <span class="op">=</span> <span class="va">total_cites</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">n_articles</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">n_articles</span>, <span class="va">total_cites</span>, <span class="va">jif_proxy</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">jif_proxy</span><span class="op">)</span><span class="op">)</span></span>
+<p>The citation mean uses only observed citation counts, with that denominator
+reported. Missing counts are not zero. A total over observed values is not a
+complete journal total when records or counts are missing.</p>
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">summarise_journal_records</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">required</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"id"</span>, <span class="st">"cited_by_count"</span>, <span class="st">"referenced_works_count"</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">is.data.frame</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">||</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">||</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="va">required</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Journal summaries need nonempty records with IDs, citation counts and reference counts."</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">anyNA</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">id</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nzchar</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">id</span><span class="op">)</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">anyDuplicated</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">id</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Journal work IDs must be present and unique."</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">column</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"cited_by_count"</span>, <span class="st">"referenced_works_count"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">values</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">[[</span><span class="va">column</span><span class="op">]</span><span class="op">]</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html">is.numeric</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="op">&amp;</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">values</span><span class="op">)</span> <span class="op">|</span> <span class="va">values</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Citation and reference counts must be finite nonnegative numbers or missing."</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">citations</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="va">references</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">referenced_works_count</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">referenced_works_count</span><span class="op">)</span><span class="op">]</span></span>
+<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
+<span>    n_articles <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, n_citations_observed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">citations</span><span class="op">)</span>,</span>
+<span>    observed_citation_sum <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">citations</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">citations</span><span class="op">)</span> <span class="kw">else</span> <span class="cn">NA_real_</span>,</span>
+<span>    mean_cumulative_citations <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">citations</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">citations</span><span class="op">)</span> <span class="kw">else</span> <span class="cn">NA_real_</span>,</span>
+<span>    median_cumulative_citations <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">citations</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">citations</span><span class="op">)</span> <span class="kw">else</span> <span class="cn">NA_real_</span>,</span>
+<span>    n_references_observed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">references</span><span class="op">)</span>,</span>
+<span>    median_recorded_references <span class="op">=</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">references</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">references</span><span class="op">)</span> <span class="kw">else</span> <span class="cn">NA_real_</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">jif_proxy</span> <span class="op">|&gt;</span></span>
+<span><span class="va">journal_summary</span> <span class="op">&lt;-</span> <span class="va">journal_works</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>summary <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">summarise_journal_records</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">summary</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">data</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">short_name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">journal_summary</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">n_articles</span>, <span class="va">n_citations_observed</span>, <span class="va">observed_citation_sum</span>,</span>
+<span>         <span class="va">mean_cumulative_citations</span>, <span class="va">median_cumulative_citations</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="va">jif_proxy</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span></span>
-<span>    short_name <span class="op">=</span> <span class="st">"Journal"</span>,</span>
-<span>    n_articles <span class="op">=</span> <span class="st">"Articles (2021-22)"</span>,</span>
-<span>    total_cites <span class="op">=</span> <span class="st">"Total citations"</span>,</span>
-<span>    jif_proxy <span class="op">=</span> <span class="st">"JIF proxy"</span></span>
-<span>  <span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">mean_cumulative_citations</span>, <span class="va">median_cumulative_citations</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span>short_name <span class="op">=</span> <span class="st">"Journal"</span>, n_articles <span class="op">=</span> <span class="st">"Retrieved articles (2021–22)"</span>,</span>
+<span>             n_citations_observed <span class="op">=</span> <span class="st">"Observed citation counts"</span>,</span>
+<span>             observed_citation_sum <span class="op">=</span> <span class="st">"Sum of observed cumulative citations"</span>,</span>
+<span>             mean_cumulative_citations <span class="op">=</span> <span class="st">"Mean cumulative citations"</span>,</span>
+<span>             median_cumulative_citations <span class="op">=</span> <span class="st">"Median cumulative citations"</span><span class="op">)</span></span></code></pre></div>
 <div id="wuolgkrdww" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#wuolgkrdww table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -725,69 +785,73 @@
 <div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">Journal</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_articles">Articles (2021-22)</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total_cites">Total citations</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="jif_proxy">JIF proxy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_articles">Retrieved articles (2021–22)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_citations_observed">Observed citation counts</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="observed_citation_sum">Sum of observed cumulative citations</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cumulative_citations">Mean cumulative citations</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_cumulative_citations">Median cumulative citations</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="short_name" class="gt_row gt_left">Quant Sci Stud</td>
-<td headers="n_articles" class="gt_row gt_right">33</td>
-<td headers="total_cites" class="gt_row gt_right">1511</td>
-<td headers="jif_proxy" class="gt_row gt_right">45.79</td>
-</tr>
-<tr>
-<td headers="short_name" class="gt_row gt_left">Scientometrics</td>
-<td headers="n_articles" class="gt_row gt_right">770</td>
-<td headers="total_cites" class="gt_row gt_right">15202</td>
-<td headers="jif_proxy" class="gt_row gt_right">19.74</td>
-</tr>
-<tr>
 <td headers="short_name" class="gt_row gt_left">J Informetrics</td>
-<td headers="n_articles" class="gt_row gt_right">0</td>
-<td headers="total_cites" class="gt_row gt_right">0</td>
-<td headers="jif_proxy" class="gt_row gt_right">0.00</td>
+<td headers="n_articles" class="gt_row gt_right">184</td>
+<td headers="n_citations_observed" class="gt_row gt_right">184</td>
+<td headers="observed_citation_sum" class="gt_row gt_right">3796</td>
+<td headers="mean_cumulative_citations" class="gt_row gt_right">20.63</td>
+<td headers="median_cumulative_citations" class="gt_row gt_right">16.00</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">J Am Soc Inf Sci</td>
-<td headers="n_articles" class="gt_row gt_right">0</td>
-<td headers="total_cites" class="gt_row gt_right">0</td>
-<td headers="jif_proxy" class="gt_row gt_right">0.00</td>
+<td headers="short_name" class="gt_row gt_left">JASIST</td>
+<td headers="n_articles" class="gt_row gt_right">211</td>
+<td headers="n_citations_observed" class="gt_row gt_right">211</td>
+<td headers="observed_citation_sum" class="gt_row gt_right">4886</td>
+<td headers="mean_cumulative_citations" class="gt_row gt_right">23.16</td>
+<td headers="median_cumulative_citations" class="gt_row gt_right">16.00</td>
+</tr>
+<tr>
+<td headers="short_name" class="gt_row gt_left">Quant Sci Stud</td>
+<td headers="n_articles" class="gt_row gt_right">128</td>
+<td headers="n_citations_observed" class="gt_row gt_right">128</td>
+<td headers="observed_citation_sum" class="gt_row gt_right">4141</td>
+<td headers="mean_cumulative_citations" class="gt_row gt_right">32.35</td>
+<td headers="median_cumulative_citations" class="gt_row gt_right">12.00</td>
 </tr>
 <tr>
 <td headers="short_name" class="gt_row gt_left">Res Evaluation</td>
-<td headers="n_articles" class="gt_row gt_right">0</td>
-<td headers="total_cites" class="gt_row gt_right">0</td>
-<td headers="jif_proxy" class="gt_row gt_right">0.00</td>
+<td headers="n_articles" class="gt_row gt_right">84</td>
+<td headers="n_citations_observed" class="gt_row gt_right">84</td>
+<td headers="observed_citation_sum" class="gt_row gt_right">1592</td>
+<td headers="mean_cumulative_citations" class="gt_row gt_right">18.95</td>
+<td headers="median_cumulative_citations" class="gt_row gt_right">12.00</td>
+</tr>
+<tr>
+<td headers="short_name" class="gt_row gt_left">Scientometrics</td>
+<td headers="n_articles" class="gt_row gt_right">747</td>
+<td headers="n_citations_observed" class="gt_row gt_right">747</td>
+<td headers="observed_citation_sum" class="gt_row gt_right">18132</td>
+<td headers="mean_cumulative_citations" class="gt_row gt_right">24.27</td>
+<td headers="median_cumulative_citations" class="gt_row gt_right">14.00</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="computing-a-snip-like-proxy" class="section level3" number="12.4.4">
+<div id="recorded-reference-counts" class="section level3" number="11.4.4">
 <h3>
-<span class="header-section-number">12.4.4</span> Computing a SNIP-like proxy<a class="anchor" aria-label="anchor" href="#computing-a-snip-like-proxy"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.4</span> Recorded reference counts<a class="anchor" aria-label="anchor" href="#recorded-reference-counts"><i class="fas fa-link"></i></a>
 </h3>
-<p>SNIP normalises by citation potential. We approximate this by dividing each journal’s mean citations per paper by the median reference-list length of its citing works.</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">snip_proxy</span> <span class="op">&lt;-</span> <span class="va">journal_works</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    mean_cites <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">data</span>, \<span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="cn">NA_real_</span> <span class="kw">else</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">cited_by_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    median_refs <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">data</span>, \<span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NA_real_</span><span class="op">)</span></span>
-<span>      <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">d</span><span class="op">$</span><span class="va">referenced_works_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="op">}</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    citation_potential <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">median_refs</span>, <span class="fl">1</span><span class="op">)</span>,</span>
-<span>    snip_proxy <span class="op">=</span> <span class="va">mean_cites</span> <span class="op">/</span> <span class="va">citation_potential</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">mean_cites</span>, <span class="va">citation_potential</span>, <span class="va">snip_proxy</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">snip_proxy</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">snip_proxy</span> <span class="op">|&gt;</span></span>
+<p><code>referenced_works_count</code> describes the references recorded for the fetched
+journal articles. It is not the reference-list information for papers citing
+those articles, and it need not capture every reference in the original texts.
+We report it separately rather than dividing citations by it or calling it
+citation potential.</p>
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">journal_summary</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">n_articles</span>, <span class="va">n_references_observed</span>, <span class="va">median_recorded_references</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">mean_cites</span>, <span class="va">snip_proxy</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span>short_name <span class="op">=</span> <span class="st">"Journal"</span>, n_articles <span class="op">=</span> <span class="st">"Retrieved articles"</span>,</span>
+<span>             n_references_observed <span class="op">=</span> <span class="st">"Observed reference counts"</span>,</span>
+<span>             median_recorded_references <span class="op">=</span> <span class="st">"Median recorded references"</span><span class="op">)</span></span></code></pre></div>
 <div id="vhdvwtvjrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#vhdvwtvjrx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1239,173 +1303,175 @@
 </style>
 <div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">short_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cites">mean_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="citation_potential">citation_potential</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="snip_proxy">snip_proxy</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">Journal</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_articles">Retrieved articles</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_references_observed">Observed reference counts</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_recorded_references">Median recorded references</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="short_name" class="gt_row gt_left">Quant Sci Stud</td>
-<td headers="mean_cites" class="gt_row gt_right">45.79</td>
-<td headers="citation_potential" class="gt_row gt_right">94</td>
-<td headers="snip_proxy" class="gt_row gt_right">0.49</td>
-</tr>
-<tr>
-<td headers="short_name" class="gt_row gt_left">Scientometrics</td>
-<td headers="mean_cites" class="gt_row gt_right">19.74</td>
-<td headers="citation_potential" class="gt_row gt_right">46</td>
-<td headers="snip_proxy" class="gt_row gt_right">0.43</td>
-</tr>
-<tr>
 <td headers="short_name" class="gt_row gt_left">J Informetrics</td>
-<td headers="mean_cites" class="gt_row gt_right">NA</td>
-<td headers="citation_potential" class="gt_row gt_right">NA</td>
-<td headers="snip_proxy" class="gt_row gt_right">NA</td>
+<td headers="n_articles" class="gt_row gt_right">184</td>
+<td headers="n_references_observed" class="gt_row gt_right">184</td>
+<td headers="median_recorded_references" class="gt_row gt_right">59</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">J Am Soc Inf Sci</td>
-<td headers="mean_cites" class="gt_row gt_right">NA</td>
-<td headers="citation_potential" class="gt_row gt_right">NA</td>
-<td headers="snip_proxy" class="gt_row gt_right">NA</td>
+<td headers="short_name" class="gt_row gt_left">JASIST</td>
+<td headers="n_articles" class="gt_row gt_right">211</td>
+<td headers="n_references_observed" class="gt_row gt_right">211</td>
+<td headers="median_recorded_references" class="gt_row gt_right">50</td>
+</tr>
+<tr>
+<td headers="short_name" class="gt_row gt_left">Quant Sci Stud</td>
+<td headers="n_articles" class="gt_row gt_right">128</td>
+<td headers="n_references_observed" class="gt_row gt_right">128</td>
+<td headers="median_recorded_references" class="gt_row gt_right">47</td>
 </tr>
 <tr>
 <td headers="short_name" class="gt_row gt_left">Res Evaluation</td>
-<td headers="mean_cites" class="gt_row gt_right">NA</td>
-<td headers="citation_potential" class="gt_row gt_right">NA</td>
-<td headers="snip_proxy" class="gt_row gt_right">NA</td>
+<td headers="n_articles" class="gt_row gt_right">84</td>
+<td headers="n_references_observed" class="gt_row gt_right">84</td>
+<td headers="median_recorded_references" class="gt_row gt_right">46</td>
+</tr>
+<tr>
+<td headers="short_name" class="gt_row gt_left">Scientometrics</td>
+<td headers="n_articles" class="gt_row gt_right">747</td>
+<td headers="n_references_observed" class="gt_row gt_right">747</td>
+<td headers="median_recorded_references" class="gt_row gt_right">46</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="visualization-5" class="section level3" number="12.4.5">
+<div id="visualization-5" class="section level3" number="11.4.5">
 <h3>
-<span class="header-section-number">12.4.5</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.5</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-5"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">jif_proxy</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">jif_proxy</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">snip_proxy</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">snip_proxy</span><span class="op">)</span>, by <span class="op">=</span> <span class="st">"short_name"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">jif_proxy</span>, <span class="va">snip_proxy</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"metric"</span>, values_to <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>metric <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">metric</span>, jif_proxy <span class="op">=</span> <span class="st">"JIF proxy"</span>, snip_proxy <span class="op">=</span> <span class="st">"SNIP proxy"</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">journal_summary</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">mean_cumulative_citations</span>, <span class="va">median_recorded_references</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="op">-</span><span class="va">short_name</span>, names_to <span class="op">=</span> <span class="st">"summary"</span>, values_to <span class="op">=</span> <span class="st">"value"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>summary <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">summary</span>,</span>
+<span>    mean_cumulative_citations <span class="op">=</span> <span class="st">"Mean cumulative citations"</span>,</span>
+<span>    median_recorded_references <span class="op">=</span> <span class="st">"Median recorded references"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">combined</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">value</span><span class="op">)</span>, colour <span class="op">=</span> <span class="va">metric</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Metric value"</span>, y <span class="op">=</span> <span class="cn">NULL</span>, colour <span class="op">=</span> <span class="st">"Metric"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_colour_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">combined</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">value</span>, y <span class="op">=</span> <span class="va">short_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">3</span>, colour <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span><span class="op">(</span><span class="op">~</span> <span class="va">summary</span>, scales <span class="op">=</span> <span class="st">"free_x"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Descriptive value (see panel)"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:11-fig-jmetrics-comparison"></span>
-<img src="scientometrics-in-r_files/figure-html/11-fig-jmetrics-comparison-1.png" alt="Dot plot showing JIF proxy and SNIP proxy values side by side for five information science journals, illustrating how normalisation changes relative rankings." width="90%"><p class="caption">
-Figure 12.1: Comparison of JIF proxy and SNIP proxy across five journals.
+<img src="scientometrics-in-r_files/figure-html/11-fig-jmetrics-comparison-1.png" alt="Two panels show journal mean cumulative citations at retrieval and median recorded references in those same journal articles; neither panel is an official journal metric." width="90%"><p class="caption">
+Figure 11.1: Current cumulative citations and recorded references for the retrieved 2021–2022 article cohorts, shown as separate descriptive quantities.
 </p>
 </div>
 </div>
 </div>
-<div id="jmetrics-diagnostics" class="section level2" number="12.5">
+<div id="jmetrics-diagnostics" class="section level2" number="11.5">
 <h2>
-<span class="header-section-number">12.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#jmetrics-diagnostics"><i class="fas fa-link"></i></a>
-</h2>
-<p>When evaluating journal metric proxies:</p>
-<ul>
-<li>
-<strong>Coverage gaps</strong>: OpenAlex may miss some document types or citations present in Scopus/WoS. Compare article counts with known totals.</li>
-<li>
-<strong>Document-type classification</strong>: The JIF denominator famously excludes editorials and letters. Our proxy counts all articles; this may lower the ratio compared to official JIF values.</li>
-<li>
-<strong>Temporal alignment</strong>: Ensure citation windows match the intended metric definition exactly (two years for JIF, four for CiteScore).</li>
-<li>
-<strong>Rank correlation</strong>: Even if absolute values differ from official metrics, the <em>rank order</em> of journals often agrees, which is sufficient for many analyses.</li>
-</ul>
-</div>
-<div id="jmetrics-limitations" class="section level2" number="12.6">
-<h2>
-<span class="header-section-number">12.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#jmetrics-limitations"><i class="fas fa-link"></i></a>
-</h2>
-</div>
-<div id="limitations-and-responsible-use-10" class="section level2 callout callout-warn" number="12.7">
-<h2>
-<span class="header-section-number">12.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#jmetrics-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<strong>Journal metrics are not article metrics.</strong> The distribution of citations within a journal is highly skewed; the mean says little about any individual paper <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span>.</li>
+<strong>Coverage</strong>: Report source IDs, publication filters, retrieval dates and the number of retrieved records. Reconcile these with the intended corpus before interpreting output counts.</li>
 <li>
-<strong>Goodhart’s law applies.</strong> When a metric becomes a target, it ceases to be a good metric <span class="citation">(<a href="references.html#ref-goodhart1984">Goodhart 1984</a>)</span>. Editors may game the JIF through citation stacking, coercive citation, or manipulating the denominator.</li>
+<strong>Missing data</strong>: Compare the retrieved-record count with each observed denominator. An all-missing citation column produces missing summaries, not a zero-citation journal.</li>
 <li>
-<strong>Proxy ≠ official.</strong> Our OpenAlex-based proxies are transparent and reproducible, but they will differ from Clarivate JIF or Elsevier CiteScore. Never present proxies as official values.</li>
+<strong>Time</strong>: Older papers have had longer to accumulate citations. A publication-date filter cannot create an annual citation window from a current cumulative count.</li>
 <li>
-<strong>Field dependence persists.</strong> Even SNIP does not fully eliminate field effects. Comparing SNIP values across distant disciplines requires caution <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>.</li>
+<strong>Scope</strong>: References in the journal’s own articles describe those records; they do not supply the citing-side data needed for SNIP.</li>
+<li>
+<strong>Comparisons</strong>: Differences can reflect field mix, document classification, coverage and citation exposure. Agreement between descriptive rankings does not validate an official metric or justify an evaluation decision.</li>
 </ul>
 </div>
-<div id="jmetrics-pitfalls" class="section level2" number="12.8">
+<div id="jmetrics-limitations" class="section level2" number="11.6">
 <h2>
-<span class="header-section-number">12.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#jmetrics-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#jmetrics-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-10" class="section level2 callout callout-stop" number="12.9">
+<div id="limitations-and-responsible-use-10" class="section level2 callout callout-warn" number="11.7">
 <h2>
-<span class="header-section-number">12.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-10"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<strong>Treating the JIF as a measure of article quality.</strong> The JIF describes the journal, not the paper. A paper in a high-JIF journal may have zero citations.</li>
+<strong>Journal summaries are not article-quality measures.</strong> Means can conceal skewed citation distributions and do not establish a particular paper’s quality <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span>.</li>
 <li>
-<strong>Ignoring the citation window.</strong> Computing a “JIF” using lifetime citations instead of a two-year window produces a different and non-comparable number.</li>
+<strong>Targets can distort behaviour.</strong> Citation stacking, coercive citation and denominator manipulation are risks when metrics become targets <span class="citation">(<a href="references.html#ref-goodhart1984">Goodhart 1984</a>)</span>.</li>
 <li>
-<strong>Conflating numerator and denominator document types.</strong> Mixing reviews (which inflate the numerator) with a denominator that excludes them inflates the ratio.</li>
+<strong>These are descriptive snapshots.</strong> They are not JIF, CiteScore, SNIP or substitutes for those indicators. Reusing a familiar label does not supply the missing citation windows or methodology.</li>
 <li>
-<strong>Ranking journals by a single metric.</strong> Always use multiple indicators and consider disciplinary context.</li>
+<strong>Field dependence and metadata coverage remain.</strong> The example performs no field normalisation and cannot establish a fair ranking across disciplines <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>.</li>
 </ul>
 </div>
-<div id="jmetrics-exercises" class="section level2" number="12.10">
+<div id="jmetrics-pitfalls" class="section level2" number="11.8">
 <h2>
-<span class="header-section-number">12.10</span> Exercises<a class="anchor" aria-label="anchor" href="#jmetrics-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#jmetrics-pitfalls"><i class="fas fa-link"></i></a>
+</h2>
+</div>
+<div id="common-pitfalls-10" class="section level2 callout callout-stop" number="11.9">
+<h2>
+<span class="header-section-number">11.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-10"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>
+<strong>Relabeling cumulative citations as annual citations.</strong> JIF needs citations received in one specified year to the preceding two publication years.</li>
+<li>
+<strong>Using the wrong side of a citation link.</strong> The cited journal’s own reference counts do not describe the reference lists of its citing works.</li>
+<li>
+<strong>Treating absence as zero.</strong> Failed requests, empty responses and missing values require explicit handling before computing a denominator.</li>
+<li>
+<strong>Ranking journals by a single number.</strong> Indicator definitions, distributions, coverage and disciplinary context matter alongside any numerical comparison.</li>
+</ul>
+</div>
+<div id="jmetrics-exercises" class="section level2" number="11.10">
+<h2>
+<span class="header-section-number">11.10</span> Exercises<a class="anchor" aria-label="anchor" href="#jmetrics-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><p><strong>Four-year CiteScore proxy.</strong> Modify the worked example to compute a four-year CiteScore proxy (citations in year <em>t</em> to articles published in years <em>t</em>-1 to <em>t</em>-4, divided by all documents in those years). How does the ranking change?</p></li>
-<li><p><strong>Rank correlation.</strong> Compute Spearman’s rank correlation between your JIF proxy and SNIP proxy. Is the agreement high or low?</p></li>
-<li><p><strong>Field comparison.</strong> Pick five journals from two different fields (e.g., physics and sociology). Compute JIF proxies for both groups. Does SNIP normalisation reduce the between-field gap?</p></li>
-<li><p><strong>Self-citation share.</strong> For one journal, estimate the proportion of citations that come from the journal itself. How would excluding self-citations change the JIF proxy?</p></li>
+<li><p><strong>Cohort sensitivity.</strong> Fetch 2019–2022 articles for one of the verified source IDs and compare their cumulative citation summary with the 2021–2022 cohort. Explain why widening the publication cohort does not compute CiteScore.</p></li>
+<li><p><strong>Descriptive association.</strong> Compute Spearman correlation between the journal means of cumulative citations and medians of recorded references, using complete pairs. Explain why any association does not validate SNIP or establish field normalisation.</p></li>
+<li><p><strong>Missing-data denominator.</strong> For three invented records with citation counts 0, 20 and missing, calculate the observed citation sum and mean using the helper. Compare that mean with dividing the observed sum by all three records. Also check a cohort whose citation counts are all missing.</p></li>
+<li><p><strong>Self-citation design.</strong> Specify the citation edges, citing-journal identities, time window and denominator needed to measure a journal self-citation share. Explain why the fetched cumulative counts and reference counts are insufficient.</p></li>
 </ol>
 </div>
-<div id="solutions-10" class="section level2 callout callout-ok" number="12.11">
+<div id="id_11-solutions" class="section level2 callout callout-ok" number="11.11">
 <h2>
-<span class="header-section-number">12.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_11-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="jmetrics-reading" class="section level2" number="12.12">
+<div id="jmetrics-reading" class="section level2" number="11.12">
 <h2>
-<span class="header-section-number">12.12</span> Further reading<a class="anchor" aria-label="anchor" href="#jmetrics-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.12</span> Further reading<a class="anchor" aria-label="anchor" href="#jmetrics-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> — The original proposal for citation indexes, from which the JIF eventually emerged.</li>
+<span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> — The original proposal for citation indexes.</li>
 <li>
-<span class="citation">Waltman (<a href="references.html#ref-waltman2016">2016</a>)</span> — Comprehensive review of citation impact indicators, including journal-level metrics.</li>
+<span class="citation">Waltman (<a href="references.html#ref-waltman2016">2016</a>)</span> — Review of citation impact indicators and their data requirements.</li>
 <li>
-<span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> — The Leiden Manifesto, with specific guidance on responsible use of journal metrics.</li>
+<a href="https://clarivate.libguides.com/jcr/">Clarivate’s JIF calculation</a> and <a href="https://www.elsevier.com/en-gb/researcher/author/tools-and-resources/measuring-a-journals-impact">Elsevier’s metric definitions</a> — Provider definitions of citation windows and eligible documents.</li>
 <li>
-<span class="citation">American Society for Cell Biology (<a href="references.html#ref-dora2012">2012</a>)</span> — DORA: explicitly warns against using the JIF for individual evaluation.</li>
+<a href="https://doi.org/10.1016/j.joi.2012.11.011">Waltman et al. (2013)</a> — The revised SNIP methodology.</li>
 <li>
-<span class="citation">Goodhart (<a href="references.html#ref-goodhart1984">1984</a>)</span> — Goodhart’s law: when a measure becomes a target, it ceases to be a good measure.</li>
+<span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span>; <span class="citation">American Society for Cell Biology (<a href="references.html#ref-dora2012">2012</a>)</span> — Responsible use of journal-level metrics.</li>
 <li>
-<span class="citation">Visser et al. (<a href="references.html#ref-visser2021">2021</a>)</span> — Database comparison showing how coverage affects computed metrics.</li>
+<span class="citation">Visser et al. (<a href="references.html#ref-visser2021">2021</a>)</span> — Database coverage differences.</li>
 <li>
-<span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex as a fully open data source for computing metric proxies.</li>
+<span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex as an open bibliographic data source.</li>
 </ul>
 </div>
-<div id="jmetrics-sessioninfo" class="section level2" number="12.13">
+<div id="jmetrics-sessioninfo" class="section level2" number="11.13">
 <h2>
-<span class="header-section-number">12.13</span> Session info<a class="anchor" aria-label="anchor" href="#jmetrics-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.13</span> Session info<a class="anchor" aria-label="anchor" href="#jmetrics-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -1424,51 +1490,49 @@ Figure 12.1: Comparison of JIF proxy and SNIP proxy across five journals.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] quanteda_4.4       pdftools_3.9.0     arrow_24.0.0       bibliometrix_5.4.0
-#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.3.0          
-#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.0.1    lubridate_1.9.5   
+#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0
+#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0          
+#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
 #&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2       
 #&gt; [17] readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3     
 #&gt; [21] tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.31         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.0.0  curl_7.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.11.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.2.2            plotly_4.12.0         
-#&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      igraph_2.3.2          
-#&gt;  [28] mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
-#&gt;  [31] Matrix_1.7-0           R6_2.6.1               fastmap_1.2.0         
-#&gt;  [34] shiny_1.13.0           digest_0.6.39          shinycssloaders_1.1.0 
-#&gt;  [37] rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3        
-#&gt;  [40] urltools_1.7.3.1       timechange_0.4.0       httr_1.4.8            
-#&gt;  [43] compiler_4.4.1         here_1.0.2             bit64_4.8.0           
-#&gt;  [46] withr_3.0.2            S7_0.2.2               backports_1.5.1       
-#&gt;  [49] viridis_0.6.5          rappdirs_0.3.4         bibliometrixData_0.3.0
-#&gt;  [52] tools_4.4.1            otel_0.2.0             stopwords_2.3         
-#&gt;  [55] zip_2.3.3              httpuv_1.6.17          rentrez_1.2.4         
-#&gt;  [58] promises_1.5.0         grid_4.4.1             stringdist_0.9.17     
-#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
-#&gt;  [64] rscopus_0.9.0          ca_0.71.1              data.table_1.18.4     
-#&gt;  [67] hms_1.1.4              xml2_1.5.2             utf8_1.2.6            
-#&gt;  [70] ggrepel_0.9.8          pillar_1.11.1          later_1.4.8           
-#&gt;  [73] brand.yml_0.1.0        lattice_0.22-6         bit_4.6.0             
-#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [79] knitr_1.51             gridExtra_2.3          bookdown_0.46         
-#&gt;  [82] crul_1.6.0             xfun_0.57              DT_0.34.0             
-#&gt;  [85] humaniformat_0.6.0     visNetwork_2.1.4       stringi_1.8.7         
-#&gt;  [88] lazyeval_0.2.3         qpdf_1.4.1             yaml_2.3.12           
-#&gt;  [91] evaluate_1.0.5         codetools_0.2-20       httpcode_0.3.0        
-#&gt;  [94] cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
-#&gt;  [97] dichromat_2.0-0.1      Rcpp_1.1.1-1.1         readxl_1.4.5          
-#&gt; [100] triebeard_0.4.1        XML_3.99-0.23          parallel_4.4.1        
-#&gt; [103] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3     
-#&gt; [106] scales_1.4.0           openxlsx_4.2.8.1       rlang_1.2.0           
-#&gt; [109] fastmatch_1.1-8</code></pre>
+#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0          
+#&gt;   [4] rlang_1.3.0            magrittr_2.0.5         otel_0.2.0            
+#&gt;   [7] compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0        
+#&gt;  [10] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
+#&gt;  [13] ca_0.72                utf8_1.2.6             promises_1.5.0        
+#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0             
+#&gt;  [19] xfun_0.62              cachem_1.1.0           jsonlite_2.0.0        
+#&gt;  [22] SnowballC_0.7.1        later_1.4.8            parallel_4.6.1        
+#&gt;  [25] stopwords_2.3          R6_2.6.1               bslib_0.12.0          
+#&gt;  [28] stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
+#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2            
+#&gt;  [34] bookdown_0.48          knitr_1.52             triebeard_0.4.1       
+#&gt;  [37] base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17         
+#&gt;  [40] Matrix_1.7-5           igraph_2.3.4           timechange_0.4.0      
+#&gt;  [43] tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
+#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5         
+#&gt;  [49] miniUI_0.1.2           humaniformat_0.6.0     curl_8.1.0            
+#&gt;  [52] qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9            
+#&gt;  [55] shiny_1.14.0           withr_3.0.3            S7_0.2.2              
+#&gt;  [58] askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
+#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1         
+#&gt;  [64] janeaustenr_1.0.0      DT_0.34.0              plotly_4.12.1         
+#&gt;  [67] generics_0.1.4         rprojroot_2.1.1        hms_1.1.4             
+#&gt;  [70] scales_1.4.0           xtable_1.8-8           contentanalysis_1.1.1 
+#&gt;  [73] tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
+#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0              
+#&gt;  [79] visNetwork_2.1.4       fastmatch_1.1-8        grid_4.6.1            
+#&gt;  [82] bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0         
+#&gt;  [85] dimensionsR_0.0.3      bibliometrixData_0.3.0 cli_3.6.6             
+#&gt;  [88] viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
+#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8         
+#&gt;  [94] crul_1.6.0             htmlwidgets_1.6.4      farver_2.1.2          
+#&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
+#&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
+#&gt; [103] bit64_4.8.6</code></pre>
 
 </div>
 </div>
@@ -1497,101 +1561,97 @@ Figure 12.1: Comparison of JIF proxy and SNIP proxy across five journals.
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></div>
-<div class="next"><a href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></div>
+<div class="prev"><a href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></div>
+<div class="next"><a href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#journal-metrics"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="nav-link" href="#jmetrics-objectives"><span class="header-section-number">12.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#jmetrics-setup"><span class="header-section-number">12.2</span> Setup</a></li>
-<li><a class="nav-link" href="#jmetrics-background"><span class="header-section-number">12.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#journal-metrics"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="nav-link" href="#jmetrics-objectives"><span class="header-section-number">11.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#jmetrics-setup"><span class="header-section-number">11.2</span> Setup</a></li>
+<li><a class="nav-link" href="#jmetrics-background"><span class="header-section-number">11.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#jmetrics-example"><span class="header-section-number">12.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#selecting-journals"><span class="header-section-number">12.4.1</span> Selecting journals</a></li>
-<li><a class="nav-link" href="#fetching-citation-data"><span class="header-section-number">12.4.2</span> Fetching citation data</a></li>
-<li><a class="nav-link" href="#computing-jif-like-proxies"><span class="header-section-number">12.4.3</span> Computing JIF-like proxies</a></li>
-<li><a class="nav-link" href="#computing-a-snip-like-proxy"><span class="header-section-number">12.4.4</span> Computing a SNIP-like proxy</a></li>
-<li><a class="nav-link" href="#visualization-5"><span class="header-section-number">12.4.5</span> Visualization</a></li>
+<a class="nav-link" href="#jmetrics-example"><span class="header-section-number">11.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#selecting-journals"><span class="header-section-number">11.4.1</span> Selecting journals</a></li>
+<li><a class="nav-link" href="#fetching-a-publication-cohort"><span class="header-section-number">11.4.2</span> Fetching a publication cohort</a></li>
+<li><a class="nav-link" href="#cumulative-citation-summaries"><span class="header-section-number">11.4.3</span> Cumulative citation summaries</a></li>
+<li><a class="nav-link" href="#recorded-reference-counts"><span class="header-section-number">11.4.4</span> Recorded reference counts</a></li>
+<li><a class="nav-link" href="#visualization-5"><span class="header-section-number">11.4.5</span> Visualization</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#jmetrics-diagnostics"><span class="header-section-number">12.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#jmetrics-limitations"><span class="header-section-number">12.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-10"><span class="header-section-number">12.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#jmetrics-pitfalls"><span class="header-section-number">12.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-10"><span class="header-section-number">12.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#jmetrics-exercises"><span class="header-section-number">12.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-10"><span class="header-section-number">12.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#jmetrics-reading"><span class="header-section-number">12.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#jmetrics-sessioninfo"><span class="header-section-number">12.13</span> Session info</a></li>
+<li><a class="nav-link" href="#jmetrics-diagnostics"><span class="header-section-number">11.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#jmetrics-limitations"><span class="header-section-number">11.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-10"><span class="header-section-number">11.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#jmetrics-pitfalls"><span class="header-section-number">11.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-10"><span class="header-section-number">11.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#jmetrics-exercises"><span class="header-section-number">11.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_11-solutions"><span class="header-section-number">11.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#jmetrics-reading"><span class="header-section-number">11.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#jmetrics-sessioninfo"><span class="header-section-number">11.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1609,7 +1669,7 @@ Figure 12.1: Comparison of JIF proxy and SNIP proxy across five journals.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

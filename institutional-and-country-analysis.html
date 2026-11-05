@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 14 Institutional and Country Analysis | Scientometrics in R</title>
+<title>Chapter 13 Institutional and Country Analysis | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="14.1 Learning objectives After completing this chapter, you will be able to: Aggregate bibliometric data at institutional and country levels using OpenAlex Explain the difference between full...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 14 Institutional and Country Analysis | Scientometrics in R">
+<meta name="description" content="13.1 Learning objectives After completing this chapter, you will be able to: Aggregate bibliometric data at institutional and country levels using OpenAlex Explain the difference between full...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 13 Institutional and Country Analysis | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/institutional-and-country-analysis.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="14.1 Learning objectives After completing this chapter, you will be able to: Aggregate bibliometric data at institutional and country levels using OpenAlex Explain the difference between full...">
+<meta property="og:description" content="13.1 Learning objectives After completing this chapter, you will be able to: Aggregate bibliometric data at institutional and country levels using OpenAlex Explain the difference between full...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 Institutional and Country Analysis | Scientometrics in R">
-<meta name="twitter:description" content="14.1 Learning objectives After completing this chapter, you will be able to: Aggregate bibliometric data at institutional and country levels using OpenAlex Explain the difference between full...">
+<meta name="twitter:title" content="Chapter 13 Institutional and Country Analysis | Scientometrics in R">
+<meta name="twitter:description" content="13.1 Learning objectives After completing this chapter, you will be able to: Aggregate bibliometric data at institutional and country levels using OpenAlex Explain the difference between full...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="active" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="active" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,28 +163,28 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="institutional-and-country-analysis" class="section level1" number="14">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="institutional-and-country-analysis" class="section level1" number="13">
 <h1>
-<span class="header-section-number">14</span> Institutional and Country Analysis<a class="anchor" aria-label="anchor" href="#institutional-and-country-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13</span> Institutional and Country Analysis<a class="anchor" aria-label="anchor" href="#institutional-and-country-analysis"><i class="fas fa-link"></i></a>
 </h1>
-<div id="instcountry-objectives" class="section level2" number="14.1">
+<div id="instcountry-objectives" class="section level2" number="13.1">
 <h2>
-<span class="header-section-number">14.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#instcountry-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#instcountry-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
 <li>Aggregate bibliometric data at institutional and country levels using OpenAlex</li>
 <li>Explain the difference between full counting and fractional counting and when each is appropriate</li>
 <li>Use ROR (Research Organization Registry) identifiers for reliable institutional matching</li>
-<li>Compute size-independent indicators (MNCS, PP(top 10%)) at the institutional level</li>
+<li>Compute descriptive citation summaries and a shared sample/year citation ratio, while explaining why it is not MNCS</li>
 <li>Interpret institutional rankings critically, accounting for size, field mix, and counting method</li>
 </ul>
 </div>
-<div id="instcountry-setup" class="section level2" number="14.2">
+<div id="instcountry-setup" class="section level2" number="13.2">
 <h2>
-<span class="header-section-number">14.2</span> Setup<a class="anchor" aria-label="anchor" href="#instcountry-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.2</span> Setup<a class="anchor" aria-label="anchor" href="#instcountry-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -195,99 +194,88 @@
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"api_helpers.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"institutional_samples.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="instcountry-background" class="section level2" number="14.3">
+<div id="instcountry-background" class="section level2" number="13.3">
 <h2>
-<span class="header-section-number">14.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#instcountry-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#instcountry-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Comparing research performance across institutions and countries is one of the most common — and most contentious — applications of bibliometrics. University rankings, national R&amp;D assessments, and funding allocation decisions all rely on aggregate bibliometric statistics. Getting the aggregation right matters enormously.</p>
-<p>The fundamental choice is between <strong>full counting</strong> and <strong>fractional counting</strong>. Under full counting, each institution listed on a paper receives one full credit for that paper. A paper with authors from five institutions thus generates five institutional publications. Under fractional counting, credit is divided: each institution receives 1/5 of a publication count. Full counting inflates the output of institutions that frequently collaborate, while fractional counting better reflects each entity’s proportional contribution <span class="citation">(<a href="references.html#ref-glanzel2004">Glänzel and Schubert 2004</a>; <a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span>.</p>
+<p>The fundamental choice is between <strong>full counting</strong> and <strong>fractional counting</strong>. Under full counting, each institution listed on a paper receives one full credit for that paper. A paper with authors from five institutions thus generates five institutional publications. Under fractional counting, credit is divided: each institution receives 1/5 of a publication count. Full counting inflates the output of institutions that frequently collaborate, while this fractional rule divides bibliometric credit equally among the listed institutions; it does not measure their actual contribution <span class="citation">(<a href="references.html#ref-glanzel2004">Glänzel and Schubert 2004</a>; <a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span>.</p>
 <p><strong>ROR</strong> (Research Organization Registry) identifiers provide a stable, open system for identifying institutions, analogous to DOIs for publications and ORCID for researchers. OpenAlex maps institutional affiliations to ROR IDs, though coverage varies by discipline and geography. Using ROR avoids the pitfalls of string matching on institution names, which are notoriously inconsistent (e.g., “MIT”, “Massachusetts Institute of Technology”, “Mass. Inst. Tech.”).</p>
-<p>Size-independent indicators are essential for fair comparison. Raw publication counts favour large universities. The <strong>Mean Normalised Citation Score</strong> (MNCS) <span class="citation">(<a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span> and <strong>PP(top 10%)</strong> — the proportion of papers in the top 10% most cited in their field and year — allow meaningful comparison between a small specialised institute and a large comprehensive university. The Leiden Ranking uses these indicators with fractional counting as its default, offering a model of responsible institutional benchmarking.</p>
+<p>Size-independent indicators are essential for fair comparison. Raw publication counts favour large universities. The <strong>Mean Normalised Citation Score</strong> (MNCS) <span class="citation">(<a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span> and <strong>PP(top 10%)</strong> — the proportion of papers in the top 10% most cited in their field and year — are designed to account for differences in reference sets. Their interpretation still depends on reference-set construction, coverage, attribution and the citation window. The Leiden Ranking uses these indicators with fractional counting as its default, offering a model of responsible institutional benchmarking.</p>
 <p>Country-level analysis faces the same choices. Additionally, linguistic bias in databases means that countries where English is not the primary research language may appear less productive than they truly are <span class="citation">(<a href="references.html#ref-visser2021">Visser et al. 2021</a>)</span>.</p>
 </div>
-<div id="instcountry-example" class="section level2" number="14.4">
+<div id="instcountry-example" class="section level2" number="13.4">
 <h2>
-<span class="header-section-number">14.4</span> Worked example<a class="anchor" aria-label="anchor" href="#instcountry-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4</span> Worked example<a class="anchor" aria-label="anchor" href="#instcountry-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="selecting-institutions" class="section level3" number="14.4.1">
+<div id="selecting-institutions" class="section level3" number="13.4.1">
 <h3>
-<span class="header-section-number">14.4.1</span> Selecting institutions<a class="anchor" aria-label="anchor" href="#selecting-institutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.1</span> Selecting institutions<a class="anchor" aria-label="anchor" href="#selecting-institutions"><i class="fas fa-link"></i></a>
 </h3>
-<p>We compare five research-intensive universities.</p>
-<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<p>We use five institutions to demonstrate summaries of equally capped samples. The identifiers below are <strong>OpenAlex institution IDs</strong>, not ROR IDs. Their names, countries and ROR mappings were checked against the OpenAlex institution records on 30 October 2026. Subsidiary coverage still needs checking before an actual assessment.</p>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">institutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
-<span>  <span class="op">~</span><span class="va">short_name</span>,  <span class="op">~</span><span class="va">ror_id</span>,</span>
+<span>  <span class="op">~</span><span class="va">short_name</span>,  <span class="op">~</span><span class="va">openalex_id</span>,</span>
 <span>  <span class="st">"MIT"</span>,        <span class="st">"I63966007"</span>,</span>
 <span>  <span class="st">"Oxford"</span>,     <span class="st">"I40120149"</span>,</span>
-<span>  <span class="st">"ETH Zurich"</span>, <span class="st">"I202697423"</span>,</span>
-<span>  <span class="st">"U Tokyo"</span>,    <span class="st">"I39804265"</span>,</span>
-<span>  <span class="st">"U Cape Town"</span>, <span class="st">"I173603587"</span></span>
+<span>  <span class="st">"ETH Zurich"</span>, <span class="st">"I35440088"</span>,</span>
+<span>  <span class="st">"U Tokyo"</span>,    <span class="st">"I74801974"</span>,</span>
+<span>  <span class="st">"U Cape Town"</span>, <span class="st">"I157614274"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="fetching-institutional-publications" class="section level3" number="14.4.2">
+<div id="fetching-institutional-publications" class="section level3" number="13.4.2">
 <h3>
-<span class="header-section-number">14.4.2</span> Fetching institutional publications<a class="anchor" aria-label="anchor" href="#fetching-institutional-publications"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.2</span> Fetching institutional publications<a class="anchor" aria-label="anchor" href="#fetching-institutional-publications"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fetch_inst_works</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">inst_id</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
-<span>      entity <span class="op">=</span> <span class="st">"works"</span>,</span>
-<span>      authorships.institutions.id <span class="op">=</span> <span class="va">inst_id</span>,</span>
-<span>      from_publication_date <span class="op">=</span> <span class="st">"2020-01-01"</span>,</span>
-<span>      to_publication_date <span class="op">=</span> <span class="st">"2022-12-31"</span>,</span>
-<span>      type <span class="op">=</span> <span class="st">"article"</span>,</span>
-<span>      options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">400</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
-<span>    <span class="op">)</span>,</span>
-<span>    error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="cn">NULL</span></span>
+<span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
+<span>    entity <span class="op">=</span> <span class="st">"works"</span>,</span>
+<span>    authorships.institutions.id <span class="op">=</span> <span class="va">inst_id</span>,</span>
+<span>    from_publication_date <span class="op">=</span> <span class="st">"2020-01-01"</span>,</span>
+<span>    to_publication_date <span class="op">=</span> <span class="st">"2022-12-31"</span>,</span>
+<span>    type <span class="op">=</span> <span class="st">"article"</span>,</span>
+<span>    options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">400</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span><span class="op">)</span> <span class="kw">else</span> <span class="va">res</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">is.data.frame</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">||</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"No usable works returned for {inst_id}; check the request before comparing institutions."</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="va">res</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">inst_data</span> <span class="op">&lt;-</span> <span class="va">institutions</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>works <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">ror_id</span>, <span class="va">fetch_inst_works</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">nrow</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>works <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">openalex_id</span>, <span class="va">fetch_inst_works</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>These requests retrieve at most 400 sampled articles per institution from 2020–2022,
+not each institution’s complete output. Counts below describe the retrieved samples;
+the cap prevents interpreting them as comparative institutional productivity.
+Provider failures stop the example rather than removing an institution silently.</p>
 </div>
-<div id="full-counting-vs.-fractional-counting" class="section level3" number="14.4.3">
+<div id="full-counting-vs.-fractional-counting" class="section level3" number="13.4.3">
 <h3>
-<span class="header-section-number">14.4.3</span> Full counting vs. fractional counting<a class="anchor" aria-label="anchor" href="#full-counting-vs.-fractional-counting"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.3</span> Full counting vs. fractional counting<a class="anchor" aria-label="anchor" href="#full-counting-vs.-fractional-counting"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">compute_counts</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">works_df</span>, <span class="va">inst_id</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">works_df</span><span class="op">)</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">works_df</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>full_count <span class="op">=</span> <span class="fl">0L</span>, frac_count <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="co"># Full count: each paper counts as 1</span></span>
-<span>  <span class="va">full_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">works_df</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co"># Fractional count: 1 / number of distinct institutions per paper</span></span>
-<span>  <span class="va">frac</span> <span class="op">&lt;-</span> <span class="va">works_df</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">authorships</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">authorships</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">authorships_affiliations</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n_inst <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/n_distinct.html">n_distinct</a></span><span class="op">(</span><span class="va">authorships_affiliations_id</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>frac_credit <span class="op">=</span> <span class="fl">1</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">n_inst</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="va">frac_count</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">frac</span><span class="op">$</span><span class="va">frac_credit</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span>full_count <span class="op">=</span> <span class="va">full_count</span>, frac_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">frac_count</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Equal institutional credit per sampled work: 1 / number of distinct affiliations.</span></span>
+<span><span class="co"># The helper requires the queried institution to be among those affiliations.</span></span>
+<span><span class="co"># Incomplete affiliations leave the fractional total missing, with coverage shown.</span></span>
+<span><span class="va">compute_counts</span> <span class="op">&lt;-</span> <span class="va">sci_institution_sample_counts</span></span>
 <span></span>
 <span><span class="va">counting_comparison</span> <span class="op">&lt;-</span> <span class="va">inst_data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">ror_id</span>, <span class="va">compute_counts</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">openalex_id</span>, <span class="va">compute_counts</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">full_count</span>, <span class="va">frac_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">full_count</span>, <span class="va">affiliation_covered</span>, <span class="va">frac_count</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ratio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">frac_count</span> <span class="op">/</span> <span class="va">full_count</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">counting_comparison</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span></span>
 <span>    short_name <span class="op">=</span> <span class="st">"Institution"</span>,</span>
-<span>    full_count <span class="op">=</span> <span class="st">"Full count"</span>,</span>
-<span>    frac_count <span class="op">=</span> <span class="st">"Fractional count"</span>,</span>
+<span>    full_count <span class="op">=</span> <span class="st">"Sampled works"</span>,</span>
+<span>    affiliation_covered <span class="op">=</span> <span class="st">"Works with usable affiliations"</span>,</span>
+<span>    frac_count <span class="op">=</span> <span class="st">"Fractional sample credit"</span>,</span>
 <span>    ratio <span class="op">=</span> <span class="st">"Frac / Full"</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <div id="wuolgkrdww" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -742,59 +730,88 @@
 <div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">Institution</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="full_count">Full count</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="frac_count">Fractional count</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="full_count">Sampled works</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="affiliation_covered">Works with usable affiliations</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="frac_count">Fractional sample credit</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ratio">Frac / Full</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
 <td headers="short_name" class="gt_row gt_left">MIT</td>
 <td headers="full_count" class="gt_row gt_right">400</td>
-<td headers="frac_count" class="gt_row gt_right">161</td>
-<td headers="ratio" class="gt_row gt_right">0.40</td>
+<td headers="affiliation_covered" class="gt_row gt_right">352</td>
+<td headers="frac_count" class="gt_row gt_right">NA</td>
+<td headers="ratio" class="gt_row gt_right">NA</td>
 </tr>
 <tr>
 <td headers="short_name" class="gt_row gt_left">Oxford</td>
 <td headers="full_count" class="gt_row gt_right">400</td>
-<td headers="frac_count" class="gt_row gt_right">139</td>
-<td headers="ratio" class="gt_row gt_right">0.35</td>
+<td headers="affiliation_covered" class="gt_row gt_right">333</td>
+<td headers="frac_count" class="gt_row gt_right">NA</td>
+<td headers="ratio" class="gt_row gt_right">NA</td>
 </tr>
 <tr>
 <td headers="short_name" class="gt_row gt_left">ETH Zurich</td>
 <td headers="full_count" class="gt_row gt_right">400</td>
-<td headers="frac_count" class="gt_row gt_right">146</td>
-<td headers="ratio" class="gt_row gt_right">0.37</td>
+<td headers="affiliation_covered" class="gt_row gt_right">353</td>
+<td headers="frac_count" class="gt_row gt_right">NA</td>
+<td headers="ratio" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="short_name" class="gt_row gt_left">U Tokyo</td>
+<td headers="full_count" class="gt_row gt_right">400</td>
+<td headers="affiliation_covered" class="gt_row gt_right">350</td>
+<td headers="frac_count" class="gt_row gt_right">NA</td>
+<td headers="ratio" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="short_name" class="gt_row gt_left">U Cape Town</td>
+<td headers="full_count" class="gt_row gt_right">400</td>
+<td headers="affiliation_covered" class="gt_row gt_right">323</td>
+<td headers="frac_count" class="gt_row gt_right">NA</td>
+<td headers="ratio" class="gt_row gt_right">NA</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="normalised-citation-impact" class="section level3" number="14.4.4">
+<div id="descriptive-citation-comparison-using-a-shared-reference" class="section level3" number="13.4.4">
 <h3>
-<span class="header-section-number">14.4.4</span> Normalised citation impact<a class="anchor" aria-label="anchor" href="#normalised-citation-impact"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.4</span> Descriptive citation comparison using a shared reference<a class="anchor" aria-label="anchor" href="#descriptive-citation-comparison-using-a-shared-reference"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">inst_impact</span> <span class="op">&lt;-</span> <span class="va">inst_data</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
-<span>    mean_cites <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">works</span>, \<span class="op">(</span><span class="va">w</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">cited_by_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    median_cites <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">works</span>, \<span class="op">(</span><span class="va">w</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/median.html">median</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">cited_by_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span>,</span>
-<span>    mncs_approx <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">works</span>, \<span class="op">(</span><span class="va">w</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="va">w</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>field_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cited_by_count</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ncs <span class="op">=</span> <span class="va">cited_by_count</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmax</a></span><span class="op">(</span><span class="va">field_mean</span>, <span class="fl">0.01</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">ncs</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>        <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span>na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="op">}</span><span class="op">)</span></span>
-<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">mean_cites</span>, <span class="va">median_cites</span>, <span class="va">mncs_approx</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">mncs_approx</span><span class="op">)</span><span class="op">)</span></span>
+<p>A separate mean for each institution/year would make its mean citation ratio equal
+to 1 by construction. Instead, combine the retrieved samples, de-duplicate shared
+work IDs, and compute a <strong>common mean for each publication year</strong>. For an eligible
+work, divide its citation count by that pooled year mean, then average those ratios
+within each institution’s sample. Shared works enter the reference once. Conflicting
+snapshots of a shared work cause an error rather than an arbitrary choice.</p>
+<p>This is a descriptive <strong>pooled sample/year ratio</strong>, not field-normalized MNCS.
+The reference is the union of five capped institutional samples, not all world
+publications. It adjusts for publication year only; current cumulative citation
+counts do not impose a common post-publication citation window. Missing counts,
+missing years, and zero-mean reference years are excluded from the ratio, with
+its usable denominator reported separately.</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">citation_reference</span> <span class="op">&lt;-</span> <span class="fu">sci_pooled_year_reference</span><span class="op">(</span><span class="va">inst_data</span><span class="op">$</span><span class="va">works</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">inst_impact</span> <span class="op">&lt;-</span> <span class="va">inst_data</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>summary <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">sci_sample_citation_summary</span>,</span>
+<span>                       reference <span class="op">=</span> <span class="va">citation_reference</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">summary</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">n_sampled</span>, <span class="va">n_citation_observed</span>, <span class="va">mean_cites</span>,</span>
+<span>         <span class="va">median_cites</span>, <span class="va">n_ratio_observed</span>, <span class="va">pooled_year_ratio</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">short_name</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">inst_impact</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">mean_cites</span>, <span class="va">mncs_approx</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/fmt_number.html">fmt_number</a></span><span class="op">(</span>columns <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">mean_cites</span>, <span class="va">pooled_year_ratio</span><span class="op">)</span>, decimals <span class="op">=</span> <span class="fl">2</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://gt.rstudio.com/reference/cols_label.html">cols_label</a></span><span class="op">(</span></span>
+<span>    short_name <span class="op">=</span> <span class="st">"Institution"</span>, n_sampled <span class="op">=</span> <span class="st">"Sampled works"</span>,</span>
+<span>    n_citation_observed <span class="op">=</span> <span class="st">"Observed citation counts"</span>,</span>
+<span>    mean_cites <span class="op">=</span> <span class="st">"Mean citations"</span>, median_cites <span class="op">=</span> <span class="st">"Median citations"</span>,</span>
+<span>    n_ratio_observed <span class="op">=</span> <span class="st">"Works in ratio"</span>,</span>
+<span>    pooled_year_ratio <span class="op">=</span> <span class="st">"Pooled sample/year ratio"</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <div id="vhdvwtvjrx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>#vhdvwtvjrx table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
@@ -1246,39 +1263,71 @@
 </style>
 <div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">short_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cites">mean_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_cites">median_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mncs_approx">mncs_approx</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">Institution</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_sampled">Sampled works</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_citation_observed">Observed citation counts</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cites">Mean citations</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_cites">Median citations</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_ratio_observed">Works in ratio</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pooled_year_ratio">Pooled sample/year ratio</th>
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
+<td headers="short_name" class="gt_row gt_left">ETH Zurich</td>
+<td headers="n_sampled" class="gt_row gt_right">400</td>
+<td headers="n_citation_observed" class="gt_row gt_right">400</td>
+<td headers="mean_cites" class="gt_row gt_right">38.67</td>
+<td headers="median_cites" class="gt_row gt_right">22</td>
+<td headers="n_ratio_observed" class="gt_row gt_right">400</td>
+<td headers="pooled_year_ratio" class="gt_row gt_right">1.09</td>
+</tr>
+<tr>
 <td headers="short_name" class="gt_row gt_left">MIT</td>
-<td headers="mean_cites" class="gt_row gt_right">36.22</td>
-<td headers="median_cites" class="gt_row gt_right">13</td>
-<td headers="mncs_approx" class="gt_row gt_right">1.00</td>
+<td headers="n_sampled" class="gt_row gt_right">400</td>
+<td headers="n_citation_observed" class="gt_row gt_right">400</td>
+<td headers="mean_cites" class="gt_row gt_right">49.88</td>
+<td headers="median_cites" class="gt_row gt_right">20</td>
+<td headers="n_ratio_observed" class="gt_row gt_right">400</td>
+<td headers="pooled_year_ratio" class="gt_row gt_right">1.42</td>
 </tr>
 <tr>
 <td headers="short_name" class="gt_row gt_left">Oxford</td>
-<td headers="mean_cites" class="gt_row gt_right">37.90</td>
-<td headers="median_cites" class="gt_row gt_right">14</td>
-<td headers="mncs_approx" class="gt_row gt_right">1.00</td>
+<td headers="n_sampled" class="gt_row gt_right">400</td>
+<td headers="n_citation_observed" class="gt_row gt_right">400</td>
+<td headers="mean_cites" class="gt_row gt_right">33.80</td>
+<td headers="median_cites" class="gt_row gt_right">15</td>
+<td headers="n_ratio_observed" class="gt_row gt_right">400</td>
+<td headers="pooled_year_ratio" class="gt_row gt_right">0.96</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">ETH Zurich</td>
-<td headers="mean_cites" class="gt_row gt_right">31.26</td>
-<td headers="median_cites" class="gt_row gt_right">13</td>
-<td headers="mncs_approx" class="gt_row gt_right">1.00</td>
+<td headers="short_name" class="gt_row gt_left">U Cape Town</td>
+<td headers="n_sampled" class="gt_row gt_right">400</td>
+<td headers="n_citation_observed" class="gt_row gt_right">400</td>
+<td headers="mean_cites" class="gt_row gt_right">27.82</td>
+<td headers="median_cites" class="gt_row gt_right">12</td>
+<td headers="n_ratio_observed" class="gt_row gt_right">400</td>
+<td headers="pooled_year_ratio" class="gt_row gt_right">0.81</td>
+</tr>
+<tr>
+<td headers="short_name" class="gt_row gt_left">U Tokyo</td>
+<td headers="n_sampled" class="gt_row gt_right">400</td>
+<td headers="n_citation_observed" class="gt_row gt_right">400</td>
+<td headers="mean_cites" class="gt_row gt_right">27.26</td>
+<td headers="median_cites" class="gt_row gt_right">10</td>
+<td headers="n_ratio_observed" class="gt_row gt_right">400</td>
+<td headers="pooled_year_ratio" class="gt_row gt_right">0.79</td>
 </tr>
 </tbody>
 </table></div>
 </div>
+<p>The helper implementations in <code>R/institutional_samples.R</code> make the de-duplication,
+reference construction and missing-data denominators explicit.</p>
 </div>
-<div id="visualization-6" class="section level3" number="14.4.5">
+<div id="visualization-6" class="section level3" number="13.4.5">
 <h3>
-<span class="header-section-number">14.4.5</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.4.5</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-6"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">counting_long</span> <span class="op">&lt;-</span> <span class="va">counting_comparison</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span>cols <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">full_count</span>, <span class="va">frac_count</span><span class="op">)</span>,</span>
 <span>               names_to <span class="op">=</span> <span class="st">"method"</span>, values_to <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1290,51 +1339,51 @@
 <span>                          fill <span class="op">=</span> <span class="va">method</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>position <span class="op">=</span> <span class="st">"dodge"</span>, width <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span><span class="op">(</span>values <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Publication count"</span>, y <span class="op">=</span> <span class="cn">NULL</span>, fill <span class="op">=</span> <span class="st">"Method"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Credit within the retrieved sample"</span>, y <span class="op">=</span> <span class="cn">NULL</span>, fill <span class="op">=</span> <span class="st">"Method"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:13-fig-instcountry-comparison"></span>
-<img src="scientometrics-in-r_files/figure-html/13-fig-instcountry-comparison-1.png" alt="Grouped bar chart comparing full-count and fractional-count publication numbers for five universities, showing how fractional counting reduces output for highly collaborative institutions." width="90%"><p class="caption">
-Figure 14.1: Full count vs. fractional count publication output for five institutions.
+<img src="scientometrics-in-r_files/figure-html/13-fig-instcountry-comparison-1.png" alt="Grouped bar chart of sampled-work counts and fractional sample credits, with unavailable fractional totals omitted when affiliations are incomplete." width="90%"><p class="caption">
+Figure 13.1: Full and fractional institutional credits in the retrieved article samples; these are not institutional output totals.
 </p>
 </div>
-<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">inst_impact</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">mncs_approx</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">mncs_approx</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">inst_impact</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">pooled_year_ratio</span>, y <span class="op">=</span> <span class="va">short_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"MNCS (approx.)"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Citation ratio to pooled sample/year reference"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:13-fig-instcountry-mncs"></span>
-<img src="scientometrics-in-r_files/figure-html/13-fig-instcountry-mncs-1.png" alt="Horizontal bar chart showing the mean normalised citation score for each of the five institutions, with a vertical reference line at 1.0 representing the sample average." width="90%"><p class="caption">
-Figure 14.2: Approximate MNCS for each institution (within-sample normalisation).
+<img src="scientometrics-in-r_files/figure-html/13-fig-instcountry-mncs-1.png" alt="Horizontal bars show each institutional sample's mean ratio to the pooled publication-year reference; the dashed line denotes a ratio of one." width="90%"><p class="caption">
+Figure 13.2: Mean citation ratios relative to the shared pooled sample in each publication year. This is not field-normalized MNCS.
 </p>
 </div>
 </div>
 </div>
-<div id="instcountry-diagnostics" class="section level2" number="14.5">
+<div id="instcountry-diagnostics" class="section level2" number="13.5">
 <h2>
-<span class="header-section-number">14.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#instcountry-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#instcountry-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<strong>Size vs. impact</strong>: A large university may rank highly on total output but poorly on per-paper impact. Always report both size-dependent and size-independent indicators.</li>
+<strong>Sample counts are not size</strong>: Capping each sample at 400 articles removes information about institutional output. The full/fractional comparison illustrates counting rules within those samples only.</li>
 <li>
 <strong>Field mix</strong>: A medical university will appear more productive (and highly cited) than a social-science institute due to field-level citation norms. True normalisation requires field-level data.</li>
 <li>
-<strong>Sample vs. population</strong>: Our sample of 400 works per institution is illustrative. For real benchmarking, use the full population or report confidence intervals.</li>
+<strong>Sample vs. population</strong>: The reference depends on which institutions and works were sampled. For a genuine assessment, define the target population and reference set, document inclusion probabilities, and use uncertainty methods appropriate to that design.</li>
 <li>
-<strong>Fractional/full ratio</strong>: A ratio near 1.0 indicates few collaborations beyond the institution; a ratio well below 1.0 indicates extensive inter-institutional collaboration.</li>
+<strong>Fractional/full ratio</strong>: With complete affiliations, the ratio summarizes how institutional credit is divided in the retrieved works. Missing affiliations leave the fractional total unavailable; they are not treated as single-institution papers.</li>
 </ul>
 </div>
-<div id="instcountry-limitations" class="section level2" number="14.6">
+<div id="instcountry-limitations" class="section level2" number="13.6">
 <h2>
-<span class="header-section-number">14.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#instcountry-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#instcountry-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-12" class="section level2 callout callout-warn" number="14.7">
+<div id="limitations-and-responsible-use-12" class="section level2 callout callout-warn" number="13.7">
 <h2>
-<span class="header-section-number">14.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-12"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-12"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1346,23 +1395,23 @@ Figure 14.2: Approximate MNCS for each institution (within-sample normalisation)
 <li>
 <strong>Language and geographic bias.</strong> Databases undercount research published in non-English languages, disadvantaging countries in Latin America, Asia, and Africa <span class="citation">(<a href="references.html#ref-visser2021">Visser et al. 2021</a>; <a href="references.html#ref-singh2021">Singh et al. 2021</a>)</span>.</li>
 <li>
-<strong>Do not compare across fields without normalisation.</strong> A biomedical research university will always outperform a humanities-focused institution on raw citation indicators.</li>
+<strong>Do not compare across fields without normalisation.</strong> Raw citation differences can reflect disciplinary citation practices as well as other differences; the sample/year ratio does not remove field mix.</li>
 </ul>
 </div>
-<div id="instcountry-pitfalls" class="section level2" number="14.8">
+<div id="instcountry-pitfalls" class="section level2" number="13.8">
 <h2>
-<span class="header-section-number">14.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#instcountry-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#instcountry-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-12" class="section level2 callout callout-stop" number="14.9">
+<div id="common-pitfalls-12" class="section level2 callout callout-stop" number="13.9">
 <h2>
-<span class="header-section-number">14.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-12"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-12"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
 <strong>Using full counting when fractional is more appropriate.</strong> Full counting double-credits collaborative work, inflating output for institutions with many international partnerships.</li>
 <li>
-<strong>Ignoring field normalisation.</strong> Comparing raw MNCS across institutions with very different disciplinary profiles is misleading.</li>
+<strong>Ignoring field normalisation.</strong> The pooled sample/year ratio adjusts for year only. It must not be relabeled as MNCS or used as a field-adjusted ranking.</li>
 <li>
 <strong>String-matching institution names.</strong> Never match institutions by name strings alone. Use ROR or OpenAlex institution IDs.</li>
 <li>
@@ -1371,25 +1420,25 @@ Figure 14.2: Approximate MNCS for each institution (within-sample normalisation)
 <strong>Forgetting subsidiary institutions.</strong> Large universities may have hospitals, research institutes, or campuses with separate ROR IDs. Decide on the unit of analysis upfront.</li>
 </ul>
 </div>
-<div id="instcountry-exercises" class="section level2" number="14.10">
+<div id="instcountry-exercises" class="section level2" number="13.10">
 <h2>
-<span class="header-section-number">14.10</span> Exercises<a class="anchor" aria-label="anchor" href="#instcountry-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.10</span> Exercises<a class="anchor" aria-label="anchor" href="#instcountry-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Country-level analysis.</strong> Aggregate publications by author country (using <code>authorships.countries</code>) instead of institution. Compute full and fractional counts for the top 10 countries in your corpus. Which countries are most affected by the counting method?</p></li>
-<li><p><strong>PP(top 10%) by institution.</strong> For each institution, compute the proportion of papers in the top 10% most cited within the sample (by year). How does this correlate with MNCS?</p></li>
+<li><p><strong>Top-decile sample share.</strong> Using the same de-duplicated pooled year reference, define a top-decile threshold and an explicit rule for ties. Compute each sample’s share above that threshold. Explain why this is not the field-normalized PP(top 10%) indicator.</p></li>
 <li><p><strong>Collaboration intensity.</strong> Compute the mean number of distinct institutional affiliations per paper for each institution. Is there a relationship between collaboration intensity and the full/fractional count ratio?</p></li>
 </ol>
 </div>
-<div id="solutions-12" class="section level2 callout callout-ok" number="14.11">
+<div id="id_13-solutions" class="section level2 callout callout-ok" number="13.11">
 <h2>
-<span class="header-section-number">14.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-12"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_13-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="instcountry-reading" class="section level2" number="14.12">
+<div id="instcountry-reading" class="section level2" number="13.12">
 <h2>
-<span class="header-section-number">14.12</span> Further reading<a class="anchor" aria-label="anchor" href="#instcountry-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.12</span> Further reading<a class="anchor" aria-label="anchor" href="#instcountry-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1406,15 +1455,15 @@ Figure 14.2: Approximate MNCS for each institution (within-sample normalisation)
 <span class="citation">Singh et al. (<a href="references.html#ref-singh2021">2021</a>)</span> — Journal coverage across databases, highlighting geographic imbalances.</li>
 </ul>
 </div>
-<div id="instcountry-sessioninfo" class="section level2" number="14.13">
+<div id="instcountry-sessioninfo" class="section level2" number="13.13">
 <h2>
-<span class="header-section-number">14.13</span> Session info<a class="anchor" aria-label="anchor" href="#instcountry-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">13.13</span> Session info<a class="anchor" aria-label="anchor" href="#instcountry-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -1433,51 +1482,49 @@ Figure 14.2: Approximate MNCS for each institution (within-sample normalisation)
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] quanteda_4.4       pdftools_3.9.0     arrow_24.0.0       bibliometrix_5.4.0
-#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.3.0          
-#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.0.1    lubridate_1.9.5   
+#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0
+#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0          
+#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
 #&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2       
 #&gt; [17] readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3     
 #&gt; [21] tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.31         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.0.0  curl_7.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.11.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.2.2            plotly_4.12.0         
-#&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      igraph_2.3.2          
-#&gt;  [28] mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
-#&gt;  [31] Matrix_1.7-0           R6_2.6.1               fastmap_1.2.0         
-#&gt;  [34] shiny_1.13.0           digest_0.6.39          shinycssloaders_1.1.0 
-#&gt;  [37] rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3        
-#&gt;  [40] urltools_1.7.3.1       timechange_0.4.0       httr_1.4.8            
-#&gt;  [43] compiler_4.4.1         here_1.0.2             bit64_4.8.0           
-#&gt;  [46] withr_3.0.2            S7_0.2.2               backports_1.5.1       
-#&gt;  [49] viridis_0.6.5          rappdirs_0.3.4         bibliometrixData_0.3.0
-#&gt;  [52] tools_4.4.1            otel_0.2.0             stopwords_2.3         
-#&gt;  [55] zip_2.3.3              httpuv_1.6.17          rentrez_1.2.4         
-#&gt;  [58] promises_1.5.0         grid_4.4.1             stringdist_0.9.17     
-#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
-#&gt;  [64] rscopus_0.9.0          ca_0.71.1              data.table_1.18.4     
-#&gt;  [67] hms_1.1.4              xml2_1.5.2             utf8_1.2.6            
-#&gt;  [70] ggrepel_0.9.8          pillar_1.11.1          later_1.4.8           
-#&gt;  [73] brand.yml_0.1.0        lattice_0.22-6         bit_4.6.0             
-#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [79] knitr_1.51             gridExtra_2.3          bookdown_0.46         
-#&gt;  [82] crul_1.6.0             xfun_0.57              DT_0.34.0             
-#&gt;  [85] humaniformat_0.6.0     visNetwork_2.1.4       stringi_1.8.7         
-#&gt;  [88] lazyeval_0.2.3         qpdf_1.4.1             yaml_2.3.12           
-#&gt;  [91] evaluate_1.0.5         codetools_0.2-20       httpcode_0.3.0        
-#&gt;  [94] cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
-#&gt;  [97] dichromat_2.0-0.1      Rcpp_1.1.1-1.1         readxl_1.4.5          
-#&gt; [100] triebeard_0.4.1        XML_3.99-0.23          parallel_4.4.1        
-#&gt; [103] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3     
-#&gt; [106] scales_1.4.0           openxlsx_4.2.8.1       rlang_1.2.0           
-#&gt; [109] fastmatch_1.1-8</code></pre>
+#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0          
+#&gt;   [4] rlang_1.3.0            magrittr_2.0.5         otel_0.2.0            
+#&gt;   [7] compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0        
+#&gt;  [10] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
+#&gt;  [13] ca_0.72                utf8_1.2.6             promises_1.5.0        
+#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0             
+#&gt;  [19] xfun_0.62              cachem_1.1.0           jsonlite_2.0.0        
+#&gt;  [22] SnowballC_0.7.1        later_1.4.8            parallel_4.6.1        
+#&gt;  [25] stopwords_2.3          R6_2.6.1               bslib_0.12.0          
+#&gt;  [28] stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
+#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2            
+#&gt;  [34] bookdown_0.48          knitr_1.52             triebeard_0.4.1       
+#&gt;  [37] base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17         
+#&gt;  [40] Matrix_1.7-5           igraph_2.3.4           timechange_0.4.0      
+#&gt;  [43] tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
+#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5         
+#&gt;  [49] miniUI_0.1.2           humaniformat_0.6.0     curl_8.1.0            
+#&gt;  [52] qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9            
+#&gt;  [55] shiny_1.14.0           withr_3.0.3            S7_0.2.2              
+#&gt;  [58] askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
+#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1         
+#&gt;  [64] janeaustenr_1.0.0      DT_0.34.0              plotly_4.12.1         
+#&gt;  [67] generics_0.1.4         rprojroot_2.1.1        hms_1.1.4             
+#&gt;  [70] scales_1.4.0           xtable_1.8-8           contentanalysis_1.1.1 
+#&gt;  [73] tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
+#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0              
+#&gt;  [79] visNetwork_2.1.4       fastmatch_1.1-8        grid_4.6.1            
+#&gt;  [82] bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0         
+#&gt;  [85] dimensionsR_0.0.3      bibliometrixData_0.3.0 cli_3.6.6             
+#&gt;  [88] viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
+#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8         
+#&gt;  [94] crul_1.6.0             htmlwidgets_1.6.4      farver_2.1.2          
+#&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
+#&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
+#&gt; [103] bit64_4.8.6</code></pre>
 
 </div>
 </div>
@@ -1506,101 +1553,97 @@ Figure 14.2: Approximate MNCS for each institution (within-sample normalisation)
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></div>
-<div class="next"><a href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></div>
+<div class="prev"><a href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></div>
+<div class="next"><a href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#institutional-and-country-analysis"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="nav-link" href="#instcountry-objectives"><span class="header-section-number">14.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#instcountry-setup"><span class="header-section-number">14.2</span> Setup</a></li>
-<li><a class="nav-link" href="#instcountry-background"><span class="header-section-number">14.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#institutional-and-country-analysis"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="nav-link" href="#instcountry-objectives"><span class="header-section-number">13.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#instcountry-setup"><span class="header-section-number">13.2</span> Setup</a></li>
+<li><a class="nav-link" href="#instcountry-background"><span class="header-section-number">13.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#instcountry-example"><span class="header-section-number">14.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#selecting-institutions"><span class="header-section-number">14.4.1</span> Selecting institutions</a></li>
-<li><a class="nav-link" href="#fetching-institutional-publications"><span class="header-section-number">14.4.2</span> Fetching institutional publications</a></li>
-<li><a class="nav-link" href="#full-counting-vs.-fractional-counting"><span class="header-section-number">14.4.3</span> Full counting vs. fractional counting</a></li>
-<li><a class="nav-link" href="#normalised-citation-impact"><span class="header-section-number">14.4.4</span> Normalised citation impact</a></li>
-<li><a class="nav-link" href="#visualization-6"><span class="header-section-number">14.4.5</span> Visualization</a></li>
+<a class="nav-link" href="#instcountry-example"><span class="header-section-number">13.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#selecting-institutions"><span class="header-section-number">13.4.1</span> Selecting institutions</a></li>
+<li><a class="nav-link" href="#fetching-institutional-publications"><span class="header-section-number">13.4.2</span> Fetching institutional publications</a></li>
+<li><a class="nav-link" href="#full-counting-vs.-fractional-counting"><span class="header-section-number">13.4.3</span> Full counting vs. fractional counting</a></li>
+<li><a class="nav-link" href="#descriptive-citation-comparison-using-a-shared-reference"><span class="header-section-number">13.4.4</span> Descriptive citation comparison using a shared reference</a></li>
+<li><a class="nav-link" href="#visualization-6"><span class="header-section-number">13.4.5</span> Visualization</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#instcountry-diagnostics"><span class="header-section-number">14.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#instcountry-limitations"><span class="header-section-number">14.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-12"><span class="header-section-number">14.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#instcountry-pitfalls"><span class="header-section-number">14.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-12"><span class="header-section-number">14.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#instcountry-exercises"><span class="header-section-number">14.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-12"><span class="header-section-number">14.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#instcountry-reading"><span class="header-section-number">14.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#instcountry-sessioninfo"><span class="header-section-number">14.13</span> Session info</a></li>
+<li><a class="nav-link" href="#instcountry-diagnostics"><span class="header-section-number">13.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#instcountry-limitations"><span class="header-section-number">13.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-12"><span class="header-section-number">13.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#instcountry-pitfalls"><span class="header-section-number">13.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-12"><span class="header-section-number">13.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#instcountry-exercises"><span class="header-section-number">13.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_13-solutions"><span class="header-section-number">13.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#instcountry-reading"><span class="header-section-number">13.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#instcountry-sessioninfo"><span class="header-section-number">13.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1618,7 +1661,7 @@ Figure 14.2: Approximate MNCS for each institution (within-sample normalisation)
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

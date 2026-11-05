@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 10 Descriptive Bibliometrics | Scientometrics in R</title>
+<title>Chapter 9 Descriptive Bibliometrics | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="10.1 Learning objectives After completing this chapter, you will be able to: Import bibliographic data into bibliometrix using convert2df Produce a corpus-level summary with biblioAnalysis and...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 10 Descriptive Bibliometrics | Scientometrics in R">
+<meta name="description" content="9.1 Learning objectives After completing this chapter, you will be able to: Import bibliographic data into bibliometrix using convert2df Produce a corpus-level summary with biblioAnalysis and...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Descriptive Bibliometrics | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/descriptive-bibliometrics.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="10.1 Learning objectives After completing this chapter, you will be able to: Import bibliographic data into bibliometrix using convert2df Produce a corpus-level summary with biblioAnalysis and...">
+<meta property="og:description" content="9.1 Learning objectives After completing this chapter, you will be able to: Import bibliographic data into bibliometrix using convert2df Produce a corpus-level summary with biblioAnalysis and...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 10 Descriptive Bibliometrics | Scientometrics in R">
-<meta name="twitter:description" content="10.1 Learning objectives After completing this chapter, you will be able to: Import bibliographic data into bibliometrix using convert2df Produce a corpus-level summary with biblioAnalysis and...">
+<meta name="twitter:title" content="Chapter 9 Descriptive Bibliometrics | Scientometrics in R">
+<meta name="twitter:description" content="9.1 Learning objectives After completing this chapter, you will be able to: Import bibliographic data into bibliometrix using convert2df Produce a corpus-level summary with biblioAnalysis and...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="active" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="active" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,13 +163,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="descriptive-bibliometrics" class="section level1" number="10">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="descriptive-bibliometrics" class="section level1" number="9">
 <h1>
-<span class="header-section-number">10</span> Descriptive Bibliometrics<a class="anchor" aria-label="anchor" href="#descriptive-bibliometrics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9</span> Descriptive Bibliometrics<a class="anchor" aria-label="anchor" href="#descriptive-bibliometrics"><i class="fas fa-link"></i></a>
 </h1>
-<div id="desc-objectives" class="section level2" number="10.1">
+<div id="desc-objectives" class="section level2" number="9.1">
 <h2>
-<span class="header-section-number">10.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#desc-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#desc-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -184,11 +183,11 @@
 <li>Recognise the descriptive statistics that should precede any advanced analysis</li>
 </ul>
 </div>
-<div id="desc-setup" class="section level2" number="10.2">
+<div id="desc-setup" class="section level2" number="9.2">
 <h2>
-<span class="header-section-number">10.2</span> Setup<a class="anchor" aria-label="anchor" href="#desc-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.2</span> Setup<a class="anchor" aria-label="anchor" href="#desc-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bibliometrix.org">bibliometrix</a></span><span class="op">)</span></span>
@@ -200,9 +199,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="desc-background" class="section level2" number="10.3">
+<div id="desc-background" class="section level2" number="9.3">
 <h2>
-<span class="header-section-number">10.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#desc-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#desc-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Before computing any advanced indicator, a responsible bibliometric study begins with <strong>descriptive analysis</strong>: understanding the size, growth, and composition of the corpus. How many documents per year? Which journals dominate? Which countries contribute? These questions set the stage for every subsequent method.</p>
 <p>The <strong>bibliometrix</strong> package <span class="citation">(<a href="references.html#ref-aria2017">Aria and Cuccurullo 2017</a>)</span> provides an integrated R workflow for science mapping. Its companion web app, <strong>biblioshiny</strong>, wraps the same functions in a point-and-click interface — useful for exploration but not for reproducible reporting. In a Quarto pipeline, we prefer scripted calls so that every number is traceable to code.</p>
@@ -210,17 +209,17 @@
 <p>Three classical bibliometric laws underpin this descriptive stage. <strong>Lotka’s law</strong> <span class="citation">(<a href="references.html#ref-lotka1926">Lotka 1926</a>)</span> describes the inverse-square relationship between the number of authors and their publication counts. <strong>Bradford’s law</strong> <span class="citation">(<a href="references.html#ref-bradford1934">Bradford 1934</a>)</span> models how articles on a subject scatter across journals, identifying core, mid-range, and peripheral zones. <strong>Price’s law</strong> <span class="citation">(<a href="references.html#ref-price1963">Solla Price 1963</a>)</span> states that half of all contributions come from the square root of the total number of contributors. These empirical regularities provide benchmarks against which any corpus can be compared.</p>
 <p>Descriptive bibliometrics also serves a data-quality role. Anomalous spikes in annual output may signal duplicate records; a suspiciously dominant country may indicate a search query biased toward a specific language. Inspecting descriptive statistics is the first line of defence against analytical errors.</p>
 </div>
-<div id="desc-example" class="section level2" number="10.4">
+<div id="desc-example" class="section level2" number="9.4">
 <h2>
-<span class="header-section-number">10.4</span> Worked example<a class="anchor" aria-label="anchor" href="#desc-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4</span> Worked example<a class="anchor" aria-label="anchor" href="#desc-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="acquiring-the-data" class="section level3" number="10.4.1">
+<div id="acquiring-the-data" class="section level3" number="9.4.1">
 <h3>
-<span class="header-section-number">10.4.1</span> Acquiring the data<a class="anchor" aria-label="anchor" href="#acquiring-the-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.1</span> Acquiring the data<a class="anchor" aria-label="anchor" href="#acquiring-the-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch a sample of works from the <em>Scientometrics</em> journal via OpenAlex and convert the result into a bibliometrix-compatible data frame.</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2018-01-01"</span>,</span>
@@ -231,24 +230,24 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">works</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; [1] 500</code></pre>
 </div>
-<div id="converting-to-bibliometrix-format" class="section level3" number="10.4.2">
+<div id="converting-to-bibliometrix-format" class="section level3" number="9.4.2">
 <h3>
-<span class="header-section-number">10.4.2</span> Converting to bibliometrix format<a class="anchor" aria-label="anchor" href="#converting-to-bibliometrix-format"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.2</span> Converting to bibliometrix format<a class="anchor" aria-label="anchor" href="#converting-to-bibliometrix-format"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bib_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa2bibliometrix.html">oa2bibliometrix</a></span><span class="op">(</span><span class="va">works</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Records: {nrow(bib_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Records: 500</code></pre>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Fields: {ncol(bib_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Fields: 61</code></pre>
 </div>
-<div id="running-biblioanalysis" class="section level3" number="10.4.3">
+<div id="running-biblioanalysis" class="section level3" number="9.4.3">
 <h3>
-<span class="header-section-number">10.4.3</span> Running biblioAnalysis<a class="anchor" aria-label="anchor" href="#running-biblioanalysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.3</span> Running biblioAnalysis<a class="anchor" aria-label="anchor" href="#running-biblioanalysis"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">results</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/bibliometrix/man/biblioAnalysis.html">biblioAnalysis</a></span><span class="op">(</span><span class="va">bib_df</span>, sep <span class="op">=</span> <span class="st">";"</span><span class="op">)</span>,</span>
 <span>  error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="op">{</span></span>
@@ -259,16 +258,16 @@
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Note: biblioAnalysis() encountered an error with this data format.
 #&gt; This is a known compatibility issue between bibliometrix and openalexR v3.</code></pre>
-<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">results</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">summary_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">results</span>, k <span class="op">=</span> <span class="fl">10</span>, verbose <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 </div>
-<div id="annual-scientific-production" class="section level3" number="10.4.4">
+<div id="annual-scientific-production" class="section level3" number="9.4.4">
 <h3>
-<span class="header-section-number">10.4.4</span> Annual scientific production<a class="anchor" aria-label="anchor" href="#annual-scientific-production"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.4</span> Annual scientific production<a class="anchor" aria-label="anchor" href="#annual-scientific-production"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annual</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span></span>
@@ -281,15 +280,15 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:09-fig-desc-annual"></span>
 <img src="scientometrics-in-r_files/figure-html/09-fig-desc-annual-1.png" alt="Bar chart showing the number of publications per year from 2018 to 2023, illustrating the growth trend in the sampled Scientometrics articles." width="90%"><p class="caption">
-Figure 10.1: Annual scientific production in the sampled corpus (2018-2023).
+Figure 9.1: Annual scientific production in the sampled corpus (2018-2023).
 </p>
 </div>
 </div>
-<div id="most-productive-authors" class="section level3" number="10.4.5">
+<div id="most-productive-authors" class="section level3" number="9.4.5">
 <h3>
-<span class="header-section-number">10.4.5</span> Most productive authors<a class="anchor" aria-label="anchor" href="#most-productive-authors"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.5</span> Most productive authors<a class="anchor" aria-label="anchor" href="#most-productive-authors"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">author_prod</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">authorships</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">authorships</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -303,16 +302,16 @@ Figure 10.1: Annual scientific production in the sampled corpus (2018-2023).
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:09-fig-desc-top-authors"></span>
 <img src="scientometrics-in-r_files/figure-html/09-fig-desc-top-authors-1.png" alt="Horizontal bar chart listing the 15 authors with the most publications in the sample, ordered by number of articles." width="90%"><p class="caption">
-Figure 10.2: Top 15 most productive authors in the sample.
+Figure 9.2: Top 15 most productive authors in the sample.
 </p>
 </div>
 </div>
-<div id="most-productive-sources" class="section level3" number="10.4.6">
+<div id="most-productive-sources" class="section level3" number="9.4.6">
 <h3>
-<span class="header-section-number">10.4.6</span> Most productive sources<a class="anchor" aria-label="anchor" href="#most-productive-sources"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.6</span> Most productive sources<a class="anchor" aria-label="anchor" href="#most-productive-sources"><i class="fas fa-link"></i></a>
 </h3>
 <p>Because all sampled works come from a single journal in this example, we instead show the most frequent cited sources from the references.</p>
-<div class="sourceCode" id="cb127"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top_sources</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">referenced_works</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">referenced_works</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -321,28 +320,28 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Top 10 most-cited reference work IDs:\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Top 10 most-cited reference work IDs:</code></pre>
-<div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">top_sources</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; # A tibble: 10 × 2
 #&gt;    referenced_works                     n
 #&gt;    &lt;chr&gt;                            &lt;int&gt;
-#&gt;  1 https://openalex.org/W4285719527    47
-#&gt;  2 https://openalex.org/W2128438887    40
-#&gt;  3 https://openalex.org/W767067438     26
-#&gt;  4 https://openalex.org/W4254947497    25
-#&gt;  5 https://openalex.org/W2037925493    21
-#&gt;  6 https://openalex.org/W2068452509    20
-#&gt;  7 https://openalex.org/W4292887282    19
-#&gt;  8 https://openalex.org/W1546171873    18
-#&gt;  9 https://openalex.org/W2150220236    18
-#&gt; 10 &lt;NA&gt;                                17</code></pre>
+#&gt;  1 https://openalex.org/W2128438887    54
+#&gt;  2 https://openalex.org/W4285719527    49
+#&gt;  3 https://openalex.org/W767067438     28
+#&gt;  4 https://openalex.org/W1880262756    25
+#&gt;  5 https://openalex.org/W4254947497    25
+#&gt;  6 https://openalex.org/W2150220236    22
+#&gt;  7 https://openalex.org/W2068452509    19
+#&gt;  8 &lt;NA&gt;                                19
+#&gt;  9 https://openalex.org/W2053549370    18
+#&gt; 10 https://openalex.org/W1965631677    16</code></pre>
 </div>
-<div id="three-field-plot" class="section level3" number="10.4.7">
+<div id="three-field-plot" class="section level3" number="9.4.7">
 <h3>
-<span class="header-section-number">10.4.7</span> Three-field plot<a class="anchor" aria-label="anchor" href="#three-field-plot"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.4.7</span> Three-field plot<a class="anchor" aria-label="anchor" href="#three-field-plot"><i class="fas fa-link"></i></a>
 </h3>
 <p>The three-field plot (Sankey diagram) links authors, keywords, and sources. It is a signature visualisation in bibliometrix.</p>
-<div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html">tryCatch</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/pkg/bibliometrix/man/threeFieldsPlot.html">threeFieldsPlot</a></span><span class="op">(</span><span class="va">bib_df</span>, fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"DE"</span>, <span class="st">"SO_SO"</span><span class="op">)</span>, n <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">8</span>, <span class="fl">8</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">e</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Three-field plot skipped due to data format incompatibility.\n"</span><span class="op">)</span></span>
@@ -350,9 +349,9 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <pre><code>#&gt; Three-field plot skipped due to data format incompatibility.</code></pre>
 </div>
 </div>
-<div id="desc-diagnostics" class="section level2" number="10.5">
+<div id="desc-diagnostics" class="section level2" number="9.5">
 <h2>
-<span class="header-section-number">10.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#desc-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#desc-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>When reviewing descriptive output, check the following:</p>
 <ul>
@@ -366,14 +365,14 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <strong>Bradford zones</strong>: In a multi-journal corpus, check whether a small core of journals accounts for roughly one-third of all articles, as Bradford’s law predicts.</li>
 </ul>
 </div>
-<div id="desc-limitations" class="section level2" number="10.6">
+<div id="desc-limitations" class="section level2" number="9.6">
 <h2>
-<span class="header-section-number">10.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#desc-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#desc-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-8" class="section level2 callout callout-warn" number="10.7">
+<div id="limitations-and-responsible-use-8" class="section level2 callout callout-warn" number="9.7">
 <h2>
-<span class="header-section-number">10.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-8"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -386,14 +385,14 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <strong>Name disambiguation.</strong> Despite algorithmic clustering, author and institutional names can still be conflated or split. Treat productivity rankings as approximate.</li>
 </ul>
 </div>
-<div id="desc-pitfalls" class="section level2" number="10.8">
+<div id="desc-pitfalls" class="section level2" number="9.8">
 <h2>
-<span class="header-section-number">10.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#desc-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#desc-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-8" class="section level2 callout callout-stop" number="10.9">
+<div id="common-pitfalls-8" class="section level2 callout callout-stop" number="9.9">
 <h2>
-<span class="header-section-number">10.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-8"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -406,9 +405,9 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <strong>Comparing raw counts across time windows of different length.</strong> Counting publications in a 6-year window is not comparable to a 3-year window without normalisation.</li>
 </ul>
 </div>
-<div id="desc-exercises" class="section level2" number="10.10">
+<div id="desc-exercises" class="section level2" number="9.10">
 <h2>
-<span class="header-section-number">10.10</span> Exercises<a class="anchor" aria-label="anchor" href="#desc-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.10</span> Exercises<a class="anchor" aria-label="anchor" href="#desc-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Lotka’s law.</strong> Using the author productivity data from this chapter, fit Lotka’s inverse-square law with <code><a href="https://rdrr.io/pkg/bibliometrix/man/lotka.html">bibliometrix::lotka()</a></code>. Does the observed distribution follow the theoretical prediction? <em>(Hint: plot observed vs. expected proportions.)</em></p></li>
@@ -417,15 +416,15 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <li><p><strong>Annual growth rate.</strong> Compute the compound annual growth rate (CAGR) of publications in the sample. Is the field accelerating?</p></li>
 </ol>
 </div>
-<div id="solutions-8" class="section level2 callout callout-ok" number="10.11">
+<div id="id_09-solutions" class="section level2 callout callout-ok" number="9.11">
 <h2>
-<span class="header-section-number">10.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-8"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_09-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="desc-reading" class="section level2" number="10.12">
+<div id="desc-reading" class="section level2" number="9.12">
 <h2>
-<span class="header-section-number">10.12</span> Further reading<a class="anchor" aria-label="anchor" href="#desc-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.12</span> Further reading<a class="anchor" aria-label="anchor" href="#desc-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -442,15 +441,15 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <span class="citation">Visser et al. (<a href="references.html#ref-visser2021">2021</a>)</span> — Comparison of bibliographic databases; important context for coverage limitations.</li>
 </ul>
 </div>
-<div id="desc-sessioninfo" class="section level2" number="10.13">
+<div id="desc-sessioninfo" class="section level2" number="9.13">
 <h2>
-<span class="header-section-number">10.13</span> Session info<a class="anchor" aria-label="anchor" href="#desc-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">9.13</span> Session info<a class="anchor" aria-label="anchor" href="#desc-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -469,51 +468,49 @@ Figure 10.2: Top 15 most productive authors in the sample.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] quanteda_4.4       pdftools_3.9.0     arrow_24.0.0       bibliometrix_5.4.0
-#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.3.0          
-#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.0.1    lubridate_1.9.5   
+#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0
+#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0          
+#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
 #&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2       
 #&gt; [17] readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3     
 #&gt; [21] tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.31         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.0.0  curl_7.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.11.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.2.2            plotly_4.12.0         
-#&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      igraph_2.3.2          
-#&gt;  [28] mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
-#&gt;  [31] Matrix_1.7-0           R6_2.6.1               fastmap_1.2.0         
-#&gt;  [34] shiny_1.13.0           digest_0.6.39          shinycssloaders_1.1.0 
-#&gt;  [37] rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3        
-#&gt;  [40] urltools_1.7.3.1       timechange_0.4.0       httr_1.4.8            
-#&gt;  [43] compiler_4.4.1         here_1.0.2             bit64_4.8.0           
-#&gt;  [46] withr_3.0.2            S7_0.2.2               backports_1.5.1       
-#&gt;  [49] viridis_0.6.5          rappdirs_0.3.4         bibliometrixData_0.3.0
-#&gt;  [52] tools_4.4.1            otel_0.2.0             stopwords_2.3         
-#&gt;  [55] zip_2.3.3              httpuv_1.6.17          rentrez_1.2.4         
-#&gt;  [58] promises_1.5.0         grid_4.4.1             stringdist_0.9.17     
-#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
-#&gt;  [64] rscopus_0.9.0          ca_0.71.1              data.table_1.18.4     
-#&gt;  [67] hms_1.1.4              xml2_1.5.2             utf8_1.2.6            
-#&gt;  [70] ggrepel_0.9.8          pillar_1.11.1          later_1.4.8           
-#&gt;  [73] brand.yml_0.1.0        lattice_0.22-6         bit_4.6.0             
-#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [79] knitr_1.51             gridExtra_2.3          bookdown_0.46         
-#&gt;  [82] crul_1.6.0             xfun_0.57              DT_0.34.0             
-#&gt;  [85] humaniformat_0.6.0     visNetwork_2.1.4       stringi_1.8.7         
-#&gt;  [88] lazyeval_0.2.3         qpdf_1.4.1             yaml_2.3.12           
-#&gt;  [91] evaluate_1.0.5         codetools_0.2-20       httpcode_0.3.0        
-#&gt;  [94] cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
-#&gt;  [97] dichromat_2.0-0.1      Rcpp_1.1.1-1.1         readxl_1.4.5          
-#&gt; [100] triebeard_0.4.1        XML_3.99-0.23          parallel_4.4.1        
-#&gt; [103] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3     
-#&gt; [106] scales_1.4.0           openxlsx_4.2.8.1       rlang_1.2.0           
-#&gt; [109] fastmatch_1.1-8</code></pre>
+#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0          
+#&gt;   [4] rlang_1.3.0            magrittr_2.0.5         otel_0.2.0            
+#&gt;   [7] compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0        
+#&gt;  [10] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
+#&gt;  [13] ca_0.72                utf8_1.2.6             promises_1.5.0        
+#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0             
+#&gt;  [19] xfun_0.62              cachem_1.1.0           jsonlite_2.0.0        
+#&gt;  [22] SnowballC_0.7.1        later_1.4.8            parallel_4.6.1        
+#&gt;  [25] stopwords_2.3          R6_2.6.1               bslib_0.12.0          
+#&gt;  [28] stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
+#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2            
+#&gt;  [34] bookdown_0.48          knitr_1.52             triebeard_0.4.1       
+#&gt;  [37] base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17         
+#&gt;  [40] Matrix_1.7-5           igraph_2.3.4           timechange_0.4.0      
+#&gt;  [43] tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
+#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5         
+#&gt;  [49] miniUI_0.1.2           humaniformat_0.6.0     curl_8.1.0            
+#&gt;  [52] qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9            
+#&gt;  [55] shiny_1.14.0           withr_3.0.3            S7_0.2.2              
+#&gt;  [58] askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
+#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1         
+#&gt;  [64] janeaustenr_1.0.0      DT_0.34.0              plotly_4.12.1         
+#&gt;  [67] generics_0.1.4         rprojroot_2.1.1        hms_1.1.4             
+#&gt;  [70] scales_1.4.0           xtable_1.8-8           contentanalysis_1.1.1 
+#&gt;  [73] tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
+#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0              
+#&gt;  [79] visNetwork_2.1.4       fastmatch_1.1-8        grid_4.6.1            
+#&gt;  [82] bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0         
+#&gt;  [85] dimensionsR_0.0.3      bibliometrixData_0.3.0 cli_3.6.6             
+#&gt;  [88] viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
+#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8         
+#&gt;  [94] crul_1.6.0             htmlwidgets_1.6.4      farver_2.1.2          
+#&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
+#&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
+#&gt; [103] bit64_4.8.6</code></pre>
 
 </div>
 </div>
@@ -542,103 +539,99 @@ Figure 10.2: Top 15 most productive authors in the sample.
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></div>
-<div class="next"><a href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></div>
+<div class="prev"><a href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></div>
+<div class="next"><a href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#descriptive-bibliometrics"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="nav-link" href="#desc-objectives"><span class="header-section-number">10.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#desc-setup"><span class="header-section-number">10.2</span> Setup</a></li>
-<li><a class="nav-link" href="#desc-background"><span class="header-section-number">10.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#descriptive-bibliometrics"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="nav-link" href="#desc-objectives"><span class="header-section-number">9.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#desc-setup"><span class="header-section-number">9.2</span> Setup</a></li>
+<li><a class="nav-link" href="#desc-background"><span class="header-section-number">9.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#desc-example"><span class="header-section-number">10.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#acquiring-the-data"><span class="header-section-number">10.4.1</span> Acquiring the data</a></li>
-<li><a class="nav-link" href="#converting-to-bibliometrix-format"><span class="header-section-number">10.4.2</span> Converting to bibliometrix format</a></li>
-<li><a class="nav-link" href="#running-biblioanalysis"><span class="header-section-number">10.4.3</span> Running biblioAnalysis</a></li>
-<li><a class="nav-link" href="#annual-scientific-production"><span class="header-section-number">10.4.4</span> Annual scientific production</a></li>
-<li><a class="nav-link" href="#most-productive-authors"><span class="header-section-number">10.4.5</span> Most productive authors</a></li>
-<li><a class="nav-link" href="#most-productive-sources"><span class="header-section-number">10.4.6</span> Most productive sources</a></li>
-<li><a class="nav-link" href="#three-field-plot"><span class="header-section-number">10.4.7</span> Three-field plot</a></li>
+<a class="nav-link" href="#desc-example"><span class="header-section-number">9.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#acquiring-the-data"><span class="header-section-number">9.4.1</span> Acquiring the data</a></li>
+<li><a class="nav-link" href="#converting-to-bibliometrix-format"><span class="header-section-number">9.4.2</span> Converting to bibliometrix format</a></li>
+<li><a class="nav-link" href="#running-biblioanalysis"><span class="header-section-number">9.4.3</span> Running biblioAnalysis</a></li>
+<li><a class="nav-link" href="#annual-scientific-production"><span class="header-section-number">9.4.4</span> Annual scientific production</a></li>
+<li><a class="nav-link" href="#most-productive-authors"><span class="header-section-number">9.4.5</span> Most productive authors</a></li>
+<li><a class="nav-link" href="#most-productive-sources"><span class="header-section-number">9.4.6</span> Most productive sources</a></li>
+<li><a class="nav-link" href="#three-field-plot"><span class="header-section-number">9.4.7</span> Three-field plot</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#desc-diagnostics"><span class="header-section-number">10.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#desc-limitations"><span class="header-section-number">10.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-8"><span class="header-section-number">10.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#desc-pitfalls"><span class="header-section-number">10.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-8"><span class="header-section-number">10.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#desc-exercises"><span class="header-section-number">10.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-8"><span class="header-section-number">10.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#desc-reading"><span class="header-section-number">10.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#desc-sessioninfo"><span class="header-section-number">10.13</span> Session info</a></li>
+<li><a class="nav-link" href="#desc-diagnostics"><span class="header-section-number">9.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#desc-limitations"><span class="header-section-number">9.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-8"><span class="header-section-number">9.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#desc-pitfalls"><span class="header-section-number">9.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-8"><span class="header-section-number">9.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#desc-exercises"><span class="header-section-number">9.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_09-solutions"><span class="header-section-number">9.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#desc-reading"><span class="header-section-number">9.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#desc-sessioninfo"><span class="header-section-number">9.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -656,7 +649,7 @@ Figure 10.2: Top 15 most productive authors in the sample.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

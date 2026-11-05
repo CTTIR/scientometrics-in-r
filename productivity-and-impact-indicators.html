@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 11 Productivity and Impact Indicators | Scientometrics in R</title>
+<title>Chapter 10 Productivity and Impact Indicators | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="11.1 Learning objectives After completing this chapter, you will be able to: Compute the h-index, g-index, and m-quotient from a vector of citation counts Explain the difference between...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Productivity and Impact Indicators | Scientometrics in R">
+<meta name="description" content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 10 Productivity and Impact Indicators | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/productivity-and-impact-indicators.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="11.1 Learning objectives After completing this chapter, you will be able to: Compute the h-index, g-index, and m-quotient from a vector of citation counts Explain the difference between...">
+<meta property="og:description" content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Productivity and Impact Indicators | Scientometrics in R">
-<meta name="twitter:description" content="11.1 Learning objectives After completing this chapter, you will be able to: Compute the h-index, g-index, and m-quotient from a vector of citation counts Explain the difference between...">
+<meta name="twitter:title" content="Chapter 10 Productivity and Impact Indicators | Scientometrics in R">
+<meta name="twitter:description" content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="active" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="active" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,27 +163,27 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="productivity-and-impact-indicators" class="section level1" number="11">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="productivity-and-impact-indicators" class="section level1" number="10">
 <h1>
-<span class="header-section-number">11</span> Productivity and Impact Indicators<a class="anchor" aria-label="anchor" href="#productivity-and-impact-indicators"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10</span> Productivity and Impact Indicators<a class="anchor" aria-label="anchor" href="#productivity-and-impact-indicators"><i class="fas fa-link"></i></a>
 </h1>
-<div id="indicators-objectives" class="section level2" number="11.1">
+<div id="indicators-objectives" class="section level2" number="10.1">
 <h2>
-<span class="header-section-number">11.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#indicators-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#indicators-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
-<li>Compute the h-index, g-index, and m-quotient from a vector of citation counts</li>
+<li>Compute sample h- and g-indices and distinguish a corpus publication span from an author career</li>
 <li>Explain the difference between size-dependent and size-independent indicators</li>
-<li>Calculate field-normalized indicators (MNCS, PP(top 10%)) and explain why normalization matters</li>
+<li>Explain the external reference sets needed for MNCS and PP(top 10%), and diagnose misleading within-sample normalization</li>
 <li>Articulate the limitations of each indicator and the risks of misuse, citing the Leiden Manifesto</li>
 </ul>
 </div>
-<div id="indicators-setup" class="section level2" number="11.2">
+<div id="indicators-setup" class="section level2" number="10.2">
 <h2>
-<span class="header-section-number">11.2</span> Setup<a class="anchor" aria-label="anchor" href="#indicators-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Setup<a class="anchor" aria-label="anchor" href="#indicators-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -196,26 +195,26 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="indicators-background" class="section level2" number="11.3">
+<div id="indicators-background" class="section level2" number="10.3">
 <h2>
-<span class="header-section-number">11.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#indicators-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#indicators-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Quantitative indicators are central to research evaluation — and among the most contested tools in science policy. The h-index, proposed by <span class="citation">Hirsch (<a href="references.html#ref-hirsch2005">2005</a>)</span>, counts the number <em>h</em> of an author’s papers that have each received at least <em>h</em> citations. Its simplicity made it wildly popular, but also obscures important nuances: it conflates productivity with impact, is insensitive to highly cited papers, and can only increase over a career <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>.</p>
 <p>The <strong>g-index</strong> <span class="citation">(<a href="references.html#ref-egghe2006">Egghe 2006</a>)</span> addresses the insensitivity to top-cited papers by requiring that the top <em>g</em> papers have together received at least <em>g</em>² citations. The <strong>m-quotient</strong> divides the h-index by career length, offering a rough age correction.</p>
-<p>These are all <em>raw</em> indicators. Comparing them across fields is meaningless without <strong>field normalization</strong>. A citation count of 50 is exceptional in mathematics but ordinary in biomedical research. The <strong>Mean Normalized Citation Score</strong> (MNCS) divides each paper’s citations by the world average for its field and publication year <span class="citation">(<a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span>. The <strong>PP(top 10%)</strong> — the proportion of an entity’s papers in the top 10% most cited in their field — is a percentile-based indicator recommended by the Leiden Ranking.</p>
+<p>These are all <em>raw</em> indicators. Citation distributions differ across fields, so comparisons require a justified reference and <strong>field normalization</strong>. The <strong>Mean Normalized Citation Score</strong> (MNCS) divides each paper’s citations by the world average for its field and publication year <span class="citation">(<a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span>. The <strong>PP(top 10%)</strong> — the proportion of an entity’s papers in the top 10% most cited in their field — is a percentile-based indicator recommended by the Leiden Ranking.</p>
 <p>The Leiden Manifesto <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span> and the San Francisco Declaration on Research Assessment <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> both caution against mechanical use of any single indicator. Indicators should support, not replace, qualitative judgement.</p>
 </div>
-<div id="indicators-example" class="section level2" number="11.4">
+<div id="indicators-example" class="section level2" number="10.4">
 <h2>
-<span class="header-section-number">11.4</span> Worked example<a class="anchor" aria-label="anchor" href="#indicators-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4</span> Worked example<a class="anchor" aria-label="anchor" href="#indicators-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="acquiring-sample-data" class="section level3" number="11.4.1">
+<div id="acquiring-sample-data" class="section level3" number="10.4.1">
 <h3>
-<span class="header-section-number">11.4.1</span> Acquiring sample data<a class="anchor" aria-label="anchor" href="#acquiring-sample-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.1</span> Acquiring sample data<a class="anchor" aria-label="anchor" href="#acquiring-sample-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch a sample of works and their citation counts from OpenAlex.</p>
-<div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2018-01-01"</span>,</span>
@@ -229,23 +228,23 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#&gt;     0.0     6.0    13.0    21.8    27.0   241.0</code></pre>
+#&gt;     0.0     6.0    14.0    24.3    27.0   717.0</code></pre>
 </div>
-<div id="computing-the-h-index" class="section level3" number="11.4.2">
+<div id="computing-the-h-index" class="section level3" number="10.4.2">
 <h3>
-<span class="header-section-number">11.4.2</span> Computing the h-index<a class="anchor" aria-label="anchor" href="#computing-the-h-index"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.2</span> Computing the h-index<a class="anchor" aria-label="anchor" href="#computing-the-h-index"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu">compute_h_index</span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"h-index for this corpus: {h}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; h-index for this corpus: 50</code></pre>
-<p>The h-index tells us that {h} papers in this sample have each been cited at least {h} times.</p>
+<pre><code>#&gt; h-index for this corpus: 49</code></pre>
+<p>The sample h-index means that at least 49 sampled papers each have at least 49 citations. It is not an author career h-index.</p>
 </div>
-<div id="computing-the-g-index" class="section level3" number="11.4.3">
+<div id="computing-the-g-index" class="section level3" number="10.4.3">
 <h3>
-<span class="header-section-number">11.4.3</span> Computing the g-index<a class="anchor" aria-label="anchor" href="#computing-the-g-index"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.3</span> Computing the g-index<a class="anchor" aria-label="anchor" href="#computing-the-g-index"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">compute_g_index</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">citations</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">sorted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">citations</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="va">cumsum_cites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">sorted</span><span class="op">)</span></span>
@@ -256,48 +255,57 @@
 <span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">compute_g_index</span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"g-index for this corpus: {g}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; g-index for this corpus: 72</code></pre>
+<pre><code>#&gt; g-index for this corpus: 82</code></pre>
 </div>
-<div id="the-m-quotient" class="section level3" number="11.4.4">
+<div id="publication-span-is-not-career-length" class="section level3" number="10.4.4">
 <h3>
-<span class="header-section-number">11.4.4</span> The m-quotient<a class="anchor" aria-label="anchor" href="#the-m-quotient"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.4</span> Publication span is not career length<a class="anchor" aria-label="anchor" href="#publication-span-is-not-career-length"><i class="fas fa-link"></i></a>
 </h3>
-<p>The m-quotient normalizes the h-index by career length (here, publication span).</p>
-<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
+<p>A proper m-quotient needs an identified author and a justified career-start date.
+This corpus contains many authors, so its publication span cannot supply that
+denominator. The following h/span ratio is only a descriptive calculation.</p>
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">career_years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">publication_date</span><span class="op">)</span>,</span>
 <span>           <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">publication_date</span><span class="op">)</span>,</span>
 <span>           units <span class="op">=</span> <span class="st">"days"</span><span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">/</span> <span class="fl">365.25</span></span>
 <span></span>
-<span><span class="va">m_quotient</span> <span class="op">&lt;-</span> <span class="va">h</span> <span class="op">/</span> <span class="va">career_years</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"m-quotient: {round(m_quotient, 3)} (over {round(career_years, 1)} years)\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; m-quotient: 8.358 (over 6 years)</code></pre>
+<span><span class="va">h_per_span</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">career_years</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">career_years</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">h</span> <span class="op">/</span> <span class="va">career_years</span> <span class="kw">else</span> <span class="cn">NA_real_</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sample h/publication-span ratio: {round(h_per_span, 3)} (span {round(career_years, 1)} years)\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Sample h/publication-span ratio: 8.24 (span 5.9 years)</code></pre>
 </div>
-<div id="field-normalized-indicators-mncs" class="section level3" number="11.4.5">
+<div id="a-normalization-diagnostic-using-the-sample-as-its-own-reference" class="section level3" number="10.4.5">
 <h3>
-<span class="header-section-number">11.4.5</span> Field-normalized indicators: MNCS<a class="anchor" aria-label="anchor" href="#field-normalized-indicators-mncs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.5</span> A normalization diagnostic: using the sample as its own reference<a class="anchor" aria-label="anchor" href="#a-normalization-diagnostic-using-the-sample-as-its-own-reference"><i class="fas fa-link"></i></a>
 </h3>
-<p>To compute MNCS, we need field averages. We simulate field means here; in a real analysis these would come from the OpenAlex snapshot or a reference dataset.</p>
-<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">field_means_by_year</span> <span class="op">&lt;-</span> <span class="va">works_slim</span> <span class="op">|&gt;</span></span>
+<p>MNCS requires a justified field/year reference with compatible document types
+and citation windows. The live corpus here supplies no such reference. To show
+why that matters, compute a mean within each sample year and divide the same
+records by it. Every usable year must average to 1 by construction. These are
+observed sample means, not simulated field means or world averages.</p>
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sample_means_by_year</span> <span class="op">&lt;-</span> <span class="va">works_slim</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>field_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cited_by_count</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sample_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cited_by_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">works_normalized</span> <span class="op">&lt;-</span> <span class="va">works_slim</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">field_means_by_year</span>, by <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ncs <span class="op">=</span> <span class="fu">field_normalize</span><span class="op">(</span><span class="va">cited_by_count</span>, <span class="va">field_mean</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">left_join</a></span><span class="op">(</span><span class="va">sample_means_by_year</span>, by <span class="op">=</span> <span class="st">"year"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>ncs <span class="op">=</span> <span class="fu">field_normalize</span><span class="op">(</span><span class="va">cited_by_count</span>, <span class="va">sample_mean</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">mncs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">works_normalized</span><span class="op">$</span><span class="va">ncs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"MNCS: {round(mncs, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; MNCS: 1</code></pre>
-<p>An MNCS of 1.0 means the entity performs at exactly the world average. Values above 1.0 indicate above-average citation impact.</p>
+<span><span class="va">sample_ratio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">works_normalized</span><span class="op">$</span><span class="va">ncs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean within-sample/year ratio: {round(sample_ratio, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Mean within-sample/year ratio: 1</code></pre>
+<p>A value of 1 here is an arithmetic identity, not evidence of world-average
+impact. Zero-mean years have undefined ratios and are excluded. An actual MNCS
+interpretation requires an independently justified field/year reference
+<span class="citation">(<a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span>.</p>
 </div>
-<div id="pptop-10" class="section level3" number="11.4.6">
+<div id="within-sample-upper-percentile-membership" class="section level3" number="10.4.6">
 <h3>
-<span class="header-section-number">11.4.6</span> PP(top 10%)<a class="anchor" aria-label="anchor" href="#pptop-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.6</span> Within-sample upper-percentile membership<a class="anchor" aria-label="anchor" href="#within-sample-upper-percentile-membership"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_with_pct</span> <span class="op">&lt;-</span> <span class="va">works_normalized</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -306,15 +314,18 @@
 <span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">pp_top10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">works_with_pct</span><span class="op">$</span><span class="va">is_top10</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"PP(top 10%): {scales::percent(pp_top10, accuracy = 0.1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; PP(top 10%): 10.4%</code></pre>
+<span><span class="va">pp_top10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">works_with_pct</span><span class="op">$</span><span class="va">is_top10</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Share at or above the sample/year 90th percentile rank: {scales::percent(pp_top10, accuracy = 0.1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Share at or above the sample/year 90th percentile rank: 10.2%</code></pre>
+<p>The ranks use only sampled works in each year. Ties and small groups can make
+the selected share differ from 10%; a singleton has no percentile rank. This
+is not field-normalized PP(top 10%). Report the ranking and tie rule explicitly.</p>
 </div>
-<div id="visualization-4" class="section level3" number="11.4.7">
+<div id="visualization-4" class="section level3" number="10.4.7">
 <h3>
-<span class="header-section-number">11.4.7</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.7</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-4"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_slim</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cited_by_count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">5</span>, fill <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -326,46 +337,46 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:10-fig-indicators-citation-dist"></span>
 <img src="scientometrics-in-r_files/figure-html/10-fig-indicators-citation-dist-1.png" alt="Histogram of citation counts with a vertical dashed line at the h-index value, showing the long-tailed distribution typical of citation data." width="90%"><p class="caption">
-Figure 11.1: Citation distribution of sampled works, with the h-index threshold marked.
+Figure 10.1: Citation distribution of sampled works, with the h-index threshold marked.
 </p>
 </div>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_normalized</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mncs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ncs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">mncs</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sample_ratio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ncs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">sample_ratio</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span>color <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_hline</a></span><span class="op">(</span>yintercept <span class="op">=</span> <span class="fl">1</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, color <span class="op">=</span> <span class="st">"grey50"</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Publication year"</span>, y <span class="op">=</span> <span class="st">"MNCS"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Publication year"</span>, y <span class="op">=</span> <span class="st">"Within-sample/year ratio"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:10-fig-indicators-mncs-by-year"></span>
-<img src="scientometrics-in-r_files/figure-html/10-fig-indicators-mncs-by-year-1.png" alt="Line chart showing the MNCS trend across publication years, with a horizontal reference line at 1.0 representing the world average." width="90%"><p class="caption">
-Figure 11.2: Mean Normalized Citation Score by publication year.
+<img src="scientometrics-in-r_files/figure-html/10-fig-indicators-mncs-by-year-1.png" alt="Line chart at one across usable years, demonstrating the arithmetic identity created by normalizing each sample year to itself." width="90%"><p class="caption">
+Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of one.
 </p>
 </div>
 </div>
-<div id="summary-table" class="section level3" number="11.4.8">
+<div id="summary-table" class="section level3" number="10.4.8">
 <h3>
-<span class="header-section-number">11.4.8</span> Summary table<a class="anchor" aria-label="anchor" href="#summary-table"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.8</span> Summary table<a class="anchor" aria-label="anchor" href="#summary-table"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
-<span>  Indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"h-index"</span>, <span class="st">"g-index"</span>, <span class="st">"m-quotient"</span>, <span class="st">"MNCS"</span>, <span class="st">"PP(top 10%)"</span><span class="op">)</span>,</span>
+<span>  Indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sample h-index"</span>, <span class="st">"Sample g-index"</span>, <span class="st">"Sample h/span"</span>, <span class="st">"Mean sample/year ratio"</span>, <span class="st">"Sample upper-percentile share"</span><span class="op">)</span>,</span>
 <span>  Value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span>,</span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">m_quotient</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">mncs</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">h_per_span</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">sample_ratio</span>, <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>    <span class="fu">scales</span><span class="fu">::</span><span class="fu"><a href="https://scales.r-lib.org/reference/percent_format.html">percent</a></span><span class="op">(</span><span class="va">pp_top10</span>, accuracy <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span></span>
 <span>  <span class="op">)</span>,</span>
 <span>  Interpretation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{h} papers with &gt;= {h} citations each"</span><span class="op">)</span>,</span>
 <span>    <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Top {g} papers have &gt;= {g}^2 = {g^2} cumulative citations"</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"h-index per year of publication activity"</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{ifelse(mncs &gt; 1, 'Above', 'Below')} world average"</span><span class="op">)</span>,</span>
-<span>    <span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"{scales::percent(pp_top10, accuracy = 0.1)} of papers in the top decile"</span><span class="op">)</span></span>
+<span>    <span class="st">"Not a career m-quotient"</span>,</span>
+<span>    <span class="st">"One by construction; not MNCS"</span>,</span>
+<span>    <span class="st">"Within-sample rank rule; not world PP(top 10%)"</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -826,38 +837,38 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Indicator" class="gt_row gt_left">h-index</td>
-<td headers="Value" class="gt_row gt_right">50</td>
-<td headers="Interpretation" class="gt_row gt_left">50 papers with &gt;= 50 citations each</td>
+<td headers="Indicator" class="gt_row gt_left">Sample h-index</td>
+<td headers="Value" class="gt_row gt_right">49</td>
+<td headers="Interpretation" class="gt_row gt_left">49 papers with &gt;= 49 citations each</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">g-index</td>
-<td headers="Value" class="gt_row gt_right">72</td>
-<td headers="Interpretation" class="gt_row gt_left">Top 72 papers have &gt;= 72^2 = 5184 cumulative citations</td>
+<td headers="Indicator" class="gt_row gt_left">Sample g-index</td>
+<td headers="Value" class="gt_row gt_right">82</td>
+<td headers="Interpretation" class="gt_row gt_left">Top 82 papers have &gt;= 82^2 = 6724 cumulative citations</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">m-quotient</td>
-<td headers="Value" class="gt_row gt_right">8.358</td>
-<td headers="Interpretation" class="gt_row gt_left">h-index per year of publication activity</td>
+<td headers="Indicator" class="gt_row gt_left">Sample h/span</td>
+<td headers="Value" class="gt_row gt_right">8.24</td>
+<td headers="Interpretation" class="gt_row gt_left">Not a career m-quotient</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">MNCS</td>
+<td headers="Indicator" class="gt_row gt_left">Mean sample/year ratio</td>
 <td headers="Value" class="gt_row gt_right">1</td>
-<td headers="Interpretation" class="gt_row gt_left">Below world average</td>
+<td headers="Interpretation" class="gt_row gt_left">One by construction; not MNCS</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">PP(top 10%)</td>
-<td headers="Value" class="gt_row gt_right">10.4%</td>
-<td headers="Interpretation" class="gt_row gt_left">10.4% of papers in the top decile</td>
+<td headers="Indicator" class="gt_row gt_left">Sample upper-percentile share</td>
+<td headers="Value" class="gt_row gt_right">10.2%</td>
+<td headers="Interpretation" class="gt_row gt_left">Within-sample rank rule; not world PP(top 10%)</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
 </div>
-<div id="indicators-diagnostics" class="section level2" number="11.5">
+<div id="indicators-diagnostics" class="section level2" number="10.5">
 <h2>
-<span class="header-section-number">11.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#indicators-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#indicators-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>When interpreting bibliometric indicators, keep in mind:</p>
 <ul>
@@ -871,14 +882,14 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
 <strong>Self-citations.</strong> None of the indicators above exclude self-citations. In a full analysis, consider computing variants with and without self-citations.</li>
 </ul>
 </div>
-<div id="indicators-limitations" class="section level2" number="11.6">
+<div id="indicators-limitations" class="section level2" number="10.6">
 <h2>
-<span class="header-section-number">11.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#indicators-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#indicators-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-9" class="section level2 callout callout-warn" number="11.7">
+<div id="limitations-and-responsible-use-9" class="section level2 callout callout-warn" number="10.7">
 <h2>
-<span class="header-section-number">11.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>No single number can capture the quality, significance, or societal impact of a researcher’s work. The Leiden Manifesto <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span> offers ten principles for the responsible use of metrics:</p>
 <ol style="list-style-type: decimal">
@@ -891,14 +902,14 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
 <p>The h-index in particular can be gamed through self-citation, salami slicing, or guest authorship. It penalises researchers in small fields, those who publish fewer but higher-impact works, and those who take career breaks. The DORA declaration <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> explicitly warns against using journal-level metrics (like the Impact Factor) as surrogates for individual article quality — but the same caution applies to any single indicator.</p>
 <p><strong>Always present multiple indicators alongside qualitative context.</strong> Never use a single number to make hiring, promotion, or funding decisions.</p>
 </div>
-<div id="indicators-pitfalls" class="section level2" number="11.8">
+<div id="indicators-pitfalls" class="section level2" number="10.8">
 <h2>
-<span class="header-section-number">11.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#indicators-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#indicators-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-9" class="section level2 callout callout-stop" number="11.9">
+<div id="common-pitfalls-9" class="section level2 callout callout-stop" number="10.9">
 <h2>
-<span class="header-section-number">11.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-9"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -911,26 +922,26 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
 <strong>Reporting precision that isn’t there.</strong> An MNCS of 1.237 vs. 1.241 is not a meaningful difference. Report with appropriate precision and always provide confidence intervals or bootstrapped uncertainty where possible.</li>
 </ul>
 </div>
-<div id="indicators-exercises" class="section level2" number="11.10">
+<div id="indicators-exercises" class="section level2" number="10.10">
 <h2>
-<span class="header-section-number">11.10</span> Exercises<a class="anchor" aria-label="anchor" href="#indicators-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.10</span> Exercises<a class="anchor" aria-label="anchor" href="#indicators-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Career h-index.</strong> Fetch all works by a specific author using <code>oa_fetch(entity = "works", author.id = "...")</code>. Compute their h-index, g-index, and m-quotient. How do the three indicators tell different stories about the same career?</p></li>
 <li><p><strong>Self-citation sensitivity.</strong> If you could identify self-citations (e.g., via author overlap in the reference list), how would removing them affect the h-index? Write pseudocode for this analysis.</p></li>
-<li><p><strong>Bootstrap uncertainty for MNCS.</strong> Use <code><a href="https://rdrr.io/r/base/lapply.html">replicate()</a></code> and <code><a href="https://rdrr.io/r/base/sample.html">sample()</a></code> to compute a 95% confidence interval for the MNCS of your sample. How wide is the interval?</p></li>
-<li><p><strong>PP(top 10%) vs. MNCS.</strong> For the sample data, plot PP(top 10%) against MNCS by year. Do they always agree on which years performed best?</p></li>
+<li><p><strong>Empirical resampling.</strong> Resample the within-sample/year ratios while holding their empirical reference fixed. Explain why the resulting interval does not measure uncertainty about world-normalized MNCS.</p></li>
+<li><p><strong>Normalization and ranks.</strong> Compare each year’s mean sample ratio with its upper-percentile share. Explain why the ratio is fixed at one and why ties can change the percentile share; neither ranks world-normalized impact.</p></li>
 </ol>
 </div>
-<div id="solutions-9" class="section level2 callout callout-ok" number="11.11">
+<div id="id_10-solutions" class="section level2 callout callout-ok" number="10.11">
 <h2>
-<span class="header-section-number">11.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_10-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="indicators-reading" class="section level2" number="11.12">
+<div id="indicators-reading" class="section level2" number="10.12">
 <h2>
-<span class="header-section-number">11.12</span> Further reading<a class="anchor" aria-label="anchor" href="#indicators-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.12</span> Further reading<a class="anchor" aria-label="anchor" href="#indicators-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -947,15 +958,15 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
 <span class="citation">American Society for Cell Biology (<a href="references.html#ref-dora2012">2012</a>)</span> — DORA: the San Francisco Declaration on Research Assessment.</li>
 </ul>
 </div>
-<div id="indicators-sessioninfo" class="section level2" number="11.13">
+<div id="indicators-sessioninfo" class="section level2" number="10.13">
 <h2>
-<span class="header-section-number">11.13</span> Session info<a class="anchor" aria-label="anchor" href="#indicators-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.13</span> Session info<a class="anchor" aria-label="anchor" href="#indicators-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -974,51 +985,49 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] quanteda_4.4       pdftools_3.9.0     arrow_24.0.0       bibliometrix_5.4.0
-#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.3.0          
-#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.0.1    lubridate_1.9.5   
+#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0
+#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0          
+#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
 #&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2       
 #&gt; [17] readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3     
 #&gt; [21] tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.31         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.0.0  curl_7.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.11.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.2.2            plotly_4.12.0         
-#&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      igraph_2.3.2          
-#&gt;  [28] mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
-#&gt;  [31] Matrix_1.7-0           R6_2.6.1               fastmap_1.2.0         
-#&gt;  [34] shiny_1.13.0           digest_0.6.39          shinycssloaders_1.1.0 
-#&gt;  [37] rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3        
-#&gt;  [40] urltools_1.7.3.1       timechange_0.4.0       httr_1.4.8            
-#&gt;  [43] compiler_4.4.1         here_1.0.2             bit64_4.8.0           
-#&gt;  [46] withr_3.0.2            S7_0.2.2               backports_1.5.1       
-#&gt;  [49] viridis_0.6.5          rappdirs_0.3.4         bibliometrixData_0.3.0
-#&gt;  [52] tools_4.4.1            otel_0.2.0             stopwords_2.3         
-#&gt;  [55] zip_2.3.3              httpuv_1.6.17          rentrez_1.2.4         
-#&gt;  [58] promises_1.5.0         grid_4.4.1             stringdist_0.9.17     
-#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
-#&gt;  [64] rscopus_0.9.0          ca_0.71.1              data.table_1.18.4     
-#&gt;  [67] hms_1.1.4              xml2_1.5.2             utf8_1.2.6            
-#&gt;  [70] ggrepel_0.9.8          pillar_1.11.1          later_1.4.8           
-#&gt;  [73] brand.yml_0.1.0        lattice_0.22-6         bit_4.6.0             
-#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [79] knitr_1.51             gridExtra_2.3          bookdown_0.46         
-#&gt;  [82] crul_1.6.0             xfun_0.57              DT_0.34.0             
-#&gt;  [85] humaniformat_0.6.0     visNetwork_2.1.4       stringi_1.8.7         
-#&gt;  [88] lazyeval_0.2.3         qpdf_1.4.1             yaml_2.3.12           
-#&gt;  [91] evaluate_1.0.5         codetools_0.2-20       httpcode_0.3.0        
-#&gt;  [94] cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
-#&gt;  [97] dichromat_2.0-0.1      Rcpp_1.1.1-1.1         readxl_1.4.5          
-#&gt; [100] triebeard_0.4.1        XML_3.99-0.23          parallel_4.4.1        
-#&gt; [103] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3     
-#&gt; [106] scales_1.4.0           openxlsx_4.2.8.1       rlang_1.2.0           
-#&gt; [109] fastmatch_1.1-8</code></pre>
+#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0          
+#&gt;   [4] rlang_1.3.0            magrittr_2.0.5         otel_0.2.0            
+#&gt;   [7] compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0        
+#&gt;  [10] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
+#&gt;  [13] ca_0.72                utf8_1.2.6             promises_1.5.0        
+#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0             
+#&gt;  [19] xfun_0.62              cachem_1.1.0           jsonlite_2.0.0        
+#&gt;  [22] SnowballC_0.7.1        later_1.4.8            parallel_4.6.1        
+#&gt;  [25] stopwords_2.3          R6_2.6.1               bslib_0.12.0          
+#&gt;  [28] stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
+#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2            
+#&gt;  [34] bookdown_0.48          knitr_1.52             triebeard_0.4.1       
+#&gt;  [37] base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17         
+#&gt;  [40] Matrix_1.7-5           igraph_2.3.4           timechange_0.4.0      
+#&gt;  [43] tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
+#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5         
+#&gt;  [49] miniUI_0.1.2           humaniformat_0.6.0     curl_8.1.0            
+#&gt;  [52] qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9            
+#&gt;  [55] shiny_1.14.0           withr_3.0.3            S7_0.2.2              
+#&gt;  [58] askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
+#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1         
+#&gt;  [64] janeaustenr_1.0.0      DT_0.34.0              plotly_4.12.1         
+#&gt;  [67] generics_0.1.4         rprojroot_2.1.1        hms_1.1.4             
+#&gt;  [70] scales_1.4.0           xtable_1.8-8           contentanalysis_1.1.1 
+#&gt;  [73] tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
+#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0              
+#&gt;  [79] visNetwork_2.1.4       fastmatch_1.1-8        grid_4.6.1            
+#&gt;  [82] bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0         
+#&gt;  [85] dimensionsR_0.0.3      bibliometrixData_0.3.0 cli_3.6.6             
+#&gt;  [88] viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
+#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8         
+#&gt;  [94] crul_1.6.0             htmlwidgets_1.6.4      farver_2.1.2          
+#&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
+#&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
+#&gt; [103] bit64_4.8.6</code></pre>
 
 </div>
 </div>
@@ -1047,104 +1056,100 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></div>
-<div class="next"><a href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></div>
+<div class="prev"><a href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></div>
+<div class="next"><a href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#productivity-and-impact-indicators"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="nav-link" href="#indicators-objectives"><span class="header-section-number">11.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#indicators-setup"><span class="header-section-number">11.2</span> Setup</a></li>
-<li><a class="nav-link" href="#indicators-background"><span class="header-section-number">11.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#productivity-and-impact-indicators"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="nav-link" href="#indicators-objectives"><span class="header-section-number">10.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#indicators-setup"><span class="header-section-number">10.2</span> Setup</a></li>
+<li><a class="nav-link" href="#indicators-background"><span class="header-section-number">10.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#indicators-example"><span class="header-section-number">11.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#acquiring-sample-data"><span class="header-section-number">11.4.1</span> Acquiring sample data</a></li>
-<li><a class="nav-link" href="#computing-the-h-index"><span class="header-section-number">11.4.2</span> Computing the h-index</a></li>
-<li><a class="nav-link" href="#computing-the-g-index"><span class="header-section-number">11.4.3</span> Computing the g-index</a></li>
-<li><a class="nav-link" href="#the-m-quotient"><span class="header-section-number">11.4.4</span> The m-quotient</a></li>
-<li><a class="nav-link" href="#field-normalized-indicators-mncs"><span class="header-section-number">11.4.5</span> Field-normalized indicators: MNCS</a></li>
-<li><a class="nav-link" href="#pptop-10"><span class="header-section-number">11.4.6</span> PP(top 10%)</a></li>
-<li><a class="nav-link" href="#visualization-4"><span class="header-section-number">11.4.7</span> Visualization</a></li>
-<li><a class="nav-link" href="#summary-table"><span class="header-section-number">11.4.8</span> Summary table</a></li>
+<a class="nav-link" href="#indicators-example"><span class="header-section-number">10.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#acquiring-sample-data"><span class="header-section-number">10.4.1</span> Acquiring sample data</a></li>
+<li><a class="nav-link" href="#computing-the-h-index"><span class="header-section-number">10.4.2</span> Computing the h-index</a></li>
+<li><a class="nav-link" href="#computing-the-g-index"><span class="header-section-number">10.4.3</span> Computing the g-index</a></li>
+<li><a class="nav-link" href="#publication-span-is-not-career-length"><span class="header-section-number">10.4.4</span> Publication span is not career length</a></li>
+<li><a class="nav-link" href="#a-normalization-diagnostic-using-the-sample-as-its-own-reference"><span class="header-section-number">10.4.5</span> A normalization diagnostic: using the sample as its own reference</a></li>
+<li><a class="nav-link" href="#within-sample-upper-percentile-membership"><span class="header-section-number">10.4.6</span> Within-sample upper-percentile membership</a></li>
+<li><a class="nav-link" href="#visualization-4"><span class="header-section-number">10.4.7</span> Visualization</a></li>
+<li><a class="nav-link" href="#summary-table"><span class="header-section-number">10.4.8</span> Summary table</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#indicators-diagnostics"><span class="header-section-number">11.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#indicators-limitations"><span class="header-section-number">11.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-9"><span class="header-section-number">11.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#indicators-pitfalls"><span class="header-section-number">11.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-9"><span class="header-section-number">11.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#indicators-exercises"><span class="header-section-number">11.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-9"><span class="header-section-number">11.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#indicators-reading"><span class="header-section-number">11.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#indicators-sessioninfo"><span class="header-section-number">11.13</span> Session info</a></li>
+<li><a class="nav-link" href="#indicators-diagnostics"><span class="header-section-number">10.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#indicators-limitations"><span class="header-section-number">10.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-9"><span class="header-section-number">10.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#indicators-pitfalls"><span class="header-section-number">10.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-9"><span class="header-section-number">10.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#indicators-exercises"><span class="header-section-number">10.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_10-solutions"><span class="header-section-number">10.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#indicators-reading"><span class="header-section-number">10.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#indicators-sessioninfo"><span class="header-section-number">10.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1162,7 +1167,7 @@ Figure 11.2: Mean Normalized Citation Score by publication year.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

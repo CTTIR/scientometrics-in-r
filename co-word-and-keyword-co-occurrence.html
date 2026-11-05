@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 18 Co-word and Keyword Co-occurrence | Scientometrics in R</title>
+<title>Chapter 17 Co-word and Keyword Co-occurrence | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="18.1 Learning objectives After completing this chapter, you will be able to: Explain the principles of co-word analysis and its role in science mapping Extract and clean keywords from OpenAlex...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 18 Co-word and Keyword Co-occurrence | Scientometrics in R">
+<meta name="description" content="17.1 Learning objectives After completing this chapter, you will be able to: Explain the principles of co-word analysis and its role in science mapping Extract and clean keywords from OpenAlex...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 17 Co-word and Keyword Co-occurrence | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/co-word-and-keyword-co-occurrence.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="18.1 Learning objectives After completing this chapter, you will be able to: Explain the principles of co-word analysis and its role in science mapping Extract and clean keywords from OpenAlex...">
+<meta property="og:description" content="17.1 Learning objectives After completing this chapter, you will be able to: Explain the principles of co-word analysis and its role in science mapping Extract and clean keywords from OpenAlex...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 18 Co-word and Keyword Co-occurrence | Scientometrics in R">
-<meta name="twitter:description" content="18.1 Learning objectives After completing this chapter, you will be able to: Explain the principles of co-word analysis and its role in science mapping Extract and clean keywords from OpenAlex...">
+<meta name="twitter:title" content="Chapter 17 Co-word and Keyword Co-occurrence | Scientometrics in R">
+<meta name="twitter:description" content="17.1 Learning objectives After completing this chapter, you will be able to: Explain the principles of co-word analysis and its role in science mapping Extract and clean keywords from OpenAlex...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="active" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="active" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,13 +163,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="co-word-and-keyword-co-occurrence" class="section level1" number="18">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="co-word-and-keyword-co-occurrence" class="section level1" number="17">
 <h1>
-<span class="header-section-number">18</span> Co-word and Keyword Co-occurrence<a class="anchor" aria-label="anchor" href="#co-word-and-keyword-co-occurrence"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17</span> Co-word and Keyword Co-occurrence<a class="anchor" aria-label="anchor" href="#co-word-and-keyword-co-occurrence"><i class="fas fa-link"></i></a>
 </h1>
-<div id="coword-objectives" class="section level2" number="18.1">
+<div id="coword-objectives" class="section level2" number="17.1">
 <h2>
-<span class="header-section-number">18.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#coword-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#coword-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -181,11 +180,11 @@
 <li>Visualise keyword co-occurrence networks with interpretable layouts</li>
 </ul>
 </div>
-<div id="coword-setup" class="section level2" number="18.2">
+<div id="coword-setup" class="section level2" number="17.2">
 <h2>
-<span class="header-section-number">18.2</span> Setup<a class="anchor" aria-label="anchor" href="#coword-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.2</span> Setup<a class="anchor" aria-label="anchor" href="#coword-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb254"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
@@ -200,9 +199,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="coword-background" class="section level2" number="18.3">
+<div id="coword-background" class="section level2" number="17.3">
 <h2>
-<span class="header-section-number">18.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#coword-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#coword-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Co-word analysis maps the conceptual structure of a research field by examining which terms appear together in the same documents. Introduced by <span class="citation">Callon et al. (<a href="references.html#ref-callon1983">1983</a>)</span>, the method assumes that when two keywords repeatedly co-occur across publications, they are thematically related. The resulting co-occurrence network reveals the topical landscape of a field: clusters of densely connected keywords represent coherent research themes, while bridges between clusters indicate interdisciplinary connections.</p>
 <p>The method works with several types of terms:</p>
@@ -217,43 +216,45 @@
 <strong>Title/abstract words</strong>: Extracted via text mining. Comprehensive but noisy; requires extensive preprocessing.</li>
 </ul>
 <p>Normalisation is important for co-word networks. Raw co-occurrence counts favour high-frequency terms. Common normalisations include the <strong>association strength</strong> (equivalent to pointwise mutual information) and the <strong>equivalence index</strong> (cosine of the co-occurrence vector). <span class="citation">Waltman et al. (<a href="references.html#ref-waltman2012">2010</a>)</span> demonstrated that association strength produces the most balanced network structures for bibliometric mapping.</p>
-<p>Co-word analysis complements citation-based methods (<a href="co-citation-and-bibliographic-coupling.html#cocit-background">17.3</a>). Citation networks reveal intellectual influence; co-word networks reveal thematic content. Combining both provides a more complete picture of a field’s structure.</p>
+<p>Co-word analysis complements citation-based methods (<a href="co-citation-and-bibliographic-coupling.html#cocit-background">16.3</a>). Citation networks reveal intellectual influence; co-word networks reveal thematic content. Combining both provides a more complete picture of a field’s structure.</p>
 </div>
-<div id="coword-example" class="section level2" number="18.4">
+<div id="coword-example" class="section level2" number="17.4">
 <h2>
-<span class="header-section-number">18.4</span> Worked example<a class="anchor" aria-label="anchor" href="#coword-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4</span> Worked example<a class="anchor" aria-label="anchor" href="#coword-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="extracting-keywords" class="section level3" number="18.4.1">
+<div id="extracting-keywords" class="section level3" number="17.4.1">
 <h3>
-<span class="header-section-number">18.4.1</span> Extracting keywords<a class="anchor" aria-label="anchor" href="#extracting-keywords"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4.1</span> Extracting keywords<a class="anchor" aria-label="anchor" href="#extracting-keywords"><i class="fas fa-link"></i></a>
 </h3>
-<p>We extract author keywords from a sample of scientometrics research.</p>
-<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<p>We use OpenAlex-assigned topic labels as terms in a sample of scientometrics research. These are algorithmic labels, not author-supplied keywords. The flattened topic table also includes parent subfields, fields, and domains; retain only topic identifiers (<code>T...</code>) and count each term once per work.</p>
+<div class="sourceCode" id="cb255"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2019-01-01"</span>,</span>
 <span>  to_publication_date <span class="op">=</span> <span class="st">"2023-12-31"</span>,</span>
 <span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">500</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb257"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb256"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">keywords</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">topics</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">topics</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_detect.html">str_detect</a></span><span class="op">(</span><span class="va">topics_id</span>, <span class="st">"(^|/)T[0-9]+$"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">topics_display_name</span> <span class="op">!=</span> <span class="st">""</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span>work_id <span class="op">=</span> <span class="va">id</span>, keyword <span class="op">=</span> <span class="va">topics_display_name</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/case.html">str_to_lower</a></span><span class="op">(</span><span class="fu"><a href="https://stringr.tidyverse.org/reference/str_trim.html">str_trim</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/nchar.html">nchar</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span> <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/distinct.html">distinct</a></span><span class="op">(</span><span class="va">work_id</span>, <span class="va">keyword</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">kw_counts</span> <span class="op">&lt;-</span> <span class="va">keywords</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">keyword</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Total keyword occurrences: {nrow(keywords)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Total keyword occurrences: 5228</code></pre>
-<div class="sourceCode" id="cb259"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Total keyword occurrences: 1500</code></pre>
+<div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Unique keywords: {n_distinct(keywords$keyword)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Unique keywords: 416</code></pre>
-<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Unique keywords: 141</code></pre>
+<div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kw_counts</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>keyword <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">keyword</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -263,17 +264,17 @@
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:17-fig-coword-topkeywords"></span>
-<img src="scientometrics-in-r_files/figure-html/17-fig-coword-topkeywords-1.png" alt="Horizontal bar chart showing the 20 most frequently occurring keywords, with frequency counts on the x-axis." width="90%"><p class="caption">
-Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
+<img src="scientometrics-in-r_files/figure-html/17-fig-coword-topkeywords-1.png" alt="Horizontal bar chart showing the 20 most frequent assigned topic labels, counted once per work." width="90%"><p class="caption">
+Figure 17.1: Top 20 most frequent assigned topics used as terms in the Scientometrics sample.
 </p>
 </div>
 </div>
-<div id="building-the-co-occurrence-network" class="section level3" number="18.4.2">
+<div id="building-the-co-occurrence-network" class="section level3" number="17.4.2">
 <h3>
-<span class="header-section-number">18.4.2</span> Building the co-occurrence network<a class="anchor" aria-label="anchor" href="#building-the-co-occurrence-network"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4.2</span> Building the co-occurrence network<a class="anchor" aria-label="anchor" href="#building-the-co-occurrence-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>We create edges between keywords that appear in the same paper.</p>
-<div class="sourceCode" id="cb262"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb261"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kw_frequent</span> <span class="op">&lt;-</span> <span class="va">kw_counts</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">n</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">keyword</span><span class="op">)</span></span>
@@ -297,13 +298,13 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Keyword network: {vcount(g_kw)} nodes, {ecount(g_kw)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Keyword network: 112 nodes, 908 edges</code></pre>
+<pre><code>#&gt; Keyword network: 33 nodes, 68 edges</code></pre>
 </div>
-<div id="community-detection-for-topical-clusters" class="section level3" number="18.4.3">
+<div id="community-detection-for-topical-clusters" class="section level3" number="17.4.3">
 <h3>
-<span class="header-section-number">18.4.3</span> Community detection for topical clusters<a class="anchor" aria-label="anchor" href="#community-detection-for-topical-clusters"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4.3</span> Community detection for topical clusters<a class="anchor" aria-label="anchor" href="#community-detection-for-topical-clusters"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb264"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb263"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">degree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">strength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/strength.html">strength</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span></span>
 <span></span>
@@ -312,11 +313,11 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">community</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="va">communities</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities: {length(unique(membership(communities)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Communities: 3</code></pre>
-<div class="sourceCode" id="cb266"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Communities: 5</code></pre>
+<div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Modularity: {round(modularity(g_kw, membership(communities)), 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Modularity: 0.235</code></pre>
-<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Modularity: 0.06</code></pre>
+<div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">community_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  keyword <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">name</span>,</span>
 <span>  community <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">community</span>,</span>
@@ -328,23 +329,23 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
 <span>            n_keywords <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">community_summary</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="foxkjwmhyh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#foxkjwmhyh table {
+<div id="krcrnteiul" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#krcrnteiul table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#foxkjwmhyh thead, #foxkjwmhyh tbody, #foxkjwmhyh tfoot, #foxkjwmhyh tr, #foxkjwmhyh td, #foxkjwmhyh th {
+#krcrnteiul thead, #krcrnteiul tbody, #krcrnteiul tfoot, #krcrnteiul tr, #krcrnteiul td, #krcrnteiul th {
   border-style: none;
 }
 
-#foxkjwmhyh p {
+#krcrnteiul p {
   margin: 0;
   padding: 0;
 }
 
-#foxkjwmhyh .gt_table {
+#krcrnteiul .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -370,12 +371,12 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-left-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_caption {
+#krcrnteiul .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#foxkjwmhyh .gt_title {
+#krcrnteiul .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -387,7 +388,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-bottom-width: 0;
 }
 
-#foxkjwmhyh .gt_subtitle {
+#krcrnteiul .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -399,7 +400,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-top-width: 0;
 }
 
-#foxkjwmhyh .gt_heading {
+#krcrnteiul .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -411,13 +412,13 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-right-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_bottom_border {
+#krcrnteiul .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_col_headings {
+#krcrnteiul .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -432,7 +433,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-right-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_col_heading {
+#krcrnteiul .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -452,7 +453,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   overflow-x: hidden;
 }
 
-#foxkjwmhyh .gt_column_spanner_outer {
+#krcrnteiul .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -464,15 +465,15 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   padding-right: 4px;
 }
 
-#foxkjwmhyh .gt_column_spanner_outer:first-child {
+#krcrnteiul .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#foxkjwmhyh .gt_column_spanner_outer:last-child {
+#krcrnteiul .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#foxkjwmhyh .gt_column_spanner {
+#krcrnteiul .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -484,11 +485,11 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   width: 100%;
 }
 
-#foxkjwmhyh .gt_spanner_row {
+#krcrnteiul .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#foxkjwmhyh .gt_group_heading {
+#krcrnteiul .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -514,7 +515,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   text-align: left;
 }
 
-#foxkjwmhyh .gt_empty_group_heading {
+#krcrnteiul .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -529,15 +530,15 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   vertical-align: middle;
 }
 
-#foxkjwmhyh .gt_from_md > :first-child {
+#krcrnteiul .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#foxkjwmhyh .gt_from_md > :last-child {
+#krcrnteiul .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#foxkjwmhyh .gt_row {
+#krcrnteiul .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -556,7 +557,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   overflow-x: hidden;
 }
 
-#foxkjwmhyh .gt_stub {
+#krcrnteiul .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -569,7 +570,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   padding-right: 5px;
 }
 
-#foxkjwmhyh .gt_stub_row_group {
+#krcrnteiul .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -583,15 +584,15 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   vertical-align: top;
 }
 
-#foxkjwmhyh .gt_row_group_first td {
+#krcrnteiul .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#foxkjwmhyh .gt_row_group_first th {
+#krcrnteiul .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#foxkjwmhyh .gt_summary_row {
+#krcrnteiul .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -601,16 +602,16 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   padding-right: 5px;
 }
 
-#foxkjwmhyh .gt_first_summary_row {
+#krcrnteiul .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_first_summary_row.thick {
+#krcrnteiul .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#foxkjwmhyh .gt_last_summary_row {
+#krcrnteiul .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -620,7 +621,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-bottom-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_grand_summary_row {
+#krcrnteiul .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -630,7 +631,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   padding-right: 5px;
 }
 
-#foxkjwmhyh .gt_first_grand_summary_row {
+#krcrnteiul .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -640,7 +641,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-top-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_last_grand_summary_row_top {
+#krcrnteiul .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -650,11 +651,11 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-bottom-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_striped {
+#krcrnteiul .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#foxkjwmhyh .gt_table_body {
+#krcrnteiul .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -663,7 +664,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-bottom-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_footnotes {
+#krcrnteiul .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -677,7 +678,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-right-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_footnote {
+#krcrnteiul .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -686,7 +687,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   padding-right: 5px;
 }
 
-#foxkjwmhyh .gt_sourcenotes {
+#krcrnteiul .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -700,7 +701,7 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   border-right-color: #D3D3D3;
 }
 
-#foxkjwmhyh .gt_sourcenote {
+#krcrnteiul .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -708,72 +709,72 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
   padding-right: 5px;
 }
 
-#foxkjwmhyh .gt_left {
+#krcrnteiul .gt_left {
   text-align: left;
 }
 
-#foxkjwmhyh .gt_center {
+#krcrnteiul .gt_center {
   text-align: center;
 }
 
-#foxkjwmhyh .gt_right {
+#krcrnteiul .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#foxkjwmhyh .gt_font_normal {
+#krcrnteiul .gt_font_normal {
   font-weight: normal;
 }
 
-#foxkjwmhyh .gt_font_bold {
+#krcrnteiul .gt_font_bold {
   font-weight: bold;
 }
 
-#foxkjwmhyh .gt_font_italic {
+#krcrnteiul .gt_font_italic {
   font-style: italic;
 }
 
-#foxkjwmhyh .gt_super {
+#krcrnteiul .gt_super {
   font-size: 65%;
 }
 
-#foxkjwmhyh .gt_footnote_marks {
+#krcrnteiul .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#foxkjwmhyh .gt_asterisk {
+#krcrnteiul .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#foxkjwmhyh .gt_indent_1 {
+#krcrnteiul .gt_indent_1 {
   text-indent: 5px;
 }
 
-#foxkjwmhyh .gt_indent_2 {
+#krcrnteiul .gt_indent_2 {
   text-indent: 10px;
 }
 
-#foxkjwmhyh .gt_indent_3 {
+#krcrnteiul .gt_indent_3 {
   text-indent: 15px;
 }
 
-#foxkjwmhyh .gt_indent_4 {
+#krcrnteiul .gt_indent_4 {
   text-indent: 20px;
 }
 
-#foxkjwmhyh .gt_indent_5 {
+#krcrnteiul .gt_indent_5 {
   text-indent: 25px;
 }
 
-#foxkjwmhyh .katex-display {
+#krcrnteiul .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#foxkjwmhyh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#krcrnteiul div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -786,28 +787,38 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
 <tbody class="gt_table_body">
 <tr>
 <td headers="community" class="gt_row gt_center">1</td>
-<td headers="top_keywords" class="gt_row gt_left">social sciences, decision sciences, statistics, probability and uncertainty, scientometrics and bibliometrics research, business, management and accounting</td>
+<td headers="top_keywords" class="gt_row gt_left">scientometrics and bibliometrics research, web visibility and informetrics, psychology research and bibliometrics, academic publishing and open access, publishing and scholarly communication</td>
 <td headers="n_keywords" class="gt_row gt_right">5</td>
 </tr>
 <tr>
 <td headers="community" class="gt_row gt_center">2</td>
-<td headers="top_keywords" class="gt_row gt_left">physical sciences, computer science, artificial intelligence, information systems, physics and astronomy, statistical and nonlinear physics</td>
-<td headers="n_keywords" class="gt_row gt_right">6</td>
+<td headers="top_keywords" class="gt_row gt_left">computational and text analysis methods, topic modeling, advanced text analysis techniques</td>
+<td headers="n_keywords" class="gt_row gt_right">3</td>
 </tr>
 <tr>
 <td headers="community" class="gt_row gt_center">3</td>
-<td headers="top_keywords" class="gt_row gt_left">health sciences, medicine, public health, environmental and occupational health, health and medical research impacts, gender studies</td>
+<td headers="top_keywords" class="gt_row gt_left">intellectual property and patents, innovation and knowledge management, university-industry-government innovation models, agglomeration and urban systems, firm innovation and growth</td>
 <td headers="n_keywords" class="gt_row gt_right">5</td>
+</tr>
+<tr>
+<td headers="community" class="gt_row gt_center">4</td>
+<td headers="top_keywords" class="gt_row gt_left">library science and information systems, data quality and management</td>
+<td headers="n_keywords" class="gt_row gt_right">2</td>
+</tr>
+<tr>
+<td headers="community" class="gt_row gt_center">5</td>
+<td headers="top_keywords" class="gt_row gt_left">recommender systems and techniques, information retrieval and search behavior</td>
+<td headers="n_keywords" class="gt_row gt_right">2</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="visualisation-1" class="section level3" number="18.4.4">
+<div id="visualisation-1" class="section level3" number="17.4.4">
 <h3>
-<span class="header-section-number">18.4.4</span> Visualisation<a class="anchor" aria-label="anchor" href="#visualisation-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.4.4</span> Visualisation<a class="anchor" aria-label="anchor" href="#visualisation-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb268"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">42</span><span class="op">)</span></span>
 <span><span class="va">layout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggraph.data-imaginist.com/reference/ggraph.html">create_layout</a></span><span class="op">(</span><span class="fu"><a href="https://tidygraph.data-imaginist.com/reference/tbl_graph.html">as_tbl_graph</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span>, layout <span class="op">=</span> <span class="st">"fr"</span><span class="op">)</span></span>
 <span></span>
@@ -828,14 +839,14 @@ Figure 18.1: Top 20 most frequent keywords in the Scientometrics sample.
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:17-fig-coword-network"></span>
 <img src="scientometrics-in-r_files/figure-html/17-fig-coword-network-1.png" alt="Network graph where nodes are keywords and edges connect keywords that frequently co-occur. Node size reflects degree; colours indicate topical communities identified by the Leiden algorithm." width="90%"><p class="caption">
-Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
+Figure 17.2: Keyword co-occurrence network coloured by topical cluster.
 </p>
 </div>
 </div>
 </div>
-<div id="coword-diagnostics" class="section level2" number="18.5">
+<div id="coword-diagnostics" class="section level2" number="17.5">
 <h2>
-<span class="header-section-number">18.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#coword-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#coword-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -848,14 +859,14 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
 <strong>Centrality interpretation</strong>: High-degree keywords are thematically central (used across many contexts). High-betweenness keywords bridge distinct topics and may represent interdisciplinary concepts.</li>
 </ul>
 </div>
-<div id="coword-limitations" class="section level2" number="18.6">
+<div id="coword-limitations" class="section level2" number="17.6">
 <h2>
-<span class="header-section-number">18.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#coword-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#coword-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-16" class="section level2 callout callout-warn" number="18.7">
+<div id="limitations-and-responsible-use-16" class="section level2 callout callout-warn" number="17.7">
 <h2>
-<span class="header-section-number">18.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-16"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-16"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -868,14 +879,14 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
 <strong>Not evaluative.</strong> Popular keywords indicate research activity, not research quality or societal impact. Do not equate topical centrality with importance <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="coword-pitfalls" class="section level2" number="18.8">
+<div id="coword-pitfalls" class="section level2" number="17.8">
 <h2>
-<span class="header-section-number">18.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#coword-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#coword-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-16" class="section level2 callout callout-stop" number="18.9">
+<div id="common-pitfalls-16" class="section level2 callout callout-stop" number="17.9">
 <h2>
-<span class="header-section-number">18.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-16"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-16"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -888,9 +899,9 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
 <strong>Over-reading small clusters.</strong> A cluster with two or three keywords may reflect a single paper, not a research theme. Report cluster size alongside content.</li>
 </ul>
 </div>
-<div id="coword-exercises" class="section level2" number="18.10">
+<div id="coword-exercises" class="section level2" number="17.10">
 <h2>
-<span class="header-section-number">18.10</span> Exercises<a class="anchor" aria-label="anchor" href="#coword-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.10</span> Exercises<a class="anchor" aria-label="anchor" href="#coword-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Author keywords vs. concepts.</strong> Build co-occurrence networks from both author keywords (if available) and OpenAlex concepts for the same corpus. Compare the resulting topical clusters.</p></li>
@@ -899,15 +910,15 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
 <li><p><strong>Normalisation comparison.</strong> Build two networks from the same data: one with raw co-occurrence counts and one with association strength normalisation. How do the most central keywords differ?</p></li>
 </ol>
 </div>
-<div id="solutions-16" class="section level2 callout callout-ok" number="18.11">
+<div id="id_17-solutions" class="section level2 callout callout-ok" number="17.11">
 <h2>
-<span class="header-section-number">18.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-16"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_17-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="coword-reading" class="section level2" number="18.12">
+<div id="coword-reading" class="section level2" number="17.12">
 <h2>
-<span class="header-section-number">18.12</span> Further reading<a class="anchor" aria-label="anchor" href="#coword-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.12</span> Further reading<a class="anchor" aria-label="anchor" href="#coword-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -920,15 +931,15 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
 <span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex concepts and topic classification.</li>
 </ul>
 </div>
-<div id="coword-sessioninfo" class="section level2" number="18.13">
+<div id="coword-sessioninfo" class="section level2" number="17.13">
 <h2>
-<span class="header-section-number">18.13</span> Session info<a class="anchor" aria-label="anchor" href="#coword-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">17.13</span> Session info<a class="anchor" aria-label="anchor" href="#coword-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -947,52 +958,50 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] ggraph_2.2.2       tidygraph_1.3.1    igraph_2.3.2       quanteda_4.4      
-#&gt;  [5] pdftools_3.9.0     arrow_24.0.0       bibliometrix_5.4.0 RefManageR_1.4.0  
-#&gt;  [9] bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.3.0           tidytext_0.4.3    
-#&gt; [13] glue_1.8.1         openalexR_3.0.1    lubridate_1.9.5    forcats_1.0.1     
+#&gt;  [1] ggraph_2.2.2       tidygraph_1.3.1    igraph_2.3.4       quanteda_4.5.1    
+#&gt;  [5] pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0 RefManageR_1.4.0  
+#&gt;  [9] bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3    
+#&gt; [13] glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5    forcats_1.0.1     
 #&gt; [17] stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2        readr_2.2.0       
 #&gt; [21] tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
 #&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.31         fs_2.1.0               vctrs_0.7.3           
+#&gt;   [7] rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3           
 #&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.0.0  curl_7.1.0            
+#&gt;  [13] htmltools_0.5.9        contentanalysis_1.1.1  curl_8.1.0            
 #&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.11.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.2.2            plotly_4.12.0         
+#&gt;  [19] bslib_0.12.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
+#&gt;  [22] plyr_1.8.9             httr2_1.3.0            plotly_4.12.1         
 #&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      mime_0.13             
-#&gt;  [28] lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-0          
-#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.13.0          
+#&gt;  [28] lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-5          
+#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0          
 #&gt;  [34] digest_0.6.39          shinycssloaders_1.1.0  rprojroot_2.1.1       
 #&gt;  [37] SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1      
-#&gt;  [40] timechange_0.4.0       polyclip_1.10-7        httr_1.4.8            
-#&gt;  [43] compiler_4.4.1         here_1.0.2             bit64_4.8.0           
-#&gt;  [46] withr_3.0.2            S7_0.2.2               backports_1.5.1       
-#&gt;  [49] viridis_0.6.5          ggforce_0.5.0          MASS_7.3-60.2         
-#&gt;  [52] rappdirs_0.3.4         bibliometrixData_0.3.0 tools_4.4.1           
-#&gt;  [55] otel_0.2.0             stopwords_2.3          zip_2.3.3             
-#&gt;  [58] httpuv_1.6.17          rentrez_1.2.4          promises_1.5.0        
-#&gt;  [61] grid_4.4.1             stringdist_0.9.17      generics_0.1.4        
-#&gt;  [64] gtable_0.3.6           tzdb_0.5.0             rscopus_0.9.0         
-#&gt;  [67] ca_0.71.1              data.table_1.18.4      hms_1.1.4             
-#&gt;  [70] xml2_1.5.2             utf8_1.2.6             ggrepel_0.9.8         
-#&gt;  [73] pillar_1.11.1          later_1.4.8            tweenr_2.0.3          
-#&gt;  [76] brand.yml_0.1.0        lattice_0.22-6         bit_4.6.0             
-#&gt;  [79] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [82] knitr_1.51             gridExtra_2.3          bookdown_0.46         
-#&gt;  [85] crul_1.6.0             xfun_0.57              graphlayouts_1.2.3    
-#&gt;  [88] DT_0.34.0              humaniformat_0.6.0     visNetwork_2.1.4      
-#&gt;  [91] stringi_1.8.7          lazyeval_0.2.3         qpdf_1.4.1            
-#&gt;  [94] yaml_2.3.12            evaluate_1.0.5         codetools_0.2-20      
-#&gt;  [97] httpcode_0.3.0         cli_3.6.6              xtable_1.8-8          
-#&gt; [100] jquerylib_0.1.4        dichromat_2.0-0.1      Rcpp_1.1.1-1.1        
-#&gt; [103] readxl_1.4.5           triebeard_0.4.1        XML_3.99-0.23         
-#&gt; [106] parallel_4.4.1         assertthat_0.2.1       pubmedR_1.0.2         
-#&gt; [109] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.8.1      
-#&gt; [112] rlang_1.2.0            fastmatch_1.1-8</code></pre>
+#&gt;  [40] timechange_0.4.0       polyclip_1.10-7        httr_1.4.9            
+#&gt;  [43] compiler_4.6.1         here_1.0.2             bit64_4.8.6           
+#&gt;  [46] withr_3.0.3            S7_0.2.2               viridis_0.6.5         
+#&gt;  [49] ggforce_0.5.0          MASS_7.3-65            bibliometrixData_0.3.0
+#&gt;  [52] tools_4.6.1            otel_0.2.0             stopwords_2.3         
+#&gt;  [55] zip_3.0.2              httpuv_1.6.17          rentrez_1.2.4         
+#&gt;  [58] promises_1.5.0         grid_4.6.1             stringdist_0.9.17     
+#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
+#&gt;  [64] rscopus_0.9.0          ca_0.72                data.table_1.18.6.1   
+#&gt;  [67] hms_1.1.4              xml2_1.6.0             utf8_1.2.6            
+#&gt;  [70] ggrepel_0.9.8          pillar_1.11.1          later_1.4.8           
+#&gt;  [73] tweenr_2.0.3           lattice_0.22-9         bit_4.6.0             
+#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
+#&gt;  [79] knitr_1.52             gridExtra_2.3.1        bookdown_0.48         
+#&gt;  [82] crul_1.6.0             xfun_0.62              graphlayouts_1.2.5    
+#&gt;  [85] DT_0.34.0              humaniformat_0.6.0     visNetwork_2.1.4      
+#&gt;  [88] stringi_1.8.9          qpdf_1.4.1             yaml_2.3.12           
+#&gt;  [91] evaluate_1.0.5         httpcode_0.3.0         cli_3.6.6             
+#&gt;  [94] xtable_1.8-8           jquerylib_0.1.4        Rcpp_1.1.2            
+#&gt;  [97] readxl_1.6.0           triebeard_0.4.1        XML_3.99-0.25         
+#&gt; [100] parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
+#&gt; [103] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
+#&gt; [106] rlang_1.3.0            fastmatch_1.1-8</code></pre>
 
 </div>
 </div>
@@ -1021,100 +1030,96 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></div>
-<div class="next"><a href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></div>
+<div class="prev"><a href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></div>
+<div class="next"><a href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#co-word-and-keyword-co-occurrence"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="nav-link" href="#coword-objectives"><span class="header-section-number">18.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#coword-setup"><span class="header-section-number">18.2</span> Setup</a></li>
-<li><a class="nav-link" href="#coword-background"><span class="header-section-number">18.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#co-word-and-keyword-co-occurrence"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="nav-link" href="#coword-objectives"><span class="header-section-number">17.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#coword-setup"><span class="header-section-number">17.2</span> Setup</a></li>
+<li><a class="nav-link" href="#coword-background"><span class="header-section-number">17.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#coword-example"><span class="header-section-number">18.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#extracting-keywords"><span class="header-section-number">18.4.1</span> Extracting keywords</a></li>
-<li><a class="nav-link" href="#building-the-co-occurrence-network"><span class="header-section-number">18.4.2</span> Building the co-occurrence network</a></li>
-<li><a class="nav-link" href="#community-detection-for-topical-clusters"><span class="header-section-number">18.4.3</span> Community detection for topical clusters</a></li>
-<li><a class="nav-link" href="#visualisation-1"><span class="header-section-number">18.4.4</span> Visualisation</a></li>
+<a class="nav-link" href="#coword-example"><span class="header-section-number">17.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#extracting-keywords"><span class="header-section-number">17.4.1</span> Extracting keywords</a></li>
+<li><a class="nav-link" href="#building-the-co-occurrence-network"><span class="header-section-number">17.4.2</span> Building the co-occurrence network</a></li>
+<li><a class="nav-link" href="#community-detection-for-topical-clusters"><span class="header-section-number">17.4.3</span> Community detection for topical clusters</a></li>
+<li><a class="nav-link" href="#visualisation-1"><span class="header-section-number">17.4.4</span> Visualisation</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#coword-diagnostics"><span class="header-section-number">18.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#coword-limitations"><span class="header-section-number">18.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-16"><span class="header-section-number">18.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#coword-pitfalls"><span class="header-section-number">18.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-16"><span class="header-section-number">18.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#coword-exercises"><span class="header-section-number">18.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-16"><span class="header-section-number">18.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#coword-reading"><span class="header-section-number">18.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#coword-sessioninfo"><span class="header-section-number">18.13</span> Session info</a></li>
+<li><a class="nav-link" href="#coword-diagnostics"><span class="header-section-number">17.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#coword-limitations"><span class="header-section-number">17.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-16"><span class="header-section-number">17.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#coword-pitfalls"><span class="header-section-number">17.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-16"><span class="header-section-number">17.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#coword-exercises"><span class="header-section-number">17.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_17-solutions"><span class="header-section-number">17.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#coword-reading"><span class="header-section-number">17.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#coword-sessioninfo"><span class="header-section-number">17.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1132,7 +1137,7 @@ Figure 18.2: Keyword co-occurrence network coloured by topical cluster.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 32 Patent–Paper Linkages | Scientometrics in R</title>
+<title>Chapter 31 Patent–Paper Linkages | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="32.1 Learning objectives After completing this chapter, you will be able to: Explain the significance of patent–paper citations for understanding research impact Identify OpenAlex works that have...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 32 Patent–Paper Linkages | Scientometrics in R">
+<meta name="description" content="31.1 Learning objectives After completing this chapter, you will be able to: Explain the significance of patent–paper citations for understanding research impact Specify the paper and patent...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 31 Patent–Paper Linkages | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/patentpaper-linkages.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="32.1 Learning objectives After completing this chapter, you will be able to: Explain the significance of patent–paper citations for understanding research impact Identify OpenAlex works that have...">
+<meta property="og:description" content="31.1 Learning objectives After completing this chapter, you will be able to: Explain the significance of patent–paper citations for understanding research impact Specify the paper and patent...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 32 Patent–Paper Linkages | Scientometrics in R">
-<meta name="twitter:description" content="32.1 Learning objectives After completing this chapter, you will be able to: Explain the significance of patent–paper citations for understanding research impact Identify OpenAlex works that have...">
+<meta name="twitter:title" content="Chapter 31 Patent–Paper Linkages | Scientometrics in R">
+<meta name="twitter:description" content="31.1 Learning objectives After completing this chapter, you will be able to: Explain the significance of patent–paper citations for understanding research impact Specify the paper and patent...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="active" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="active" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,26 +163,26 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="patentpaper-linkages" class="section level1" number="32">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="patentpaper-linkages" class="section level1" number="31">
 <h1>
-<span class="header-section-number">32</span> Patent–Paper Linkages<a class="anchor" aria-label="anchor" href="#patentpaper-linkages"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31</span> Patent–Paper Linkages<a class="anchor" aria-label="anchor" href="#patentpaper-linkages"><i class="fas fa-link"></i></a>
 </h1>
-<div id="patent-objectives" class="section level2" number="32.1">
+<div id="patent-objectives" class="section level2" number="31.1">
 <h2>
-<span class="header-section-number">32.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#patent-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#patent-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
 <li>Explain the significance of patent–paper citations for understanding research impact</li>
-<li>Identify OpenAlex works that have been cited in patent documents</li>
-<li>Analyse which journals, fields, and institutions produce patent-cited research</li>
+<li>Specify the paper and patent identifiers needed to establish an observed linkage</li>
+<li>Explore scholarly citation metadata without treating it as patent-citation evidence</li>
 <li>Discuss the limitations of patent citations as indicators of technological impact</li>
 <li>Distinguish between direct citation (paper cited in patent) and indirect influence</li>
 </ul>
 </div>
-<div id="patent-setup" class="section level2" number="32.2">
+<div id="patent-setup" class="section level2" number="31.2">
 <h2>
-<span class="header-section-number">32.2</span> Setup<a class="anchor" aria-label="anchor" href="#patent-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.2</span> Setup<a class="anchor" aria-label="anchor" href="#patent-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb458"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -197,25 +196,26 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="patent-background" class="section level2" number="32.3">
+<div id="patent-background" class="section level2" number="31.3">
 <h2>
-<span class="header-section-number">32.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#patent-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#patent-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>When a patent examiner or inventor cites a scientific paper in a patent document, it creates an observable link between knowledge production (science) and knowledge application (technology). These <strong>patent–paper citations</strong> (also called non-patent literature or NPL citations) are one of the few quantitative measures of the science–technology interface.</p>
 <p>Patent citations serve a legal function: they define the prior art against which the patent’s novelty is assessed. Not all patent–paper citations reflect genuine intellectual influence — some are added by examiners for legal completeness, not because the inventor actually used the cited research. Nevertheless, at the aggregate level, patent citation patterns reveal which fields, journals, and institutions produce research that feeds into technological innovation.</p>
 <p>The biomedical and chemical sciences dominate patent–paper linkages because pharmaceutical and chemical patents routinely cite scientific literature. Physics and engineering have moderate linkages. Social sciences and humanities are rarely cited in patents, not because they lack impact, but because their impact operates through different channels (policy, education, culture).</p>
-<p>OpenAlex records whether a work has been cited in patents and provides the count, though the source and completeness of this data varies. The Lens.org database provides the most comprehensive open mapping of patent–paper citations.</p>
+<p>The OpenAlex fields retrieved in this example describe scholarly works and scholarly citations. They contain no citing patent identifiers, patent citation dates, or patent-family identifiers. Establishing a patent–paper linkage requires a separate, documented source of patent references and a validated match to the cited paper. The analysis below does not perform that linkage.</p>
 </div>
-<div id="patent-example" class="section level2" number="32.4">
+<div id="patent-example" class="section level2" number="31.4">
 <h2>
-<span class="header-section-number">32.4</span> Worked example<a class="anchor" aria-label="anchor" href="#patent-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.4</span> Worked example<a class="anchor" aria-label="anchor" href="#patent-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="identifying-patent-cited-papers" class="section level3" number="32.4.1">
+<p>This executable example explores a 500-article scholarly-citation sample. It is preparation for a possible future linkage analysis, not a substitute for patent data. A high scholarly citation count does not identify a patent-cited paper. No patent-citation prevalence, rate, or technological impact is estimated here.</p>
+<div id="preparing-a-scholarly-citation-sample" class="section level3" number="31.4.1">
 <h3>
-<span class="header-section-number">32.4.1</span> Identifying patent-cited papers<a class="anchor" aria-label="anchor" href="#identifying-patent-cited-papers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.4.1</span> Preparing a scholarly-citation sample<a class="anchor" aria-label="anchor" href="#preparing-a-scholarly-citation-sample"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb459"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2015-01-01"</span>,</span>
 <span>  to_publication_date <span class="op">=</span> <span class="st">"2020-12-31"</span>,</span>
@@ -223,7 +223,7 @@
 <span>  options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>sample <span class="op">=</span> <span class="fl">500</span>, seed <span class="op">=</span> <span class="fl">42</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">works_patent</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
+<span><span class="va">works_citations</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/transmute.html">transmute</a></span><span class="op">(</span></span>
 <span>    <span class="va">id</span>, <span class="va">display_name</span>, <span class="va">source_display_name</span>,</span>
 <span>    year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span>,</span>
@@ -232,57 +232,57 @@
 <span>    <span class="va">type</span></span>
 <span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Total works: {nrow(works_patent)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Total works: {nrow(works_citations)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Total works: 500</code></pre>
 </div>
-<div id="citation-distribution-analysis" class="section level3" number="32.4.2">
+<div id="scholarly-citation-distribution" class="section level3" number="31.4.2">
 <h3>
-<span class="header-section-number">32.4.2</span> Citation distribution analysis<a class="anchor" aria-label="anchor" href="#citation-distribution-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.4.2</span> Scholarly citation distribution<a class="anchor" aria-label="anchor" href="#scholarly-citation-distribution"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb461"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">p90</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">works_patent</span><span class="op">$</span><span class="va">cited_by_count</span>, <span class="fl">0.90</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">p90</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="va">works_citations</span><span class="op">$</span><span class="va">cited_by_count</span>, <span class="fl">0.90</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">works_patent</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cited_by_count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
+<span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">works_citations</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cited_by_count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">10</span>, fill <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_abline.html">geom_vline</a></span><span class="op">(</span>xintercept <span class="op">=</span> <span class="va">p90</span>, linetype <span class="op">=</span> <span class="st">"dashed"</span>, colour <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/annotate.html">annotate</a></span><span class="op">(</span><span class="st">"text"</span>, x <span class="op">=</span> <span class="va">p90</span> <span class="op">+</span> <span class="fl">20</span>, y <span class="op">=</span> <span class="cn">Inf</span>, label <span class="op">=</span> <span class="st">"90th percentile"</span>,</span>
 <span>           vjust <span class="op">=</span> <span class="fl">2</span>, colour <span class="op">=</span> <span class="st">"red"</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Citation count"</span>, y <span class="op">=</span> <span class="st">"Papers"</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Scholarly citation count"</span>, y <span class="op">=</span> <span class="st">"Papers"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:31-fig-patent-citedist"></span>
-<img src="scientometrics-in-r_files/figure-html/31-fig-patent-citedist-1.png" alt="Histogram of citation counts with a vertical line marking the 90th percentile, indicating the most-cited papers that are most likely to appear in patent references." width="90%"><p class="caption">
-Figure 32.1: Citation count distribution, highlighting the most-cited papers as potential patent-cited candidates.
+<img src="scientometrics-in-r_files/figure-html/31-fig-patent-citedist-1.png" alt="Histogram of scholarly citation counts with a vertical line at the sample 90th percentile. The figure contains no patent-citation information." width="90%"><p class="caption">
+Figure 31.1: Scholarly citation counts in the sample, with the sample 90th percentile marked.
 </p>
 </div>
 </div>
-<div id="journals-producing-highly-cited-papers" class="section level3" number="32.4.3">
+<div id="journals-represented-among-highly-cited-sampled-papers" class="section level3" number="31.4.3">
 <h3>
-<span class="header-section-number">32.4.3</span> Journals producing highly cited papers<a class="anchor" aria-label="anchor" href="#journals-producing-highly-cited-papers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.4.3</span> Journals represented among highly cited sampled papers<a class="anchor" aria-label="anchor" href="#journals-represented-among-highly-cited-sampled-papers"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb462"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works_patent</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">works_citations</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cited_by_count</span> <span class="op">&gt;=</span> <span class="va">p90</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">source_display_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">source_display_name</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">15</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>source_display_name <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">source_display_name</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n</span>, y <span class="op">=</span> <span class="va">source_display_name</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
-<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Highly cited papers"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Highly cited sampled papers"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:31-fig-patent-journals"></span>
-<img src="scientometrics-in-r_files/figure-html/31-fig-patent-journals-1.png" alt="Horizontal bar chart of the journals with the most papers above the citation 90th percentile — these are the journals most likely to be cited in patents." width="90%"><p class="caption">
-Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percentile).
+<img src="scientometrics-in-r_files/figure-html/31-fig-patent-journals-1.png" alt="Horizontal bar chart counting sampled papers at or above the scholarly-citation threshold, grouped by journal. This is not a ranking of patent-cited research." width="90%"><p class="caption">
+Figure 31.2: Up to 15 journals with the most sampled papers at or above the sample scholarly-citation 90th percentile.
 </p>
 </div>
 </div>
-<div id="citation-impact-by-document-characteristics" class="section level3" number="32.4.4">
+<div id="descriptive-characteristics-by-scholarly-citation-group" class="section level3" number="31.4.4">
 <h3>
-<span class="header-section-number">32.4.4</span> Citation impact by document characteristics<a class="anchor" aria-label="anchor" href="#citation-impact-by-document-characteristics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.4.4</span> Descriptive characteristics by scholarly-citation group<a class="anchor" aria-label="anchor" href="#descriptive-characteristics-by-scholarly-citation-group"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb463"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works_patent</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">works_citations</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>high_cite <span class="op">=</span> <span class="va">cited_by_count</span> <span class="op">&gt;=</span> <span class="va">p90</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">high_cite</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
@@ -751,64 +751,68 @@ Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percen
 <tbody class="gt_table_body">
 <tr>
 <td headers="high_cite" class="gt_row gt_center">FALSE</td>
-<td headers="n" class="gt_row gt_right">448</td>
-<td headers="mean_refs" class="gt_row gt_right">9.3</td>
+<td headers="n" class="gt_row gt_right">450</td>
+<td headers="mean_refs" class="gt_row gt_right">11.0</td>
 <td headers="mean_year" class="gt_row gt_right">2017</td>
 </tr>
 <tr>
 <td headers="high_cite" class="gt_row gt_center">TRUE</td>
-<td headers="n" class="gt_row gt_right">52</td>
-<td headers="mean_refs" class="gt_row gt_right">53.3</td>
-<td headers="mean_year" class="gt_row gt_right">2018</td>
+<td headers="n" class="gt_row gt_right">50</td>
+<td headers="mean_refs" class="gt_row gt_right">50.3</td>
+<td headers="mean_year" class="gt_row gt_right">2017</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
 </div>
-<div id="patent-diagnostics" class="section level2" number="32.5">
+<div id="patent-diagnostics" class="section level2" number="31.5">
 <h2>
-<span class="header-section-number">32.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#patent-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#patent-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
-<strong>Patent citation coverage</strong>: Not all databases provide patent citation data. OpenAlex’s coverage varies by field and time period. Cross-reference with Lens.org for comprehensive data.</li>
+<strong>Measured quantity</strong>: <code>cited_by_count</code> in this analysis counts scholarly citations. Neither the threshold nor the journal plot measures patent citations.</li>
+<li>
+<strong>Sample and threshold</strong>: Counts refer only to the retrieved sample, not total journal output. Ties at the 90th percentile can place more than 10% of papers in the high-citation group.</li>
+<li>
+<strong>Citation window</strong>: Current cumulative counts give older publication cohorts more time to receive citations. They are not a fixed-window impact measure.</li>
 <li>
 <strong>Field normalisation</strong>: Biomedical papers are far more likely to be cited in patents than social science papers. Compare patent citation rates within fields, not across them.</li>
 <li>
-<strong>Time lag</strong>: The median time from paper publication to patent citation is 5–10 years. Recent papers have not had time to accumulate patent citations.</li>
+<strong>Time lag</strong>: Estimating a paper-to-patent citation delay requires both dates from actual linked records and a stated observation cutoff; current scholarly citation counts cannot supply it.</li>
 <li>
 <strong>Examiner vs. inventor citations</strong>: Patent examiners add citations that inventors may not have used. This inflates apparent science–technology linkage.</li>
 </ul>
 </div>
-<div id="patent-limitations" class="section level2" number="32.6">
+<div id="patent-limitations" class="section level2" number="31.6">
 <h2>
-<span class="header-section-number">32.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#patent-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#patent-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-30" class="section level2 callout callout-warn" number="32.7">
+<div id="limitations-and-responsible-use-30" class="section level2 callout callout-warn" number="31.7">
 <h2>
-<span class="header-section-number">32.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-30"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-30"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
 <strong>Patent citations are a narrow measure of impact.</strong> Much research influences technology without being cited in patents — through consulting, training, open-source software, or informal knowledge transfer.</li>
 <li>
-<strong>Field bias is extreme.</strong> Humanities, social sciences, and mathematics are effectively invisible in patent citation analysis. Using patent citations as an impact indicator systematically disadvantages these fields <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
+<strong>Field coverage differs.</strong> Patent citations capture only some forms of influence. Comparing fields without considering these differences can misrepresent their contributions <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 <li>
 <strong>Geographic bias.</strong> Patent systems vary by country. US and European patents have different citation practices. Analyses based on one patent office may not generalise.</li>
 <li>
 <strong>Not evaluative for individuals.</strong> A researcher whose paper is cited in a patent may have had no involvement with the technology. Patent citation reflects relevance of the knowledge, not the researcher’s intent to innovate.</li>
 </ul>
 </div>
-<div id="patent-pitfalls" class="section level2" number="32.8">
+<div id="patent-pitfalls" class="section level2" number="31.8">
 <h2>
-<span class="header-section-number">32.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#patent-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#patent-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-30" class="section level2 callout callout-stop" number="32.9">
+<div id="common-pitfalls-30" class="section level2 callout callout-stop" number="31.9">
 <h2>
-<span class="header-section-number">32.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-30"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-30"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -818,28 +822,28 @@ Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percen
 <li>
 <strong>Double-counting across patent families.</strong> The same invention may be patented in multiple countries. Count at the patent family level, not the individual patent level.</li>
 <li>
-<strong>Using patent counts as a metric for basic science.</strong> Basic research is by definition distant from application. Low patent citation counts for fundamental research are expected, not a failure.</li>
+<strong>Substituting scholarly citations for patent linkages.</strong> High scholarly citation counts do not establish that a paper was cited by a patent. Require an observed patent–paper reference before classifying a paper as patent-cited.</li>
 </ul>
 </div>
-<div id="patent-exercises" class="section level2" number="32.10">
+<div id="patent-exercises" class="section level2" number="31.10">
 <h2>
-<span class="header-section-number">32.10</span> Exercises<a class="anchor" aria-label="anchor" href="#patent-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.10</span> Exercises<a class="anchor" aria-label="anchor" href="#patent-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
-<li><p><strong>Field comparison.</strong> Fetch papers from biomedical and social science journals. Compare the proportion of highly cited papers in each field. What does this suggest about differential patent citation potential?</p></li>
-<li><p><strong>Time lag estimation.</strong> For a set of papers published in 2015, estimate the median citation count trajectory over years. At what age do papers typically peak in citation accumulation?</p></li>
-<li><p><strong>Institutional patent linkage.</strong> For two universities, compare the proportion of papers above the citation 90th percentile. Does a higher proportion suggest greater technological relevance?</p></li>
+<li><p><strong>Scholarly-citation comparison.</strong> Compare citation distributions in two journal samples, reporting sample sizes, field differences, publication years, retrieval date and threshold choice. Explain why the result does not estimate patent-citation potential.</p></li>
+<li><p><strong>Linkage data specification.</strong> Design a table containing a paper identifier, citing patent identifier, patent-family identifier, citation date, source and match status. Describe how you would verify ambiguous references and retain unmatched records. This exercise requires actual patent-reference data before any linkage rates can be calculated.</p></li>
+<li><p><strong>Institutional patent linkage.</strong> Given an independently validated patent–paper dataset, define the publication denominator, observation window and patent-family deduplication rule for two institutions. Report coverage and uncertainty. If those data are unavailable, identify the missing inputs rather than using scholarly citation percentiles as a proxy.</p></li>
 </ol>
 </div>
-<div id="solutions-30" class="section level2 callout callout-ok" number="32.11">
+<div id="id_31-solutions" class="section level2 callout callout-ok" number="31.11">
 <h2>
-<span class="header-section-number">32.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-30"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_31-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="patent-reading" class="section level2" number="32.12">
+<div id="patent-reading" class="section level2" number="31.12">
 <h2>
-<span class="header-section-number">32.12</span> Further reading<a class="anchor" aria-label="anchor" href="#patent-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.12</span> Further reading<a class="anchor" aria-label="anchor" href="#patent-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -847,18 +851,18 @@ Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percen
 <li>
 <span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> — Responsible metrics: why patent citations should not be the sole indicator of research impact.</li>
 <li>
-<span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex metadata coverage for patent-related indicators.</li>
+<span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex scholarly-work metadata; this example does not establish patent-citation coverage.</li>
 </ul>
 </div>
-<div id="patent-sessioninfo" class="section level2" number="32.13">
+<div id="patent-sessioninfo" class="section level2" number="31.13">
 <h2>
-<span class="header-section-number">32.13</span> Session info<a class="anchor" aria-label="anchor" href="#patent-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">31.13</span> Session info<a class="anchor" aria-label="anchor" href="#patent-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb464"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -877,17 +881,17 @@ Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percen
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] uwot_0.2.4                Matrix_1.7-0             
+#&gt;  [1] uwot_0.2.5                Matrix_1.7-5             
 #&gt;  [3] word2vec_0.4.1            stm_1.3.8                
 #&gt;  [5] topicmodels_0.2-17        quanteda.textstats_0.97.2
 #&gt;  [7] visNetwork_2.1.4          ggraph_2.2.2             
-#&gt;  [9] tidygraph_1.3.1           igraph_2.3.2             
-#&gt; [11] quanteda_4.4              pdftools_3.9.0           
-#&gt; [13] arrow_24.0.0              bibliometrix_5.4.0       
+#&gt;  [9] tidygraph_1.3.1           igraph_2.3.4             
+#&gt; [11] quanteda_4.5.1            pdftools_3.9.1           
+#&gt; [13] arrow_26.0.0              bibliometrix_5.5.0       
 #&gt; [15] RefManageR_1.4.0          bib2df_1.1.2.0           
-#&gt; [17] rcrossref_1.2.1           gt_1.3.0                 
+#&gt; [17] rcrossref_1.2.1           gt_1.4.0                 
 #&gt; [19] tidytext_0.4.3            glue_1.8.1               
-#&gt; [21] openalexR_3.0.1           lubridate_1.9.5          
+#&gt; [21] openalexR_3.1.2           lubridate_1.9.5          
 #&gt; [23] forcats_1.0.1             stringr_1.6.0            
 #&gt; [25] dplyr_1.2.1               purrr_1.2.2              
 #&gt; [27] readr_2.2.0               tidyr_1.3.2              
@@ -895,49 +899,47 @@ Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percen
 #&gt; [31] tidyverse_2.0.0          
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         modeltools_0.2-24     
-#&gt;   [7] farver_2.1.2           rmarkdown_2.31         fs_2.1.0              
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
+#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         modeltools_0.2-25     
+#&gt;   [7] farver_2.1.2           rmarkdown_2.32         fs_2.1.0              
 #&gt;  [10] vctrs_0.7.3            memoise_2.0.1          askpass_1.2.1         
-#&gt;  [13] base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.0.0 
-#&gt;  [16] curl_7.1.0             janeaustenr_1.0.0      cellranger_1.1.0      
-#&gt;  [19] sass_0.4.10            bslib_0.11.0           htmlwidgets_1.6.4     
-#&gt;  [22] tokenizers_0.3.0       plyr_1.8.9             httr2_1.2.2           
-#&gt;  [25] plotly_4.12.0          cachem_1.1.0           dimensionsR_0.0.3     
+#&gt;  [13] base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1 
+#&gt;  [16] curl_8.1.0             janeaustenr_1.0.0      cellranger_1.1.0      
+#&gt;  [19] sass_0.4.10            bslib_0.12.0           htmlwidgets_1.6.4     
+#&gt;  [22] tokenizers_0.3.0       plyr_1.8.9             httr2_1.3.0           
+#&gt;  [25] plotly_4.12.1          cachem_1.1.0           dimensionsR_0.0.3     
 #&gt;  [28] mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
-#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.13.0          
+#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0          
 #&gt;  [34] digest_0.6.39          patchwork_1.3.2        shinycssloaders_1.1.0 
 #&gt;  [37] rprojroot_2.1.1        RSpectra_0.16-2        SnowballC_0.7.1       
 #&gt;  [40] labeling_0.4.3         urltools_1.7.3.1       timechange_0.4.0      
-#&gt;  [43] mgcv_1.9-1             polyclip_1.10-7        httr_1.4.8            
-#&gt;  [46] compiler_4.4.1         here_1.0.2             bit64_4.8.0           
-#&gt;  [49] withr_3.0.2            S7_0.2.2               backports_1.5.1       
-#&gt;  [52] viridis_0.6.5          ggforce_0.5.0          MASS_7.3-60.2         
-#&gt;  [55] rappdirs_0.3.4         bibliometrixData_0.3.0 tools_4.4.1           
-#&gt;  [58] otel_0.2.0             stopwords_2.3          zip_2.3.3             
-#&gt;  [61] httpuv_1.6.17          rentrez_1.2.4          nlme_3.1-164          
-#&gt;  [64] promises_1.5.0         grid_4.4.1             stringdist_0.9.17     
-#&gt;  [67] reshape2_1.4.5         generics_0.1.4         gtable_0.3.6          
-#&gt;  [70] tzdb_0.5.0             rscopus_0.9.0          ca_0.71.1             
-#&gt;  [73] data.table_1.18.4      hms_1.1.4              xml2_1.5.2            
-#&gt;  [76] utf8_1.2.6             ggrepel_0.9.8          pillar_1.11.1         
-#&gt;  [79] nsyllable_1.0.1        vroom_1.7.1            later_1.4.8           
-#&gt;  [82] splines_4.4.1          tweenr_2.0.3           brand.yml_0.1.0       
-#&gt;  [85] lattice_0.22-6         FNN_1.1.4.1            bit_4.6.0             
-#&gt;  [88] tidyselect_1.2.1       tm_0.7-18              miniUI_0.1.2          
-#&gt;  [91] downlit_0.4.5          knitr_1.51             gridExtra_2.3         
-#&gt;  [94] NLP_0.3-2              bookdown_0.46          stats4_4.4.1          
-#&gt;  [97] crul_1.6.0             xfun_0.57              graphlayouts_1.2.3    
-#&gt; [100] matrixStats_1.5.0      DT_0.34.0              humaniformat_0.6.0    
-#&gt; [103] stringi_1.8.7          lazyeval_0.2.3         qpdf_1.4.1            
-#&gt; [106] yaml_2.3.12            evaluate_1.0.5         codetools_0.2-20      
-#&gt; [109] httpcode_0.3.0         cli_3.6.6              xtable_1.8-8          
-#&gt; [112] jquerylib_0.1.4        dichromat_2.0-0.1      Rcpp_1.1.1-1.1        
-#&gt; [115] readxl_1.4.5           triebeard_0.4.1        XML_3.99-0.23         
-#&gt; [118] parallel_4.4.1         assertthat_0.2.1       pubmedR_1.0.2         
-#&gt; [121] slam_0.1-55            viridisLite_0.4.3      scales_1.4.0          
-#&gt; [124] crayon_1.5.3           openxlsx_4.2.8.1       rlang_1.2.0           
-#&gt; [127] fastmatch_1.1-8</code></pre>
+#&gt;  [43] mgcv_1.9-4             polyclip_1.10-7        httr_1.4.9            
+#&gt;  [46] compiler_4.6.1         here_1.0.2             bit64_4.8.6           
+#&gt;  [49] withr_3.0.3            S7_0.2.2               viridis_0.6.5         
+#&gt;  [52] ggforce_0.5.0          MASS_7.3-65            bibliometrixData_0.3.0
+#&gt;  [55] tools_4.6.1            otel_0.2.0             stopwords_2.3         
+#&gt;  [58] zip_3.0.2              httpuv_1.6.17          rentrez_1.2.4         
+#&gt;  [61] nlme_3.1-169           promises_1.5.0         grid_4.6.1            
+#&gt;  [64] stringdist_0.9.17      reshape2_1.4.5         generics_0.1.4        
+#&gt;  [67] gtable_0.3.6           tzdb_0.5.0             rscopus_0.9.0         
+#&gt;  [70] ca_0.72                data.table_1.18.6.1    hms_1.1.4             
+#&gt;  [73] xml2_1.6.0             utf8_1.2.6             ggrepel_0.9.8         
+#&gt;  [76] pillar_1.11.1          nsyllable_1.0.1        vroom_1.7.1           
+#&gt;  [79] later_1.4.8            splines_4.6.1          tweenr_2.0.3          
+#&gt;  [82] lattice_0.22-9         FNN_1.1.4.1            bit_4.6.0             
+#&gt;  [85] tidyselect_1.2.1       tm_0.7-20              miniUI_0.1.2          
+#&gt;  [88] downlit_0.4.5          knitr_1.52             gridExtra_2.3.1       
+#&gt;  [91] NLP_0.3-3              bookdown_0.48          stats4_4.6.1          
+#&gt;  [94] crul_1.6.0             xfun_0.62              graphlayouts_1.2.5    
+#&gt;  [97] matrixStats_1.5.0      DT_0.34.0              humaniformat_0.6.0    
+#&gt; [100] stringi_1.8.9          qpdf_1.4.1             yaml_2.3.12           
+#&gt; [103] evaluate_1.0.5         httpcode_0.3.0         cli_3.6.6             
+#&gt; [106] xtable_1.8-8           jquerylib_0.1.4        Rcpp_1.1.2            
+#&gt; [109] readxl_1.6.0           triebeard_0.4.1        XML_3.99-0.25         
+#&gt; [112] parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
+#&gt; [115] slam_0.1-56            viridisLite_0.4.3      scales_1.4.0          
+#&gt; [118] crayon_1.5.3           openxlsx_4.2.9         rlang_1.3.0           
+#&gt; [121] fastmatch_1.1-8</code></pre>
 
 </div>
 </div>
@@ -966,100 +968,96 @@ Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percen
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></div>
-<div class="next"><a href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></div>
+<div class="prev"><a href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></div>
+<div class="next"><a href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#patentpaper-linkages"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="nav-link" href="#patent-objectives"><span class="header-section-number">32.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#patent-setup"><span class="header-section-number">32.2</span> Setup</a></li>
-<li><a class="nav-link" href="#patent-background"><span class="header-section-number">32.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#patentpaper-linkages"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="nav-link" href="#patent-objectives"><span class="header-section-number">31.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#patent-setup"><span class="header-section-number">31.2</span> Setup</a></li>
+<li><a class="nav-link" href="#patent-background"><span class="header-section-number">31.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#patent-example"><span class="header-section-number">32.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#identifying-patent-cited-papers"><span class="header-section-number">32.4.1</span> Identifying patent-cited papers</a></li>
-<li><a class="nav-link" href="#citation-distribution-analysis"><span class="header-section-number">32.4.2</span> Citation distribution analysis</a></li>
-<li><a class="nav-link" href="#journals-producing-highly-cited-papers"><span class="header-section-number">32.4.3</span> Journals producing highly cited papers</a></li>
-<li><a class="nav-link" href="#citation-impact-by-document-characteristics"><span class="header-section-number">32.4.4</span> Citation impact by document characteristics</a></li>
+<a class="nav-link" href="#patent-example"><span class="header-section-number">31.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#preparing-a-scholarly-citation-sample"><span class="header-section-number">31.4.1</span> Preparing a scholarly-citation sample</a></li>
+<li><a class="nav-link" href="#scholarly-citation-distribution"><span class="header-section-number">31.4.2</span> Scholarly citation distribution</a></li>
+<li><a class="nav-link" href="#journals-represented-among-highly-cited-sampled-papers"><span class="header-section-number">31.4.3</span> Journals represented among highly cited sampled papers</a></li>
+<li><a class="nav-link" href="#descriptive-characteristics-by-scholarly-citation-group"><span class="header-section-number">31.4.4</span> Descriptive characteristics by scholarly-citation group</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#patent-diagnostics"><span class="header-section-number">32.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#patent-limitations"><span class="header-section-number">32.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-30"><span class="header-section-number">32.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#patent-pitfalls"><span class="header-section-number">32.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-30"><span class="header-section-number">32.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#patent-exercises"><span class="header-section-number">32.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-30"><span class="header-section-number">32.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#patent-reading"><span class="header-section-number">32.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#patent-sessioninfo"><span class="header-section-number">32.13</span> Session info</a></li>
+<li><a class="nav-link" href="#patent-diagnostics"><span class="header-section-number">31.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#patent-limitations"><span class="header-section-number">31.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-30"><span class="header-section-number">31.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#patent-pitfalls"><span class="header-section-number">31.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-30"><span class="header-section-number">31.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#patent-exercises"><span class="header-section-number">31.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_31-solutions"><span class="header-section-number">31.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#patent-reading"><span class="header-section-number">31.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#patent-sessioninfo"><span class="header-section-number">31.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -1077,7 +1075,7 @@ Figure 32.2: Top 15 journals by number of highly cited papers (above 90th percen
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -4,27 +4,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>Chapter 8 Building Reproducible Corpora | Scientometrics in R</title>
+<title>Chapter 7 Building Reproducible Corpora | Scientometrics in R</title>
 <meta name="author" content="R. Heller">
-<meta name="description" content="8.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
-<meta name="generator" content="bookdown 0.46 with bs4_book()">
-<meta property="og:title" content="Chapter 8 Building Reproducible Corpora | Scientometrics in R">
+<meta name="description" content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
+<meta name="generator" content="bookdown 0.48 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Building Reproducible Corpora | Scientometrics in R">
 <meta property="og:type" content="book">
 <meta property="og:url" content="https://r-heller.github.io/scientometrics-in-r/building-reproducible-corpora.html">
 <meta property="og:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="8.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
+<meta property="og:description" content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 8 Building Reproducible Corpora | Scientometrics in R">
-<meta name="twitter:description" content="8.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
+<meta name="twitter:title" content="Chapter 7 Building Reproducible Corpora | Scientometrics in R">
+<meta name="twitter:description" content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
 <meta name="twitter:image" content="https://r-heller.github.io/scientometrics-in-r/images/cover.png">
 <!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
 <link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
 <script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
 <script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.0/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
 <script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
 <script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
 <script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
@@ -95,64 +95,63 @@
 <li><a class="" href="how-to-use-this-book.html">How to use this book</a></li>
 <li><a class="" href="notation.html">Notation</a></li>
 <li><a class="" href="about-the-author.html">About the author</a></li>
-<li><a class="" href="find-your-method.html"><span class="header-section-number">1</span> Find Your Method</a></li>
+<li><a class="" href="find-your-method.html">Find Your Method</a></li>
 <li class="book-part">Foundations</li>
-<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">2</span> What Is Scientometrics?</a></li>
-<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">3</span> Theoretical Underpinnings</a></li>
-<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">4</span> Ethics and Responsible Metrics</a></li>
-<li><a class="" href="data-sources-compared.html"><span class="header-section-number">5</span> Data Sources Compared</a></li>
+<li><a class="" href="what-is-scientometrics.html"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
+<li><a class="" href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></li>
+<li><a class="" href="ethics-and-responsible-metrics.html"><span class="header-section-number">3</span> Ethics and Responsible Metrics</a></li>
+<li><a class="" href="data-sources-compared.html"><span class="header-section-number">4</span> Data Sources Compared</a></li>
 <li class="book-part">Data Acquisition in R</li>
-<li><a class="" href="apis-and-packages.html"><span class="header-section-number">6</span> APIs and Packages</a></li>
-<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></li>
-<li><a class="active" href="building-reproducible-corpora.html"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="" href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></li>
+<li><a class="" href="apis-and-packages.html"><span class="header-section-number">5</span> APIs and Packages</a></li>
+<li><a class="" href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></li>
+<li><a class="active" href="building-reproducible-corpora.html"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="" href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></li>
 <li class="book-part">Core Bibliometric Analysis</li>
-<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">10</span> Descriptive Bibliometrics</a></li>
-<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">11</span> Productivity and Impact Indicators</a></li>
-<li><a class="" href="journal-metrics.html"><span class="header-section-number">12</span> Journal Metrics</a></li>
-<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">13</span> Author-Level Analysis and Disambiguation</a></li>
-<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">14</span> Institutional and Country Analysis</a></li>
-<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">15</span> Temporal Analysis and Citation Aging</a></li>
+<li><a class="" href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></li>
+<li><a class="" href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
+<li><a class="" href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></li>
+<li><a class="" href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></li>
+<li><a class="" href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></li>
+<li><a class="" href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li class="book-part">Network &amp; Mapping Methods</li>
-<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">16</span> Co-authorship Networks</a></li>
-<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">17</span> Co-citation and Bibliographic Coupling</a></li>
-<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">18</span> Co-word and Keyword Co-occurrence</a></li>
-<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">19</span> Community Detection and Backbone Extraction</a></li>
-<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">20</span> Science Mapping and Overlay Maps</a></li>
-<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">21</span> Network Visualization and Interoperability</a></li>
+<li><a class="" href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
+<li><a class="" href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
+<li><a class="" href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></li>
+<li><a class="" href="community-detection-and-backbone-extraction.html"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
+<li><a class="" href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></li>
+<li><a class="" href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></li>
 <li class="book-part">Text &amp; Topic Analysis</li>
-<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">22</span> Text Mining Bibliographic Corpora</a></li>
-<li><a class="" href="topic-modeling.html"><span class="header-section-number">23</span> Topic Modeling</a></li>
-<li><a class="" href="keyword-extraction.html"><span class="header-section-number">24</span> Keyword Extraction</a></li>
-<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">25</span> Embeddings for Scientometrics</a></li>
-<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">26</span> Detecting Emerging Topics</a></li>
+<li><a class="" href="text-mining-bibliographic-corpora.html"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
+<li><a class="" href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></li>
+<li><a class="" href="keyword-extraction.html"><span class="header-section-number">23</span> Keyword Extraction</a></li>
+<li><a class="" href="embeddings-for-scientometrics.html"><span class="header-section-number">24</span> Embeddings for Scientometrics</a></li>
+<li><a class="" href="detecting-emerging-topics.html"><span class="header-section-number">25</span> Detecting Emerging Topics</a></li>
 <li class="book-part">Advanced Topics</li>
-<li><a class="" href="altmetrics.html"><span class="header-section-number">27</span> Altmetrics</a></li>
-<li><a class="" href="open-science-indicators.html"><span class="header-section-number">28</span> Open Science Indicators</a></li>
-<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">29</span> Gender and Equity Analysis</a></li>
-<li><a class="" href="retraction-analysis.html"><span class="header-section-number">30</span> Retraction Analysis</a></li>
-<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">31</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
-<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">32</span> Patent–Paper Linkages</a></li>
-<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">33</span> Causal Inference in Scientometrics</a></li>
-<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">34</span> Reproducibility, RRIDs, and Badges</a></li>
+<li><a class="" href="altmetrics.html"><span class="header-section-number">26</span> Altmetrics</a></li>
+<li><a class="" href="open-science-indicators.html"><span class="header-section-number">27</span> Open Science Indicators</a></li>
+<li><a class="" href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></li>
+<li><a class="" href="retraction-analysis.html"><span class="header-section-number">29</span> Retraction Analysis</a></li>
+<li><a class="" href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></li>
+<li><a class="" href="patentpaper-linkages.html"><span class="header-section-number">31</span> Patent–Paper Linkages</a></li>
+<li><a class="" href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></li>
+<li><a class="" href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li class="book-part">Production &amp; Reporting</li>
-<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">35</span> Reproducible Pipelines</a></li>
-<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">36</span> Interactive Dashboards</a></li>
-<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">37</span> Parameterized Quarto Reports</a></li>
-<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">38</span> Building a Bibliometric Shiny App</a></li>
+<li><a class="" href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
+<li><a class="" href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></li>
+<li><a class="" href="parameterized-quarto-reports.html"><span class="header-section-number">36</span> Parameterized Quarto Reports</a></li>
+<li><a class="" href="building-a-bibliometric-shiny-app.html"><span class="header-section-number">37</span> Building a Bibliometric Shiny App</a></li>
 <li class="book-part">Case Studies</li>
-<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">39</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
-<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">40</span> Case Study 2: Institutional Benchmarking</a></li>
-<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">41</span> Case Study 3: Journal Portfolio Analysis</a></li>
-<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">42</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
-<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">43</span> Case Study 5: Detecting Emerging Topics</a></li>
+<li><a class="" href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></li>
+<li><a class="" href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
+<li><a class="" href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
+<li><a class="" href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></li>
+<li><a class="" href="case-study-5-detecting-emerging-topics.html"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
 <li class="book-part">Appendix</li>
 <li><a class="" href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></li>
 <li><a class="" href="sql-primer-for-the-openalex-snapshot.html"><span class="header-section-number">B</span> SQL Primer for the OpenAlex Snapshot</a></li>
 <li><a class="" href="indicator-crosswalk-across-databases.html"><span class="header-section-number">C</span> Indicator Crosswalk Across Databases</a></li>
 <li><a class="" href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></li>
-<li><a class="" href="exercise-solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
-<li><a class="" href="solutions.html"><span class="header-section-number">F</span> Exercise Solutions</a></li>
+<li><a class="" href="solutions.html"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="" href="glossary.html">Glossary</a></li>
 <li><a class="" href="colophon.html">Colophon</a></li>
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
@@ -164,13 +163,13 @@
         </div>
       </nav>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="building-reproducible-corpora" class="section level1" number="8">
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="building-reproducible-corpora" class="section level1" number="7">
 <h1>
-<span class="header-section-number">8</span> Building Reproducible Corpora<a class="anchor" aria-label="anchor" href="#building-reproducible-corpora"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7</span> Building Reproducible Corpora<a class="anchor" aria-label="anchor" href="#building-reproducible-corpora"><i class="fas fa-link"></i></a>
 </h1>
-<div id="corpora-objectives" class="section level2" number="8.1">
+<div id="corpora-objectives" class="section level2" number="7.1">
 <h2>
-<span class="header-section-number">8.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#corpora-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#corpora-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -181,11 +180,11 @@
 <li>Save a clean corpus in an efficient format (Parquet) for downstream analysis</li>
 </ul>
 </div>
-<div id="corpora-setup" class="section level2" number="8.2">
+<div id="corpora-setup" class="section level2" number="7.2">
 <h2>
-<span class="header-section-number">8.2</span> Setup<a class="anchor" aria-label="anchor" href="#corpora-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Setup<a class="anchor" aria-label="anchor" href="#corpora-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -197,25 +196,25 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="corpora-background" class="section level2" number="8.3">
+<div id="corpora-background" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">8.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#corpora-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#corpora-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Raw bibliographic data is messy. Records from different sources may describe the same paper with different metadata, the same author under different name variants, and the same institution under dozens of spelling variations. Building a clean, reproducible corpus requires systematic attention to three problems:</p>
 <p><strong>Deduplication.</strong> When merging data from multiple sources, the same publication may appear multiple times. DOI-based deduplication is the gold standard, but not all records have DOIs. Fuzzy title matching provides a fallback but is error-prone for short or generic titles.</p>
 <p><strong>Author disambiguation.</strong> “J. Smith” could be dozens of different people. OpenAlex uses machine-learning-based author clustering to assign persistent author IDs, but errors persist — especially for common names and authors who change institutions <span class="citation">(<a href="references.html#ref-priem2022">Priem et al. 2022</a>)</span>.</p>
 <p><strong>Affiliation standardization.</strong> Institutional names appear in countless variants (“MIT”, “Massachusetts Institute of Technology”, “Mass. Inst. Tech.”). The Research Organization Registry (ROR) provides a curated set of persistent identifiers for research organizations. OpenAlex maps many affiliations to ROR IDs, but coverage is incomplete.</p>
 </div>
-<div id="corpora-example" class="section level2" number="8.4">
+<div id="corpora-example" class="section level2" number="7.4">
 <h2>
-<span class="header-section-number">8.4</span> Worked example<a class="anchor" aria-label="anchor" href="#corpora-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Worked example<a class="anchor" aria-label="anchor" href="#corpora-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="fetching-raw-data" class="section level3" number="8.4.1">
+<div id="fetching-raw-data" class="section level3" number="7.4.1">
 <h3>
-<span class="header-section-number">8.4.1</span> Fetching raw data<a class="anchor" aria-label="anchor" href="#fetching-raw-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.1</span> Fetching raw data<a class="anchor" aria-label="anchor" href="#fetching-raw-data"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://docs.ropensci.org/openalexR/reference/oa_fetch.html">oa_fetch</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  search <span class="op">=</span> <span class="st">"bibliometrics"</span>,</span>
 <span>  from_publication_date <span class="op">=</span> <span class="st">"2021-01-01"</span>,</span>
@@ -226,24 +225,24 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Raw records: {nrow(works)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Raw records: 300</code></pre>
 </div>
-<div id="doi-based-deduplication" class="section level3" number="8.4.2">
+<div id="doi-based-deduplication" class="section level3" number="7.4.2">
 <h3>
-<span class="header-section-number">8.4.2</span> DOI-based deduplication<a class="anchor" aria-label="anchor" href="#doi-based-deduplication"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.2</span> DOI-based deduplication<a class="anchor" aria-label="anchor" href="#doi-based-deduplication"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_deduped</span> <span class="op">&lt;-</span> <span class="fu">dedupe_by_doi</span><span class="op">(</span><span class="va">works</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"After DOI dedup: {nrow(works_deduped)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; After DOI dedup: 300</code></pre>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Removed: {nrow(works) - nrow(works_deduped)} duplicates\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Removed: 0 duplicates</code></pre>
 </div>
-<div id="fuzzy-title-deduplication" class="section level3" number="8.4.3">
+<div id="fuzzy-title-deduplication" class="section level3" number="7.4.3">
 <h3>
-<span class="header-section-number">8.4.3</span> Fuzzy title deduplication<a class="anchor" aria-label="anchor" href="#fuzzy-title-deduplication"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.3</span> Fuzzy title deduplication<a class="anchor" aria-label="anchor" href="#fuzzy-title-deduplication"><i class="fas fa-link"></i></a>
 </h3>
 <p>For records without DOIs, we use approximate string matching.</p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">no_doi</span> <span class="op">&lt;-</span> <span class="va">works_deduped</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">doi</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">no_doi</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -258,11 +257,11 @@
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code>#&gt; Potential fuzzy duplicates (no DOI): 0 pairs</code></pre>
 </div>
-<div id="affiliation-extraction-and-ror-mapping" class="section level3" number="8.4.4">
+<div id="affiliation-extraction-and-ror-mapping" class="section level3" number="7.4.4">
 <h3>
-<span class="header-section-number">8.4.4</span> Affiliation extraction and ROR mapping<a class="anchor" aria-label="anchor" href="#affiliation-extraction-and-ror-mapping"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.4</span> Affiliation extraction and ROR mapping<a class="anchor" aria-label="anchor" href="#affiliation-extraction-and-ror-mapping"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">affiliations</span> <span class="op">&lt;-</span> <span class="va">works_deduped</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">authorships</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">authorships</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -278,42 +277,44 @@
 <span></span>
 <span><span class="va">top_institutions</span></span></code></pre></div>
 <pre><code>#&gt; # A tibble: 15 × 2
-#&gt;    institution                                                            n
-#&gt;    &lt;chr&gt;                                                              &lt;int&gt;
-#&gt;  1 Capital Medical University                                            18
-#&gt;  2 Beijing Friendship Hospital                                           16
-#&gt;  3 National Taiwan University of Science and Technology                  12
-#&gt;  4 University of Bari Aldo Moro                                          11
-#&gt;  5 Chinese Academy of Medical Sciences &amp; Peking Union Medical College    10
-#&gt;  6 Indonesia University of Education                                     10
-#&gt;  7 McMaster University                                                   10
-#&gt;  8 National University of Malaysia                                       10
-#&gt;  9 Universiti Teknologi MARA                                             10
-#&gt; 10 Dongguan People’s Hospital                                             9
-#&gt; 11 Guangdong Medical College                                              9
-#&gt; 12 North American Vascular Biology Organization                           9
-#&gt; 13 Universitas Jember                                                     9
-#&gt; 14 University of Ilorin                                                   9
-#&gt; 15 Diponegoro University                                                  8</code></pre>
+#&gt;    institution                                                                 n
+#&gt;    &lt;chr&gt;                                                                   &lt;int&gt;
+#&gt;  1 Tongji University                                                          16
+#&gt;  2 Centre National de la Recherche Scientifique                               14
+#&gt;  3 Shanghai Pulmonary Hospital                                                14
+#&gt;  4 Hangzhou Normal University                                                 12
+#&gt;  5 China Academy of Chinese Medical Sciences                                  11
+#&gt;  6 University of Minho                                                        11
+#&gt;  7 North Eastern Indira Gandhi Regional Institute of Health and Medical S…    10
+#&gt;  8 Jiangxi University of Traditional Chinese Medicine                          9
+#&gt;  9 Universidade Federal de Santa Catarina                                      9
+#&gt; 10 Binus University                                                            8
+#&gt; 11 Centers for Disease Control and Prevention                                  8
+#&gt; 12 Jiangsu University                                                          8
+#&gt; 13 Western University                                                          8
+#&gt; 14 Changhai Hospital                                                           7
+#&gt; 15 China Pharmaceutical University                                             7</code></pre>
 </div>
-<div id="saving-as-parquet" class="section level3" number="8.4.5">
+<div id="saving-as-parquet" class="section level3" number="7.4.5">
 <h3>
-<span class="header-section-number">8.4.5</span> Saving as Parquet<a class="anchor" aria-label="anchor" href="#saving-as-parquet"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.5</span> Saving as Parquet<a class="anchor" aria-label="anchor" href="#saving-as-parquet"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corpus_clean</span> <span class="op">&lt;-</span> <span class="va">works_deduped</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">display_name</span>, <span class="va">publication_date</span>, <span class="va">cited_by_count</span>, <span class="va">doi</span>, <span class="va">source_display_name</span>, <span class="va">abstract</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">out_path</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"corpus_sample.parquet"</span><span class="op">)</span></span>
+<span><span class="va">out_dir</span> <span class="op">&lt;-</span> <span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"_freeze"</span>, <span class="st">"exports"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">out_dir</span>, recursive <span class="op">=</span> <span class="cn">TRUE</span>, showWarnings <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">out_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="va">out_dir</span>, <span class="st">"corpus_sample.parquet"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://arrow.apache.org/docs/r/reference/write_parquet.html">write_parquet</a></span><span class="op">(</span><span class="va">corpus_clean</span>, <span class="va">out_path</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Saved {nrow(corpus_clean)} records to {out_path}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Saved 300 records to /home/runner/work/scientometrics-in-r/scientometrics-in-r/data/corpus_sample.parquet</code></pre>
+<pre><code>#&gt; Saved 300 records to /home/runner/work/scientometrics-in-r/scientometrics-in-r/_freeze/exports/corpus_sample.parquet</code></pre>
 </div>
-<div id="visualization-3" class="section level3" number="8.4.6">
+<div id="visualization-3" class="section level3" number="7.4.6">
 <h3>
-<span class="header-section-number">8.4.6</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.6</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top_institutions</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>institution <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">institution</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n</span>, y <span class="op">=</span> <span class="va">institution</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -323,14 +324,14 @@
 <div class="figure" style="text-align: center">
 <span style="display:block;" id="fig:07-fig-corpora-institutions"></span>
 <img src="scientometrics-in-r_files/figure-html/07-fig-corpora-institutions-1.png" alt="Horizontal bar chart showing the 15 most frequent institutional affiliations in the cleaned corpus." width="90%"><p class="caption">
-Figure 8.1: Top 15 institutions by publication count in the sample corpus.
+Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 </p>
 </div>
 </div>
 </div>
-<div id="corpora-diagnostics" class="section level2" number="8.5">
+<div id="corpora-diagnostics" class="section level2" number="7.5">
 <h2>
-<span class="header-section-number">8.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#corpora-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#corpora-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>After cleaning:</p>
 <ul>
@@ -344,14 +345,14 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
 <strong>Parquet file size</strong>: Parquet is columnar and compressed. A 10,000-record corpus typically compresses to under 1 MB.</li>
 </ul>
 </div>
-<div id="corpora-limitations" class="section level2" number="8.6">
+<div id="corpora-limitations" class="section level2" number="7.6">
 <h2>
-<span class="header-section-number">8.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#corpora-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#corpora-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-6" class="section level2 callout callout-warn" number="8.7">
+<div id="limitations-and-responsible-use-6" class="section level2 callout callout-warn" number="7.7">
 <h2>
-<span class="header-section-number">8.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-6"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -362,14 +363,14 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
 <strong>Affiliation data is noisy.</strong> Even with ROR mapping, temporary affiliations, joint appointments, and name changes create ambiguity. Never use affiliation data as ground truth without validation <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="corpora-pitfalls" class="section level2" number="8.8">
+<div id="corpora-pitfalls" class="section level2" number="7.8">
 <h2>
-<span class="header-section-number">8.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#corpora-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#corpora-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-6" class="section level2 callout callout-stop" number="8.9">
+<div id="common-pitfalls-6" class="section level2 callout callout-stop" number="7.9">
 <h2>
-<span class="header-section-number">8.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-6"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -382,9 +383,9 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
 <strong>Not documenting cleaning steps.</strong> Every deduplication or name-standardization step should be logged for reproducibility.</li>
 </ul>
 </div>
-<div id="corpora-exercises" class="section level2" number="8.10">
+<div id="corpora-exercises" class="section level2" number="7.10">
 <h2>
-<span class="header-section-number">8.10</span> Exercises<a class="anchor" aria-label="anchor" href="#corpora-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.10</span> Exercises<a class="anchor" aria-label="anchor" href="#corpora-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>DOI coverage by year.</strong> Compute the DOI coverage rate by publication year in the sample. Is there a trend?</p></li>
@@ -392,15 +393,15 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
 <li><p><strong>ROR lookup.</strong> Use the ROR API to resolve the top 5 institutions in your corpus to their official ROR identifiers.</p></li>
 </ol>
 </div>
-<div id="solutions-6" class="section level2 callout callout-ok" number="8.11">
+<div id="id_07-solutions" class="section level2 callout callout-ok" number="7.11">
 <h2>
-<span class="header-section-number">8.11</span> Solutions<a class="anchor" aria-label="anchor" href="#solutions-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_07-solutions"><i class="fas fa-link"></i></a>
 </h2>
-<p>Solutions are provided in <a href="what-is-scientometrics.html#solutions">2.11</a>.</p>
+<p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="corpora-reading" class="section level2" number="8.12">
+<div id="corpora-reading" class="section level2" number="7.12">
 <h2>
-<span class="header-section-number">8.12</span> Further reading<a class="anchor" aria-label="anchor" href="#corpora-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.12</span> Further reading<a class="anchor" aria-label="anchor" href="#corpora-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -411,15 +412,15 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
 <span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> — The Leiden Manifesto; principles 4 and 5 emphasise data transparency and verifiability.</li>
 </ul>
 </div>
-<div id="corpora-sessioninfo" class="section level2" number="8.13">
+<div id="corpora-sessioninfo" class="section level2" number="7.13">
 <h2>
-<span class="header-section-number">8.13</span> Session info<a class="anchor" aria-label="anchor" href="#corpora-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.13</span> Session info<a class="anchor" aria-label="anchor" href="#corpora-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; R version 4.4.1 (2024-06-14)
+<pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
-#&gt; Running under: Ubuntu 24.04.4 LTS
+#&gt; Running under: Ubuntu 24.04.5 LTS
 #&gt; 
 #&gt; Matrix products: default
 #&gt; BLAS:   /usr/lib/x86_64-linux-gnu/openblas-pthread/libblas.so.3 
@@ -438,50 +439,48 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] arrow_24.0.0       bibliometrix_5.4.0 RefManageR_1.4.0   bib2df_1.1.2.0    
-#&gt;  [5] rcrossref_1.2.1    gt_1.3.0           tidytext_0.4.3     glue_1.8.1        
-#&gt;  [9] openalexR_3.0.1    lubridate_1.9.5    forcats_1.0.1      stringr_1.6.0     
+#&gt;  [1] arrow_26.0.0       bibliometrix_5.5.0 RefManageR_1.4.0   bib2df_1.1.2.0    
+#&gt;  [5] rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3     glue_1.8.1        
+#&gt;  [9] openalexR_3.1.2    lubridate_1.9.5    forcats_1.0.1      stringr_1.6.0     
 #&gt; [13] dplyr_1.2.1        purrr_1.2.2        readr_2.2.0        tidyr_1.3.2       
 #&gt; [17] tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.2           RColorBrewer_1.1-3     rstudioapi_0.18.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.31         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.0.0  curl_7.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.11.0           htmlwidgets_1.6.4      pdftools_3.9.0        
-#&gt;  [22] tokenizers_0.3.0       plyr_1.8.9             httr2_1.2.2           
-#&gt;  [25] plotly_4.12.0          cachem_1.1.0           dimensionsR_0.0.3     
-#&gt;  [28] igraph_2.3.2           mime_0.13              lifecycle_1.0.5       
-#&gt;  [31] pkgconfig_2.0.3        Matrix_1.7-0           R6_2.6.1              
-#&gt;  [34] fastmap_1.2.0          shiny_1.13.0           digest_0.6.39         
-#&gt;  [37] shinycssloaders_1.1.0  rprojroot_2.1.1        SnowballC_0.7.1       
-#&gt;  [40] labeling_0.4.3         urltools_1.7.3.1       timechange_0.4.0      
-#&gt;  [43] httr_1.4.8             compiler_4.4.1         here_1.0.2            
-#&gt;  [46] bit64_4.8.0            withr_3.0.2            S7_0.2.2              
-#&gt;  [49] backports_1.5.1        viridis_0.6.5          rappdirs_0.3.4        
-#&gt;  [52] bibliometrixData_0.3.0 tools_4.4.1            otel_0.2.0            
-#&gt;  [55] stopwords_2.3          zip_2.3.3              httpuv_1.6.17         
-#&gt;  [58] rentrez_1.2.4          promises_1.5.0         grid_4.4.1            
-#&gt;  [61] stringdist_0.9.17      generics_0.1.4         gtable_0.3.6          
-#&gt;  [64] tzdb_0.5.0             rscopus_0.9.0          ca_0.71.1             
-#&gt;  [67] data.table_1.18.4      hms_1.1.4              xml2_1.5.2            
-#&gt;  [70] utf8_1.2.6             ggrepel_0.9.8          pillar_1.11.1         
-#&gt;  [73] later_1.4.8            brand.yml_0.1.0        lattice_0.22-6        
-#&gt;  [76] bit_4.6.0              tidyselect_1.2.1       miniUI_0.1.2          
-#&gt;  [79] downlit_0.4.5          knitr_1.51             gridExtra_2.3         
-#&gt;  [82] bookdown_0.46          crul_1.6.0             xfun_0.57             
-#&gt;  [85] DT_0.34.0              humaniformat_0.6.0     visNetwork_2.1.4      
-#&gt;  [88] stringi_1.8.7          lazyeval_0.2.3         qpdf_1.4.1            
-#&gt;  [91] yaml_2.3.12            evaluate_1.0.5         codetools_0.2-20      
-#&gt;  [94] httpcode_0.3.0         cli_3.6.6              xtable_1.8-8          
-#&gt;  [97] jquerylib_0.1.4        dichromat_2.0-0.1      Rcpp_1.1.1-1.1        
-#&gt; [100] readxl_1.4.5           triebeard_0.4.1        XML_3.99-0.23         
-#&gt; [103] parallel_4.4.1         assertthat_0.2.1       pubmedR_1.0.2         
-#&gt; [106] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.8.1      
-#&gt; [109] rlang_1.2.0</code></pre>
+#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0          
+#&gt;   [4] rlang_1.3.0            magrittr_2.0.5         otel_0.2.0            
+#&gt;   [7] compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0        
+#&gt;  [10] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
+#&gt;  [13] ca_0.72                utf8_1.2.6             promises_1.5.0        
+#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0             
+#&gt;  [19] xfun_0.62              cachem_1.1.0           jsonlite_2.0.0        
+#&gt;  [22] SnowballC_0.7.1        later_1.4.8            parallel_4.6.1        
+#&gt;  [25] stopwords_2.3          R6_2.6.1               bslib_0.12.0          
+#&gt;  [28] stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
+#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2            
+#&gt;  [34] bookdown_0.48          knitr_1.52             triebeard_0.4.1       
+#&gt;  [37] base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17         
+#&gt;  [40] Matrix_1.7-5           igraph_2.3.4           timechange_0.4.0      
+#&gt;  [43] tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
+#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5         
+#&gt;  [49] miniUI_0.1.2           humaniformat_0.6.0     curl_8.1.0            
+#&gt;  [52] qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9            
+#&gt;  [55] shiny_1.14.0           withr_3.0.3            S7_0.2.2              
+#&gt;  [58] askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
+#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1         
+#&gt;  [64] janeaustenr_1.0.0      DT_0.34.0              plotly_4.12.1         
+#&gt;  [67] generics_0.1.4         rprojroot_2.1.1        hms_1.1.4             
+#&gt;  [70] scales_1.4.0           xtable_1.8-8           contentanalysis_1.1.1 
+#&gt;  [73] tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
+#&gt;  [76] openxlsx_4.2.9         pdftools_3.9.1         XML_3.99-0.25         
+#&gt;  [79] fs_2.1.0               visNetwork_2.1.4       grid_4.6.1            
+#&gt;  [82] bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0         
+#&gt;  [85] dimensionsR_0.0.3      bibliometrixData_0.3.0 cli_3.6.6             
+#&gt;  [88] viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
+#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8         
+#&gt;  [94] crul_1.6.0             htmlwidgets_1.6.4      farver_2.1.2          
+#&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
+#&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
+#&gt; [103] bit64_4.8.6</code></pre>
 
 </div>
 </div>
@@ -510,102 +509,98 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
       });
     });
   })();
-</script><!--
-  Right-side panel "Download" section: adds
-    - Download
-      - Entire book (PDF)
-      - This chapter (PDF)
-  above the existing "View source" / "Edit this page" links produced by
-  bs4_book's repo:base config. The chapter PDF URL is derived from the
-  View-source href so it stays in sync with however bookdown slugs the
-  page filename.
---><script>
+</script><!-- Links are limited to nonempty artifacts inventoried after rendering. --><script>
   document.addEventListener("DOMContentLoaded", function () {
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var bookName = "scientometrics-in-r";
-    var bookPdf  = bookName + ".pdf";
-
-    // Derive the chapter PDF from the source path:
-    //   chapters/01-foo.Rmd  -> pdf-chapters/01-foo.pdf
     var src = document.getElementById("book-source");
-    var chapterPdf = null;
+    var sourcePath = null;
     if (src && src.href) {
       var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) {
-        var rmd = match[1];                              // e.g. chapters/01-foo.Rmd
-        var baseName = rmd.split("/").pop().replace(/\.Rmd$/, ".pdf");
-        chapterPdf = "pdf-chapters/" + baseName;
-      }
+      if (match) sourcePath = decodeURIComponent(match[1]);
     }
 
-    // Header above the download entries
-    var header = document.createElement("li");
-    header.className = "book-extra-section";
-    var hb = document.createElement("strong");
-    hb.textContent = "Download";
-    header.appendChild(hb);
+    fetch("downloads.json", { cache: "no-cache" })
+      .then(function (response) {
+        return response.ok ? response.json() : null;
+      })
+      .then(function (inventory) {
+        if (!inventory) return;
+        var book = inventory.book || {};
+        var chapters = inventory.chapters || {};
+        var links = [];
+        if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
+        if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
+        if (sourcePath && chapters[sourcePath]) {
+          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
+        }
+        if (!links.length) return;
 
-    var bookItem = document.createElement("li");
-    var bookA    = document.createElement("a");
-    bookA.id         = "book-pdf-full";
-    bookA.href       = bookPdf;
-    bookA.textContent = "Entire book (PDF) ";
-    var bookI    = document.createElement("i");
-    bookI.className = "fa-solid fa-file-pdf";
-    bookA.appendChild(bookI);
-    bookItem.appendChild(bookA);
+        function insertLinks(list, suffix) {
+          var firstChild = list.firstElementChild;
+          var header = document.createElement("li");
+          header.className = "book-extra-section";
+          var heading = document.createElement("strong");
+          heading.textContent = "Download";
+          header.appendChild(heading);
+          list.insertBefore(header, firstChild);
+          links.forEach(function (link) {
+            var item = document.createElement("li");
+            var anchor = document.createElement("a");
+            anchor.id = link[0] + suffix;
+            anchor.href = link[1];
+            anchor.textContent = link[2];
+            item.appendChild(anchor);
+            list.insertBefore(item, firstChild);
+          });
+        }
 
-    var firstChild = extraList.firstElementChild;
-    extraList.insertBefore(header,   firstChild);
-    extraList.insertBefore(bookItem, firstChild);
-
-    if (chapterPdf) {
-      var chapItem = document.createElement("li");
-      var chapA    = document.createElement("a");
-      chapA.id         = "book-pdf-chapter";
-      chapA.href       = chapterPdf;
-      chapA.textContent = "This chapter (PDF) ";
-      var chapI    = document.createElement("i");
-      chapI.className = "fa-solid fa-file-pdf";
-      chapA.appendChild(chapI);
-      chapItem.appendChild(chapA);
-      extraList.insertBefore(chapItem, firstChild);
-    }
+        insertLinks(extraList, "");
+        var mobileExtra = document.querySelector(".sidebar-book .book-extra");
+        if (mobileExtra) {
+          var mobileList = document.createElement("ul");
+          mobileList.className = "list-unstyled d-md-none";
+          mobileExtra.appendChild(mobileList);
+          insertLinks(mobileList, "-mobile");
+        }
+      })
+      .catch(function () {
+        // A missing or unreadable inventory offers no unverified downloads.
+      });
   });
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
   <div class="chapter-nav">
-<div class="prev"><a href="parsing-native-exports.html"><span class="header-section-number">7</span> Parsing Native Exports</a></div>
-<div class="next"><a href="working-with-full-text.html"><span class="header-section-number">9</span> Working with Full Text</a></div>
+<div class="prev"><a href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></div>
+<div class="next"><a href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
-<li><a class="nav-link" href="#building-reproducible-corpora"><span class="header-section-number">8</span> Building Reproducible Corpora</a></li>
-<li><a class="nav-link" href="#corpora-objectives"><span class="header-section-number">8.1</span> Learning objectives</a></li>
-<li><a class="nav-link" href="#corpora-setup"><span class="header-section-number">8.2</span> Setup</a></li>
-<li><a class="nav-link" href="#corpora-background"><span class="header-section-number">8.3</span> Conceptual background</a></li>
+<li><a class="nav-link" href="#building-reproducible-corpora"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
+<li><a class="nav-link" href="#corpora-objectives"><span class="header-section-number">7.1</span> Learning objectives</a></li>
+<li><a class="nav-link" href="#corpora-setup"><span class="header-section-number">7.2</span> Setup</a></li>
+<li><a class="nav-link" href="#corpora-background"><span class="header-section-number">7.3</span> Conceptual background</a></li>
 <li>
-<a class="nav-link" href="#corpora-example"><span class="header-section-number">8.4</span> Worked example</a><ul class="nav navbar-nav">
-<li><a class="nav-link" href="#fetching-raw-data"><span class="header-section-number">8.4.1</span> Fetching raw data</a></li>
-<li><a class="nav-link" href="#doi-based-deduplication"><span class="header-section-number">8.4.2</span> DOI-based deduplication</a></li>
-<li><a class="nav-link" href="#fuzzy-title-deduplication"><span class="header-section-number">8.4.3</span> Fuzzy title deduplication</a></li>
-<li><a class="nav-link" href="#affiliation-extraction-and-ror-mapping"><span class="header-section-number">8.4.4</span> Affiliation extraction and ROR mapping</a></li>
-<li><a class="nav-link" href="#saving-as-parquet"><span class="header-section-number">8.4.5</span> Saving as Parquet</a></li>
-<li><a class="nav-link" href="#visualization-3"><span class="header-section-number">8.4.6</span> Visualization</a></li>
+<a class="nav-link" href="#corpora-example"><span class="header-section-number">7.4</span> Worked example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#fetching-raw-data"><span class="header-section-number">7.4.1</span> Fetching raw data</a></li>
+<li><a class="nav-link" href="#doi-based-deduplication"><span class="header-section-number">7.4.2</span> DOI-based deduplication</a></li>
+<li><a class="nav-link" href="#fuzzy-title-deduplication"><span class="header-section-number">7.4.3</span> Fuzzy title deduplication</a></li>
+<li><a class="nav-link" href="#affiliation-extraction-and-ror-mapping"><span class="header-section-number">7.4.4</span> Affiliation extraction and ROR mapping</a></li>
+<li><a class="nav-link" href="#saving-as-parquet"><span class="header-section-number">7.4.5</span> Saving as Parquet</a></li>
+<li><a class="nav-link" href="#visualization-3"><span class="header-section-number">7.4.6</span> Visualization</a></li>
 </ul>
 </li>
-<li><a class="nav-link" href="#corpora-diagnostics"><span class="header-section-number">8.5</span> Diagnostics and interpretation</a></li>
-<li><a class="nav-link" href="#corpora-limitations"><span class="header-section-number">8.6</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#limitations-and-responsible-use-6"><span class="header-section-number">8.7</span> Limitations and responsible use</a></li>
-<li><a class="nav-link" href="#corpora-pitfalls"><span class="header-section-number">8.8</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#common-pitfalls-6"><span class="header-section-number">8.9</span> Common pitfalls</a></li>
-<li><a class="nav-link" href="#corpora-exercises"><span class="header-section-number">8.10</span> Exercises</a></li>
-<li><a class="nav-link" href="#solutions-6"><span class="header-section-number">8.11</span> Solutions</a></li>
-<li><a class="nav-link" href="#corpora-reading"><span class="header-section-number">8.12</span> Further reading</a></li>
-<li><a class="nav-link" href="#corpora-sessioninfo"><span class="header-section-number">8.13</span> Session info</a></li>
+<li><a class="nav-link" href="#corpora-diagnostics"><span class="header-section-number">7.5</span> Diagnostics and interpretation</a></li>
+<li><a class="nav-link" href="#corpora-limitations"><span class="header-section-number">7.6</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#limitations-and-responsible-use-6"><span class="header-section-number">7.7</span> Limitations and responsible use</a></li>
+<li><a class="nav-link" href="#corpora-pitfalls"><span class="header-section-number">7.8</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#common-pitfalls-6"><span class="header-section-number">7.9</span> Common pitfalls</a></li>
+<li><a class="nav-link" href="#corpora-exercises"><span class="header-section-number">7.10</span> Exercises</a></li>
+<li><a class="nav-link" href="#id_07-solutions"><span class="header-section-number">7.11</span> Solutions</a></li>
+<li><a class="nav-link" href="#corpora-reading"><span class="header-section-number">7.12</span> Further reading</a></li>
+<li><a class="nav-link" href="#corpora-sessioninfo"><span class="header-section-number">7.13</span> Session info</a></li>
 </ul>
 
       <div class="book-extra">
@@ -623,7 +618,7 @@ Figure 8.1: Top 15 institutions by publication count in the sample corpus.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-06-14.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">
