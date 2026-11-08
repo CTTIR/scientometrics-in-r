@@ -245,10 +245,10 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Full network: {vcount(g_full)} nodes, {ecount(g_full)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Full network: 288 nodes, 3549 edges</code></pre>
+<pre><code>#&gt; Full network: 293 nodes, 4086 edges</code></pre>
 <div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Density: {round(graph.density(g_full), 4)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Density: 0.0859</code></pre>
+<pre><code>#&gt; Density: 0.0955</code></pre>
 </div>
 <div id="backbone-extraction-disparity-filter" class="section level3" number="18.4.2">
 <h3>
@@ -278,7 +278,7 @@
 <span></span>
 <span><span class="va">g_backbone</span> <span class="op">&lt;-</span> <span class="fu">disparity_filter</span><span class="op">(</span><span class="va">g_full</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Backbone: {vcount(g_backbone)} nodes, {ecount(g_backbone)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Backbone: 126 nodes, 114 edges</code></pre>
+<pre><code>#&gt; Backbone: 136 nodes, 136 edges</code></pre>
 <div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Edge retention: {scales::percent(ecount(g_backbone) / ecount(g_full))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Edge retention: 3%</code></pre>
@@ -296,7 +296,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Threshold (75th pctile = {threshold}): {vcount(g_threshold)} nodes, {ecount(g_threshold)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Threshold (75th pctile = 2): 237 nodes, 1013 edges</code></pre>
+<pre><code>#&gt; Threshold (75th pctile = 2): 253 nodes, 1155 edges</code></pre>
 </div>
 <div id="community-detection-at-multiple-resolutions" class="section level3" number="18.4.4">
 <h3>
@@ -318,23 +318,23 @@
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sweep_results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="xtdrvxvigg" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xtdrvxvigg table {
+<div id="ajiepjraoa" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ajiepjraoa table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xtdrvxvigg thead, #xtdrvxvigg tbody, #xtdrvxvigg tfoot, #xtdrvxvigg tr, #xtdrvxvigg td, #xtdrvxvigg th {
+#ajiepjraoa thead, #ajiepjraoa tbody, #ajiepjraoa tfoot, #ajiepjraoa tr, #ajiepjraoa td, #ajiepjraoa th {
   border-style: none;
 }
 
-#xtdrvxvigg p {
+#ajiepjraoa p {
   margin: 0;
   padding: 0;
 }
 
-#xtdrvxvigg .gt_table {
+#ajiepjraoa .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -360,12 +360,12 @@
   border-left-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_caption {
+#ajiepjraoa .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xtdrvxvigg .gt_title {
+#ajiepjraoa .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -377,7 +377,7 @@
   border-bottom-width: 0;
 }
 
-#xtdrvxvigg .gt_subtitle {
+#ajiepjraoa .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -389,7 +389,7 @@
   border-top-width: 0;
 }
 
-#xtdrvxvigg .gt_heading {
+#ajiepjraoa .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -401,13 +401,13 @@
   border-right-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_bottom_border {
+#ajiepjraoa .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_col_headings {
+#ajiepjraoa .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -422,7 +422,7 @@
   border-right-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_col_heading {
+#ajiepjraoa .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -442,7 +442,7 @@
   overflow-x: hidden;
 }
 
-#xtdrvxvigg .gt_column_spanner_outer {
+#ajiepjraoa .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -454,15 +454,15 @@
   padding-right: 4px;
 }
 
-#xtdrvxvigg .gt_column_spanner_outer:first-child {
+#ajiepjraoa .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xtdrvxvigg .gt_column_spanner_outer:last-child {
+#ajiepjraoa .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xtdrvxvigg .gt_column_spanner {
+#ajiepjraoa .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -474,11 +474,11 @@
   width: 100%;
 }
 
-#xtdrvxvigg .gt_spanner_row {
+#ajiepjraoa .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xtdrvxvigg .gt_group_heading {
+#ajiepjraoa .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -504,7 +504,7 @@
   text-align: left;
 }
 
-#xtdrvxvigg .gt_empty_group_heading {
+#ajiepjraoa .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -519,15 +519,15 @@
   vertical-align: middle;
 }
 
-#xtdrvxvigg .gt_from_md > :first-child {
+#ajiepjraoa .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xtdrvxvigg .gt_from_md > :last-child {
+#ajiepjraoa .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xtdrvxvigg .gt_row {
+#ajiepjraoa .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +546,7 @@
   overflow-x: hidden;
 }
 
-#xtdrvxvigg .gt_stub {
+#ajiepjraoa .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -559,7 +559,7 @@
   padding-right: 5px;
 }
 
-#xtdrvxvigg .gt_stub_row_group {
+#ajiepjraoa .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -573,15 +573,15 @@
   vertical-align: top;
 }
 
-#xtdrvxvigg .gt_row_group_first td {
+#ajiepjraoa .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xtdrvxvigg .gt_row_group_first th {
+#ajiepjraoa .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xtdrvxvigg .gt_summary_row {
+#ajiepjraoa .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -591,16 +591,16 @@
   padding-right: 5px;
 }
 
-#xtdrvxvigg .gt_first_summary_row {
+#ajiepjraoa .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_first_summary_row.thick {
+#ajiepjraoa .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xtdrvxvigg .gt_last_summary_row {
+#ajiepjraoa .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -610,7 +610,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_grand_summary_row {
+#ajiepjraoa .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -620,7 +620,7 @@
   padding-right: 5px;
 }
 
-#xtdrvxvigg .gt_first_grand_summary_row {
+#ajiepjraoa .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -630,7 +630,7 @@
   border-top-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_last_grand_summary_row_top {
+#ajiepjraoa .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -640,11 +640,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_striped {
+#ajiepjraoa .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xtdrvxvigg .gt_table_body {
+#ajiepjraoa .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -653,7 +653,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_footnotes {
+#ajiepjraoa .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -667,7 +667,7 @@
   border-right-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_footnote {
+#ajiepjraoa .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -676,7 +676,7 @@
   padding-right: 5px;
 }
 
-#xtdrvxvigg .gt_sourcenotes {
+#ajiepjraoa .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -690,7 +690,7 @@
   border-right-color: #D3D3D3;
 }
 
-#xtdrvxvigg .gt_sourcenote {
+#ajiepjraoa .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -698,72 +698,72 @@
   padding-right: 5px;
 }
 
-#xtdrvxvigg .gt_left {
+#ajiepjraoa .gt_left {
   text-align: left;
 }
 
-#xtdrvxvigg .gt_center {
+#ajiepjraoa .gt_center {
   text-align: center;
 }
 
-#xtdrvxvigg .gt_right {
+#ajiepjraoa .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xtdrvxvigg .gt_font_normal {
+#ajiepjraoa .gt_font_normal {
   font-weight: normal;
 }
 
-#xtdrvxvigg .gt_font_bold {
+#ajiepjraoa .gt_font_bold {
   font-weight: bold;
 }
 
-#xtdrvxvigg .gt_font_italic {
+#ajiepjraoa .gt_font_italic {
   font-style: italic;
 }
 
-#xtdrvxvigg .gt_super {
+#ajiepjraoa .gt_super {
   font-size: 65%;
 }
 
-#xtdrvxvigg .gt_footnote_marks {
+#ajiepjraoa .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xtdrvxvigg .gt_asterisk {
+#ajiepjraoa .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xtdrvxvigg .gt_indent_1 {
+#ajiepjraoa .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xtdrvxvigg .gt_indent_2 {
+#ajiepjraoa .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xtdrvxvigg .gt_indent_3 {
+#ajiepjraoa .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xtdrvxvigg .gt_indent_4 {
+#ajiepjraoa .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xtdrvxvigg .gt_indent_5 {
+#ajiepjraoa .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xtdrvxvigg .katex-display {
+#ajiepjraoa .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xtdrvxvigg div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ajiepjraoa div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -778,37 +778,37 @@
 <tbody class="gt_table_body">
 <tr>
 <td headers="resolution" class="gt_row gt_right">0.5</td>
-<td headers="n_communities" class="gt_row gt_right">30</td>
-<td headers="modularity" class="gt_row gt_right">0.880</td>
-<td headers="max_size" class="gt_row gt_right">14</td>
+<td headers="n_communities" class="gt_row gt_right">29</td>
+<td headers="modularity" class="gt_row gt_right">0.882</td>
+<td headers="max_size" class="gt_row gt_right">17</td>
 <td headers="min_size" class="gt_row gt_right">2</td>
 </tr>
 <tr>
 <td headers="resolution" class="gt_row gt_right">0.8</td>
-<td headers="n_communities" class="gt_row gt_right">30</td>
-<td headers="modularity" class="gt_row gt_right">0.880</td>
-<td headers="max_size" class="gt_row gt_right">14</td>
+<td headers="n_communities" class="gt_row gt_right">29</td>
+<td headers="modularity" class="gt_row gt_right">0.883</td>
+<td headers="max_size" class="gt_row gt_right">17</td>
 <td headers="min_size" class="gt_row gt_right">2</td>
 </tr>
 <tr>
 <td headers="resolution" class="gt_row gt_right">1.0</td>
-<td headers="n_communities" class="gt_row gt_right">31</td>
-<td headers="modularity" class="gt_row gt_right">0.880</td>
-<td headers="max_size" class="gt_row gt_right">13</td>
+<td headers="n_communities" class="gt_row gt_right">30</td>
+<td headers="modularity" class="gt_row gt_right">0.883</td>
+<td headers="max_size" class="gt_row gt_right">15</td>
 <td headers="min_size" class="gt_row gt_right">2</td>
 </tr>
 <tr>
 <td headers="resolution" class="gt_row gt_right">1.5</td>
-<td headers="n_communities" class="gt_row gt_right">32</td>
-<td headers="modularity" class="gt_row gt_right">0.879</td>
-<td headers="max_size" class="gt_row gt_right">12</td>
+<td headers="n_communities" class="gt_row gt_right">30</td>
+<td headers="modularity" class="gt_row gt_right">0.883</td>
+<td headers="max_size" class="gt_row gt_right">15</td>
 <td headers="min_size" class="gt_row gt_right">2</td>
 </tr>
 <tr>
 <td headers="resolution" class="gt_row gt_right">2.0</td>
-<td headers="n_communities" class="gt_row gt_right">33</td>
+<td headers="n_communities" class="gt_row gt_right">32</td>
 <td headers="modularity" class="gt_row gt_right">0.877</td>
-<td headers="max_size" class="gt_row gt_right">10</td>
+<td headers="max_size" class="gt_row gt_right">15</td>
 <td headers="min_size" class="gt_row gt_right">2</td>
 </tr>
 </tbody>
@@ -850,13 +850,13 @@ Figure 18.1: Number of communities and modularity as a function of resolution pa
 <span></span>
 <span><span class="va">nmi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/compare.html">compare</a></span><span class="op">(</span><span class="va">mem_full</span>, <span class="va">mem_back</span>, method <span class="op">=</span> <span class="st">"nmi"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"NMI (full vs backbone, shared nodes): {round(nmi, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.635</code></pre>
+<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.691</code></pre>
 <div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities in full network: {length(unique(membership(comm_full)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Communities in full network: 10</code></pre>
+<pre><code>#&gt; Communities in full network: 9</code></pre>
 <div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities in backbone: {length(unique(membership(comm_backbone)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Communities in backbone: 31</code></pre>
+<pre><code>#&gt; Communities in backbone: 30</code></pre>
 </div>
 <div id="visualisation-2" class="section level3" number="18.4.6">
 <h3>
@@ -1184,7 +1184,7 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

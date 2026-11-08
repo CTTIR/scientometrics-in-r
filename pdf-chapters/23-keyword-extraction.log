@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.5)  5 NOV 2026 11:41
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  8 NOV 2026 11:57
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1776,7 +1776,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/runner/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-Overfull \hbox (1867.5292pt too wide) in alignment at lines 314--322
+Overfull \hbox (1697.38126pt too wide) in alignment at lines 314--322
 [] [] 
  []
 
@@ -1798,7 +1798,7 @@ LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
 LaTeX Font Info:    Font shape `TU/NotoSansCJKKR(0)/m/n' will be
 (Font)              scaled to size 5.0pt on input line 387.
 
-Overfull \vbox (9.01178pt too high) detected at line 389
+Overfull \vbox (9.02782pt too high) detected at line 389
  []
 
 [3] [4]

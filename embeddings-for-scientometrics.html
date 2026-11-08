@@ -246,7 +246,7 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents for embedding: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents for embedding: 102</code></pre>
+<pre><code>#&gt; Documents for embedding: 109</code></pre>
 </div>
 <div id="training-word2vec-embeddings" class="section level3" number="24.4.2">
 <h3>
@@ -262,7 +262,7 @@
 <span>                  type <span class="op">=</span> <span class="st">"skip-gram"</span>, threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Vocabulary size: {nrow(as.matrix(model))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Vocabulary size: 1365</code></pre>
+<pre><code>#&gt; Vocabulary size: 1402</code></pre>
 <div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"citation"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">nn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="st">"citation"</span>, type <span class="op">=</span> <span class="st">"nearest"</span>, top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -271,17 +271,17 @@
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code>#&gt; Nearest neighbours of 'citation':
 #&gt; $citation
-#&gt;       term1         term2 similarity rank
-#&gt; 1  citation        counts      0.704    1
-#&gt; 2  citation heterogeneous      0.690    2
-#&gt; 3  citation     instances      0.656    3
-#&gt; 4  citation        rating      0.654    4
-#&gt; 5  citation   comparisons      0.649    5
-#&gt; 6  citation       contain      0.649    6
-#&gt; 7  citation        double      0.646    7
-#&gt; 8  citation    consisting      0.646    8
-#&gt; 9  citation           any      0.644    9
-#&gt; 10 citation        twenty      0.637   10</code></pre>
+#&gt;       term1      term2 similarity rank
+#&gt; 1  citation       mean      0.718    1
+#&gt; 2  citation normalised      0.696    2
+#&gt; 3  citation inequality      0.686    3
+#&gt; 4  citation  regarding      0.668    4
+#&gt; 5  citation  citations      0.653    5
+#&gt; 6  citation normalized      0.651    6
+#&gt; 7  citation      links      0.649    7
+#&gt; 8  citation   validity      0.648    8
+#&gt; 9  citation    develop      0.643    9
+#&gt; 10 citation     skewed      0.640   10</code></pre>
 </div>
 <div id="computing-document-embeddings-via-mean-pooling" class="section level3" number="24.4.3">
 <h3>
@@ -309,7 +309,7 @@ acronyms when matching them to the learned word vectors.</p>
 <span><span class="va">text_df_valid</span> <span class="op">&lt;-</span> <span class="va">text_df</span><span class="op">[</span><span class="va">valid</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Valid document embeddings: {nrow(embed_mat)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Valid document embeddings: 102</code></pre>
+<pre><code>#&gt; Valid document embeddings: 109</code></pre>
 </div>
 <div id="dimensionality-reduction-with-umap" class="section level3" number="24.4.4">
 <h3>
@@ -349,7 +349,7 @@ Figure 24.1: UMAP projection of document embeddings, coloured by publication yea
 <span><span class="va">top_similar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">sims</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Query: {text_df_valid$title[query_idx]}\n\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Query: Measuring academic entities’ impact by content-based citation analysis in a heterogeneous academic network</code></pre>
+<pre><code>#&gt; Query: Market forces in Italian academia today (and yesterday)</code></pre>
 <div class="sourceCode" id="cb382"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Most similar documents:\n"</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Most similar documents:</code></pre>
@@ -357,7 +357,7 @@ Figure 24.1: UMAP projection of document embeddings, coloured by publication yea
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span><span class="op">(</span><span class="va">top_similar</span>, \<span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"  [{round(sims[i], 3)}] {text_df_valid$title[i]}\n"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; [0.961] Evaluating semantometrics from computer science publications[0.956] The explanatory power of citations: a new approach to unpacking impact in science[0.954] Topic space trajectories[0.945] Machine learning misclassification of academic publications reveals non-trivial interdependencies of scientific disciplines[0.943] Disambiguation of author entities in ADS using supervised learning and graph theory methods</code></pre>
+<pre><code>#&gt; [0.94] Empirical evidence on the relationship between research and teaching in academia[0.925] Relations between academic reputation and innovation networks[0.922] Comments are welcome[0.921] “Formal and informal networkedness among German Academics”: exploring the role of conferences and co-publications in scientific performance[0.911] Reverse adoption of information and communication technology among organisers of academic conferences</code></pre>
 </div>
 <div id="embedding-clusters-vs.-citation-impact" class="section level3" number="24.4.6">
 <h3>
@@ -686,7 +686,7 @@ Figure 24.2: UMAP embedding coloured by citation impact (log scale).
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

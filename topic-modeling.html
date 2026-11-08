@@ -236,7 +236,7 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents for topic modelling: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents for topic modelling: 93</code></pre>
+<pre><code>#&gt; Documents for topic modelling: 103</code></pre>
 <div class="sourceCode" id="cb346"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/corpus.html">corpus</a></span><span class="op">(</span><span class="va">text_df</span>, docid_field <span class="op">=</span> <span class="st">"doc_id"</span>, text_field <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://quanteda.io/reference/docvars.html">docvars</a></span><span class="op">(</span><span class="va">corp</span>, <span class="st">"year"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">text_df</span><span class="op">$</span><span class="va">year</span></span>
@@ -251,7 +251,7 @@
 <span>  <span class="fu"><a href="https://quanteda.io/reference/dfm_trim.html">dfm_trim</a></span><span class="op">(</span>min_termfreq <span class="op">=</span> <span class="fl">5</span>, min_docfreq <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"DFM: {nrow(dfmat)} docs x {ncol(dfmat)} features\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; DFM: 93 docs x 504 features</code></pre>
+<pre><code>#&gt; DFM: 103 docs x 604 features</code></pre>
 </div>
 <div id="fitting-lda" class="section level3" number="22.4.2">
 <h3>
@@ -364,23 +364,23 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">diag_df</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="quxmfqmcre" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#quxmfqmcre table {
+<div id="pkbfudxueh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pkbfudxueh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#quxmfqmcre thead, #quxmfqmcre tbody, #quxmfqmcre tfoot, #quxmfqmcre tr, #quxmfqmcre td, #quxmfqmcre th {
+#pkbfudxueh thead, #pkbfudxueh tbody, #pkbfudxueh tfoot, #pkbfudxueh tr, #pkbfudxueh td, #pkbfudxueh th {
   border-style: none;
 }
 
-#quxmfqmcre p {
+#pkbfudxueh p {
   margin: 0;
   padding: 0;
 }
 
-#quxmfqmcre .gt_table {
+#pkbfudxueh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -406,12 +406,12 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-left-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_caption {
+#pkbfudxueh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#quxmfqmcre .gt_title {
+#pkbfudxueh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -423,7 +423,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-bottom-width: 0;
 }
 
-#quxmfqmcre .gt_subtitle {
+#pkbfudxueh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -435,7 +435,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-top-width: 0;
 }
 
-#quxmfqmcre .gt_heading {
+#pkbfudxueh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -447,13 +447,13 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_bottom_border {
+#pkbfudxueh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_col_headings {
+#pkbfudxueh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -468,7 +468,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_col_heading {
+#pkbfudxueh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -488,7 +488,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   overflow-x: hidden;
 }
 
-#quxmfqmcre .gt_column_spanner_outer {
+#pkbfudxueh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -500,15 +500,15 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   padding-right: 4px;
 }
 
-#quxmfqmcre .gt_column_spanner_outer:first-child {
+#pkbfudxueh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#quxmfqmcre .gt_column_spanner_outer:last-child {
+#pkbfudxueh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#quxmfqmcre .gt_column_spanner {
+#pkbfudxueh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -520,11 +520,11 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   width: 100%;
 }
 
-#quxmfqmcre .gt_spanner_row {
+#pkbfudxueh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#quxmfqmcre .gt_group_heading {
+#pkbfudxueh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -550,7 +550,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   text-align: left;
 }
 
-#quxmfqmcre .gt_empty_group_heading {
+#pkbfudxueh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -565,15 +565,15 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   vertical-align: middle;
 }
 
-#quxmfqmcre .gt_from_md > :first-child {
+#pkbfudxueh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#quxmfqmcre .gt_from_md > :last-child {
+#pkbfudxueh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#quxmfqmcre .gt_row {
+#pkbfudxueh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -592,7 +592,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   overflow-x: hidden;
 }
 
-#quxmfqmcre .gt_stub {
+#pkbfudxueh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -605,7 +605,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#quxmfqmcre .gt_stub_row_group {
+#pkbfudxueh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -619,15 +619,15 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   vertical-align: top;
 }
 
-#quxmfqmcre .gt_row_group_first td {
+#pkbfudxueh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#quxmfqmcre .gt_row_group_first th {
+#pkbfudxueh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#quxmfqmcre .gt_summary_row {
+#pkbfudxueh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -637,16 +637,16 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#quxmfqmcre .gt_first_summary_row {
+#pkbfudxueh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_first_summary_row.thick {
+#pkbfudxueh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#quxmfqmcre .gt_last_summary_row {
+#pkbfudxueh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -656,7 +656,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-bottom-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_grand_summary_row {
+#pkbfudxueh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -666,7 +666,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#quxmfqmcre .gt_first_grand_summary_row {
+#pkbfudxueh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -676,7 +676,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-top-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_last_grand_summary_row_top {
+#pkbfudxueh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -686,11 +686,11 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-bottom-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_striped {
+#pkbfudxueh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#quxmfqmcre .gt_table_body {
+#pkbfudxueh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -699,7 +699,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-bottom-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_footnotes {
+#pkbfudxueh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -713,7 +713,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_footnote {
+#pkbfudxueh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -722,7 +722,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#quxmfqmcre .gt_sourcenotes {
+#pkbfudxueh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -736,7 +736,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   border-right-color: #D3D3D3;
 }
 
-#quxmfqmcre .gt_sourcenote {
+#pkbfudxueh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -744,72 +744,72 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
   padding-right: 5px;
 }
 
-#quxmfqmcre .gt_left {
+#pkbfudxueh .gt_left {
   text-align: left;
 }
 
-#quxmfqmcre .gt_center {
+#pkbfudxueh .gt_center {
   text-align: center;
 }
 
-#quxmfqmcre .gt_right {
+#pkbfudxueh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#quxmfqmcre .gt_font_normal {
+#pkbfudxueh .gt_font_normal {
   font-weight: normal;
 }
 
-#quxmfqmcre .gt_font_bold {
+#pkbfudxueh .gt_font_bold {
   font-weight: bold;
 }
 
-#quxmfqmcre .gt_font_italic {
+#pkbfudxueh .gt_font_italic {
   font-style: italic;
 }
 
-#quxmfqmcre .gt_super {
+#pkbfudxueh .gt_super {
   font-size: 65%;
 }
 
-#quxmfqmcre .gt_footnote_marks {
+#pkbfudxueh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#quxmfqmcre .gt_asterisk {
+#pkbfudxueh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#quxmfqmcre .gt_indent_1 {
+#pkbfudxueh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#quxmfqmcre .gt_indent_2 {
+#pkbfudxueh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#quxmfqmcre .gt_indent_3 {
+#pkbfudxueh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#quxmfqmcre .gt_indent_4 {
+#pkbfudxueh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#quxmfqmcre .gt_indent_5 {
+#pkbfudxueh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#quxmfqmcre .katex-display {
+#pkbfudxueh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#quxmfqmcre div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#pkbfudxueh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -822,43 +822,43 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
 <tbody class="gt_table_body">
 <tr>
 <td headers="topic" class="gt_row gt_right">1</td>
-<td headers="coherence" class="gt_row gt_right">-77.1</td>
-<td headers="exclusivity" class="gt_row gt_right">9.45</td>
+<td headers="coherence" class="gt_row gt_right">-75.4</td>
+<td headers="exclusivity" class="gt_row gt_right">9.20</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">2</td>
-<td headers="coherence" class="gt_row gt_right">-54.6</td>
-<td headers="exclusivity" class="gt_row gt_right">9.31</td>
+<td headers="coherence" class="gt_row gt_right">-62.7</td>
+<td headers="exclusivity" class="gt_row gt_right">9.05</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">3</td>
-<td headers="coherence" class="gt_row gt_right">-64.5</td>
-<td headers="exclusivity" class="gt_row gt_right">8.63</td>
+<td headers="coherence" class="gt_row gt_right">-49.2</td>
+<td headers="exclusivity" class="gt_row gt_right">9.25</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">4</td>
-<td headers="coherence" class="gt_row gt_right">-79.9</td>
-<td headers="exclusivity" class="gt_row gt_right">8.81</td>
+<td headers="coherence" class="gt_row gt_right">-72.4</td>
+<td headers="exclusivity" class="gt_row gt_right">9.49</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">5</td>
-<td headers="coherence" class="gt_row gt_right">-154.8</td>
-<td headers="exclusivity" class="gt_row gt_right">9.16</td>
+<td headers="coherence" class="gt_row gt_right">-98.7</td>
+<td headers="exclusivity" class="gt_row gt_right">9.01</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">6</td>
-<td headers="coherence" class="gt_row gt_right">-106.7</td>
-<td headers="exclusivity" class="gt_row gt_right">9.09</td>
+<td headers="coherence" class="gt_row gt_right">-87.2</td>
+<td headers="exclusivity" class="gt_row gt_right">9.43</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">7</td>
-<td headers="coherence" class="gt_row gt_right">-78.2</td>
-<td headers="exclusivity" class="gt_row gt_right">9.40</td>
+<td headers="coherence" class="gt_row gt_right">-122.5</td>
+<td headers="exclusivity" class="gt_row gt_right">8.90</td>
 </tr>
 <tr>
 <td headers="topic" class="gt_row gt_right">8</td>
-<td headers="coherence" class="gt_row gt_right">-136.0</td>
-<td headers="exclusivity" class="gt_row gt_right">9.77</td>
+<td headers="coherence" class="gt_row gt_right">-92.9</td>
+<td headers="exclusivity" class="gt_row gt_right">9.20</td>
 </tr>
 </tbody>
 </table></div>
@@ -1172,7 +1172,7 @@ Figure 22.3: Estimated topic prevalence by publication year (STM).
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

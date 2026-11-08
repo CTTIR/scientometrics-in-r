@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.5)  5 NOV 2026 11:39
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  8 NOV 2026 11:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1721,53 +1721,53 @@ File: /home/runner/work/scientometrics-in-r/scientometrics-in-r/docs/pdf-chapter
 File: /home/runner/work/scientometrics-in-r/scientometrics-in-r/docs/pdf-chapters/02-theoretical-underpinnings_files/figure-latex/02-fig-theory-growth-1.pdf Graphic file (type pdf)
 <use /home/runner/work/scientometrics-in-r/scientometrics-in-r/docs/pdf-chapters/02-theoretical-underpinnings_files/figure-latex/02-fig-theory-growth-1.pdf>
 [6]
-Underfull \hbox (badness 1028) in paragraph at lines 451--453
+Underfull \hbox (badness 1028) in paragraph at lines 450--452
 []\TU/NotoSansCJKKR(0)/m/it/10 The Matthew Effect [@merton1968] is a mechanism that amplifies inequality. Recognising
  []
 
 [7]
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
-(Font)              scaled to size 7.94324pt on input line 523.
+(Font)              scaled to size 7.94324pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.07886pt on input line 523.
+(Font)              scaled to size 10.07886pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 7.55914pt on input line 523.
+(Font)              scaled to size 7.55914pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.29929pt on input line 523.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 523.
+(Font)              scaled to size 6.29929pt on input line 522.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 522.
 (/home/runner/.TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 10.07983pt on input line 523.
+(Font)              scaled to size 10.07983pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 7.55988pt on input line 523.
+(Font)              scaled to size 7.55988pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.2999pt on input line 523.
+(Font)              scaled to size 6.2999pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 10.07788pt on input line 523.
+(Font)              scaled to size 10.07788pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.55841pt on input line 523.
+(Font)              scaled to size 7.55841pt on input line 522.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.29868pt on input line 523.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 523.
+(Font)              scaled to size 6.29868pt on input line 522.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 522.
 (/home/runner/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/home/runner/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 523.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 522.
 (/home/runner/.TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/runner/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 LaTeX Font Info:    Font shape `TU/NotoSansCJKKR(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 523.
+(Font)              scaled to size 8.0pt on input line 522.
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
-(Font)              scaled to size 4.96452pt on input line 523.
+(Font)              scaled to size 4.96452pt on input line 522.
 LaTeX Font Info:    Font shape `TU/NotoSansCJKKR(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 523.
+(Font)              scaled to size 5.0pt on input line 522.
 [8] (./02-theoretical-underpinnings.aux)
  ***********
 LaTeX2e <2026-11-01>

@@ -234,16 +234,16 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents with abstracts: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents with abstracts: 132</code></pre>
+<pre><code>#&gt; Documents with abstracts: 134</code></pre>
 <div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/corpus.html">corpus</a></span><span class="op">(</span><span class="va">text_df</span>, docid_field <span class="op">=</span> <span class="st">"doc_id"</span>, text_field <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://quanteda.io/reference/docvars.html">docvars</a></span><span class="op">(</span><span class="va">corp</span>, <span class="st">"year"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">text_df</span><span class="op">$</span><span class="va">year</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Corpus size: {ndoc(corp)} documents\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Corpus size: 132 documents</code></pre>
+<pre><code>#&gt; Corpus size: 134 documents</code></pre>
 <div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Total tokens: {sum(ntoken(corp))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Total tokens: 32304</code></pre>
+<pre><code>#&gt; Total tokens: 33015</code></pre>
 </div>
 <div id="tokenisation-and-preprocessing" class="section level3" number="21.4.2">
 <h3>
@@ -261,7 +261,7 @@
 <span>  <span class="fu"><a href="https://quanteda.io/reference/tokens_wordstem.html">tokens_wordstem</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Tokens after preprocessing: {sum(ntoken(toks))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Tokens after preprocessing: 16362</code></pre>
+<pre><code>#&gt; Tokens after preprocessing: 16628</code></pre>
 </div>
 <div id="document-feature-matrix" class="section level3" number="21.4.3">
 <h3>
@@ -272,7 +272,7 @@
 <span>  <span class="fu"><a href="https://quanteda.io/reference/dfm_trim.html">dfm_trim</a></span><span class="op">(</span>min_termfreq <span class="op">=</span> <span class="fl">5</span>, min_docfreq <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"DFM dimensions: {nrow(dfmat)} docs x {ncol(dfmat)} features\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; DFM dimensions: 132 docs x 713 features</code></pre>
+<pre><code>#&gt; DFM dimensions: 134 docs x 708 features</code></pre>
 <div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sparsity: {scales::percent(sparsity(dfmat))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Sparsity: 92%</code></pre>
@@ -774,116 +774,116 @@ Figure 21.1: Top 20 most frequent terms in the Scientometrics corpus.
 <th colspan="2" class="gt_group_heading" scope="colgroup" id="a2019">2019</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="a2019  term" class="gt_row gt_left">collabor</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">17.6</td>
+<td headers="a2019  term" class="gt_row gt_left">econom</td>
+<td headers="a2019  tfidf" class="gt_row gt_right">18.8</td>
 </tr>
 <tr>
 <td headers="a2019  term" class="gt_row gt_left">journal</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">17.1</td>
+<td headers="a2019  tfidf" class="gt_row gt_right">18.3</td>
 </tr>
 <tr>
 <td headers="a2019  term" class="gt_row gt_left">score</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">16.1</td>
+<td headers="a2019  tfidf" class="gt_row gt_right">17.4</td>
 </tr>
 <tr>
-<td headers="a2019  term" class="gt_row gt_left">emerg</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">16.1</td>
+<td headers="a2019  term" class="gt_row gt_left">doctor</td>
+<td headers="a2019  tfidf" class="gt_row gt_right">16.5</td>
 </tr>
 <tr>
-<td headers="a2019  term" class="gt_row gt_left">region</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">14.8</td>
+<td headers="a2019  term" class="gt_row gt_left">peer</td>
+<td headers="a2019  tfidf" class="gt_row gt_right">15.9</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th colspan="2" class="gt_group_heading" scope="colgroup" id="a2020">2020</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="a2020  term" class="gt_row gt_left">rank</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">20.2</td>
+<td headers="a2020  term" class="gt_row gt_left">lis</td>
+<td headers="a2020  tfidf" class="gt_row gt_right">24.7</td>
 </tr>
 <tr>
 <td headers="a2020  term" class="gt_row gt_left">citat</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">19.0</td>
+<td headers="a2020  tfidf" class="gt_row gt_right">19.7</td>
 </tr>
 <tr>
-<td headers="a2020  term" class="gt_row gt_left">paper</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">18.0</td>
+<td headers="a2020  term" class="gt_row gt_left">classifi</td>
+<td headers="a2020  tfidf" class="gt_row gt_right">16.4</td>
 </tr>
 <tr>
-<td headers="a2020  term" class="gt_row gt_left">laureat</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">14.8</td>
+<td headers="a2020  term" class="gt_row gt_left">machin</td>
+<td headers="a2020  tfidf" class="gt_row gt_right">14.7</td>
 </tr>
 <tr>
-<td headers="a2020  term" class="gt_row gt_left">technolog</td>
+<td headers="a2020  term" class="gt_row gt_left">covid-19</td>
 <td headers="a2020  tfidf" class="gt_row gt_right">14.7</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th colspan="2" class="gt_group_heading" scope="colgroup" id="a2021">2021</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="a2021  term" class="gt_row gt_left">trial</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">26.3</td>
+<td headers="a2021  term" class="gt_row gt_left">retract</td>
+<td headers="a2021  tfidf" class="gt_row gt_right">41.2</td>
 </tr>
 <tr>
 <td headers="a2021  term" class="gt_row gt_left">book</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">21.3</td>
+<td headers="a2021  tfidf" class="gt_row gt_right">30.5</td>
 </tr>
 <tr>
-<td headers="a2021  term" class="gt_row gt_left">librari</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">19.1</td>
+<td headers="a2021  term" class="gt_row gt_left">journal</td>
+<td headers="a2021  tfidf" class="gt_row gt_right">26.7</td>
 </tr>
 <tr>
-<td headers="a2021  term" class="gt_row gt_left">articl</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">18.5</td>
+<td headers="a2021  term" class="gt_row gt_left">sars-cov-2</td>
+<td headers="a2021  tfidf" class="gt_row gt_right">24.4</td>
 </tr>
 <tr>
 <td headers="a2021  term" class="gt_row gt_left">hold</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">17.9</td>
+<td headers="a2021  tfidf" class="gt_row gt_right">21.6</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th colspan="2" class="gt_group_heading" scope="colgroup" id="a2022">2022</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="a2022  term" class="gt_row gt_left">patent</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">36.2</td>
-</tr>
-<tr>
-<td headers="a2022  term" class="gt_row gt_left">twitter</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">30.4</td>
-</tr>
-<tr>
-<td headers="a2022  term" class="gt_row gt_left">univers</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">30.2</td>
-</tr>
-<tr>
 <td headers="a2022  term" class="gt_row gt_left">journal</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">27.7</td>
+<td headers="a2022  tfidf" class="gt_row gt_right">26.7</td>
 </tr>
 <tr>
-<td headers="a2022  term" class="gt_row gt_left">author</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">23.8</td>
+<td headers="a2022  term" class="gt_row gt_left">acknowledg</td>
+<td headers="a2022  tfidf" class="gt_row gt_right">25.9</td>
+</tr>
+<tr>
+<td headers="a2022  term" class="gt_row gt_left">p</td>
+<td headers="a2022  tfidf" class="gt_row gt_right">25.9</td>
+</tr>
+<tr>
+<td headers="a2022  term" class="gt_row gt_left">citat</td>
+<td headers="a2022  tfidf" class="gt_row gt_right">25.3</td>
+</tr>
+<tr>
+<td headers="a2022  term" class="gt_row gt_left">network</td>
+<td headers="a2022  tfidf" class="gt_row gt_right">24.3</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th colspan="2" class="gt_group_heading" scope="colgroup" id="a2023">2023</th>
     </tr>
 <tr class="gt_row_group_first">
-<td headers="a2023  term" class="gt_row gt_left">collabor</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">29.5</td>
+<td headers="a2023  term" class="gt_row gt_left">mention</td>
+<td headers="a2023  tfidf" class="gt_row gt_right">32.0</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">academ</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">16.3</td>
+<td headers="a2023  term" class="gt_row gt_left">nobel</td>
+<td headers="a2023  tfidf" class="gt_row gt_right">29.7</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">teach</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">14.8</td>
+<td headers="a2023  term" class="gt_row gt_left">oa</td>
+<td headers="a2023  tfidf" class="gt_row gt_right">29.7</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">technolog</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">14.7</td>
+<td headers="a2023  term" class="gt_row gt_left">polici</td>
+<td headers="a2023  tfidf" class="gt_row gt_right">27.2</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">field</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">14.1</td>
+<td headers="a2023  term" class="gt_row gt_left">bias</td>
+<td headers="a2023  tfidf" class="gt_row gt_right">23.3</td>
 </tr>
 </tbody>
 </table></div>
@@ -1222,7 +1222,7 @@ Figure 21.2: Relative frequency of selected terms over time.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

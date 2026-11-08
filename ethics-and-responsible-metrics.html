@@ -311,10 +311,10 @@
 <span><span class="fu"><a href="https://pillar.r-lib.org/reference/glimpse.html">glimpse</a></span><span class="op">(</span><span class="va">authors</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Rows: 30
 #&gt; Columns: 4
-#&gt; $ id             &lt;chr&gt; "https://openalex.org/A5063251000", "https://openalex.o…
-#&gt; $ display_name   &lt;chr&gt; "Eva María Mora Valentín", "Alireza Isfandyari‐Moghadda…
-#&gt; $ works_count    &lt;int&gt; 74, 109, 143, 54, 56, 59, 56, 74, 71, 122, 73, 100, 83,…
-#&gt; $ cited_by_count &lt;int&gt; 1308, 638, 0, 696, 610, 0, 1811, 292, 89, 1532, 510, 60…</code></pre>
+#&gt; $ id             &lt;chr&gt; "https://openalex.org/A5081466232", "https://openalex.o…
+#&gt; $ display_name   &lt;chr&gt; "Qiang Wu", "Bojan Macan", "Nina Karlina", "Mohammad Re…
+#&gt; $ works_count    &lt;int&gt; 73, 121, 111, 79, 62, 76, 90, 87, 62, 88, 515, 73, 91, …
+#&gt; $ cited_by_count &lt;int&gt; 1169, 215, 467, 1419, 0, 662, 715, 654, 2102, 3221, 340…</code></pre>
 </div>
 <div id="fetching-works-and-computing-self-citations" class="section level3" number="3.4.2">
 <h3>
@@ -857,10 +857,10 @@
 <div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
 <thead>
 <tr class="gt_heading">
-<td colspan="5" class="gt_heading gt_title gt_font_normal" style>Self-citation rates among sampled scientometrics authors</td>
+<td colspan="7" class="gt_heading gt_title gt_font_normal" style>Self-citation rates among sampled scientometrics authors</td>
     </tr>
 <tr class="gt_heading">
-<td colspan="5" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Based on references in up to 50 recent works per author</td>
+<td colspan="7" class="gt_heading gt_subtitle gt_font_normal gt_bottom_border" style>Based on references in up to 50 recent works per author</td>
     </tr>
 <tr class="gt_col_headings">
 <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="author_name">Author</th>
@@ -868,78 +868,91 @@
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total_references">Total references</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="self_references">Self-references</th>
       <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="self_cite_rate">Self-citation rate</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total_citations">total_citations</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="self_citations">self_citations</th>
     </tr>
 </thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="author_name" class="gt_row gt_left">Daniel García-Costa</td>
-<td headers="n_works" class="gt_row gt_right">49</td>
-<td headers="total_references" class="gt_row gt_right">823</td>
-<td headers="self_references" class="gt_row gt_right">29</td>
-<td headers="self_cite_rate" class="gt_row gt_right">3.5%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">N. S. Harinarayana</td>
-<td headers="n_works" class="gt_row gt_right">49</td>
-<td headers="total_references" class="gt_row gt_right">646</td>
-<td headers="self_references" class="gt_row gt_right">6</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.9%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Shmatko Natalia Anatolyevna</td>
-<td headers="n_works" class="gt_row gt_right">27</td>
-<td headers="total_references" class="gt_row gt_right">737</td>
-<td headers="self_references" class="gt_row gt_right">6</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.8%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Ying Chen</td>
-<td headers="n_works" class="gt_row gt_right">31</td>
-<td headers="total_references" class="gt_row gt_right">1116</td>
-<td headers="self_references" class="gt_row gt_right">9</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.8%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Vanash Patel</td>
-<td headers="n_works" class="gt_row gt_right">15</td>
-<td headers="total_references" class="gt_row gt_right">498</td>
-<td headers="self_references" class="gt_row gt_right">4</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.8%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Catherine Liu</td>
-<td headers="n_works" class="gt_row gt_right">34</td>
-<td headers="total_references" class="gt_row gt_right">941</td>
-<td headers="self_references" class="gt_row gt_right">1</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.1%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Zhuo Yang</td>
-<td headers="n_works" class="gt_row gt_right">33</td>
-<td headers="total_references" class="gt_row gt_right">1258</td>
-<td headers="self_references" class="gt_row gt_right">1</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.1%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Răzvan V. Florian</td>
-<td headers="n_works" class="gt_row gt_right">5</td>
-<td headers="total_references" class="gt_row gt_right">128</td>
-<td headers="self_references" class="gt_row gt_right">0</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.0%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">N. Radhakrishnan</td>
-<td headers="n_works" class="gt_row gt_right">24</td>
-<td headers="total_references" class="gt_row gt_right">212</td>
-<td headers="self_references" class="gt_row gt_right">0</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.0%</td>
-</tr>
-<tr>
-<td headers="author_name" class="gt_row gt_left">Yong Huang</td>
+<td headers="author_name" class="gt_row gt_left">Nassr Nama</td>
 <td headers="n_works" class="gt_row gt_right">38</td>
-<td headers="total_references" class="gt_row gt_right">1252</td>
-<td headers="self_references" class="gt_row gt_right">0</td>
-<td headers="self_cite_rate" class="gt_row gt_right">0.0%</td>
+<td headers="total_references" class="gt_row gt_right">1065</td>
+<td headers="self_references" class="gt_row gt_right">88</td>
+<td headers="self_cite_rate" class="gt_row gt_right">8.3%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">C. García Villar</td>
+<td headers="n_works" class="gt_row gt_right">34</td>
+<td headers="total_references" class="gt_row gt_right">514</td>
+<td headers="self_references" class="gt_row gt_right">14</td>
+<td headers="self_cite_rate" class="gt_row gt_right">2.7%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Christopher Sean Burns</td>
+<td headers="n_works" class="gt_row gt_right">21</td>
+<td headers="total_references" class="gt_row gt_right">398</td>
+<td headers="self_references" class="gt_row gt_right">9</td>
+<td headers="self_cite_rate" class="gt_row gt_right">2.3%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Youngjung Geum</td>
+<td headers="n_works" class="gt_row gt_right">50</td>
+<td headers="total_references" class="gt_row gt_right">1717</td>
+<td headers="self_references" class="gt_row gt_right">31</td>
+<td headers="self_cite_rate" class="gt_row gt_right">1.8%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Mohammad Reza Sabour</td>
+<td headers="n_works" class="gt_row gt_right">46</td>
+<td headers="total_references" class="gt_row gt_right">1524</td>
+<td headers="self_references" class="gt_row gt_right">25</td>
+<td headers="self_cite_rate" class="gt_row gt_right">1.6%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Haiyun Xu</td>
+<td headers="n_works" class="gt_row gt_right">50</td>
+<td headers="total_references" class="gt_row gt_right">1794</td>
+<td headers="self_references" class="gt_row gt_right">20</td>
+<td headers="self_cite_rate" class="gt_row gt_right">1.1%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Ashish Kumar Jha</td>
+<td headers="n_works" class="gt_row gt_right">50</td>
+<td headers="total_references" class="gt_row gt_right">2303</td>
+<td headers="self_references" class="gt_row gt_right">23</td>
+<td headers="self_cite_rate" class="gt_row gt_right">1.0%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Mathijs de Vaan</td>
+<td headers="n_works" class="gt_row gt_right">28</td>
+<td headers="total_references" class="gt_row gt_right">1035</td>
+<td headers="self_references" class="gt_row gt_right">6</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.6%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
+</tr>
+<tr>
+<td headers="author_name" class="gt_row gt_left">Atanas G. Atanasov</td>
+<td headers="n_works" class="gt_row gt_right">50</td>
+<td headers="total_references" class="gt_row gt_right">3666</td>
+<td headers="self_references" class="gt_row gt_right">16</td>
+<td headers="self_cite_rate" class="gt_row gt_right">0.4%</td>
+<td headers="total_citations" class="gt_row gt_right">NA</td>
+<td headers="self_citations" class="gt_row gt_right">NA</td>
 </tr>
 </tbody>
 </table></div>
@@ -1292,7 +1305,7 @@ Figure 3.2: Self-citation rates by author, sorted from highest to lowest.
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-05.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

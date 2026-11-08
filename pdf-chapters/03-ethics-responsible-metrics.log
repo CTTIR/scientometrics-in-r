@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.5)  5 NOV 2026 11:39
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  8 NOV 2026 11:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1790,8 +1790,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/runner/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-Overfull \hbox (99.10501pt too wide) in alignment at lines 459--474
-[] [] [] [] [] 
+Overfull \hbox (253.233pt too wide) in alignment at lines 459--473
+[] [] [] [] [] [] [] 
  []
 
 [5]
@@ -1801,22 +1801,22 @@ File: /home/runner/work/scientometrics-in-r/scientometrics-in-r/docs/pdf-chapter
 <use /home/runner/work/scientometrics-in-r/scientometrics-in-r/docs/pdf-chapters/03-ethics-responsible-metrics_files/figure-latex/03-fig-ethics-self-cite-bar-1.pdf>
 [6] [7] [8]
 LaTeX Font Info:    Font shape `TU/NotoSansCJKKR(0)/m/it' will be
-(Font)              scaled to size 10.0pt on input line 572.
+(Font)              scaled to size 10.0pt on input line 571.
 [9] [10]
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
-(Font)              scaled to size 7.94324pt on input line 646.
+(Font)              scaled to size 7.94324pt on input line 645.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.29929pt on input line 646.
+(Font)              scaled to size 6.29929pt on input line 645.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.2999pt on input line 646.
+(Font)              scaled to size 6.2999pt on input line 645.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 6.29868pt on input line 646.
+(Font)              scaled to size 6.29868pt on input line 645.
 LaTeX Font Info:    Font shape `TU/NotoSansCJKKR(0)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 646.
+(Font)              scaled to size 8.0pt on input line 645.
 LaTeX Font Info:    Font shape `TU/DejaVuSansMono(0)/m/n' will be
-(Font)              scaled to size 4.96452pt on input line 646.
+(Font)              scaled to size 4.96452pt on input line 645.
 LaTeX Font Info:    Font shape `TU/NotoSansCJKKR(0)/m/n' will be
-(Font)              scaled to size 5.0pt on input line 646.
+(Font)              scaled to size 5.0pt on input line 645.
 [11] (./03-ethics-responsible-metrics.aux)
  ***********
 LaTeX2e <2026-11-01>
@@ -1829,7 +1829,7 @@ LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 Here is how much of TeX's memory you used:
  35929 strings out of 469594
  739583 string characters out of 5462186
- 1329671 words of memory out of 5000000
+ 1330671 words of memory out of 5000000
  64542 multiletter control sequences out of 15000+600000
  633262 words of font info for 106 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
