@@ -119,6 +119,19 @@ def main():
             if tree.xpath('//*[local-name()="math" and namespace-uri()="http://www.w3.org/1998/Math/MathML"]'):properties.add('mathml')
             if properties:item.set('properties',' '.join(sorted(properties)))
             if itemid not in spine_ids:ET.SubElement(spine,'{'+O+'}itemref',idref=itemid,linear='no')
+    # Keep package-level language attributes valid as well as dc:language.
+    for node in opf.iter():
+        for attr in ['lang','{http://www.w3.org/XML/1998/namespace}lang']:
+            if node.get(attr) in ['C','POSIX']:node.set(attr,language)
+    for ref in list(spine):
+        item=original_items[ref.get('idref')]
+        if 'nav' in item.get('properties','').split() and ref.get('linear')=='no':spine.remove(ref)
+        elif local(opfpath,item.get('href')).endswith('.xhtml'):ref.attrib.pop('linear',None)
+    linked={local(name,value) for name,data in archive.items() if name.endswith('.xhtml') for value in xml(data).xpath('//@href')}
+    spine_ids={e.get('idref') for e in spine}
+    for itemid,item in original_items.items():
+        name=local(opfpath,item.get('href'))
+        if name in linked and (name.endswith('.svg') or name in fallback_paths) and itemid not in spine_ids:ET.SubElement(spine,'{'+O+'}itemref',idref=itemid,linear='no')
     archive[opfpath]=serialize(opf)
     texts={n:xml(data) for n,data in archive.items() if n.endswith('.xhtml') and '/text/' in n}
     ids={n:set(t.xpath('//@id')) for n,t in texts.items()}
@@ -250,7 +263,10 @@ def main():
         spine=ET.SubElement(package,'{'+O+'}spine')
         for name in sequence:ET.SubElement(spine,'{'+O+'}itemref',idref=itemids[name])
         for name in files:
-            if name.endswith('.xhtml') and name not in sequence:ET.SubElement(spine,'{'+O+'}itemref',idref=itemids[name],linear='no')
+            if name.endswith('.xhtml') and name not in sequence and name!=navpath:ET.SubElement(spine,'{'+O+'}itemref',idref=itemids[name])
+        linked={local(n,value) for n,data in files.items() if n.endswith('.xhtml') for value in xml(data).xpath('//@href')}
+        for name in linked:
+            if name in itemids and (name.endswith('.svg') or name in fallback_paths):ET.SubElement(spine,'{'+O+'}itemref',idref=itemids[name],linear='no')
         files[opfpath]=serialize(package);files['META-INF/container.xml']=archive['META-INF/container.xml']
         epub_write(root/page['epub'],files);validate_epub(root/page['epub'])
     # Use the EPUB's static equivalent of interactive figures for print.
