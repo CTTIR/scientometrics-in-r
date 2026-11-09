@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 16 Co-citation and Bibliographic Coupling | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="16.1 Learning objectives After completing this chapter, you will be able to: Distinguish co-citation analysis from bibliographic coupling and explain when each is appropriate Construct co-citation...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 16 Co-citation and Bibliographic Coupling | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/co-citation-and-bibliographic-coupling.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="16.1 Learning objectives After completing this chapter, you will be able to: Distinguish co-citation analysis from bibliographic coupling and explain when each is appropriate Construct co-citation...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 16 Co-citation and Bibliographic Coupling | Scientometrics in R">
-<meta name="twitter:description" content="16.1 Learning objectives After completing this chapter, you will be able to: Distinguish co-citation analysis from bibliographic coupling and explain when each is appropriate Construct co-citation...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="16.1 Learning objectives After completing this chapter, you will be able to: Distinguish co-citation analysis from bibliographic coupling and explain when each is appropriate Construct co-citation..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 16 Co-citation and Bibliographic Coupling | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/co-citation-and-bibliographic-coupling.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="16.1 Learning objectives After completing this chapter, you will be able to: Distinguish co-citation analysis from bibliographic coupling and explain when each is appropriate Construct co-citation..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 16 Co-citation and Bibliographic Coupling | Scientometrics in R" name="twitter:title"/>
+<meta content="16.1 Learning objectives After completing this chapter, you will be able to: Distinguish co-citation analysis from bibliographic coupling and explain when each is appropriate Construct co-citation..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="co-citation-and-bibliographic-coupling" class="section level1" number="16">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="co-citation-and-bibliographic-coupling" number="16">
 <h1>
-<span class="header-section-number">16</span> Co-citation and Bibliographic Coupling<a class="anchor" aria-label="anchor" href="#co-citation-and-bibliographic-coupling"><i class="fas fa-link"></i></a>
-</h1>
-<div id="cocit-objectives" class="section level2" number="16.1">
+<span class="header-section-number">16</span> Co-citation and Bibliographic Coupling<a aria-label="anchor" class="anchor" href="#co-citation-and-bibliographic-coupling"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/co-citation-and-bibliographic-coupling.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/co-citation-and-bibliographic-coupling.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="cocit-objectives" number="16.1">
 <h2>
-<span class="header-section-number">16.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#cocit-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#cocit-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Interpret co-citation maps as representations of intellectual structure</li>
 </ul>
 </div>
-<div id="cocit-setup" class="section level2" number="16.2">
+<div class="section level2" id="cocit-setup" number="16.2">
 <h2>
-<span class="header-section-number">16.2</span> Setup<a class="anchor" aria-label="anchor" href="#cocit-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.2</span> Setup<a aria-label="anchor" class="anchor" href="#cocit-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -199,9 +206,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="cocit-background" class="section level2" number="16.3">
+<div class="section level2" id="cocit-background" number="16.3">
 <h2>
-<span class="header-section-number">16.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#cocit-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#cocit-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>While co-authorship networks (<a href="co-authorship-networks.html#coauth-background">15.3</a>) reveal social structure, <strong>co-citation</strong> and <strong>bibliographic coupling</strong> networks reveal <em>intellectual</em> structure — the conceptual relationships between documents as expressed through citation behaviour.</p>
 <p><strong>Co-citation analysis</strong>, introduced independently by <span class="citation">Small (<a href="references.html#ref-small1973">1973</a>)</span> and Marshakova-Shaikevich in 1973, measures the relatedness of two documents by how often they are cited together by other papers. If documents A and B frequently appear in the same reference lists, they likely address related topics or represent complementary contributions to a field. Co-citation strength changes over time: as a field evolves, new citing papers create new co-citation links and strengthen or weaken existing ones.</p>
@@ -209,13 +216,13 @@
 <p>The two methods reveal different facets of intellectual structure. Co-citation maps the <em>reception</em> of ideas (how the community groups prior work); bibliographic coupling maps the <em>production</em> of knowledge (how authors draw on shared foundations). <span class="citation">Waltman et al. (<a href="references.html#ref-waltman2012">2010</a>)</span> demonstrated that combining both perspectives yields richer maps of science than either alone.</p>
 <p>Both methods produce <strong>similarity matrices</strong> that can be converted to networks. Common normalisation approaches include cosine similarity (emphasising relative overlap) and the Jaccard index (penalising pairs with many unshared references). Unnormalised raw counts are dominated by highly-cited papers; normalisation is essential for balanced network construction.</p>
 </div>
-<div id="cocit-example" class="section level2" number="16.4">
+<div class="section level2" id="cocit-example" number="16.4">
 <h2>
-<span class="header-section-number">16.4</span> Worked example<a class="anchor" aria-label="anchor" href="#cocit-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4</span> Worked example<a aria-label="anchor" class="anchor" href="#cocit-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="fetching-citing-and-cited-works" class="section level3" number="16.4.1">
+<div class="section level3" id="fetching-citing-and-cited-works" number="16.4.1">
 <h3>
-<span class="header-section-number">16.4.1</span> Fetching citing and cited works<a class="anchor" aria-label="anchor" href="#fetching-citing-and-cited-works"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4.1</span> Fetching citing and cited works<a aria-label="anchor" class="anchor" href="#fetching-citing-and-cited-works"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch a corpus of scientometrics research and extract reference lists.</p>
 <div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
@@ -236,14 +243,14 @@
 <pre><code>#&gt; Citing works: 200</code></pre>
 <div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Cited works: {n_distinct(refs$cited_id)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Cited works: 8122</code></pre>
+<pre><code>#&gt; Cited works: 8209</code></pre>
 <div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Citation links: {nrow(refs)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Citation links: 9422</code></pre>
+<pre><code>#&gt; Citation links: 9553</code></pre>
 </div>
-<div id="building-a-co-citation-network" class="section level3" number="16.4.2">
+<div class="section level3" id="building-a-co-citation-network" number="16.4.2">
 <h3>
-<span class="header-section-number">16.4.2</span> Building a co-citation network<a class="anchor" aria-label="anchor" href="#building-a-co-citation-network"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4.2</span> Building a co-citation network<a aria-label="anchor" class="anchor" href="#building-a-co-citation-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>Two cited documents are co-cited when they appear in the same reference list. We count shared citing papers.</p>
 <div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
@@ -257,7 +264,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cocit_count</span> <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Co-citation pairs (count &gt;= 3): {nrow(cocit_top)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Co-citation pairs (count &gt;= 3): 136</code></pre>
+<pre><code>#&gt; Co-citation pairs (count &gt;= 3): 166</code></pre>
 <div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g_cocit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span></span>
 <span>  <span class="va">cocit_top</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">cited_id_a</span>, <span class="va">cited_id_b</span>, weight <span class="op">=</span> <span class="va">cocit_count</span><span class="op">)</span>,</span>
@@ -266,11 +273,11 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Co-citation network: {vcount(g_cocit)} nodes, {ecount(g_cocit)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Co-citation network: 116 nodes, 136 edges</code></pre>
+<pre><code>#&gt; Co-citation network: 125 nodes, 166 edges</code></pre>
 </div>
-<div id="building-a-bibliographic-coupling-network" class="section level3" number="16.4.3">
+<div class="section level3" id="building-a-bibliographic-coupling-network" number="16.4.3">
 <h3>
-<span class="header-section-number">16.4.3</span> Building a bibliographic coupling network<a class="anchor" aria-label="anchor" href="#building-a-bibliographic-coupling-network"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4.3</span> Building a bibliographic coupling network<a aria-label="anchor" class="anchor" href="#building-a-bibliographic-coupling-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>Two citing documents are coupled when they share at least one reference.</p>
 <div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
@@ -284,7 +291,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">shared_refs</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Bibliographic coupling pairs (shared refs &gt;= 5): {nrow(bibcoup_top)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Bibliographic coupling pairs (shared refs &gt;= 5): 56</code></pre>
+<pre><code>#&gt; Bibliographic coupling pairs (shared refs &gt;= 5): 60</code></pre>
 <div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g_bibcoup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span></span>
 <span>  <span class="va">bibcoup_top</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">citing_id_a</span>, <span class="va">citing_id_b</span>, weight <span class="op">=</span> <span class="va">shared_refs</span><span class="op">)</span>,</span>
@@ -293,11 +300,11 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Coupling network: {vcount(g_bibcoup)} nodes, {ecount(g_bibcoup)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Coupling network: 61 nodes, 56 edges</code></pre>
+<pre><code>#&gt; Coupling network: 62 nodes, 60 edges</code></pre>
 </div>
-<div id="visualisation" class="section level3" number="16.4.4">
+<div class="section level3" id="visualisation" number="16.4.4">
 <h3>
-<span class="header-section-number">16.4.4</span> Visualisation<a class="anchor" aria-label="anchor" href="#visualisation"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4.4</span> Visualisation<a aria-label="anchor" class="anchor" href="#visualisation"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/components.html">components</a></span><span class="op">(</span><span class="va">g_cocit</span><span class="op">)</span></span>
@@ -321,8 +328,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"sans"</span>, base_size <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:16-fig-cocit-network"></span>
-<img src="scientometrics-in-r_files/figure-html/16-fig-cocit-network-1.png" alt="Network graph showing co-citation relationships between documents. Nodes are cited papers; edges connect papers frequently cited together. Node size reflects degree. Communities are coloured." width="90%"><p class="caption">
+<span id="fig:16-fig-cocit-network" style="display:block;"></span>
+<img alt="Network graph showing co-citation relationships between documents. Nodes are cited papers; edges connect papers frequently cited together. Node size reflects degree. Communities are coloured." src="scientometrics-in-r_files/figure-html/16-fig-cocit-network-1.png" width="90%"/><p class="caption">
 Figure 16.1: Co-citation network of frequently co-cited references in Scientometrics (2020–2023).
 </p>
 </div>
@@ -349,15 +356,15 @@ Figure 16.1: Co-citation network of frequently co-cited references in Scientomet
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"sans"</span>, base_size <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:16-fig-bibcoup-network"></span>
-<img src="scientometrics-in-r_files/figure-html/16-fig-bibcoup-network-1.png" alt="Network graph showing bibliographic coupling relationships between articles. Edges connect papers that share many references. Coloured by community." width="90%"><p class="caption">
+<span id="fig:16-fig-bibcoup-network" style="display:block;"></span>
+<img alt="Network graph showing bibliographic coupling relationships between articles. Edges connect papers that share many references. Coloured by community." src="scientometrics-in-r_files/figure-html/16-fig-bibcoup-network-1.png" width="90%"/><p class="caption">
 Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2023).
 </p>
 </div>
 </div>
-<div id="comparing-the-two-approaches" class="section level3" number="16.4.5">
+<div class="section level3" id="comparing-the-two-approaches" number="16.4.5">
 <h3>
-<span class="header-section-number">16.4.5</span> Comparing the two approaches<a class="anchor" aria-label="anchor" href="#comparing-the-two-approaches"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.4.5</span> Comparing the two approaches<a aria-label="anchor" class="anchor" href="#comparing-the-two-approaches"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
@@ -370,23 +377,23 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">comparison</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="aowgytrnak" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#aowgytrnak table {
+<div id="ulnbkvzijo" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ulnbkvzijo table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#aowgytrnak thead, #aowgytrnak tbody, #aowgytrnak tfoot, #aowgytrnak tr, #aowgytrnak td, #aowgytrnak th {
+#ulnbkvzijo thead, #ulnbkvzijo tbody, #ulnbkvzijo tfoot, #ulnbkvzijo tr, #ulnbkvzijo td, #ulnbkvzijo th {
   border-style: none;
 }
 
-#aowgytrnak p {
+#ulnbkvzijo p {
   margin: 0;
   padding: 0;
 }
 
-#aowgytrnak .gt_table {
+#ulnbkvzijo .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -412,12 +419,12 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-left-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_caption {
+#ulnbkvzijo .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#aowgytrnak .gt_title {
+#ulnbkvzijo .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -429,7 +436,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-width: 0;
 }
 
-#aowgytrnak .gt_subtitle {
+#ulnbkvzijo .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -441,7 +448,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-top-width: 0;
 }
 
-#aowgytrnak .gt_heading {
+#ulnbkvzijo .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -453,13 +460,13 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_bottom_border {
+#ulnbkvzijo .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_col_headings {
+#ulnbkvzijo .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -474,7 +481,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_col_heading {
+#ulnbkvzijo .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -494,7 +501,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   overflow-x: hidden;
 }
 
-#aowgytrnak .gt_column_spanner_outer {
+#ulnbkvzijo .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -506,15 +513,15 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 4px;
 }
 
-#aowgytrnak .gt_column_spanner_outer:first-child {
+#ulnbkvzijo .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#aowgytrnak .gt_column_spanner_outer:last-child {
+#ulnbkvzijo .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#aowgytrnak .gt_column_spanner {
+#ulnbkvzijo .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -526,11 +533,11 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   width: 100%;
 }
 
-#aowgytrnak .gt_spanner_row {
+#ulnbkvzijo .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#aowgytrnak .gt_group_heading {
+#ulnbkvzijo .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -556,7 +563,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   text-align: left;
 }
 
-#aowgytrnak .gt_empty_group_heading {
+#ulnbkvzijo .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -571,15 +578,15 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   vertical-align: middle;
 }
 
-#aowgytrnak .gt_from_md > :first-child {
+#ulnbkvzijo .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#aowgytrnak .gt_from_md > :last-child {
+#ulnbkvzijo .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#aowgytrnak .gt_row {
+#ulnbkvzijo .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -598,7 +605,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   overflow-x: hidden;
 }
 
-#aowgytrnak .gt_stub {
+#ulnbkvzijo .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -611,7 +618,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#aowgytrnak .gt_stub_row_group {
+#ulnbkvzijo .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -625,15 +632,15 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   vertical-align: top;
 }
 
-#aowgytrnak .gt_row_group_first td {
+#ulnbkvzijo .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#aowgytrnak .gt_row_group_first th {
+#ulnbkvzijo .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#aowgytrnak .gt_summary_row {
+#ulnbkvzijo .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -643,16 +650,16 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#aowgytrnak .gt_first_summary_row {
+#ulnbkvzijo .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_first_summary_row.thick {
+#ulnbkvzijo .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#aowgytrnak .gt_last_summary_row {
+#ulnbkvzijo .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -662,7 +669,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_grand_summary_row {
+#ulnbkvzijo .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -672,7 +679,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#aowgytrnak .gt_first_grand_summary_row {
+#ulnbkvzijo .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -682,7 +689,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-top-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_last_grand_summary_row_top {
+#ulnbkvzijo .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -692,11 +699,11 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_striped {
+#ulnbkvzijo .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#aowgytrnak .gt_table_body {
+#ulnbkvzijo .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -705,7 +712,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_footnotes {
+#ulnbkvzijo .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -719,7 +726,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_footnote {
+#ulnbkvzijo .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -728,7 +735,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#aowgytrnak .gt_sourcenotes {
+#ulnbkvzijo .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -742,7 +749,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#aowgytrnak .gt_sourcenote {
+#ulnbkvzijo .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -750,106 +757,106 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#aowgytrnak .gt_left {
+#ulnbkvzijo .gt_left {
   text-align: left;
 }
 
-#aowgytrnak .gt_center {
+#ulnbkvzijo .gt_center {
   text-align: center;
 }
 
-#aowgytrnak .gt_right {
+#ulnbkvzijo .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#aowgytrnak .gt_font_normal {
+#ulnbkvzijo .gt_font_normal {
   font-weight: normal;
 }
 
-#aowgytrnak .gt_font_bold {
+#ulnbkvzijo .gt_font_bold {
   font-weight: bold;
 }
 
-#aowgytrnak .gt_font_italic {
+#ulnbkvzijo .gt_font_italic {
   font-style: italic;
 }
 
-#aowgytrnak .gt_super {
+#ulnbkvzijo .gt_super {
   font-size: 65%;
 }
 
-#aowgytrnak .gt_footnote_marks {
+#ulnbkvzijo .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#aowgytrnak .gt_asterisk {
+#ulnbkvzijo .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#aowgytrnak .gt_indent_1 {
+#ulnbkvzijo .gt_indent_1 {
   text-indent: 5px;
 }
 
-#aowgytrnak .gt_indent_2 {
+#ulnbkvzijo .gt_indent_2 {
   text-indent: 10px;
 }
 
-#aowgytrnak .gt_indent_3 {
+#ulnbkvzijo .gt_indent_3 {
   text-indent: 15px;
 }
 
-#aowgytrnak .gt_indent_4 {
+#ulnbkvzijo .gt_indent_4 {
   text-indent: 20px;
 }
 
-#aowgytrnak .gt_indent_5 {
+#ulnbkvzijo .gt_indent_5 {
   text-indent: 25px;
 }
 
-#aowgytrnak .katex-display {
+#ulnbkvzijo .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#aowgytrnak div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#ulnbkvzijo div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Method">Method</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Nodes">Nodes</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Edges">Edges</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Components">Components</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Density">Density</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="Method" rowspan="1" scope="col">Method</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="Nodes" rowspan="1" scope="col">Nodes</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="Edges" rowspan="1" scope="col">Edges</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="Components" rowspan="1" scope="col">Components</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="Density" rowspan="1" scope="col">Density</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Method" class="gt_row gt_left">Co-citation</td>
-<td headers="Nodes" class="gt_row gt_right">116</td>
-<td headers="Edges" class="gt_row gt_right">136</td>
-<td headers="Components" class="gt_row gt_right">24</td>
-<td headers="Density" class="gt_row gt_right">0.0204</td>
+<td class="gt_row gt_left" headers="Method">Co-citation</td>
+<td class="gt_row gt_right" headers="Nodes">125</td>
+<td class="gt_row gt_right" headers="Edges">166</td>
+<td class="gt_row gt_right" headers="Components">24</td>
+<td class="gt_row gt_right" headers="Density">0.0214</td>
 </tr>
 <tr>
-<td headers="Method" class="gt_row gt_left">Bibliographic coupling</td>
-<td headers="Nodes" class="gt_row gt_right">61</td>
-<td headers="Edges" class="gt_row gt_right">56</td>
-<td headers="Components" class="gt_row gt_right">13</td>
-<td headers="Density" class="gt_row gt_right">0.0306</td>
+<td class="gt_row gt_left" headers="Method">Bibliographic coupling</td>
+<td class="gt_row gt_right" headers="Nodes">62</td>
+<td class="gt_row gt_right" headers="Edges">60</td>
+<td class="gt_row gt_right" headers="Components">13</td>
+<td class="gt_row gt_right" headers="Density">0.0317</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
 </div>
-<div id="cocit-diagnostics" class="section level2" number="16.5">
+<div class="section level2" id="cocit-diagnostics" number="16.5">
 <h2>
-<span class="header-section-number">16.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#cocit-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#cocit-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -862,14 +869,14 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <strong>Temporal stability</strong>: Co-citation networks change as new papers cite old ones. Bibliographic coupling networks are fixed at publication time. If you need a stable snapshot of recent literature, coupling is preferable.</li>
 </ul>
 </div>
-<div id="cocit-limitations" class="section level2" number="16.6">
+<div class="section level2" id="cocit-limitations" number="16.6">
 <h2>
-<span class="header-section-number">16.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#cocit-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#cocit-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-15" class="section level2 callout callout-warn" number="16.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-15" number="16.7">
 <h2>
-<span class="header-section-number">16.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-15"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-15"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -882,14 +889,14 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <strong>Not evaluative.</strong> Co-citation and coupling measure relatedness, not quality. A highly co-cited paper is intellectually central, which is not the same as excellent or correct <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="cocit-pitfalls" class="section level2" number="16.8">
+<div class="section level2" id="cocit-pitfalls" number="16.8">
 <h2>
-<span class="header-section-number">16.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#cocit-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#cocit-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-15" class="section level2 callout callout-stop" number="16.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-15" number="16.9">
 <h2>
-<span class="header-section-number">16.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-15"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-15"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -902,9 +909,9 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <strong>Treating coupling as dynamic.</strong> Bibliographic coupling strength is fixed at publication. Do not interpret changes in coupling networks over time as evolving relationships — they reflect changes in the corpus, not the links.</li>
 </ul>
 </div>
-<div id="cocit-exercises" class="section level2" number="16.10">
+<div class="section level2" id="cocit-exercises" number="16.10">
 <h2>
-<span class="header-section-number">16.10</span> Exercises<a class="anchor" aria-label="anchor" href="#cocit-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.10</span> Exercises<a aria-label="anchor" class="anchor" href="#cocit-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Cosine normalisation.</strong> Compute cosine-normalised co-citation strengths instead of raw counts. How does the network structure change? Do the same core documents emerge?</p></li>
@@ -913,15 +920,15 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <li><p><strong>Identifying research fronts.</strong> Use bibliographic coupling communities to identify research fronts. For each community, list the three most frequent keywords or title words. Do the fronts correspond to recognisable subfields?</p></li>
 </ol>
 </div>
-<div id="id_16-solutions" class="section level2 callout callout-ok" number="16.11">
+<div class="section level2 callout callout-ok" id="id_16-solutions" number="16.11">
 <h2>
-<span class="header-section-number">16.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_16-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_16-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="cocit-reading" class="section level2" number="16.12">
+<div class="section level2" id="cocit-reading" number="16.12">
 <h2>
-<span class="header-section-number">16.12</span> Further reading<a class="anchor" aria-label="anchor" href="#cocit-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.12</span> Further reading<a aria-label="anchor" class="anchor" href="#cocit-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -936,9 +943,9 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> — The intellectual origins of citation indexing.</li>
 </ul>
 </div>
-<div id="cocit-sessioninfo" class="section level2" number="16.13">
+<div class="section level2" id="cocit-sessioninfo" number="16.13">
 <h2>
-<span class="header-section-number">16.13</span> Session info<a class="anchor" aria-label="anchor" href="#cocit-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">16.13</span> Session info<a aria-label="anchor" class="anchor" href="#cocit-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1007,16 +1014,14 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 #&gt; [100] parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
 #&gt; [103] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
 #&gt; [106] rlang_1.3.0            fastmatch_1.1-8</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1098,12 +1103,12 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></div>
 <div class="next"><a href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#co-citation-and-bibliographic-coupling"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></li>
 <li><a class="nav-link" href="#cocit-objectives"><span class="header-section-number">16.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#cocit-setup"><span class="header-section-number">16.2</span> Setup</a></li>
@@ -1127,29 +1132,23 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <li><a class="nav-link" href="#cocit-reading"><span class="header-section-number">16.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#cocit-sessioninfo"><span class="header-section-number">16.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/16-co-citation-bibliographic-coupling.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/16-co-citation-bibliographic-coupling.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/16-co-citation-bibliographic-coupling.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/16-co-citation-bibliographic-coupling.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

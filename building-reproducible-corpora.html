@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 7 Building Reproducible Corpora | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 7 Building Reproducible Corpora | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/building-reproducible-corpora.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 7 Building Reproducible Corpora | Scientometrics in R">
-<meta name="twitter:description" content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 7 Building Reproducible Corpora | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/building-reproducible-corpora.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 7 Building Reproducible Corpora | Scientometrics in R" name="twitter:title"/>
+<meta content="7.1 Learning objectives After completing this chapter, you will be able to: Deduplicate bibliographic records by DOI and by approximate title matching Resolve identifiers across databases..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="building-reproducible-corpora" class="section level1" number="7">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="building-reproducible-corpora" number="7">
 <h1>
-<span class="header-section-number">7</span> Building Reproducible Corpora<a class="anchor" aria-label="anchor" href="#building-reproducible-corpora"><i class="fas fa-link"></i></a>
-</h1>
-<div id="corpora-objectives" class="section level2" number="7.1">
+<span class="header-section-number">7</span> Building Reproducible Corpora<a aria-label="anchor" class="anchor" href="#building-reproducible-corpora"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/building-reproducible-corpora.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/building-reproducible-corpora.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="corpora-objectives" number="7.1">
 <h2>
-<span class="header-section-number">7.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#corpora-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#corpora-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Save a clean corpus in an efficient format (Parquet) for downstream analysis</li>
 </ul>
 </div>
-<div id="corpora-setup" class="section level2" number="7.2">
+<div class="section level2" id="corpora-setup" number="7.2">
 <h2>
-<span class="header-section-number">7.2</span> Setup<a class="anchor" aria-label="anchor" href="#corpora-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.2</span> Setup<a aria-label="anchor" class="anchor" href="#corpora-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -196,22 +203,22 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="corpora-background" class="section level2" number="7.3">
+<div class="section level2" id="corpora-background" number="7.3">
 <h2>
-<span class="header-section-number">7.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#corpora-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#corpora-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Raw bibliographic data is messy. Records from different sources may describe the same paper with different metadata, the same author under different name variants, and the same institution under dozens of spelling variations. Building a clean, reproducible corpus requires systematic attention to three problems:</p>
 <p><strong>Deduplication.</strong> When merging data from multiple sources, the same publication may appear multiple times. DOI-based deduplication is the gold standard, but not all records have DOIs. Fuzzy title matching provides a fallback but is error-prone for short or generic titles.</p>
 <p><strong>Author disambiguation.</strong> “J. Smith” could be dozens of different people. OpenAlex uses machine-learning-based author clustering to assign persistent author IDs, but errors persist — especially for common names and authors who change institutions <span class="citation">(<a href="references.html#ref-priem2022">Priem et al. 2022</a>)</span>.</p>
 <p><strong>Affiliation standardization.</strong> Institutional names appear in countless variants (“MIT”, “Massachusetts Institute of Technology”, “Mass. Inst. Tech.”). The Research Organization Registry (ROR) provides a curated set of persistent identifiers for research organizations. OpenAlex maps many affiliations to ROR IDs, but coverage is incomplete.</p>
 </div>
-<div id="corpora-example" class="section level2" number="7.4">
+<div class="section level2" id="corpora-example" number="7.4">
 <h2>
-<span class="header-section-number">7.4</span> Worked example<a class="anchor" aria-label="anchor" href="#corpora-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4</span> Worked example<a aria-label="anchor" class="anchor" href="#corpora-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="fetching-raw-data" class="section level3" number="7.4.1">
+<div class="section level3" id="fetching-raw-data" number="7.4.1">
 <h3>
-<span class="header-section-number">7.4.1</span> Fetching raw data<a class="anchor" aria-label="anchor" href="#fetching-raw-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.1</span> Fetching raw data<a aria-label="anchor" class="anchor" href="#fetching-raw-data"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
@@ -225,9 +232,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Raw records: {nrow(works)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Raw records: 300</code></pre>
 </div>
-<div id="doi-based-deduplication" class="section level3" number="7.4.2">
+<div class="section level3" id="doi-based-deduplication" number="7.4.2">
 <h3>
-<span class="header-section-number">7.4.2</span> DOI-based deduplication<a class="anchor" aria-label="anchor" href="#doi-based-deduplication"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.2</span> DOI-based deduplication<a aria-label="anchor" class="anchor" href="#doi-based-deduplication"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_deduped</span> <span class="op">&lt;-</span> <span class="fu">dedupe_by_doi</span><span class="op">(</span><span class="va">works</span><span class="op">)</span></span>
@@ -237,9 +244,9 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Removed: {nrow(works) - nrow(works_deduped)} duplicates\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Removed: 0 duplicates</code></pre>
 </div>
-<div id="fuzzy-title-deduplication" class="section level3" number="7.4.3">
+<div class="section level3" id="fuzzy-title-deduplication" number="7.4.3">
 <h3>
-<span class="header-section-number">7.4.3</span> Fuzzy title deduplication<a class="anchor" aria-label="anchor" href="#fuzzy-title-deduplication"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.3</span> Fuzzy title deduplication<a aria-label="anchor" class="anchor" href="#fuzzy-title-deduplication"><i class="fas fa-link"></i></a>
 </h3>
 <p>For records without DOIs, we use approximate string matching.</p>
 <div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
@@ -257,9 +264,9 @@
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code>#&gt; Potential fuzzy duplicates (no DOI): 0 pairs</code></pre>
 </div>
-<div id="affiliation-extraction-and-ror-mapping" class="section level3" number="7.4.4">
+<div class="section level3" id="affiliation-extraction-and-ror-mapping" number="7.4.4">
 <h3>
-<span class="header-section-number">7.4.4</span> Affiliation extraction and ROR mapping<a class="anchor" aria-label="anchor" href="#affiliation-extraction-and-ror-mapping"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.4</span> Affiliation extraction and ROR mapping<a aria-label="anchor" class="anchor" href="#affiliation-extraction-and-ror-mapping"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">affiliations</span> <span class="op">&lt;-</span> <span class="va">works_deduped</span> <span class="op">|&gt;</span></span>
@@ -295,9 +302,9 @@
 #&gt; 14 Indian Institute of Technology Guwahati              8
 #&gt; 15 State Key Laboratory of Kidney Diseases              8</code></pre>
 </div>
-<div id="saving-as-parquet" class="section level3" number="7.4.5">
+<div class="section level3" id="saving-as-parquet" number="7.4.5">
 <h3>
-<span class="header-section-number">7.4.5</span> Saving as Parquet<a class="anchor" aria-label="anchor" href="#saving-as-parquet"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.5</span> Saving as Parquet<a aria-label="anchor" class="anchor" href="#saving-as-parquet"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corpus_clean</span> <span class="op">&lt;-</span> <span class="va">works_deduped</span> <span class="op">|&gt;</span></span>
@@ -310,9 +317,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Saved {nrow(corpus_clean)} records to {out_path}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Saved 300 records to /home/runner/work/scientometrics-in-r/scientometrics-in-r/_freeze/exports/corpus_sample.parquet</code></pre>
 </div>
-<div id="visualization-3" class="section level3" number="7.4.6">
+<div class="section level3" id="visualization-3" number="7.4.6">
 <h3>
-<span class="header-section-number">7.4.6</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-3"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.4.6</span> Visualization<a aria-label="anchor" class="anchor" href="#visualization-3"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top_institutions</span> <span class="op">|&gt;</span></span>
@@ -322,16 +329,16 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Publications"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:07-fig-corpora-institutions"></span>
-<img src="scientometrics-in-r_files/figure-html/07-fig-corpora-institutions-1.png" alt="Horizontal bar chart showing the 15 most frequent institutional affiliations in the cleaned corpus." width="90%"><p class="caption">
+<span id="fig:07-fig-corpora-institutions" style="display:block;"></span>
+<img alt="Horizontal bar chart showing the 15 most frequent institutional affiliations in the cleaned corpus." src="scientometrics-in-r_files/figure-html/07-fig-corpora-institutions-1.png" width="90%"/><p class="caption">
 Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 </p>
 </div>
 </div>
 </div>
-<div id="corpora-diagnostics" class="section level2" number="7.5">
+<div class="section level2" id="corpora-diagnostics" number="7.5">
 <h2>
-<span class="header-section-number">7.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#corpora-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#corpora-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>After cleaning:</p>
 <ul>
@@ -345,14 +352,14 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 <strong>Parquet file size</strong>: Parquet is columnar and compressed. A 10,000-record corpus typically compresses to under 1 MB.</li>
 </ul>
 </div>
-<div id="corpora-limitations" class="section level2" number="7.6">
+<div class="section level2" id="corpora-limitations" number="7.6">
 <h2>
-<span class="header-section-number">7.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#corpora-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#corpora-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-6" class="section level2 callout callout-warn" number="7.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-6" number="7.7">
 <h2>
-<span class="header-section-number">7.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-6"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -363,14 +370,14 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 <strong>Affiliation data is noisy.</strong> Even with ROR mapping, temporary affiliations, joint appointments, and name changes create ambiguity. Never use affiliation data as ground truth without validation <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="corpora-pitfalls" class="section level2" number="7.8">
+<div class="section level2" id="corpora-pitfalls" number="7.8">
 <h2>
-<span class="header-section-number">7.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#corpora-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#corpora-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-6" class="section level2 callout callout-stop" number="7.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-6" number="7.9">
 <h2>
-<span class="header-section-number">7.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-6"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-6"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -383,9 +390,9 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 <strong>Not documenting cleaning steps.</strong> Every deduplication or name-standardization step should be logged for reproducibility.</li>
 </ul>
 </div>
-<div id="corpora-exercises" class="section level2" number="7.10">
+<div class="section level2" id="corpora-exercises" number="7.10">
 <h2>
-<span class="header-section-number">7.10</span> Exercises<a class="anchor" aria-label="anchor" href="#corpora-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.10</span> Exercises<a aria-label="anchor" class="anchor" href="#corpora-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>DOI coverage by year.</strong> Compute the DOI coverage rate by publication year in the sample. Is there a trend?</p></li>
@@ -393,15 +400,15 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 <li><p><strong>ROR lookup.</strong> Use the ROR API to resolve the top 5 institutions in your corpus to their official ROR identifiers.</p></li>
 </ol>
 </div>
-<div id="id_07-solutions" class="section level2 callout callout-ok" number="7.11">
+<div class="section level2 callout callout-ok" id="id_07-solutions" number="7.11">
 <h2>
-<span class="header-section-number">7.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_07-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_07-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="corpora-reading" class="section level2" number="7.12">
+<div class="section level2" id="corpora-reading" number="7.12">
 <h2>
-<span class="header-section-number">7.12</span> Further reading<a class="anchor" aria-label="anchor" href="#corpora-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.12</span> Further reading<a aria-label="anchor" class="anchor" href="#corpora-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -412,9 +419,9 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 <span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> — The Leiden Manifesto; principles 4 and 5 emphasise data transparency and verifiability.</li>
 </ul>
 </div>
-<div id="corpora-sessioninfo" class="section level2" number="7.13">
+<div class="section level2" id="corpora-sessioninfo" number="7.13">
 <h2>
-<span class="header-section-number">7.13</span> Session info<a class="anchor" aria-label="anchor" href="#corpora-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.13</span> Session info<a aria-label="anchor" class="anchor" href="#corpora-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -481,16 +488,14 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 #&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
 #&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
 #&gt; [103] bit64_4.8.6</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -572,12 +577,12 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="parsing-native-exports.html"><span class="header-section-number">6</span> Parsing Native Exports</a></div>
 <div class="next"><a href="working-with-full-text.html"><span class="header-section-number">8</span> Working with Full Text</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#building-reproducible-corpora"><span class="header-section-number">7</span> Building Reproducible Corpora</a></li>
 <li><a class="nav-link" href="#corpora-objectives"><span class="header-section-number">7.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#corpora-setup"><span class="header-section-number">7.2</span> Setup</a></li>
@@ -602,29 +607,23 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 <li><a class="nav-link" href="#corpora-reading"><span class="header-section-number">7.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#corpora-sessioninfo"><span class="header-section-number">7.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/07-building-reproducible-corpora.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/07-building-reproducible-corpora.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/07-building-reproducible-corpora.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/07-building-reproducible-corpora.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

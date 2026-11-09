@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 40 Case Study 3: Journal Portfolio Analysis | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="40.1 Objective Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 40 Case Study 3: Journal Portfolio Analysis | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/case-study-3-journal-portfolio-analysis.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="40.1 Objective Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 40 Case Study 3: Journal Portfolio Analysis | Scientometrics in R">
-<meta name="twitter:description" content="40.1 Objective Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="40.1 Objective Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 40 Case Study 3: Journal Portfolio Analysis | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/case-study-3-journal-portfolio-analysis.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="40.1 Objective Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 40 Case Study 3: Journal Portfolio Analysis | Scientometrics in R" name="twitter:title"/>
+<meta content="40.1 Objective Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,25 +165,24 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="case-study-3-journal-portfolio-analysis" class="section level1" number="40">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="case-study-3-journal-portfolio-analysis" number="40">
 <h1>
-<span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis<a class="anchor" aria-label="anchor" href="#case-study-3-journal-portfolio-analysis"><i class="fas fa-link"></i></a>
-</h1>
-<div id="objective-2" class="section level2" number="40.1">
+<span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis<a aria-label="anchor" class="anchor" href="#case-study-3-journal-portfolio-analysis"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/case-study-3-journal-portfolio-analysis.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/case-study-3-journal-portfolio-analysis.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="objective-2" number="40.1">
 <h2>
-<span class="header-section-number">40.1</span> Objective<a class="anchor" aria-label="anchor" href="#objective-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.1</span> Objective<a aria-label="anchor" class="anchor" href="#objective-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Compare samples from three information-science journals using cumulative citation distributions, publication-cohort summaries, and assigned topics as a starting point for collection review.</p>
 </div>
-<div id="setup-2" class="section level2" number="40.2">
+<div class="section level2" id="setup-2" number="40.2">
 <h2>
-<span class="header-section-number">40.2</span> Setup<a class="anchor" aria-label="anchor" href="#setup-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.2</span> Setup<a aria-label="anchor" class="anchor" href="#setup-2"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -190,9 +197,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="data-acquisition-2" class="section level2" number="40.3">
+<div class="section level2" id="data-acquisition-2" number="40.3">
 <h2>
-<span class="header-section-number">40.3</span> Data acquisition<a class="anchor" aria-label="anchor" href="#data-acquisition-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.3</span> Data acquisition<a aria-label="anchor" class="anchor" href="#data-acquisition-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>The source identifiers resolve to <a href="https://api.openalex.org/sources/S148561398">Scientometrics</a>, <a href="https://api.openalex.org/sources/S205292342">Journal of Informetrics</a>, and the <a href="https://api.openalex.org/sources/S4210197613">Journal of the Association for Information Science and Technology</a> (JASIST). These OpenAlex source records were checked on 2026-10-30. Historical titles of JASIST have separate source records and should not be substituted for this recent publication window.</p>
 <div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
@@ -230,9 +237,9 @@
 <span><span class="va">journal_data</span> <span class="op">&lt;-</span> <span class="va">journals</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>works <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">source_id</span>, <span class="va">fetch_journal</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="citation-distributions-in-the-samples" class="section level2" number="40.4">
+<div class="section level2" id="citation-distributions-in-the-samples" number="40.4">
 <h2>
-<span class="header-section-number">40.4</span> Citation distributions in the samples<a class="anchor" aria-label="anchor" href="#citation-distributions-in-the-samples"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.4</span> Citation distributions in the samples<a aria-label="anchor" class="anchor" href="#citation-distributions-in-the-samples"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>cited_by_count</code> is the cumulative number of citations recorded when the data were retrieved, including citations received after 2023. It does not restrict citing papers to the sampled publication years. The h-index below describes only the returned sample, and all summaries remain unnormalised for field and publication year.</p>
 <div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
@@ -247,8 +254,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">NULL</span>, y <span class="op">=</span> <span class="st">"Cumulative citations + 1 (log10 scale)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:cs03-fig-cs03-impact"></span>
-<img src="scientometrics-in-r_files/figure-html/cs03-fig-cs03-impact-1.png" alt="Box plots comparing cumulative citations plus one across the three journal samples." width="90%"><p class="caption">
+<span id="fig:cs03-fig-cs03-impact" style="display:block;"></span>
+<img alt="Box plots comparing cumulative citations plus one across the three journal samples." src="scientometrics-in-r_files/figure-html/cs03-fig-cs03-impact-1.png" width="90%"/><p class="caption">
 Figure 40.1: Cumulative citation distributions in the sampled articles, with one added before log scaling.
 </p>
 </div>
@@ -717,43 +724,43 @@ Figure 40.1: Cumulative citation distributions in the sampled articles, with one
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="journal">Journal</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sampled_articles">Sampled articles</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cites">Mean cumulative citations</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_cites">Median cumulative citations</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="sample_h_index">Sample h-index</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="journal" rowspan="1" scope="col">Journal</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="sampled_articles" rowspan="1" scope="col">Sampled articles</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="mean_cites" rowspan="1" scope="col">Mean cumulative citations</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="median_cites" rowspan="1" scope="col">Median cumulative citations</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="sample_h_index" rowspan="1" scope="col">Sample h-index</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="journal" class="gt_row gt_left">J. Informetrics</td>
-<td headers="sampled_articles" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">40.0</td>
-<td headers="median_cites" class="gt_row gt_right">19</td>
-<td headers="sample_h_index" class="gt_row gt_right">51</td>
+<td class="gt_row gt_left" headers="journal">J. Informetrics</td>
+<td class="gt_row gt_right" headers="sampled_articles">300</td>
+<td class="gt_row gt_right" headers="mean_cites">39.4</td>
+<td class="gt_row gt_right" headers="median_cites">19</td>
+<td class="gt_row gt_right" headers="sample_h_index">51</td>
 </tr>
 <tr>
-<td headers="journal" class="gt_row gt_left">JASIST</td>
-<td headers="sampled_articles" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">29.4</td>
-<td headers="median_cites" class="gt_row gt_right">20</td>
-<td headers="sample_h_index" class="gt_row gt_right">50</td>
+<td class="gt_row gt_left" headers="journal">JASIST</td>
+<td class="gt_row gt_right" headers="sampled_articles">300</td>
+<td class="gt_row gt_right" headers="mean_cites">29.4</td>
+<td class="gt_row gt_right" headers="median_cites">20</td>
+<td class="gt_row gt_right" headers="sample_h_index">50</td>
 </tr>
 <tr>
-<td headers="journal" class="gt_row gt_left">Scientometrics</td>
-<td headers="sampled_articles" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">32.3</td>
-<td headers="median_cites" class="gt_row gt_right">17</td>
-<td headers="sample_h_index" class="gt_row gt_right">44</td>
+<td class="gt_row gt_left" headers="journal">Scientometrics</td>
+<td class="gt_row gt_right" headers="sampled_articles">300</td>
+<td class="gt_row gt_right" headers="mean_cites">32.4</td>
+<td class="gt_row gt_right" headers="median_cites">17</td>
+<td class="gt_row gt_right" headers="sample_h_index">45</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="publication-cohort-comparison" class="section level2" number="40.5">
+<div class="section level2" id="publication-cohort-comparison" number="40.5">
 <h2>
-<span class="header-section-number">40.5</span> Publication-cohort comparison<a class="anchor" aria-label="anchor" href="#publication-cohort-comparison"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.5</span> Publication-cohort comparison<a aria-label="anchor" class="anchor" href="#publication-cohort-comparison"><i class="fas fa-link"></i></a>
 </h2>
 <p>The following plot compares different publication cohorts at retrieval. Older cohorts have had more time to receive citations, and their composition may also differ. It is not a trajectory following the same articles over time, so it cannot establish citation-aging curves or citation half-lives. That requires time-resolved citation counts and an explicit observation window.</p>
 <div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
@@ -770,15 +777,15 @@ Figure 40.1: Cumulative citation distributions in the sampled articles, with one
 <span>       colour <span class="op">=</span> <span class="st">"Journal"</span>, size <span class="op">=</span> <span class="st">"Sampled articles"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:cs03-fig-cs03-aging"></span>
-<img src="scientometrics-in-r_files/figure-html/cs03-fig-cs03-aging-1.png" alt="Lines compare mean cumulative citations for different publication cohorts, with larger points indicating more sampled articles." width="90%"><p class="caption">
+<span id="fig:cs03-fig-cs03-aging" style="display:block;"></span>
+<img alt="Lines compare mean cumulative citations for different publication cohorts, with larger points indicating more sampled articles." src="scientometrics-in-r_files/figure-html/cs03-fig-cs03-aging-1.png" width="90%"/><p class="caption">
 Figure 40.2: Mean cumulative citations by publication year in each journal sample; point size shows cohort sample size.
 </p>
 </div>
 </div>
-<div id="topical-coverage" class="section level2" number="40.6">
+<div class="section level2" id="topical-coverage" number="40.6">
 <h2>
-<span class="header-section-number">40.6</span> Topical coverage<a class="anchor" aria-label="anchor" href="#topical-coverage"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.6</span> Topical coverage<a aria-label="anchor" class="anchor" href="#topical-coverage"><i class="fas fa-link"></i></a>
 </h2>
 <p>Count each article once per assigned topic. The flattened <code>topics</code> table also contains the topics’ parent subfields, fields, and domains; retain only topic identifiers (<code>T...</code>). An article can contribute to several topics, while articles without topic assignments do not contribute to this chart; topic counts therefore need not sum to the number of sampled articles.</p>
 <div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
@@ -806,15 +813,15 @@ Figure 40.2: Mean cumulative citations by publication year in each journal sampl
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sampled articles assigned to topic"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span>base_size <span class="op">=</span> <span class="fl">9</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:cs03-fig-cs03-topics"></span>
-<img src="scientometrics-in-r_files/figure-html/cs03-fig-cs03-topics-1.png" alt="Faceted bar chart comparing numbers of sampled articles assigned to the most frequent topics in each journal." width="90%"><p class="caption">
+<span id="fig:cs03-fig-cs03-topics" style="display:block;"></span>
+<img alt="Faceted bar chart comparing numbers of sampled articles assigned to the most frequent topics in each journal." src="scientometrics-in-r_files/figure-html/cs03-fig-cs03-topics-1.png" width="90%"/><p class="caption">
 Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
 </p>
 </div>
 </div>
-<div id="reading-the-results-1" class="section level2" number="40.7">
+<div class="section level2" id="reading-the-results-1" number="40.7">
 <h2>
-<span class="header-section-number">40.7</span> Reading the results<a class="anchor" aria-label="anchor" href="#reading-the-results-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.7</span> Reading the results<a aria-label="anchor" class="anchor" href="#reading-the-results-1"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>
@@ -825,9 +832,9 @@ Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
 <strong>Assigned topics</strong>: Inspect overlap and differences in the displayed topics, then review representative articles before drawing conclusions about collection coverage.</li>
 </ol>
 </div>
-<div id="lessons-learned-2" class="section level2" number="40.8">
+<div class="section level2" id="lessons-learned-2" number="40.8">
 <h2>
-<span class="header-section-number">40.8</span> Lessons learned<a class="anchor" aria-label="anchor" href="#lessons-learned-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">40.8</span> Lessons learned<a aria-label="anchor" class="anchor" href="#lessons-learned-2"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Journal comparison requires multiple dimensions; no single metric tells the full story.</li>
@@ -838,11 +845,10 @@ Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -924,12 +930,12 @@ Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="case-study-2-institutional-benchmarking.html"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></div>
 <div class="next"><a href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#case-study-3-journal-portfolio-analysis"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></li>
 <li><a class="nav-link" href="#objective-2"><span class="header-section-number">40.1</span> Objective</a></li>
 <li><a class="nav-link" href="#setup-2"><span class="header-section-number">40.2</span> Setup</a></li>
@@ -940,29 +946,23 @@ Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
 <li><a class="nav-link" href="#reading-the-results-1"><span class="header-section-number">40.7</span> Reading the results</a></li>
 <li><a class="nav-link" href="#lessons-learned-2"><span class="header-section-number">40.8</span> Lessons learned</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/case-studies/cs03-journal-portfolio.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/case-studies/cs03-journal-portfolio.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/case-studies/cs03-journal-portfolio.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/case-studies/cs03-journal-portfolio.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

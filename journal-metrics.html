@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 11 Journal Metrics | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 11 Journal Metrics | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/journal-metrics.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 11 Journal Metrics | Scientometrics in R">
-<meta name="twitter:description" content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 11 Journal Metrics | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/journal-metrics.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 11 Journal Metrics | Scientometrics in R" name="twitter:title"/>
+<meta content="11.1 Learning objectives After completing this chapter, you will be able to: Explain the citation windows and data requirements of JIF, CiteScore and SNIP Explain why network-based journal metrics..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="journal-metrics" class="section level1" number="11">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="journal-metrics" number="11">
 <h1>
-<span class="header-section-number">11</span> Journal Metrics<a class="anchor" aria-label="anchor" href="#journal-metrics"><i class="fas fa-link"></i></a>
-</h1>
-<div id="jmetrics-objectives" class="section level2" number="11.1">
+<span class="header-section-number">11</span> Journal Metrics<a aria-label="anchor" class="anchor" href="#journal-metrics"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/journal-metrics.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/journal-metrics.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="jmetrics-objectives" number="11.1">
 <h2>
-<span class="header-section-number">11.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#jmetrics-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#jmetrics-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Evaluate journals using appropriate evidence rather than a single number</li>
 </ul>
 </div>
-<div id="jmetrics-setup" class="section level2" number="11.2">
+<div class="section level2" id="jmetrics-setup" number="11.2">
 <h2>
-<span class="header-section-number">11.2</span> Setup<a class="anchor" aria-label="anchor" href="#jmetrics-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.2</span> Setup<a aria-label="anchor" class="anchor" href="#jmetrics-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -196,9 +203,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="jmetrics-background" class="section level2" number="11.3">
+<div class="section level2" id="jmetrics-background" number="11.3">
 <h2>
-<span class="header-section-number">11.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#jmetrics-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#jmetrics-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Journal-level metrics summarise particular aspects of a journal’s citation
 record. The two-year <strong>Journal Impact Factor</strong> (JIF) for year <em>t</em> counts citations
@@ -229,13 +236,13 @@ implements nor estimates JIF, CiteScore, SNIP, SJR or Eigenfactor.</p>
 article’s quality. Journal averages cannot establish the quality of a particular
 paper, and citation distributions within journals can be highly uneven <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</p>
 </div>
-<div id="jmetrics-example" class="section level2" number="11.4">
+<div class="section level2" id="jmetrics-example" number="11.4">
 <h2>
-<span class="header-section-number">11.4</span> Worked example<a class="anchor" aria-label="anchor" href="#jmetrics-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4</span> Worked example<a aria-label="anchor" class="anchor" href="#jmetrics-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="selecting-journals" class="section level3" number="11.4.1">
+<div class="section level3" id="selecting-journals" number="11.4.1">
 <h3>
-<span class="header-section-number">11.4.1</span> Selecting journals<a class="anchor" aria-label="anchor" href="#selecting-journals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.1</span> Selecting journals<a aria-label="anchor" class="anchor" href="#selecting-journals"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use five journals in information science and research evaluation. Source
 identities were checked against OpenAlex on 30 October 2026. The JASIST record
@@ -252,9 +259,9 @@ can have separate source records.</p>
 <span>  <span class="st">"Res Evaluation"</span>,   <span class="st">"S16793705"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="fetching-a-publication-cohort" class="section level3" number="11.4.2">
+<div class="section level3" id="fetching-a-publication-cohort" number="11.4.2">
 <h3>
-<span class="header-section-number">11.4.2</span> Fetching a publication cohort<a class="anchor" aria-label="anchor" href="#fetching-a-publication-cohort"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.2</span> Fetching a publication cohort<a aria-label="anchor" class="anchor" href="#fetching-a-publication-cohort"><i class="fas fa-link"></i></a>
 </h3>
 <p>Fetch records classified as articles and published in 2021–2022. Their
 <code>cited_by_count</code> values are <strong>cumulative citations at retrieval</strong>, not citations
@@ -283,9 +290,9 @@ journal output.</p>
 citations. An empty result stops the worked comparison; it is not evidence that
 a journal has no output.</p>
 </div>
-<div id="cumulative-citation-summaries" class="section level3" number="11.4.3">
+<div class="section level3" id="cumulative-citation-summaries" number="11.4.3">
 <h3>
-<span class="header-section-number">11.4.3</span> Cumulative citation summaries<a class="anchor" aria-label="anchor" href="#cumulative-citation-summaries"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.3</span> Cumulative citation summaries<a aria-label="anchor" class="anchor" href="#cumulative-citation-summaries"><i class="fas fa-link"></i></a>
 </h3>
 <p>The citation mean uses only observed citation counts, with that denominator
 reported. Missing counts are not zero. A total over observed values is not a
@@ -782,63 +789,63 @@ complete journal total when records or counts are missing.</p>
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">Journal</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_articles">Retrieved articles (2021–22)</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_citations_observed">Observed citation counts</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="observed_citation_sum">Sum of observed cumulative citations</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cumulative_citations">Mean cumulative citations</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_cumulative_citations">Median cumulative citations</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="short_name" rowspan="1" scope="col">Journal</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_articles" rowspan="1" scope="col">Retrieved articles (2021–22)</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_citations_observed" rowspan="1" scope="col">Observed citation counts</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="observed_citation_sum" rowspan="1" scope="col">Sum of observed cumulative citations</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="mean_cumulative_citations" rowspan="1" scope="col">Mean cumulative citations</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="median_cumulative_citations" rowspan="1" scope="col">Median cumulative citations</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="short_name" class="gt_row gt_left">J Informetrics</td>
-<td headers="n_articles" class="gt_row gt_right">185</td>
-<td headers="n_citations_observed" class="gt_row gt_right">185</td>
-<td headers="observed_citation_sum" class="gt_row gt_right">4062</td>
-<td headers="mean_cumulative_citations" class="gt_row gt_right">21.96</td>
-<td headers="median_cumulative_citations" class="gt_row gt_right">17.00</td>
+<td class="gt_row gt_left" headers="short_name">J Informetrics</td>
+<td class="gt_row gt_right" headers="n_articles">185</td>
+<td class="gt_row gt_right" headers="n_citations_observed">185</td>
+<td class="gt_row gt_right" headers="observed_citation_sum">4062</td>
+<td class="gt_row gt_right" headers="mean_cumulative_citations">21.96</td>
+<td class="gt_row gt_right" headers="median_cumulative_citations">17.00</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">JASIST</td>
-<td headers="n_articles" class="gt_row gt_right">211</td>
-<td headers="n_citations_observed" class="gt_row gt_right">211</td>
-<td headers="observed_citation_sum" class="gt_row gt_right">5601</td>
-<td headers="mean_cumulative_citations" class="gt_row gt_right">26.55</td>
-<td headers="median_cumulative_citations" class="gt_row gt_right">17.00</td>
+<td class="gt_row gt_left" headers="short_name">JASIST</td>
+<td class="gt_row gt_right" headers="n_articles">211</td>
+<td class="gt_row gt_right" headers="n_citations_observed">211</td>
+<td class="gt_row gt_right" headers="observed_citation_sum">5601</td>
+<td class="gt_row gt_right" headers="mean_cumulative_citations">26.55</td>
+<td class="gt_row gt_right" headers="median_cumulative_citations">17.00</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Quant Sci Stud</td>
-<td headers="n_articles" class="gt_row gt_right">128</td>
-<td headers="n_citations_observed" class="gt_row gt_right">128</td>
-<td headers="observed_citation_sum" class="gt_row gt_right">4621</td>
-<td headers="mean_cumulative_citations" class="gt_row gt_right">36.10</td>
-<td headers="median_cumulative_citations" class="gt_row gt_right">14.00</td>
+<td class="gt_row gt_left" headers="short_name">Quant Sci Stud</td>
+<td class="gt_row gt_right" headers="n_articles">128</td>
+<td class="gt_row gt_right" headers="n_citations_observed">128</td>
+<td class="gt_row gt_right" headers="observed_citation_sum">4621</td>
+<td class="gt_row gt_right" headers="mean_cumulative_citations">36.10</td>
+<td class="gt_row gt_right" headers="median_cumulative_citations">14.00</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Res Evaluation</td>
-<td headers="n_articles" class="gt_row gt_right">84</td>
-<td headers="n_citations_observed" class="gt_row gt_right">84</td>
-<td headers="observed_citation_sum" class="gt_row gt_right">1803</td>
-<td headers="mean_cumulative_citations" class="gt_row gt_right">21.46</td>
-<td headers="median_cumulative_citations" class="gt_row gt_right">14.00</td>
+<td class="gt_row gt_left" headers="short_name">Res Evaluation</td>
+<td class="gt_row gt_right" headers="n_articles">84</td>
+<td class="gt_row gt_right" headers="n_citations_observed">84</td>
+<td class="gt_row gt_right" headers="observed_citation_sum">1803</td>
+<td class="gt_row gt_right" headers="mean_cumulative_citations">21.46</td>
+<td class="gt_row gt_right" headers="median_cumulative_citations">14.00</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Scientometrics</td>
-<td headers="n_articles" class="gt_row gt_right">747</td>
-<td headers="n_citations_observed" class="gt_row gt_right">747</td>
-<td headers="observed_citation_sum" class="gt_row gt_right">19690</td>
-<td headers="mean_cumulative_citations" class="gt_row gt_right">26.36</td>
-<td headers="median_cumulative_citations" class="gt_row gt_right">15.00</td>
+<td class="gt_row gt_left" headers="short_name">Scientometrics</td>
+<td class="gt_row gt_right" headers="n_articles">747</td>
+<td class="gt_row gt_right" headers="n_citations_observed">747</td>
+<td class="gt_row gt_right" headers="observed_citation_sum">19690</td>
+<td class="gt_row gt_right" headers="mean_cumulative_citations">26.36</td>
+<td class="gt_row gt_right" headers="median_cumulative_citations">15.00</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="recorded-reference-counts" class="section level3" number="11.4.4">
+<div class="section level3" id="recorded-reference-counts" number="11.4.4">
 <h3>
-<span class="header-section-number">11.4.4</span> Recorded reference counts<a class="anchor" aria-label="anchor" href="#recorded-reference-counts"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.4</span> Recorded reference counts<a aria-label="anchor" class="anchor" href="#recorded-reference-counts"><i class="fas fa-link"></i></a>
 </h3>
 <p><code>referenced_works_count</code> describes the references recorded for the fetched
 journal articles. It is not the reference-list information for papers citing
@@ -1301,51 +1308,51 @@ citation potential.</p>
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">Journal</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_articles">Retrieved articles</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_references_observed">Observed reference counts</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_recorded_references">Median recorded references</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="short_name" rowspan="1" scope="col">Journal</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_articles" rowspan="1" scope="col">Retrieved articles</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_references_observed" rowspan="1" scope="col">Observed reference counts</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="median_recorded_references" rowspan="1" scope="col">Median recorded references</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="short_name" class="gt_row gt_left">J Informetrics</td>
-<td headers="n_articles" class="gt_row gt_right">185</td>
-<td headers="n_references_observed" class="gt_row gt_right">185</td>
-<td headers="median_recorded_references" class="gt_row gt_right">59</td>
+<td class="gt_row gt_left" headers="short_name">J Informetrics</td>
+<td class="gt_row gt_right" headers="n_articles">185</td>
+<td class="gt_row gt_right" headers="n_references_observed">185</td>
+<td class="gt_row gt_right" headers="median_recorded_references">59</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">JASIST</td>
-<td headers="n_articles" class="gt_row gt_right">211</td>
-<td headers="n_references_observed" class="gt_row gt_right">211</td>
-<td headers="median_recorded_references" class="gt_row gt_right">50</td>
+<td class="gt_row gt_left" headers="short_name">JASIST</td>
+<td class="gt_row gt_right" headers="n_articles">211</td>
+<td class="gt_row gt_right" headers="n_references_observed">211</td>
+<td class="gt_row gt_right" headers="median_recorded_references">50</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Quant Sci Stud</td>
-<td headers="n_articles" class="gt_row gt_right">128</td>
-<td headers="n_references_observed" class="gt_row gt_right">128</td>
-<td headers="median_recorded_references" class="gt_row gt_right">47</td>
+<td class="gt_row gt_left" headers="short_name">Quant Sci Stud</td>
+<td class="gt_row gt_right" headers="n_articles">128</td>
+<td class="gt_row gt_right" headers="n_references_observed">128</td>
+<td class="gt_row gt_right" headers="median_recorded_references">47</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Res Evaluation</td>
-<td headers="n_articles" class="gt_row gt_right">84</td>
-<td headers="n_references_observed" class="gt_row gt_right">84</td>
-<td headers="median_recorded_references" class="gt_row gt_right">46</td>
+<td class="gt_row gt_left" headers="short_name">Res Evaluation</td>
+<td class="gt_row gt_right" headers="n_articles">84</td>
+<td class="gt_row gt_right" headers="n_references_observed">84</td>
+<td class="gt_row gt_right" headers="median_recorded_references">46</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Scientometrics</td>
-<td headers="n_articles" class="gt_row gt_right">747</td>
-<td headers="n_references_observed" class="gt_row gt_right">747</td>
-<td headers="median_recorded_references" class="gt_row gt_right">46</td>
+<td class="gt_row gt_left" headers="short_name">Scientometrics</td>
+<td class="gt_row gt_right" headers="n_articles">747</td>
+<td class="gt_row gt_right" headers="n_references_observed">747</td>
+<td class="gt_row gt_right" headers="median_recorded_references">46</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="visualization-5" class="section level3" number="11.4.5">
+<div class="section level3" id="visualization-5" number="11.4.5">
 <h3>
-<span class="header-section-number">11.4.5</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-5"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.4.5</span> Visualization<a aria-label="anchor" class="anchor" href="#visualization-5"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">combined</span> <span class="op">&lt;-</span> <span class="va">journal_summary</span> <span class="op">|&gt;</span></span>
@@ -1361,16 +1368,16 @@ citation potential.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Descriptive value (see panel)"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:11-fig-jmetrics-comparison"></span>
-<img src="scientometrics-in-r_files/figure-html/11-fig-jmetrics-comparison-1.png" alt="Two panels show journal mean cumulative citations at retrieval and median recorded references in those same journal articles; neither panel is an official journal metric." width="90%"><p class="caption">
+<span id="fig:11-fig-jmetrics-comparison" style="display:block;"></span>
+<img alt="Two panels show journal mean cumulative citations at retrieval and median recorded references in those same journal articles; neither panel is an official journal metric." src="scientometrics-in-r_files/figure-html/11-fig-jmetrics-comparison-1.png" width="90%"/><p class="caption">
 Figure 11.1: Current cumulative citations and recorded references for the retrieved 2021–2022 article cohorts, shown as separate descriptive quantities.
 </p>
 </div>
 </div>
 </div>
-<div id="jmetrics-diagnostics" class="section level2" number="11.5">
+<div class="section level2" id="jmetrics-diagnostics" number="11.5">
 <h2>
-<span class="header-section-number">11.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#jmetrics-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#jmetrics-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1385,14 +1392,14 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 <strong>Comparisons</strong>: Differences can reflect field mix, document classification, coverage and citation exposure. Agreement between descriptive rankings does not validate an official metric or justify an evaluation decision.</li>
 </ul>
 </div>
-<div id="jmetrics-limitations" class="section level2" number="11.6">
+<div class="section level2" id="jmetrics-limitations" number="11.6">
 <h2>
-<span class="header-section-number">11.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#jmetrics-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#jmetrics-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-10" class="section level2 callout callout-warn" number="11.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-10" number="11.7">
 <h2>
-<span class="header-section-number">11.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-10"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1405,14 +1412,14 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 <strong>Field dependence and metadata coverage remain.</strong> The example performs no field normalisation and cannot establish a fair ranking across disciplines <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>.</li>
 </ul>
 </div>
-<div id="jmetrics-pitfalls" class="section level2" number="11.8">
+<div class="section level2" id="jmetrics-pitfalls" number="11.8">
 <h2>
-<span class="header-section-number">11.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#jmetrics-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#jmetrics-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-10" class="section level2 callout callout-stop" number="11.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-10" number="11.9">
 <h2>
-<span class="header-section-number">11.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-10"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-10"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1425,9 +1432,9 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 <strong>Ranking journals by a single number.</strong> Indicator definitions, distributions, coverage and disciplinary context matter alongside any numerical comparison.</li>
 </ul>
 </div>
-<div id="jmetrics-exercises" class="section level2" number="11.10">
+<div class="section level2" id="jmetrics-exercises" number="11.10">
 <h2>
-<span class="header-section-number">11.10</span> Exercises<a class="anchor" aria-label="anchor" href="#jmetrics-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.10</span> Exercises<a aria-label="anchor" class="anchor" href="#jmetrics-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Cohort sensitivity.</strong> Fetch 2019–2022 articles for one of the verified source IDs and compare their cumulative citation summary with the 2021–2022 cohort. Explain why widening the publication cohort does not compute CiteScore.</p></li>
@@ -1436,15 +1443,15 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 <li><p><strong>Self-citation design.</strong> Specify the citation edges, citing-journal identities, time window and denominator needed to measure a journal self-citation share. Explain why the fetched cumulative counts and reference counts are insufficient.</p></li>
 </ol>
 </div>
-<div id="id_11-solutions" class="section level2 callout callout-ok" number="11.11">
+<div class="section level2 callout callout-ok" id="id_11-solutions" number="11.11">
 <h2>
-<span class="header-section-number">11.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_11-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_11-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="jmetrics-reading" class="section level2" number="11.12">
+<div class="section level2" id="jmetrics-reading" number="11.12">
 <h2>
-<span class="header-section-number">11.12</span> Further reading<a class="anchor" aria-label="anchor" href="#jmetrics-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.12</span> Further reading<a aria-label="anchor" class="anchor" href="#jmetrics-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1463,9 +1470,9 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 <span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex as an open bibliographic data source.</li>
 </ul>
 </div>
-<div id="jmetrics-sessioninfo" class="section level2" number="11.13">
+<div class="section level2" id="jmetrics-sessioninfo" number="11.13">
 <h2>
-<span class="header-section-number">11.13</span> Session info<a class="anchor" aria-label="anchor" href="#jmetrics-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">11.13</span> Session info<a aria-label="anchor" class="anchor" href="#jmetrics-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1533,16 +1540,14 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 #&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
 #&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
 #&gt; [103] bit64_4.8.6</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1624,12 +1629,12 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="productivity-and-impact-indicators.html"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></div>
 <div class="next"><a href="author-level-analysis-and-disambiguation.html"><span class="header-section-number">12</span> Author-Level Analysis and Disambiguation</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#journal-metrics"><span class="header-section-number">11</span> Journal Metrics</a></li>
 <li><a class="nav-link" href="#jmetrics-objectives"><span class="header-section-number">11.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#jmetrics-setup"><span class="header-section-number">11.2</span> Setup</a></li>
@@ -1653,29 +1658,23 @@ Figure 11.1: Current cumulative citations and recorded references for the retrie
 <li><a class="nav-link" href="#jmetrics-reading"><span class="header-section-number">11.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#jmetrics-sessioninfo"><span class="header-section-number">11.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/11-journal-metrics.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/11-journal-metrics.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/11-journal-metrics.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/11-journal-metrics.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

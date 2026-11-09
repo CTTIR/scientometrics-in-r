@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 29 Retraction Analysis | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="29.1 Learning objectives After completing this chapter, you will be able to: Identify retracted works in OpenAlex using type and metadata filters Analyse retraction rates by year, journal, and...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 29 Retraction Analysis | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/retraction-analysis.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="29.1 Learning objectives After completing this chapter, you will be able to: Identify retracted works in OpenAlex using type and metadata filters Analyse retraction rates by year, journal, and...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 29 Retraction Analysis | Scientometrics in R">
-<meta name="twitter:description" content="29.1 Learning objectives After completing this chapter, you will be able to: Identify retracted works in OpenAlex using type and metadata filters Analyse retraction rates by year, journal, and...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="29.1 Learning objectives After completing this chapter, you will be able to: Identify retracted works in OpenAlex using type and metadata filters Analyse retraction rates by year, journal, and..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 29 Retraction Analysis | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/retraction-analysis.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="29.1 Learning objectives After completing this chapter, you will be able to: Identify retracted works in OpenAlex using type and metadata filters Analyse retraction rates by year, journal, and..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 29 Retraction Analysis | Scientometrics in R" name="twitter:title"/>
+<meta content="29.1 Learning objectives After completing this chapter, you will be able to: Identify retracted works in OpenAlex using type and metadata filters Analyse retraction rates by year, journal, and..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="retraction-analysis" class="section level1" number="29">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="retraction-analysis" number="29">
 <h1>
-<span class="header-section-number">29</span> Retraction Analysis<a class="anchor" aria-label="anchor" href="#retraction-analysis"><i class="fas fa-link"></i></a>
-</h1>
-<div id="retraction-objectives" class="section level2" number="29.1">
+<span class="header-section-number">29</span> Retraction Analysis<a aria-label="anchor" class="anchor" href="#retraction-analysis"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/retraction-analysis.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/retraction-analysis.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="retraction-objectives" number="29.1">
 <h2>
-<span class="header-section-number">29.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#retraction-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#retraction-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Explain why retracted papers continue to accumulate citations</li>
 </ul>
 </div>
-<div id="retraction-setup" class="section level2" number="29.2">
+<div class="section level2" id="retraction-setup" number="29.2">
 <h2>
-<span class="header-section-number">29.2</span> Setup<a class="anchor" aria-label="anchor" href="#retraction-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.2</span> Setup<a aria-label="anchor" class="anchor" href="#retraction-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb435"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -196,9 +203,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="retraction-background" class="section level2" number="29.3">
+<div class="section level2" id="retraction-background" number="29.3">
 <h2>
-<span class="header-section-number">29.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#retraction-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#retraction-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Retraction is the formal mechanism by which the scholarly record corrects itself. A paper is retracted when it is found to contain fabricated data, serious errors, plagiarism, or ethical violations. In theory, retraction should halt the influence of flawed work. In practice, retracted papers continue to be cited — sometimes for years or decades after retraction.</p>
 <p>The growth in retractions has been dramatic: from a few dozen per year in the 1990s to over 10,000 in recent years. This increase reflects both more misconduct detection (plagiarism software, image forensics) and more publications overall. Retraction rates vary by field: biomedical sciences have the highest absolute numbers, partly because of larger publication volumes and greater scrutiny.</p>
@@ -206,13 +213,13 @@
 <p>OpenAlex marks retracted works with a specific type or retraction flag, though coverage depends on publisher reporting. The Retraction Watch database provides the most comprehensive curated list of retractions but is not directly integrated into most bibliometric databases.</p>
 <p>Bibliometric analysis of retractions must be approached carefully. The goal is to improve the self-correction mechanism, not to stigmatise individuals or institutions.</p>
 </div>
-<div id="retraction-example" class="section level2" number="29.4">
+<div class="section level2" id="retraction-example" number="29.4">
 <h2>
-<span class="header-section-number">29.4</span> Worked example<a class="anchor" aria-label="anchor" href="#retraction-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.4</span> Worked example<a aria-label="anchor" class="anchor" href="#retraction-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="finding-retracted-works" class="section level3" number="29.4.1">
+<div class="section level3" id="finding-retracted-works" number="29.4.1">
 <h3>
-<span class="header-section-number">29.4.1</span> Finding retracted works<a class="anchor" aria-label="anchor" href="#finding-retracted-works"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.4.1</span> Finding retracted works<a aria-label="anchor" class="anchor" href="#finding-retracted-works"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb436"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retracted</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
@@ -680,75 +687,75 @@
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="year">year</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="year" rowspan="1" scope="col">year</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n" rowspan="1" scope="col">n</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="year" class="gt_row gt_right">2010</td>
-<td headers="n" class="gt_row gt_right">8</td>
+<td class="gt_row gt_right" headers="year">2010</td>
+<td class="gt_row gt_right" headers="n">9</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2011</td>
-<td headers="n" class="gt_row gt_right">14</td>
+<td class="gt_row gt_right" headers="year">2011</td>
+<td class="gt_row gt_right" headers="n">14</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2012</td>
-<td headers="n" class="gt_row gt_right">5</td>
+<td class="gt_row gt_right" headers="year">2012</td>
+<td class="gt_row gt_right" headers="n">5</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2013</td>
-<td headers="n" class="gt_row gt_right">2</td>
+<td class="gt_row gt_right" headers="year">2013</td>
+<td class="gt_row gt_right" headers="n">2</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2014</td>
-<td headers="n" class="gt_row gt_right">7</td>
+<td class="gt_row gt_right" headers="year">2014</td>
+<td class="gt_row gt_right" headers="n">7</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2015</td>
-<td headers="n" class="gt_row gt_right">4</td>
+<td class="gt_row gt_right" headers="year">2015</td>
+<td class="gt_row gt_right" headers="n">4</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2016</td>
-<td headers="n" class="gt_row gt_right">6</td>
+<td class="gt_row gt_right" headers="year">2016</td>
+<td class="gt_row gt_right" headers="n">6</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2017</td>
-<td headers="n" class="gt_row gt_right">5</td>
+<td class="gt_row gt_right" headers="year">2017</td>
+<td class="gt_row gt_right" headers="n">5</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2018</td>
-<td headers="n" class="gt_row gt_right">15</td>
+<td class="gt_row gt_right" headers="year">2018</td>
+<td class="gt_row gt_right" headers="n">15</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2019</td>
-<td headers="n" class="gt_row gt_right">9</td>
+<td class="gt_row gt_right" headers="year">2019</td>
+<td class="gt_row gt_right" headers="n">9</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2020</td>
-<td headers="n" class="gt_row gt_right">23</td>
+<td class="gt_row gt_right" headers="year">2020</td>
+<td class="gt_row gt_right" headers="n">23</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2021</td>
-<td headers="n" class="gt_row gt_right">25</td>
+<td class="gt_row gt_right" headers="year">2021</td>
+<td class="gt_row gt_right" headers="n">26</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2022</td>
-<td headers="n" class="gt_row gt_right">32</td>
+<td class="gt_row gt_right" headers="year">2022</td>
+<td class="gt_row gt_right" headers="n">31</td>
 </tr>
 <tr>
-<td headers="year" class="gt_row gt_right">2023</td>
-<td headers="n" class="gt_row gt_right">45</td>
+<td class="gt_row gt_right" headers="year">2023</td>
+<td class="gt_row gt_right" headers="n">44</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="citation-counts-of-retracted-papers" class="section level3" number="29.4.2">
+<div class="section level3" id="citation-counts-of-retracted-papers" number="29.4.2">
 <h3>
-<span class="header-section-number">29.4.2</span> Citation counts of retracted papers<a class="anchor" aria-label="anchor" href="#citation-counts-of-retracted-papers"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.4.2</span> Citation counts of retracted papers<a aria-label="anchor" class="anchor" href="#citation-counts-of-retracted-papers"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb439"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">retracted</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cited_by_count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -756,8 +763,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Citations received"</span>, y <span class="op">=</span> <span class="st">"Number of retracted papers"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:29-fig-retraction-citations"></span>
-<img src="scientometrics-in-r_files/figure-html/29-fig-retraction-citations-1.png" alt="Histogram showing how many citations retracted papers have accumulated, revealing that many retracted papers continue to be cited." width="90%"><p class="caption">
+<span id="fig:29-fig-retraction-citations" style="display:block;"></span>
+<img alt="Histogram showing how many citations retracted papers have accumulated, revealing that many retracted papers continue to be cited." src="scientometrics-in-r_files/figure-html/29-fig-retraction-citations-1.png" width="90%"/><p class="caption">
 Figure 29.1: Citation count distribution of retracted papers.
 </p>
 </div>
@@ -1221,27 +1228,27 @@ Figure 29.1: Citation count distribution of retracted papers.
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cites">mean_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_cites">median_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="max_cites">max_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pct_uncited">pct_uncited</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n" rowspan="1" scope="col">n</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="mean_cites" rowspan="1" scope="col">mean_cites</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="median_cites" rowspan="1" scope="col">median_cites</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="max_cites" rowspan="1" scope="col">max_cites</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="pct_uncited" rowspan="1" scope="col">pct_uncited</th>
+</tr></thead>
 <tbody class="gt_table_body"><tr>
-<td headers="n" class="gt_row gt_right">200</td>
-<td headers="mean_cites" class="gt_row gt_right">11.7</td>
-<td headers="median_cites" class="gt_row gt_right">2</td>
-<td headers="max_cites" class="gt_row gt_right">576</td>
-<td headers="pct_uncited" class="gt_row gt_right">39%</td>
+<td class="gt_row gt_right" headers="n">200</td>
+<td class="gt_row gt_right" headers="mean_cites">11.7</td>
+<td class="gt_row gt_right" headers="median_cites">2</td>
+<td class="gt_row gt_right" headers="max_cites">576</td>
+<td class="gt_row gt_right" headers="pct_uncited">38%</td>
 </tr></tbody>
 </table></div>
 </div>
 </div>
-<div id="retracted-papers-by-source" class="section level3" number="29.4.3">
+<div class="section level3" id="retracted-papers-by-source" number="29.4.3">
 <h3>
-<span class="header-section-number">29.4.3</span> Retracted papers by source<a class="anchor" aria-label="anchor" href="#retracted-papers-by-source"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.4.3</span> Retracted papers by source<a aria-label="anchor" class="anchor" href="#retracted-papers-by-source"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb441"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retracted</span> <span class="op">|&gt;</span></span>
@@ -1254,15 +1261,15 @@ Figure 29.1: Citation count distribution of retracted papers.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Retracted papers"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:29-fig-retraction-sources"></span>
-<img src="scientometrics-in-r_files/figure-html/29-fig-retraction-sources-1.png" alt="Horizontal bar chart showing which journals have the most retracted papers in the retrieved sample." width="90%"><p class="caption">
+<span id="fig:29-fig-retraction-sources" style="display:block;"></span>
+<img alt="Horizontal bar chart showing which journals have the most retracted papers in the retrieved sample." src="scientometrics-in-r_files/figure-html/29-fig-retraction-sources-1.png" width="90%"/><p class="caption">
 Figure 29.2: Top journals with the most retracted papers in the sample.
 </p>
 </div>
 </div>
-<div id="citation-persistence-over-time" class="section level3" number="29.4.4">
+<div class="section level3" id="citation-persistence-over-time" number="29.4.4">
 <h3>
-<span class="header-section-number">29.4.4</span> Citation persistence over time<a class="anchor" aria-label="anchor" href="#citation-persistence-over-time"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.4.4</span> Citation persistence over time<a aria-label="anchor" class="anchor" href="#citation-persistence-over-time"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb442"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retracted</span> <span class="op">|&gt;</span></span>
@@ -1276,16 +1283,16 @@ Figure 29.2: Top journals with the most retracted papers in the sample.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Years since publication"</span>, y <span class="op">=</span> <span class="st">"Mean citations"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:29-fig-retraction-persistence"></span>
-<img src="scientometrics-in-r_files/figure-html/29-fig-retraction-persistence-1.png" alt="Line chart showing the mean citation count of retracted papers by years since publication, demonstrating that citations continue to accumulate." width="90%"><p class="caption">
+<span id="fig:29-fig-retraction-persistence" style="display:block;"></span>
+<img alt="Line chart showing the mean citation count of retracted papers by years since publication, demonstrating that citations continue to accumulate." src="scientometrics-in-r_files/figure-html/29-fig-retraction-persistence-1.png" width="90%"/><p class="caption">
 Figure 29.3: Mean citations by publication age for retracted papers.
 </p>
 </div>
 </div>
 </div>
-<div id="retraction-diagnostics" class="section level2" number="29.5">
+<div class="section level2" id="retraction-diagnostics" number="29.5">
 <h2>
-<span class="header-section-number">29.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#retraction-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#retraction-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1298,14 +1305,14 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 <strong>Denominator</strong>: Retraction <em>rates</em> require the total number of publications as denominator. Raw retraction counts favour large journals.</li>
 </ul>
 </div>
-<div id="retraction-limitations" class="section level2" number="29.6">
+<div class="section level2" id="retraction-limitations" number="29.6">
 <h2>
-<span class="header-section-number">29.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#retraction-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#retraction-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-28" class="section level2 callout callout-warn" number="29.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-28" number="29.7">
 <h2>
-<span class="header-section-number">29.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-28"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-28"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1320,14 +1327,14 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 <strong>Do not equate retractions with research quality.</strong> Fields with more scrutiny detect more problems. A high retraction rate may indicate effective oversight, not worse science <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="retraction-pitfalls" class="section level2" number="29.8">
+<div class="section level2" id="retraction-pitfalls" number="29.8">
 <h2>
-<span class="header-section-number">29.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#retraction-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#retraction-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-28" class="section level2 callout callout-stop" number="29.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-28" number="29.9">
 <h2>
-<span class="header-section-number">29.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-28"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-28"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1340,9 +1347,9 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 <strong>Using retraction analysis for individual evaluation.</strong> Authors of retracted papers may be victims of co-author misconduct. Never use retraction counts as performance indicators.</li>
 </ul>
 </div>
-<div id="retraction-exercises" class="section level2" number="29.10">
+<div class="section level2" id="retraction-exercises" number="29.10">
 <h2>
-<span class="header-section-number">29.10</span> Exercises<a class="anchor" aria-label="anchor" href="#retraction-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.10</span> Exercises<a aria-label="anchor" class="anchor" href="#retraction-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Retraction rate by field.</strong> Fetch retracted works from two different fields. Compare the retraction rate (retractions per 1,000 publications). Account for corpus size.</p></li>
@@ -1350,15 +1357,15 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 <li><p><strong>Retraction-citation correlation.</strong> Is there a relationship between a paper’s citation count at the time of retraction and the number of post-retraction citations it receives?</p></li>
 </ol>
 </div>
-<div id="id_29-solutions" class="section level2 callout callout-ok" number="29.11">
+<div class="section level2 callout callout-ok" id="id_29-solutions" number="29.11">
 <h2>
-<span class="header-section-number">29.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_29-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_29-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="retraction-reading" class="section level2" number="29.12">
+<div class="section level2" id="retraction-reading" number="29.12">
 <h2>
-<span class="header-section-number">29.12</span> Further reading<a class="anchor" aria-label="anchor" href="#retraction-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.12</span> Further reading<a aria-label="anchor" class="anchor" href="#retraction-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1369,9 +1376,9 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 <span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> — Citation indexing: the infrastructure that makes retraction tracking possible.</li>
 </ul>
 </div>
-<div id="retraction-sessioninfo" class="section level2" number="29.13">
+<div class="section level2" id="retraction-sessioninfo" number="29.13">
 <h2>
-<span class="header-section-number">29.13</span> Session info<a class="anchor" aria-label="anchor" href="#retraction-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">29.13</span> Session info<a aria-label="anchor" class="anchor" href="#retraction-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb443"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1455,16 +1462,14 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 #&gt; [115] slam_0.1-56            viridisLite_0.4.3      scales_1.4.0          
 #&gt; [118] crayon_1.5.3           openxlsx_4.2.9         rlang_1.3.0           
 #&gt; [121] fastmatch_1.1-8</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1546,12 +1551,12 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="gender-and-equity-analysis.html"><span class="header-section-number">28</span> Gender and Equity Analysis</a></div>
 <div class="next"><a href="funding-analysis-and-grant-to-publication-linkage.html"><span class="header-section-number">30</span> Funding Analysis and Grant-to-Publication Linkage</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#retraction-analysis"><span class="header-section-number">29</span> Retraction Analysis</a></li>
 <li><a class="nav-link" href="#retraction-objectives"><span class="header-section-number">29.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#retraction-setup"><span class="header-section-number">29.2</span> Setup</a></li>
@@ -1574,29 +1579,23 @@ Figure 29.3: Mean citations by publication age for retracted papers.
 <li><a class="nav-link" href="#retraction-reading"><span class="header-section-number">29.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#retraction-sessioninfo"><span class="header-section-number">29.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/29-retraction-analysis.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/29-retraction-analysis.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/29-retraction-analysis.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/29-retraction-analysis.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

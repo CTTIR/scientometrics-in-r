@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 15 Co-authorship Networks | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="15.1 Learning objectives After completing this chapter, you will be able to: Construct a co-authorship network from bibliographic data using igraph Compute and interpret node-level metrics:...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 15 Co-authorship Networks | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/co-authorship-networks.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="15.1 Learning objectives After completing this chapter, you will be able to: Construct a co-authorship network from bibliographic data using igraph Compute and interpret node-level metrics:...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 15 Co-authorship Networks | Scientometrics in R">
-<meta name="twitter:description" content="15.1 Learning objectives After completing this chapter, you will be able to: Construct a co-authorship network from bibliographic data using igraph Compute and interpret node-level metrics:...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="15.1 Learning objectives After completing this chapter, you will be able to: Construct a co-authorship network from bibliographic data using igraph Compute and interpret node-level metrics:..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 15 Co-authorship Networks | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/co-authorship-networks.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="15.1 Learning objectives After completing this chapter, you will be able to: Construct a co-authorship network from bibliographic data using igraph Compute and interpret node-level metrics:..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 15 Co-authorship Networks | Scientometrics in R" name="twitter:title"/>
+<meta content="15.1 Learning objectives After completing this chapter, you will be able to: Construct a co-authorship network from bibliographic data using igraph Compute and interpret node-level metrics:..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="co-authorship-networks" class="section level1" number="15">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="co-authorship-networks" number="15">
 <h1>
-<span class="header-section-number">15</span> Co-authorship Networks<a class="anchor" aria-label="anchor" href="#co-authorship-networks"><i class="fas fa-link"></i></a>
-</h1>
-<div id="coauth-objectives" class="section level2" number="15.1">
+<span class="header-section-number">15</span> Co-authorship Networks<a aria-label="anchor" class="anchor" href="#co-authorship-networks"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/co-authorship-networks.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/co-authorship-networks.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="coauth-objectives" number="15.1">
 <h2>
-<span class="header-section-number">15.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#coauth-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#coauth-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -181,9 +188,9 @@
 <li>Identify central authors and structural holes in a collaboration network</li>
 </ul>
 </div>
-<div id="coauth-setup" class="section level2" number="15.2">
+<div class="section level2" id="coauth-setup" number="15.2">
 <h2>
-<span class="header-section-number">15.2</span> Setup<a class="anchor" aria-label="anchor" href="#coauth-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.2</span> Setup<a aria-label="anchor" class="anchor" href="#coauth-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -199,22 +206,22 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="coauth-background" class="section level2" number="15.3">
+<div class="section level2" id="coauth-background" number="15.3">
 <h2>
-<span class="header-section-number">15.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#coauth-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#coauth-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Co-authorship is one of the most visible and well-studied forms of scientific collaboration. When two researchers appear together on a publication, they form a tie in the co-authorship network. Studying these networks reveals the social structure of science: who collaborates with whom, which groups are isolated, and which individuals serve as bridges between communities <span class="citation">(<a href="references.html#ref-newman2001">Newman 2001</a>)</span>.</p>
 <p>Co-authorship networks are typically modelled as <strong>undirected, weighted graphs</strong>. Nodes represent authors, and an edge connects two authors who have co-authored at least one paper. Edge weights reflect the number of co-authored papers (or, alternatively, fractional counts inversely proportional to the number of authors per paper). These networks tend to exhibit properties common to social networks: a heavy-tailed degree distribution (most authors have few collaborators, a few have many), high clustering (collaborators of collaborators tend to collaborate), and a small-world structure <span class="citation">(<a href="references.html#ref-barabasi2002">Barabási et al. 2002</a>)</span>.</p>
 <p><strong>Community detection</strong> identifies groups of authors who collaborate more densely among themselves than with the rest of the network. The Louvain algorithm <span class="citation">(<a href="references.html#ref-blondel2008">Blondel et al. 2008</a>)</span> is fast and widely used; the Leiden algorithm <span class="citation">(<a href="references.html#ref-traag2019">Traag et al. 2019</a>)</span> provides theoretical guarantees that all communities are well-connected, avoiding the “resolution limit” problem that can afflict Louvain.</p>
 <p>Network analysis of co-authorship data has been widely applied to map research fields <span class="citation">(<a href="references.html#ref-glanzel2004">Glänzel and Schubert 2004</a>)</span>, identify key opinion leaders, assess interdisciplinary collaboration, and study the evolution of research communities over time. <span class="citation">Fortunato (<a href="references.html#ref-fortunato2010">2010</a>)</span> provides a comprehensive review of community detection methods applicable to these networks.</p>
 </div>
-<div id="coauth-example" class="section level2" number="15.4">
+<div class="section level2" id="coauth-example" number="15.4">
 <h2>
-<span class="header-section-number">15.4</span> Worked example<a class="anchor" aria-label="anchor" href="#coauth-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4</span> Worked example<a aria-label="anchor" class="anchor" href="#coauth-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="acquiring-co-authorship-data" class="section level3" number="15.4.1">
+<div class="section level3" id="acquiring-co-authorship-data" number="15.4.1">
 <h3>
-<span class="header-section-number">15.4.1</span> Acquiring co-authorship data<a class="anchor" aria-label="anchor" href="#acquiring-co-authorship-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.1</span> Acquiring co-authorship data<a aria-label="anchor" class="anchor" href="#acquiring-co-authorship-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch works from a journal and extract the author pairs.</p>
 <div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
@@ -229,9 +236,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">works</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; [1] 300</code></pre>
 </div>
-<div id="extracting-author-pairs" class="section level3" number="15.4.2">
+<div class="section level3" id="extracting-author-pairs" number="15.4.2">
 <h3>
-<span class="header-section-number">15.4.2</span> Extracting author pairs<a class="anchor" aria-label="anchor" href="#extracting-author-pairs"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.2</span> Extracting author pairs<a aria-label="anchor" class="anchor" href="#extracting-author-pairs"><i class="fas fa-link"></i></a>
 </h3>
 <p>Each work has a list-column of authors. We unnest and build all pairwise co-author edges.</p>
 <div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
@@ -250,14 +257,14 @@
 <span>        name <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Authors: {n_distinct(c(edges$author_id_1, edges$author_id_2))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Authors: 658</code></pre>
+<pre><code>#&gt; Authors: 660</code></pre>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Edges: {nrow(edges)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Edges: 982</code></pre>
+<pre><code>#&gt; Edges: 983</code></pre>
 </div>
-<div id="building-the-network" class="section level3" number="15.4.3">
+<div class="section level3" id="building-the-network" number="15.4.3">
 <h3>
-<span class="header-section-number">15.4.3</span> Building the network<a class="anchor" aria-label="anchor" href="#building-the-network"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.3</span> Building the network<a aria-label="anchor" class="anchor" href="#building-the-network"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span></span>
@@ -268,17 +275,17 @@
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Nodes: {vcount(g)}, Edges: {ecount(g)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Nodes: 658, Edges: 982</code></pre>
+<pre><code>#&gt; Nodes: 660, Edges: 983</code></pre>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Components: {components(g)$no}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Components: 179</code></pre>
+<pre><code>#&gt; Components: 180</code></pre>
 <div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Density: {round(graph.density(g), 4)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Density: 0.0045</code></pre>
 </div>
-<div id="network-metrics" class="section level3" number="15.4.4">
+<div class="section level3" id="network-metrics" number="15.4.4">
 <h3>
-<span class="header-section-number">15.4.4</span> Network metrics<a class="anchor" aria-label="anchor" href="#network-metrics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.4</span> Network metrics<a aria-label="anchor" class="anchor" href="#network-metrics"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">degree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
@@ -303,20 +310,20 @@
 <pre><code>#&gt; # A tibble: 10 × 4
 #&gt;    author_name         degree betweenness clustering
 #&gt;    &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-#&gt;  1 Lutz Bornmann           11 0.000241         0.236
-#&gt;  2 Neil H. Shear           10 0.000000464      1    
-#&gt;  3 Robert Gniadecki        10 0.000000464      1    
-#&gt;  4 Charles W Lynde         10 0.000000464      1    
-#&gt;  5 Zafar Ali               10 0.000104         0.356
+#&gt;  1 Lutz Bornmann           11 0.000240         0.236
+#&gt;  2 Neil H. Shear           10 0.000000461      1    
+#&gt;  3 Robert Gniadecki        10 0.000000461      1    
+#&gt;  4 Charles W Lynde         10 0.000000461      1    
+#&gt;  5 Zafar Ali               10 0.000103         0.356
 #&gt;  6 Elena Netchiporouk      10 0                1    
 #&gt;  7 Silvio Peroni           10 0.000125         0.4  
-#&gt;  8 Steve Mathieu           10 0.000000464      1    
-#&gt;  9 Denis Sasseville        10 0.000000464      1    
-#&gt; 10 Anastasiya Muntyanu     10 0.000000464      1</code></pre>
+#&gt;  8 Steve Mathieu           10 0.000000461      1    
+#&gt;  9 Denis Sasseville        10 0.000000461      1    
+#&gt; 10 Anastasiya Muntyanu     10 0.000000461      1</code></pre>
 </div>
-<div id="community-detection" class="section level3" number="15.4.5">
+<div class="section level3" id="community-detection" number="15.4.5">
 <h3>
-<span class="header-section-number">15.4.5</span> Community detection<a class="anchor" aria-label="anchor" href="#community-detection"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.5</span> Community detection<a aria-label="anchor" class="anchor" href="#community-detection"><i class="fas fa-link"></i></a>
 </h3>
 <p>We apply both Louvain and Leiden to the largest connected component.</p>
 <div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
@@ -342,9 +349,9 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Leiden modularity: {round(modularity(giant, membership(leiden_result)), 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Leiden modularity: 0.492</code></pre>
 </div>
-<div id="comparing-community-assignments" class="section level3" number="15.4.6">
+<div class="section level3" id="comparing-community-assignments" number="15.4.6">
 <h3>
-<span class="header-section-number">15.4.6</span> Comparing community assignments<a class="anchor" aria-label="anchor" href="#comparing-community-assignments"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.6</span> Comparing community assignments<a aria-label="anchor" class="anchor" href="#comparing-community-assignments"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb222"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
@@ -360,9 +367,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Normalized Mutual Information (Louvain vs Leiden): {round(nmi, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Normalized Mutual Information (Louvain vs Leiden): 0.834</code></pre>
 </div>
-<div id="visualization-7" class="section level3" number="15.4.7">
+<div class="section level3" id="visualization-7" number="15.4.7">
 <h3>
-<span class="header-section-number">15.4.7</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-7"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.4.7</span> Visualization<a aria-label="anchor" class="anchor" href="#visualization-7"><i class="fas fa-link"></i></a>
 </h3>
 <p>We use a Fruchterman-Reingold layout with a fixed seed for deterministic output.</p>
 <div class="sourceCode" id="cb224"><pre class="downlit sourceCode r">
@@ -390,8 +397,8 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"sans"</span>, base_size <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:15-fig-coauth-network"></span>
-<img src="scientometrics-in-r_files/figure-html/15-fig-coauth-network-1.png" alt="Network graph showing co-authorship relationships. Nodes represent authors and are coloured by community membership detected by the Leiden algorithm. Node size reflects degree centrality. Edges connect co-authors." width="90%"><p class="caption">
+<span id="fig:15-fig-coauth-network" style="display:block;"></span>
+<img alt="Network graph showing co-authorship relationships. Nodes represent authors and are coloured by community membership detected by the Leiden algorithm. Node size reflects degree centrality. Edges connect co-authors." src="scientometrics-in-r_files/figure-html/15-fig-coauth-network-1.png" width="90%"/><p class="caption">
 Figure 15.1: Co-authorship network of sampled Scientometrics articles (2021–2023), coloured by Leiden community.
 </p>
 </div>
@@ -402,16 +409,16 @@ Figure 15.1: Co-authorship network of sampled Scientometrics articles (2021–20
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Degree (number of co-authors)"</span>, y <span class="op">=</span> <span class="st">"Count"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:15-fig-coauth-degree-dist"></span>
-<img src="scientometrics-in-r_files/figure-html/15-fig-coauth-degree-dist-1.png" alt="Histogram of node degree values showing the right-skewed distribution typical of co-authorship networks, where most authors have few co-authors and a few have many." width="90%"><p class="caption">
+<span id="fig:15-fig-coauth-degree-dist" style="display:block;"></span>
+<img alt="Histogram of node degree values showing the right-skewed distribution typical of co-authorship networks, where most authors have few co-authors and a few have many." src="scientometrics-in-r_files/figure-html/15-fig-coauth-degree-dist-1.png" width="90%"/><p class="caption">
 Figure 15.2: Degree distribution of the co-authorship network.
 </p>
 </div>
 </div>
 </div>
-<div id="coauth-diagnostics" class="section level2" number="15.5">
+<div class="section level2" id="coauth-diagnostics" number="15.5">
 <h2>
-<span class="header-section-number">15.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#coauth-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#coauth-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>Key diagnostics for co-authorship networks:</p>
 <ul>
@@ -427,7 +434,7 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">giant_ratio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/gorder.html">vcount</a></span><span class="op">(</span><span class="va">giant</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://r.igraph.org/reference/gorder.html">vcount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Giant component: {vcount(giant)}/{vcount(g)} nodes ({scales::percent(giant_ratio)})\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Giant component: 16/658 nodes (2%)</code></pre>
+<pre><code>#&gt; Giant component: 16/660 nodes (2%)</code></pre>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean degree: {round(mean(degree(giant)), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Mean degree: 4.1</code></pre>
@@ -435,14 +442,14 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Transitivity (global): {round(transitivity(giant, type = 'global'), 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Transitivity (global): 0.681</code></pre>
 </div>
-<div id="coauth-limitations" class="section level2" number="15.6">
+<div class="section level2" id="coauth-limitations" number="15.6">
 <h2>
-<span class="header-section-number">15.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#coauth-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#coauth-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-14" class="section level2 callout callout-warn" number="15.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-14" number="15.7">
 <h2>
-<span class="header-section-number">15.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-14"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-14"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -457,14 +464,14 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <strong>Causality.</strong> Network position (e.g., high betweenness) does not imply leadership or influence. It is a structural observation, not an evaluative judgement <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="coauth-pitfalls" class="section level2" number="15.8">
+<div class="section level2" id="coauth-pitfalls" number="15.8">
 <h2>
-<span class="header-section-number">15.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#coauth-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#coauth-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-14" class="section level2 callout callout-stop" number="15.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-14" number="15.9">
 <h2>
-<span class="header-section-number">15.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-14"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-14"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -479,9 +486,9 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <strong>Overinterpreting small components.</strong> A component with 2–3 authors who co-authored one paper is not a “community” — it is an artifact of the sample.</li>
 </ul>
 </div>
-<div id="coauth-exercises" class="section level2" number="15.10">
+<div class="section level2" id="coauth-exercises" number="15.10">
 <h2>
-<span class="header-section-number">15.10</span> Exercises<a class="anchor" aria-label="anchor" href="#coauth-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.10</span> Exercises<a aria-label="anchor" class="anchor" href="#coauth-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Fractional counting.</strong> Modify the edge construction to use fractional counting (weight = 1/(k-1) where k is the number of authors on the paper). How do the top-degree authors change?</p></li>
@@ -490,15 +497,15 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <li><p><strong>Resolution parameter.</strong> Run Leiden community detection with resolution parameters of 0.5, 1.0, and 2.0. How does the number of communities change? Which resolution produces the most interpretable results?</p></li>
 </ol>
 </div>
-<div id="id_15-solutions" class="section level2 callout callout-ok" number="15.11">
+<div class="section level2 callout callout-ok" id="id_15-solutions" number="15.11">
 <h2>
-<span class="header-section-number">15.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_15-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_15-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="coauth-reading" class="section level2" number="15.12">
+<div class="section level2" id="coauth-reading" number="15.12">
 <h2>
-<span class="header-section-number">15.12</span> Further reading<a class="anchor" aria-label="anchor" href="#coauth-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.12</span> Further reading<a aria-label="anchor" class="anchor" href="#coauth-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -515,9 +522,9 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <span class="citation">Glänzel and Schubert (<a href="references.html#ref-glanzel2004">2004</a>)</span> — Co-authorship analysis and fractional counting in bibliometrics.</li>
 </ul>
 </div>
-<div id="coauth-sessioninfo" class="section level2" number="15.13">
+<div class="section level2" id="coauth-sessioninfo" number="15.13">
 <h2>
-<span class="header-section-number">15.13</span> Session info<a class="anchor" aria-label="anchor" href="#coauth-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">15.13</span> Session info<a aria-label="anchor" class="anchor" href="#coauth-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -586,16 +593,14 @@ Figure 15.2: Degree distribution of the co-authorship network.
 #&gt; [100] parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
 #&gt; [103] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
 #&gt; [106] rlang_1.3.0            fastmatch_1.1-8</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -677,12 +682,12 @@ Figure 15.2: Degree distribution of the co-authorship network.
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="temporal-analysis-and-citation-aging.html"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></div>
 <div class="next"><a href="co-citation-and-bibliographic-coupling.html"><span class="header-section-number">16</span> Co-citation and Bibliographic Coupling</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#co-authorship-networks"><span class="header-section-number">15</span> Co-authorship Networks</a></li>
 <li><a class="nav-link" href="#coauth-objectives"><span class="header-section-number">15.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#coauth-setup"><span class="header-section-number">15.2</span> Setup</a></li>
@@ -708,29 +713,23 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <li><a class="nav-link" href="#coauth-reading"><span class="header-section-number">15.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#coauth-sessioninfo"><span class="header-section-number">15.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/15-co-authorship-networks.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/15-co-authorship-networks.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/15-co-authorship-networks.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/15-co-authorship-networks.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

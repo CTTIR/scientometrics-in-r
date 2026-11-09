@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 34 Reproducible Pipelines | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="34.1 Learning objectives After completing this chapter, you will be able to: Explain why ad hoc scripts are insufficient for reproducible bibliometric analysis Define a targets pipeline with...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 34 Reproducible Pipelines | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/reproducible-pipelines.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="34.1 Learning objectives After completing this chapter, you will be able to: Explain why ad hoc scripts are insufficient for reproducible bibliometric analysis Define a targets pipeline with...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 34 Reproducible Pipelines | Scientometrics in R">
-<meta name="twitter:description" content="34.1 Learning objectives After completing this chapter, you will be able to: Explain why ad hoc scripts are insufficient for reproducible bibliometric analysis Define a targets pipeline with...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="34.1 Learning objectives After completing this chapter, you will be able to: Explain why ad hoc scripts are insufficient for reproducible bibliometric analysis Define a targets pipeline with..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 34 Reproducible Pipelines | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/reproducible-pipelines.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="34.1 Learning objectives After completing this chapter, you will be able to: Explain why ad hoc scripts are insufficient for reproducible bibliometric analysis Define a targets pipeline with..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 34 Reproducible Pipelines | Scientometrics in R" name="twitter:title"/>
+<meta content="34.1 Learning objectives After completing this chapter, you will be able to: Explain why ad hoc scripts are insufficient for reproducible bibliometric analysis Define a targets pipeline with..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="reproducible-pipelines" class="section level1" number="34">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="reproducible-pipelines" number="34">
 <h1>
-<span class="header-section-number">34</span> Reproducible Pipelines<a class="anchor" aria-label="anchor" href="#reproducible-pipelines"><i class="fas fa-link"></i></a>
-</h1>
-<div id="pipeline-objectives" class="section level2" number="34.1">
+<span class="header-section-number">34</span> Reproducible Pipelines<a aria-label="anchor" class="anchor" href="#reproducible-pipelines"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/reproducible-pipelines.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/reproducible-pipelines.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="pipeline-objectives" number="34.1">
 <h2>
-<span class="header-section-number">34.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#pipeline-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#pipeline-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Structure a bibliometric project for long-term reproducibility</li>
 </ul>
 </div>
-<div id="pipeline-setup" class="section level2" number="34.2">
+<div class="section level2" id="pipeline-setup" number="34.2">
 <h2>
-<span class="header-section-number">34.2</span> Setup<a class="anchor" aria-label="anchor" href="#pipeline-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.2</span> Setup<a aria-label="anchor" class="anchor" href="#pipeline-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb495"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -192,9 +199,9 @@
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="pipeline-background" class="section level2" number="34.3">
+<div class="section level2" id="pipeline-background" number="34.3">
 <h2>
-<span class="header-section-number">34.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#pipeline-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#pipeline-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>A bibliometric analysis is a multi-step process: fetch data from an API, clean and deduplicate records, compute indicators, build networks, fit models, and generate figures. Each step depends on earlier ones. When the upstream data changes (a new API query, an updated corpus), downstream results must be regenerated — but only the affected parts.</p>
 <p><strong>Ad hoc scripts</strong> (running scripts manually in sequence) fail at scale: they do not track dependencies, they re-run everything even when only one input changed, and they break when run on a different machine with different package versions.</p>
@@ -203,13 +210,13 @@
 <p><strong>Docker</strong> takes reproducibility further by containerising the entire compute environment: operating system, R version, system libraries, and package versions. A <code>Dockerfile</code> defines the environment declaratively; anyone with Docker can rebuild it identically. Docker is essential for long-term reproducibility, since R versions and system libraries evolve.</p>
 <p>These tools complement each other: <code>targets</code> manages the computation, <code>renv</code> manages the packages, and Docker manages the environment. Together, they make a bibliometric analysis fully reproducible years after it was originally run.</p>
 </div>
-<div id="pipeline-example" class="section level2" number="34.4">
+<div class="section level2" id="pipeline-example" number="34.4">
 <h2>
-<span class="header-section-number">34.4</span> Worked example<a class="anchor" aria-label="anchor" href="#pipeline-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.4</span> Worked example<a aria-label="anchor" class="anchor" href="#pipeline-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="defining-a-targets-pipeline" class="section level3" number="34.4.1">
+<div class="section level3" id="defining-a-targets-pipeline" number="34.4.1">
 <h3>
-<span class="header-section-number">34.4.1</span> Defining a targets pipeline<a class="anchor" aria-label="anchor" href="#defining-a-targets-pipeline"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.4.1</span> Defining a targets pipeline<a aria-label="anchor" class="anchor" href="#defining-a-targets-pipeline"><i class="fas fa-link"></i></a>
 </h3>
 <p>The <code>_targets.R</code> file defines the pipeline. Here we show the structure for a typical bibliometric analysis.</p>
 <div class="sourceCode" id="cb496"><pre class="downlit sourceCode r">
@@ -253,9 +260,9 @@
 <span>  <span class="op">}</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="running-and-inspecting-the-pipeline" class="section level3" number="34.4.2">
+<div class="section level3" id="running-and-inspecting-the-pipeline" number="34.4.2">
 <h3>
-<span class="header-section-number">34.4.2</span> Running and inspecting the pipeline<a class="anchor" aria-label="anchor" href="#running-and-inspecting-the-pipeline"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.4.2</span> Running and inspecting the pipeline<a aria-label="anchor" class="anchor" href="#running-and-inspecting-the-pipeline"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb497"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Run the pipeline</span></span>
@@ -267,9 +274,9 @@
 <span><span class="co"># Read a specific target</span></span>
 <span><span class="fu">targets</span><span class="fu">::</span><span class="fu">tar_read</span><span class="op">(</span><span class="va">citation_stats</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="project-structure" class="section level3" number="34.4.3">
+<div class="section level3" id="project-structure" number="34.4.3">
 <h3>
-<span class="header-section-number">34.4.3</span> Project structure<a class="anchor" aria-label="anchor" href="#project-structure"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.4.3</span> Project structure<a aria-label="anchor" class="anchor" href="#project-structure"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb498"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Recommended project layout:</span></span>
@@ -286,9 +293,9 @@
 <span><span class="co"># ├── output/             # Figures and tables</span></span>
 <span><span class="co"># └── report.qmd          # Quarto report consuming targets</span></span></code></pre></div>
 </div>
-<div id="using-renv" class="section level3" number="34.4.4">
+<div class="section level3" id="using-renv" number="34.4.4">
 <h3>
-<span class="header-section-number">34.4.4</span> Using renv<a class="anchor" aria-label="anchor" href="#using-renv"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.4.4</span> Using renv<a aria-label="anchor" class="anchor" href="#using-renv"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb499"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initialise renv in a new project</span></span>
@@ -300,9 +307,9 @@
 <span><span class="co"># Restore packages on a new machine</span></span>
 <span><span class="fu">renv</span><span class="fu">::</span><span class="fu">restore</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="dockerfile-for-bibliometric-analysis" class="section level3" number="34.4.5">
+<div class="section level3" id="dockerfile-for-bibliometric-analysis" number="34.4.5">
 <h3>
-<span class="header-section-number">34.4.5</span> Dockerfile for bibliometric analysis<a class="anchor" aria-label="anchor" href="#dockerfile-for-bibliometric-analysis"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.4.5</span> Dockerfile for bibliometric analysis<a aria-label="anchor" class="anchor" href="#dockerfile-for-bibliometric-analysis"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb500"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example Dockerfile (not R code — shown for reference)</span></span>
@@ -315,9 +322,9 @@
 <span><span class="co"># CMD ["R", "-e", "targets::tar_make()"]</span></span></code></pre></div>
 </div>
 </div>
-<div id="pipeline-diagnostics" class="section level2" number="34.5">
+<div class="section level2" id="pipeline-diagnostics" number="34.5">
 <h2>
-<span class="header-section-number">34.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#pipeline-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#pipeline-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -330,14 +337,14 @@
 <strong>renv consistency</strong>: Run <code>renv::status()</code> to check if your lockfile matches the installed packages.</li>
 </ul>
 </div>
-<div id="pipeline-limitations" class="section level2" number="34.6">
+<div class="section level2" id="pipeline-limitations" number="34.6">
 <h2>
-<span class="header-section-number">34.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#pipeline-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#pipeline-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-33" class="section level2 callout callout-warn" number="34.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-33" number="34.7">
 <h2>
-<span class="header-section-number">34.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-33"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-33"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -350,14 +357,14 @@
 <strong>Reproducibility is not eternal</strong>: Even with Docker, operating system patches and hardware changes can affect results. Archive final outputs alongside the pipeline.</li>
 </ul>
 </div>
-<div id="pipeline-pitfalls" class="section level2" number="34.8">
+<div class="section level2" id="pipeline-pitfalls" number="34.8">
 <h2>
-<span class="header-section-number">34.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#pipeline-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#pipeline-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-33" class="section level2 callout callout-stop" number="34.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-33" number="34.9">
 <h2>
-<span class="header-section-number">34.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-33"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-33"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -369,9 +376,9 @@
 <strong>Writing monolithic targets.</strong> Each target should do one thing. Fine-grained targets enable selective re-execution.</li>
 </ul>
 </div>
-<div id="pipeline-exercises" class="section level2" number="34.10">
+<div class="section level2" id="pipeline-exercises" number="34.10">
 <h2>
-<span class="header-section-number">34.10</span> Exercises<a class="anchor" aria-label="anchor" href="#pipeline-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.10</span> Exercises<a aria-label="anchor" class="anchor" href="#pipeline-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Build a pipeline.</strong> Create a <code>_targets.R</code> file for a simple bibliometric analysis: fetch → clean → summarise → plot. Run it and verify that changing the summary function only re-runs downstream targets.</p></li>
@@ -379,15 +386,15 @@
 <li><p><strong>Branching.</strong> Use <code>tar_target()</code> with dynamic branching to run the same analysis across multiple journals in parallel.</p></li>
 </ol>
 </div>
-<div id="id_34-solutions" class="section level2 callout callout-ok" number="34.11">
+<div class="section level2 callout callout-ok" id="id_34-solutions" number="34.11">
 <h2>
-<span class="header-section-number">34.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_34-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_34-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="pipeline-reading" class="section level2" number="34.12">
+<div class="section level2" id="pipeline-reading" number="34.12">
 <h2>
-<span class="header-section-number">34.12</span> Further reading<a class="anchor" aria-label="anchor" href="#pipeline-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.12</span> Further reading<a aria-label="anchor" class="anchor" href="#pipeline-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -396,9 +403,9 @@
 <span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex as a reproducible data source for bibliometric pipelines.</li>
 </ul>
 </div>
-<div id="pipeline-sessioninfo" class="section level2" number="34.13">
+<div class="section level2" id="pipeline-sessioninfo" number="34.13">
 <h2>
-<span class="header-section-number">34.13</span> Session info<a class="anchor" aria-label="anchor" href="#pipeline-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">34.13</span> Session info<a aria-label="anchor" class="anchor" href="#pipeline-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb501"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -482,16 +489,14 @@
 #&gt; [115] assertthat_0.2.1       pubmedR_1.0.2          slam_0.1-56           
 #&gt; [118] viridisLite_0.4.3      scales_1.4.0           crayon_1.5.3          
 #&gt; [121] openxlsx_4.2.9         rlang_1.3.0            fastmatch_1.1-8</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -573,12 +578,12 @@
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="reproducibility-rrids-and-badges.html"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></div>
 <div class="next"><a href="interactive-dashboards.html"><span class="header-section-number">35</span> Interactive Dashboards</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#reproducible-pipelines"><span class="header-section-number">34</span> Reproducible Pipelines</a></li>
 <li><a class="nav-link" href="#pipeline-objectives"><span class="header-section-number">34.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#pipeline-setup"><span class="header-section-number">34.2</span> Setup</a></li>
@@ -602,29 +607,23 @@
 <li><a class="nav-link" href="#pipeline-reading"><span class="header-section-number">34.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#pipeline-sessioninfo"><span class="header-section-number">34.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/34-reproducible-pipelines.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/34-reproducible-pipelines.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/34-reproducible-pipelines.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/34-reproducible-pipelines.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

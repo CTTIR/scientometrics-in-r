@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 10 Productivity and Impact Indicators | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 10 Productivity and Impact Indicators | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/productivity-and-impact-indicators.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 10 Productivity and Impact Indicators | Scientometrics in R">
-<meta name="twitter:description" content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 10 Productivity and Impact Indicators | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/productivity-and-impact-indicators.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 10 Productivity and Impact Indicators | Scientometrics in R" name="twitter:title"/>
+<meta content="10.1 Learning objectives After completing this chapter, you will be able to: Compute sample h- and g-indices and distinguish a corpus publication span from an author career Explain the difference..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="productivity-and-impact-indicators" class="section level1" number="10">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="productivity-and-impact-indicators" number="10">
 <h1>
-<span class="header-section-number">10</span> Productivity and Impact Indicators<a class="anchor" aria-label="anchor" href="#productivity-and-impact-indicators"><i class="fas fa-link"></i></a>
-</h1>
-<div id="indicators-objectives" class="section level2" number="10.1">
+<span class="header-section-number">10</span> Productivity and Impact Indicators<a aria-label="anchor" class="anchor" href="#productivity-and-impact-indicators"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/productivity-and-impact-indicators.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/productivity-and-impact-indicators.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="indicators-objectives" number="10.1">
 <h2>
-<span class="header-section-number">10.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#indicators-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#indicators-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -179,9 +186,9 @@
 <li>Articulate the limitations of each indicator and the risks of misuse, citing the Leiden Manifesto</li>
 </ul>
 </div>
-<div id="indicators-setup" class="section level2" number="10.2">
+<div class="section level2" id="indicators-setup" number="10.2">
 <h2>
-<span class="header-section-number">10.2</span> Setup<a class="anchor" aria-label="anchor" href="#indicators-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.2</span> Setup<a aria-label="anchor" class="anchor" href="#indicators-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -195,22 +202,22 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="indicators-background" class="section level2" number="10.3">
+<div class="section level2" id="indicators-background" number="10.3">
 <h2>
-<span class="header-section-number">10.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#indicators-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#indicators-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Quantitative indicators are central to research evaluation — and among the most contested tools in science policy. The h-index, proposed by <span class="citation">Hirsch (<a href="references.html#ref-hirsch2005">2005</a>)</span>, counts the number <em>h</em> of an author’s papers that have each received at least <em>h</em> citations. Its simplicity made it wildly popular, but also obscures important nuances: it conflates productivity with impact, is insensitive to highly cited papers, and can only increase over a career <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>.</p>
 <p>The <strong>g-index</strong> <span class="citation">(<a href="references.html#ref-egghe2006">Egghe 2006</a>)</span> addresses the insensitivity to top-cited papers by requiring that the top <em>g</em> papers have together received at least <em>g</em>² citations. The <strong>m-quotient</strong> divides the h-index by career length, offering a rough age correction.</p>
 <p>These are all <em>raw</em> indicators. Citation distributions differ across fields, so comparisons require a justified reference and <strong>field normalization</strong>. The <strong>Mean Normalized Citation Score</strong> (MNCS) divides each paper’s citations by the world average for its field and publication year <span class="citation">(<a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span>. The <strong>PP(top 10%)</strong> — the proportion of an entity’s papers in the top 10% most cited in their field — is a percentile-based indicator recommended by the Leiden Ranking.</p>
 <p>The Leiden Manifesto <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span> and the San Francisco Declaration on Research Assessment <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> both caution against mechanical use of any single indicator. Indicators should support, not replace, qualitative judgement.</p>
 </div>
-<div id="indicators-example" class="section level2" number="10.4">
+<div class="section level2" id="indicators-example" number="10.4">
 <h2>
-<span class="header-section-number">10.4</span> Worked example<a class="anchor" aria-label="anchor" href="#indicators-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4</span> Worked example<a aria-label="anchor" class="anchor" href="#indicators-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="acquiring-sample-data" class="section level3" number="10.4.1">
+<div class="section level3" id="acquiring-sample-data" number="10.4.1">
 <h3>
-<span class="header-section-number">10.4.1</span> Acquiring sample data<a class="anchor" aria-label="anchor" href="#acquiring-sample-data"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.1</span> Acquiring sample data<a aria-label="anchor" class="anchor" href="#acquiring-sample-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch a sample of works and their citation counts from OpenAlex.</p>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
@@ -228,21 +235,21 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#&gt;     0.0     8.0    17.0    29.5    30.0  1449.0</code></pre>
+#&gt;     0.0     8.0    17.0    29.6    30.2  1449.0</code></pre>
 </div>
-<div id="computing-the-h-index" class="section level3" number="10.4.2">
+<div class="section level3" id="computing-the-h-index" number="10.4.2">
 <h3>
-<span class="header-section-number">10.4.2</span> Computing the h-index<a class="anchor" aria-label="anchor" href="#computing-the-h-index"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.2</span> Computing the h-index<a aria-label="anchor" class="anchor" href="#computing-the-h-index"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu">compute_h_index</span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"h-index for this corpus: {h}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; h-index for this corpus: 51</code></pre>
-<p>The sample h-index means that at least 51 sampled papers each have at least 51 citations. It is not an author career h-index.</p>
+<pre><code>#&gt; h-index for this corpus: 52</code></pre>
+<p>The sample h-index means that at least 52 sampled papers each have at least 52 citations. It is not an author career h-index.</p>
 </div>
-<div id="computing-the-g-index" class="section level3" number="10.4.3">
+<div class="section level3" id="computing-the-g-index" number="10.4.3">
 <h3>
-<span class="header-section-number">10.4.3</span> Computing the g-index<a class="anchor" aria-label="anchor" href="#computing-the-g-index"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.3</span> Computing the g-index<a aria-label="anchor" class="anchor" href="#computing-the-g-index"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">compute_g_index</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">citations</span><span class="op">)</span> <span class="op">{</span></span>
@@ -257,9 +264,9 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"g-index for this corpus: {g}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; g-index for this corpus: 95</code></pre>
 </div>
-<div id="publication-span-is-not-career-length" class="section level3" number="10.4.4">
+<div class="section level3" id="publication-span-is-not-career-length" number="10.4.4">
 <h3>
-<span class="header-section-number">10.4.4</span> Publication span is not career length<a class="anchor" aria-label="anchor" href="#publication-span-is-not-career-length"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.4</span> Publication span is not career length<a aria-label="anchor" class="anchor" href="#publication-span-is-not-career-length"><i class="fas fa-link"></i></a>
 </h3>
 <p>A proper m-quotient needs an identified author and a justified career-start date.
 This corpus contains many authors, so its publication span cannot supply that
@@ -273,11 +280,11 @@ denominator. The following h/span ratio is only a descriptive calculation.</p>
 <span></span>
 <span><span class="va">h_per_span</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">career_years</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">career_years</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">h</span> <span class="op">/</span> <span class="va">career_years</span> <span class="kw">else</span> <span class="cn">NA_real_</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sample h/publication-span ratio: {round(h_per_span, 3)} (span {round(career_years, 1)} years)\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Sample h/publication-span ratio: 8.521 (span 6 years)</code></pre>
+<pre><code>#&gt; Sample h/publication-span ratio: 8.688 (span 6 years)</code></pre>
 </div>
-<div id="a-normalization-diagnostic-using-the-sample-as-its-own-reference" class="section level3" number="10.4.5">
+<div class="section level3" id="a-normalization-diagnostic-using-the-sample-as-its-own-reference" number="10.4.5">
 <h3>
-<span class="header-section-number">10.4.5</span> A normalization diagnostic: using the sample as its own reference<a class="anchor" aria-label="anchor" href="#a-normalization-diagnostic-using-the-sample-as-its-own-reference"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.5</span> A normalization diagnostic: using the sample as its own reference<a aria-label="anchor" class="anchor" href="#a-normalization-diagnostic-using-the-sample-as-its-own-reference"><i class="fas fa-link"></i></a>
 </h3>
 <p>MNCS requires a justified field/year reference with compatible document types
 and citation windows. The live corpus here supplies no such reference. To show
@@ -301,9 +308,9 @@ impact. Zero-mean years have undefined ratios and are excluded. An actual MNCS
 interpretation requires an independently justified field/year reference
 <span class="citation">(<a href="references.html#ref-waltman2012mncs">Waltman et al. 2011</a>)</span>.</p>
 </div>
-<div id="within-sample-upper-percentile-membership" class="section level3" number="10.4.6">
+<div class="section level3" id="within-sample-upper-percentile-membership" number="10.4.6">
 <h3>
-<span class="header-section-number">10.4.6</span> Within-sample upper-percentile membership<a class="anchor" aria-label="anchor" href="#within-sample-upper-percentile-membership"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.6</span> Within-sample upper-percentile membership<a aria-label="anchor" class="anchor" href="#within-sample-upper-percentile-membership"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_with_pct</span> <span class="op">&lt;-</span> <span class="va">works_normalized</span> <span class="op">|&gt;</span></span>
@@ -321,9 +328,9 @@ interpretation requires an independently justified field/year reference
 the selected share differ from 10%; a singleton has no percentile rank. This
 is not field-normalized PP(top 10%). Report the ranking and tie rule explicitly.</p>
 </div>
-<div id="visualization-4" class="section level3" number="10.4.7">
+<div class="section level3" id="visualization-4" number="10.4.7">
 <h3>
-<span class="header-section-number">10.4.7</span> Visualization<a class="anchor" aria-label="anchor" href="#visualization-4"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.7</span> Visualization<a aria-label="anchor" class="anchor" href="#visualization-4"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_slim</span> <span class="op">|&gt;</span></span>
@@ -335,8 +342,8 @@ is not field-normalized PP(top 10%). Report the ranking and tie rule explicitly.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Citation count"</span>, y <span class="op">=</span> <span class="st">"Number of works"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:10-fig-indicators-citation-dist"></span>
-<img src="scientometrics-in-r_files/figure-html/10-fig-indicators-citation-dist-1.png" alt="Histogram of citation counts with a vertical dashed line at the h-index value, showing the long-tailed distribution typical of citation data." width="90%"><p class="caption">
+<span id="fig:10-fig-indicators-citation-dist" style="display:block;"></span>
+<img alt="Histogram of citation counts with a vertical dashed line at the h-index value, showing the long-tailed distribution typical of citation data." src="scientometrics-in-r_files/figure-html/10-fig-indicators-citation-dist-1.png" width="90%"/><p class="caption">
 Figure 10.1: Citation distribution of sampled works, with the h-index threshold marked.
 </p>
 </div>
@@ -351,15 +358,15 @@ Figure 10.1: Citation distribution of sampled works, with the h-index threshold 
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Publication year"</span>, y <span class="op">=</span> <span class="st">"Within-sample/year ratio"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:10-fig-indicators-mncs-by-year"></span>
-<img src="scientometrics-in-r_files/figure-html/10-fig-indicators-mncs-by-year-1.png" alt="Line chart at one across usable years, demonstrating the arithmetic identity created by normalizing each sample year to itself." width="90%"><p class="caption">
+<span id="fig:10-fig-indicators-mncs-by-year" style="display:block;"></span>
+<img alt="Line chart at one across usable years, demonstrating the arithmetic identity created by normalizing each sample year to itself." src="scientometrics-in-r_files/figure-html/10-fig-indicators-mncs-by-year-1.png" width="90%"/><p class="caption">
 Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of one.
 </p>
 </div>
 </div>
-<div id="summary-table" class="section level3" number="10.4.8">
+<div class="section level3" id="summary-table" number="10.4.8">
 <h3>
-<span class="header-section-number">10.4.8</span> Summary table<a class="anchor" aria-label="anchor" href="#summary-table"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.4.8</span> Summary table<a aria-label="anchor" class="anchor" href="#summary-table"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
@@ -829,46 +836,46 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Indicator">Indicator</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Value">Value</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="Interpretation">Interpretation</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="Indicator" rowspan="1" scope="col">Indicator</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="Value" rowspan="1" scope="col">Value</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="Interpretation" rowspan="1" scope="col">Interpretation</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="Indicator" class="gt_row gt_left">Sample h-index</td>
-<td headers="Value" class="gt_row gt_right">51</td>
-<td headers="Interpretation" class="gt_row gt_left">51 papers with &gt;= 51 citations each</td>
+<td class="gt_row gt_left" headers="Indicator">Sample h-index</td>
+<td class="gt_row gt_right" headers="Value">52</td>
+<td class="gt_row gt_left" headers="Interpretation">52 papers with &gt;= 52 citations each</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">Sample g-index</td>
-<td headers="Value" class="gt_row gt_right">95</td>
-<td headers="Interpretation" class="gt_row gt_left">Top 95 papers have &gt;= 95^2 = 9025 cumulative citations</td>
+<td class="gt_row gt_left" headers="Indicator">Sample g-index</td>
+<td class="gt_row gt_right" headers="Value">95</td>
+<td class="gt_row gt_left" headers="Interpretation">Top 95 papers have &gt;= 95^2 = 9025 cumulative citations</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">Sample h/span</td>
-<td headers="Value" class="gt_row gt_right">8.521</td>
-<td headers="Interpretation" class="gt_row gt_left">Not a career m-quotient</td>
+<td class="gt_row gt_left" headers="Indicator">Sample h/span</td>
+<td class="gt_row gt_right" headers="Value">8.688</td>
+<td class="gt_row gt_left" headers="Interpretation">Not a career m-quotient</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">Mean sample/year ratio</td>
-<td headers="Value" class="gt_row gt_right">1</td>
-<td headers="Interpretation" class="gt_row gt_left">One by construction; not MNCS</td>
+<td class="gt_row gt_left" headers="Indicator">Mean sample/year ratio</td>
+<td class="gt_row gt_right" headers="Value">1</td>
+<td class="gt_row gt_left" headers="Interpretation">One by construction; not MNCS</td>
 </tr>
 <tr>
-<td headers="Indicator" class="gt_row gt_left">Sample upper-percentile share</td>
-<td headers="Value" class="gt_row gt_right">10.4%</td>
-<td headers="Interpretation" class="gt_row gt_left">Within-sample rank rule; not world PP(top 10%)</td>
+<td class="gt_row gt_left" headers="Indicator">Sample upper-percentile share</td>
+<td class="gt_row gt_right" headers="Value">10.4%</td>
+<td class="gt_row gt_left" headers="Interpretation">Within-sample rank rule; not world PP(top 10%)</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
 </div>
-<div id="indicators-diagnostics" class="section level2" number="10.5">
+<div class="section level2" id="indicators-diagnostics" number="10.5">
 <h2>
-<span class="header-section-number">10.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#indicators-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#indicators-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>When interpreting bibliometric indicators, keep in mind:</p>
 <ul>
@@ -882,14 +889,14 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <strong>Self-citations.</strong> None of the indicators above exclude self-citations. In a full analysis, consider computing variants with and without self-citations.</li>
 </ul>
 </div>
-<div id="indicators-limitations" class="section level2" number="10.6">
+<div class="section level2" id="indicators-limitations" number="10.6">
 <h2>
-<span class="header-section-number">10.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#indicators-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#indicators-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-9" class="section level2 callout callout-warn" number="10.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-9" number="10.7">
 <h2>
-<span class="header-section-number">10.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-9"><i class="fas fa-link"></i></a>
 </h2>
 <p>No single number can capture the quality, significance, or societal impact of a researcher’s work. The Leiden Manifesto <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span> offers ten principles for the responsible use of metrics:</p>
 <ol style="list-style-type: decimal">
@@ -902,14 +909,14 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <p>The h-index in particular can be gamed through self-citation, salami slicing, or guest authorship. It penalises researchers in small fields, those who publish fewer but higher-impact works, and those who take career breaks. The DORA declaration <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> explicitly warns against using journal-level metrics (like the Impact Factor) as surrogates for individual article quality — but the same caution applies to any single indicator.</p>
 <p><strong>Always present multiple indicators alongside qualitative context.</strong> Never use a single number to make hiring, promotion, or funding decisions.</p>
 </div>
-<div id="indicators-pitfalls" class="section level2" number="10.8">
+<div class="section level2" id="indicators-pitfalls" number="10.8">
 <h2>
-<span class="header-section-number">10.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#indicators-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#indicators-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-9" class="section level2 callout callout-stop" number="10.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-9" number="10.9">
 <h2>
-<span class="header-section-number">10.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-9"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-9"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -922,9 +929,9 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <strong>Reporting precision that isn’t there.</strong> An MNCS of 1.237 vs. 1.241 is not a meaningful difference. Report with appropriate precision and always provide confidence intervals or bootstrapped uncertainty where possible.</li>
 </ul>
 </div>
-<div id="indicators-exercises" class="section level2" number="10.10">
+<div class="section level2" id="indicators-exercises" number="10.10">
 <h2>
-<span class="header-section-number">10.10</span> Exercises<a class="anchor" aria-label="anchor" href="#indicators-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.10</span> Exercises<a aria-label="anchor" class="anchor" href="#indicators-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Career h-index.</strong> Fetch all works by a specific author using <code>oa_fetch(entity = "works", author.id = "...")</code>. Compute their h-index, g-index, and m-quotient. How do the three indicators tell different stories about the same career?</p></li>
@@ -933,15 +940,15 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <li><p><strong>Normalization and ranks.</strong> Compare each year’s mean sample ratio with its upper-percentile share. Explain why the ratio is fixed at one and why ties can change the percentile share; neither ranks world-normalized impact.</p></li>
 </ol>
 </div>
-<div id="id_10-solutions" class="section level2 callout callout-ok" number="10.11">
+<div class="section level2 callout callout-ok" id="id_10-solutions" number="10.11">
 <h2>
-<span class="header-section-number">10.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_10-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_10-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="indicators-reading" class="section level2" number="10.12">
+<div class="section level2" id="indicators-reading" number="10.12">
 <h2>
-<span class="header-section-number">10.12</span> Further reading<a class="anchor" aria-label="anchor" href="#indicators-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.12</span> Further reading<a aria-label="anchor" class="anchor" href="#indicators-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -958,9 +965,9 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <span class="citation">American Society for Cell Biology (<a href="references.html#ref-dora2012">2012</a>)</span> — DORA: the San Francisco Declaration on Research Assessment.</li>
 </ul>
 </div>
-<div id="indicators-sessioninfo" class="section level2" number="10.13">
+<div class="section level2" id="indicators-sessioninfo" number="10.13">
 <h2>
-<span class="header-section-number">10.13</span> Session info<a class="anchor" aria-label="anchor" href="#indicators-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">10.13</span> Session info<a aria-label="anchor" class="anchor" href="#indicators-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1028,16 +1035,14 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 #&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
 #&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
 #&gt; [103] bit64_4.8.6</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1119,12 +1124,12 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="descriptive-bibliometrics.html"><span class="header-section-number">9</span> Descriptive Bibliometrics</a></div>
 <div class="next"><a href="journal-metrics.html"><span class="header-section-number">11</span> Journal Metrics</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#productivity-and-impact-indicators"><span class="header-section-number">10</span> Productivity and Impact Indicators</a></li>
 <li><a class="nav-link" href="#indicators-objectives"><span class="header-section-number">10.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#indicators-setup"><span class="header-section-number">10.2</span> Setup</a></li>
@@ -1151,29 +1156,23 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <li><a class="nav-link" href="#indicators-reading"><span class="header-section-number">10.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#indicators-sessioninfo"><span class="header-section-number">10.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/10-productivity-impact-indicators.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/10-productivity-impact-indicators.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/10-productivity-impact-indicators.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/10-productivity-impact-indicators.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

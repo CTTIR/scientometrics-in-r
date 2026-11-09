@@ -1,0 +1,297 @@
+[
+  {
+    "file": "scientometrics-in-r.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/detecting-emerging-topics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/acknowledgments.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/case-study-4-gender-gap-in-scientific-publishing.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/text-mining-bibliographic-corpora.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/co-word-and-keyword-co-occurrence.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/network-visualization-and-interoperability.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/productivity-and-impact-indicators.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/solutions.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/open-science-indicators.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/what-is-scientometrics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/co-authorship-networks.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/impressum.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/author-level-analysis-and-disambiguation.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/community-detection-and-backbone-extraction.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/cheatsheets-and-quick-reference.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/case-study-3-journal-portfolio-analysis.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/co-citation-and-bibliographic-coupling.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/case-study-1-crispr-field-review-20102024.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/references.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/glossary.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/index.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/gender-and-equity-analysis.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/keyword-extraction.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/case-study-5-detecting-emerging-topics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/case-study-2-institutional-benchmarking.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/causal-inference-in-scientometrics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/r-setup-renv-and-docker.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/indicator-crosswalk-across-databases.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/retraction-analysis.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/reproducibility-rrids-and-badges.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/descriptive-bibliometrics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/journal-metrics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/building-a-bibliometric-shiny-app.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/apis-and-packages.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/funding-analysis-and-grant-to-publication-linkage.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/parsing-native-exports.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/altmetrics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/working-with-full-text.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/patentpaper-linkages.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/parameterized-quarto-reports.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/interactive-dashboards.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/about-the-author.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/reproducible-pipelines.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/institutional-and-country-analysis.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/topic-modeling.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/citing-this-guide-1.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/sql-primer-for-the-openalex-snapshot.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/embeddings-for-scientometrics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/colophon.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/temporal-analysis-and-citation-aging.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/find-your-method.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/how-to-use-this-book.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/data-sources-compared.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/notation.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/theoretical-underpinnings.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/building-reproducible-corpora.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/ethics-and-responsible-metrics.epub",
+    "status": 0,
+    "output": ""
+  },
+  {
+    "file": "downloads/chapters/science-mapping-and-overlay-maps.epub",
+    "status": 0,
+    "output": ""
+  }
+]

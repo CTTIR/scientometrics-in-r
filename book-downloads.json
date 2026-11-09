@@ -1,0 +1,417 @@
+{
+  "book": "scientometrics-in-r",
+  "title": "Scientometrics in R",
+  "site": "https://cttir.github.io/scientometrics-in-r/",
+  "whole": {
+    "pdf": "scientometrics-in-r.pdf",
+    "epub": "scientometrics-in-r.epub"
+  },
+  "chapters": [
+    {
+      "path": "index.html",
+      "title": "Welcome!",
+      "epub_source": "EPUB/text/ch001.xhtml",
+      "pdf": "downloads/chapters/index.pdf",
+      "epub": "downloads/chapters/index.epub"
+    },
+    {
+      "path": "impressum.html",
+      "title": "Impressum",
+      "epub_source": "EPUB/text/ch002.xhtml",
+      "pdf": "downloads/chapters/impressum.pdf",
+      "epub": "downloads/chapters/impressum.epub"
+    },
+    {
+      "path": "acknowledgments.html",
+      "title": "Acknowledgments",
+      "epub_source": "EPUB/text/ch003.xhtml",
+      "pdf": "downloads/chapters/acknowledgments.pdf",
+      "epub": "downloads/chapters/acknowledgments.epub"
+    },
+    {
+      "path": "how-to-use-this-book.html",
+      "title": "How to use this book",
+      "epub_source": "EPUB/text/ch004.xhtml",
+      "pdf": "downloads/chapters/how-to-use-this-book.pdf",
+      "epub": "downloads/chapters/how-to-use-this-book.epub"
+    },
+    {
+      "path": "notation.html",
+      "title": "Notation",
+      "epub_source": "EPUB/text/ch005.xhtml",
+      "pdf": "downloads/chapters/notation.pdf",
+      "epub": "downloads/chapters/notation.epub"
+    },
+    {
+      "path": "about-the-author.html",
+      "title": "About the author",
+      "epub_source": "EPUB/text/ch006.xhtml",
+      "pdf": "downloads/chapters/about-the-author.pdf",
+      "epub": "downloads/chapters/about-the-author.epub"
+    },
+    {
+      "path": "find-your-method.html",
+      "title": "Find Your Method",
+      "epub_source": "EPUB/text/ch007.xhtml",
+      "pdf": "downloads/chapters/find-your-method.pdf",
+      "epub": "downloads/chapters/find-your-method.epub"
+    },
+    {
+      "path": "what-is-scientometrics.html",
+      "title": "1 What Is Scientometrics?",
+      "epub_source": "EPUB/text/ch008.xhtml",
+      "pdf": "downloads/chapters/what-is-scientometrics.pdf",
+      "epub": "downloads/chapters/what-is-scientometrics.epub"
+    },
+    {
+      "path": "theoretical-underpinnings.html",
+      "title": "2 Theoretical Underpinnings",
+      "epub_source": "EPUB/text/ch009.xhtml",
+      "pdf": "downloads/chapters/theoretical-underpinnings.pdf",
+      "epub": "downloads/chapters/theoretical-underpinnings.epub"
+    },
+    {
+      "path": "ethics-and-responsible-metrics.html",
+      "title": "3 Ethics and Responsible Metrics",
+      "epub_source": "EPUB/text/ch010.xhtml",
+      "pdf": "downloads/chapters/ethics-and-responsible-metrics.pdf",
+      "epub": "downloads/chapters/ethics-and-responsible-metrics.epub"
+    },
+    {
+      "path": "data-sources-compared.html",
+      "title": "4 Data Sources Compared",
+      "epub_source": "EPUB/text/ch011.xhtml",
+      "pdf": "downloads/chapters/data-sources-compared.pdf",
+      "epub": "downloads/chapters/data-sources-compared.epub"
+    },
+    {
+      "path": "apis-and-packages.html",
+      "title": "5 APIs and Packages",
+      "epub_source": "EPUB/text/ch012.xhtml",
+      "pdf": "downloads/chapters/apis-and-packages.pdf",
+      "epub": "downloads/chapters/apis-and-packages.epub"
+    },
+    {
+      "path": "parsing-native-exports.html",
+      "title": "6 Parsing Native Exports",
+      "epub_source": "EPUB/text/ch013.xhtml",
+      "pdf": "downloads/chapters/parsing-native-exports.pdf",
+      "epub": "downloads/chapters/parsing-native-exports.epub"
+    },
+    {
+      "path": "building-reproducible-corpora.html",
+      "title": "7 Building Reproducible Corpora",
+      "epub_source": "EPUB/text/ch014.xhtml",
+      "pdf": "downloads/chapters/building-reproducible-corpora.pdf",
+      "epub": "downloads/chapters/building-reproducible-corpora.epub"
+    },
+    {
+      "path": "working-with-full-text.html",
+      "title": "8 Working with Full Text",
+      "epub_source": "EPUB/text/ch015.xhtml",
+      "pdf": "downloads/chapters/working-with-full-text.pdf",
+      "epub": "downloads/chapters/working-with-full-text.epub"
+    },
+    {
+      "path": "descriptive-bibliometrics.html",
+      "title": "9 Descriptive Bibliometrics",
+      "epub_source": "EPUB/text/ch016.xhtml",
+      "pdf": "downloads/chapters/descriptive-bibliometrics.pdf",
+      "epub": "downloads/chapters/descriptive-bibliometrics.epub"
+    },
+    {
+      "path": "productivity-and-impact-indicators.html",
+      "title": "10 Productivity and Impact Indicators",
+      "epub_source": "EPUB/text/ch017.xhtml",
+      "pdf": "downloads/chapters/productivity-and-impact-indicators.pdf",
+      "epub": "downloads/chapters/productivity-and-impact-indicators.epub"
+    },
+    {
+      "path": "journal-metrics.html",
+      "title": "11 Journal Metrics",
+      "epub_source": "EPUB/text/ch018.xhtml",
+      "pdf": "downloads/chapters/journal-metrics.pdf",
+      "epub": "downloads/chapters/journal-metrics.epub"
+    },
+    {
+      "path": "author-level-analysis-and-disambiguation.html",
+      "title": "12 Author-Level Analysis and Disambiguation",
+      "epub_source": "EPUB/text/ch019.xhtml",
+      "pdf": "downloads/chapters/author-level-analysis-and-disambiguation.pdf",
+      "epub": "downloads/chapters/author-level-analysis-and-disambiguation.epub"
+    },
+    {
+      "path": "institutional-and-country-analysis.html",
+      "title": "13 Institutional and Country Analysis",
+      "epub_source": "EPUB/text/ch020.xhtml",
+      "pdf": "downloads/chapters/institutional-and-country-analysis.pdf",
+      "epub": "downloads/chapters/institutional-and-country-analysis.epub"
+    },
+    {
+      "path": "temporal-analysis-and-citation-aging.html",
+      "title": "14 Temporal Analysis and Citation Aging",
+      "epub_source": "EPUB/text/ch021.xhtml",
+      "pdf": "downloads/chapters/temporal-analysis-and-citation-aging.pdf",
+      "epub": "downloads/chapters/temporal-analysis-and-citation-aging.epub"
+    },
+    {
+      "path": "co-authorship-networks.html",
+      "title": "15 Co-authorship Networks",
+      "epub_source": "EPUB/text/ch022.xhtml",
+      "pdf": "downloads/chapters/co-authorship-networks.pdf",
+      "epub": "downloads/chapters/co-authorship-networks.epub"
+    },
+    {
+      "path": "co-citation-and-bibliographic-coupling.html",
+      "title": "16 Co-citation and Bibliographic Coupling",
+      "epub_source": "EPUB/text/ch023.xhtml",
+      "pdf": "downloads/chapters/co-citation-and-bibliographic-coupling.pdf",
+      "epub": "downloads/chapters/co-citation-and-bibliographic-coupling.epub"
+    },
+    {
+      "path": "co-word-and-keyword-co-occurrence.html",
+      "title": "17 Co-word and Keyword Co-occurrence",
+      "epub_source": "EPUB/text/ch024.xhtml",
+      "pdf": "downloads/chapters/co-word-and-keyword-co-occurrence.pdf",
+      "epub": "downloads/chapters/co-word-and-keyword-co-occurrence.epub"
+    },
+    {
+      "path": "community-detection-and-backbone-extraction.html",
+      "title": "18 Community Detection and Backbone Extraction",
+      "epub_source": "EPUB/text/ch025.xhtml",
+      "pdf": "downloads/chapters/community-detection-and-backbone-extraction.pdf",
+      "epub": "downloads/chapters/community-detection-and-backbone-extraction.epub"
+    },
+    {
+      "path": "science-mapping-and-overlay-maps.html",
+      "title": "19 Science Mapping and Overlay Maps",
+      "epub_source": "EPUB/text/ch026.xhtml",
+      "pdf": "downloads/chapters/science-mapping-and-overlay-maps.pdf",
+      "epub": "downloads/chapters/science-mapping-and-overlay-maps.epub"
+    },
+    {
+      "path": "network-visualization-and-interoperability.html",
+      "title": "20 Network Visualization and Interoperability",
+      "epub_source": "EPUB/text/ch027.xhtml",
+      "pdf": "downloads/chapters/network-visualization-and-interoperability.pdf",
+      "epub": "downloads/chapters/network-visualization-and-interoperability.epub"
+    },
+    {
+      "path": "text-mining-bibliographic-corpora.html",
+      "title": "21 Text Mining Bibliographic Corpora",
+      "epub_source": "EPUB/text/ch028.xhtml",
+      "pdf": "downloads/chapters/text-mining-bibliographic-corpora.pdf",
+      "epub": "downloads/chapters/text-mining-bibliographic-corpora.epub"
+    },
+    {
+      "path": "topic-modeling.html",
+      "title": "22 Topic Modeling",
+      "epub_source": "EPUB/text/ch029.xhtml",
+      "pdf": "downloads/chapters/topic-modeling.pdf",
+      "epub": "downloads/chapters/topic-modeling.epub"
+    },
+    {
+      "path": "keyword-extraction.html",
+      "title": "23 Keyword Extraction",
+      "epub_source": "EPUB/text/ch030.xhtml",
+      "pdf": "downloads/chapters/keyword-extraction.pdf",
+      "epub": "downloads/chapters/keyword-extraction.epub"
+    },
+    {
+      "path": "embeddings-for-scientometrics.html",
+      "title": "24 Embeddings for Scientometrics",
+      "epub_source": "EPUB/text/ch031.xhtml",
+      "pdf": "downloads/chapters/embeddings-for-scientometrics.pdf",
+      "epub": "downloads/chapters/embeddings-for-scientometrics.epub"
+    },
+    {
+      "path": "detecting-emerging-topics.html",
+      "title": "25 Detecting Emerging Topics",
+      "epub_source": "EPUB/text/ch032.xhtml",
+      "pdf": "downloads/chapters/detecting-emerging-topics.pdf",
+      "epub": "downloads/chapters/detecting-emerging-topics.epub"
+    },
+    {
+      "path": "altmetrics.html",
+      "title": "26 Altmetrics",
+      "epub_source": "EPUB/text/ch033.xhtml",
+      "pdf": "downloads/chapters/altmetrics.pdf",
+      "epub": "downloads/chapters/altmetrics.epub"
+    },
+    {
+      "path": "open-science-indicators.html",
+      "title": "27 Open Science Indicators",
+      "epub_source": "EPUB/text/ch034.xhtml",
+      "pdf": "downloads/chapters/open-science-indicators.pdf",
+      "epub": "downloads/chapters/open-science-indicators.epub"
+    },
+    {
+      "path": "gender-and-equity-analysis.html",
+      "title": "28 Gender and Equity Analysis",
+      "epub_source": "EPUB/text/ch035.xhtml",
+      "pdf": "downloads/chapters/gender-and-equity-analysis.pdf",
+      "epub": "downloads/chapters/gender-and-equity-analysis.epub"
+    },
+    {
+      "path": "retraction-analysis.html",
+      "title": "29 Retraction Analysis",
+      "epub_source": "EPUB/text/ch036.xhtml",
+      "pdf": "downloads/chapters/retraction-analysis.pdf",
+      "epub": "downloads/chapters/retraction-analysis.epub"
+    },
+    {
+      "path": "funding-analysis-and-grant-to-publication-linkage.html",
+      "title": "30 Funding Analysis and Grant-to-Publication Linkage",
+      "epub_source": "EPUB/text/ch037.xhtml",
+      "pdf": "downloads/chapters/funding-analysis-and-grant-to-publication-linkage.pdf",
+      "epub": "downloads/chapters/funding-analysis-and-grant-to-publication-linkage.epub"
+    },
+    {
+      "path": "patentpaper-linkages.html",
+      "title": "31 Patent\u2013Paper Linkages",
+      "epub_source": "EPUB/text/ch038.xhtml",
+      "pdf": "downloads/chapters/patentpaper-linkages.pdf",
+      "epub": "downloads/chapters/patentpaper-linkages.epub"
+    },
+    {
+      "path": "causal-inference-in-scientometrics.html",
+      "title": "32 Causal Inference in Scientometrics",
+      "epub_source": "EPUB/text/ch039.xhtml",
+      "pdf": "downloads/chapters/causal-inference-in-scientometrics.pdf",
+      "epub": "downloads/chapters/causal-inference-in-scientometrics.epub"
+    },
+    {
+      "path": "reproducibility-rrids-and-badges.html",
+      "title": "33 Reproducibility, RRIDs, and Badges",
+      "epub_source": "EPUB/text/ch040.xhtml",
+      "pdf": "downloads/chapters/reproducibility-rrids-and-badges.pdf",
+      "epub": "downloads/chapters/reproducibility-rrids-and-badges.epub"
+    },
+    {
+      "path": "reproducible-pipelines.html",
+      "title": "34 Reproducible Pipelines",
+      "epub_source": "EPUB/text/ch041.xhtml",
+      "pdf": "downloads/chapters/reproducible-pipelines.pdf",
+      "epub": "downloads/chapters/reproducible-pipelines.epub"
+    },
+    {
+      "path": "interactive-dashboards.html",
+      "title": "35 Interactive Dashboards",
+      "epub_source": "EPUB/text/ch042.xhtml",
+      "pdf": "downloads/chapters/interactive-dashboards.pdf",
+      "epub": "downloads/chapters/interactive-dashboards.epub"
+    },
+    {
+      "path": "parameterized-quarto-reports.html",
+      "title": "36 Parameterized Quarto Reports",
+      "epub_source": "EPUB/text/ch043.xhtml",
+      "pdf": "downloads/chapters/parameterized-quarto-reports.pdf",
+      "epub": "downloads/chapters/parameterized-quarto-reports.epub"
+    },
+    {
+      "path": "building-a-bibliometric-shiny-app.html",
+      "title": "37 Building a Bibliometric Shiny App",
+      "epub_source": "EPUB/text/ch044.xhtml",
+      "pdf": "downloads/chapters/building-a-bibliometric-shiny-app.pdf",
+      "epub": "downloads/chapters/building-a-bibliometric-shiny-app.epub"
+    },
+    {
+      "path": "case-study-1-crispr-field-review-20102024.html",
+      "title": "38 Case Study 1: CRISPR Field Review (2010\u20132024)",
+      "epub_source": "EPUB/text/ch045.xhtml",
+      "pdf": "downloads/chapters/case-study-1-crispr-field-review-20102024.pdf",
+      "epub": "downloads/chapters/case-study-1-crispr-field-review-20102024.epub"
+    },
+    {
+      "path": "case-study-2-institutional-benchmarking.html",
+      "title": "39 Case Study 2: Institutional Benchmarking",
+      "epub_source": "EPUB/text/ch046.xhtml",
+      "pdf": "downloads/chapters/case-study-2-institutional-benchmarking.pdf",
+      "epub": "downloads/chapters/case-study-2-institutional-benchmarking.epub"
+    },
+    {
+      "path": "case-study-3-journal-portfolio-analysis.html",
+      "title": "40 Case Study 3: Journal Portfolio Analysis",
+      "epub_source": "EPUB/text/ch047.xhtml",
+      "pdf": "downloads/chapters/case-study-3-journal-portfolio-analysis.pdf",
+      "epub": "downloads/chapters/case-study-3-journal-portfolio-analysis.epub"
+    },
+    {
+      "path": "case-study-4-gender-gap-in-scientific-publishing.html",
+      "title": "41 Case Study 4: Gender Gap in Scientific Publishing",
+      "epub_source": "EPUB/text/ch048.xhtml",
+      "pdf": "downloads/chapters/case-study-4-gender-gap-in-scientific-publishing.pdf",
+      "epub": "downloads/chapters/case-study-4-gender-gap-in-scientific-publishing.epub"
+    },
+    {
+      "path": "case-study-5-detecting-emerging-topics.html",
+      "title": "42 Case Study 5: Detecting Emerging Topics",
+      "epub_source": "EPUB/text/ch049.xhtml",
+      "pdf": "downloads/chapters/case-study-5-detecting-emerging-topics.pdf",
+      "epub": "downloads/chapters/case-study-5-detecting-emerging-topics.epub"
+    },
+    {
+      "path": "r-setup-renv-and-docker.html",
+      "title": "A R Setup, renv, and Docker",
+      "epub_source": "EPUB/text/ch051.xhtml",
+      "pdf": "downloads/chapters/r-setup-renv-and-docker.pdf",
+      "epub": "downloads/chapters/r-setup-renv-and-docker.epub"
+    },
+    {
+      "path": "sql-primer-for-the-openalex-snapshot.html",
+      "title": "B SQL Primer for the OpenAlex Snapshot",
+      "epub_source": "EPUB/text/ch052.xhtml",
+      "pdf": "downloads/chapters/sql-primer-for-the-openalex-snapshot.pdf",
+      "epub": "downloads/chapters/sql-primer-for-the-openalex-snapshot.epub"
+    },
+    {
+      "path": "indicator-crosswalk-across-databases.html",
+      "title": "C Indicator Crosswalk Across Databases",
+      "epub_source": "EPUB/text/ch053.xhtml",
+      "pdf": "downloads/chapters/indicator-crosswalk-across-databases.pdf",
+      "epub": "downloads/chapters/indicator-crosswalk-across-databases.epub"
+    },
+    {
+      "path": "cheatsheets-and-quick-reference.html",
+      "title": "D Cheatsheets and Quick Reference",
+      "epub_source": "EPUB/text/ch054.xhtml",
+      "pdf": "downloads/chapters/cheatsheets-and-quick-reference.pdf",
+      "epub": "downloads/chapters/cheatsheets-and-quick-reference.epub"
+    },
+    {
+      "path": "solutions.html",
+      "title": "E Exercise Solutions",
+      "epub_source": "EPUB/text/ch055.xhtml",
+      "pdf": "downloads/chapters/solutions.pdf",
+      "epub": "downloads/chapters/solutions.epub"
+    },
+    {
+      "path": "glossary.html",
+      "title": "Glossary",
+      "epub_source": "EPUB/text/ch056.xhtml",
+      "pdf": "downloads/chapters/glossary.pdf",
+      "epub": "downloads/chapters/glossary.epub"
+    },
+    {
+      "path": "colophon.html",
+      "title": "Colophon",
+      "epub_source": "EPUB/text/ch057.xhtml",
+      "pdf": "downloads/chapters/colophon.pdf",
+      "epub": "downloads/chapters/colophon.epub"
+    },
+    {
+      "path": "citing-this-guide-1.html",
+      "title": "Citing this Guide",
+      "epub_source": "EPUB/text/ch058.xhtml",
+      "pdf": "downloads/chapters/citing-this-guide-1.pdf",
+      "epub": "downloads/chapters/citing-this-guide-1.epub"
+    },
+    {
+      "path": "references.html",
+      "title": "References",
+      "epub_source": "EPUB/text/ch059.xhtml",
+      "pdf": "downloads/chapters/references.pdf",
+      "epub": "downloads/chapters/references.epub"
+    }
+  ]
+}

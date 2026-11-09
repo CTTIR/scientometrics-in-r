@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 14 Temporal Analysis and Citation Aging | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="14.1 Learning objectives After completing this chapter, you will be able to: Define and apply citation windows of different lengths Compute and interpret the citation half-life for a journal or...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 14 Temporal Analysis and Citation Aging | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/temporal-analysis-and-citation-aging.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="14.1 Learning objectives After completing this chapter, you will be able to: Define and apply citation windows of different lengths Compute and interpret the citation half-life for a journal or...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 14 Temporal Analysis and Citation Aging | Scientometrics in R">
-<meta name="twitter:description" content="14.1 Learning objectives After completing this chapter, you will be able to: Define and apply citation windows of different lengths Compute and interpret the citation half-life for a journal or...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="14.1 Learning objectives After completing this chapter, you will be able to: Define and apply citation windows of different lengths Compute and interpret the citation half-life for a journal or..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 14 Temporal Analysis and Citation Aging | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/temporal-analysis-and-citation-aging.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="14.1 Learning objectives After completing this chapter, you will be able to: Define and apply citation windows of different lengths Compute and interpret the citation half-life for a journal or..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 14 Temporal Analysis and Citation Aging | Scientometrics in R" name="twitter:title"/>
+<meta content="14.1 Learning objectives After completing this chapter, you will be able to: Define and apply citation windows of different lengths Compute and interpret the citation half-life for a journal or..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="temporal-analysis-and-citation-aging" class="section level1" number="14">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="temporal-analysis-and-citation-aging" number="14">
 <h1>
-<span class="header-section-number">14</span> Temporal Analysis and Citation Aging<a class="anchor" aria-label="anchor" href="#temporal-analysis-and-citation-aging"><i class="fas fa-link"></i></a>
-</h1>
-<div id="temporal-objectives" class="section level2" number="14.1">
+<span class="header-section-number">14</span> Temporal Analysis and Citation Aging<a aria-label="anchor" class="anchor" href="#temporal-analysis-and-citation-aging"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/temporal-analysis-and-citation-aging.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/temporal-analysis-and-citation-aging.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="temporal-objectives" number="14.1">
 <h2>
-<span class="header-section-number">14.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#temporal-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#temporal-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -181,9 +188,9 @@
 <li>Explain how aging patterns differ across disciplines</li>
 </ul>
 </div>
-<div id="temporal-setup" class="section level2" number="14.2">
+<div class="section level2" id="temporal-setup" number="14.2">
 <h2>
-<span class="header-section-number">14.2</span> Setup<a class="anchor" aria-label="anchor" href="#temporal-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.2</span> Setup<a aria-label="anchor" class="anchor" href="#temporal-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -197,9 +204,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="temporal-background" class="section level2" number="14.3">
+<div class="section level2" id="temporal-background" number="14.3">
 <h2>
-<span class="header-section-number">14.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#temporal-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#temporal-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Citations are not evenly distributed over time. Most papers receive the bulk of their citations within a few years of publication, then gradually fade. This phenomenon — <strong>citation aging</strong> or <strong>obsolescence</strong> — was first studied systematically by <span class="citation">Solla Price (<a href="references.html#ref-price1963">1963</a>)</span>, who observed that scientific literature has a characteristic “half-life”: the time by which half of all citations to a given year’s output have been received.</p>
 <p>The <strong>citation half-life</strong> varies dramatically across disciplines. In fast-moving fields like molecular biology, half-lives may be three to four years; in mathematics or humanities, they can exceed ten years. This has direct consequences for metrics: a two-year Journal Impact Factor systematically undervalues journals in slow-aging fields <span class="citation">(<a href="references.html#ref-waltman2016">Waltman 2016</a>)</span>.</p>
@@ -208,13 +215,13 @@
 <p><strong>Sleeping beauties</strong> — papers that receive few citations for years then suddenly attract attention <span class="citation">(<a href="references.html#ref-kleinberg2003">Kleinberg 2003</a>)</span> — violate the standard aging model. Their existence is a reminder that citation half-lives describe averages, not individual papers. <span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> already noted that some ideas take decades to be recognised.</p>
 <p>Understanding citation temporality is essential for fair evaluation. Comparing citation counts without accounting for publication year, citation window, and field-specific aging rates produces meaningless results.</p>
 </div>
-<div id="temporal-example" class="section level2" number="14.4">
+<div class="section level2" id="temporal-example" number="14.4">
 <h2>
-<span class="header-section-number">14.4</span> Worked example<a class="anchor" aria-label="anchor" href="#temporal-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4</span> Worked example<a aria-label="anchor" class="anchor" href="#temporal-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="acquiring-the-data-1" class="section level3" number="14.4.1">
+<div class="section level3" id="acquiring-the-data-1" number="14.4.1">
 <h3>
-<span class="header-section-number">14.4.1</span> Acquiring the data<a class="anchor" aria-label="anchor" href="#acquiring-the-data-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.1</span> Acquiring the data<a aria-label="anchor" class="anchor" href="#acquiring-the-data-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch works from two journals with different expected aging profiles.</p>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
@@ -245,9 +252,9 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span>,</span>
 <span>         age <span class="op">=</span> <span class="fl">2024</span> <span class="op">-</span> <span class="va">year</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="citation-aging-curves" class="section level3" number="14.4.2">
+<div class="section level3" id="citation-aging-curves" number="14.4.2">
 <h3>
-<span class="header-section-number">14.4.2</span> Citation aging curves<a class="anchor" aria-label="anchor" href="#citation-aging-curves"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.2</span> Citation aging curves<a aria-label="anchor" class="anchor" href="#citation-aging-curves"><i class="fas fa-link"></i></a>
 </h3>
 <p>We compute mean citations by age (years since publication) for each journal.</p>
 <div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
@@ -269,15 +276,15 @@
 <span>       colour <span class="op">=</span> <span class="st">"Journal"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:14-fig-temporal-aging"></span>
-<img src="scientometrics-in-r_files/figure-html/14-fig-temporal-aging-1.png" alt="Line chart showing mean citation count by years since publication for two journals. PLOS ONE articles accumulate citations faster in early years, while Scientometrics articles show a slower but more sustained pattern." width="90%"><p class="caption">
+<span id="fig:14-fig-temporal-aging" style="display:block;"></span>
+<img alt="Line chart showing mean citation count by years since publication for two journals. PLOS ONE articles accumulate citations faster in early years, while Scientometrics articles show a slower but more sustained pattern." src="scientometrics-in-r_files/figure-html/14-fig-temporal-aging-1.png" width="90%"/><p class="caption">
 Figure 14.1: Citation aging curves for Scientometrics and PLOS ONE articles published 2013-2018.
 </p>
 </div>
 </div>
-<div id="estimating-citation-half-life" class="section level3" number="14.4.3">
+<div class="section level3" id="estimating-citation-half-life" number="14.4.3">
 <h3>
-<span class="header-section-number">14.4.3</span> Estimating citation half-life<a class="anchor" aria-label="anchor" href="#estimating-citation-half-life"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.3</span> Estimating citation half-life<a aria-label="anchor" class="anchor" href="#estimating-citation-half-life"><i class="fas fa-link"></i></a>
 </h3>
 <p>We estimate the half-life as the age at which cumulative citations reach 50% of total.</p>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
@@ -751,30 +758,30 @@ Figure 14.1: Citation aging curves for Scientometrics and PLOS ONE articles publ
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="journal">Journal</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="total_cites">Total citations</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="half_life_age">Half-life (years)</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="journal" rowspan="1" scope="col">Journal</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="total_cites" rowspan="1" scope="col">Total citations</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="half_life_age" rowspan="1" scope="col">Half-life (years)</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="journal" class="gt_row gt_left">PLOS ONE</td>
-<td headers="total_cites" class="gt_row gt_right">16861</td>
-<td headers="half_life_age" class="gt_row gt_right">10</td>
+<td class="gt_row gt_left" headers="journal">PLOS ONE</td>
+<td class="gt_row gt_right" headers="total_cites">16861</td>
+<td class="gt_row gt_right" headers="half_life_age">10</td>
 </tr>
 <tr>
-<td headers="journal" class="gt_row gt_left">Scientometrics</td>
-<td headers="total_cites" class="gt_row gt_right">17513</td>
-<td headers="half_life_age" class="gt_row gt_right">8</td>
+<td class="gt_row gt_left" headers="journal">Scientometrics</td>
+<td class="gt_row gt_right" headers="total_cites">17513</td>
+<td class="gt_row gt_right" headers="half_life_age">8</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="price-index" class="section level3" number="14.4.4">
+<div class="section level3" id="price-index" number="14.4.4">
 <h3>
-<span class="header-section-number">14.4.4</span> Price index<a class="anchor" aria-label="anchor" href="#price-index"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.4</span> Price index<a aria-label="anchor" class="anchor" href="#price-index"><i class="fas fa-link"></i></a>
 </h3>
 <p>The Price index is the fraction of references less than five years old. A full computation requires publication years of each reference; here we show reference-list lengths as a starting point.</p>
 <div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
@@ -788,9 +795,9 @@ Figure 14.1: Citation aging curves for Scientometrics and PLOS ONE articles publ
 #&gt; 1 PLOS ONE            47.7
 #&gt; 2 Scientometrics      45.5</code></pre>
 </div>
-<div id="cumulative-citation-trajectories" class="section level3" number="14.4.5">
+<div class="section level3" id="cumulative-citation-trajectories" number="14.4.5">
 <h3>
-<span class="header-section-number">14.4.5</span> Cumulative citation trajectories<a class="anchor" aria-label="anchor" href="#cumulative-citation-trajectories"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.4.5</span> Cumulative citation trajectories<a aria-label="anchor" class="anchor" href="#cumulative-citation-trajectories"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cum_aging</span> <span class="op">&lt;-</span> <span class="va">works_all</span> <span class="op">|&gt;</span></span>
@@ -814,16 +821,16 @@ Figure 14.1: Citation aging curves for Scientometrics and PLOS ONE articles publ
 <span>           colour <span class="op">=</span> <span class="st">"grey40"</span>, size <span class="op">=</span> <span class="fl">3.5</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:14-fig-temporal-cumulative"></span>
-<img src="scientometrics-in-r_files/figure-html/14-fig-temporal-cumulative-1.png" alt="Line chart showing how the cumulative share of total citations grows with article age for each journal. Steeper curves indicate faster citation accumulation." width="90%"><p class="caption">
+<span id="fig:14-fig-temporal-cumulative" style="display:block;"></span>
+<img alt="Line chart showing how the cumulative share of total citations grows with article age for each journal. Steeper curves indicate faster citation accumulation." src="scientometrics-in-r_files/figure-html/14-fig-temporal-cumulative-1.png" width="90%"/><p class="caption">
 Figure 14.2: Cumulative citation percentage by years since publication.
 </p>
 </div>
 </div>
 </div>
-<div id="temporal-diagnostics" class="section level2" number="14.5">
+<div class="section level2" id="temporal-diagnostics" number="14.5">
 <h2>
-<span class="header-section-number">14.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#temporal-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#temporal-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -836,14 +843,14 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 <strong>Outliers</strong>: A few extremely highly cited papers can distort mean-based aging curves. Compare mean and median trajectories.</li>
 </ul>
 </div>
-<div id="temporal-limitations" class="section level2" number="14.6">
+<div class="section level2" id="temporal-limitations" number="14.6">
 <h2>
-<span class="header-section-number">14.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#temporal-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#temporal-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-13" class="section level2 callout callout-warn" number="14.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-13" number="14.7">
 <h2>
-<span class="header-section-number">14.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-13"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-13"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -858,14 +865,14 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 <strong>Do not penalise slow-aging fields.</strong> Using short citation windows systematically undervalues mathematics, humanities, and theoretical disciplines <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="temporal-pitfalls" class="section level2" number="14.8">
+<div class="section level2" id="temporal-pitfalls" number="14.8">
 <h2>
-<span class="header-section-number">14.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#temporal-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#temporal-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-13" class="section level2 callout callout-stop" number="14.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-13" number="14.9">
 <h2>
-<span class="header-section-number">14.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-13"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-13"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -878,9 +885,9 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 <strong>Forgetting about the denominator.</strong> If the number of publications in a field is growing, the absolute citation count grows even if the per-paper impact is constant.</li>
 </ul>
 </div>
-<div id="temporal-exercises" class="section level2" number="14.10">
+<div class="section level2" id="temporal-exercises" number="14.10">
 <h2>
-<span class="header-section-number">14.10</span> Exercises<a class="anchor" aria-label="anchor" href="#temporal-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.10</span> Exercises<a aria-label="anchor" class="anchor" href="#temporal-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Half-life comparison.</strong> Fetch works from a mathematics journal and a biomedical journal. Compute and compare their citation half-lives. Does the difference match disciplinary expectations?</p></li>
@@ -890,15 +897,15 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 <li><p><strong>Publication-cohort sensitivity.</strong> Using the fetched Scientometrics sample, compare current cumulative citation summaries for the 2-, 3- and 5-year publication cohorts ending in 2018. Report observed denominators and explain why changing the publication cohort does not establish a citation-receipt window or compute JIF.</p></li>
 </ol>
 </div>
-<div id="id_14-solutions" class="section level2 callout callout-ok" number="14.11">
+<div class="section level2 callout callout-ok" id="id_14-solutions" number="14.11">
 <h2>
-<span class="header-section-number">14.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_14-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_14-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="temporal-reading" class="section level2" number="14.12">
+<div class="section level2" id="temporal-reading" number="14.12">
 <h2>
-<span class="header-section-number">14.12</span> Further reading<a class="anchor" aria-label="anchor" href="#temporal-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.12</span> Further reading<a aria-label="anchor" class="anchor" href="#temporal-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -913,9 +920,9 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 <span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> — The Leiden Manifesto; warns against penalising slow-aging fields with short citation windows.</li>
 </ul>
 </div>
-<div id="temporal-sessioninfo" class="section level2" number="14.13">
+<div class="section level2" id="temporal-sessioninfo" number="14.13">
 <h2>
-<span class="header-section-number">14.13</span> Session info<a class="anchor" aria-label="anchor" href="#temporal-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">14.13</span> Session info<a aria-label="anchor" class="anchor" href="#temporal-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -983,18 +990,14 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 #&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
 #&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
 #&gt; [103] bit64_4.8.6</code></pre>
-
 </div>
 </div>
-
-
-
 <div class="chapter-nav">
 <div class="prev"><a href="institutional-and-country-analysis.html"><span class="header-section-number">13</span> Institutional and Country Analysis</a></div>
 <div class="next"><a href="co-authorship-networks.html"><span class="header-section-number">15</span> Co-authorship Networks</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#temporal-analysis-and-citation-aging"><span class="header-section-number">14</span> Temporal Analysis and Citation Aging</a></li>
 <li><a class="nav-link" href="#temporal-objectives"><span class="header-section-number">14.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#temporal-setup"><span class="header-section-number">14.2</span> Setup</a></li>
@@ -1018,23 +1021,21 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 <li><a class="nav-link" href="#temporal-reading"><span class="header-section-number">14.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#temporal-sessioninfo"><span class="header-section-number">14.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/14-temporal-analysis-citation-aging.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/14-temporal-analysis-citation-aging.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/14-temporal-analysis-citation-aging.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/14-temporal-analysis-citation-aging.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1116,23 +1117,15 @@ Figure 14.2: Cumulative citation percentage by years since publication.
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  
-
-  
-
 </div>
- <!-- .container -->
-
+<!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 33 Reproducibility, RRIDs, and Badges | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="33.1 Learning objectives After completing this chapter, you will be able to: Define reproducibility indicators and explain their role in research evaluation Search for data availability statements...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 33 Reproducibility, RRIDs, and Badges | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/reproducibility-rrids-and-badges.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="33.1 Learning objectives After completing this chapter, you will be able to: Define reproducibility indicators and explain their role in research evaluation Search for data availability statements...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 33 Reproducibility, RRIDs, and Badges | Scientometrics in R">
-<meta name="twitter:description" content="33.1 Learning objectives After completing this chapter, you will be able to: Define reproducibility indicators and explain their role in research evaluation Search for data availability statements...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="33.1 Learning objectives After completing this chapter, you will be able to: Define reproducibility indicators and explain their role in research evaluation Search for data availability statements..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 33 Reproducibility, RRIDs, and Badges | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/reproducibility-rrids-and-badges.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="33.1 Learning objectives After completing this chapter, you will be able to: Define reproducibility indicators and explain their role in research evaluation Search for data availability statements..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 33 Reproducibility, RRIDs, and Badges | Scientometrics in R" name="twitter:title"/>
+<meta content="33.1 Learning objectives After completing this chapter, you will be able to: Define reproducibility indicators and explain their role in research evaluation Search for data availability statements..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="reproducibility-rrids-and-badges" class="section level1" number="33">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="reproducibility-rrids-and-badges" number="33">
 <h1>
-<span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges<a class="anchor" aria-label="anchor" href="#reproducibility-rrids-and-badges"><i class="fas fa-link"></i></a>
-</h1>
-<div id="repro-objectives" class="section level2" number="33.1">
+<span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges<a aria-label="anchor" class="anchor" href="#reproducibility-rrids-and-badges"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/reproducibility-rrids-and-badges.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/reproducibility-rrids-and-badges.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="repro-objectives" number="33.1">
 <h2>
-<span class="header-section-number">33.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#repro-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#repro-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Recognise the gap between reproducibility signalling and actual reproducibility</li>
 </ul>
 </div>
-<div id="repro-setup" class="section level2" number="33.2">
+<div class="section level2" id="repro-setup" number="33.2">
 <h2>
-<span class="header-section-number">33.2</span> Setup<a class="anchor" aria-label="anchor" href="#repro-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.2</span> Setup<a aria-label="anchor" class="anchor" href="#repro-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb486"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -196,9 +203,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="repro-background" class="section level2" number="33.3">
+<div class="section level2" id="repro-background" number="33.3">
 <h2>
-<span class="header-section-number">33.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#repro-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#repro-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>The “replication crisis” has prompted widespread adoption of transparency practices: open data, open code, pre-registration, and registered reports. Bibliometrics can measure the uptake of these practices at scale, providing evidence for policy interventions.</p>
 <p><strong>Open badges</strong> are visual indicators (icons) attached to published papers that certify the availability of data, materials, or pre-registration. Journals like <em>Psychological Science</em> pioneered their use. Studies suggest that badges increase data sharing rates, though the quality of shared data varies.</p>
@@ -207,13 +214,13 @@
 <p><strong>Code availability</strong> is increasingly expected, especially in computational fields. Journals like <em>Nature</em> require code availability statements. Platforms like GitHub, Zenodo, and Code Ocean facilitate code sharing, and DOIs for code repositories enable citation and tracking.</p>
 <p>These practices are measurable proxies for reproducibility, but they are not reproducibility itself. A paper with an open badge may have unusable data; a paper without one may be perfectly reproducible. <span class="citation">Hicks et al. (<a href="references.html#ref-hicks2015">2015</a>)</span> warn against using transparency indicators as mechanical evaluation criteria.</p>
 </div>
-<div id="repro-example" class="section level2" number="33.4">
+<div class="section level2" id="repro-example" number="33.4">
 <h2>
-<span class="header-section-number">33.4</span> Worked example<a class="anchor" aria-label="anchor" href="#repro-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.4</span> Worked example<a aria-label="anchor" class="anchor" href="#repro-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="analysing-access-status-and-metadata-coverage" class="section level3" number="33.4.1">
+<div class="section level3" id="analysing-access-status-and-metadata-coverage" number="33.4.1">
 <h3>
-<span class="header-section-number">33.4.1</span> Analysing access status and metadata coverage<a class="anchor" aria-label="anchor" href="#analysing-access-status-and-metadata-coverage"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.4.1</span> Analysing access status and metadata coverage<a aria-label="anchor" class="anchor" href="#analysing-access-status-and-metadata-coverage"><i class="fas fa-link"></i></a>
 </h3>
 <p>The example below measures article access status and abstract coverage in
 OpenAlex. It does not detect data/code availability, RRIDs, badges, or successful
@@ -242,9 +249,9 @@ and validation; OA status is not a validated substitute for them.</p>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Works: {nrow(works_repro)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Works: 400</code></pre>
 </div>
-<div id="observed-article-access-status" class="section level3" number="33.4.2">
+<div class="section level3" id="observed-article-access-status" number="33.4.2">
 <h3>
-<span class="header-section-number">33.4.2</span> Observed article access status<a class="anchor" aria-label="anchor" href="#observed-article-access-status"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.4.2</span> Observed article access status<a aria-label="anchor" class="anchor" href="#observed-article-access-status"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb489"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_repro</span> <span class="op">|&gt;</span></span>
@@ -258,15 +265,15 @@ and validation; OA status is not a validated substitute for them.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, y <span class="op">=</span> <span class="st">"OA rate"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:33-fig-repro-oa-trend"></span>
-<img src="scientometrics-in-r_files/figure-html/33-fig-repro-oa-trend-1.png" alt="Line chart of recorded article access status by publication year; it does not measure open data or code." width="90%"><p class="caption">
+<span id="fig:33-fig-repro-oa-trend" style="display:block;"></span>
+<img alt="Line chart of recorded article access status by publication year; it does not measure open data or code." src="scientometrics-in-r_files/figure-html/33-fig-repro-oa-trend-1.png" width="90%"/><p class="caption">
 Figure 33.1: Open-access share among sampled articles with observed access status, by year.
 </p>
 </div>
 </div>
-<div id="abstract-availability-as-metadata-completeness" class="section level3" number="33.4.3">
+<div class="section level3" id="abstract-availability-as-metadata-completeness" number="33.4.3">
 <h3>
-<span class="header-section-number">33.4.3</span> Abstract availability as metadata completeness<a class="anchor" aria-label="anchor" href="#abstract-availability-as-metadata-completeness"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.4.3</span> Abstract availability as metadata completeness<a aria-label="anchor" class="anchor" href="#abstract-availability-as-metadata-completeness"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb490"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_repro</span> <span class="op">|&gt;</span></span>
@@ -279,15 +286,15 @@ Figure 33.1: Open-access share among sampled articles with observed access statu
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, y <span class="op">=</span> <span class="st">"Abstract available"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:33-fig-repro-abstract"></span>
-<img src="scientometrics-in-r_files/figure-html/33-fig-repro-abstract-1.png" alt="Line chart showing the proportion of articles with available abstracts over time." width="90%"><p class="caption">
+<span id="fig:33-fig-repro-abstract" style="display:block;"></span>
+<img alt="Line chart showing the proportion of articles with available abstracts over time." src="scientometrics-in-r_files/figure-html/33-fig-repro-abstract-1.png" width="90%"/><p class="caption">
 Figure 33.2: Abstract availability rate by year.
 </p>
 </div>
 </div>
-<div id="access-status-and-cumulative-citations" class="section level3" number="33.4.4">
+<div class="section level3" id="access-status-and-cumulative-citations" number="33.4.4">
 <h3>
-<span class="header-section-number">33.4.4</span> Access status and cumulative citations<a class="anchor" aria-label="anchor" href="#access-status-and-cumulative-citations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.4.4</span> Access status and cumulative citations<a aria-label="anchor" class="anchor" href="#access-status-and-cumulative-citations"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb491"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_repro</span> <span class="op">|&gt;</span></span>
@@ -298,15 +305,15 @@ Figure 33.2: Abstract availability rate by year.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Access status"</span>, y <span class="op">=</span> <span class="st">"Citations (log scale)"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:33-fig-repro-impact"></span>
-<img src="scientometrics-in-r_files/figure-html/33-fig-repro-impact-1.png" alt="Box plot comparing cumulative citations for OA and closed papers without estimating a causal effect or data-sharing relationship." width="90%"><p class="caption">
+<span id="fig:33-fig-repro-impact" style="display:block;"></span>
+<img alt="Box plot comparing cumulative citations for OA and closed papers without estimating a causal effect or data-sharing relationship." src="scientometrics-in-r_files/figure-html/33-fig-repro-impact-1.png" width="90%"/><p class="caption">
 Figure 33.3: Current cumulative citation counts by recorded article access status.
 </p>
 </div>
 </div>
-<div id="summary-statistics" class="section level3" number="33.4.5">
+<div class="section level3" id="summary-statistics" number="33.4.5">
 <h3>
-<span class="header-section-number">33.4.5</span> Summary statistics<a class="anchor" aria-label="anchor" href="#summary-statistics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.4.5</span> Summary statistics<a aria-label="anchor" class="anchor" href="#summary-statistics"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb492"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_repro</span> <span class="op">|&gt;</span></span>
@@ -768,34 +775,34 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="is_oa">is_oa</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n">n</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cites">mean_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="abstract_rate">abstract_rate</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_center" colspan="1" id="is_oa" rowspan="1" scope="col">is_oa</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n" rowspan="1" scope="col">n</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="mean_cites" rowspan="1" scope="col">mean_cites</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="abstract_rate" rowspan="1" scope="col">abstract_rate</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="is_oa" class="gt_row gt_center">FALSE</td>
-<td headers="n" class="gt_row gt_right">206</td>
-<td headers="mean_cites" class="gt_row gt_right">24.2</td>
-<td headers="abstract_rate" class="gt_row gt_right">0%</td>
+<td class="gt_row gt_center" headers="is_oa">FALSE</td>
+<td class="gt_row gt_right" headers="n">205</td>
+<td class="gt_row gt_right" headers="mean_cites">24.3</td>
+<td class="gt_row gt_right" headers="abstract_rate">0%</td>
 </tr>
 <tr>
-<td headers="is_oa" class="gt_row gt_center">TRUE</td>
-<td headers="n" class="gt_row gt_right">194</td>
-<td headers="mean_cites" class="gt_row gt_right">39.3</td>
-<td headers="abstract_rate" class="gt_row gt_right">55%</td>
+<td class="gt_row gt_center" headers="is_oa">TRUE</td>
+<td class="gt_row gt_right" headers="n">195</td>
+<td class="gt_row gt_right" headers="mean_cites">39.4</td>
+<td class="gt_row gt_right" headers="abstract_rate">55%</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
 </div>
-<div id="repro-diagnostics" class="section level2" number="33.5">
+<div class="section level2" id="repro-diagnostics" number="33.5">
 <h2>
-<span class="header-section-number">33.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#repro-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#repro-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -808,14 +815,14 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 <strong>Field differences</strong>: Data sharing norms vary enormously. Genomics shares data routinely; clinical research often cannot due to privacy. Compare within fields.</li>
 </ul>
 </div>
-<div id="repro-limitations" class="section level2" number="33.6">
+<div class="section level2" id="repro-limitations" number="33.6">
 <h2>
-<span class="header-section-number">33.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#repro-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#repro-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-32" class="section level2 callout callout-warn" number="33.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-32" number="33.7">
 <h2>
-<span class="header-section-number">33.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-32"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-32"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -828,14 +835,14 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 <strong>Do not penalise fields where sharing is constrained.</strong> Clinical data (privacy), indigenous data (sovereignty), and sensitive social data cannot be freely shared. Mandating open data policies uniformly across fields is inappropriate <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="repro-pitfalls" class="section level2" number="33.8">
+<div class="section level2" id="repro-pitfalls" number="33.8">
 <h2>
-<span class="header-section-number">33.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#repro-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#repro-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-32" class="section level2 callout callout-stop" number="33.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-32" number="33.9">
 <h2>
-<span class="header-section-number">33.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-32"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-32"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -848,9 +855,9 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 <strong>Using transparency metrics as performance indicators.</strong> Transparency practices should be valued, but mechanically rewarding them creates perverse incentives (superficial compliance).</li>
 </ul>
 </div>
-<div id="repro-exercises" class="section level2" number="33.10">
+<div class="section level2" id="repro-exercises" number="33.10">
 <h2>
-<span class="header-section-number">33.10</span> Exercises<a class="anchor" aria-label="anchor" href="#repro-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.10</span> Exercises<a aria-label="anchor" class="anchor" href="#repro-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>DAS detection.</strong> For papers with full abstracts, search for keywords like “data availability”, “code availability”, or “github.com” in the abstract text. What proportion mention data or code sharing?</p></li>
@@ -858,15 +865,15 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 <li><p><strong>Temporal trends.</strong> Track recorded OA status and abstract coverage by publication cohort. Report the usable denominators and explain why these measures do not establish data/code sharing or reproducibility.</p></li>
 </ol>
 </div>
-<div id="id_33-solutions" class="section level2 callout callout-ok" number="33.11">
+<div class="section level2 callout callout-ok" id="id_33-solutions" number="33.11">
 <h2>
-<span class="header-section-number">33.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_33-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_33-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="repro-reading" class="section level2" number="33.12">
+<div class="section level2" id="repro-reading" number="33.12">
 <h2>
-<span class="header-section-number">33.12</span> Further reading<a class="anchor" aria-label="anchor" href="#repro-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.12</span> Further reading<a aria-label="anchor" class="anchor" href="#repro-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -877,9 +884,9 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 <span class="citation">American Society for Cell Biology (<a href="references.html#ref-dora2012">2012</a>)</span> — DORA: assessment should consider research practices, not just outputs.</li>
 </ul>
 </div>
-<div id="repro-sessioninfo" class="section level2" number="33.13">
+<div class="section level2" id="repro-sessioninfo" number="33.13">
 <h2>
-<span class="header-section-number">33.13</span> Session info<a class="anchor" aria-label="anchor" href="#repro-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">33.13</span> Session info<a aria-label="anchor" class="anchor" href="#repro-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb493"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -963,18 +970,14 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 #&gt; [115] assertthat_0.2.1       pubmedR_1.0.2          slam_0.1-56           
 #&gt; [118] viridisLite_0.4.3      scales_1.4.0           crayon_1.5.3          
 #&gt; [121] openxlsx_4.2.9         rlang_1.3.0            fastmatch_1.1-8</code></pre>
-
 </div>
 </div>
-
-
-
 <div class="chapter-nav">
 <div class="prev"><a href="causal-inference-in-scientometrics.html"><span class="header-section-number">32</span> Causal Inference in Scientometrics</a></div>
 <div class="next"><a href="reproducible-pipelines.html"><span class="header-section-number">34</span> Reproducible Pipelines</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#reproducibility-rrids-and-badges"><span class="header-section-number">33</span> Reproducibility, RRIDs, and Badges</a></li>
 <li><a class="nav-link" href="#repro-objectives"><span class="header-section-number">33.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#repro-setup"><span class="header-section-number">33.2</span> Setup</a></li>
@@ -998,23 +1001,21 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 <li><a class="nav-link" href="#repro-reading"><span class="header-section-number">33.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#repro-sessioninfo"><span class="header-section-number">33.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/33-reproducibility-rrids-badges.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/33-reproducibility-rrids-badges.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/33-reproducibility-rrids-badges.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/33-reproducibility-rrids-badges.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1096,23 +1097,15 @@ Figure 33.3: Current cumulative citation counts by recorded article access statu
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  
-
-  
-
 </div>
- <!-- .container -->
-
+<!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

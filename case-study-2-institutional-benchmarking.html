@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 39 Case Study 2: Institutional Benchmarking | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="39.1 Objective Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 39 Case Study 2: Institutional Benchmarking | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/case-study-2-institutional-benchmarking.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="39.1 Objective Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 39 Case Study 2: Institutional Benchmarking | Scientometrics in R">
-<meta name="twitter:description" content="39.1 Objective Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="39.1 Objective Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 39 Case Study 2: Institutional Benchmarking | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/case-study-2-institutional-benchmarking.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="39.1 Objective Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 39 Case Study 2: Institutional Benchmarking | Scientometrics in R" name="twitter:title"/>
+<meta content="39.1 Objective Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,25 +165,24 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="case-study-2-institutional-benchmarking" class="section level1" number="39">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="case-study-2-institutional-benchmarking" number="39">
 <h1>
-<span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking<a class="anchor" aria-label="anchor" href="#case-study-2-institutional-benchmarking"><i class="fas fa-link"></i></a>
-</h1>
-<div id="objective-1" class="section level2" number="39.1">
+<span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking<a aria-label="anchor" class="anchor" href="#case-study-2-institutional-benchmarking"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/case-study-2-institutional-benchmarking.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/case-study-2-institutional-benchmarking.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="objective-1" number="39.1">
 <h2>
-<span class="header-section-number">39.1</span> Objective<a class="anchor" aria-label="anchor" href="#objective-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.1</span> Objective<a aria-label="anchor" class="anchor" href="#objective-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Compare citation summaries, fractional credits and open-access metadata in capped publication samples from five universities. These descriptive samples do not measure total productivity or field-normalised impact.</p>
 </div>
-<div id="setup-1" class="section level2" number="39.2">
+<div class="section level2" id="setup-1" number="39.2">
 <h2>
-<span class="header-section-number">39.2</span> Setup<a class="anchor" aria-label="anchor" href="#setup-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.2</span> Setup<a aria-label="anchor" class="anchor" href="#setup-1"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -190,9 +197,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"institutional_samples.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="data-acquisition-1" class="section level2" number="39.3">
+<div class="section level2" id="data-acquisition-1" number="39.3">
 <h2>
-<span class="header-section-number">39.3</span> Data acquisition<a class="anchor" aria-label="anchor" href="#data-acquisition-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.3</span> Data acquisition<a aria-label="anchor" class="anchor" href="#data-acquisition-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Institution IDs were checked against OpenAlex on 30 October 2026, including the
 <a href="https://openalex.org/institutions/I17974374">University of São Paulo record</a>. Each
@@ -226,9 +233,9 @@ A failed or empty request stops the comparison instead of silently dropping an i
 <span><span class="va">inst_data</span> <span class="op">&lt;-</span> <span class="va">institutions</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>works <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">oa_id</span>, <span class="va">fetch_works</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="publication-volume" class="section level2" number="39.4">
+<div class="section level2" id="publication-volume" number="39.4">
 <h2>
-<span class="header-section-number">39.4</span> Publication volume<a class="anchor" aria-label="anchor" href="#publication-volume"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.4</span> Publication volume<a aria-label="anchor" class="anchor" href="#publication-volume"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inst_data</span> <span class="op">|&gt;</span></span>
@@ -238,15 +245,15 @@ A failed or empty request stops the comparison instead of silently dropping an i
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Sampled articles"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:cs02-fig-cs02-volume"></span>
-<img src="scientometrics-in-r_files/figure-html/cs02-fig-cs02-volume-1.png" alt="Bar chart comparing sampled publication volumes for five universities." width="90%"><p class="caption">
+<span id="fig:cs02-fig-cs02-volume" style="display:block;"></span>
+<img alt="Bar chart comparing sampled publication volumes for five universities." src="scientometrics-in-r_files/figure-html/cs02-fig-cs02-volume-1.png" width="90%"/><p class="caption">
 Figure 39.1: Sampled publication counts by institution.
 </p>
 </div>
 </div>
-<div id="citation-summaries" class="section level2" number="39.5">
+<div class="section level2" id="citation-summaries" number="39.5">
 <h2>
-<span class="header-section-number">39.5</span> Citation summaries<a class="anchor" aria-label="anchor" href="#citation-summaries"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.5</span> Citation summaries<a aria-label="anchor" class="anchor" href="#citation-summaries"><i class="fas fa-link"></i></a>
 </h2>
 <p>As in Chapter 13, the citation ratio uses a common year reference from the union
 of the five samples, de-duplicated by work ID. It adjusts for year only, not
@@ -714,69 +721,69 @@ ratios are excluded with their usable denominators shown.</p>
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">short_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_sampled">n_sampled</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_citation_observed">n_citation_observed</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="mean_cites">mean_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="median_cites">median_cites</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_ratio_observed">n_ratio_observed</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="pooled_year_ratio">pooled_year_ratio</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="short_name" rowspan="1" scope="col">short_name</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_sampled" rowspan="1" scope="col">n_sampled</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_citation_observed" rowspan="1" scope="col">n_citation_observed</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="mean_cites" rowspan="1" scope="col">mean_cites</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="median_cites" rowspan="1" scope="col">median_cites</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_ratio_observed" rowspan="1" scope="col">n_ratio_observed</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="pooled_year_ratio" rowspan="1" scope="col">pooled_year_ratio</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="short_name" class="gt_row gt_left">ETH Zurich</td>
-<td headers="n_sampled" class="gt_row gt_right">300</td>
-<td headers="n_citation_observed" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">46.94</td>
-<td headers="median_cites" class="gt_row gt_right">25.00</td>
-<td headers="n_ratio_observed" class="gt_row gt_right">300</td>
-<td headers="pooled_year_ratio" class="gt_row gt_right">1.39</td>
+<td class="gt_row gt_left" headers="short_name">ETH Zurich</td>
+<td class="gt_row gt_right" headers="n_sampled">300</td>
+<td class="gt_row gt_right" headers="n_citation_observed">300</td>
+<td class="gt_row gt_right" headers="mean_cites">46.76</td>
+<td class="gt_row gt_right" headers="median_cites">24.50</td>
+<td class="gt_row gt_right" headers="n_ratio_observed">300</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">1.38</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">MIT</td>
-<td headers="n_sampled" class="gt_row gt_right">300</td>
-<td headers="n_citation_observed" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">43.64</td>
-<td headers="median_cites" class="gt_row gt_right">24.00</td>
-<td headers="n_ratio_observed" class="gt_row gt_right">300</td>
-<td headers="pooled_year_ratio" class="gt_row gt_right">1.27</td>
+<td class="gt_row gt_left" headers="short_name">MIT</td>
+<td class="gt_row gt_right" headers="n_sampled">300</td>
+<td class="gt_row gt_right" headers="n_citation_observed">300</td>
+<td class="gt_row gt_right" headers="mean_cites">43.81</td>
+<td class="gt_row gt_right" headers="median_cites">24.50</td>
+<td class="gt_row gt_right" headers="n_ratio_observed">300</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">1.28</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Oxford</td>
-<td headers="n_sampled" class="gt_row gt_right">300</td>
-<td headers="n_citation_observed" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">33.08</td>
-<td headers="median_cites" class="gt_row gt_right">18.00</td>
-<td headers="n_ratio_observed" class="gt_row gt_right">300</td>
-<td headers="pooled_year_ratio" class="gt_row gt_right">0.98</td>
+<td class="gt_row gt_left" headers="short_name">Oxford</td>
+<td class="gt_row gt_right" headers="n_sampled">300</td>
+<td class="gt_row gt_right" headers="n_citation_observed">300</td>
+<td class="gt_row gt_right" headers="mean_cites">33.10</td>
+<td class="gt_row gt_right" headers="median_cites">18.00</td>
+<td class="gt_row gt_right" headers="n_ratio_observed">300</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">0.98</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">U Cape Town</td>
-<td headers="n_sampled" class="gt_row gt_right">300</td>
-<td headers="n_citation_observed" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">34.92</td>
-<td headers="median_cites" class="gt_row gt_right">12.00</td>
-<td headers="n_ratio_observed" class="gt_row gt_right">300</td>
-<td headers="pooled_year_ratio" class="gt_row gt_right">1.01</td>
+<td class="gt_row gt_left" headers="short_name">U Cape Town</td>
+<td class="gt_row gt_right" headers="n_sampled">300</td>
+<td class="gt_row gt_right" headers="n_citation_observed">300</td>
+<td class="gt_row gt_right" headers="mean_cites">34.56</td>
+<td class="gt_row gt_right" headers="median_cites">12.00</td>
+<td class="gt_row gt_right" headers="n_ratio_observed">300</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">1.00</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">U São Paulo</td>
-<td headers="n_sampled" class="gt_row gt_right">300</td>
-<td headers="n_citation_observed" class="gt_row gt_right">300</td>
-<td headers="mean_cites" class="gt_row gt_right">14.11</td>
-<td headers="median_cites" class="gt_row gt_right">6.00</td>
-<td headers="n_ratio_observed" class="gt_row gt_right">300</td>
-<td headers="pooled_year_ratio" class="gt_row gt_right">0.42</td>
+<td class="gt_row gt_left" headers="short_name">U São Paulo</td>
+<td class="gt_row gt_right" headers="n_sampled">300</td>
+<td class="gt_row gt_right" headers="n_citation_observed">300</td>
+<td class="gt_row gt_right" headers="mean_cites">14.11</td>
+<td class="gt_row gt_right" headers="median_cites">6.00</td>
+<td class="gt_row gt_right" headers="n_ratio_observed">300</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">0.42</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="full-vs.-fractional-counting" class="section level2" number="39.6">
+<div class="section level2" id="full-vs.-fractional-counting" number="39.6">
 <h2>
-<span class="header-section-number">39.6</span> Full vs. fractional counting<a class="anchor" aria-label="anchor" href="#full-vs.-fractional-counting"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.6</span> Full vs. fractional counting<a aria-label="anchor" class="anchor" href="#full-vs.-fractional-counting"><i class="fas fa-link"></i></a>
 </h2>
 <p>Count each distinct affiliation once per work and divide its credit equally.
 Incomplete affiliations make the fractional total unavailable; the coverage
@@ -1239,49 +1246,49 @@ credit, not an estimate of each institution’s contribution.</p>
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="short_name">short_name</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="full_count">full_count</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="affiliation_covered">affiliation_covered</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="frac_count">frac_count</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="ratio">ratio</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="short_name" rowspan="1" scope="col">short_name</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="full_count" rowspan="1" scope="col">full_count</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="affiliation_covered" rowspan="1" scope="col">affiliation_covered</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="frac_count" rowspan="1" scope="col">frac_count</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="ratio" rowspan="1" scope="col">ratio</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="short_name" class="gt_row gt_left">MIT</td>
-<td headers="full_count" class="gt_row gt_right">300</td>
-<td headers="affiliation_covered" class="gt_row gt_right">255</td>
-<td headers="frac_count" class="gt_row gt_right">NA</td>
-<td headers="ratio" class="gt_row gt_right">NA</td>
+<td class="gt_row gt_left" headers="short_name">MIT</td>
+<td class="gt_row gt_right" headers="full_count">300</td>
+<td class="gt_row gt_right" headers="affiliation_covered">255</td>
+<td class="gt_row gt_right" headers="frac_count">NA</td>
+<td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">Oxford</td>
-<td headers="full_count" class="gt_row gt_right">300</td>
-<td headers="affiliation_covered" class="gt_row gt_right">264</td>
-<td headers="frac_count" class="gt_row gt_right">NA</td>
-<td headers="ratio" class="gt_row gt_right">NA</td>
+<td class="gt_row gt_left" headers="short_name">Oxford</td>
+<td class="gt_row gt_right" headers="full_count">300</td>
+<td class="gt_row gt_right" headers="affiliation_covered">262</td>
+<td class="gt_row gt_right" headers="frac_count">NA</td>
+<td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">ETH Zurich</td>
-<td headers="full_count" class="gt_row gt_right">300</td>
-<td headers="affiliation_covered" class="gt_row gt_right">272</td>
-<td headers="frac_count" class="gt_row gt_right">NA</td>
-<td headers="ratio" class="gt_row gt_right">NA</td>
+<td class="gt_row gt_left" headers="short_name">ETH Zurich</td>
+<td class="gt_row gt_right" headers="full_count">300</td>
+<td class="gt_row gt_right" headers="affiliation_covered">272</td>
+<td class="gt_row gt_right" headers="frac_count">NA</td>
+<td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">U São Paulo</td>
-<td headers="full_count" class="gt_row gt_right">300</td>
-<td headers="affiliation_covered" class="gt_row gt_right">254</td>
-<td headers="frac_count" class="gt_row gt_right">NA</td>
-<td headers="ratio" class="gt_row gt_right">NA</td>
+<td class="gt_row gt_left" headers="short_name">U São Paulo</td>
+<td class="gt_row gt_right" headers="full_count">300</td>
+<td class="gt_row gt_right" headers="affiliation_covered">254</td>
+<td class="gt_row gt_right" headers="frac_count">NA</td>
+<td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
-<td headers="short_name" class="gt_row gt_left">U Cape Town</td>
-<td headers="full_count" class="gt_row gt_right">300</td>
-<td headers="affiliation_covered" class="gt_row gt_right">244</td>
-<td headers="frac_count" class="gt_row gt_right">NA</td>
-<td headers="ratio" class="gt_row gt_right">NA</td>
+<td class="gt_row gt_left" headers="short_name">U Cape Town</td>
+<td class="gt_row gt_right" headers="full_count">300</td>
+<td class="gt_row gt_right" headers="affiliation_covered">242</td>
+<td class="gt_row gt_right" headers="frac_count">NA</td>
+<td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 </tbody>
 </table></div>
@@ -1296,15 +1303,15 @@ credit, not an estimate of each institution’s contribution.</p>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Count"</span>, y <span class="op">=</span> <span class="cn">NULL</span>, fill <span class="op">=</span> <span class="st">"Method"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:cs02-fig-cs02-counting"></span>
-<img src="scientometrics-in-r_files/figure-html/cs02-fig-cs02-counting-1.png" alt="Grouped bar chart comparing full sample counts with fractional credits where affiliation coverage is complete." width="90%"><p class="caption">
+<span id="fig:cs02-fig-cs02-counting" style="display:block;"></span>
+<img alt="Grouped bar chart comparing full sample counts with fractional credits where affiliation coverage is complete." src="scientometrics-in-r_files/figure-html/cs02-fig-cs02-counting-1.png" width="90%"/><p class="caption">
 Figure 39.2: Full and fractional credits within the retrieved samples.
 </p>
 </div>
 </div>
-<div id="oa-rates" class="section level2" number="39.7">
+<div class="section level2" id="oa-rates" number="39.7">
 <h2>
-<span class="header-section-number">39.7</span> OA rates<a class="anchor" aria-label="anchor" href="#oa-rates"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.7</span> OA rates<a aria-label="anchor" class="anchor" href="#oa-rates"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inst_data</span> <span class="op">|&gt;</span></span>
@@ -1315,15 +1322,15 @@ Figure 39.2: Full and fractional credits within the retrieved samples.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"OA rate"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:cs02-fig-cs02-oa"></span>
-<img src="scientometrics-in-r_files/figure-html/cs02-fig-cs02-oa-1.png" alt="Bar chart comparing observed open-access shares in the five university samples." width="90%"><p class="caption">
+<span id="fig:cs02-fig-cs02-oa" style="display:block;"></span>
+<img alt="Bar chart comparing observed open-access shares in the five university samples." src="scientometrics-in-r_files/figure-html/cs02-fig-cs02-oa-1.png" width="90%"/><p class="caption">
 Figure 39.3: Open-access share among sampled articles with observed OA status.
 </p>
 </div>
 </div>
-<div id="reading-the-results" class="section level2" number="39.8">
+<div class="section level2" id="reading-the-results" number="39.8">
 <h2>
-<span class="header-section-number">39.8</span> Reading the results<a class="anchor" aria-label="anchor" href="#reading-the-results"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.8</span> Reading the results<a aria-label="anchor" class="anchor" href="#reading-the-results"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li>
@@ -1338,9 +1345,9 @@ Figure 39.3: Open-access share among sampled articles with observed OA status.
 <strong>No single ranking</strong>: Report coverage, sample design and indicator definitions alongside any comparison <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ol>
 </div>
-<div id="lessons-learned-1" class="section level2" number="39.9">
+<div class="section level2" id="lessons-learned-1" number="39.9">
 <h2>
-<span class="header-section-number">39.9</span> Lessons learned<a class="anchor" aria-label="anchor" href="#lessons-learned-1"><i class="fas fa-link"></i></a>
+<span class="header-section-number">39.9</span> Lessons learned<a aria-label="anchor" class="anchor" href="#lessons-learned-1"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>Treat these outputs as illustrative sampled comparisons, not population rankings.</li>
@@ -1351,11 +1358,10 @@ Figure 39.3: Open-access share among sampled articles with observed OA status.
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1437,12 +1443,12 @@ Figure 39.3: Open-access share among sampled articles with observed OA status.
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="case-study-1-crispr-field-review-20102024.html"><span class="header-section-number">38</span> Case Study 1: CRISPR Field Review (2010–2024)</a></div>
 <div class="next"><a href="case-study-3-journal-portfolio-analysis.html"><span class="header-section-number">40</span> Case Study 3: Journal Portfolio Analysis</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#case-study-2-institutional-benchmarking"><span class="header-section-number">39</span> Case Study 2: Institutional Benchmarking</a></li>
 <li><a class="nav-link" href="#objective-1"><span class="header-section-number">39.1</span> Objective</a></li>
 <li><a class="nav-link" href="#setup-1"><span class="header-section-number">39.2</span> Setup</a></li>
@@ -1454,29 +1460,23 @@ Figure 39.3: Open-access share among sampled articles with observed OA status.
 <li><a class="nav-link" href="#reading-the-results"><span class="header-section-number">39.8</span> Reading the results</a></li>
 <li><a class="nav-link" href="#lessons-learned-1"><span class="header-section-number">39.9</span> Lessons learned</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/case-studies/cs02-institutional-benchmark.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/case-studies/cs02-institutional-benchmark.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/case-studies/cs02-institutional-benchmark.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/case-studies/cs02-institutional-benchmark.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

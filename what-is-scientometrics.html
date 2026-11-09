@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 1 What Is Scientometrics? | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="1.1 Learning objectives After completing this chapter, you will be able to: Define scientometrics, bibliometrics, and informetrics and explain how the three fields relate Trace the historical...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 1 What Is Scientometrics? | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/what-is-scientometrics.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="1.1 Learning objectives After completing this chapter, you will be able to: Define scientometrics, bibliometrics, and informetrics and explain how the three fields relate Trace the historical...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 1 What Is Scientometrics? | Scientometrics in R">
-<meta name="twitter:description" content="1.1 Learning objectives After completing this chapter, you will be able to: Define scientometrics, bibliometrics, and informetrics and explain how the three fields relate Trace the historical...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="1.1 Learning objectives After completing this chapter, you will be able to: Define scientometrics, bibliometrics, and informetrics and explain how the three fields relate Trace the historical..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 1 What Is Scientometrics? | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/what-is-scientometrics.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="1.1 Learning objectives After completing this chapter, you will be able to: Define scientometrics, bibliometrics, and informetrics and explain how the three fields relate Trace the historical..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 1 What Is Scientometrics? | Scientometrics in R" name="twitter:title"/>
+<meta content="1.1 Learning objectives After completing this chapter, you will be able to: Define scientometrics, bibliometrics, and informetrics and explain how the three fields relate Trace the historical..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="what-is-scientometrics" class="section level1" number="1">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="what-is-scientometrics" number="1">
 <h1>
-<span class="header-section-number">1</span> What Is Scientometrics?<a class="anchor" aria-label="anchor" href="#what-is-scientometrics"><i class="fas fa-link"></i></a>
-</h1>
-<div id="what-objectives" class="section level2" number="1.1">
+<span class="header-section-number">1</span> What Is Scientometrics?<a aria-label="anchor" class="anchor" href="#what-is-scientometrics"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/what-is-scientometrics.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/what-is-scientometrics.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="what-objectives" number="1.1">
 <h2>
-<span class="header-section-number">1.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#what-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#what-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Create simple visualisations of publication trends and journal distributions</li>
 </ul>
 </div>
-<div id="what-setup" class="section level2" number="1.2">
+<div class="section level2" id="what-setup" number="1.2">
 <h2>
-<span class="header-section-number">1.2</span> Setup<a class="anchor" aria-label="anchor" href="#what-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.2</span> Setup<a aria-label="anchor" class="anchor" href="#what-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -195,30 +202,30 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="what-background" class="section level2" number="1.3">
+<div class="section level2" id="what-background" number="1.3">
 <h2>
-<span class="header-section-number">1.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#what-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#what-background"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>Scientometrics</strong> is the quantitative study of science itself — its growth, structure, productivity, and impact. Where scientists in most disciplines study the natural or social world, scientometricians turn the lens inward: they study the system that produces scientific knowledge.</p>
 <p>The term sits within a family of overlapping labels. <strong>Bibliometrics</strong>, the oldest sibling, focuses on the statistical analysis of publications — books, journal articles, and their metadata such as authors, citations, and keywords. The word was coined by Alan Pritchard in 1969 to replace the earlier “statistical bibliography”. <strong>Informetrics</strong> is the broadest umbrella, encompassing any quantitative study of information transfer, including web analytics, patent analysis, and library usage statistics. In practice, the three terms are often used interchangeably, but it helps to remember that bibliometrics emphasises the <em>document</em>, scientometrics emphasises the <em>science</em>, and informetrics emphasises the <em>information</em>.</p>
-<div id="a-brief-history" class="section level3" number="1.3.1">
+<div class="section level3" id="a-brief-history" number="1.3.1">
 <h3>
-<span class="header-section-number">1.3.1</span> A brief history<a class="anchor" aria-label="anchor" href="#a-brief-history"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3.1</span> A brief history<a aria-label="anchor" class="anchor" href="#a-brief-history"><i class="fas fa-link"></i></a>
 </h3>
 <p>The intellectual roots of the field trace back to at least 1955, when Eugene <span class="citation">Garfield (<a href="references.html#ref-garfield1955">1955</a>)</span> proposed the idea of a citation index for science. Garfield argued that citations create an “association of ideas” — a traceable web of intellectual influence — and that indexing these links would transform how scholars discover literature. His vision was realised in the Science Citation Index (SCI), launched in 1964 by the Institute for Scientific Information (ISI). For the first time, researchers could systematically trace who cited whom across the entire scientific literature.</p>
 <p>A few years later, Derek de Solla Price gave the field its quantitative backbone. In <em>Little Science, Big Science</em> <span class="citation">(<a href="references.html#ref-price1963">Solla Price 1963</a>)</span>, Price marshalled data to show that science was growing exponentially — in the number of journals, articles, and scientists — and that this growth followed remarkably regular statistical patterns. He estimated that the volume of scientific literature doubles approximately every 15 years, a regularity so striking that it came to be known as “Price’s Law.” Price’s work established that science could be studied with the same empirical rigour that it applies to other phenomena.</p>
 <p>These foundations were reinforced by earlier statistical regularities. Alfred <span class="citation">Lotka (<a href="references.html#ref-lotka1926">1926</a>)</span> had already shown that the distribution of scientific productivity follows a power law: a small number of authors produce the majority of papers. Samuel <span class="citation">Bradford (<a href="references.html#ref-bradford1934">1934</a>)</span> demonstrated a similar pattern for journal coverage: a core set of journals in any field accounts for a disproportionate share of the relevant literature. These laws, which we explore in detail in the next chapter, remain cornerstones of scientometric theory.</p>
 <p>From these beginnings, scientometrics expanded rapidly through the latter half of the twentieth century. The h-index <span class="citation">(<a href="references.html#ref-hirsch2005">Hirsch 2005</a>)</span>, journal impact factors, co-citation networks, and science maps became standard tools in research evaluation and science policy. Landmark declarations such as the Leiden Manifesto <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span> and DORA <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> later established principles for responsible use of these tools, warning against mechanical reliance on any single indicator.</p>
 </div>
-<div id="the-modern-era" class="section level3" number="1.3.2">
+<div class="section level3" id="the-modern-era" number="1.3.2">
 <h3>
-<span class="header-section-number">1.3.2</span> The modern era<a class="anchor" aria-label="anchor" href="#the-modern-era"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3.2</span> The modern era<a aria-label="anchor" class="anchor" href="#the-modern-era"><i class="fas fa-link"></i></a>
 </h3>
 <p>Today the field is undergoing another transformation. The launch of <strong>OpenAlex</strong> <span class="citation">(<a href="references.html#ref-priem2022">Priem et al. 2022</a>)</span> — a fully open index of over 250 million scholarly works, built from Crossref, PubMed, institutional repositories, and other open sources — has democratised access to the raw data that powers scientometric research. Researchers no longer need expensive subscriptions to Web of Science or Scopus to conduct large-scale analyses. This book takes advantage of that openness: every example uses data that any reader can reproduce for free.</p>
 </div>
-<div id="scope-of-this-book" class="section level3" number="1.3.3">
+<div class="section level3" id="scope-of-this-book" number="1.3.3">
 <h3>
-<span class="header-section-number">1.3.3</span> Scope of this book<a class="anchor" aria-label="anchor" href="#scope-of-this-book"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.3.3</span> Scope of this book<a aria-label="anchor" class="anchor" href="#scope-of-this-book"><i class="fas fa-link"></i></a>
 </h3>
 <p>This book teaches you to do scientometrics in R. It covers:</p>
 <ul>
@@ -238,14 +245,14 @@
 <p>Each chapter follows the same pattern: conceptual background, a fully reproducible worked example, diagnostics, limitations, and exercises.</p>
 </div>
 </div>
-<div id="what-example" class="section level2" number="1.4">
+<div class="section level2" id="what-example" number="1.4">
 <h2>
-<span class="header-section-number">1.4</span> Worked example<a class="anchor" aria-label="anchor" href="#what-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4</span> Worked example<a aria-label="anchor" class="anchor" href="#what-example"><i class="fas fa-link"></i></a>
 </h2>
 <p>To make things concrete from the very first chapter, we fetch a small sample of recent works from OpenAlex and compute some basic descriptive statistics. Think of this as a first taste of the workflows that the rest of the book will develop in depth.</p>
-<div id="fetching-a-sample-from-openalex" class="section level3" number="1.4.1">
+<div class="section level3" id="fetching-a-sample-from-openalex" number="1.4.1">
 <h3>
-<span class="header-section-number">1.4.1</span> Fetching a sample from OpenAlex<a class="anchor" aria-label="anchor" href="#fetching-a-sample-from-openalex"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4.1</span> Fetching a sample from OpenAlex<a aria-label="anchor" class="anchor" href="#fetching-a-sample-from-openalex"><i class="fas fa-link"></i></a>
 </h3>
 <p>We search for works whose title or abstract mentions “scientometrics”, published between 2014 and 2023, and draw a random sample of 500 records.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -310,9 +317,9 @@
 #&gt; $ issue                         &lt;chr&gt; "24", NA, NA, NA, "43", "8", NA, "suppl …</code></pre>
 <p>Each row is a scholarly work. Key columns include <code>display_name</code> (the title), <code>publication_date</code>, <code>cited_by_count</code>, <code>doi</code>, and <code>source_display_name</code> (the source or journal name).</p>
 </div>
-<div id="basic-descriptive-statistics" class="section level3" number="1.4.2">
+<div class="section level3" id="basic-descriptive-statistics" number="1.4.2">
 <h3>
-<span class="header-section-number">1.4.2</span> Basic descriptive statistics<a class="anchor" aria-label="anchor" href="#basic-descriptive-statistics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4.2</span> Basic descriptive statistics<a aria-label="anchor" class="anchor" href="#basic-descriptive-statistics"><i class="fas fa-link"></i></a>
 </h3>
 <p>How many works did we retrieve, and what does the citation distribution look like?</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -333,9 +340,9 @@
 #&gt; 1     500 90%                     5       18.9       352        120</code></pre>
 <p>The large gap between the mean and median is a hallmark of citation distributions: most papers receive few citations while a small number accumulate many. This skewness is one of the most robust empirical regularities in scientometrics, and we will return to its theoretical basis in <a href="theoretical-underpinnings.html#theory-background">2.3</a>.</p>
 </div>
-<div id="top-journals" class="section level3" number="1.4.3">
+<div class="section level3" id="top-journals" number="1.4.3">
 <h3>
-<span class="header-section-number">1.4.3</span> Top journals<a class="anchor" aria-label="anchor" href="#top-journals"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4.3</span> Top journals<a aria-label="anchor" class="anchor" href="#top-journals"><i class="fas fa-link"></i></a>
 </h3>
 <p>Which journals appear most often in our sample?</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -359,9 +366,9 @@
 #&gt;  9 Scientific Reports                                 4
 #&gt; 10 DOAJ (DOAJ: Directory of Open Access Journals)     3</code></pre>
 </div>
-<div id="publication-trend-over-time" class="section level3" number="1.4.4">
+<div class="section level3" id="publication-trend-over-time" number="1.4.4">
 <h3>
-<span class="header-section-number">1.4.4</span> Publication trend over time<a class="anchor" aria-label="anchor" href="#publication-trend-over-time"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4.4</span> Publication trend over time<a aria-label="anchor" class="anchor" href="#publication-trend-over-time"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -375,16 +382,16 @@
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:01-fig-what-pub-trend"></span>
-<img src="scientometrics-in-r_files/figure-html/01-fig-what-pub-trend-1.png" alt="Bar chart showing the number of sampled publications per year from 2014 to 2023, illustrating the growth trend in scientometrics research." width="90%"><p class="caption">
+<span id="fig:01-fig-what-pub-trend" style="display:block;"></span>
+<img alt="Bar chart showing the number of sampled publications per year from 2014 to 2023, illustrating the growth trend in scientometrics research." src="scientometrics-in-r_files/figure-html/01-fig-what-pub-trend-1.png" width="90%"/><p class="caption">
 Figure 1.1: Annual publication counts for sampled works related to scientometrics (2014–2023).
 </p>
 </div>
 <p>The trend shows a growing volume of scientometrics-related publications over the past decade — consistent with the broader exponential growth of science documented by <span class="citation">Solla Price (<a href="references.html#ref-price1963">1963</a>)</span>.</p>
 </div>
-<div id="top-journals-visualised" class="section level3" number="1.4.5">
+<div class="section level3" id="top-journals-visualised" number="1.4.5">
 <h3>
-<span class="header-section-number">1.4.5</span> Top journals visualised<a class="anchor" aria-label="anchor" href="#top-journals-visualised"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4.5</span> Top journals visualised<a aria-label="anchor" class="anchor" href="#top-journals-visualised"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top_journals</span> <span class="op">|&gt;</span></span>
@@ -397,15 +404,15 @@ Figure 1.1: Annual publication counts for sampled works related to scientometric
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:01-fig-what-top-journals"></span>
-<img src="scientometrics-in-r_files/figure-html/01-fig-what-top-journals-1.png" alt="Horizontal bar chart showing the 10 journals that contribute the most works to the sampled corpus, with Scientometrics leading." width="90%"><p class="caption">
+<span id="fig:01-fig-what-top-journals" style="display:block;"></span>
+<img alt="Horizontal bar chart showing the 10 journals that contribute the most works to the sampled corpus, with Scientometrics leading." src="scientometrics-in-r_files/figure-html/01-fig-what-top-journals-1.png" width="90%"/><p class="caption">
 Figure 1.2: Top 10 journals by number of works in the sampled scientometrics corpus.
 </p>
 </div>
 </div>
-<div id="citation-distribution" class="section level3" number="1.4.6">
+<div class="section level3" id="citation-distribution" number="1.4.6">
 <h3>
-<span class="header-section-number">1.4.6</span> Citation distribution<a class="anchor" aria-label="anchor" href="#citation-distribution"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.4.6</span> Citation distribution<a aria-label="anchor" class="anchor" href="#citation-distribution"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -419,17 +426,17 @@ Figure 1.2: Top 10 journals by number of works in the sampled scientometrics cor
 <span>  <span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:01-fig-what-citation-dist"></span>
-<img src="scientometrics-in-r_files/figure-html/01-fig-what-citation-dist-1.png" alt="Histogram of citation counts on a logarithmic x-axis, revealing the heavily right-skewed distribution characteristic of citation data." width="90%"><p class="caption">
+<span id="fig:01-fig-what-citation-dist" style="display:block;"></span>
+<img alt="Histogram of citation counts on a logarithmic x-axis, revealing the heavily right-skewed distribution characteristic of citation data." src="scientometrics-in-r_files/figure-html/01-fig-what-citation-dist-1.png" width="90%"/><p class="caption">
 Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-axis).
 </p>
 </div>
 <p>This right-skewed citation distribution is a universal feature of scholarly communication. In Chapter 2, we will see that it connects to deeper theoretical regularities: Lotka’s Law, Bradford’s Law, and the Matthew Effect.</p>
 </div>
 </div>
-<div id="what-diagnostics" class="section level2" number="1.5">
+<div class="section level2" id="what-diagnostics" number="1.5">
 <h2>
-<span class="header-section-number">1.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#what-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#what-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <p>Even for a simple descriptive analysis, a few diagnostic checks are essential:</p>
 <ul>
@@ -450,14 +457,14 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Unique journals: {n_distinct(works$source_display_name, na.rm = TRUE)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Unique journals: 406</code></pre>
 </div>
-<div id="what-limitations" class="section level2" number="1.6">
+<div class="section level2" id="what-limitations" number="1.6">
 <h2>
-<span class="header-section-number">1.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#what-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#what-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use" class="section level2 callout callout-warn" number="1.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use" number="1.7">
 <h2>
-<span class="header-section-number">1.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -470,14 +477,14 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 <strong>The Leiden Manifesto</strong> <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span> and <strong>DORA</strong> <span class="citation">(<a href="references.html#ref-dora2012">American Society for Cell Biology 2012</a>)</span> provide essential guardrails. Quantitative data should support, never replace, expert qualitative judgement.</li>
 </ul>
 </div>
-<div id="what-pitfalls" class="section level2" number="1.8">
+<div class="section level2" id="what-pitfalls" number="1.8">
 <h2>
-<span class="header-section-number">1.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#what-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#what-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls" class="section level2 callout callout-stop" number="1.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls" number="1.9">
 <h2>
-<span class="header-section-number">1.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -492,9 +499,9 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 <strong>Forgetting to set a seed.</strong> Random samples are only reproducible if you set the seed both in R (<code><a href="https://rdrr.io/r/base/Random.html">set.seed()</a></code>) and in the API call (<code>seed</code> parameter). Without this, every render produces different results.</li>
 </ul>
 </div>
-<div id="what-exercises" class="section level2" number="1.10">
+<div class="section level2" id="what-exercises" number="1.10">
 <h2>
-<span class="header-section-number">1.10</span> Exercises<a class="anchor" aria-label="anchor" href="#what-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.10</span> Exercises<a aria-label="anchor" class="anchor" href="#what-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Explore a different field.</strong> Replace the search term “scientometrics” with a topic of your choice (e.g., “machine learning”, “climate change”). Fetch 500 works and compare the publication trend and top journals to those we found above. What differences do you notice?</p></li>
@@ -503,15 +510,15 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 <li><p><strong>Growth curve.</strong> Extend the publication trend analysis to 2000–2023. Does the annual publication count follow an exponential growth pattern, as <span class="citation">Solla Price (<a href="references.html#ref-price1963">1963</a>)</span> predicted? <em>(Hint: plot on a log-scaled y-axis and check for linearity.)</em></p></li>
 </ol>
 </div>
-<div id="id_01-solutions" class="section level2 callout callout-ok" number="1.11">
+<div class="section level2 callout callout-ok" id="id_01-solutions" number="1.11">
 <h2>
-<span class="header-section-number">1.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_01-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_01-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="what-reading" class="section level2" number="1.12">
+<div class="section level2" id="what-reading" number="1.12">
 <h2>
-<span class="header-section-number">1.12</span> Further reading<a class="anchor" aria-label="anchor" href="#what-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.12</span> Further reading<a aria-label="anchor" class="anchor" href="#what-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -532,9 +539,9 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 <span class="citation">Lotka (<a href="references.html#ref-lotka1926">1926</a>)</span> — The foundational study of scientific productivity distributions; a bridge to Chapter 2.</li>
 </ul>
 </div>
-<div id="what-sessioninfo" class="section level2" number="1.13">
+<div class="section level2" id="what-sessioninfo" number="1.13">
 <h2>
-<span class="header-section-number">1.13</span> Session info<a class="anchor" aria-label="anchor" href="#what-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">1.13</span> Session info<a aria-label="anchor" class="anchor" href="#what-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -577,16 +584,14 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 #&gt; [41] gtable_0.3.6       xfun_0.62          tidyselect_1.2.1   rstudioapi_0.19.0 
 #&gt; [45] knitr_1.52         farver_2.1.2       htmltools_0.5.9    labeling_0.4.3    
 #&gt; [49] rmarkdown_2.32     compiler_4.6.1     S7_0.2.2           downlit_0.4.5</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -668,12 +673,12 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="find-your-method.html">Find Your Method</a></div>
 <div class="next"><a href="theoretical-underpinnings.html"><span class="header-section-number">2</span> Theoretical Underpinnings</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#what-is-scientometrics"><span class="header-section-number">1</span> What Is Scientometrics?</a></li>
 <li><a class="nav-link" href="#what-objectives"><span class="header-section-number">1.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#what-setup"><span class="header-section-number">1.2</span> Setup</a></li>
@@ -704,29 +709,23 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 <li><a class="nav-link" href="#what-reading"><span class="header-section-number">1.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#what-sessioninfo"><span class="header-section-number">1.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/01-what-is-scientometrics.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/01-what-is-scientometrics.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/01-what-is-scientometrics.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/01-what-is-scientometrics.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

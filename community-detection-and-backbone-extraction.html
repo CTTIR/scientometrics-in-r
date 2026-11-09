@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 18 Community Detection and Backbone Extraction | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="18.1 Learning objectives After completing this chapter, you will be able to: Explain why dense networks require backbone extraction before community detection Apply the disparity filter to extract...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 18 Community Detection and Backbone Extraction | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/community-detection-and-backbone-extraction.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="18.1 Learning objectives After completing this chapter, you will be able to: Explain why dense networks require backbone extraction before community detection Apply the disparity filter to extract...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 18 Community Detection and Backbone Extraction | Scientometrics in R">
-<meta name="twitter:description" content="18.1 Learning objectives After completing this chapter, you will be able to: Explain why dense networks require backbone extraction before community detection Apply the disparity filter to extract...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="18.1 Learning objectives After completing this chapter, you will be able to: Explain why dense networks require backbone extraction before community detection Apply the disparity filter to extract..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 18 Community Detection and Backbone Extraction | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/community-detection-and-backbone-extraction.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="18.1 Learning objectives After completing this chapter, you will be able to: Explain why dense networks require backbone extraction before community detection Apply the disparity filter to extract..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 18 Community Detection and Backbone Extraction | Scientometrics in R" name="twitter:title"/>
+<meta content="18.1 Learning objectives After completing this chapter, you will be able to: Explain why dense networks require backbone extraction before community detection Apply the disparity filter to extract..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="community-detection-and-backbone-extraction" class="section level1" number="18">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="community-detection-and-backbone-extraction" number="18">
 <h1>
-<span class="header-section-number">18</span> Community Detection and Backbone Extraction<a class="anchor" aria-label="anchor" href="#community-detection-and-backbone-extraction"><i class="fas fa-link"></i></a>
-</h1>
-<div id="backbone-objectives" class="section level2" number="18.1">
+<span class="header-section-number">18</span> Community Detection and Backbone Extraction<a aria-label="anchor" class="anchor" href="#community-detection-and-backbone-extraction"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/community-detection-and-backbone-extraction.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/community-detection-and-backbone-extraction.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="backbone-objectives" number="18.1">
 <h2>
-<span class="header-section-number">18.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#backbone-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#backbone-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Interpret hierarchical community structure at multiple resolutions</li>
 </ul>
 </div>
-<div id="backbone-setup" class="section level2" number="18.2">
+<div class="section level2" id="backbone-setup" number="18.2">
 <h2>
-<span class="header-section-number">18.2</span> Setup<a class="anchor" aria-label="anchor" href="#backbone-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.2</span> Setup<a aria-label="anchor" class="anchor" href="#backbone-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -199,9 +206,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="backbone-background" class="section level2" number="18.3">
+<div class="section level2" id="backbone-background" number="18.3">
 <h2>
-<span class="header-section-number">18.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#backbone-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#backbone-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Bibliometric networks are often dense: in a co-citation or bibliographic coupling network, every pair of documents with any shared citation creates an edge. A corpus of 1,000 papers can easily produce a network with hundreds of thousands of edges, most of which represent weak or coincidental relationships. Applying community detection directly to such networks yields poor results — the algorithms cannot distinguish signal from noise.</p>
 <p><strong>Backbone extraction</strong> addresses this by pruning edges that are not statistically significant, retaining only the “skeleton” of the network. The <strong>disparity filter</strong> <span class="citation">(<a href="references.html#ref-serrano2009">Serrano et al. 2009</a>)</span> tests each edge against a null model based on the local weight distribution of its endpoints. An edge is retained if its weight is unexpectedly high given the node’s total weight and degree. This preserves multi-scale structure: both high-weight and low-weight nodes can retain their most important connections.</p>
@@ -209,13 +216,13 @@
 <p>Once the backbone is extracted, <strong>community detection</strong> identifies groups of nodes that are more densely connected internally than externally. The Leiden algorithm <span class="citation">(<a href="references.html#ref-traag2019">Traag et al. 2019</a>)</span> improves on Louvain <span class="citation">(<a href="references.html#ref-blondel2008">Blondel et al. 2008</a>)</span> by guaranteeing that all detected communities are internally connected. Both algorithms accept a <strong>resolution parameter</strong> that controls community granularity: lower values produce fewer, larger communities; higher values produce more, smaller communities. There is no single “correct” resolution — the appropriate value depends on the research question.</p>
 <p><span class="citation">Fortunato (<a href="references.html#ref-fortunato2010">2010</a>)</span> provides a comprehensive review of community detection methods. In practice, running the algorithm at multiple resolutions and examining the hierarchical structure provides the richest understanding of network organisation.</p>
 </div>
-<div id="backbone-example" class="section level2" number="18.4">
+<div class="section level2" id="backbone-example" number="18.4">
 <h2>
-<span class="header-section-number">18.4</span> Worked example<a class="anchor" aria-label="anchor" href="#backbone-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4</span> Worked example<a aria-label="anchor" class="anchor" href="#backbone-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="building-a-dense-network" class="section level3" number="18.4.1">
+<div class="section level3" id="building-a-dense-network" number="18.4.1">
 <h3>
-<span class="header-section-number">18.4.1</span> Building a dense network<a class="anchor" aria-label="anchor" href="#building-a-dense-network"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.1</span> Building a dense network<a aria-label="anchor" class="anchor" href="#building-a-dense-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>We construct a bibliographic coupling network from scientometrics articles.</p>
 <div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
@@ -245,14 +252,14 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Full network: {vcount(g_full)} nodes, {ecount(g_full)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Full network: 290 nodes, 3983 edges</code></pre>
+<pre><code>#&gt; Full network: 290 nodes, 4024 edges</code></pre>
 <div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Density: {round(graph.density(g_full), 4)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Density: 0.095</code></pre>
+<pre><code>#&gt; Density: 0.096</code></pre>
 </div>
-<div id="backbone-extraction-disparity-filter" class="section level3" number="18.4.2">
+<div class="section level3" id="backbone-extraction-disparity-filter" number="18.4.2">
 <h3>
-<span class="header-section-number">18.4.2</span> Backbone extraction: disparity filter<a class="anchor" aria-label="anchor" href="#backbone-extraction-disparity-filter"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.2</span> Backbone extraction: disparity filter<a aria-label="anchor" class="anchor" href="#backbone-extraction-disparity-filter"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">disparity_filter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">g</span>, <span class="va">alpha</span> <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">{</span></span>
@@ -278,14 +285,14 @@
 <span></span>
 <span><span class="va">g_backbone</span> <span class="op">&lt;-</span> <span class="fu">disparity_filter</span><span class="op">(</span><span class="va">g_full</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Backbone: {vcount(g_backbone)} nodes, {ecount(g_backbone)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Backbone: 131 nodes, 127 edges</code></pre>
+<pre><code>#&gt; Backbone: 133 nodes, 132 edges</code></pre>
 <div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Edge retention: {scales::percent(ecount(g_backbone) / ecount(g_full))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Edge retention: 3%</code></pre>
 </div>
-<div id="threshold-filtering-for-comparison" class="section level3" number="18.4.3">
+<div class="section level3" id="threshold-filtering-for-comparison" number="18.4.3">
 <h3>
-<span class="header-section-number">18.4.3</span> Threshold filtering for comparison<a class="anchor" aria-label="anchor" href="#threshold-filtering-for-comparison"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.3</span> Threshold filtering for comparison<a aria-label="anchor" class="anchor" href="#threshold-filtering-for-comparison"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">threshold</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/E.html">E</a></span><span class="op">(</span><span class="va">g_full</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span>, <span class="fl">0.75</span><span class="op">)</span></span>
@@ -296,11 +303,11 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Threshold (75th pctile = {threshold}): {vcount(g_threshold)} nodes, {ecount(g_threshold)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Threshold (75th pctile = 2): 252 nodes, 1126 edges</code></pre>
+<pre><code>#&gt; Threshold (75th pctile = 2): 252 nodes, 1140 edges</code></pre>
 </div>
-<div id="community-detection-at-multiple-resolutions" class="section level3" number="18.4.4">
+<div class="section level3" id="community-detection-at-multiple-resolutions" number="18.4.4">
 <h3>
-<span class="header-section-number">18.4.4</span> Community detection at multiple resolutions<a class="anchor" aria-label="anchor" href="#community-detection-at-multiple-resolutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.4</span> Community detection at multiple resolutions<a aria-label="anchor" class="anchor" href="#community-detection-at-multiple-resolutions"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resolutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span><span class="op">)</span></span>
@@ -318,23 +325,23 @@
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sweep_results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="xhtpclxvsu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xhtpclxvsu table {
+<div id="khchdpdnjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#khchdpdnjc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xhtpclxvsu thead, #xhtpclxvsu tbody, #xhtpclxvsu tfoot, #xhtpclxvsu tr, #xhtpclxvsu td, #xhtpclxvsu th {
+#khchdpdnjc thead, #khchdpdnjc tbody, #khchdpdnjc tfoot, #khchdpdnjc tr, #khchdpdnjc td, #khchdpdnjc th {
   border-style: none;
 }
 
-#xhtpclxvsu p {
+#khchdpdnjc p {
   margin: 0;
   padding: 0;
 }
 
-#xhtpclxvsu .gt_table {
+#khchdpdnjc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -360,12 +367,12 @@
   border-left-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_caption {
+#khchdpdnjc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xhtpclxvsu .gt_title {
+#khchdpdnjc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -377,7 +384,7 @@
   border-bottom-width: 0;
 }
 
-#xhtpclxvsu .gt_subtitle {
+#khchdpdnjc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -389,7 +396,7 @@
   border-top-width: 0;
 }
 
-#xhtpclxvsu .gt_heading {
+#khchdpdnjc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -401,13 +408,13 @@
   border-right-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_bottom_border {
+#khchdpdnjc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_col_headings {
+#khchdpdnjc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -422,7 +429,7 @@
   border-right-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_col_heading {
+#khchdpdnjc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -442,7 +449,7 @@
   overflow-x: hidden;
 }
 
-#xhtpclxvsu .gt_column_spanner_outer {
+#khchdpdnjc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -454,15 +461,15 @@
   padding-right: 4px;
 }
 
-#xhtpclxvsu .gt_column_spanner_outer:first-child {
+#khchdpdnjc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xhtpclxvsu .gt_column_spanner_outer:last-child {
+#khchdpdnjc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xhtpclxvsu .gt_column_spanner {
+#khchdpdnjc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -474,11 +481,11 @@
   width: 100%;
 }
 
-#xhtpclxvsu .gt_spanner_row {
+#khchdpdnjc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xhtpclxvsu .gt_group_heading {
+#khchdpdnjc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -504,7 +511,7 @@
   text-align: left;
 }
 
-#xhtpclxvsu .gt_empty_group_heading {
+#khchdpdnjc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -519,15 +526,15 @@
   vertical-align: middle;
 }
 
-#xhtpclxvsu .gt_from_md > :first-child {
+#khchdpdnjc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xhtpclxvsu .gt_from_md > :last-child {
+#khchdpdnjc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xhtpclxvsu .gt_row {
+#khchdpdnjc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -546,7 +553,7 @@
   overflow-x: hidden;
 }
 
-#xhtpclxvsu .gt_stub {
+#khchdpdnjc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -559,7 +566,7 @@
   padding-right: 5px;
 }
 
-#xhtpclxvsu .gt_stub_row_group {
+#khchdpdnjc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -573,15 +580,15 @@
   vertical-align: top;
 }
 
-#xhtpclxvsu .gt_row_group_first td {
+#khchdpdnjc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xhtpclxvsu .gt_row_group_first th {
+#khchdpdnjc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xhtpclxvsu .gt_summary_row {
+#khchdpdnjc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -591,16 +598,16 @@
   padding-right: 5px;
 }
 
-#xhtpclxvsu .gt_first_summary_row {
+#khchdpdnjc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_first_summary_row.thick {
+#khchdpdnjc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xhtpclxvsu .gt_last_summary_row {
+#khchdpdnjc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -610,7 +617,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_grand_summary_row {
+#khchdpdnjc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -620,7 +627,7 @@
   padding-right: 5px;
 }
 
-#xhtpclxvsu .gt_first_grand_summary_row {
+#khchdpdnjc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -630,7 +637,7 @@
   border-top-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_last_grand_summary_row_top {
+#khchdpdnjc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -640,11 +647,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_striped {
+#khchdpdnjc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xhtpclxvsu .gt_table_body {
+#khchdpdnjc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -653,7 +660,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_footnotes {
+#khchdpdnjc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -667,7 +674,7 @@
   border-right-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_footnote {
+#khchdpdnjc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -676,7 +683,7 @@
   padding-right: 5px;
 }
 
-#xhtpclxvsu .gt_sourcenotes {
+#khchdpdnjc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -690,7 +697,7 @@
   border-right-color: #D3D3D3;
 }
 
-#xhtpclxvsu .gt_sourcenote {
+#khchdpdnjc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -698,118 +705,118 @@
   padding-right: 5px;
 }
 
-#xhtpclxvsu .gt_left {
+#khchdpdnjc .gt_left {
   text-align: left;
 }
 
-#xhtpclxvsu .gt_center {
+#khchdpdnjc .gt_center {
   text-align: center;
 }
 
-#xhtpclxvsu .gt_right {
+#khchdpdnjc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xhtpclxvsu .gt_font_normal {
+#khchdpdnjc .gt_font_normal {
   font-weight: normal;
 }
 
-#xhtpclxvsu .gt_font_bold {
+#khchdpdnjc .gt_font_bold {
   font-weight: bold;
 }
 
-#xhtpclxvsu .gt_font_italic {
+#khchdpdnjc .gt_font_italic {
   font-style: italic;
 }
 
-#xhtpclxvsu .gt_super {
+#khchdpdnjc .gt_super {
   font-size: 65%;
 }
 
-#xhtpclxvsu .gt_footnote_marks {
+#khchdpdnjc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xhtpclxvsu .gt_asterisk {
+#khchdpdnjc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xhtpclxvsu .gt_indent_1 {
+#khchdpdnjc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xhtpclxvsu .gt_indent_2 {
+#khchdpdnjc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xhtpclxvsu .gt_indent_3 {
+#khchdpdnjc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xhtpclxvsu .gt_indent_4 {
+#khchdpdnjc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xhtpclxvsu .gt_indent_5 {
+#khchdpdnjc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xhtpclxvsu .katex-display {
+#khchdpdnjc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xhtpclxvsu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#khchdpdnjc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="resolution">resolution</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="n_communities">n_communities</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="modularity">modularity</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="max_size">max_size</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="min_size">min_size</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="resolution" rowspan="1" scope="col">resolution</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="n_communities" rowspan="1" scope="col">n_communities</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="modularity" rowspan="1" scope="col">modularity</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="max_size" rowspan="1" scope="col">max_size</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="min_size" rowspan="1" scope="col">min_size</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="resolution" class="gt_row gt_right">0.5</td>
-<td headers="n_communities" class="gt_row gt_right">29</td>
-<td headers="modularity" class="gt_row gt_right">0.884</td>
-<td headers="max_size" class="gt_row gt_right">14</td>
-<td headers="min_size" class="gt_row gt_right">2</td>
+<td class="gt_row gt_right" headers="resolution">0.5</td>
+<td class="gt_row gt_right" headers="n_communities">30</td>
+<td class="gt_row gt_right" headers="modularity">0.867</td>
+<td class="gt_row gt_right" headers="max_size">16</td>
+<td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
-<td headers="resolution" class="gt_row gt_right">0.8</td>
-<td headers="n_communities" class="gt_row gt_right">29</td>
-<td headers="modularity" class="gt_row gt_right">0.885</td>
-<td headers="max_size" class="gt_row gt_right">14</td>
-<td headers="min_size" class="gt_row gt_right">2</td>
+<td class="gt_row gt_right" headers="resolution">0.8</td>
+<td class="gt_row gt_right" headers="n_communities">30</td>
+<td class="gt_row gt_right" headers="modularity">0.867</td>
+<td class="gt_row gt_right" headers="max_size">16</td>
+<td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
-<td headers="resolution" class="gt_row gt_right">1.0</td>
-<td headers="n_communities" class="gt_row gt_right">29</td>
-<td headers="modularity" class="gt_row gt_right">0.885</td>
-<td headers="max_size" class="gt_row gt_right">14</td>
-<td headers="min_size" class="gt_row gt_right">2</td>
+<td class="gt_row gt_right" headers="resolution">1.0</td>
+<td class="gt_row gt_right" headers="n_communities">30</td>
+<td class="gt_row gt_right" headers="modularity">0.867</td>
+<td class="gt_row gt_right" headers="max_size">16</td>
+<td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
-<td headers="resolution" class="gt_row gt_right">1.5</td>
-<td headers="n_communities" class="gt_row gt_right">29</td>
-<td headers="modularity" class="gt_row gt_right">0.885</td>
-<td headers="max_size" class="gt_row gt_right">14</td>
-<td headers="min_size" class="gt_row gt_right">2</td>
+<td class="gt_row gt_right" headers="resolution">1.5</td>
+<td class="gt_row gt_right" headers="n_communities">31</td>
+<td class="gt_row gt_right" headers="modularity">0.867</td>
+<td class="gt_row gt_right" headers="max_size">13</td>
+<td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
-<td headers="resolution" class="gt_row gt_right">2.0</td>
-<td headers="n_communities" class="gt_row gt_right">31</td>
-<td headers="modularity" class="gt_row gt_right">0.880</td>
-<td headers="max_size" class="gt_row gt_right">12</td>
-<td headers="min_size" class="gt_row gt_right">2</td>
+<td class="gt_row gt_right" headers="resolution">2.0</td>
+<td class="gt_row gt_right" headers="n_communities">32</td>
+<td class="gt_row gt_right" headers="modularity">0.865</td>
+<td class="gt_row gt_right" headers="max_size">13</td>
+<td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 </tbody>
 </table></div>
@@ -828,15 +835,15 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Resolution parameter"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:18-fig-backbone-resolution"></span>
-<img src="scientometrics-in-r_files/figure-html/18-fig-backbone-resolution-1.png" alt="Dual-axis line chart showing how the number of detected communities increases and modularity changes as the Leiden resolution parameter increases." width="90%"><p class="caption">
+<span id="fig:18-fig-backbone-resolution" style="display:block;"></span>
+<img alt="Dual-axis line chart showing how the number of detected communities increases and modularity changes as the Leiden resolution parameter increases." src="scientometrics-in-r_files/figure-html/18-fig-backbone-resolution-1.png" width="90%"/><p class="caption">
 Figure 18.1: Number of communities and modularity as a function of resolution parameter.
 </p>
 </div>
 </div>
-<div id="comparing-backbone-vs.-full-network-communities" class="section level3" number="18.4.5">
+<div class="section level3" id="comparing-backbone-vs.-full-network-communities" number="18.4.5">
 <h3>
-<span class="header-section-number">18.4.5</span> Comparing backbone vs. full network communities<a class="anchor" aria-label="anchor" href="#comparing-backbone-vs.-full-network-communities"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.5</span> Comparing backbone vs. full network communities<a aria-label="anchor" class="anchor" href="#comparing-backbone-vs.-full-network-communities"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comm_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/cluster_leiden.html">cluster_leiden</a></span><span class="op">(</span><span class="va">g_full</span>, resolution_parameter <span class="op">=</span> <span class="fl">1.0</span>,</span>
@@ -850,17 +857,17 @@ Figure 18.1: Number of communities and modularity as a function of resolution pa
 <span></span>
 <span><span class="va">nmi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/compare.html">compare</a></span><span class="op">(</span><span class="va">mem_full</span>, <span class="va">mem_back</span>, method <span class="op">=</span> <span class="st">"nmi"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"NMI (full vs backbone, shared nodes): {round(nmi, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.672</code></pre>
+<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.666</code></pre>
 <div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities in full network: {length(unique(membership(comm_full)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Communities in full network: 9</code></pre>
 <div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities in backbone: {length(unique(membership(comm_backbone)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Communities in backbone: 29</code></pre>
+<pre><code>#&gt; Communities in backbone: 30</code></pre>
 </div>
-<div id="visualisation-2" class="section level3" number="18.4.6">
+<div class="section level3" id="visualisation-2" number="18.4.6">
 <h3>
-<span class="header-section-number">18.4.6</span> Visualisation<a class="anchor" aria-label="anchor" href="#visualisation-2"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.4.6</span> Visualisation<a aria-label="anchor" class="anchor" href="#visualisation-2"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_backbone</span><span class="op">)</span><span class="op">$</span><span class="va">community</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="va">comm_backbone</span><span class="op">)</span><span class="op">)</span></span>
@@ -880,16 +887,16 @@ Figure 18.1: Number of communities and modularity as a function of resolution pa
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span><span class="op">(</span>base_family <span class="op">=</span> <span class="st">"sans"</span>, base_size <span class="op">=</span> <span class="fl">11</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span><span class="op">(</span>legend.position <span class="op">=</span> <span class="st">"bottom"</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:18-fig-backbone-network"></span>
-<img src="scientometrics-in-r_files/figure-html/18-fig-backbone-network-1.png" alt="Network graph showing the backbone of the bibliographic coupling network. Nodes coloured by community, sized by degree. Only statistically significant edges are shown." width="90%"><p class="caption">
+<span id="fig:18-fig-backbone-network" style="display:block;"></span>
+<img alt="Network graph showing the backbone of the bibliographic coupling network. Nodes coloured by community, sized by degree. Only statistically significant edges are shown." src="scientometrics-in-r_files/figure-html/18-fig-backbone-network-1.png" width="90%"/><p class="caption">
 Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 </p>
 </div>
 </div>
 </div>
-<div id="backbone-diagnostics" class="section level2" number="18.5">
+<div class="section level2" id="backbone-diagnostics" number="18.5">
 <h2>
-<span class="header-section-number">18.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#backbone-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#backbone-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -902,14 +909,14 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <strong>Singleton communities</strong>: Communities with one or two nodes are usually noise. Consider merging them into the nearest larger community or excluding them from interpretation.</li>
 </ul>
 </div>
-<div id="backbone-limitations" class="section level2" number="18.6">
+<div class="section level2" id="backbone-limitations" number="18.6">
 <h2>
-<span class="header-section-number">18.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#backbone-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#backbone-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-17" class="section level2 callout callout-warn" number="18.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-17" number="18.7">
 <h2>
-<span class="header-section-number">18.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-17"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-17"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -922,14 +929,14 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <strong>Communities are not ground truth.</strong> Detected communities are algorithmic constructs. They reflect structural patterns in citation data, not necessarily real-world research groups or coherent intellectual traditions <span class="citation">(<a href="references.html#ref-hicks2015">Hicks et al. 2015</a>)</span>.</li>
 </ul>
 </div>
-<div id="backbone-pitfalls" class="section level2" number="18.8">
+<div class="section level2" id="backbone-pitfalls" number="18.8">
 <h2>
-<span class="header-section-number">18.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#backbone-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#backbone-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-17" class="section level2 callout callout-stop" number="18.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-17" number="18.9">
 <h2>
-<span class="header-section-number">18.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-17"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-17"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -942,9 +949,9 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <strong>Interpreting backbone edges as “strong” relationships.</strong> The disparity filter retains <em>locally significant</em> edges, not necessarily those with the highest absolute weight. A low-weight edge can be retained if it is important relative to its endpoint’s other connections.</li>
 </ul>
 </div>
-<div id="backbone-exercises" class="section level2" number="18.10">
+<div class="section level2" id="backbone-exercises" number="18.10">
 <h2>
-<span class="header-section-number">18.10</span> Exercises<a class="anchor" aria-label="anchor" href="#backbone-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.10</span> Exercises<a aria-label="anchor" class="anchor" href="#backbone-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Alpha sensitivity.</strong> Run the disparity filter with alpha values of 0.01, 0.05, 0.10, and 0.20. Plot the number of retained edges and communities against alpha. At what alpha does the network become disconnected?</p></li>
@@ -953,15 +960,15 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <li><p><strong>Weighted vs. unweighted community detection.</strong> Remove edge weights from the backbone and run Leiden again. How much does the community structure change?</p></li>
 </ol>
 </div>
-<div id="id_18-solutions" class="section level2 callout callout-ok" number="18.11">
+<div class="section level2 callout callout-ok" id="id_18-solutions" number="18.11">
 <h2>
-<span class="header-section-number">18.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_18-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_18-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="backbone-reading" class="section level2" number="18.12">
+<div class="section level2" id="backbone-reading" number="18.12">
 <h2>
-<span class="header-section-number">18.12</span> Further reading<a class="anchor" aria-label="anchor" href="#backbone-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.12</span> Further reading<a aria-label="anchor" class="anchor" href="#backbone-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -976,9 +983,9 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <span class="citation">Waltman et al. (<a href="references.html#ref-waltman2012">2010</a>)</span> — Network construction and clustering for bibliometric applications.</li>
 </ul>
 </div>
-<div id="backbone-sessioninfo" class="section level2" number="18.13">
+<div class="section level2" id="backbone-sessioninfo" number="18.13">
 <h2>
-<span class="header-section-number">18.13</span> Session info<a class="anchor" aria-label="anchor" href="#backbone-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">18.13</span> Session info<a aria-label="anchor" class="anchor" href="#backbone-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1047,16 +1054,14 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 #&gt; [100] parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
 #&gt; [103] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
 #&gt; [106] rlang_1.3.0            fastmatch_1.1-8</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1138,12 +1143,12 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="co-word-and-keyword-co-occurrence.html"><span class="header-section-number">17</span> Co-word and Keyword Co-occurrence</a></div>
 <div class="next"><a href="science-mapping-and-overlay-maps.html"><span class="header-section-number">19</span> Science Mapping and Overlay Maps</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#community-detection-and-backbone-extraction"><span class="header-section-number">18</span> Community Detection and Backbone Extraction</a></li>
 <li><a class="nav-link" href="#backbone-objectives"><span class="header-section-number">18.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#backbone-setup"><span class="header-section-number">18.2</span> Setup</a></li>
@@ -1168,29 +1173,23 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <li><a class="nav-link" href="#backbone-reading"><span class="header-section-number">18.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#backbone-sessioninfo"><span class="header-section-number">18.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/18-community-detection-backbone.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/18-community-detection-backbone.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/18-community-detection-backbone.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/18-community-detection-backbone.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

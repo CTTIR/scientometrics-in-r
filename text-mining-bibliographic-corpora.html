@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 21 Text Mining Bibliographic Corpora | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="21.1 Learning objectives After completing this chapter, you will be able to: Build a text corpus from OpenAlex titles and abstracts Apply standard preprocessing steps: tokenisation, stopword...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="Chapter 21 Text Mining Bibliographic Corpora | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/text-mining-bibliographic-corpora.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="21.1 Learning objectives After completing this chapter, you will be able to: Build a text corpus from OpenAlex titles and abstracts Apply standard preprocessing steps: tokenisation, stopword...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chapter 21 Text Mining Bibliographic Corpora | Scientometrics in R">
-<meta name="twitter:description" content="21.1 Learning objectives After completing this chapter, you will be able to: Build a text corpus from OpenAlex titles and abstracts Apply standard preprocessing steps: tokenisation, stopword...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="21.1 Learning objectives After completing this chapter, you will be able to: Build a text corpus from OpenAlex titles and abstracts Apply standard preprocessing steps: tokenisation, stopword..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="Chapter 21 Text Mining Bibliographic Corpora | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/text-mining-bibliographic-corpora.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="21.1 Learning objectives After completing this chapter, you will be able to: Build a text corpus from OpenAlex titles and abstracts Apply standard preprocessing steps: tokenisation, stopword..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="Chapter 21 Text Mining Bibliographic Corpora | Scientometrics in R" name="twitter:title"/>
+<meta content="21.1 Learning objectives After completing this chapter, you will be able to: Build a text corpus from OpenAlex titles and abstracts Apply standard preprocessing steps: tokenisation, stopword..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,19 +165,18 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="text-mining-bibliographic-corpora" class="section level1" number="21">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="text-mining-bibliographic-corpora" number="21">
 <h1>
-<span class="header-section-number">21</span> Text Mining Bibliographic Corpora<a class="anchor" aria-label="anchor" href="#text-mining-bibliographic-corpora"><i class="fas fa-link"></i></a>
-</h1>
-<div id="textmine-objectives" class="section level2" number="21.1">
+<span class="header-section-number">21</span> Text Mining Bibliographic Corpora<a aria-label="anchor" class="anchor" href="#text-mining-bibliographic-corpora"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/text-mining-bibliographic-corpora.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/text-mining-bibliographic-corpora.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<div class="section level2" id="textmine-objectives" number="21.1">
 <h2>
-<span class="header-section-number">21.1</span> Learning objectives<a class="anchor" aria-label="anchor" href="#textmine-objectives"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.1</span> Learning objectives<a aria-label="anchor" class="anchor" href="#textmine-objectives"><i class="fas fa-link"></i></a>
 </h2>
 <p>After completing this chapter, you will be able to:</p>
 <ul>
@@ -180,9 +187,9 @@
 <li>Visualise term frequency patterns across time or groups</li>
 </ul>
 </div>
-<div id="textmine-setup" class="section level2" number="21.2">
+<div class="section level2" id="textmine-setup" number="21.2">
 <h2>
-<span class="header-section-number">21.2</span> Setup<a class="anchor" aria-label="anchor" href="#textmine-setup"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.2</span> Setup<a aria-label="anchor" class="anchor" href="#textmine-setup"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -198,9 +205,9 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"utils.R"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="fu">here</span><span class="fu">::</span><span class="fu"><a href="https://here.r-lib.org/reference/here.html">here</a></span><span class="op">(</span><span class="st">"R"</span>, <span class="st">"sci_palette.R"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
-<div id="textmine-background" class="section level2" number="21.3">
+<div class="section level2" id="textmine-background" number="21.3">
 <h2>
-<span class="header-section-number">21.3</span> Conceptual background<a class="anchor" aria-label="anchor" href="#textmine-background"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.3</span> Conceptual background<a aria-label="anchor" class="anchor" href="#textmine-background"><i class="fas fa-link"></i></a>
 </h2>
 <p>Bibliometric metadata — titles, abstracts, and keywords — constitutes a rich but noisy text corpus. Text mining transforms this unstructured data into structured representations suitable for statistical analysis. The pipeline typically follows three stages: preprocessing, representation, and analysis.</p>
 <p><strong>Preprocessing</strong> converts raw text into a standardised form. Tokenisation splits text into individual words or n-grams. Lowercasing removes case variation. Stopword removal eliminates high-frequency function words (“the”, “of”, “and”) that carry little topical information. Stemming or lemmatisation reduces words to their root forms (“computing”, “computed”, “computation” → “comput” or “compute”). Each step involves trade-offs: aggressive stemming can merge distinct concepts, while minimal preprocessing retains noise.</p>
@@ -208,13 +215,13 @@
 <p><code>quanteda</code> <span class="citation">(<a href="references.html#ref-aria2017">Aria and Cuccurullo 2017</a>)</span> provides a fast, well-designed toolkit for text analysis in R. Its <code>corpus → tokens → dfm</code> pipeline integrates naturally with the tidyverse. For very large corpora, <code>quanteda</code> uses sparse matrix representations that scale to millions of documents.</p>
 <p>Text mining complements network-based methods (<a href="co-word-and-keyword-co-occurrence.html#coword-background">17.3</a>). Co-word networks reveal term associations; text mining provides the frequency distributions, temporal trends, and discriminative features that characterise a field’s vocabulary.</p>
 </div>
-<div id="textmine-example" class="section level2" number="21.4">
+<div class="section level2" id="textmine-example" number="21.4">
 <h2>
-<span class="header-section-number">21.4</span> Worked example<a class="anchor" aria-label="anchor" href="#textmine-example"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.4</span> Worked example<a aria-label="anchor" class="anchor" href="#textmine-example"><i class="fas fa-link"></i></a>
 </h2>
-<div id="building-a-text-corpus" class="section level3" number="21.4.1">
+<div class="section level3" id="building-a-text-corpus" number="21.4.1">
 <h3>
-<span class="header-section-number">21.4.1</span> Building a text corpus<a class="anchor" aria-label="anchor" href="#building-a-text-corpus"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.4.1</span> Building a text corpus<a aria-label="anchor" class="anchor" href="#building-a-text-corpus"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
@@ -234,20 +241,20 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents with abstracts: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents with abstracts: 133</code></pre>
+<pre><code>#&gt; Documents with abstracts: 134</code></pre>
 <div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/corpus.html">corpus</a></span><span class="op">(</span><span class="va">text_df</span>, docid_field <span class="op">=</span> <span class="st">"doc_id"</span>, text_field <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://quanteda.io/reference/docvars.html">docvars</a></span><span class="op">(</span><span class="va">corp</span>, <span class="st">"year"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">text_df</span><span class="op">$</span><span class="va">year</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Corpus size: {ndoc(corp)} documents\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Corpus size: 133 documents</code></pre>
+<pre><code>#&gt; Corpus size: 134 documents</code></pre>
 <div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Total tokens: {sum(ntoken(corp))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Total tokens: 32797</code></pre>
+<pre><code>#&gt; Total tokens: 33115</code></pre>
 </div>
-<div id="tokenisation-and-preprocessing" class="section level3" number="21.4.2">
+<div class="section level3" id="tokenisation-and-preprocessing" number="21.4.2">
 <h3>
-<span class="header-section-number">21.4.2</span> Tokenisation and preprocessing<a class="anchor" aria-label="anchor" href="#tokenisation-and-preprocessing"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.4.2</span> Tokenisation and preprocessing<a aria-label="anchor" class="anchor" href="#tokenisation-and-preprocessing"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">toks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/tokens.html">tokens</a></span><span class="op">(</span><span class="va">corp</span>,</span>
@@ -261,18 +268,18 @@
 <span>  <span class="fu"><a href="https://quanteda.io/reference/tokens_wordstem.html">tokens_wordstem</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Tokens after preprocessing: {sum(ntoken(toks))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Tokens after preprocessing: 16519</code></pre>
+<pre><code>#&gt; Tokens after preprocessing: 16690</code></pre>
 </div>
-<div id="document-feature-matrix" class="section level3" number="21.4.3">
+<div class="section level3" id="document-feature-matrix" number="21.4.3">
 <h3>
-<span class="header-section-number">21.4.3</span> Document-feature matrix<a class="anchor" aria-label="anchor" href="#document-feature-matrix"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.4.3</span> Document-feature matrix<a aria-label="anchor" class="anchor" href="#document-feature-matrix"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/dfm.html">dfm</a></span><span class="op">(</span><span class="va">toks</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://quanteda.io/reference/dfm_trim.html">dfm_trim</a></span><span class="op">(</span>min_termfreq <span class="op">=</span> <span class="fl">5</span>, min_docfreq <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"DFM dimensions: {nrow(dfmat)} docs x {ncol(dfmat)} features\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; DFM dimensions: 133 docs x 694 features</code></pre>
+<pre><code>#&gt; DFM dimensions: 134 docs x 702 features</code></pre>
 <div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sparsity: {scales::percent(sparsity(dfmat))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Sparsity: 92%</code></pre>
@@ -286,15 +293,15 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Frequency"</span>, y <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:21-fig-textmine-topfeatures"></span>
-<img src="scientometrics-in-r_files/figure-html/21-fig-textmine-topfeatures-1.png" alt="Horizontal bar chart showing the 20 most frequent terms after preprocessing, with term frequency on the x-axis." width="90%"><p class="caption">
+<span id="fig:21-fig-textmine-topfeatures" style="display:block;"></span>
+<img alt="Horizontal bar chart showing the 20 most frequent terms after preprocessing, with term frequency on the x-axis." src="scientometrics-in-r_files/figure-html/21-fig-textmine-topfeatures-1.png" width="90%"/><p class="caption">
 Figure 21.1: Top 20 most frequent terms in the Scientometrics corpus.
 </p>
 </div>
 </div>
-<div id="tf-idf-weighting" class="section level3" number="21.4.4">
+<div class="section level3" id="tf-idf-weighting" number="21.4.4">
 <h3>
-<span class="header-section-number">21.4.4</span> TF-IDF weighting<a class="anchor" aria-label="anchor" href="#tf-idf-weighting"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.4.4</span> TF-IDF weighting<a aria-label="anchor" class="anchor" href="#tf-idf-weighting"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfmat_tfidf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/dfm_tfidf.html">dfm_tfidf</a></span><span class="op">(</span><span class="va">dfmat</span><span class="op">)</span></span>
@@ -764,134 +771,134 @@ Figure 21.1: Top 20 most frequent terms in the Scientometrics corpus.
   height: 0px !important;
 }
 </style>
-<div class="inline-table"><table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<div class="inline-table"><table class="gt_table" data-quarto-bootstrap="false" data-quarto-disable-processing="false">
 <thead><tr class="gt_col_headings">
-<th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="term">term</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="tfidf">tfidf</th>
-    </tr></thead>
+<th class="gt_col_heading gt_columns_bottom_border gt_left" colspan="1" id="term" rowspan="1" scope="col">term</th>
+<th class="gt_col_heading gt_columns_bottom_border gt_right" colspan="1" id="tfidf" rowspan="1" scope="col">tfidf</th>
+</tr></thead>
 <tbody class="gt_table_body">
 <tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" scope="colgroup" id="a2019">2019</th>
-    </tr>
+<th class="gt_group_heading" colspan="2" id="a2019" scope="colgroup">2019</th>
+</tr>
 <tr class="gt_row_group_first">
-<td headers="a2019  term" class="gt_row gt_left">journal</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">19.7</td>
+<td class="gt_row gt_left" headers="a2019 term">journal</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">19.8</td>
 </tr>
 <tr>
-<td headers="a2019  term" class="gt_row gt_left">econom</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">18.7</td>
+<td class="gt_row gt_left" headers="a2019 term">econom</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">18.8</td>
 </tr>
 <tr>
-<td headers="a2019  term" class="gt_row gt_left">score</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">17.3</td>
+<td class="gt_row gt_left" headers="a2019 term">score</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">17.4</td>
 </tr>
 <tr>
-<td headers="a2019  term" class="gt_row gt_left">peer</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">16.6</td>
+<td class="gt_row gt_left" headers="a2019 term">peer</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">16.7</td>
 </tr>
 <tr>
-<td headers="a2019  term" class="gt_row gt_left">doctor</td>
-<td headers="a2019  tfidf" class="gt_row gt_right">16.5</td>
+<td class="gt_row gt_left" headers="a2019 term">doctor</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">16.5</td>
 </tr>
 <tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" scope="colgroup" id="a2020">2020</th>
-    </tr>
+<th class="gt_group_heading" colspan="2" id="a2020" scope="colgroup">2020</th>
+</tr>
 <tr class="gt_row_group_first">
-<td headers="a2020  term" class="gt_row gt_left">citat</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">25.7</td>
+<td class="gt_row gt_left" headers="a2020 term">citat</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">25.4</td>
 </tr>
 <tr>
-<td headers="a2020  term" class="gt_row gt_left">lis</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">24.7</td>
+<td class="gt_row gt_left" headers="a2020 term">lis</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">24.7</td>
 </tr>
 <tr>
-<td headers="a2020  term" class="gt_row gt_left">classifi</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">16.4</td>
+<td class="gt_row gt_left" headers="a2020 term">classifi</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">16.4</td>
 </tr>
 <tr>
-<td headers="a2020  term" class="gt_row gt_left">scopus</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">14.6</td>
+<td class="gt_row gt_left" headers="a2020 term">journal</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">14.5</td>
 </tr>
 <tr>
-<td headers="a2020  term" class="gt_row gt_left">journal</td>
-<td headers="a2020  tfidf" class="gt_row gt_right">14.4</td>
+<td class="gt_row gt_left" headers="a2020 term">scopus</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">14.2</td>
 </tr>
 <tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" scope="colgroup" id="a2021">2021</th>
-    </tr>
+<th class="gt_group_heading" colspan="2" id="a2021" scope="colgroup">2021</th>
+</tr>
 <tr class="gt_row_group_first">
-<td headers="a2021  term" class="gt_row gt_left">retract</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">41.1</td>
+<td class="gt_row gt_left" headers="a2021 term">retract</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">41.2</td>
 </tr>
 <tr>
-<td headers="a2021  term" class="gt_row gt_left">book</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">24.7</td>
+<td class="gt_row gt_left" headers="a2021 term">book</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">24.7</td>
 </tr>
 <tr>
-<td headers="a2021  term" class="gt_row gt_left">journal</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">24.5</td>
+<td class="gt_row gt_left" headers="a2021 term">journal</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">24.7</td>
 </tr>
 <tr>
-<td headers="a2021  term" class="gt_row gt_left">sars-cov-2</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">22.8</td>
+<td class="gt_row gt_left" headers="a2021 term">sars-cov-2</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">22.9</td>
 </tr>
 <tr>
-<td headers="a2021  term" class="gt_row gt_left">hold</td>
-<td headers="a2021  tfidf" class="gt_row gt_right">21.4</td>
+<td class="gt_row gt_left" headers="a2021 term">hold</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">21.4</td>
 </tr>
 <tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" scope="colgroup" id="a2022">2022</th>
-    </tr>
+<th class="gt_group_heading" colspan="2" id="a2022" scope="colgroup">2022</th>
+</tr>
 <tr class="gt_row_group_first">
-<td headers="a2022  term" class="gt_row gt_left">journal</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">28.8</td>
+<td class="gt_row gt_left" headers="a2022 term">journal</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">28.9</td>
 </tr>
 <tr>
-<td headers="a2022  term" class="gt_row gt_left">citat</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">26.2</td>
+<td class="gt_row gt_left" headers="a2022 term">citat</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">26.3</td>
 </tr>
 <tr>
-<td headers="a2022  term" class="gt_row gt_left">acknowledg</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">25.9</td>
+<td class="gt_row gt_left" headers="a2022 term">acknowledg</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">25.9</td>
 </tr>
 <tr>
-<td headers="a2022  term" class="gt_row gt_left">p</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">25.9</td>
+<td class="gt_row gt_left" headers="a2022 term">p</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">25.9</td>
 </tr>
 <tr>
-<td headers="a2022  term" class="gt_row gt_left">public</td>
-<td headers="a2022  tfidf" class="gt_row gt_right">24.5</td>
+<td class="gt_row gt_left" headers="a2022 term">public</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">24.8</td>
 </tr>
 <tr class="gt_group_heading_row">
-<th colspan="2" class="gt_group_heading" scope="colgroup" id="a2023">2023</th>
-    </tr>
+<th class="gt_group_heading" colspan="2" id="a2023" scope="colgroup">2023</th>
+</tr>
 <tr class="gt_row_group_first">
-<td headers="a2023  term" class="gt_row gt_left">mention</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">32.0</td>
+<td class="gt_row gt_left" headers="a2023 term">mention</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">32.0</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">nobel</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">29.6</td>
+<td class="gt_row gt_left" headers="a2023 term">nobel</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">29.7</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">polici</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">26.3</td>
+<td class="gt_row gt_left" headers="a2023 term">polici</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">26.3</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">bias</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">23.2</td>
+<td class="gt_row gt_left" headers="a2023 term">bias</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">23.3</td>
 </tr>
 <tr>
-<td headers="a2023  term" class="gt_row gt_left">prize</td>
-<td headers="a2023  tfidf" class="gt_row gt_right">23.1</td>
+<td class="gt_row gt_left" headers="a2023 term">prize</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">23.1</td>
 </tr>
 </tbody>
 </table></div>
 </div>
 </div>
-<div id="term-frequency-over-time" class="section level3" number="21.4.5">
+<div class="section level3" id="term-frequency-over-time" number="21.4.5">
 <h3>
-<span class="header-section-number">21.4.5</span> Term frequency over time<a class="anchor" aria-label="anchor" href="#term-frequency-over-time"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.4.5</span> Term frequency over time<a aria-label="anchor" class="anchor" href="#term-frequency-over-time"><i class="fas fa-link"></i></a>
 </h3>
 <div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">target_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bibliometr"</span>, <span class="st">"open"</span>, <span class="st">"network"</span>, <span class="st">"impact"</span>, <span class="st">"collabor"</span><span class="op">)</span></span>
@@ -915,16 +922,16 @@ Figure 21.1: Top 20 most frequent terms in the Scientometrics corpus.
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Year"</span>, y <span class="op">=</span> <span class="st">"Relative frequency"</span>, colour <span class="op">=</span> <span class="st">"Term"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu">theme_sci</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="figure" style="text-align: center">
-<span style="display:block;" id="fig:21-fig-textmine-temporal"></span>
-<img src="scientometrics-in-r_files/figure-html/21-fig-textmine-temporal-1.png" alt="Line chart showing how the relative frequency of key terms changes across publication years, revealing shifts in research vocabulary." width="90%"><p class="caption">
+<span id="fig:21-fig-textmine-temporal" style="display:block;"></span>
+<img alt="Line chart showing how the relative frequency of key terms changes across publication years, revealing shifts in research vocabulary." src="scientometrics-in-r_files/figure-html/21-fig-textmine-temporal-1.png" width="90%"/><p class="caption">
 Figure 21.2: Relative frequency of selected terms over time.
 </p>
 </div>
 </div>
 </div>
-<div id="textmine-diagnostics" class="section level2" number="21.5">
+<div class="section level2" id="textmine-diagnostics" number="21.5">
 <h2>
-<span class="header-section-number">21.5</span> Diagnostics and interpretation<a class="anchor" aria-label="anchor" href="#textmine-diagnostics"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.5</span> Diagnostics and interpretation<a aria-label="anchor" class="anchor" href="#textmine-diagnostics"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -937,14 +944,14 @@ Figure 21.2: Relative frequency of selected terms over time.
 <strong>Abstract availability</strong>: Not all OpenAlex records have abstracts. Report the coverage rate and consider whether missing abstracts introduce bias (e.g., older papers, certain publishers).</li>
 </ul>
 </div>
-<div id="textmine-limitations" class="section level2" number="21.6">
+<div class="section level2" id="textmine-limitations" number="21.6">
 <h2>
-<span class="header-section-number">21.6</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#textmine-limitations"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.6</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#textmine-limitations"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="limitations-and-responsible-use-20" class="section level2 callout callout-warn" number="21.7">
+<div class="section level2 callout callout-warn" id="limitations-and-responsible-use-20" number="21.7">
 <h2>
-<span class="header-section-number">21.7</span> Limitations and responsible use<a class="anchor" aria-label="anchor" href="#limitations-and-responsible-use-20"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.7</span> Limitations and responsible use<a aria-label="anchor" class="anchor" href="#limitations-and-responsible-use-20"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -957,14 +964,14 @@ Figure 21.2: Relative frequency of selected terms over time.
 <strong>Bag-of-words ignores context.</strong> TF-IDF and frequency-based methods treat documents as unordered collections of words. Phrase meaning (“machine learning” vs. “learning machine”) is lost unless you use n-grams or embeddings (<a href="embeddings-for-scientometrics.html#embed-background">24.3</a>).</li>
 </ul>
 </div>
-<div id="textmine-pitfalls" class="section level2" number="21.8">
+<div class="section level2" id="textmine-pitfalls" number="21.8">
 <h2>
-<span class="header-section-number">21.8</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#textmine-pitfalls"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.8</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#textmine-pitfalls"><i class="fas fa-link"></i></a>
 </h2>
 </div>
-<div id="common-pitfalls-20" class="section level2 callout callout-stop" number="21.9">
+<div class="section level2 callout callout-stop" id="common-pitfalls-20" number="21.9">
 <h2>
-<span class="header-section-number">21.9</span> Common pitfalls<a class="anchor" aria-label="anchor" href="#common-pitfalls-20"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.9</span> Common pitfalls<a aria-label="anchor" class="anchor" href="#common-pitfalls-20"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -977,9 +984,9 @@ Figure 21.2: Relative frequency of selected terms over time.
 <strong>Stemming titles but not abstracts (or vice versa).</strong> Apply identical preprocessing to all text fields.</li>
 </ul>
 </div>
-<div id="textmine-exercises" class="section level2" number="21.10">
+<div class="section level2" id="textmine-exercises" number="21.10">
 <h2>
-<span class="header-section-number">21.10</span> Exercises<a class="anchor" aria-label="anchor" href="#textmine-exercises"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.10</span> Exercises<a aria-label="anchor" class="anchor" href="#textmine-exercises"><i class="fas fa-link"></i></a>
 </h2>
 <ol style="list-style-type: decimal">
 <li><p><strong>Bigram analysis.</strong> Build a DFM using bigrams (two-word sequences) instead of unigrams. What meaningful phrases emerge that single words miss?</p></li>
@@ -988,15 +995,15 @@ Figure 21.2: Relative frequency of selected terms over time.
 <li><p><strong>Preprocessing sensitivity.</strong> Run the same analysis with and without stemming. How do the top terms differ? Which version is more interpretable?</p></li>
 </ol>
 </div>
-<div id="id_21-solutions" class="section level2 callout callout-ok" number="21.11">
+<div class="section level2 callout callout-ok" id="id_21-solutions" number="21.11">
 <h2>
-<span class="header-section-number">21.11</span> Solutions<a class="anchor" aria-label="anchor" href="#id_21-solutions"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.11</span> Solutions<a aria-label="anchor" class="anchor" href="#id_21-solutions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Solutions are provided in <a href="solutions.html#solutions">E</a>.</p>
 </div>
-<div id="textmine-reading" class="section level2" number="21.12">
+<div class="section level2" id="textmine-reading" number="21.12">
 <h2>
-<span class="header-section-number">21.12</span> Further reading<a class="anchor" aria-label="anchor" href="#textmine-reading"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.12</span> Further reading<a aria-label="anchor" class="anchor" href="#textmine-reading"><i class="fas fa-link"></i></a>
 </h2>
 <ul>
 <li>
@@ -1007,9 +1014,9 @@ Figure 21.2: Relative frequency of selected terms over time.
 <span class="citation">Priem et al. (<a href="references.html#ref-priem2022">2022</a>)</span> — OpenAlex abstract availability and coverage.</li>
 </ul>
 </div>
-<div id="textmine-sessioninfo" class="section level2" number="21.13">
+<div class="section level2" id="textmine-sessioninfo" number="21.13">
 <h2>
-<span class="header-section-number">21.13</span> Session info<a class="anchor" aria-label="anchor" href="#textmine-sessioninfo"><i class="fas fa-link"></i></a>
+<span class="header-section-number">21.13</span> Session info<a aria-label="anchor" class="anchor" href="#textmine-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
 <div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -1086,16 +1093,14 @@ Figure 21.2: Relative frequency of selected terms over time.
 #&gt; [103] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3     
 #&gt; [106] scales_1.4.0           crayon_1.5.3           openxlsx_4.2.9        
 #&gt; [109] rlang_1.3.0            fastmatch_1.1-8</code></pre>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -1177,12 +1182,12 @@ Figure 21.2: Relative frequency of selected terms over time.
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="network-visualization-and-interoperability.html"><span class="header-section-number">20</span> Network Visualization and Interoperability</a></div>
 <div class="next"><a href="topic-modeling.html"><span class="header-section-number">22</span> Topic Modeling</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#text-mining-bibliographic-corpora"><span class="header-section-number">21</span> Text Mining Bibliographic Corpora</a></li>
 <li><a class="nav-link" href="#textmine-objectives"><span class="header-section-number">21.1</span> Learning objectives</a></li>
 <li><a class="nav-link" href="#textmine-setup"><span class="header-section-number">21.2</span> Setup</a></li>
@@ -1206,29 +1211,23 @@ Figure 21.2: Relative frequency of selected terms over time.
 <li><a class="nav-link" href="#textmine-reading"><span class="header-section-number">21.12</span> Further reading</a></li>
 <li><a class="nav-link" href="#textmine-sessioninfo"><span class="header-section-number">21.13</span> Session info</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/21-text-mining-corpora.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/21-text-mining-corpora.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/chapters/21-text-mining-corpora.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/chapters/21-text-mining-corpora.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {

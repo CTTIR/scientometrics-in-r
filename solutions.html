@@ -1,45 +1,46 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>E Exercise Solutions | Scientometrics in R</title>
-<meta name="author" content="R. Heller">
-<meta name="description" content="This appendix provides suggested solutions for all chapter exercises. The code sketches below are meant to guide you toward a working answer; they are not the only valid approach. Because each...">
-<meta name="generator" content="bookdown 0.48 with bs4_book()">
-<meta property="og:title" content="E Exercise Solutions | Scientometrics in R">
-<meta property="og:type" content="book">
-<meta property="og:url" content="https://cttir.github.io/scientometrics-in-r/solutions.html">
-<meta property="og:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<meta property="og:description" content="This appendix provides suggested solutions for all chapter exercises. The code sketches below are meant to guide you toward a working answer; they are not the only valid approach. Because each...">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="E Exercise Solutions | Scientometrics in R">
-<meta name="twitter:description" content="This appendix provides suggested solutions for all chapter exercises. The code sketches below are meant to guide you toward a working answer; they are not the only valid approach. Because each...">
-<meta name="twitter:image" content="https://cttir.github.io/scientometrics-in-r/images/cover.png">
-<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
-<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet">
-<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet">
-<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
-<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet">
-<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet">
-<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet">
-<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet">
-<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet">
-<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
-<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet">
-<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet">
-<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet">
-<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet">
-<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
-<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link rel="stylesheet" href="style/font-awesome.min.css">
+<meta content="R. Heller" name="author"/>
+<meta content="This appendix provides suggested solutions for all chapter exercises. The code sketches below are meant to guide you toward a working answer; they are not the only valid approach. Because each..." name="description"/>
+<meta content="bookdown 0.48 with bs4_book()" name="generator"/>
+<meta content="E Exercise Solutions | Scientometrics in R" property="og:title"/>
+<meta content="book" property="og:type"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/solutions.html" property="og:url"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
+<meta content="This appendix provides suggested solutions for all chapter exercises. The code sketches below are meant to guide you toward a working answer; they are not the only valid approach. Because each..." property="og:description"/>
+<meta content="summary" name="twitter:card"/>
+<meta content="E Exercise Solutions | Scientometrics in R" name="twitter:title"/>
+<meta content="This appendix provides suggested solutions for all chapter exercises. The code sketches below are meant to guide you toward a working answer; they are not the only valid approach. Because each..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
+<link href="libs/JetBrains_Mono-0.4.10/font.css" rel="stylesheet"/>
+<script src="libs/bs3compat-0.12.0/transition.js"></script><script src="libs/bs3compat-0.12.0/tabs.js"></script><script src="libs/bs3compat-0.12.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet"/>
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/vis-9.1.0/vis-network.min.css" rel="stylesheet"/>
+<script src="libs/vis-9.1.0/vis-network.min.js"></script><script src="libs/visNetwork-binding-2.1.4/visNetwork.js"></script><link href="libs/htmltools-fill-0.5.9/fill.css" rel="stylesheet"/>
+<script src="libs/plotly-binding-4.12.1/plotly.js"></script><script src="libs/typedarray-0.1/typedarray.min.js"></script><link href="libs/crosstalk-1.2.2/css/crosstalk.min.css" rel="stylesheet"/>
+<script src="libs/crosstalk-1.2.2/js/crosstalk.min.js"></script><link href="libs/plotly-htmlwidgets-css-2.25.2/plotly-htmlwidgets.css" rel="stylesheet"/>
+<script src="libs/plotly-main-2.25.2/plotly-latest.min.js"></script><link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet"/>
+<script src="libs/datatables-binding-0.34.0/datatables.js"></script><link href="libs/dt-core-1.13.6/css/jquery.dataTables.min.css" rel="stylesheet"/>
+<link href="libs/dt-core-1.13.6/css/jquery.dataTables.extra.css" rel="stylesheet"/>
+<script src="libs/dt-core-1.13.6/js/jquery.dataTables.min.js"></script><link href="libs/nouislider-7.0.10/jquery.nouislider.min.css" rel="stylesheet"/>
+<script src="libs/nouislider-7.0.10/jquery.nouislider.min.js"></script><link href="libs/selectize-0.12.0/selectize.bootstrap3.css" rel="stylesheet"/>
+<script src="libs/selectize-0.12.0/selectize.min.js"></script><link href="libs/dt-plugin-searchhighlight-1.13.6/source.css" rel="stylesheet"/>
+<script src="libs/dt-plugin-searchhighlight-1.13.6/jquery.highlight.js"></script><script src="libs/dt-plugin-searchhighlight-1.13.6/source.min.js"></script><!-- Fonts (Hugo Coder set) --><link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Local Font Awesome 6 (woff2 in style/webfonts/) --><link href="style/font-awesome.min.css" rel="stylesheet"/>
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -65,30 +66,37 @@
       margin-left: 2em;
     }
   </style>
-<link rel="stylesheet" href="style/style.css">
-<link rel="stylesheet" href="style/font-awesome.min.css">
-</head>
+<link href="style/style.css" rel="stylesheet"/>
+<link href="style/font-awesome.min.css" rel="stylesheet"/>
+<style id="unified-book-download-style">
+.book-downloads--unified {display:flex!important;flex-wrap:wrap;gap:12px 24px;margin:16px 0 24px!important;padding:14px 16px!important;border:1px solid #a8adb4;border-radius:8px;background:transparent;color:inherit;font-family:system-ui,sans-serif;font-size:14px;line-height:1.4;box-sizing:border-box;max-width:100%;}
+.book-downloads--unified .book-download-group {display:flex;align-items:center;flex-wrap:wrap;gap:8px;}
+.book-downloads--unified .book-download-label {font-weight:600;margin-right:4px;}
+.book-downloads--unified a {display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid currentColor;border-radius:5px;text-decoration:none!important;font-weight:600;color:inherit;}
+.book-downloads--unified a:hover {background:rgba(127,127,127,.14);}
+.book-downloads--unified a:focus-visible {outline:3px solid #2684d9;outline-offset:3px;}
+.book-downloads--unified svg {height:20px;width:20px;flex:none;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;}
+.book-downloads:not(.book-downloads--unified),.book-download-footer,.sidebar-downloads {display:none!important;}
+@media(max-width:500px){.book-downloads--unified{gap:12px;padding:12px!important;}.book-downloads--unified .book-download-group{width:100%;}.book-downloads--unified .book-download-label{min-width:92px;}}
+@media print{.book-downloads--unified{display:none!important;}}
+</style></head>
 <body data-spy="scroll" data-target="#toc">
-
 <div class="container-fluid">
 <div class="row">
-  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
-
-    <div class="d-flex align-items-start justify-content-between">
-      <h1>
-        <a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
+<header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+<div class="d-flex align-items-start justify-content-between">
+<h1>
+<a href="index.html" title="Bibliometrics, Network Science, and Research Evaluation">Scientometrics in R</a>:
         <small class="text-muted">Bibliometrics, Network Science, and Research Evaluation</small>
-      </h1>
-      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
-    </div>
-
-    <div id="main-nav" class="collapse-lg">
-      <form role="search">
-        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</h1>
+<button aria-controls="main-nav" aria-expanded="true" class="btn btn-outline-primary d-lg-none ml-2 mt-1" data-target="#main-nav" data-toggle="collapse" type="button"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+</div>
+<div class="collapse-lg" id="main-nav">
+<form role="search">
+<input aria-label="Search" class="form-control" id="search" placeholder="Search" type="search"/>
 </form>
-
-      <nav aria-label="Table of contents"><h2>Table of contents</h2>
-        <ul class="book-toc list-unstyled">
+<nav aria-label="Table of contents"><h2>Table of contents</h2>
+<ul class="book-toc list-unstyled">
 <li><a class="" href="index.html">Welcome!</a></li>
 <li><a class="" href="impressum.html">Impressum</a></li>
 <li><a class="" href="acknowledgments.html">Acknowledgments</a></li>
@@ -157,16 +165,15 @@
 <li><a class="" href="citing-this-guide-1.html">Citing this Guide</a></li>
 <li><a class="" href="references.html">References</a></li>
 </ul>
-
-        <div class="book-extra">
-          <p><a id="book-repo" href="https://github.com/CTTIR/scientometrics-in-r">View book source <i class="fab fa-github"></i></a></p>
-        </div>
-      </nav>
+<div class="book-extra">
+<p><a href="https://github.com/CTTIR/scientometrics-in-r" id="book-repo">View book source <i class="fab fa-github"></i></a></p>
 </div>
-  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="solutions" class="section level1" number="47">
+</nav>
+</div>
+</header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div class="section level1" id="solutions" number="47">
 <h1>
-<span class="header-section-number">E</span> Exercise Solutions<a class="anchor" aria-label="anchor" href="#solutions"><i class="fas fa-link"></i></a>
-</h1>
+<span class="header-section-number">E</span> Exercise Solutions<a aria-label="anchor" class="anchor" href="#solutions"><i class="fas fa-link"></i></a>
+</h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/solutions.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/solutions.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
 <!-- verify_chunks: skip-file
      Every chunk in this appendix is intentionally not evaluated; solutions
      reference data built during the corresponding chapter. -->
@@ -176,8 +183,8 @@ not the only valid approach.
 Because each solution references data built during the corresponding chapter,
 code chunks are <strong>not evaluated</strong> here — run them inside the chapter project
 after completing the worked example.</p>
-<div id="chapter-1-what-is-scientometrics" class="section level2 unnumbered">
-<h2>Chapter 1 — What Is Scientometrics?<a class="anchor" aria-label="anchor" href="#chapter-1-what-is-scientometrics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-1-what-is-scientometrics">
+<h2>Chapter 1 — What Is Scientometrics?<a aria-label="anchor" class="anchor" href="#chapter-1-what-is-scientometrics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Explore a different field.</strong>
 Swap the search term and fetch a fresh sample. Comparing the publication trend
@@ -249,8 +256,8 @@ Plot annual counts on a log scale; linearity implies exponential growth.</p>
 <p><em>Key insight:</em> If the points fall roughly on a straight line, growth is
 approximately exponential, consistent with Price’s law.</p>
 </div>
-<div id="chapter-2-theoretical-underpinnings" class="section level2 unnumbered">
-<h2>Chapter 2 — Theoretical Underpinnings<a class="anchor" aria-label="anchor" href="#chapter-2-theoretical-underpinnings"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-2-theoretical-underpinnings">
+<h2>Chapter 2 — Theoretical Underpinnings<a aria-label="anchor" class="anchor" href="#chapter-2-theoretical-underpinnings"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Lotka exponent.</strong>
 Fit a linear model in log-log space to estimate the exponent.</p>
@@ -338,8 +345,8 @@ Lotka’s law.</p>
 <p><em>Key insight:</em> Preferential attachment generates a skewed distribution
 resembling Lotka’s law, illustrating the Matthew Effect.</p>
 </div>
-<div id="chapter-3-ethics-and-responsible-metrics" class="section level2 unnumbered">
-<h2>Chapter 3 — Ethics and Responsible Metrics<a class="anchor" aria-label="anchor" href="#chapter-3-ethics-and-responsible-metrics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-3-ethics-and-responsible-metrics">
+<h2>Chapter 3 — Ethics and Responsible Metrics<a aria-label="anchor" class="anchor" href="#chapter-3-ethics-and-responsible-metrics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Leiden Manifesto audit.</strong>
 This is a qualitative exercise. Evaluate a real hiring policy against the ten
@@ -404,8 +411,8 @@ Propose a new indicator and analyse potential gaming strategies.</p>
 <p><em>Key insight:</em> Any ratio-based metric can be gamed on both numerator and
 denominator. Indicator design must anticipate behavioural responses.</p>
 </div>
-<div id="chapter-4-data-sources-compared" class="section level2 unnumbered">
-<h2>Chapter 4 — Data Sources Compared<a class="anchor" aria-label="anchor" href="#chapter-4-data-sources-compared"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-4-data-sources-compared">
+<h2>Chapter 4 — Data Sources Compared<a aria-label="anchor" class="anchor" href="#chapter-4-data-sources-compared"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Coverage gap analysis.</strong>
 Query the same DOIs in OpenAlex and Crossref and compare.</p>
@@ -516,8 +523,8 @@ This is a qualitative exercise requiring no code.</p>
 <p><em>Key insight:</em> No single source is sufficient; combining an open global database
 with a regional index maximises both coverage and reproducibility.</p>
 </div>
-<div id="chapter-5-apis-and-packages" class="section level2 unnumbered">
-<h2>Chapter 5 — APIs and Packages<a class="anchor" aria-label="anchor" href="#chapter-5-apis-and-packages"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-5-apis-and-packages">
+<h2>Chapter 5 — APIs and Packages<a aria-label="anchor" class="anchor" href="#chapter-5-apis-and-packages"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Fetch works by institution.</strong>
 Find your institution in OpenAlex and retrieve its works.</p>
@@ -582,8 +589,8 @@ Fetch all works from a journal across multiple years.</p>
 the citation time window, while publication counts may rise if the journal is
 growing.</p>
 </div>
-<div id="chapter-6-parsing-native-exports" class="section level2 unnumbered">
-<h2>Chapter 6 — Parsing Native Exports<a class="anchor" aria-label="anchor" href="#chapter-6-parsing-native-exports"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-6-parsing-native-exports">
+<h2>Chapter 6 — Parsing Native Exports<a aria-label="anchor" class="anchor" href="#chapter-6-parsing-native-exports"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Export and parse.</strong>
 Parse a BibTeX file from Google Scholar using <code>bib2df</code>.</p>
@@ -633,8 +640,8 @@ Write a reusable function to normalise columns.</p>
 <p><em>Key insight:</em> A standardisation layer decouples downstream analysis from the
 input format, improving reproducibility.</p>
 </div>
-<div id="chapter-7-building-reproducible-corpora" class="section level2 unnumbered">
-<h2>Chapter 7 — Building Reproducible Corpora<a class="anchor" aria-label="anchor" href="#chapter-7-building-reproducible-corpora"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-7-building-reproducible-corpora">
+<h2>Chapter 7 — Building Reproducible Corpora<a aria-label="anchor" class="anchor" href="#chapter-7-building-reproducible-corpora"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. DOI coverage by year.</strong>
 Compute the DOI coverage rate per publication year.</p>
@@ -700,8 +707,8 @@ Use the ROR API to resolve institutions.</p>
 <p><em>Key insight:</em> ROR provides stable, disambiguated identifiers; matching by name
 alone can produce false positives for common institutional names.</p>
 </div>
-<div id="chapter-8-working-with-full-text" class="section level2 unnumbered">
-<h2>Chapter 8 — Working with Full Text<a class="anchor" aria-label="anchor" href="#chapter-8-working-with-full-text"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-8-working-with-full-text">
+<h2>Chapter 8 — Working with Full Text<a aria-label="anchor" class="anchor" href="#chapter-8-working-with-full-text"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Extract and compare.</strong>
 Download a PDF, extract text, and compare the abstract.</p>
@@ -767,8 +774,8 @@ Extract a table from a PDF using <code>tabulizer</code>.</p>
 <p><em>Key insight:</em> Extracted tables almost always need header row promotion,
 whitespace trimming, and removal of empty or merged-cell artefact rows.</p>
 </div>
-<div id="chapter-9-descriptive-bibliometrics" class="section level2 unnumbered">
-<h2>Chapter 9 — Descriptive Bibliometrics<a class="anchor" aria-label="anchor" href="#chapter-9-descriptive-bibliometrics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-9-descriptive-bibliometrics">
+<h2>Chapter 9 — Descriptive Bibliometrics<a aria-label="anchor" class="anchor" href="#chapter-9-descriptive-bibliometrics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Lotka’s law.</strong>
 Fit Lotka’s law using <code>bibliometrix</code>.</p>
@@ -825,8 +832,8 @@ Compute the compound annual growth rate (CAGR).</p>
 the global average (~4-5% for all scientific literature) to assess relative
 growth.</p>
 </div>
-<div id="chapter-10-productivity-and-impact-indicators" class="section level2 unnumbered">
-<h2>Chapter 10 — Productivity and Impact Indicators<a class="anchor" aria-label="anchor" href="#chapter-10-productivity-and-impact-indicators"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-10-productivity-and-impact-indicators">
+<h2>Chapter 10 — Productivity and Impact Indicators<a aria-label="anchor" class="anchor" href="#chapter-10-productivity-and-impact-indicators"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Career h-index.</strong>
 Compute h-index, g-index, and m-quotient for a specific author.</p>
@@ -908,8 +915,8 @@ Compare the within-sample mean ratio and percentile selection share by year.</p>
 Ties and small groups affect the percentile share. These sample summaries do
 not rank field-normalized impact; that requires a justified external reference.</p>
 </div>
-<div id="chapter-11-journal-metrics" class="section level2 unnumbered">
-<h2>Chapter 11 — Journal Metrics<a class="anchor" aria-label="anchor" href="#chapter-11-journal-metrics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-11-journal-metrics">
+<h2>Chapter 11 — Journal Metrics<a aria-label="anchor" class="anchor" href="#chapter-11-journal-metrics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Cohort sensitivity.</strong>
 Use the verified source table and helper from Chapter 11. This code performs a
@@ -966,8 +973,8 @@ differs from the edge-level share. Neither current cumulative counts nor referen
 recorded for the cited papers identify the journals that cited them. No fixed
 self-citation threshold or empirical result follows from this chapter’s data.</p>
 </div>
-<div id="chapter-12-author-level-analysis" class="section level2 unnumbered">
-<h2>Chapter 12 — Author-Level Analysis<a class="anchor" aria-label="anchor" href="#chapter-12-author-level-analysis"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-12-author-level-analysis">
+<h2>Chapter 12 — Author-Level Analysis<a aria-label="anchor" class="anchor" href="#chapter-12-author-level-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Profile comparison.</strong>
 Compare two researchers on multiple indicators.</p>
@@ -1077,8 +1084,8 @@ Estimate the fraction of self-citations for an author.</p>
 <p><em>Key insight:</em> Self-citation rates of 5-15% are typical; rates above 25%
 may signal strategic self-citation behaviour.</p>
 </div>
-<div id="chapter-13-institutional-and-country-analysis" class="section level2 unnumbered">
-<h2>Chapter 13 — Institutional and Country Analysis<a class="anchor" aria-label="anchor" href="#chapter-13-institutional-and-country-analysis"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-13-institutional-and-country-analysis">
+<h2>Chapter 13 — Institutional and Country Analysis<a aria-label="anchor" class="anchor" href="#chapter-13-institutional-and-country-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Country-level analysis.</strong>
 Aggregate by country using full and fractional counts.</p>
@@ -1169,8 +1176,8 @@ effects.</p>
 <p><em>Key insight:</em> There is a positive relationship — institutions with higher
 collaboration intensity are more inflated by full counting.</p>
 </div>
-<div id="chapter-14-temporal-analysis-and-citation-aging" class="section level2 unnumbered">
-<h2>Chapter 14 — Temporal Analysis and Citation Aging<a class="anchor" aria-label="anchor" href="#chapter-14-temporal-analysis-and-citation-aging"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-14-temporal-analysis-and-citation-aging">
+<h2>Chapter 14 — Temporal Analysis and Citation Aging<a aria-label="anchor" class="anchor" href="#chapter-14-temporal-analysis-and-citation-aging"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Half-life comparison.</strong>
 Compare citation half-lives between a mathematics and a biomedical journal.</p>
@@ -1299,8 +1306,8 @@ length. A publication-date filter does not restrict citation-receipt dates.
 These calculations therefore do not estimate JIF or compare fixed post-publication
 citation windows. Missing citation counts remain outside the observed denominator.</p>
 </div>
-<div id="chapter-15-co-authorship-networks" class="section level2 unnumbered">
-<h2>Chapter 15 — Co-authorship Networks<a class="anchor" aria-label="anchor" href="#chapter-15-co-authorship-networks"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-15-co-authorship-networks">
+<h2>Chapter 15 — Co-authorship Networks<a aria-label="anchor" class="anchor" href="#chapter-15-co-authorship-networks"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Fractional counting.</strong>
 Weight edges by 1/(k-1) where k is the number of authors.</p>
@@ -1397,8 +1404,8 @@ Vary the Leiden resolution and compare community counts.</p>
 depends on the application — lower resolution reveals broad thematic clusters,
 higher resolution reveals tight collaborative teams.</p>
 </div>
-<div id="chapter-16-co-citation-and-bibliographic-coupling" class="section level2 unnumbered">
-<h2>Chapter 16 — Co-citation and Bibliographic Coupling<a class="anchor" aria-label="anchor" href="#chapter-16-co-citation-and-bibliographic-coupling"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-16-co-citation-and-bibliographic-coupling">
+<h2>Chapter 16 — Co-citation and Bibliographic Coupling<a aria-label="anchor" class="anchor" href="#chapter-16-co-citation-and-bibliographic-coupling"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Cosine normalisation.</strong>
 Normalise co-citation strengths by the geometric mean of individual citation
@@ -1498,8 +1505,8 @@ Label communities using top title words.</p>
 <p><em>Key insight:</em> Community labels based on frequent title words typically
 correspond to recognisable subfields or research themes.</p>
 </div>
-<div id="chapter-17-co-word-and-keyword-co-occurrence" class="section level2 unnumbered">
-<h2>Chapter 17 — Co-word and Keyword Co-occurrence<a class="anchor" aria-label="anchor" href="#chapter-17-co-word-and-keyword-co-occurrence"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-17-co-word-and-keyword-co-occurrence">
+<h2>Chapter 17 — Co-word and Keyword Co-occurrence<a aria-label="anchor" class="anchor" href="#chapter-17-co-word-and-keyword-co-occurrence"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Author keywords vs. concepts.</strong>
 Build and compare two co-occurrence networks.</p>
@@ -1613,8 +1620,8 @@ Compare raw and association-strength-normalised networks.</p>
 <p><em>Key insight:</em> Normalisation reduces the dominance of high-frequency generic
 terms, elevating more specific and meaningful keyword pairs.</p>
 </div>
-<div id="chapter-18-community-detection-and-backbone-extraction" class="section level2 unnumbered">
-<h2>Chapter 18 — Community Detection and Backbone Extraction<a class="anchor" aria-label="anchor" href="#chapter-18-community-detection-and-backbone-extraction"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-18-community-detection-and-backbone-extraction">
+<h2>Chapter 18 — Community Detection and Backbone Extraction<a aria-label="anchor" class="anchor" href="#chapter-18-community-detection-and-backbone-extraction"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Alpha sensitivity.</strong>
 Run the disparity filter across multiple alpha values.</p>
@@ -1711,8 +1718,8 @@ Remove weights and compare results.</p>
 weak connections that helped merge groups are no longer distinguishable from
 strong ones.</p>
 </div>
-<div id="chapter-19-science-mapping-and-overlay-maps" class="section level2 unnumbered">
-<h2>Chapter 19 — Science Mapping and Overlay Maps<a class="anchor" aria-label="anchor" href="#chapter-19-science-mapping-and-overlay-maps"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-19-science-mapping-and-overlay-maps">
+<h2>Chapter 19 — Science Mapping and Overlay Maps<a aria-label="anchor" class="anchor" href="#chapter-19-science-mapping-and-overlay-maps"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Multi-institution overlay.</strong>
 Overlay two institutions on the same base map.</p>
@@ -1792,8 +1799,8 @@ Compare a small and a large country’s publication profiles.</p>
 <p><em>Key insight:</em> Small countries tend to show concentrated profiles (above the
 diagonal in selected areas); large countries are more evenly distributed.</p>
 </div>
-<div id="chapter-20-network-visualization-and-interoperability" class="section level2 unnumbered">
-<h2>Chapter 20 — Network Visualization and Interoperability<a class="anchor" aria-label="anchor" href="#chapter-20-network-visualization-and-interoperability"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-20-network-visualization-and-interoperability">
+<h2>Chapter 20 — Network Visualization and Interoperability<a aria-label="anchor" class="anchor" href="#chapter-20-network-visualization-and-interoperability"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Layout comparison.</strong>
 Apply five layouts and compare quality and speed.</p>
@@ -1882,8 +1889,8 @@ Test colour distinguishability with increasing community counts.</p>
 <p><em>Key insight:</em> Viridis palettes remain distinguishable up to about 8 categories;
 beyond that, consider shape or faceting as supplementary channels.</p>
 </div>
-<div id="chapter-21-text-mining-bibliographic-corpora" class="section level2 unnumbered">
-<h2>Chapter 21 — Text Mining Bibliographic Corpora<a class="anchor" aria-label="anchor" href="#chapter-21-text-mining-bibliographic-corpora"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-21-text-mining-bibliographic-corpora">
+<h2>Chapter 21 — Text Mining Bibliographic Corpora<a aria-label="anchor" class="anchor" href="#chapter-21-text-mining-bibliographic-corpora"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Bigram analysis.</strong>
 Build a DFM from bigrams.</p>
@@ -1978,8 +1985,8 @@ Compare analyses with and without stemming.</p>
 can produce unintelligible stems. For keyword-based analyses, unstemmed terms
 are often more interpretable.</p>
 </div>
-<div id="chapter-22-topic-modeling" class="section level2 unnumbered">
-<h2>Chapter 22 — Topic Modeling<a class="anchor" aria-label="anchor" href="#chapter-22-topic-modeling"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-22-topic-modeling">
+<h2>Chapter 22 — Topic Modeling<a aria-label="anchor" class="anchor" href="#chapter-22-topic-modeling"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. K selection.</strong>
 Fit LDA models with multiple values of K and compare coherence.</p>
@@ -2087,8 +2094,8 @@ Compare topics from both models.</p>
 <p><em>Key insight:</em> STM topics may differ because the year covariate allows topic
 prevalence to shift over time, producing more temporally coherent topics.</p>
 </div>
-<div id="chapter-23-keyword-extraction" class="section level2 unnumbered">
-<h2>Chapter 23 — Keyword Extraction<a class="anchor" aria-label="anchor" href="#chapter-23-keyword-extraction"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-23-keyword-extraction">
+<h2>Chapter 23 — Keyword Extraction<a aria-label="anchor" class="anchor" href="#chapter-23-keyword-extraction"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Precision and recall.</strong>
 Evaluate RAKE keywords against author keywords.</p>
@@ -2177,8 +2184,8 @@ Use extracted keywords to build a co-word network for keyword-poor papers.</p>
 author keywords, enabling co-word analysis even for papers without manual
 keyword assignments.</p>
 </div>
-<div id="chapter-24-embeddings-for-scientometrics" class="section level2 unnumbered">
-<h2>Chapter 24 — Embeddings for Scientometrics<a class="anchor" aria-label="anchor" href="#chapter-24-embeddings-for-scientometrics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-24-embeddings-for-scientometrics">
+<h2>Chapter 24 — Embeddings for Scientometrics<a aria-label="anchor" class="anchor" href="#chapter-24-embeddings-for-scientometrics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Weighted averaging.</strong>
 Use TF-IDF weights for document embedding computation.</p>
@@ -2282,8 +2289,8 @@ Test analogical reasoning in the word2vec model.</p>
 “h-index” - “author” + “journal” near “impact factor”) but fail on generic
 analogies, reflecting the training corpus.</p>
 </div>
-<div id="chapter-25-detecting-emerging-topics" class="section level2 unnumbered">
-<h2>Chapter 25 — Detecting Emerging Topics<a class="anchor" aria-label="anchor" href="#chapter-25-detecting-emerging-topics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-25-detecting-emerging-topics">
+<h2>Chapter 25 — Detecting Emerging Topics<a aria-label="anchor" class="anchor" href="#chapter-25-detecting-emerging-topics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Relative burst detection.</strong>
 Use proportional frequencies instead of absolute counts.</p>
@@ -2405,8 +2412,8 @@ Manually validate burst-detected emerging terms.</p>
 <p><em>Key insight:</em> Burst detection has moderate precision; triangulating with
 qualitative sources reduces false positives and increases confidence.</p>
 </div>
-<div id="chapter-26-altmetrics" class="section level2 unnumbered">
-<h2>Chapter 26 — Altmetrics<a class="anchor" aria-label="anchor" href="#chapter-26-altmetrics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-26-altmetrics">
+<h2>Chapter 26 — Altmetrics<a aria-label="anchor" class="anchor" href="#chapter-26-altmetrics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. OA citation advantage.</strong>
 Compare citations for OA vs. closed-access papers across journals.</p>
@@ -2496,8 +2503,8 @@ Compare citation distributions and reference list lengths across fields.</p>
 lists than mathematics papers. This is why raw citation counts cannot be compared
 across fields.</p>
 </div>
-<div id="chapter-27-open-science-indicators" class="section level2 unnumbered">
-<h2>Chapter 27 — Open Science Indicators<a class="anchor" aria-label="anchor" href="#chapter-27-open-science-indicators"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-27-open-science-indicators">
+<h2>Chapter 27 — Open Science Indicators<a aria-label="anchor" class="anchor" href="#chapter-27-open-science-indicators"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Cross-journal OA comparison.</strong>
 Compare OA rates across three journals in different disciplines.</p>
@@ -2556,8 +2563,8 @@ Test whether author count predicts OA status.</p>
 collaborations also increase OA probability because at least one funder may
 mandate it.</p>
 </div>
-<div id="chapter-28-gender-and-equity-analysis" class="section level2 unnumbered">
-<h2>Chapter 28 — Gender and Equity Analysis<a class="anchor" aria-label="anchor" href="#chapter-28-gender-and-equity-analysis"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-28-gender-and-equity-analysis">
+<h2>Chapter 28 — Gender and Equity Analysis<a aria-label="anchor" class="anchor" href="#chapter-28-gender-and-equity-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Denominator comparison.</strong>
 Use the explicitly synthetic <code>lookup_records</code> from Chapter 28.</p>
@@ -2592,8 +2599,8 @@ The fixture supplies none of those demographic observations, nor real identity
 linkage, publication years or citation outcomes. Changing a name dictionary cannot
 recover them. No citation-gap or gender-equity conclusion follows from this exercise.</p>
 </div>
-<div id="chapter-29-retraction-analysis" class="section level2 unnumbered">
-<h2>Chapter 29 — Retraction Analysis<a class="anchor" aria-label="anchor" href="#chapter-29-retraction-analysis"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-29-retraction-analysis">
+<h2>Chapter 29 — Retraction Analysis<a aria-label="anchor" class="anchor" href="#chapter-29-retraction-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Retraction rate by field.</strong>
 Compare retraction rates across fields, normalised by corpus size.</p>
@@ -2664,8 +2671,8 @@ Test whether pre-retraction citation count predicts post-retraction citations.</
 <p><em>Key insight:</em> A positive correlation suggests that highly visible papers
 continue to be cited after retraction — the “retraction paradox.”</p>
 </div>
-<div id="chapter-30-funding-analysis" class="section level2 unnumbered">
-<h2>Chapter 30 — Funding Analysis<a class="anchor" aria-label="anchor" href="#chapter-30-funding-analysis"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-30-funding-analysis">
+<h2>Chapter 30 — Funding Analysis<a aria-label="anchor" class="anchor" href="#chapter-30-funding-analysis"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Funder co-occurrence.</strong>
 Identify frequently co-occurring funder pairs.</p>
@@ -2730,8 +2737,8 @@ It does not measure the prevalence of financial support or establish how the
 database’s coverage changed historically. Keep the annual sample denominators
 and report sparse groups and missing publication years.</p>
 </div>
-<div id="chapter-31-patent-paper-linkages" class="section level2 unnumbered">
-<h2>Chapter 31 — Patent-Paper Linkages<a class="anchor" aria-label="anchor" href="#chapter-31-patent-paper-linkages"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-31-patent-paper-linkages">
+<h2>Chapter 31 — Patent-Paper Linkages<a aria-label="anchor" class="anchor" href="#chapter-31-patent-paper-linkages"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Scholarly-citation comparison.</strong>
 Use two journals represented in the Chapter 31 sample. Keep the common sample
@@ -2774,8 +2781,8 @@ technological impact.</p>
 The linkage table needs actual source records, with at least these fields:</p>
 <div class="inline-table"><table class="table table-sm">
 <colgroup>
-<col width="50%">
-<col width="50%">
+<col width="50%"/>
+<col width="50%"/>
 </colgroup>
 <thead><tr class="header">
 <th align="left">Field</th>
@@ -2842,8 +2849,8 @@ are the citing patent and family identifiers, reference matches, dates and
 coverage information. Report the analysis as unavailable. The scholarly-citation
 sample and institutional top-decile shares cannot replace those inputs.</p>
 </div>
-<div id="chapter-32-causal-inference-in-scientometrics" class="section level2 unnumbered">
-<h2>Chapter 32 — Causal Inference in Scientometrics<a class="anchor" aria-label="anchor" href="#chapter-32-causal-inference-in-scientometrics"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-32-causal-inference-in-scientometrics">
+<h2>Chapter 32 — Causal Inference in Scientometrics<a aria-label="anchor" class="anchor" href="#chapter-32-causal-inference-in-scientometrics"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Interaction sensitivity.</strong>
 Use the complete sampled records in <code>cohort_data</code> from Chapter 32.</p>
@@ -2880,8 +2887,8 @@ causal effect, outcome measurement over comparable exposure periods, and a defen
 comparison design. It also needs relevant pre-treatment covariates and an explicit
 account of identification and inference assumptions.</p>
 </div>
-<div id="chapter-33-reproducibility-rrids-and-badges" class="section level2 unnumbered">
-<h2>Chapter 33 — Reproducibility, RRIDs, and Badges<a class="anchor" aria-label="anchor" href="#chapter-33-reproducibility-rrids-and-badges"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-33-reproducibility-rrids-and-badges">
+<h2>Chapter 33 — Reproducibility, RRIDs, and Badges<a aria-label="anchor" class="anchor" href="#chapter-33-reproducibility-rrids-and-badges"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. DAS detection.</strong>
 Screen available abstracts for candidate data/code availability mentions, then
@@ -2951,8 +2958,8 @@ Track recorded access status and abstract coverage by publication cohort.</p>
 <p><em>Key insight:</em> These are current recorded properties of publication cohorts,
 not adoption histories or measures of data/code sharing and reproducibility.</p>
 </div>
-<div id="chapter-34-reproducible-pipelines" class="section level2 unnumbered">
-<h2>Chapter 34 — Reproducible Pipelines<a class="anchor" aria-label="anchor" href="#chapter-34-reproducible-pipelines"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-34-reproducible-pipelines">
+<h2>Chapter 34 — Reproducible Pipelines<a aria-label="anchor" class="anchor" href="#chapter-34-reproducible-pipelines"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Build a pipeline.</strong>
 Create a <code>_targets.R</code> file for a bibliometric workflow.</p>
@@ -3049,8 +3056,8 @@ Use dynamic branching to analyse multiple journals in parallel.</p>
 journal is processed independently and can run in parallel with
 <code>tar_make_future()</code>.</p>
 </div>
-<div id="chapter-35-interactive-dashboards" class="section level2 unnumbered">
-<h2>Chapter 35 — Interactive Dashboards<a class="anchor" aria-label="anchor" href="#chapter-35-interactive-dashboards"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-35-interactive-dashboards">
+<h2>Chapter 35 — Interactive Dashboards<a aria-label="anchor" class="anchor" href="#chapter-35-interactive-dashboards"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Multi-page dashboard.</strong>
 Create a Quarto dashboard with two pages.</p>
@@ -3129,8 +3136,8 @@ Add informative hover text to a plotly chart.</p>
 <p><em>Key insight:</em> Custom tooltips using <code>text</code> and <code>hoverinfo = "text"</code> provide
 context-rich information on hover, improving dashboard usability.</p>
 </div>
-<div id="chapter-36-parameterized-quarto-reports" class="section level2 unnumbered">
-<h2>Chapter 36 — Parameterized Quarto Reports<a class="anchor" aria-label="anchor" href="#chapter-36-parameterized-quarto-reports"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-36-parameterized-quarto-reports">
+<h2>Chapter 36 — Parameterized Quarto Reports<a aria-label="anchor" class="anchor" href="#chapter-36-parameterized-quarto-reports"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Institutional template.</strong>
 Create a parameterized report for institutional profiles.</p>
@@ -3230,8 +3237,8 @@ Add a warning when the sample is too small.</p>
 <p><em>Key insight:</em> Conditional logic with <code>results: asis</code> enables dynamic content
 switching — essential for robust automated reports that handle edge cases.</p>
 </div>
-<div id="chapter-37-building-a-bibliometric-shiny-app" class="section level2 unnumbered">
-<h2>Chapter 37 — Building a Bibliometric Shiny App<a class="anchor" aria-label="anchor" href="#chapter-37-building-a-bibliometric-shiny-app"><i class="fas fa-link"></i></a>
+<div class="section level2 unnumbered" id="chapter-37-building-a-bibliometric-shiny-app">
+<h2>Chapter 37 — Building a Bibliometric Shiny App<a aria-label="anchor" class="anchor" href="#chapter-37-building-a-bibliometric-shiny-app"><i class="fas fa-link"></i></a>
 </h2>
 <p><strong>1. Add network tab.</strong>
 Extend the app with a co-authorship network visualisation.</p>
@@ -3346,16 +3353,14 @@ Run biblioshiny and compare features.</p>
 <p><em>Key insight:</em> biblioshiny is excellent for exploration but lacks
 reproducibility and customisation. A custom app is better for production
 workflows with specific analytical requirements.</p>
-
 </div>
 </div>
 <!-- Dark/light mode toggle -->
 <div class="sticky-item">
-  <button type="button" id="mode-switch" class="btn-circle-mode" aria-label="Toggle dark mode">
-    <i class="fa-solid fa-circle-half-stroke" aria-hidden="true"></i>
-  </button>
+<button aria-label="Toggle dark mode" class="btn-circle-mode" id="mode-switch" type="button">
+<i aria-hidden="true" class="fa-solid fa-circle-half-stroke"></i>
+</button>
 </div>
-
 <script>
   (function () {
     var stored = localStorage.getItem('themeMode');
@@ -3437,12 +3442,12 @@ workflows with specific analytical requirements.</p>
 </script><!-- Footer attribution --><div class="bookdown-attribution">
   This book was built by the <a href="https://bookdown.org/"><strong>bookdown</strong></a> R package.
 </div>
-  <div class="chapter-nav">
+<div class="chapter-nav">
 <div class="prev"><a href="cheatsheets-and-quick-reference.html"><span class="header-section-number">D</span> Cheatsheets and Quick Reference</a></div>
 <div class="next"><a href="glossary.html">Glossary</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
-    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav">
+<nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
+<ul class="nav navbar-nav">
 <li><a class="nav-link" href="#solutions"><span class="header-section-number">E</span> Exercise Solutions</a></li>
 <li><a class="nav-link" href="#chapter-1-what-is-scientometrics">Chapter 1 — What Is Scientometrics?</a></li>
 <li><a class="nav-link" href="#chapter-2-theoretical-underpinnings">Chapter 2 — Theoretical Underpinnings</a></li>
@@ -3482,29 +3487,23 @@ workflows with specific analytical requirements.</p>
 <li><a class="nav-link" href="#chapter-36-parameterized-quarto-reports">Chapter 36 — Parameterized Quarto Reports</a></li>
 <li><a class="nav-link" href="#chapter-37-building-a-bibliometric-shiny-app">Chapter 37 — Building a Bibliometric Shiny App</a></li>
 </ul>
-
-      <div class="book-extra">
-        <ul class="list-unstyled">
-<li><a id="book-source" href="https://github.com/CTTIR/scientometrics-in-r/blob/main/appendices/E-solutions.Rmd">View source <i class="fab fa-github"></i></a></li>
-          <li><a id="book-edit" href="https://github.com/CTTIR/scientometrics-in-r/edit/main/appendices/E-solutions.Rmd">Edit this page <i class="fab fa-github"></i></a></li>
-        </ul>
+<div class="book-extra">
+<ul class="list-unstyled">
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/blob/main/appendices/E-solutions.Rmd" id="book-source">View source <i class="fab fa-github"></i></a></li>
+<li><a href="https://github.com/CTTIR/scientometrics-in-r/edit/main/appendices/E-solutions.Rmd" id="book-edit">Edit this page <i class="fab fa-github"></i></a></li>
+</ul>
 </div>
-    </nav>
+</nav>
 </div>
-
 </div>
 </div> <!-- .container -->
-
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
-  </div>
-
-  <div class="col-12 col-md-6 mt-3">
-    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
-  </div>
-
+<div class="col-12 col-md-6 mt-3">
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+</div>
+<div class="col-12 col-md-6 mt-3">
+<p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+</div>
 </div></div>
 </footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
