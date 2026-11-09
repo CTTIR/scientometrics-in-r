@@ -8,7 +8,7 @@ benefits from community feedback.
 ### Report issues
 
 Found a broken code chunk, incorrect citation, or rendering problem? Open an
-[issue](https://github.com/r-heller/scientometrics-in-r/issues) using the
+[issue](https://github.com/CTTIR/scientometrics-in-r/issues) using the
 appropriate template.
 
 ### Suggest improvements

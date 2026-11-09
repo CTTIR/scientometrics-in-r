@@ -7,7 +7,7 @@ bookdown::bs4_book:
     heading_font: { google: "Inter" }
     code_font: { google: "JetBrains Mono" }
   repo:
-    base: https://github.com/r-heller/scientometrics-in-r
+    base: https://github.com/CTTIR/scientometrics-in-r
     branch: main
   css: [style/style.css, style/font-awesome.min.css]
   includes:

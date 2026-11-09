@@ -3,7 +3,7 @@
 The suggested citation is:
 
 ```{block, type='boxempty'}
-**Heller, R.** (2026). *Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation* (Version 0.1.0). Self-published via GitHub Pages. <https://r-heller.github.io/scientometrics-in-r/>.
+**Heller, R.** (2026). *Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation* (Version 0.1.0). Self-published via GitHub Pages. <https://cttir.github.io/scientometrics-in-r/>.
 ```
 
 Download the reference as [BibTeX](citation-files/citation.bib) or [.ris](citation-files/citation.ris).

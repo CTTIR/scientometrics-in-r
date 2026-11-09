@@ -10,8 +10,8 @@ bibliography: [references.bib, packages.bib]
 biblio-style: apalike
 csl: style/chicago-author-date.csl
 link-citations: yes
-github-repo: r-heller/scientometrics-in-r
-url: https://r-heller.github.io/scientometrics-in-r/
+github-repo: CTTIR/scientometrics-in-r
+url: https://cttir.github.io/scientometrics-in-r/
 description: "A hands-on guide to scientometrics in R: data acquisition, bibliometric indicators, network analysis, text mining, and reproducible reporting."
 cover-image: "images/cover.png"
 favicon: "favicon.ico"
@@ -25,7 +25,7 @@ source("_common.R")
 
 ---
 
-<a href="https://github.com/r-heller/scientometrics-in-r" target="_blank"><img src="images/cover.png" width="250" align="right" alt="" class="cover" /></a> Welcome to **"Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation"**.
+<a href="https://github.com/CTTIR/scientometrics-in-r" target="_blank"><img src="images/cover.png" width="250" align="right" alt="" class="cover" /></a> Welcome to **"Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation"**.
 
 This is a working guide to scientometrics in R for researchers, librarians, research administrators, and data scientists who want to study scholarly communication quantitatively. It walks the full pipeline --- from pulling records out of OpenAlex, Crossref, and PubMed, through computing the standard indicators (h-index, MNCS, journal metrics), to building co-authorship and co-citation networks, applying text and topic models to scientific corpora, and packaging the results into reproducible reports and dashboards.
 
@@ -39,7 +39,7 @@ All examples run against free, open data; no Web of Science or Scopus subscripti
 
 ---
 
-This book has been built using [**{rmarkdown}**](https://rmarkdown.rstudio.com/docs/) and [**{bookdown}**](https://bookdown.org/). Formulas are rendered using [MathJax](http://docs.mathjax.org/en/latest/index.html). All source files are available on **GitHub** at <https://github.com/r-heller/scientometrics-in-r>. You are free to fork, share, and reuse contents under the project's [CC BY 4.0 license](LICENSE).
+This book has been built using [**{rmarkdown}**](https://rmarkdown.rstudio.com/docs/) and [**{bookdown}**](https://bookdown.org/). Formulas are rendered using [MathJax](http://docs.mathjax.org/en/latest/index.html). All source files are available on **GitHub** at <https://github.com/CTTIR/scientometrics-in-r>. You are free to fork, share, and reuse contents under the project's [CC BY 4.0 license](LICENSE).
 
 <br></br>
 
@@ -50,7 +50,7 @@ This book has been built using [**{rmarkdown}**](https://rmarkdown.rstudio.com/d
 - **Linear or lookup.** Read front to back, or use the [Find Your Method navigator](#find-your-method) to jump to the chapter that answers your question.
 - **Code.** Reusable helpers live in the companion R package `scientometricsInR` and in `R/` in the source repository; every chapter shows the full chunk it depends on.
 - **Downloads.** The side panel lists whole-book and chapter files that are available in the current build.
-- **Corrections.** Please file an issue at <https://github.com/r-heller/scientometrics-in-r/issues>.
+- **Corrections.** Please file an issue at <https://github.com/CTTIR/scientometrics-in-r/issues>.
 
 <br></br>
 
@@ -58,7 +58,7 @@ This book has been built using [**{rmarkdown}**](https://rmarkdown.rstudio.com/d
 
 ---
 
-Pull requests, corrections, and additions are welcome. See [`CONTRIBUTING.md`](https://github.com/r-heller/scientometrics-in-r/blob/main/CONTRIBUTING.md) for the workflow. <!-- TODO: external contributors will be listed here. -->
+Pull requests, corrections, and additions are welcome. See [`CONTRIBUTING.md`](https://github.com/CTTIR/scientometrics-in-r/blob/main/CONTRIBUTING.md) for the workflow. <!-- TODO: external contributors will be listed here. -->
 
 <br></br>
 
@@ -69,7 +69,7 @@ Pull requests, corrections, and additions are welcome. See [`CONTRIBUTING.md`](h
 The suggested citation is:
 
 ```{block, type='boxempty'}
-**Heller, R.** (2026). *Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation* (Version 0.1.0). Self-published via GitHub Pages. <https://r-heller.github.io/scientometrics-in-r/>.
+**Heller, R.** (2026). *Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation* (Version 0.1.0). Self-published via GitHub Pages. <https://cttir.github.io/scientometrics-in-r/>.
 ```
 
 Download the reference as [BibTeX](citation-files/citation.bib) or [.ris](citation-files/citation.ris).

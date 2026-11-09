@@ -8,14 +8,14 @@ Content released under the [Creative Commons Attribution 4.0 International Licen
 
 Source code released under the [MIT License](https://opensource.org/licenses/MIT).
 
-Published online: <https://r-heller.github.io/scientometrics-in-r/>
-Source repository: <https://github.com/r-heller/scientometrics-in-r>
+Published online: <https://cttir.github.io/scientometrics-in-r/>
+Source repository: <https://github.com/CTTIR/scientometrics-in-r>
 
 Version: 0.1.0 · Build date: `r Sys.Date()`
 
 ## Suggested citation {-}
 
-> Heller, R. (2026). *Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation*. <https://r-heller.github.io/scientometrics-in-r/>
+> Heller, R. (2026). *Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation*. <https://cttir.github.io/scientometrics-in-r/>
 
 ## Disclaimer {-}
 
@@ -23,4 +23,4 @@ This book is provided "as is" without warranty of any kind. The author assumes n
 
 ## Contact {-}
 
-For corrections, suggestions, or issues: <https://github.com/r-heller/scientometrics-in-r/issues>
+For corrections, suggestions, or issues: <https://github.com/CTTIR/scientometrics-in-r/issues>

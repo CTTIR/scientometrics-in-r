@@ -1,4 +1,4 @@
-<p align="center"><a href="https://r-heller.github.io/scientometrics-in-r/"><img src="images/cover.png" alt="Scientometrics in R cover" width="280"></a></p>
+<p align="center"><a href="https://cttir.github.io/scientometrics-in-r/"><img src="images/cover.png" alt="Scientometrics in R cover" width="280"></a></p>
 
 # Scientometrics in R
 
@@ -8,12 +8,12 @@ A free, open-source book by **Raban Heller**.
 
 ## Read it online
 
-📖 **<https://r-heller.github.io/scientometrics-in-r/>**
+📖 **<https://cttir.github.io/scientometrics-in-r/>**
 
 ## Download
 
-- 📄 [Whole book (PDF)](https://r-heller.github.io/scientometrics-in-r/scientometrics-in-r.pdf)
-- 📚 [EPUB](https://r-heller.github.io/scientometrics-in-r/scientometrics-in-r.epub)
+- 📄 [Whole book (PDF)](https://cttir.github.io/scientometrics-in-r/scientometrics-in-r.pdf)
+- 📚 [EPUB](https://cttir.github.io/scientometrics-in-r/scientometrics-in-r.epub)
 The reading site lists only downloads present in its build. Local candidate files
 do not update the published site until an authorized deployment.
 
@@ -67,14 +67,14 @@ The book has eight parts plus appendices:
 
 > Heller, R. (2026). *Scientometrics in R: Bibliometrics, Network
 > Science, and Research Evaluation*.
-> <https://r-heller.github.io/scientometrics-in-r/>
+> <https://cttir.github.io/scientometrics-in-r/>
 
 ```bibtex
 @book{heller2026scientometrics,
   author    = {Heller, Raban},
   title     = {Scientometrics in {R}: Bibliometrics, Network Science, and Research Evaluation},
   year      = {2026},
-  url       = {https://r-heller.github.io/scientometrics-in-r/},
+  url       = {https://cttir.github.io/scientometrics-in-r/},
   publisher = {Self-published}
 }
 ```
@@ -170,7 +170,7 @@ was verified against its DOI, arXiv ID, or ISBN.
 
 ## License
 
-The prose of this book is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); all code (scripts, chunks, examples) is licensed under the [MIT License](https://github.com/r-heller/scientometrics-in-r/blob/main/LICENSE-CODE).
+The prose of this book is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/); all code (scripts, chunks, examples) is licensed under the [MIT License](https://github.com/CTTIR/scientometrics-in-r/blob/main/LICENSE-CODE).
 
 ## Contributing
 

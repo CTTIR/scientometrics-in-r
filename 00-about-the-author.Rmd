@@ -2,8 +2,8 @@
 
 **Raban Heller** is a biomedical scientist working at the intersection of
 biostatistics, clinical research, and data science. He maintains the
-*[Strategy in R](https://r-heller.github.io/strategy-in-r/)* and
-*[Methods in R](https://r-heller.github.io/methods-in-r/)* books in the
+*[Strategy in R](https://cttir.github.io/strategy-in-r/)* and
+*[Methods in R](https://cttir.github.io/methods-in-r/)* books in the
 same series.
 
 - ORCID: <https://orcid.org/0000-0001-8006-9742>
@@ -11,4 +11,4 @@ same series.
 - Website: <https://r-heller.github.io/website/>
 
 For corrections or suggestions, please open an issue at
-<https://github.com/r-heller/scientometrics-in-r/issues>.
+<https://github.com/CTTIR/scientometrics-in-r/issues>.

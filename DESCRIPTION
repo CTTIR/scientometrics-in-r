@@ -11,9 +11,9 @@ Description: Helper functions and bundled datasets for the book
     bibliometric indicators, building co-authorship networks, and
     detecting emerging topics.
 License: MIT + file LICENCE
-URL: https://r-heller.github.io/scientometrics-in-r/,
-    https://github.com/r-heller/scientometrics-in-r
-BugReports: https://github.com/r-heller/scientometrics-in-r/issues
+URL: https://cttir.github.io/scientometrics-in-r/,
+    https://github.com/CTTIR/scientometrics-in-r
+BugReports: https://github.com/CTTIR/scientometrics-in-r/issues
 Depends:
     R (>= 4.1.0)
 Imports:
