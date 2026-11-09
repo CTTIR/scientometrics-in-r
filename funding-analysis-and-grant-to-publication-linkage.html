@@ -232,7 +232,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">display_name</span>, <span class="va">cited_by_count</span>, <span class="va">funders</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Works with observed funder IDs: {nrow(funded)} / {nrow(works)} ({scales::percent(nrow(funded)/nrow(works))})\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Works with observed funder IDs: 219 / 400 (55%)</code></pre>
+<pre><code>#&gt; Works with observed funder IDs: 220 / 400 (55%)</code></pre>
 <div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">funded</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"No usable funder records occur in this sample. Funder summaries are unavailable; missing metadata does not establish that the papers were unfunded.\n"</span><span class="op">)</span></span>
@@ -249,10 +249,10 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Funder-work pairs: {nrow(funder_data)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Funder-work pairs: 351</code></pre>
+<pre><code>#&gt; Funder-work pairs: 355</code></pre>
 <div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Unique funders: {n_distinct(funder_data$funder_id)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Unique funders: 181</code></pre>
+<pre><code>#&gt; Unique funders: 185</code></pre>
 </div>
 <div id="top-funders-by-publication-count" class="section level3" number="30.4.2">
 <h3>
@@ -763,13 +763,6 @@ Figure 30.1: Up to 15 funders by the number of sampled publications with observe
     </tr></thead>
 <tbody class="gt_table_body">
 <tr>
-<td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320322930</td>
-<td headers="funder" class="gt_row gt_left">Ministerio de Ciencia e Innovación</td>
-<td headers="n_pubs" class="gt_row gt_right">5</td>
-<td headers="mean_cites" class="gt_row gt_right">37.0</td>
-<td headers="median_cites" class="gt_row gt_right">24</td>
-</tr>
-<tr>
 <td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320335869</td>
 <td headers="funder" class="gt_row gt_left">National Social Science Fund of China</td>
 <td headers="n_pubs" class="gt_row gt_right">7</td>
@@ -784,18 +777,25 @@ Figure 30.1: Up to 15 funders by the number of sampled publications with observe
 <td headers="median_cites" class="gt_row gt_right">22</td>
 </tr>
 <tr>
-<td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320334704</td>
-<td headers="funder" class="gt_row gt_left">Australian Research Council</td>
+<td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320322120</td>
+<td headers="funder" class="gt_row gt_left">National Research Foundation of Korea</td>
 <td headers="n_pubs" class="gt_row gt_right">5</td>
-<td headers="mean_cites" class="gt_row gt_right">34.0</td>
-<td headers="median_cites" class="gt_row gt_right">20</td>
+<td headers="mean_cites" class="gt_row gt_right">26.4</td>
+<td headers="median_cites" class="gt_row gt_right">15</td>
 </tr>
 <tr>
 <td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320321001</td>
 <td headers="funder" class="gt_row gt_left">National Natural Science Foundation of China</td>
-<td headers="n_pubs" class="gt_row gt_right">44</td>
-<td headers="mean_cites" class="gt_row gt_right">25.1</td>
-<td headers="median_cites" class="gt_row gt_right">21</td>
+<td headers="n_pubs" class="gt_row gt_right">43</td>
+<td headers="mean_cites" class="gt_row gt_right">26.0</td>
+<td headers="median_cites" class="gt_row gt_right">22</td>
+</tr>
+<tr>
+<td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320321091</td>
+<td headers="funder" class="gt_row gt_left">Coordenação de Aperfeiçoamento de Pessoal de Nível Superior</td>
+<td headers="n_pubs" class="gt_row gt_right">7</td>
+<td headers="mean_cites" class="gt_row gt_right">25.0</td>
+<td headers="median_cites" class="gt_row gt_right">22</td>
 </tr>
 <tr>
 <td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320334764</td>
@@ -803,13 +803,6 @@ Figure 30.1: Up to 15 funders by the number of sampled publications with observe
 <td headers="n_pubs" class="gt_row gt_right">5</td>
 <td headers="mean_cites" class="gt_row gt_right">24.0</td>
 <td headers="median_cites" class="gt_row gt_right">10</td>
-</tr>
-<tr>
-<td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320321091</td>
-<td headers="funder" class="gt_row gt_left">Coordenação de Aperfeiçoamento de Pessoal de Nível Superior</td>
-<td headers="n_pubs" class="gt_row gt_right">6</td>
-<td headers="mean_cites" class="gt_row gt_right">23.2</td>
-<td headers="median_cites" class="gt_row gt_right">20</td>
 </tr>
 <tr>
 <td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320321106</td>
@@ -831,6 +824,13 @@ Figure 30.1: Up to 15 funders by the number of sampled publications with observe
 <td headers="n_pubs" class="gt_row gt_right">13</td>
 <td headers="mean_cites" class="gt_row gt_right">17.0</td>
 <td headers="median_cites" class="gt_row gt_right">13</td>
+</tr>
+<tr>
+<td headers="funder_id" class="gt_row gt_left">https://openalex.org/F4320320300</td>
+<td headers="funder" class="gt_row gt_left">European Commission</td>
+<td headers="n_pubs" class="gt_row gt_right">9</td>
+<td headers="mean_cites" class="gt_row gt_right">15.9</td>
+<td headers="median_cites" class="gt_row gt_right">14</td>
 </tr>
 </tbody>
 </table></div>
@@ -1166,7 +1166,7 @@ Figure 30.2: Citation distribution by presence of observed funder metadata; miss
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

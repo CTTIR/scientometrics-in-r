@@ -228,7 +228,7 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#&gt;     0.0     8.0    17.0    25.7    30.0   810.0</code></pre>
+#&gt;     0.0     8.0    17.0    29.5    30.0  1449.0</code></pre>
 </div>
 <div id="computing-the-h-index" class="section level3" number="10.4.2">
 <h3>
@@ -255,7 +255,7 @@
 <span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">compute_g_index</span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"g-index for this corpus: {g}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; g-index for this corpus: 81</code></pre>
+<pre><code>#&gt; g-index for this corpus: 95</code></pre>
 </div>
 <div id="publication-span-is-not-career-length" class="section level3" number="10.4.4">
 <h3>
@@ -273,7 +273,7 @@ denominator. The following h/span ratio is only a descriptive calculation.</p>
 <span></span>
 <span><span class="va">h_per_span</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">career_years</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">career_years</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">h</span> <span class="op">/</span> <span class="va">career_years</span> <span class="kw">else</span> <span class="cn">NA_real_</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sample h/publication-span ratio: {round(h_per_span, 3)} (span {round(career_years, 1)} years)\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Sample h/publication-span ratio: 8.525 (span 6 years)</code></pre>
+<pre><code>#&gt; Sample h/publication-span ratio: 8.521 (span 6 years)</code></pre>
 </div>
 <div id="a-normalization-diagnostic-using-the-sample-as-its-own-reference" class="section level3" number="10.4.5">
 <h3>
@@ -316,7 +316,7 @@ interpretation requires an independently justified field/year reference
 <span></span>
 <span><span class="va">pp_top10</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">works_with_pct</span><span class="op">$</span><span class="va">is_top10</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Share at or above the sample/year 90th percentile rank: {scales::percent(pp_top10, accuracy = 0.1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Share at or above the sample/year 90th percentile rank: 10.6%</code></pre>
+<pre><code>#&gt; Share at or above the sample/year 90th percentile rank: 10.4%</code></pre>
 <p>The ranks use only sampled works in each year. Ties and small groups can make
 the selected share differ from 10%; a singleton has no percentile rank. This
 is not field-normalized PP(top 10%). Report the ranking and tie rule explicitly.</p>
@@ -843,12 +843,12 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 </tr>
 <tr>
 <td headers="Indicator" class="gt_row gt_left">Sample g-index</td>
-<td headers="Value" class="gt_row gt_right">81</td>
-<td headers="Interpretation" class="gt_row gt_left">Top 81 papers have &gt;= 81^2 = 6561 cumulative citations</td>
+<td headers="Value" class="gt_row gt_right">95</td>
+<td headers="Interpretation" class="gt_row gt_left">Top 95 papers have &gt;= 95^2 = 9025 cumulative citations</td>
 </tr>
 <tr>
 <td headers="Indicator" class="gt_row gt_left">Sample h/span</td>
-<td headers="Value" class="gt_row gt_right">8.525</td>
+<td headers="Value" class="gt_row gt_right">8.521</td>
 <td headers="Interpretation" class="gt_row gt_left">Not a career m-quotient</td>
 </tr>
 <tr>
@@ -858,7 +858,7 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 </tr>
 <tr>
 <td headers="Indicator" class="gt_row gt_left">Sample upper-percentile share</td>
-<td headers="Value" class="gt_row gt_right">10.6%</td>
+<td headers="Value" class="gt_row gt_right">10.4%</td>
 <td headers="Interpretation" class="gt_row gt_left">Within-sample rank rule; not world PP(top 10%)</td>
 </tr>
 </tbody>
@@ -1167,7 +1167,7 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

@@ -747,38 +747,38 @@ Figure 32.1: Current cumulative citations in sampled papers, grouped by OA statu
 <tbody class="gt_table_body">
 <tr>
 <td headers="term" class="gt_row gt_left">(Intercept)</td>
-<td headers="estimate" class="gt_row gt_right">26.723</td>
-<td headers="std.error" class="gt_row gt_right">14.779</td>
-<td headers="statistic" class="gt_row gt_right">1.808</td>
-<td headers="p.value" class="gt_row gt_right">0.071</td>
+<td headers="estimate" class="gt_row gt_right">22.345</td>
+<td headers="std.error" class="gt_row gt_right">8.612</td>
+<td headers="statistic" class="gt_row gt_right">2.595</td>
+<td headers="p.value" class="gt_row gt_right">0.010</td>
 </tr>
 <tr>
 <td headers="term" class="gt_row gt_left">is_oaTRUE</td>
-<td headers="estimate" class="gt_row gt_right">50.042</td>
-<td headers="std.error" class="gt_row gt_right">19.046</td>
-<td headers="statistic" class="gt_row gt_right">2.627</td>
-<td headers="p.value" class="gt_row gt_right">0.009</td>
+<td headers="estimate" class="gt_row gt_right">13.944</td>
+<td headers="std.error" class="gt_row gt_right">11.103</td>
+<td headers="statistic" class="gt_row gt_right">1.256</td>
+<td headers="p.value" class="gt_row gt_right">0.210</td>
 </tr>
 <tr>
 <td headers="term" class="gt_row gt_left">recent_cohortTRUE</td>
-<td headers="estimate" class="gt_row gt_right">-10.430</td>
-<td headers="std.error" class="gt_row gt_right">17.887</td>
-<td headers="statistic" class="gt_row gt_right">-0.583</td>
-<td headers="p.value" class="gt_row gt_right">0.560</td>
+<td headers="estimate" class="gt_row gt_right">-10.057</td>
+<td headers="std.error" class="gt_row gt_right">10.379</td>
+<td headers="statistic" class="gt_row gt_right">-0.969</td>
+<td headers="p.value" class="gt_row gt_right">0.333</td>
 </tr>
 <tr>
 <td headers="term" class="gt_row gt_left">referenced_works_count</td>
-<td headers="estimate" class="gt_row gt_right">0.129</td>
-<td headers="std.error" class="gt_row gt_right">0.196</td>
-<td headers="statistic" class="gt_row gt_right">0.661</td>
-<td headers="p.value" class="gt_row gt_right">0.509</td>
+<td headers="estimate" class="gt_row gt_right">0.237</td>
+<td headers="std.error" class="gt_row gt_right">0.114</td>
+<td headers="statistic" class="gt_row gt_right">2.089</td>
+<td headers="p.value" class="gt_row gt_right">0.037</td>
 </tr>
 <tr>
 <td headers="term" class="gt_row gt_left">is_oaTRUE:recent_cohortTRUE</td>
-<td headers="estimate" class="gt_row gt_right">-47.796</td>
-<td headers="std.error" class="gt_row gt_right">26.583</td>
-<td headers="statistic" class="gt_row gt_right">-1.798</td>
-<td headers="p.value" class="gt_row gt_right">0.073</td>
+<td headers="estimate" class="gt_row gt_right">0.102</td>
+<td headers="std.error" class="gt_row gt_right">15.448</td>
+<td headers="statistic" class="gt_row gt_right">0.007</td>
+<td headers="p.value" class="gt_row gt_right">0.995</td>
 </tr>
 </tbody>
 </table></div>
@@ -811,10 +811,10 @@ Figure 32.1: Current cumulative citations in sampled papers, grouped by OA statu
 <pre><code>#&gt; Distinct closed-access controls: 140</code></pre>
 <div class="sourceCode" id="cb479"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean cites (OA): {round(mean(matched$cited_by_count), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Mean cites (OA): 49.1</code></pre>
+<pre><code>#&gt; Mean cites (OA): 42</code></pre>
 <div class="sourceCode" id="cb481"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean cites (closed match): {round(mean(matched$cited_by_count_closed), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Mean cites (closed match): 31.8</code></pre>
+<pre><code>#&gt; Mean cites (closed match): 25.6</code></pre>
 </div>
 <div id="publication-cohort-profile" class="section level3" number="32.4.5">
 <h3>
@@ -1152,7 +1152,7 @@ Figure 32.2: Current cumulative citations by OA status and publication year in t
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-08.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

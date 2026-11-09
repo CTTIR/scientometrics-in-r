@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.8)  8 NOV 2026 11:55
+This is XeTeX, Version 3.141592653-2.6-0.999998 (TeX Live 2026) (preloaded format=xelatex 2026.11.9)  9 NOV 2026 11:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1790,7 +1790,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/home/runner/.TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-Overfull \hbox (253.233pt too wide) in alignment at lines 459--473
+Overfull \hbox (375.35703pt too wide) in alignment at lines 459--473
 [] [] [] [] [] [] [] 
  []
 
