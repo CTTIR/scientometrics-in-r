@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -280,7 +280,7 @@
 #&gt; $ publication_year              &lt;int&gt; 2023, 2022, 2019, 2023, 2016, 2020, 2019…
 #&gt; $ relevance_score               &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
 #&gt; $ fwci                          &lt;dbl&gt; 1.542, 4.761, 0.000, 0.000, 0.000, 0.000…
-#&gt; $ cited_by_count                &lt;int&gt; 24, 43, 0, 0, 0, 0, 10, 14, 3, 83, 2, 2,…
+#&gt; $ cited_by_count                &lt;int&gt; 24, 43, 0, 0, 0, 0, 10, 14, 3, 2, 2, 1, …
 #&gt; $ counts_by_year                &lt;list&gt; [&lt;data.frame[3 x 2]&gt;], [&lt;data.frame[5 x…
 #&gt; $ ids                           &lt;list&gt; &lt;"https://openalex.org/W4389819307", "h…
 #&gt; $ type                          &lt;chr&gt; "article", "article", "article", "book-c…
@@ -299,7 +299,7 @@
 #&gt; $ license                       &lt;chr&gt; "cc-by", "cc-by", NA, NA, "cc-by", NA, "…
 #&gt; $ version                       &lt;chr&gt; "publishedVersion", "publishedVersion", …
 #&gt; $ referenced_works              &lt;list&gt; &lt;"https://openalex.org/W12743890", "htt…
-#&gt; $ referenced_works_count        &lt;int&gt; 75, 15, 34, 0, 0, 2, 17, 10, 21, 64, 3, …
+#&gt; $ referenced_works_count        &lt;int&gt; 75, 15, 34, 0, 0, 2, 17, 10, 21, 3, 24, …
 #&gt; $ related_works                 &lt;list&gt; &lt;"https://openalex.org/W3132390971", "h…
 #&gt; $ concepts                      &lt;list&gt; [&lt;data.frame[24 x 5]&gt;], [&lt;data.frame[15…
 #&gt; $ topics                        &lt;list&gt; [&lt;tbl_df[12 x 5]&gt;], [&lt;tbl_df[12 x 5]&gt;],…
@@ -337,7 +337,7 @@
 <pre><code>#&gt; # A tibble: 1 × 6
 #&gt;   n_works doi_coverage median_cites mean_cites max_cites zero_cites
 #&gt;     &lt;int&gt; &lt;chr&gt;               &lt;dbl&gt;      &lt;dbl&gt;     &lt;int&gt;      &lt;int&gt;
-#&gt; 1     500 90%                     5       18.9       352        120</code></pre>
+#&gt; 1     500 90%                     5       19.8       352        124</code></pre>
 <p>The large gap between the mean and median is a hallmark of citation distributions: most papers receive few citations while a small number accumulate many. This skewness is one of the most robust empirical regularities in scientometrics, and we will return to its theoretical basis in <a href="theoretical-underpinnings.html#theory-background">2.3</a>.</p>
 </div>
 <div class="section level3" id="top-journals" number="1.4.3">
@@ -353,18 +353,18 @@
 <span></span>
 <span><span class="va">top_journals</span></span></code></pre></div>
 <pre><code>#&gt; # A tibble: 10 × 2
-#&gt;    source_display_name                                n
-#&gt;    &lt;chr&gt;                                          &lt;int&gt;
-#&gt;  1 Sustainability                                    15
-#&gt;  2 Scientometrics                                    11
-#&gt;  3 arXiv (Cornell University)                         7
-#&gt;  4 PLoS ONE                                           6
-#&gt;  5 DergiPark (Istanbul University)                    5
-#&gt;  6 Lincoln (University of Nebraska)                   5
-#&gt;  7 Americanae (AECID Library)                         4
-#&gt;  8 CRC Press eBooks                                   4
-#&gt;  9 Scientific Reports                                 4
-#&gt; 10 DOAJ (DOAJ: Directory of Open Access Journals)     3</code></pre>
+#&gt;    source_display_name                  n
+#&gt;    &lt;chr&gt;                            &lt;int&gt;
+#&gt;  1 Sustainability                      16
+#&gt;  2 Scientometrics                       9
+#&gt;  3 arXiv (Cornell University)           7
+#&gt;  4 PLoS ONE                             6
+#&gt;  5 DergiPark (Istanbul University)      5
+#&gt;  6 Lincoln (University of Nebraska)     5
+#&gt;  7 Scientific Reports                   5
+#&gt;  8 CRC Press eBooks                     4
+#&gt;  9 OSF Preprints (OSF Preprints)        4
+#&gt; 10 Americanae (AECID Library)           3</code></pre>
 </div>
 <div class="section level3" id="publication-trend-over-time" number="1.4.4">
 <h3>
@@ -452,10 +452,10 @@ Figure 1.3: Citation distribution of sampled scientometrics works (log-scaled x-
 <pre><code>#&gt; Date range: 2014-01-01 to 2023-12-31</code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Works with zero citations: {sum(works$cited_by_count == 0)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Works with zero citations: 120</code></pre>
+<pre><code>#&gt; Works with zero citations: 124</code></pre>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Unique journals: {n_distinct(works$source_display_name, na.rm = TRUE)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Unique journals: 406</code></pre>
+<pre><code>#&gt; Unique journals: 404</code></pre>
 </div>
 <div class="section level2" id="what-limitations" number="1.6">
 <h2>

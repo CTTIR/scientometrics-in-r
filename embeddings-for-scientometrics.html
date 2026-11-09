@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -253,7 +253,7 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents for embedding: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents for embedding: 110</code></pre>
+<pre><code>#&gt; Documents for embedding: 108</code></pre>
 </div>
 <div class="section level3" id="training-word2vec-embeddings" number="24.4.2">
 <h3>
@@ -269,7 +269,7 @@
 <span>                  type <span class="op">=</span> <span class="st">"skip-gram"</span>, threads <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Vocabulary size: {nrow(as.matrix(model))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Vocabulary size: 1390</code></pre>
+<pre><code>#&gt; Vocabulary size: 1395</code></pre>
 <div class="sourceCode" id="cb374"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"citation"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">nn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/predict.html">predict</a></span><span class="op">(</span><span class="va">model</span>, newdata <span class="op">=</span> <span class="st">"citation"</span>, type <span class="op">=</span> <span class="st">"nearest"</span>, top_n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
@@ -279,16 +279,16 @@
 <pre><code>#&gt; Nearest neighbours of 'citation':
 #&gt; $citation
 #&gt;       term1       term2 similarity rank
-#&gt; 1  citation        mean      0.704    1
-#&gt; 2  citation  normalized      0.692    2
-#&gt; 3  citation comparisons      0.690    3
-#&gt; 4  citation  inequality      0.680    4
-#&gt; 5  citation  normalised      0.680    5
-#&gt; 6  citation    validity      0.670    6
-#&gt; 7  citation  occurrence      0.666    7
-#&gt; 8  citation       class      0.654    8
-#&gt; 9  citation     classes      0.649    9
-#&gt; 10 citation      rating      0.647   10</code></pre>
+#&gt; 1  citation        mean      0.721    1
+#&gt; 2  citation  inequality      0.718    2
+#&gt; 3  citation      skewed      0.717    3
+#&gt; 4  citation comparisons      0.703    4
+#&gt; 5  citation  normalised      0.695    5
+#&gt; 6  citation         jif      0.694    6
+#&gt; 7  citation  normalized      0.693    7
+#&gt; 8  citation   regarding      0.681    8
+#&gt; 9  citation       links      0.672    9
+#&gt; 10 citation  percentile      0.668   10</code></pre>
 </div>
 <div class="section level3" id="computing-document-embeddings-via-mean-pooling" number="24.4.3">
 <h3>
@@ -316,7 +316,7 @@ acronyms when matching them to the learned word vectors.</p>
 <span><span class="va">text_df_valid</span> <span class="op">&lt;-</span> <span class="va">text_df</span><span class="op">[</span><span class="va">valid</span>, <span class="op">]</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Valid document embeddings: {nrow(embed_mat)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Valid document embeddings: 110</code></pre>
+<pre><code>#&gt; Valid document embeddings: 108</code></pre>
 </div>
 <div class="section level3" id="dimensionality-reduction-with-umap" number="24.4.4">
 <h3>
@@ -364,7 +364,7 @@ Figure 24.1: UMAP projection of document embeddings, coloured by publication yea
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span><span class="op">(</span><span class="va">top_similar</span>, \<span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"  [{round(sims[i], 3)}] {text_df_valid$title[i]}\n"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; [0.932] Empirical evidence on the relationship between research and teaching in academia[0.92] Comments are welcome[0.917] Relations between academic reputation and innovation networks[0.91] Measuring academic entities’ impact by content-based citation analysis in a heterogeneous academic network[0.909] “Formal and informal networkedness among German Academics”: exploring the role of conferences and co-publications in scientific performance</code></pre>
+<pre><code>#&gt; [0.934] Empirical evidence on the relationship between research and teaching in academia[0.922] Relations between academic reputation and innovation networks[0.911] Comments are welcome[0.906] Measuring academic entities’ impact by content-based citation analysis in a heterogeneous academic network[0.903] “Formal and informal networkedness among German Academics”: exploring the role of conferences and co-publications in scientific performance</code></pre>
 </div>
 <div class="section level3" id="embedding-clusters-vs.-citation-impact" number="24.4.6">
 <h3>

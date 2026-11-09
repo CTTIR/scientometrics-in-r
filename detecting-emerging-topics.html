@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -242,7 +242,7 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents: 130</code></pre>
+<pre><code>#&gt; Documents: 127</code></pre>
 <div class="sourceCode" id="cb392"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Year range: {min(text_df$year)}--{max(text_df$year)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Year range: 2015--2023</code></pre>
@@ -265,7 +265,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html">as.integer</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Terms tracked: {n_distinct(kw_by_year$term)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Terms tracked: 317</code></pre>
+<pre><code>#&gt; Terms tracked: 298</code></pre>
 </div>
 <div class="section level3" id="growth-rate-detection" number="25.4.2">
 <h3>
@@ -751,29 +751,39 @@
 </tr></thead>
 <tbody class="gt_table_body">
 <tr>
+<td class="gt_row gt_left" headers="term">countries</td>
+<td class="gt_row gt_right" headers="mean_growth">610%</td>
+<td class="gt_row gt_right" headers="total">45</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="term">review</td>
+<td class="gt_row gt_right" headers="mean_growth">541%</td>
+<td class="gt_row gt_right" headers="total">39</td>
+</tr>
+<tr>
 <td class="gt_row gt_left" headers="term">p</td>
 <td class="gt_row gt_right" headers="mean_growth">535%</td>
 <td class="gt_row gt_right" headers="total">21</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="term">countries</td>
-<td class="gt_row gt_right" headers="mean_growth">518%</td>
-<td class="gt_row gt_right" headers="total">45</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="term">female</td>
-<td class="gt_row gt_right" headers="mean_growth">471%</td>
-<td class="gt_row gt_right" headers="total">21</td>
-</tr>
-<tr>
 <td class="gt_row gt_left" headers="term">performance</td>
-<td class="gt_row gt_right" headers="mean_growth">411%</td>
-<td class="gt_row gt_right" headers="total">59</td>
+<td class="gt_row gt_right" headers="mean_growth">438%</td>
+<td class="gt_row gt_right" headers="total">57</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="term">peer</td>
+<td class="gt_row gt_right" headers="mean_growth">400%</td>
+<td class="gt_row gt_right" headers="total">27</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="term">level</td>
-<td class="gt_row gt_right" headers="mean_growth">348%</td>
+<td class="gt_row gt_right" headers="mean_growth">345%</td>
 <td class="gt_row gt_right" headers="total">30</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="term">article</td>
+<td class="gt_row gt_right" headers="mean_growth">344%</td>
+<td class="gt_row gt_right" headers="total">46</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="term">universities</td>
@@ -786,9 +796,14 @@
 <td class="gt_row gt_right" headers="total">35</td>
 </tr>
 <tr>
+<td class="gt_row gt_left" headers="term">scores</td>
+<td class="gt_row gt_right" headers="mean_growth">300%</td>
+<td class="gt_row gt_right" headers="total">20</td>
+</tr>
+<tr>
 <td class="gt_row gt_left" headers="term">scientists</td>
-<td class="gt_row gt_right" headers="mean_growth">295%</td>
-<td class="gt_row gt_right" headers="total">24</td>
+<td class="gt_row gt_right" headers="mean_growth">286%</td>
+<td class="gt_row gt_right" headers="total">21</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="term">networks</td>
@@ -801,29 +816,14 @@
 <td class="gt_row gt_right" headers="total">26</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="term">quality</td>
-<td class="gt_row gt_right" headers="mean_growth">253%</td>
-<td class="gt_row gt_right" headers="total">28</td>
-</tr>
-<tr>
 <td class="gt_row gt_left" headers="term">top</td>
-<td class="gt_row gt_right" headers="mean_growth">244%</td>
-<td class="gt_row gt_right" headers="total">25</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="term">influence</td>
-<td class="gt_row gt_right" headers="mean_growth">210%</td>
+<td class="gt_row gt_right" headers="mean_growth">241%</td>
 <td class="gt_row gt_right" headers="total">24</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="term">size</td>
-<td class="gt_row gt_right" headers="mean_growth">208%</td>
-<td class="gt_row gt_right" headers="total">30</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="term">policy</td>
-<td class="gt_row gt_right" headers="mean_growth">205%</td>
-<td class="gt_row gt_right" headers="total">23</td>
+<td class="gt_row gt_left" headers="term">influence</td>
+<td class="gt_row gt_right" headers="mean_growth">233%</td>
+<td class="gt_row gt_right" headers="total">24</td>
 </tr>
 </tbody>
 </table></div>
@@ -1319,7 +1319,7 @@
 <tr>
 <td class="gt_row gt_left" headers="term">publications</td>
 <td class="gt_row gt_right" headers="burst_years">2022</td>
-<td class="gt_row gt_right" headers="max_count">38</td>
+<td class="gt_row gt_right" headers="max_count">37</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="term">science</td>
@@ -1334,12 +1334,22 @@
 <tr>
 <td class="gt_row gt_left" headers="term">citation</td>
 <td class="gt_row gt_right" headers="burst_years">2020</td>
+<td class="gt_row gt_right" headers="max_count">29</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="term">citations</td>
+<td class="gt_row gt_right" headers="burst_years">2022</td>
 <td class="gt_row gt_right" headers="max_count">28</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="term">journals</td>
 <td class="gt_row gt_right" headers="burst_years">2022</td>
 <td class="gt_row gt_right" headers="max_count">28</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="term">authors</td>
+<td class="gt_row gt_right" headers="burst_years">2022</td>
+<td class="gt_row gt_right" headers="max_count">27</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="term">papers</td>
@@ -1372,24 +1382,14 @@
 <td class="gt_row gt_right" headers="max_count">22</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="term">data</td>
-<td class="gt_row gt_right" headers="burst_years">2020</td>
+<td class="gt_row gt_left" headers="term">different</td>
+<td class="gt_row gt_right" headers="burst_years">2022</td>
 <td class="gt_row gt_right" headers="max_count">21</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="term">authors</td>
-<td class="gt_row gt_right" headers="burst_years">2022, 2023</td>
-<td class="gt_row gt_right" headers="max_count">20</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="term">information</td>
+<td class="gt_row gt_left" headers="term">countries</td>
 <td class="gt_row gt_right" headers="burst_years">2022</td>
 <td class="gt_row gt_right" headers="max_count">20</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="term">different</td>
-<td class="gt_row gt_right" headers="burst_years">2022</td>
-<td class="gt_row gt_right" headers="max_count">19</td>
 </tr>
 </tbody>
 </table></div>

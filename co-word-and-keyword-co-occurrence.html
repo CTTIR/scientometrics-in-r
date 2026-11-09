@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -260,7 +260,7 @@
 <pre><code>#&gt; Total keyword occurrences: 1500</code></pre>
 <div class="sourceCode" id="cb258"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Unique keywords: {n_distinct(keywords$keyword)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Unique keywords: 141</code></pre>
+<pre><code>#&gt; Unique keywords: 136</code></pre>
 <div class="sourceCode" id="cb260"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">kw_counts</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -305,7 +305,7 @@ Figure 17.1: Top 20 most frequent assigned topics used as terms in the Scientome
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Keyword network: {vcount(g_kw)} nodes, {ecount(g_kw)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Keyword network: 35 nodes, 69 edges</code></pre>
+<pre><code>#&gt; Keyword network: 34 nodes, 66 edges</code></pre>
 </div>
 <div class="section level3" id="community-detection-for-topical-clusters" number="17.4.3">
 <h3>
@@ -320,10 +320,10 @@ Figure 17.1: Top 20 most frequent assigned topics used as terms in the Scientome
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">community</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="va">communities</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities: {length(unique(membership(communities)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Communities: 4</code></pre>
+<pre><code>#&gt; Communities: 5</code></pre>
 <div class="sourceCode" id="cb265"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Modularity: {round(modularity(g_kw, membership(communities)), 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Modularity: 0.048</code></pre>
+<pre><code>#&gt; Modularity: 0.051</code></pre>
 <div class="sourceCode" id="cb267"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">community_summary</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  keyword <span class="op">=</span> <span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">name</span>,</span>
@@ -809,6 +809,11 @@ Figure 17.1: Top 20 most frequent assigned topics used as terms in the Scientome
 </tr>
 <tr>
 <td class="gt_row gt_center" headers="community">4</td>
+<td class="gt_row gt_left" headers="top_keywords">efficiency analysis using dea, innovation policy and r&amp;d</td>
+<td class="gt_row gt_right" headers="n_keywords">2</td>
+</tr>
+<tr>
+<td class="gt_row gt_center" headers="community">5</td>
 <td class="gt_row gt_left" headers="top_keywords">intellectual property and patents, intellectual property law, firm innovation and growth, innovation and knowledge management</td>
 <td class="gt_row gt_right" headers="n_keywords">4</td>
 </tr>

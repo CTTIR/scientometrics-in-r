@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -239,7 +239,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">display_name</span>, <span class="va">cited_by_count</span>, <span class="va">funders</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Works with observed funder IDs: {nrow(funded)} / {nrow(works)} ({scales::percent(nrow(funded)/nrow(works))})\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Works with observed funder IDs: 220 / 400 (55%)</code></pre>
+<pre><code>#&gt; Works with observed funder IDs: 224 / 400 (56%)</code></pre>
 <div class="sourceCode" id="cb448"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">funded</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"No usable funder records occur in this sample. Funder summaries are unavailable; missing metadata does not establish that the papers were unfunded.\n"</span><span class="op">)</span></span>
@@ -256,10 +256,10 @@
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Funder-work pairs: {nrow(funder_data)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Funder-work pairs: 355</code></pre>
+<pre><code>#&gt; Funder-work pairs: 357</code></pre>
 <div class="sourceCode" id="cb451"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Unique funders: {n_distinct(funder_data$funder_id)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Unique funders: 185</code></pre>
+<pre><code>#&gt; Unique funders: 186</code></pre>
 </div>
 <div class="section level3" id="top-funders-by-publication-count" number="30.4.2">
 <h3>
@@ -773,8 +773,8 @@ Figure 30.1: Up to 15 funders by the number of sampled publications with observe
 <td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320335869</td>
 <td class="gt_row gt_left" headers="funder">National Social Science Fund of China</td>
 <td class="gt_row gt_right" headers="n_pubs">7</td>
-<td class="gt_row gt_right" headers="mean_cites">35.3</td>
-<td class="gt_row gt_right" headers="median_cites">19</td>
+<td class="gt_row gt_right" headers="mean_cites">43.6</td>
+<td class="gt_row gt_right" headers="median_cites">21</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320335598</td>
@@ -784,18 +784,11 @@ Figure 30.1: Up to 15 funders by the number of sampled publications with observe
 <td class="gt_row gt_right" headers="median_cites">22</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320322120</td>
-<td class="gt_row gt_left" headers="funder">National Research Foundation of Korea</td>
-<td class="gt_row gt_right" headers="n_pubs">5</td>
-<td class="gt_row gt_right" headers="mean_cites">26.4</td>
-<td class="gt_row gt_right" headers="median_cites">15</td>
-</tr>
-<tr>
 <td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320321001</td>
 <td class="gt_row gt_left" headers="funder">National Natural Science Foundation of China</td>
-<td class="gt_row gt_right" headers="n_pubs">43</td>
-<td class="gt_row gt_right" headers="mean_cites">26.0</td>
-<td class="gt_row gt_right" headers="median_cites">22</td>
+<td class="gt_row gt_right" headers="n_pubs">44</td>
+<td class="gt_row gt_right" headers="mean_cites">27.5</td>
+<td class="gt_row gt_right" headers="median_cites">25</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320321091</td>
@@ -812,18 +805,25 @@ Figure 30.1: Up to 15 funders by the number of sampled publications with observe
 <td class="gt_row gt_right" headers="median_cites">10</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320335787</td>
-<td class="gt_row gt_left" headers="funder">Fundamental Research Funds for the Central Universities</td>
-<td class="gt_row gt_right" headers="n_pubs">9</td>
-<td class="gt_row gt_right" headers="mean_cites">18.7</td>
-<td class="gt_row gt_right" headers="median_cites">19</td>
+<td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320321106</td>
+<td class="gt_row gt_left" headers="funder">Ministry of Education of the People's Republic of China</td>
+<td class="gt_row gt_right" headers="n_pubs">5</td>
+<td class="gt_row gt_right" headers="mean_cites">19.8</td>
+<td class="gt_row gt_right" headers="median_cites">17</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320321114</td>
 <td class="gt_row gt_left" headers="funder">Bundesministerium für Bildung und Forschung</td>
-<td class="gt_row gt_right" headers="n_pubs">13</td>
-<td class="gt_row gt_right" headers="mean_cites">17.0</td>
-<td class="gt_row gt_right" headers="median_cites">13</td>
+<td class="gt_row gt_right" headers="n_pubs">14</td>
+<td class="gt_row gt_right" headers="mean_cites">19.1</td>
+<td class="gt_row gt_right" headers="median_cites">17</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320335787</td>
+<td class="gt_row gt_left" headers="funder">Fundamental Research Funds for the Central Universities</td>
+<td class="gt_row gt_right" headers="n_pubs">8</td>
+<td class="gt_row gt_right" headers="mean_cites">18.6</td>
+<td class="gt_row gt_right" headers="median_cites">16</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="funder_id">https://openalex.org/F4320320300</td>

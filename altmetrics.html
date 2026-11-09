@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -711,22 +711,22 @@
 <tr>
 <td class="gt_row gt_left" headers="oa_status">closed</td>
 <td class="gt_row gt_right" headers="n">189</td>
-<td class="gt_row gt_right" headers="pct">47.2%</td>
+<td class="gt_row gt_right" headers="pct">47%</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="oa_status">hybrid</td>
-<td class="gt_row gt_right" headers="n">119</td>
-<td class="gt_row gt_right" headers="pct">29.8%</td>
+<td class="gt_row gt_right" headers="n">116</td>
+<td class="gt_row gt_right" headers="pct">29%</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="oa_status">green</td>
-<td class="gt_row gt_right" headers="n">65</td>
-<td class="gt_row gt_right" headers="pct">16.2%</td>
+<td class="gt_row gt_right" headers="n">69</td>
+<td class="gt_row gt_right" headers="pct">17%</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="oa_status">bronze</td>
-<td class="gt_row gt_right" headers="n">27</td>
-<td class="gt_row gt_right" headers="pct">6.8%</td>
+<td class="gt_row gt_right" headers="n">26</td>
+<td class="gt_row gt_right" headers="pct">6%</td>
 </tr>
 </tbody>
 </table></div>
@@ -783,7 +783,7 @@ Figure 26.3: Relationship between reference list length and citation count.
 <code class="sourceCode R"><span><span class="va">cor_val</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html">cor</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">referenced_works_count</span>, <span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span>,</span>
 <span>               use <span class="op">=</span> <span class="st">"complete.obs"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Pearson correlation (references vs. citations): {round(cor_val, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Pearson correlation (references vs. citations): 0.096</code></pre>
+<pre><code>#&gt; Pearson correlation (references vs. citations): 0.17</code></pre>
 </div>
 </div>
 <div class="section level2" id="altmetrics-diagnostics" number="26.5">

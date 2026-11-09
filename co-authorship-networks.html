@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -257,10 +257,10 @@
 <span>        name <span class="op">=</span> <span class="st">"weight"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Authors: {n_distinct(c(edges$author_id_1, edges$author_id_2))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Authors: 660</code></pre>
+<pre><code>#&gt; Authors: 658</code></pre>
 <div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Edges: {nrow(edges)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Edges: 983</code></pre>
+<pre><code>#&gt; Edges: 979</code></pre>
 </div>
 <div class="section level3" id="building-the-network" number="15.4.3">
 <h3>
@@ -275,7 +275,7 @@
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span><span class="va">g</span>, edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Nodes: {vcount(g)}, Edges: {ecount(g)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Nodes: 660, Edges: 983</code></pre>
+<pre><code>#&gt; Nodes: 658, Edges: 979</code></pre>
 <div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Components: {components(g)$no}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Components: 180</code></pre>
@@ -310,16 +310,16 @@
 <pre><code>#&gt; # A tibble: 10 × 4
 #&gt;    author_name         degree betweenness clustering
 #&gt;    &lt;chr&gt;                &lt;dbl&gt;       &lt;dbl&gt;      &lt;dbl&gt;
-#&gt;  1 Lutz Bornmann           11 0.000240         0.236
-#&gt;  2 Neil H. Shear           10 0.000000461      1    
-#&gt;  3 Robert Gniadecki        10 0.000000461      1    
-#&gt;  4 Charles W Lynde         10 0.000000461      1    
-#&gt;  5 Zafar Ali               10 0.000103         0.356
+#&gt;  1 Wolfgang Glänzel        13 0.00127          0.192
+#&gt;  2 Neil H. Shear           10 0.000000464      1    
+#&gt;  3 Robert Gniadecki        10 0.000000464      1    
+#&gt;  4 Charles W Lynde         10 0.000000464      1    
+#&gt;  5 Zafar Ali               10 0.000104         0.356
 #&gt;  6 Elena Netchiporouk      10 0                1    
 #&gt;  7 Silvio Peroni           10 0.000125         0.4  
-#&gt;  8 Steve Mathieu           10 0.000000461      1    
-#&gt;  9 Denis Sasseville        10 0.000000461      1    
-#&gt; 10 Anastasiya Muntyanu     10 0.000000461      1</code></pre>
+#&gt;  8 Steve Mathieu           10 0.000000464      1    
+#&gt;  9 Denis Sasseville        10 0.000000464      1    
+#&gt; 10 Anastasiya Muntyanu     10 0.000000464      1</code></pre>
 </div>
 <div class="section level3" id="community-detection" number="15.4.5">
 <h3>
@@ -334,20 +334,20 @@
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">giant</span><span class="op">)</span><span class="op">$</span><span class="va">community_louvain</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="va">louvain</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Louvain communities: {length(unique(membership(louvain)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Louvain communities: 3</code></pre>
+<pre><code>#&gt; Louvain communities: 4</code></pre>
 <div class="sourceCode" id="cb216"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Louvain modularity: {round(modularity(louvain), 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Louvain modularity: 0.486</code></pre>
+<pre><code>#&gt; Louvain modularity: 0.572</code></pre>
 <div class="sourceCode" id="cb218"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">leiden_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/cluster_leiden.html">cluster_leiden</a></span><span class="op">(</span><span class="va">giant</span>, resolution_parameter <span class="op">=</span> <span class="fl">1.0</span>,</span>
 <span>                                objective_function <span class="op">=</span> <span class="st">"modularity"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">giant</span><span class="op">)</span><span class="op">$</span><span class="va">community_leiden</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="va">leiden_result</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Leiden communities: {length(unique(membership(leiden_result)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Leiden communities: 3</code></pre>
+<pre><code>#&gt; Leiden communities: 4</code></pre>
 <div class="sourceCode" id="cb220"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Leiden modularity: {round(modularity(giant, membership(leiden_result)), 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Leiden modularity: 0.492</code></pre>
+<pre><code>#&gt; Leiden modularity: 0.572</code></pre>
 </div>
 <div class="section level3" id="comparing-community-assignments" number="15.4.6">
 <h3>
@@ -365,7 +365,7 @@
 <span>  method <span class="op">=</span> <span class="st">"nmi"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Normalized Mutual Information (Louvain vs Leiden): {round(nmi, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Normalized Mutual Information (Louvain vs Leiden): 0.834</code></pre>
+<pre><code>#&gt; Normalized Mutual Information (Louvain vs Leiden): 1</code></pre>
 </div>
 <div class="section level3" id="visualization-7" number="15.4.7">
 <h3>
@@ -434,13 +434,13 @@ Figure 15.2: Degree distribution of the co-authorship network.
 <div class="sourceCode" id="cb226"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">giant_ratio</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/gorder.html">vcount</a></span><span class="op">(</span><span class="va">giant</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://r.igraph.org/reference/gorder.html">vcount</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Giant component: {vcount(giant)}/{vcount(g)} nodes ({scales::percent(giant_ratio)})\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Giant component: 16/660 nodes (2%)</code></pre>
+<pre><code>#&gt; Giant component: 32/658 nodes (5%)</code></pre>
 <div class="sourceCode" id="cb228"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Mean degree: {round(mean(degree(giant)), 1)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Mean degree: 4.1</code></pre>
+<pre><code>#&gt; Mean degree: 4.2</code></pre>
 <div class="sourceCode" id="cb230"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Transitivity (global): {round(transitivity(giant, type = 'global'), 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Transitivity (global): 0.681</code></pre>
+<pre><code>#&gt; Transitivity (global): 0.54</code></pre>
 </div>
 <div class="section level2" id="coauth-limitations" number="15.6">
 <h2>

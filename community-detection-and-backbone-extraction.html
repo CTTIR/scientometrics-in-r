@@ -40,7 +40,7 @@
 <!-- Mermaid (for diagram chunks in chapter 0) --><script type="module">
       import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
       mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
-    </script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
+    </script><script data-domain="cttir.github.io/scientometrics-in-r" defer="" src="https://analytics.hellebo.de/js/script.file-downloads.outbound-links.js"></script><script crossorigin="anonymous" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js"></script><script crossorigin="anonymous" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js"></script><!-- CSS --><style type="text/css">
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
@@ -252,10 +252,10 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Full network: {vcount(g_full)} nodes, {ecount(g_full)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Full network: 290 nodes, 4024 edges</code></pre>
+<pre><code>#&gt; Full network: 290 nodes, 4105 edges</code></pre>
 <div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Density: {round(graph.density(g_full), 4)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Density: 0.096</code></pre>
+<pre><code>#&gt; Density: 0.098</code></pre>
 </div>
 <div class="section level3" id="backbone-extraction-disparity-filter" number="18.4.2">
 <h3>
@@ -285,7 +285,7 @@
 <span></span>
 <span><span class="va">g_backbone</span> <span class="op">&lt;-</span> <span class="fu">disparity_filter</span><span class="op">(</span><span class="va">g_full</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Backbone: {vcount(g_backbone)} nodes, {ecount(g_backbone)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Backbone: 133 nodes, 132 edges</code></pre>
+<pre><code>#&gt; Backbone: 131 nodes, 132 edges</code></pre>
 <div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Edge retention: {scales::percent(ecount(g_backbone) / ecount(g_full))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Edge retention: 3%</code></pre>
@@ -303,7 +303,7 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Threshold (75th pctile = {threshold}): {vcount(g_threshold)} nodes, {ecount(g_threshold)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Threshold (75th pctile = 2): 252 nodes, 1140 edges</code></pre>
+<pre><code>#&gt; Threshold (75th pctile = 2): 252 nodes, 1159 edges</code></pre>
 </div>
 <div class="section level3" id="community-detection-at-multiple-resolutions" number="18.4.4">
 <h3>
@@ -325,23 +325,23 @@
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sweep_results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="khchdpdnjc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#khchdpdnjc table {
+<div id="enqknnxjgh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#enqknnxjgh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#khchdpdnjc thead, #khchdpdnjc tbody, #khchdpdnjc tfoot, #khchdpdnjc tr, #khchdpdnjc td, #khchdpdnjc th {
+#enqknnxjgh thead, #enqknnxjgh tbody, #enqknnxjgh tfoot, #enqknnxjgh tr, #enqknnxjgh td, #enqknnxjgh th {
   border-style: none;
 }
 
-#khchdpdnjc p {
+#enqknnxjgh p {
   margin: 0;
   padding: 0;
 }
 
-#khchdpdnjc .gt_table {
+#enqknnxjgh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -367,12 +367,12 @@
   border-left-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_caption {
+#enqknnxjgh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#khchdpdnjc .gt_title {
+#enqknnxjgh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -384,7 +384,7 @@
   border-bottom-width: 0;
 }
 
-#khchdpdnjc .gt_subtitle {
+#enqknnxjgh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -396,7 +396,7 @@
   border-top-width: 0;
 }
 
-#khchdpdnjc .gt_heading {
+#enqknnxjgh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -408,13 +408,13 @@
   border-right-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_bottom_border {
+#enqknnxjgh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_col_headings {
+#enqknnxjgh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -429,7 +429,7 @@
   border-right-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_col_heading {
+#enqknnxjgh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -449,7 +449,7 @@
   overflow-x: hidden;
 }
 
-#khchdpdnjc .gt_column_spanner_outer {
+#enqknnxjgh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -461,15 +461,15 @@
   padding-right: 4px;
 }
 
-#khchdpdnjc .gt_column_spanner_outer:first-child {
+#enqknnxjgh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#khchdpdnjc .gt_column_spanner_outer:last-child {
+#enqknnxjgh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#khchdpdnjc .gt_column_spanner {
+#enqknnxjgh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -481,11 +481,11 @@
   width: 100%;
 }
 
-#khchdpdnjc .gt_spanner_row {
+#enqknnxjgh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#khchdpdnjc .gt_group_heading {
+#enqknnxjgh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -511,7 +511,7 @@
   text-align: left;
 }
 
-#khchdpdnjc .gt_empty_group_heading {
+#enqknnxjgh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -526,15 +526,15 @@
   vertical-align: middle;
 }
 
-#khchdpdnjc .gt_from_md > :first-child {
+#enqknnxjgh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#khchdpdnjc .gt_from_md > :last-child {
+#enqknnxjgh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#khchdpdnjc .gt_row {
+#enqknnxjgh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -553,7 +553,7 @@
   overflow-x: hidden;
 }
 
-#khchdpdnjc .gt_stub {
+#enqknnxjgh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -566,7 +566,7 @@
   padding-right: 5px;
 }
 
-#khchdpdnjc .gt_stub_row_group {
+#enqknnxjgh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -580,15 +580,15 @@
   vertical-align: top;
 }
 
-#khchdpdnjc .gt_row_group_first td {
+#enqknnxjgh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#khchdpdnjc .gt_row_group_first th {
+#enqknnxjgh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#khchdpdnjc .gt_summary_row {
+#enqknnxjgh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -598,16 +598,16 @@
   padding-right: 5px;
 }
 
-#khchdpdnjc .gt_first_summary_row {
+#enqknnxjgh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_first_summary_row.thick {
+#enqknnxjgh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#khchdpdnjc .gt_last_summary_row {
+#enqknnxjgh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -617,7 +617,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_grand_summary_row {
+#enqknnxjgh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -627,7 +627,7 @@
   padding-right: 5px;
 }
 
-#khchdpdnjc .gt_first_grand_summary_row {
+#enqknnxjgh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -637,7 +637,7 @@
   border-top-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_last_grand_summary_row_top {
+#enqknnxjgh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -647,11 +647,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_striped {
+#enqknnxjgh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#khchdpdnjc .gt_table_body {
+#enqknnxjgh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -660,7 +660,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_footnotes {
+#enqknnxjgh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -674,7 +674,7 @@
   border-right-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_footnote {
+#enqknnxjgh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -683,7 +683,7 @@
   padding-right: 5px;
 }
 
-#khchdpdnjc .gt_sourcenotes {
+#enqknnxjgh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -697,7 +697,7 @@
   border-right-color: #D3D3D3;
 }
 
-#khchdpdnjc .gt_sourcenote {
+#enqknnxjgh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -705,72 +705,72 @@
   padding-right: 5px;
 }
 
-#khchdpdnjc .gt_left {
+#enqknnxjgh .gt_left {
   text-align: left;
 }
 
-#khchdpdnjc .gt_center {
+#enqknnxjgh .gt_center {
   text-align: center;
 }
 
-#khchdpdnjc .gt_right {
+#enqknnxjgh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#khchdpdnjc .gt_font_normal {
+#enqknnxjgh .gt_font_normal {
   font-weight: normal;
 }
 
-#khchdpdnjc .gt_font_bold {
+#enqknnxjgh .gt_font_bold {
   font-weight: bold;
 }
 
-#khchdpdnjc .gt_font_italic {
+#enqknnxjgh .gt_font_italic {
   font-style: italic;
 }
 
-#khchdpdnjc .gt_super {
+#enqknnxjgh .gt_super {
   font-size: 65%;
 }
 
-#khchdpdnjc .gt_footnote_marks {
+#enqknnxjgh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#khchdpdnjc .gt_asterisk {
+#enqknnxjgh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#khchdpdnjc .gt_indent_1 {
+#enqknnxjgh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#khchdpdnjc .gt_indent_2 {
+#enqknnxjgh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#khchdpdnjc .gt_indent_3 {
+#enqknnxjgh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#khchdpdnjc .gt_indent_4 {
+#enqknnxjgh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#khchdpdnjc .gt_indent_5 {
+#enqknnxjgh .gt_indent_5 {
   text-indent: 25px;
 }
 
-#khchdpdnjc .katex-display {
+#enqknnxjgh .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#khchdpdnjc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#enqknnxjgh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -786,28 +786,28 @@
 <tr>
 <td class="gt_row gt_right" headers="resolution">0.5</td>
 <td class="gt_row gt_right" headers="n_communities">30</td>
-<td class="gt_row gt_right" headers="modularity">0.867</td>
-<td class="gt_row gt_right" headers="max_size">16</td>
+<td class="gt_row gt_right" headers="modularity">0.870</td>
+<td class="gt_row gt_right" headers="max_size">14</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
 <td class="gt_row gt_right" headers="resolution">0.8</td>
 <td class="gt_row gt_right" headers="n_communities">30</td>
-<td class="gt_row gt_right" headers="modularity">0.867</td>
-<td class="gt_row gt_right" headers="max_size">16</td>
+<td class="gt_row gt_right" headers="modularity">0.870</td>
+<td class="gt_row gt_right" headers="max_size">12</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
 <td class="gt_row gt_right" headers="resolution">1.0</td>
 <td class="gt_row gt_right" headers="n_communities">30</td>
-<td class="gt_row gt_right" headers="modularity">0.867</td>
-<td class="gt_row gt_right" headers="max_size">16</td>
+<td class="gt_row gt_right" headers="modularity">0.870</td>
+<td class="gt_row gt_right" headers="max_size">12</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
 <td class="gt_row gt_right" headers="resolution">1.5</td>
-<td class="gt_row gt_right" headers="n_communities">31</td>
-<td class="gt_row gt_right" headers="modularity">0.867</td>
+<td class="gt_row gt_right" headers="n_communities">30</td>
+<td class="gt_row gt_right" headers="modularity">0.870</td>
 <td class="gt_row gt_right" headers="max_size">13</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
@@ -815,7 +815,7 @@
 <td class="gt_row gt_right" headers="resolution">2.0</td>
 <td class="gt_row gt_right" headers="n_communities">32</td>
 <td class="gt_row gt_right" headers="modularity">0.865</td>
-<td class="gt_row gt_right" headers="max_size">13</td>
+<td class="gt_row gt_right" headers="max_size">12</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 </tbody>
@@ -857,7 +857,7 @@ Figure 18.1: Number of communities and modularity as a function of resolution pa
 <span></span>
 <span><span class="va">nmi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/compare.html">compare</a></span><span class="op">(</span><span class="va">mem_full</span>, <span class="va">mem_back</span>, method <span class="op">=</span> <span class="st">"nmi"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"NMI (full vs backbone, shared nodes): {round(nmi, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.666</code></pre>
+<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.659</code></pre>
 <div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities in full network: {length(unique(membership(comm_full)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Communities in full network: 9</code></pre>
