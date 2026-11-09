@@ -106,14 +106,6 @@ jobs:
           java -jar "$epubcheck_dir/epubcheck-5.4.0/epubcheck.jar" \
             --failonwarnings docs/scientometrics-in-r.epub
 
-      - name: Render per-chapter PDFs
-        # Nice-to-have; the full book PDF/EPUB/HTML are already built.
-        # Don't block deploy on a single chapter's LaTeX hiccup.
-        continue-on-error: true
-        env:
-          OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
-        run: Rscript scripts/render-chapter-pdfs.R
-
       - name: Inventory available downloads
         run: Rscript scripts/build-download-manifest.R
 
@@ -125,6 +117,15 @@ jobs:
           path: docs/
           retention-days: 7
           if-no-files-found: error
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build and verify every book and chapter download
+        run: bash scripts/build-downloads-ci.sh docs scientometrics-in-r https://cttir.github.io/scientometrics-in-r/
 
       - name: Deploy to gh-pages
         if: >-
