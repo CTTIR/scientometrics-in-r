@@ -2,7 +2,7 @@
 
 <!-- page-provenance:start -->
 ::: {.page-provenance}
-*R. Heller · Date: 2026-05-11 · Last changed: 2026-10-31*
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-11-10*
 :::
 <!-- page-provenance:end -->
 
@@ -36,10 +36,10 @@ Three callout styles appear throughout:
 
 ## Companion data
 
-Small sample datasets that the chapters fall back to (when a live API
-call is not appropriate) are bundled with the companion R package
-`scientometricsInR`. Larger illustrative corpora live under `data/` in
-the source repository.
+Small synthetic sample datasets are stored as `.rda` files under `data/`
+in the source repository; load one with `load("data/openalex_sample.rda")`.
+The helper functions that the chapters use live in `R/`, and each chapter
+loads the ones it needs with `source()`.
 
 ## Downloads
 

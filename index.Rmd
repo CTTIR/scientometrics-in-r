@@ -37,7 +37,7 @@ This is a working guide to scientometrics in R for researchers, librarians, rese
 
 The book assumes a working knowledge of R at the tidyverse level and basic statistics. No prior scientometric experience is needed --- the early chapters lay the conceptual and ethical foundations, and each later chapter starts with a concrete research question and ends with a callout on responsible use grounded in the Leiden Manifesto and DORA.
 
-All examples run against free, open data; no Web of Science or Scopus subscription is required. Small sample datasets ship with the companion R package `scientometricsInR`; everything else is fetched live from public APIs. The book does *not* cover proprietary platforms (InCites, SciVal), manual screening workflows for systematic reviews, or qualitative sociology of science.
+All examples run against free, open data; no Web of Science or Scopus subscription is required. Small synthetic sample datasets are stored under `data/` in the source repository; everything else is fetched live from public APIs. The book does *not* cover proprietary platforms (InCites, SciVal), manual screening workflows for systematic reviews, or qualitative sociology of science.
 
 <br></br>
 
@@ -54,7 +54,7 @@ This book has been built using [**{rmarkdown}**](https://rmarkdown.rstudio.com/d
 ---
 
 - **Linear or lookup.** Read front to back, or use the [Find Your Method navigator](#find-your-method) to jump to the chapter that answers your question.
-- **Code.** Reusable helpers live in the companion R package `scientometricsInR` and in `R/` in the source repository; every chapter shows the full chunk it depends on.
+- **Code.** Reusable helper functions live in `R/` in the source repository, and chapters load them with `source()`; every chapter shows the full chunk it depends on.
 - **Downloads.** The side panel lists whole-book and chapter files that are available in the current build.
 - **Corrections.** Please file an issue at <https://github.com/CTTIR/scientometrics-in-r/issues>.
 

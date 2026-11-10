@@ -2,7 +2,7 @@
 
 <!-- page-provenance:start -->
 ::: {.page-provenance}
-*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30*
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-11-10*
 :::
 <!-- page-provenance:end -->
 
@@ -143,9 +143,11 @@ works |>
   ungroup()
 ```
 
-## Companion package functions
+## Helper functions
 
-The `scientometricsInR` package provides helper functions used throughout the book:
+The book's helper functions in `R/` are used throughout the book. Load them with
+`source()` from `R/api_helpers.R`, `R/utils.R` and `R/sci_palette.R`, for example
+`source(here::here("R", "utils.R"))`:
 
 | Function | Purpose | Example |
 |:---------|:--------|:--------|

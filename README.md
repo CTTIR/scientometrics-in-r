@@ -25,7 +25,7 @@ through core bibliometric indicators, network analysis, text mining,
 and production reporting. Examples use free, open data sources. Live API
 results change, some operations require credentials, and exact reproduction
 requires the same cached corpus and software environment. No Web of Science or
-Scopus subscription is required. The bundled companion datasets are **synthetic
+Scopus subscription is required. The sample datasets in `data/` are **synthetic
 teaching fixtures**, not measured OpenAlex records or empirical evidence.
 
 It is written for researchers, librarians, research administrators,
@@ -82,9 +82,9 @@ The book has eight parts plus appendices:
 ## Build status and API access
 
 Local verification and remaining release boundaries are recorded in
-[`MAINTENANCE.md`](MAINTENANCE.md). The authenticated build and source-package
-checks use an isolated R 4.6.1 library; remote CI and the published site are
-separate from this local candidate.
+[`MAINTENANCE.md`](MAINTENANCE.md). The authenticated local build uses an
+isolated R 4.6.1 library; remote CI and the published site are separate from
+this local candidate.
 
 OpenAlex's [authentication documentation](https://help.openalex.org/api/authentication/)
 requires a free, activated key for paging beyond the first page. Keep it outside
@@ -137,23 +137,46 @@ EPUB packaging validates internal links and bundles the citation and licence fil
 Per-chapter PDFs are optional: run `Rscript --vanilla scripts/render-chapter-pdfs.R`
 and regenerate the manifest. Its nonzero exit reports incomplete chapter builds.
 
-For the companion package, from the checkout:
-
-```bash
-RENV_CONFIG_AUTOLOADER_ENABLED=false Rscript --vanilla -e 'install.packages("remotes", repos="https://cloud.r-project.org"); remotes::install_deps(dependencies=TRUE); remotes::install_local(".", dependencies=FALSE)'
-Rscript --vanilla -e 'library(scientometricsInR); data(openalex_sample); print(dim(openalex_sample)); print(rake_keywords("red blue red", stopwords=character()))'
-```
-
-`build_coauth_graph()` uses stable author IDs in the igraph `name` attribute;
-use `label` or `display_name` for human-readable labels. This prevents homonyms
-from merging and name variants from splitting one author.
-
 The historical `renv.lock` and Docker restore path have not been qualified for
 the current book. The dependency script installs missing package names rather
 than claiming an exact historical restore. Pin the validated software and archive
 licensed input snapshots for an immutable release; live API samples can change.
 Optional Python embeddings and SQL/OCR/deployment exercises are distinguished
 in the installer and are not required by the default executed book.
+
+## Helper functions and sample data
+
+The book's helper functions live in `R/`; they are plain R scripts, not an
+installable package. Chapters load the ones they need with `source()`:
+`R/api_helpers.R` (`fetch_openalex()`), `R/utils.R` (`dedupe_by_doi()`,
+`compute_h_index()`, `field_normalize()`, `compute_mncs()`,
+`build_coauth_graph()`, `kleinberg_bursts()`), `R/sci_palette.R`
+(`palette_sci()`, `theme_sci()`), `R/rake_keywords.R` and the chapter-specific
+helper files. The packages they use are the `Imports` in `DESCRIPTION`, which
+`scripts/install-book-deps.R` installs with the rest of the book's dependencies.
+`fetch_openalex()` caches in the session's temporary directory unless the
+`sci.openalex_cache_dir` option or its `cache_dir` argument names another
+folder; `_common.R` sets the option to `_freeze/openalex_cache`.
+`build_coauth_graph()` uses stable author IDs in the igraph `name` attribute;
+use `label` or `display_name` for human-readable labels. This prevents homonyms
+from merging and name variants from splitting one author.
+
+The three datasets in `data/` are synthetic teaching fixtures:
+`openalex_sample` (200 simulated works with bibliographic and citation fields),
+`crispr_corpus_mini` (150 simulated works with CRISPR topics and countries) and
+`journal_portfolio_demo` (simulated articles from three journal labels). Their
+identifiers, DOIs, titles, citations, authors and affiliations are artificial;
+do not resolve the example DOIs or use the values as evidence about the named
+journals or fields. The scripts in `data-raw/` generate them with random seed
+20260509; exact regeneration across R versions is not claimed. Load a dataset
+with `load()` and run the helper tests from the checkout:
+
+```bash
+Rscript --vanilla -e 'source("R/utils.R"); source("R/rake_keywords.R"); load("data/openalex_sample.rda"); print(dim(openalex_sample)); print(compute_h_index(openalex_sample$cited_by_count)); print(rake_keywords("red blue red", stopwords = character()))'
+Rscript --vanilla -e 'testthat::test_dir("tests/testthat")'
+```
+
+The render workflow runs the same tests before it builds the book.
 
 ## Use of LLM tools
 

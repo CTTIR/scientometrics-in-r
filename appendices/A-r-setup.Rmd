@@ -2,7 +2,7 @@
 
 <!-- page-provenance:start -->
 ::: {.page-provenance}
-*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31*
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-11-10*
 :::
 <!-- page-provenance:end -->
 
@@ -38,8 +38,9 @@ Internet access is required for installation and uncached provider requests.
 Configure an activated OpenAlex key locally as `OPENALEX_API_KEY`, outside Git,
 for requests that need authenticated paging. `SCIENTOMETRICS_OFFLINE=1` requires
 existing exact-query OpenAlex caches in `_freeze/openalex_cache/`; it does not
-make other providers offline and cannot supply missing cache entries. See the
-repository `README.md` for the companion package's separate installation path.
+make other providers offline and cannot supply missing cache entries. The
+repository `README.md` describes the helper functions in `R/` and the sample
+data in `data/`.
 
 ## Package management with renv
 
