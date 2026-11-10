@@ -138,7 +138,10 @@ options(
   digits = 3,
   knitr.kable.NA = "—",
   # Contact metadata does not replace the API key required for cursor paging.
-  openalexR.mailto = "raban.heller@outlook.com"
+  openalexR.mailto = "raban.heller@outlook.com",
+  # fetch_openalex() caches in tempdir() by default; the book keeps its
+  # exact-query caches with the sources.
+  scientometricsInR.cache_dir = "_freeze/openalex_cache"
 )
 
 set.seed(42)

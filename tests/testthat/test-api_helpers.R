@@ -1,4 +1,6 @@
 test_that("fetch_openalex caches results", {
+  skip_on_cran()
+  skip_if_offline("api.openalex.org")
   skip_if_not_installed("openalexR")
 
   cache_dir <- file.path(tempdir(), "test_openalex_cache")

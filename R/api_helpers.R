@@ -1,19 +1,45 @@
 #' Fetch works from OpenAlex with caching
 #'
 #' Wraps [openalexR::oa_fetch()] with local file caching so repeated
-#' builds do not re-query the API.
+#' builds do not re-query the API. Each distinct set of arguments is stored
+#' as one RDS file in `cache_dir`.
 #'
 #' @param ... Arguments passed to [openalexR::oa_fetch()].
-#' @param cache_dir Directory for cached results.
+#' @param cache_dir Directory for cached results. `NULL` (the default) uses
+#'   the `scientometricsInR.cache_dir` option or, if that is unset, a folder in
+#'   the session's temporary directory that is removed when R exits. Set the
+#'   option or this argument to a persistent path to reuse results across
+#'   sessions; the book uses `"_freeze/openalex_cache"`.
 #' @param cache_days Non-negative days before cache expires; `Inf` never expires.
 #' @param offline Use an existing cache without any provider request, even if
 #'   stale. Defaults to whether `SCIENTOMETRICS_OFFLINE=1`. Missing or unreadable
 #'   caches fail explicitly; no synthetic/provider substitute is returned.
-#' @return A tibble of OpenAlex works.
+#' @return A tibble of OpenAlex records as returned by [openalexR::oa_fetch()].
 #' @export
-fetch_openalex <- function(..., cache_dir = "_freeze/openalex_cache",
+#' @examples
+#' # Offline mode never contacts OpenAlex and fails when no cache exists.
+#' cache <- file.path(tempdir(), "openalex-example")
+#' res <- try(fetch_openalex(
+#'   entity = "works", search = "scientometrics",
+#'   cache_dir = cache, offline = TRUE
+#' ), silent = TRUE)
+#' inherits(res, "try-error")
+#' @examplesIf interactive()
+#' # A live request needs internet access; results are cached in `cache`.
+#' works <- fetch_openalex(
+#'   entity = "works", search = "scientometrics",
+#'   options = list(sample = 5, seed = 1), cache_dir = cache
+#' )
+#' unlink(cache, recursive = TRUE)
+fetch_openalex <- function(..., cache_dir = NULL,
                            cache_days = 7,
                            offline = identical(Sys.getenv("SCIENTOMETRICS_OFFLINE"), "1")) {
+  if (is.null(cache_dir)) {
+    cache_dir <- getOption(
+      "scientometricsInR.cache_dir",
+      file.path(tempdir(), "openalex_cache")
+    )
+  }
   if (
     !is.character(cache_dir) || length(cache_dir) != 1L ||
       is.na(cache_dir) || !nzchar(cache_dir)

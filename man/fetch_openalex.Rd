@@ -6,7 +6,7 @@
 \usage{
 fetch_openalex(
   ...,
-  cache_dir = "_freeze/openalex_cache",
+  cache_dir = NULL,
   cache_days = 7,
   offline = identical(Sys.getenv("SCIENTOMETRICS_OFFLINE"), "1")
 )
@@ -14,7 +14,11 @@ fetch_openalex(
 \arguments{
 \item{...}{Arguments passed to \code{\link[openalexR:oa_fetch]{openalexR::oa_fetch()}}.}
 
-\item{cache_dir}{Directory for cached results.}
+\item{cache_dir}{Directory for cached results. \code{NULL} (the default) uses
+the \code{scientometricsInR.cache_dir} option or, if that is unset, a folder in
+the session's temporary directory that is removed when R exits. Set the
+option or this argument to a persistent path to reuse results across
+sessions; the book uses \code{"_freeze/openalex_cache"}.}
 
 \item{cache_days}{Non-negative days before cache expires; \code{Inf} never expires.}
 
@@ -23,9 +27,27 @@ stale. Defaults to whether \code{SCIENTOMETRICS_OFFLINE=1}. Missing or unreadabl
 caches fail explicitly; no synthetic/provider substitute is returned.}
 }
 \value{
-A tibble of OpenAlex works.
+A tibble of OpenAlex records as returned by \code{\link[openalexR:oa_fetch]{openalexR::oa_fetch()}}.
 }
 \description{
 Wraps \code{\link[openalexR:oa_fetch]{openalexR::oa_fetch()}} with local file caching so repeated
-builds do not re-query the API.
+builds do not re-query the API. Each distinct set of arguments is stored
+as one RDS file in \code{cache_dir}.
+}
+\examples{
+# Offline mode never contacts OpenAlex and fails when no cache exists.
+cache <- file.path(tempdir(), "openalex-example")
+res <- try(fetch_openalex(
+  entity = "works", search = "scientometrics",
+  cache_dir = cache, offline = TRUE
+), silent = TRUE)
+inherits(res, "try-error")
+\dontshow{if (interactive()) withAutoprint(\{ # examplesIf}
+# A live request needs internet access; results are cached in `cache`.
+works <- fetch_openalex(
+  entity = "works", search = "scientometrics",
+  options = list(sample = 5, seed = 1), cache_dir = cache
+)
+unlink(cache, recursive = TRUE)
+\dontshow{\}) # examplesIf}
 }

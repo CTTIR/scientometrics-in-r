@@ -54,3 +54,13 @@ test_that("exhausted provider HTTP warnings cannot become empty successful datas
   expect_equal(calls,1L)
   expect_length(list.files(cache),1L)
 })
+
+test_that("the default cache is in tempdir() unless an option selects another path", {
+  previous <- options(scientometricsInR.cache_dir = NULL)
+  on.exit(options(previous), add = TRUE)
+  local_mocked_bindings(.fetch_openalex_remote = function(...) stop("network must not run"))
+  expect_error(fetch_openalex(offline = TRUE), file.path(tempdir(), "openalex_cache"), fixed = TRUE)
+  options(scientometricsInR.cache_dir = file.path(tempdir(), "book-cache"))
+  expect_error(fetch_openalex(offline = TRUE), file.path(tempdir(), "book-cache"), fixed = TRUE)
+  expect_false(dir.exists(file.path(tempdir(), "book-cache")))
+})
