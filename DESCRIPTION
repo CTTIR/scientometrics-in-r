@@ -1,15 +1,24 @@
 Package: scientometricsInR
-Title: Companion Package for 'Scientometrics in R'
-Version: 0.1.0
+Title: Functions and Teaching Data for the Book 'Scientometrics in R'
+Version: 0.2.0
 Authors@R:
-    person("Raban", "Heller", , "raban.heller@outlook.com",
+    person("Raban", "Heller", , "raban.heller@uni-ulm.de",
            role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-8006-9742"))
-Description: Helper functions and bundled datasets for the book
-    'Scientometrics in R: Bibliometrics, Network Science, and Research
-    Evaluation'. Provides utilities for fetching OpenAlex data, computing
-    bibliometric indicators, building co-authorship networks, and
-    detecting emerging topics.
+Description: Helper functions and synthetic teaching datasets that
+    accompany the book 'Scientometrics in R: Bibliometrics, Network
+    Science, and Research Evaluation'
+    <https://cttir.github.io/scientometrics-in-r/>. The functions retrieve
+    and cache records from the 'OpenAlex' scholarly metadata service
+    <https://openalex.org> through 'openalexR', remove duplicate records
+    by DOI, compute the h-index (Hirsch 2005)
+    <doi:10.1073/pnas.0507655102> and field-normalised citation scores,
+    build co-authorship networks with 'igraph', rank keyword phrases with
+    Rapid Automatic Keyword Extraction (Rose et al. 2010)
+    <doi:10.1002/9780470689646.ch1>, and detect keyword bursts with
+    Kleinberg's algorithm (Kleinberg 2003)
+    <doi:10.1023/A:1024940629314>. A colour palette and a 'ggplot2' theme
+    reproduce the book's figure style.
 License: MIT + file LICENCE
 URL: https://cttir.github.io/scientometrics-in-r/,
     https://github.com/CTTIR/scientometrics-in-r
@@ -30,10 +39,11 @@ Imports:
     viridis
 Suggests:
     ggraph,
-    testthat (>= 3.0.0),
+    testthat (>= 3.1.7),
     tidygraph
 Config/testthat/edition: 3
 Encoding: UTF-8
+Language: en-GB
 LazyData: true
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.0.0
+Config/roxygen2/version: 8.1.1
