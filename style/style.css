@@ -324,3 +324,18 @@ small.text-muted {
 .bookdown-attribution a {
   border-bottom-style: solid;
 }
+
+.page-provenance { font-size: 0.8rem; margin: 0.5rem 0 1rem; }
+
+/* Keep wide teaching material usable on narrow screens. */
+main { min-width: 0; }
+main .figure, main figure { max-width: 100%; }
+main .figure img, main figure img { max-width: 100%; height: auto; }
+main .MJXc-display, main .MathJax_Display, main mjx-container[display="true"] { max-width: 100%; overflow-x: auto; overflow-y: hidden; }
+@media (max-width: 767px) {
+  main table { display: block; max-width: 100%; overflow-x: auto; }
+  main .quarto-xref { white-space: normal; }
+  main p, main li, main .csl-entry { overflow-wrap: anywhere; }
+}
+
+main .datatables.html-widget, main .dataTables_wrapper { max-width: 100%; overflow-x: auto; }

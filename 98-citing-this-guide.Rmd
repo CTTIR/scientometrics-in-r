@@ -1,5 +1,11 @@
 # Citing this Guide {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-11-09*
+:::
+<!-- page-provenance:end -->
+
 The suggested citation is:
 
 ```{block, type='boxempty'}

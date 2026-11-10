@@ -2,7 +2,7 @@
 title: "Scientometrics in R"
 subtitle: "Bibliometrics, Network Science, and Research Evaluation"
 author: "R. Heller"
-date: "`r Sys.Date()`"
+date: "2026-11-10"
 site: bookdown::bookdown_site
 lang: en
 documentclass: book
@@ -13,7 +13,7 @@ link-citations: yes
 github-repo: CTTIR/scientometrics-in-r
 url: https://cttir.github.io/scientometrics-in-r/
 description: "A hands-on guide to scientometrics in R: data acquisition, bibliometric indicators, network analysis, text mining, and reproducible reporting."
-cover-image: "images/cover.png"
+cover-image: "images/cover-corrected.png"
 favicon: "favicon.ico"
 ---
 
@@ -23,9 +23,15 @@ source("_common.R")
 
 # Welcome! {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-11-10*
+:::
+<!-- page-provenance:end -->
+
 ---
 
-<a href="https://github.com/CTTIR/scientometrics-in-r" target="_blank"><img src="images/cover.png" width="250" align="right" alt="" class="cover" /></a> Welcome to **"Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation"**.
+<a href="https://github.com/CTTIR/scientometrics-in-r" target="_blank"><img src="images/cover-corrected.png" width="250" align="right" alt="" class="cover" /></a> Welcome to **"Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation"**.
 
 This is a working guide to scientometrics in R for researchers, librarians, research administrators, and data scientists who want to study scholarly communication quantitatively. It walks the full pipeline --- from pulling records out of OpenAlex, Crossref, and PubMed, through computing the standard indicators (h-index, MNCS, journal metrics), to building co-authorship and co-citation networks, applying text and topic models to scientific corpora, and packaging the results into reproducible reports and dashboards.
 

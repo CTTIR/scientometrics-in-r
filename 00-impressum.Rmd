@@ -1,5 +1,11 @@
 # Impressum {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-11-09*
+:::
+<!-- page-provenance:end -->
+
 **Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation**
 
 © 2026 Raban Heller. ORCID: [0000-0001-8006-9742](https://orcid.org/0000-0001-8006-9742).

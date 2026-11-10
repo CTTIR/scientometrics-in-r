@@ -1,5 +1,11 @@
 # SQL Primer for the OpenAlex Snapshot
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-05-11*
+:::
+<!-- page-provenance:end -->
+
 <!-- verify_chunks: skip-file
      Snippets require a populated PostgreSQL OpenAlex snapshot, which is not
      available at book build time. -->

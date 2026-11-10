@@ -1,5 +1,11 @@
 # Find Your Method {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31*
+:::
+<!-- page-provenance:end -->
+
 Use this decision tree to navigate to the chapter or case study most relevant to your research question.
 On narrow screens, scroll the diagram horizontally. The quick reference table
 below provides the same routes in a compact format.

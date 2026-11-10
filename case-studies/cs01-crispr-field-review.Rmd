@@ -1,5 +1,11 @@
 # Case Study 1: CRISPR Field Review (2010–2024)
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30*
+:::
+<!-- page-provenance:end -->
+
 ## Objective
 
 Map the structure, growth, and evolution of CRISPR gene editing research from its emergence to its current state using open bibliometric data.

@@ -1,5 +1,11 @@
 # Acknowledgments {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-06-10*
+:::
+<!-- page-provenance:end -->
+
 This book stands on a wide stack of free software. Particular thanks to
 the [bookdown](https://bookdown.org/) authors and the broader R Core
 and tidyverse communities; to the maintainers of `openalexR`,

@@ -1,5 +1,11 @@
 # What Is Scientometrics?
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31*
+:::
+<!-- page-provenance:end -->
+
 ## Learning objectives {#what-objectives}
 
 After completing this chapter, you will be able to:

@@ -1,5 +1,11 @@
 # Case Study 4: Gender Gap in Scientific Publishing
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31*
+:::
+<!-- page-provenance:end -->
+
 ## Objective
 
 Examine why a name lookup cannot establish a gender gap, using an explicitly

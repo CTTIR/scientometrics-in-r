@@ -1,5 +1,11 @@
 # Glossary {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-05-11*
+:::
+<!-- page-provenance:end -->
+
 **Altmetrics.** Metrics derived from online activity (social media mentions, news coverage, policy documents) rather than citations. See Chapter 26.
 
 **Bibliographic coupling.** Two documents are bibliographically coupled when they share one or more references. Strength increases with the number of shared references. See Chapter 16.

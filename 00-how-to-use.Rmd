@@ -1,5 +1,11 @@
 # How to use this book {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-10-31*
+:::
+<!-- page-provenance:end -->
+
 ## Reading paths
 
 The book is structured so that you can read it linearly — front to back —

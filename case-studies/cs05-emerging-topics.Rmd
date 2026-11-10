@@ -1,5 +1,11 @@
 # Case Study 5: Detecting Emerging Topics
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30*
+:::
+<!-- page-provenance:end -->
+
 ## Objective
 
 Identify emerging topics in scientometrics research (2015–2023) using keyword burst detection and topic modelling, and validate findings against known developments in the field.

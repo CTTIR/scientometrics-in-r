@@ -124,14 +124,14 @@ if (knitr::is_latex_output()) {
   })
 }
 
-# Re-execute analysis after helper/source changes while retaining provider caches.
-# The hook also overrides individual chunks that explicitly request caching.
-if (identical(Sys.getenv("SCIENTOMETRICS_REBUILD_CHUNKS"), "1")) {
-  knitr::opts_hooks$set(cache = function(options) {
-    options$cache <- FALSE
-    options
-  })
-}
+# Setup has package-loading and registration side effects that cannot be
+# recovered by restoring cached objects in a fresh render process.
+knitr::opts_hooks$set(cache = function(options) {
+  setup <- isTRUE(grepl("(^|[-_])setup($|[-_])", options$label))
+  rebuild <- identical(Sys.getenv("SCIENTOMETRICS_REBUILD_CHUNKS"), "1")
+  if (setup || rebuild) options$cache <- FALSE
+  options
+})
 
 options(
   scipen = 999,

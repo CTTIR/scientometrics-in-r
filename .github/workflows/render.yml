@@ -29,6 +29,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Disable renv autoloader in CI
         run: rm -f .Rprofile
@@ -84,6 +86,15 @@ jobs:
       - name: Check EPUB packaging and failure handling
         run: Rscript --vanilla scripts/test-epub-packaging.R
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF validation tools
+        run: python -m pip install pypdf
+
+      - name: Refresh source dates
+        run: python3 scripts/update-page-provenance.py
+
       - name: Render book (HTML + PDF + EPUB)
         env:
           OPENALEX_API_KEY: ${{ secrets.OPENALEX_API_KEY }}
@@ -106,8 +117,20 @@ jobs:
           java -jar "$epubcheck_dir/epubcheck-5.4.0/epubcheck.jar" \
             --failonwarnings docs/scientometrics-in-r.epub
 
+      - name: Extract verified chapter PDFs
+        run: python3 scripts/split-chapter-pdfs.py
+
       - name: Inventory available downloads
         run: Rscript scripts/build-download-manifest.R
+
+      - name: Verify page notes and downloadable formats
+        run: |
+          python3 tests/test_page_provenance.py
+          python3 tests/test_book_delivery.py
+          python3 tests/test_split_chapter_pdfs.py
+          Rscript tests/test_setup_cache.R
+          python3 scripts/finalize-book.py docs
+          python3 scripts/check-book.py docs
 
       - name: Upload manual build for review
         if: success() && github.event_name == 'workflow_dispatch'

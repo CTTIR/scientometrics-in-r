@@ -1,5 +1,11 @@
 # Indicator Crosswalk Across Databases
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-05-11*
+:::
+<!-- page-provenance:end -->
+
 This appendix maps common bibliometric indicators to the data sources and tools that support them. Use it to choose the right source for your analysis.
 
 ## Publication-level indicators

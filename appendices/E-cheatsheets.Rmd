@@ -1,5 +1,11 @@
 # Cheatsheets and Quick Reference
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30*
+:::
+<!-- page-provenance:end -->
+
 <!-- verify_chunks: skip-file
      Cheatsheet snippets are reference code, not evaluated at build time. -->
 

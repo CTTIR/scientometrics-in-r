@@ -1,5 +1,11 @@
 # Colophon {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-06-10*
+:::
+<!-- page-provenance:end -->
+
 ```{r colophon-info, echo=FALSE}
 cat("Built with:\n")
 cat("  bookdown: ", as.character(packageVersion("bookdown")), "\n")

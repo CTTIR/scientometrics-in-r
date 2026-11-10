@@ -22,12 +22,12 @@ bookdown::bs4_book:
 bookdown::pdf_book:
   latex_engine: xelatex
   citation_package: natbib
-  keep_tex: false
+  keep_tex: true
   toc_depth: 3
   includes:
     in_header: style/preamble.tex
   pandoc_args: ["--top-level-division=chapter", "--lua-filter=scripts/pdf-table-code.lua"]
 bookdown::epub_book:
-  cover_image: "images/cover.png"
+  cover_image: "images/cover-corrected.png"
   stylesheet: style/style.css
   toc_depth: 3

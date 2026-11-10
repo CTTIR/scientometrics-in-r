@@ -1,4 +1,4 @@
-<p align="center"><a href="https://cttir.github.io/scientometrics-in-r/"><img src="images/cover.png" alt="Scientometrics in R cover" width="280"></a></p>
+<p align="center"><a href="https://cttir.github.io/scientometrics-in-r/"><img src="images/cover-corrected.png" alt="Scientometrics in R cover" width="280"></a></p>
 
 # Scientometrics in R
 
@@ -175,3 +175,23 @@ The prose of this book is licensed under [CC BY 4.0](https://creativecommons.org
 ## Contributing
 
 Issues and PRs welcome — see [CONTRIBUTING.md](CONTRIBUTING.md).
+
+## Validate a release build
+
+Use Python 3 with `pypdf`, the book’s R dependencies, Pandoc and XeLaTeX.
+Refresh the page notes before rendering; their dates follow source revisions,
+not the day the site is built. Then validate the actual downloadable artifacts:
+
+```sh
+python3 scripts/update-page-provenance.py
+Rscript -e 'bookdown::render_book("index.Rmd", output_format = "all")'
+Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub
+python3 scripts/split-chapter-pdfs.py
+Rscript scripts/build-download-manifest.R
+python3 scripts/finalize-book.py
+python3 scripts/check-book.py
+```
+
+The final check fails on missing author/date notes, broken local links or anchors,
+and missing or unreadable whole-book PDF/EPUB files. Chapter downloads reuse the
+whole-book PDF’s bookmarks instead of executing every chapter a second time.

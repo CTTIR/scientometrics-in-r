@@ -1,5 +1,11 @@
 # About the author {-}
 
+<!-- page-provenance:start -->
+::: {.page-provenance}
+*R. Heller · Date: 2026-05-11 · Last changed: 2026-11-09*
+:::
+<!-- page-provenance:end -->
+
 **Raban Heller** is a biomedical scientist working at the intersection of
 biostatistics, clinical research, and data science. He maintains the
 *[Strategy in R](https://cttir.github.io/strategy-in-r/)* and
