@@ -1,0 +1,27 @@
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/CHANGELOG.html</loc></url>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/CONTRIBUTING.html</loc></url>
+<url><loc>/GENERATION_LOG.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/MAINTENANCE.html</loc></url>
+<url><loc>/PLAN.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/build_coauth_graph.html</loc></url>
+<url><loc>/reference/compute_h_index.html</loc></url>
+<url><loc>/reference/compute_mncs.html</loc></url>
+<url><loc>/reference/dedupe_by_doi.html</loc></url>
+<url><loc>/reference/fetch_openalex.html</loc></url>
+<url><loc>/reference/field_normalize.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/kleinberg_bursts.html</loc></url>
+<url><loc>/reference/palette_sci.html</loc></url>
+<url><loc>/reference/rake_keywords.html</loc></url>
+<url><loc>/reference/sci_rate_limit.html</loc></url>
+<url><loc>/reference/teaching_data.html</loc></url>
+<url><loc>/reference/theme_sci.html</loc></url>
+</urlset>
+
