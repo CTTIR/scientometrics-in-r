@@ -189,7 +189,7 @@
 <h2>
 <span class="header-section-number">39.2</span> Setup<a aria-label="anchor" class="anchor" href="#setup-1"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb544"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -210,7 +210,7 @@
 <a href="https://openalex.org/institutions/I17974374">University of São Paulo record</a>. Each
 request retrieves at most 300 articles; these are samples, not output totals.
 A failed or empty request stops the comparison instead of silently dropping an institution.</p>
-<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb545"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">institutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">short_name</span>,    <span class="op">~</span><span class="va">oa_id</span>,</span>
 <span>  <span class="st">"MIT"</span>,          <span class="st">"I63966007"</span>,</span>
@@ -219,7 +219,7 @@ A failed or empty request stops the comparison instead of silently dropping an i
 <span>  <span class="st">"U São Paulo"</span>,  <span class="st">"I17974374"</span>,</span>
 <span>  <span class="st">"U Cape Town"</span>,  <span class="st">"I157614274"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb546"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fetch_works</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">inst_id</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>    entity <span class="op">=</span> <span class="st">"works"</span>,</span>
@@ -242,7 +242,7 @@ A failed or empty request stops the comparison instead of silently dropping an i
 <h2>
 <span class="header-section-number">39.4</span> Publication volume<a aria-label="anchor" class="anchor" href="#publication-volume"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb547"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inst_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">nrow</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -264,7 +264,7 @@ Figure 39.1: Sampled publication counts by institution.
 of the five samples, de-duplicated by work ID. It adjusts for year only, not
 field mix or a common citation window. Missing citation counts and undefined
 ratios are excluded with their usable denominators shown.</p>
-<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb548"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">citation_reference</span> <span class="op">&lt;-</span> <span class="fu">sci_pooled_year_reference</span><span class="op">(</span><span class="va">inst_data</span><span class="op">$</span><span class="va">works</span><span class="op">)</span></span>
 <span><span class="va">impact</span> <span class="op">&lt;-</span> <span class="va">inst_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>summary <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">sci_sample_citation_summary</span>,</span>
@@ -741,46 +741,46 @@ ratios are excluded with their usable denominators shown.</p>
 <td class="gt_row gt_left" headers="short_name">ETH Zurich</td>
 <td class="gt_row gt_right" headers="n_sampled">300</td>
 <td class="gt_row gt_right" headers="n_citation_observed">300</td>
-<td class="gt_row gt_right" headers="mean_cites">52.02</td>
-<td class="gt_row gt_right" headers="median_cites">23.00</td>
+<td class="gt_row gt_right" headers="mean_cites">44.10</td>
+<td class="gt_row gt_right" headers="median_cites">23.50</td>
 <td class="gt_row gt_right" headers="n_ratio_observed">300</td>
-<td class="gt_row gt_right" headers="pooled_year_ratio">1.43</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">1.09</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">MIT</td>
 <td class="gt_row gt_right" headers="n_sampled">300</td>
 <td class="gt_row gt_right" headers="n_citation_observed">300</td>
-<td class="gt_row gt_right" headers="mean_cites">51.59</td>
+<td class="gt_row gt_right" headers="mean_cites">85.77</td>
 <td class="gt_row gt_right" headers="median_cites">25.00</td>
 <td class="gt_row gt_right" headers="n_ratio_observed">300</td>
-<td class="gt_row gt_right" headers="pooled_year_ratio">1.40</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">2.11</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">Oxford</td>
 <td class="gt_row gt_right" headers="n_sampled">300</td>
 <td class="gt_row gt_right" headers="n_citation_observed">300</td>
-<td class="gt_row gt_right" headers="mean_cites">39.69</td>
-<td class="gt_row gt_right" headers="median_cites">15.00</td>
+<td class="gt_row gt_right" headers="mean_cites">33.69</td>
+<td class="gt_row gt_right" headers="median_cites">18.00</td>
 <td class="gt_row gt_right" headers="n_ratio_observed">300</td>
-<td class="gt_row gt_right" headers="pooled_year_ratio">1.08</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">0.83</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">U Cape Town</td>
 <td class="gt_row gt_right" headers="n_sampled">300</td>
 <td class="gt_row gt_right" headers="n_citation_observed">300</td>
-<td class="gt_row gt_right" headers="mean_cites">29.54</td>
+<td class="gt_row gt_right" headers="mean_cites">27.03</td>
 <td class="gt_row gt_right" headers="median_cites">12.00</td>
 <td class="gt_row gt_right" headers="n_ratio_observed">300</td>
-<td class="gt_row gt_right" headers="pooled_year_ratio">0.77</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">0.66</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">U São Paulo</td>
 <td class="gt_row gt_right" headers="n_sampled">300</td>
 <td class="gt_row gt_right" headers="n_citation_observed">300</td>
-<td class="gt_row gt_right" headers="mean_cites">13.22</td>
+<td class="gt_row gt_right" headers="mean_cites">15.15</td>
 <td class="gt_row gt_right" headers="median_cites">6.00</td>
 <td class="gt_row gt_right" headers="n_ratio_observed">300</td>
-<td class="gt_row gt_right" headers="pooled_year_ratio">0.36</td>
+<td class="gt_row gt_right" headers="pooled_year_ratio">0.37</td>
 </tr>
 </tbody>
 </table></div>
@@ -794,7 +794,7 @@ ratios are excluded with their usable denominators shown.</p>
 Incomplete affiliations make the fractional total unavailable; the coverage
 column shows how many sampled works have usable data. This is bibliometric
 credit, not an estimate of each institution’s contribution.</p>
-<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb549"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">counting</span> <span class="op">&lt;-</span> <span class="va">inst_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>counts <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">oa_id</span>, <span class="va">sci_institution_sample_counts</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">counts</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1263,42 +1263,42 @@ credit, not an estimate of each institution’s contribution.</p>
 <tr>
 <td class="gt_row gt_left" headers="short_name">MIT</td>
 <td class="gt_row gt_right" headers="full_count">300</td>
-<td class="gt_row gt_right" headers="affiliation_covered">251</td>
+<td class="gt_row gt_right" headers="affiliation_covered">259</td>
 <td class="gt_row gt_right" headers="frac_count">NA</td>
 <td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">Oxford</td>
 <td class="gt_row gt_right" headers="full_count">300</td>
-<td class="gt_row gt_right" headers="affiliation_covered">263</td>
+<td class="gt_row gt_right" headers="affiliation_covered">262</td>
 <td class="gt_row gt_right" headers="frac_count">NA</td>
 <td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">ETH Zurich</td>
 <td class="gt_row gt_right" headers="full_count">300</td>
-<td class="gt_row gt_right" headers="affiliation_covered">271</td>
+<td class="gt_row gt_right" headers="affiliation_covered">270</td>
 <td class="gt_row gt_right" headers="frac_count">NA</td>
 <td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">U São Paulo</td>
 <td class="gt_row gt_right" headers="full_count">300</td>
-<td class="gt_row gt_right" headers="affiliation_covered">258</td>
+<td class="gt_row gt_right" headers="affiliation_covered">249</td>
 <td class="gt_row gt_right" headers="frac_count">NA</td>
 <td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="short_name">U Cape Town</td>
 <td class="gt_row gt_right" headers="full_count">300</td>
-<td class="gt_row gt_right" headers="affiliation_covered">255</td>
+<td class="gt_row gt_right" headers="affiliation_covered">246</td>
 <td class="gt_row gt_right" headers="frac_count">NA</td>
 <td class="gt_row gt_right" headers="ratio">NA</td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb550"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">counting</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_longer.html">pivot_longer</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">full_count</span>, <span class="va">frac_count</span><span class="op">)</span>, names_to <span class="op">=</span> <span class="st">"method"</span>, values_to <span class="op">=</span> <span class="st">"count"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>method <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/recode.html">recode</a></span><span class="op">(</span><span class="va">method</span>, full_count <span class="op">=</span> <span class="st">"Full"</span>, frac_count <span class="op">=</span> <span class="st">"Fractional"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1318,7 +1318,7 @@ Figure 39.2: Full and fractional credits within the retrieved samples.
 <h2>
 <span class="header-section-number">39.7</span> OA rates<a aria-label="anchor" class="anchor" href="#oa-rates"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb551"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">inst_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>oa_rate <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_dbl</a></span><span class="op">(</span><span class="va">works</span>, \<span class="op">(</span><span class="va">w</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">w</span><span class="op">$</span><span class="va">oa_status</span> <span class="op">!=</span> <span class="st">"closed"</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">oa_rate</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/reorder.factor.html">reorder</a></span><span class="op">(</span><span class="va">short_name</span>, <span class="va">oa_rate</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>

@@ -195,7 +195,7 @@
 <h2>
 <span class="header-section-number">10.2</span> Setup<a aria-label="anchor" class="anchor" href="#indicators-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb134"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb132"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -225,7 +225,7 @@
 <span class="header-section-number">10.4.1</span> Acquiring sample data<a aria-label="anchor" class="anchor" href="#acquiring-sample-data"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch a sample of works and their citation counts from OpenAlex.</p>
-<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
@@ -240,23 +240,23 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt;    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-#&gt;     0.0     8.0    17.0    26.8    31.0   810.0</code></pre>
+#&gt;     0.0     8.0    17.0    35.7    32.0  2580.0</code></pre>
 </div>
 <div class="section level3" id="computing-the-h-index" number="10.4.2">
 <h3>
 <span class="header-section-number">10.4.2</span> Computing the h-index<a aria-label="anchor" class="anchor" href="#computing-the-h-index"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h</span> <span class="op">&lt;-</span> <span class="fu">compute_h_index</span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"h-index for this corpus: {h}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; h-index for this corpus: 52</code></pre>
-<p>The sample h-index means that at least 52 sampled papers each have at least 52 citations. It is not an author career h-index.</p>
+<pre><code>#&gt; h-index for this corpus: 54</code></pre>
+<p>The sample h-index means that at least 54 sampled papers each have at least 54 citations. It is not an author career h-index.</p>
 </div>
 <div class="section level3" id="computing-the-g-index" number="10.4.3">
 <h3>
 <span class="header-section-number">10.4.3</span> Computing the g-index<a aria-label="anchor" class="anchor" href="#computing-the-g-index"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">compute_g_index</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">citations</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">sorted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html">sort</a></span><span class="op">(</span><span class="va">citations</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span>  <span class="va">cumsum_cites</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">sorted</span><span class="op">)</span></span>
@@ -267,7 +267,7 @@
 <span></span>
 <span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">compute_g_index</span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"g-index for this corpus: {g}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; g-index for this corpus: 84</code></pre>
+<pre><code>#&gt; g-index for this corpus: 111</code></pre>
 </div>
 <div class="section level3" id="publication-span-is-not-career-length" number="10.4.4">
 <h3>
@@ -276,7 +276,7 @@
 <p>A proper m-quotient needs an identified author and a justified career-start date.
 This corpus contains many authors, so its publication span cannot supply that
 denominator. The following h/span ratio is only a descriptive calculation.</p>
-<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">career_years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/difftime.html">difftime</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">publication_date</span><span class="op">)</span>,</span>
 <span>           <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">publication_date</span><span class="op">)</span>,</span>
@@ -285,7 +285,7 @@ denominator. The following h/span ratio is only a descriptive calculation.</p>
 <span></span>
 <span><span class="va">h_per_span</span> <span class="op">&lt;-</span> <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">career_years</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="va">career_years</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="va">h</span> <span class="op">/</span> <span class="va">career_years</span> <span class="kw">else</span> <span class="cn">NA_real_</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sample h/publication-span ratio: {round(h_per_span, 3)} (span {round(career_years, 1)} years)\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Sample h/publication-span ratio: 8.688 (span 6 years)</code></pre>
+<pre><code>#&gt; Sample h/publication-span ratio: 9.023 (span 6 years)</code></pre>
 </div>
 <div class="section level3" id="a-normalization-diagnostic-using-the-sample-as-its-own-reference" number="10.4.5">
 <h3>
@@ -296,7 +296,7 @@ and citation windows. The live corpus here supplies no such reference. To show
 why that matters, compute a mean within each sample year and divide the same
 records by it. Every usable year must average to 1 by construction. These are
 observed sample means, not simulated field means or world averages.</p>
-<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sample_means_by_year</span> <span class="op">&lt;-</span> <span class="va">works_slim</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sample_mean <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cited_by_count</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
@@ -317,7 +317,7 @@ interpretation requires an independently justified field/year reference
 <h3>
 <span class="header-section-number">10.4.6</span> Within-sample upper-percentile membership<a aria-label="anchor" class="anchor" href="#within-sample-upper-percentile-membership"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_with_pct</span> <span class="op">&lt;-</span> <span class="va">works_normalized</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span></span>
@@ -337,7 +337,7 @@ is not field-normalized PP(top 10%). Report the ranking and tie rule explicitly.
 <h3>
 <span class="header-section-number">10.4.7</span> Visualization<a aria-label="anchor" class="anchor" href="#visualization-4"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_slim</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">cited_by_count</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html">geom_histogram</a></span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">5</span>, fill <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, color <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
@@ -352,7 +352,7 @@ is not field-normalized PP(top 10%). Report the ranking and tie rule explicitly.
 Figure 10.1: Citation distribution of sampled works, with the h-index threshold marked.
 </p>
 </div>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_normalized</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>sample_ratio <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">ncs</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -373,7 +373,7 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <h3>
 <span class="header-section-number">10.4.8</span> Summary table<a aria-label="anchor" class="anchor" href="#summary-table"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  Indicator <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Sample h-index"</span>, <span class="st">"Sample g-index"</span>, <span class="st">"Sample h/span"</span>, <span class="st">"Mean sample/year ratio"</span>, <span class="st">"Sample upper-percentile share"</span><span class="op">)</span>,</span>
 <span>  Value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
@@ -850,17 +850,17 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <tbody class="gt_table_body">
 <tr>
 <td class="gt_row gt_left" headers="Indicator">Sample h-index</td>
-<td class="gt_row gt_right" headers="Value">52</td>
-<td class="gt_row gt_left" headers="Interpretation">52 papers with &gt;= 52 citations each</td>
+<td class="gt_row gt_right" headers="Value">54</td>
+<td class="gt_row gt_left" headers="Interpretation">54 papers with &gt;= 54 citations each</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Indicator">Sample g-index</td>
-<td class="gt_row gt_right" headers="Value">84</td>
-<td class="gt_row gt_left" headers="Interpretation">Top 84 papers have &gt;= 84^2 = 7056 cumulative citations</td>
+<td class="gt_row gt_right" headers="Value">111</td>
+<td class="gt_row gt_left" headers="Interpretation">Top 111 papers have &gt;= 111^2 = 12321 cumulative citations</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Indicator">Sample h/span</td>
-<td class="gt_row gt_right" headers="Value">8.688</td>
+<td class="gt_row gt_right" headers="Value">9.023</td>
 <td class="gt_row gt_left" headers="Interpretation">Not a career m-quotient</td>
 </tr>
 <tr>
@@ -974,7 +974,7 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 <h2>
 <span class="header-section-number">10.13</span> Session info<a aria-label="anchor" class="anchor" href="#indicators-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
@@ -985,10 +985,9 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 #&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #&gt; 
 #&gt; locale:
-#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
-#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
-#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8        LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8   
+#&gt;  [6] LC_MESSAGES=C.UTF-8    LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C           LC_TELEPHONE=C        
+#&gt; [11] LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #&gt; 
 #&gt; time zone: UTC
 #&gt; tzcode source: system (glibc)
@@ -997,49 +996,33 @@ Figure 10.2: Diagnostic: each usable sample/year normalizes to its own mean of o
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0
-#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0          
-#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
-#&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2       
-#&gt; [17] readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3     
-#&gt; [21] tidyverse_2.0.0   
+#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0 RefManageR_1.4.0   bib2df_1.1.2.0    
+#&gt;  [7] rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
+#&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2        readr_2.2.0        tidyr_1.3.2       
+#&gt; [19] tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0          
-#&gt;   [4] rlang_1.3.0            magrittr_2.0.5         otel_0.2.0            
-#&gt;   [7] compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0        
-#&gt;  [10] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
-#&gt;  [13] ca_0.72                utf8_1.2.6             promises_1.5.0        
-#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0             
-#&gt;  [19] xfun_0.62              cachem_1.1.0           jsonlite_2.0.0        
-#&gt;  [22] SnowballC_0.7.1        later_1.4.8            parallel_4.6.1        
-#&gt;  [25] stopwords_2.3          R6_2.6.1               bslib_0.12.0          
-#&gt;  [28] stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
-#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2            
-#&gt;  [34] bookdown_0.48          knitr_1.52             triebeard_0.4.1       
-#&gt;  [37] base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17         
-#&gt;  [40] Matrix_1.7-5           igraph_2.3.4           timechange_0.4.0      
-#&gt;  [43] tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
-#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5         
-#&gt;  [49] miniUI_0.1.2           humaniformat_0.6.0     curl_8.1.0            
-#&gt;  [52] qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9            
-#&gt;  [55] shiny_1.14.0           withr_3.0.3            S7_0.2.2              
-#&gt;  [58] askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
-#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1         
-#&gt;  [64] janeaustenr_1.0.0      DT_0.34.0              plotly_4.12.1         
-#&gt;  [67] generics_0.1.4         rprojroot_2.1.1        hms_1.1.4             
-#&gt;  [70] scales_1.4.0           xtable_1.8-8           contentanalysis_1.1.1 
-#&gt;  [73] tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
-#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0              
-#&gt;  [79] visNetwork_2.1.4       fastmatch_1.1-8        grid_4.6.1            
-#&gt;  [82] bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0         
-#&gt;  [85] dimensionsR_0.0.3      bibliometrixData_0.3.0 cli_3.6.6             
-#&gt;  [88] viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
-#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8         
-#&gt;  [94] crul_1.6.0             htmlwidgets_1.6.4      farver_2.1.2          
-#&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
-#&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
-#&gt; [103] bit64_4.8.6</code></pre>
+#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0           rlang_1.3.0            magrittr_2.0.5        
+#&gt;   [6] otel_0.2.0             compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0         pkgconfig_2.0.3       
+#&gt;  [11] fastmap_1.2.0          labeling_0.4.3         ca_0.72                utf8_1.2.6             promises_1.5.0        
+#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0              xfun_0.62              cachem_1.1.0          
+#&gt;  [21] jsonlite_2.0.0         SnowballC_0.7.1        later_1.4.8            parallel_4.6.1         stopwords_2.3         
+#&gt;  [26] R6_2.6.1               bslib_0.12.0           stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
+#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2             bookdown_0.48          knitr_1.52            
+#&gt;  [36] triebeard_0.4.1        base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17          Matrix_1.7-5          
+#&gt;  [41] igraph_2.3.4           timechange_0.4.0       tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
+#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5          miniUI_0.1.2           humaniformat_0.6.0    
+#&gt;  [51] curl_8.1.0             qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9             shiny_1.14.0          
+#&gt;  [56] withr_3.0.3            S7_0.2.2               askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
+#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1          janeaustenr_1.0.0      DT_0.34.0             
+#&gt;  [66] plotly_4.12.1          generics_0.1.4         rprojroot_2.1.1        hms_1.1.4              scales_1.4.0          
+#&gt;  [71] xtable_1.8-8           contentanalysis_1.1.1  tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
+#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0               visNetwork_2.1.4       fastmatch_1.1-8       
+#&gt;  [81] grid_4.6.1             bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0          dimensionsR_0.0.3     
+#&gt;  [86] bibliometrixData_0.3.0 cli_3.6.6              viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
+#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8          crul_1.6.0             htmlwidgets_1.6.4     
+#&gt;  [96] farver_2.1.2           memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5        httr_1.4.9            
+#&gt; [101] here_1.0.2             mime_0.13              bit64_4.8.6</code></pre>
 </div>
 </div>
 <!-- Dark/light mode toggle -->

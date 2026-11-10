@@ -7,16 +7,16 @@
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>A R Setup, renv, and Docker | Scientometrics in R</title>
 <meta content="R. Heller" name="author"/>
-<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31   A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such..." name="description"/>
+<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-11-10   A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such..." name="description"/>
 <meta content="bookdown 0.48 with bs4_book()" name="generator"/>
 <meta content="A R Setup, renv, and Docker | Scientometrics in R" property="og:title"/>
 <meta content="book" property="og:type"/>
 <meta content="https://cttir.github.io/scientometrics-in-r/r-setup-renv-and-docker.html" property="og:url"/>
 <meta content="https://cttir.github.io/scientometrics-in-r/images/cover-corrected.png" property="og:image"/>
-<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31   A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such..." property="og:description"/>
+<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-11-10   A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such..." property="og:description"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="A R Setup, renv, and Docker | Scientometrics in R" name="twitter:title"/>
-<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31   A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such..." name="twitter:description"/>
+<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-11-10   A.1 R installation and current first-use path Install R from CRAN. The current candidate was locally validated with R 4.6.1. An IDE such..." name="twitter:description"/>
 <meta content="https://cttir.github.io/scientometrics-in-r/images/cover-corrected.png" name="twitter:image"/>
 <!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
@@ -176,7 +176,7 @@
 </h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/r-setup-renv-and-docker.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/r-setup-renv-and-docker.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
 <!-- page-provenance:start -->
 <div class="page-provenance">
-<p><em>R. Heller · Date: 2026-05-09 · Last changed: 2026-10-31</em></p>
+<p><em>R. Heller · Date: 2026-05-09 · Last changed: 2026-11-10</em></p>
 </div>
 <!-- page-provenance:end -->
 <!-- verify_chunks: skip-file
@@ -193,8 +193,8 @@ requires Pandoc; PDF output additionally needs XeLaTeX/TinyTeX and R with Cairo 
 may require a C/C++ toolchain and system libraries; the Linux dependencies are
 listed in <code>.github/workflows/render.yml</code>.</p>
 <p>From the repository root, install and check the book’s R dependencies:</p>
-<div class="sourceCode" id="cb577"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb577-1"><a href="r-setup-renv-and-docker.html#cb577-1" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R</span>
-<span id="cb577-2"><a href="r-setup-renv-and-docker.html#cb577-2" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R <span class="at">--check</span></span></code></pre></div>
+<div class="sourceCode" id="cb575"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb575-1"><a href="r-setup-renv-and-docker.html#cb575-1" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R</span>
+<span id="cb575-2"><a href="r-setup-renv-and-docker.html#cb575-2" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R <span class="at">--check</span></span></code></pre></div>
 <p>The installer installs missing packages from current CRAN and checks that their
 namespaces load. It does not restore historical versions or certify an immutable
 software environment. <code>--check</code> performs no installation or network access;
@@ -206,8 +206,9 @@ must be configured separately.</p>
 Configure an activated OpenAlex key locally as <code>OPENALEX_API_KEY</code>, outside Git,
 for requests that need authenticated paging. <code>SCIENTOMETRICS_OFFLINE=1</code> requires
 existing exact-query OpenAlex caches in <code>_freeze/openalex_cache/</code>; it does not
-make other providers offline and cannot supply missing cache entries. See the
-repository <code>README.md</code> for the companion package’s separate installation path.</p>
+make other providers offline and cannot supply missing cache entries. The
+repository <code>README.md</code> describes the helper functions in <code>R/</code> and the sample
+data in <code>data/</code>.</p>
 </div>
 <div class="section level2" id="package-management-with-renv" number="43.2">
 <h2>
@@ -221,14 +222,14 @@ that restoring the historical lockfile will reproduce the current validated
 candidate.</p>
 <p>The following is an optional restoration example for a project whose lockfile
 you have independently validated, rather than a required setup step for this book:</p>
-<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"renv"</span><span class="op">)</span></span>
 <span><span class="fu">renv</span><span class="fu">::</span><span class="fu">restore</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Restoration attempts to install the recorded versions; success also depends on
 compatible R, system libraries and available package sources. In a development
 environment, add a package and deliberately update the lockfile only after
 validating the resulting environment:</p>
-<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"newpackage"</span><span class="op">)</span> <span class="co"># Replace with the intended package name.</span></span>
 <span><span class="fu">renv</span><span class="fu">::</span><span class="fu">snapshot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>A software lockfile does not freeze live API results. Exact reproduction also
@@ -334,8 +335,8 @@ for the current book. It also downloads an amd64 Quarto package, so other
 architectures need a compatible recipe. Docker does not remove the need to
 validate the lockfile, system dependencies, API access and resulting outputs.</p>
 <p>For a deliberate evaluation of that recipe, build it and inspect its R version:</p>
-<div class="sourceCode" id="cb580"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb580-1"><a href="r-setup-renv-and-docker.html#cb580-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> scientometrics-in-r .</span>
-<span id="cb580-2"><a href="r-setup-renv-and-docker.html#cb580-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> scientometrics-in-r R <span class="at">--version</span></span></code></pre></div>
+<div class="sourceCode" id="cb578"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb578-1"><a href="r-setup-renv-and-docker.html#cb578-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> scientometrics-in-r .</span>
+<span id="cb578-2"><a href="r-setup-renv-and-docker.html#cb578-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> scientometrics-in-r R <span class="at">--version</span></span></code></pre></div>
 <p>The image’s default command calls <code><a href="https://pkgs.rstudio.com/bookdown/reference/render_book.html">bookdown::render_book()</a></code> for all formats; it
 does not launch RStudio Server. Successful construction and execution of this
 historical image are not claimed here. Use the current first-use path above
@@ -348,12 +349,12 @@ for the locally validated candidate.</p>
 <p>This repository is configured for <strong>bookdown</strong>, with <code>_bookdown.yml</code> and
 <code>_output.yml</code>. From the repository root, render HTML and refresh its download
 manifest:</p>
-<div class="sourceCode" id="cb581"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb581-1"><a href="r-setup-renv-and-docker.html#cb581-1" tabindex="-1"></a><span class="va">SCIENTOMETRICS_REBUILD_CHUNKS</span><span class="op">=</span>1 <span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'</span></span>
-<span id="cb581-2"><a href="r-setup-renv-and-docker.html#cb581-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/build-download-manifest.R</span></code></pre></div>
+<div class="sourceCode" id="cb579"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb579-1"><a href="r-setup-renv-and-docker.html#cb579-1" tabindex="-1"></a><span class="va">SCIENTOMETRICS_REBUILD_CHUNKS</span><span class="op">=</span>1 <span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'</span></span>
+<span id="cb579-2"><a href="r-setup-renv-and-docker.html#cb579-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/build-download-manifest.R</span></code></pre></div>
 <p><code>SCIENTOMETRICS_REBUILD_CHUNKS=1</code> re-executes analysis chunks while retaining
 exact-query provider caches. Missing provider caches still require API access.
 The configured output directory is <code>docs/</code>. Serve it locally, for example:</p>
-<div class="sourceCode" id="cb582"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb582-1"><a href="r-setup-renv-and-docker.html#cb582-1" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8000 <span class="at">--directory</span> docs</span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb580-1"><a href="r-setup-renv-and-docker.html#cb580-1" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8000 <span class="at">--directory</span> docs</span></code></pre></div>
 <p>Then visit <code>http://localhost:8000</code>. PDF additionally needs XeLaTeX/TinyTeX;
 <code>output_format = "all"</code> requests HTML, PDF and EPUB. Before distribution, run
 <code>Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub</code> to validate

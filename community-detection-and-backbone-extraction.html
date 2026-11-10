@@ -196,7 +196,7 @@
 <h2>
 <span class="header-section-number">18.2</span> Setup<a aria-label="anchor" class="anchor" href="#backbone-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb271"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb269"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
@@ -230,7 +230,7 @@
 <span class="header-section-number">18.4.1</span> Building a dense network<a aria-label="anchor" class="anchor" href="#building-a-dense-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>We construct a bibliographic coupling network from scientometrics articles.</p>
-<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb270"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
@@ -257,16 +257,16 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Full network: {vcount(g_full)} nodes, {ecount(g_full)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Full network: 290 nodes, 4105 edges</code></pre>
-<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Full network: 290 nodes, 3929 edges</code></pre>
+<div class="sourceCode" id="cb272"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Density: {round(graph.density(g_full), 4)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Density: 0.098</code></pre>
+<pre><code>#&gt; Density: 0.0938</code></pre>
 </div>
 <div class="section level3" id="backbone-extraction-disparity-filter" number="18.4.2">
 <h3>
 <span class="header-section-number">18.4.2</span> Backbone extraction: disparity filter<a aria-label="anchor" class="anchor" href="#backbone-extraction-disparity-filter"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb274"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">disparity_filter</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">g</span>, <span class="va">alpha</span> <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">el</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">as_data_frame</a></span><span class="op">(</span><span class="va">g</span>, what <span class="op">=</span> <span class="st">"edges"</span><span class="op">)</span></span>
 <span>  <span class="va">node_strength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/strength.html">strength</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span></span>
@@ -290,8 +290,8 @@
 <span></span>
 <span><span class="va">g_backbone</span> <span class="op">&lt;-</span> <span class="fu">disparity_filter</span><span class="op">(</span><span class="va">g_full</span>, alpha <span class="op">=</span> <span class="fl">0.05</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Backbone: {vcount(g_backbone)} nodes, {ecount(g_backbone)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Backbone: 131 nodes, 132 edges</code></pre>
-<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Backbone: 124 nodes, 130 edges</code></pre>
+<div class="sourceCode" id="cb276"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Edge retention: {scales::percent(ecount(g_backbone) / ecount(g_full))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Edge retention: 3%</code></pre>
 </div>
@@ -299,7 +299,7 @@
 <h3>
 <span class="header-section-number">18.4.3</span> Threshold filtering for comparison<a aria-label="anchor" class="anchor" href="#threshold-filtering-for-comparison"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb278"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">threshold</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/E.html">E</a></span><span class="op">(</span><span class="va">g_full</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span>, <span class="fl">0.75</span><span class="op">)</span></span>
 <span><span class="va">g_threshold</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/subgraph.edges.html">subgraph.edges</a></span><span class="op">(</span></span>
 <span>  <span class="va">g_full</span>,</span>
@@ -308,13 +308,13 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Threshold (75th pctile = {threshold}): {vcount(g_threshold)} nodes, {ecount(g_threshold)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Threshold (75th pctile = 2): 252 nodes, 1159 edges</code></pre>
+<pre><code>#&gt; Threshold (75th pctile = 2): 242 nodes, 1080 edges</code></pre>
 </div>
 <div class="section level3" id="community-detection-at-multiple-resolutions" number="18.4.4">
 <h3>
 <span class="header-section-number">18.4.4</span> Community detection at multiple resolutions<a aria-label="anchor" class="anchor" href="#community-detection-at-multiple-resolutions"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb280"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resolutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">0.8</span>, <span class="fl">1.0</span>, <span class="fl">1.5</span>, <span class="fl">2.0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sweep_results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="va">resolutions</span>, <span class="kw">function</span><span class="op">(</span><span class="va">res</span><span class="op">)</span> <span class="op">{</span></span>
@@ -330,23 +330,23 @@
 <span><span class="op">}</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sweep_results</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="enqknnxjgh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#enqknnxjgh table {
+<div id="lzzpkklytk" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lzzpkklytk table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#enqknnxjgh thead, #enqknnxjgh tbody, #enqknnxjgh tfoot, #enqknnxjgh tr, #enqknnxjgh td, #enqknnxjgh th {
+#lzzpkklytk thead, #lzzpkklytk tbody, #lzzpkklytk tfoot, #lzzpkklytk tr, #lzzpkklytk td, #lzzpkklytk th {
   border-style: none;
 }
 
-#enqknnxjgh p {
+#lzzpkklytk p {
   margin: 0;
   padding: 0;
 }
 
-#enqknnxjgh .gt_table {
+#lzzpkklytk .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -372,12 +372,12 @@
   border-left-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_caption {
+#lzzpkklytk .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#enqknnxjgh .gt_title {
+#lzzpkklytk .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -389,7 +389,7 @@
   border-bottom-width: 0;
 }
 
-#enqknnxjgh .gt_subtitle {
+#lzzpkklytk .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -401,7 +401,7 @@
   border-top-width: 0;
 }
 
-#enqknnxjgh .gt_heading {
+#lzzpkklytk .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -413,13 +413,13 @@
   border-right-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_bottom_border {
+#lzzpkklytk .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_col_headings {
+#lzzpkklytk .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -434,7 +434,7 @@
   border-right-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_col_heading {
+#lzzpkklytk .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -454,7 +454,7 @@
   overflow-x: hidden;
 }
 
-#enqknnxjgh .gt_column_spanner_outer {
+#lzzpkklytk .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -466,15 +466,15 @@
   padding-right: 4px;
 }
 
-#enqknnxjgh .gt_column_spanner_outer:first-child {
+#lzzpkklytk .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#enqknnxjgh .gt_column_spanner_outer:last-child {
+#lzzpkklytk .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#enqknnxjgh .gt_column_spanner {
+#lzzpkklytk .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -486,11 +486,11 @@
   width: 100%;
 }
 
-#enqknnxjgh .gt_spanner_row {
+#lzzpkklytk .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#enqknnxjgh .gt_group_heading {
+#lzzpkklytk .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -516,7 +516,7 @@
   text-align: left;
 }
 
-#enqknnxjgh .gt_empty_group_heading {
+#lzzpkklytk .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -531,15 +531,15 @@
   vertical-align: middle;
 }
 
-#enqknnxjgh .gt_from_md > :first-child {
+#lzzpkklytk .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#enqknnxjgh .gt_from_md > :last-child {
+#lzzpkklytk .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#enqknnxjgh .gt_row {
+#lzzpkklytk .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -558,7 +558,7 @@
   overflow-x: hidden;
 }
 
-#enqknnxjgh .gt_stub {
+#lzzpkklytk .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -571,7 +571,7 @@
   padding-right: 5px;
 }
 
-#enqknnxjgh .gt_stub_row_group {
+#lzzpkklytk .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -585,15 +585,15 @@
   vertical-align: top;
 }
 
-#enqknnxjgh .gt_row_group_first td {
+#lzzpkklytk .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#enqknnxjgh .gt_row_group_first th {
+#lzzpkklytk .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#enqknnxjgh .gt_summary_row {
+#lzzpkklytk .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -603,16 +603,16 @@
   padding-right: 5px;
 }
 
-#enqknnxjgh .gt_first_summary_row {
+#lzzpkklytk .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_first_summary_row.thick {
+#lzzpkklytk .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#enqknnxjgh .gt_last_summary_row {
+#lzzpkklytk .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -622,7 +622,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_grand_summary_row {
+#lzzpkklytk .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -632,7 +632,7 @@
   padding-right: 5px;
 }
 
-#enqknnxjgh .gt_first_grand_summary_row {
+#lzzpkklytk .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -642,7 +642,7 @@
   border-top-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_last_grand_summary_row_top {
+#lzzpkklytk .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -652,11 +652,11 @@
   border-bottom-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_striped {
+#lzzpkklytk .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#enqknnxjgh .gt_table_body {
+#lzzpkklytk .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -665,7 +665,7 @@
   border-bottom-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_footnotes {
+#lzzpkklytk .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -679,7 +679,7 @@
   border-right-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_footnote {
+#lzzpkklytk .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -688,7 +688,7 @@
   padding-right: 5px;
 }
 
-#enqknnxjgh .gt_sourcenotes {
+#lzzpkklytk .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -702,7 +702,7 @@
   border-right-color: #D3D3D3;
 }
 
-#enqknnxjgh .gt_sourcenote {
+#lzzpkklytk .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -710,72 +710,72 @@
   padding-right: 5px;
 }
 
-#enqknnxjgh .gt_left {
+#lzzpkklytk .gt_left {
   text-align: left;
 }
 
-#enqknnxjgh .gt_center {
+#lzzpkklytk .gt_center {
   text-align: center;
 }
 
-#enqknnxjgh .gt_right {
+#lzzpkklytk .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#enqknnxjgh .gt_font_normal {
+#lzzpkklytk .gt_font_normal {
   font-weight: normal;
 }
 
-#enqknnxjgh .gt_font_bold {
+#lzzpkklytk .gt_font_bold {
   font-weight: bold;
 }
 
-#enqknnxjgh .gt_font_italic {
+#lzzpkklytk .gt_font_italic {
   font-style: italic;
 }
 
-#enqknnxjgh .gt_super {
+#lzzpkklytk .gt_super {
   font-size: 65%;
 }
 
-#enqknnxjgh .gt_footnote_marks {
+#lzzpkklytk .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#enqknnxjgh .gt_asterisk {
+#lzzpkklytk .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#enqknnxjgh .gt_indent_1 {
+#lzzpkklytk .gt_indent_1 {
   text-indent: 5px;
 }
 
-#enqknnxjgh .gt_indent_2 {
+#lzzpkklytk .gt_indent_2 {
   text-indent: 10px;
 }
 
-#enqknnxjgh .gt_indent_3 {
+#lzzpkklytk .gt_indent_3 {
   text-indent: 15px;
 }
 
-#enqknnxjgh .gt_indent_4 {
+#lzzpkklytk .gt_indent_4 {
   text-indent: 20px;
 }
 
-#enqknnxjgh .gt_indent_5 {
+#lzzpkklytk .gt_indent_5 {
   text-indent: 25px;
 }
 
-#enqknnxjgh .katex-display {
+#lzzpkklytk .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#enqknnxjgh div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#lzzpkklytk div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -790,43 +790,43 @@
 <tbody class="gt_table_body">
 <tr>
 <td class="gt_row gt_right" headers="resolution">0.5</td>
-<td class="gt_row gt_right" headers="n_communities">30</td>
-<td class="gt_row gt_right" headers="modularity">0.870</td>
-<td class="gt_row gt_right" headers="max_size">14</td>
+<td class="gt_row gt_right" headers="n_communities">22</td>
+<td class="gt_row gt_right" headers="modularity">0.833</td>
+<td class="gt_row gt_right" headers="max_size">25</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
 <td class="gt_row gt_right" headers="resolution">0.8</td>
-<td class="gt_row gt_right" headers="n_communities">30</td>
-<td class="gt_row gt_right" headers="modularity">0.870</td>
-<td class="gt_row gt_right" headers="max_size">12</td>
+<td class="gt_row gt_right" headers="n_communities">24</td>
+<td class="gt_row gt_right" headers="modularity">0.846</td>
+<td class="gt_row gt_right" headers="max_size">16</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
 <td class="gt_row gt_right" headers="resolution">1.0</td>
-<td class="gt_row gt_right" headers="n_communities">30</td>
-<td class="gt_row gt_right" headers="modularity">0.870</td>
-<td class="gt_row gt_right" headers="max_size">12</td>
+<td class="gt_row gt_right" headers="n_communities">25</td>
+<td class="gt_row gt_right" headers="modularity">0.846</td>
+<td class="gt_row gt_right" headers="max_size">16</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
 <td class="gt_row gt_right" headers="resolution">1.5</td>
-<td class="gt_row gt_right" headers="n_communities">30</td>
-<td class="gt_row gt_right" headers="modularity">0.870</td>
-<td class="gt_row gt_right" headers="max_size">13</td>
+<td class="gt_row gt_right" headers="n_communities">28</td>
+<td class="gt_row gt_right" headers="modularity">0.841</td>
+<td class="gt_row gt_right" headers="max_size">12</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 <tr>
 <td class="gt_row gt_right" headers="resolution">2.0</td>
-<td class="gt_row gt_right" headers="n_communities">32</td>
-<td class="gt_row gt_right" headers="modularity">0.865</td>
+<td class="gt_row gt_right" headers="n_communities">28</td>
+<td class="gt_row gt_right" headers="modularity">0.839</td>
 <td class="gt_row gt_right" headers="max_size">12</td>
 <td class="gt_row gt_right" headers="min_size">2</td>
 </tr>
 </tbody>
 </table></div>
 </div>
-<div class="sourceCode" id="cb283"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb281"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="va">sweep_results</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">resolution</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">n_communities</span><span class="op">)</span>, colour <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, linewidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>y <span class="op">=</span> <span class="va">n_communities</span><span class="op">)</span>, colour <span class="op">=</span> <span class="fu">palette_sci</span><span class="op">(</span><span class="fl">2</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, size <span class="op">=</span> <span class="fl">3</span><span class="op">)</span> <span class="op">+</span></span>
@@ -850,7 +850,7 @@ Figure 18.1: Number of communities and modularity as a function of resolution pa
 <h3>
 <span class="header-section-number">18.4.5</span> Comparing backbone vs. full network communities<a aria-label="anchor" class="anchor" href="#comparing-backbone-vs.-full-network-communities"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb282"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comm_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/cluster_leiden.html">cluster_leiden</a></span><span class="op">(</span><span class="va">g_full</span>, resolution_parameter <span class="op">=</span> <span class="fl">1.0</span>,</span>
 <span>                            objective_function <span class="op">=</span> <span class="st">"modularity"</span><span class="op">)</span></span>
 <span><span class="va">comm_backbone</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/cluster_leiden.html">cluster_leiden</a></span><span class="op">(</span><span class="va">g_backbone</span>, resolution_parameter <span class="op">=</span> <span class="fl">1.0</span>,</span>
@@ -862,19 +862,19 @@ Figure 18.1: Number of communities and modularity as a function of resolution pa
 <span></span>
 <span><span class="va">nmi</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/compare.html">compare</a></span><span class="op">(</span><span class="va">mem_full</span>, <span class="va">mem_back</span>, method <span class="op">=</span> <span class="st">"nmi"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"NMI (full vs backbone, shared nodes): {round(nmi, 3)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.659</code></pre>
-<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
+<pre><code>#&gt; NMI (full vs backbone, shared nodes): 0.674</code></pre>
+<div class="sourceCode" id="cb284"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities in full network: {length(unique(membership(comm_full)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Communities in full network: 9</code></pre>
-<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Communities in full network: 10</code></pre>
+<div class="sourceCode" id="cb286"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Communities in backbone: {length(unique(membership(comm_backbone)))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Communities in backbone: 30</code></pre>
+<pre><code>#&gt; Communities in backbone: 25</code></pre>
 </div>
 <div class="section level3" id="visualisation-2" number="18.4.6">
 <h3>
 <span class="header-section-number">18.4.6</span> Visualisation<a aria-label="anchor" class="anchor" href="#visualisation-2"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb290"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb288"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_backbone</span><span class="op">)</span><span class="op">$</span><span class="va">community</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="va">comm_backbone</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_backbone</span><span class="op">)</span><span class="op">$</span><span class="va">degree</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/degree.html">degree</a></span><span class="op">(</span><span class="va">g_backbone</span><span class="op">)</span></span>
 <span></span>
@@ -992,7 +992,7 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 <h2>
 <span class="header-section-number">18.13</span> Session info<a aria-label="anchor" class="anchor" href="#backbone-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb291"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb289"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
@@ -1003,10 +1003,9 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 #&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #&gt; 
 #&gt; locale:
-#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
-#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
-#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8        LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8   
+#&gt;  [6] LC_MESSAGES=C.UTF-8    LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C           LC_TELEPHONE=C        
+#&gt; [11] LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #&gt; 
 #&gt; time zone: UTC
 #&gt; tzcode source: system (glibc)
@@ -1015,49 +1014,33 @@ Figure 18.2: Backbone network with Leiden communities (resolution = 1.0).
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] ggraph_2.2.2       tidygraph_1.3.1    igraph_2.3.4       quanteda_4.5.1    
-#&gt;  [5] pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0 RefManageR_1.4.0  
-#&gt;  [9] bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3    
-#&gt; [13] glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5    forcats_1.0.1     
-#&gt; [17] stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2        readr_2.2.0       
-#&gt; [21] tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
+#&gt;  [1] ggraph_2.2.2       tidygraph_1.3.1    igraph_2.3.4       quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0      
+#&gt;  [7] bibliometrix_5.5.0 RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3    
+#&gt; [13] glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5    forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1       
+#&gt; [19] purrr_1.2.2        readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.1.1  curl_8.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.12.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.3.0            plotly_4.12.1         
-#&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      mime_0.13             
-#&gt;  [28] lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-5          
-#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0          
-#&gt;  [34] digest_0.6.39          shinycssloaders_1.1.0  rprojroot_2.1.1       
-#&gt;  [37] SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1      
-#&gt;  [40] timechange_0.4.0       polyclip_1.10-7        httr_1.4.9            
-#&gt;  [43] compiler_4.6.1         here_1.0.2             bit64_4.8.6           
-#&gt;  [46] withr_3.0.3            S7_0.2.2               viridis_0.6.5         
-#&gt;  [49] ggforce_0.5.0          MASS_7.3-65            bibliometrixData_0.3.0
-#&gt;  [52] tools_4.6.1            otel_0.2.0             stopwords_2.3         
-#&gt;  [55] zip_3.0.2              httpuv_1.6.17          rentrez_1.2.4         
-#&gt;  [58] promises_1.5.0         grid_4.6.1             stringdist_0.9.17     
-#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
-#&gt;  [64] rscopus_0.9.0          ca_0.72                data.table_1.18.6.1   
-#&gt;  [67] hms_1.1.4              xml2_1.6.0             utf8_1.2.6            
-#&gt;  [70] ggrepel_0.9.8          pillar_1.11.1          later_1.4.8           
-#&gt;  [73] tweenr_2.0.3           lattice_0.22-9         bit_4.6.0             
-#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [79] knitr_1.52             gridExtra_2.3.1        bookdown_0.48         
-#&gt;  [82] crul_1.6.0             xfun_0.62              graphlayouts_1.2.5    
-#&gt;  [85] DT_0.34.0              humaniformat_0.6.0     visNetwork_2.1.4      
-#&gt;  [88] stringi_1.8.9          qpdf_1.4.1             yaml_2.3.12           
-#&gt;  [91] evaluate_1.0.5         httpcode_0.3.0         cli_3.6.6             
-#&gt;  [94] xtable_1.8-8           jquerylib_0.1.4        Rcpp_1.1.2            
-#&gt;  [97] readxl_1.6.0           triebeard_0.4.1        XML_3.99-0.25         
-#&gt; [100] parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
-#&gt; [103] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0      jsonlite_2.0.0         magrittr_2.0.5        
+#&gt;   [6] farver_2.1.2           rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3            memoise_2.0.1         
+#&gt;  [11] askpass_1.2.1          base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1  curl_8.1.0            
+#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10            bslib_0.12.0           htmlwidgets_1.6.4     
+#&gt;  [21] tokenizers_0.3.0       plyr_1.8.9             httr2_1.3.0            plotly_4.12.1          cachem_1.1.0          
+#&gt;  [26] dimensionsR_0.0.3      mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-5          
+#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0           digest_0.6.39          shinycssloaders_1.1.0 
+#&gt;  [36] rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1       timechange_0.4.0      
+#&gt;  [41] polyclip_1.10-7        httr_1.4.9             compiler_4.6.1         here_1.0.2             bit64_4.8.6           
+#&gt;  [46] withr_3.0.3            S7_0.2.2               viridis_0.6.5          ggforce_0.5.0          MASS_7.3-65           
+#&gt;  [51] bibliometrixData_0.3.0 tools_4.6.1            otel_0.2.0             stopwords_2.3          zip_3.0.2             
+#&gt;  [56] httpuv_1.6.17          rentrez_1.2.4          promises_1.5.0         grid_4.6.1             stringdist_0.9.17     
+#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0             rscopus_0.9.0          ca_0.72               
+#&gt;  [66] data.table_1.18.6.1    hms_1.1.4              xml2_1.6.0             utf8_1.2.6             ggrepel_0.9.8         
+#&gt;  [71] pillar_1.11.1          later_1.4.8            tweenr_2.0.3           lattice_0.22-9         bit_4.6.0             
+#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5          knitr_1.52             gridExtra_2.3.1       
+#&gt;  [81] bookdown_0.48          crul_1.6.0             xfun_0.62              graphlayouts_1.2.5     DT_0.34.0             
+#&gt;  [86] humaniformat_0.6.0     visNetwork_2.1.4       stringi_1.8.9          qpdf_1.4.1             yaml_2.3.12           
+#&gt;  [91] evaluate_1.0.5         httpcode_0.3.0         cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
+#&gt;  [96] Rcpp_1.1.2             readxl_1.6.0           triebeard_0.4.1        XML_3.99-0.25          parallel_4.6.1        
+#&gt; [101] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
 #&gt; [106] rlang_1.3.0            fastmatch_1.1-8</code></pre>
 </div>
 </div>

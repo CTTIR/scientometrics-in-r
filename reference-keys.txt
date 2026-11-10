@@ -886,6 +886,6 @@ openalexr-quick-reference
 quanteda-pipeline
 igraph-tidygraph-ggraph
 common-data-wrangling-patterns
-companion-package-functions
+helper-functions
 useful-keyboard-shortcuts
 solutions

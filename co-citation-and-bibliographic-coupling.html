@@ -196,7 +196,7 @@
 <h2>
 <span class="header-section-number">16.2</span> Setup<a aria-label="anchor" class="anchor" href="#cocit-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb234"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb232"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
@@ -230,7 +230,7 @@
 <span class="header-section-number">16.4.1</span> Fetching citing and cited works<a aria-label="anchor" class="anchor" href="#fetching-citing-and-cited-works"><i class="fas fa-link"></i></a>
 </h3>
 <p>We fetch a corpus of scientometrics research and extract reference lists.</p>
-<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb233"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
@@ -246,19 +246,19 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Citing works: {n_distinct(refs$citing_id)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Citing works: 200</code></pre>
-<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb235"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Cited works: {n_distinct(refs$cited_id)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Cited works: 8112</code></pre>
-<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Cited works: 7971</code></pre>
+<div class="sourceCode" id="cb237"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Citation links: {nrow(refs)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Citation links: 9479</code></pre>
+<pre><code>#&gt; Citation links: 9282</code></pre>
 </div>
 <div class="section level3" id="building-a-co-citation-network" number="16.4.2">
 <h3>
 <span class="header-section-number">16.4.2</span> Building a co-citation network<a aria-label="anchor" class="anchor" href="#building-a-co-citation-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>Two cited documents are co-cited when they appear in the same reference list. We count shared citing papers.</p>
-<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb239"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cocit_pairs</span> <span class="op">&lt;-</span> <span class="va">refs</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">refs</span>, by <span class="op">=</span> <span class="st">"citing_id"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_a"</span>, <span class="st">"_b"</span><span class="op">)</span>,</span>
 <span>             relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -269,8 +269,8 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cocit_count</span> <span class="op">&gt;=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Co-citation pairs (count &gt;= 3): {nrow(cocit_top)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Co-citation pairs (count &gt;= 3): 160</code></pre>
-<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Co-citation pairs (count &gt;= 3): 107</code></pre>
+<div class="sourceCode" id="cb241"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g_cocit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span></span>
 <span>  <span class="va">cocit_top</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">cited_id_a</span>, <span class="va">cited_id_b</span>, weight <span class="op">=</span> <span class="va">cocit_count</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -278,14 +278,14 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Co-citation network: {vcount(g_cocit)} nodes, {ecount(g_cocit)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Co-citation network: 124 nodes, 160 edges</code></pre>
+<pre><code>#&gt; Co-citation network: 94 nodes, 107 edges</code></pre>
 </div>
 <div class="section level3" id="building-a-bibliographic-coupling-network" number="16.4.3">
 <h3>
 <span class="header-section-number">16.4.3</span> Building a bibliographic coupling network<a aria-label="anchor" class="anchor" href="#building-a-bibliographic-coupling-network"><i class="fas fa-link"></i></a>
 </h3>
 <p>Two citing documents are coupled when they share at least one reference.</p>
-<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb243"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bibcoup_pairs</span> <span class="op">&lt;-</span> <span class="va">refs</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span><span class="va">refs</span>, by <span class="op">=</span> <span class="st">"cited_id"</span>, suffix <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"_a"</span>, <span class="st">"_b"</span><span class="op">)</span>,</span>
 <span>             relationship <span class="op">=</span> <span class="st">"many-to-many"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -296,8 +296,8 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">shared_refs</span> <span class="op">&gt;=</span> <span class="fl">5</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Bibliographic coupling pairs (shared refs &gt;= 5): {nrow(bibcoup_top)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Bibliographic coupling pairs (shared refs &gt;= 5): 60</code></pre>
-<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Bibliographic coupling pairs (shared refs &gt;= 5): 52</code></pre>
+<div class="sourceCode" id="cb245"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g_bibcoup</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/graph_from_data_frame.html">graph_from_data_frame</a></span><span class="op">(</span></span>
 <span>  <span class="va">bibcoup_top</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">citing_id_a</span>, <span class="va">citing_id_b</span>, weight <span class="op">=</span> <span class="va">shared_refs</span><span class="op">)</span>,</span>
 <span>  directed <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -305,13 +305,13 @@
 <span>  <span class="fu"><a href="https://r.igraph.org/reference/simplify.html">simplify</a></span><span class="op">(</span>edge.attr.comb <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="st">"sum"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Coupling network: {vcount(g_bibcoup)} nodes, {ecount(g_bibcoup)} edges\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Coupling network: 63 nodes, 60 edges</code></pre>
+<pre><code>#&gt; Coupling network: 58 nodes, 52 edges</code></pre>
 </div>
 <div class="section level3" id="visualisation" number="16.4.4">
 <h3>
 <span class="header-section-number">16.4.4</span> Visualisation<a aria-label="anchor" class="anchor" href="#visualisation"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb247"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/components.html">components</a></span><span class="op">(</span><span class="va">g_cocit</span><span class="op">)</span></span>
 <span><span class="va">giant</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/subgraph.html">induced_subgraph</a></span><span class="op">(</span><span class="va">g_cocit</span>, <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">comp</span><span class="op">$</span><span class="va">membership</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">comp</span><span class="op">$</span><span class="va">csize</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">giant</span><span class="op">)</span><span class="op">$</span><span class="va">community</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/cluster_leiden.html">cluster_leiden</a></span><span class="op">(</span></span>
@@ -338,7 +338,7 @@
 Figure 16.1: Co-citation network of frequently co-cited references in Scientometrics (2020–2023).
 </p>
 </div>
-<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb248"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comp_bc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/components.html">components</a></span><span class="op">(</span><span class="va">g_bibcoup</span><span class="op">)</span></span>
 <span><span class="va">giant_bc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/subgraph.html">induced_subgraph</a></span><span class="op">(</span><span class="va">g_bibcoup</span>,</span>
 <span>                             <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="va">comp_bc</span><span class="op">$</span><span class="va">membership</span> <span class="op">==</span> <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="va">comp_bc</span><span class="op">$</span><span class="va">csize</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -371,7 +371,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <h3>
 <span class="header-section-number">16.4.5</span> Comparing the two approaches<a aria-label="anchor" class="anchor" href="#comparing-the-two-approaches"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb251"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb249"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comparison</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  Method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Co-citation"</span>, <span class="st">"Bibliographic coupling"</span><span class="op">)</span>,</span>
 <span>  Nodes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/gorder.html">vcount</a></span><span class="op">(</span><span class="va">g_cocit</span><span class="op">)</span>, <span class="fu"><a href="https://r.igraph.org/reference/gorder.html">vcount</a></span><span class="op">(</span><span class="va">g_bibcoup</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -382,23 +382,23 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">comparison</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://gt.rstudio.com/reference/gt.html">gt</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div id="xosrvgimqm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#xosrvgimqm table {
+<div id="feupneucra" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#feupneucra table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#xosrvgimqm thead, #xosrvgimqm tbody, #xosrvgimqm tfoot, #xosrvgimqm tr, #xosrvgimqm td, #xosrvgimqm th {
+#feupneucra thead, #feupneucra tbody, #feupneucra tfoot, #feupneucra tr, #feupneucra td, #feupneucra th {
   border-style: none;
 }
 
-#xosrvgimqm p {
+#feupneucra p {
   margin: 0;
   padding: 0;
 }
 
-#xosrvgimqm .gt_table {
+#feupneucra .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -424,12 +424,12 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-left-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_caption {
+#feupneucra .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xosrvgimqm .gt_title {
+#feupneucra .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -441,7 +441,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-width: 0;
 }
 
-#xosrvgimqm .gt_subtitle {
+#feupneucra .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -453,7 +453,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-top-width: 0;
 }
 
-#xosrvgimqm .gt_heading {
+#feupneucra .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -465,13 +465,13 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_bottom_border {
+#feupneucra .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_col_headings {
+#feupneucra .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -486,7 +486,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_col_heading {
+#feupneucra .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -506,7 +506,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   overflow-x: hidden;
 }
 
-#xosrvgimqm .gt_column_spanner_outer {
+#feupneucra .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -518,15 +518,15 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 4px;
 }
 
-#xosrvgimqm .gt_column_spanner_outer:first-child {
+#feupneucra .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xosrvgimqm .gt_column_spanner_outer:last-child {
+#feupneucra .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xosrvgimqm .gt_column_spanner {
+#feupneucra .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -538,11 +538,11 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   width: 100%;
 }
 
-#xosrvgimqm .gt_spanner_row {
+#feupneucra .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#xosrvgimqm .gt_group_heading {
+#feupneucra .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -568,7 +568,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   text-align: left;
 }
 
-#xosrvgimqm .gt_empty_group_heading {
+#feupneucra .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -583,15 +583,15 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   vertical-align: middle;
 }
 
-#xosrvgimqm .gt_from_md > :first-child {
+#feupneucra .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xosrvgimqm .gt_from_md > :last-child {
+#feupneucra .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xosrvgimqm .gt_row {
+#feupneucra .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -610,7 +610,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   overflow-x: hidden;
 }
 
-#xosrvgimqm .gt_stub {
+#feupneucra .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -623,7 +623,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#xosrvgimqm .gt_stub_row_group {
+#feupneucra .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -637,15 +637,15 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   vertical-align: top;
 }
 
-#xosrvgimqm .gt_row_group_first td {
+#feupneucra .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xosrvgimqm .gt_row_group_first th {
+#feupneucra .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#xosrvgimqm .gt_summary_row {
+#feupneucra .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -655,16 +655,16 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#xosrvgimqm .gt_first_summary_row {
+#feupneucra .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_first_summary_row.thick {
+#feupneucra .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xosrvgimqm .gt_last_summary_row {
+#feupneucra .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -674,7 +674,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_grand_summary_row {
+#feupneucra .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -684,7 +684,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#xosrvgimqm .gt_first_grand_summary_row {
+#feupneucra .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -694,7 +694,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-top-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_last_grand_summary_row_top {
+#feupneucra .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -704,11 +704,11 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_striped {
+#feupneucra .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xosrvgimqm .gt_table_body {
+#feupneucra .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -717,7 +717,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-bottom-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_footnotes {
+#feupneucra .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -731,7 +731,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_footnote {
+#feupneucra .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -740,7 +740,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#xosrvgimqm .gt_sourcenotes {
+#feupneucra .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -754,7 +754,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   border-right-color: #D3D3D3;
 }
 
-#xosrvgimqm .gt_sourcenote {
+#feupneucra .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -762,72 +762,72 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
   padding-right: 5px;
 }
 
-#xosrvgimqm .gt_left {
+#feupneucra .gt_left {
   text-align: left;
 }
 
-#xosrvgimqm .gt_center {
+#feupneucra .gt_center {
   text-align: center;
 }
 
-#xosrvgimqm .gt_right {
+#feupneucra .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xosrvgimqm .gt_font_normal {
+#feupneucra .gt_font_normal {
   font-weight: normal;
 }
 
-#xosrvgimqm .gt_font_bold {
+#feupneucra .gt_font_bold {
   font-weight: bold;
 }
 
-#xosrvgimqm .gt_font_italic {
+#feupneucra .gt_font_italic {
   font-style: italic;
 }
 
-#xosrvgimqm .gt_super {
+#feupneucra .gt_super {
   font-size: 65%;
 }
 
-#xosrvgimqm .gt_footnote_marks {
+#feupneucra .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#xosrvgimqm .gt_asterisk {
+#feupneucra .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xosrvgimqm .gt_indent_1 {
+#feupneucra .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xosrvgimqm .gt_indent_2 {
+#feupneucra .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xosrvgimqm .gt_indent_3 {
+#feupneucra .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xosrvgimqm .gt_indent_4 {
+#feupneucra .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xosrvgimqm .gt_indent_5 {
+#feupneucra .gt_indent_5 {
   text-indent: 25px;
 }
 
-#xosrvgimqm .katex-display {
+#feupneucra .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#xosrvgimqm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#feupneucra div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -842,17 +842,17 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <tbody class="gt_table_body">
 <tr>
 <td class="gt_row gt_left" headers="Method">Co-citation</td>
-<td class="gt_row gt_right" headers="Nodes">124</td>
-<td class="gt_row gt_right" headers="Edges">160</td>
-<td class="gt_row gt_right" headers="Components">22</td>
-<td class="gt_row gt_right" headers="Density">0.0210</td>
+<td class="gt_row gt_right" headers="Nodes">94</td>
+<td class="gt_row gt_right" headers="Edges">107</td>
+<td class="gt_row gt_right" headers="Components">21</td>
+<td class="gt_row gt_right" headers="Density">0.0245</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Method">Bibliographic coupling</td>
-<td class="gt_row gt_right" headers="Nodes">63</td>
-<td class="gt_row gt_right" headers="Edges">60</td>
-<td class="gt_row gt_right" headers="Components">14</td>
-<td class="gt_row gt_right" headers="Density">0.0307</td>
+<td class="gt_row gt_right" headers="Nodes">58</td>
+<td class="gt_row gt_right" headers="Edges">52</td>
+<td class="gt_row gt_right" headers="Components">13</td>
+<td class="gt_row gt_right" headers="Density">0.0315</td>
 </tr>
 </tbody>
 </table></div>
@@ -952,7 +952,7 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 <h2>
 <span class="header-section-number">16.13</span> Session info<a aria-label="anchor" class="anchor" href="#cocit-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb252"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb250"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
@@ -963,10 +963,9 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 #&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #&gt; 
 #&gt; locale:
-#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
-#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
-#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8        LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8   
+#&gt;  [6] LC_MESSAGES=C.UTF-8    LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C           LC_TELEPHONE=C        
+#&gt; [11] LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #&gt; 
 #&gt; time zone: UTC
 #&gt; tzcode source: system (glibc)
@@ -975,49 +974,33 @@ Figure 16.2: Bibliographic coupling network of Scientometrics articles (2020–2
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] ggraph_2.2.2       tidygraph_1.3.1    igraph_2.3.4       quanteda_4.5.1    
-#&gt;  [5] pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0 RefManageR_1.4.0  
-#&gt;  [9] bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3    
-#&gt; [13] glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5    forcats_1.0.1     
-#&gt; [17] stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2        readr_2.2.0       
-#&gt; [21] tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
+#&gt;  [1] ggraph_2.2.2       tidygraph_1.3.1    igraph_2.3.4       quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0      
+#&gt;  [7] bibliometrix_5.5.0 RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3    
+#&gt; [13] glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5    forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1       
+#&gt; [19] purrr_1.2.2        readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.1.1  curl_8.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.12.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.3.0            plotly_4.12.1         
-#&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      mime_0.13             
-#&gt;  [28] lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-5          
-#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0          
-#&gt;  [34] digest_0.6.39          shinycssloaders_1.1.0  rprojroot_2.1.1       
-#&gt;  [37] SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1      
-#&gt;  [40] timechange_0.4.0       polyclip_1.10-7        httr_1.4.9            
-#&gt;  [43] compiler_4.6.1         here_1.0.2             bit64_4.8.6           
-#&gt;  [46] withr_3.0.3            S7_0.2.2               viridis_0.6.5         
-#&gt;  [49] ggforce_0.5.0          MASS_7.3-65            bibliometrixData_0.3.0
-#&gt;  [52] tools_4.6.1            otel_0.2.0             stopwords_2.3         
-#&gt;  [55] zip_3.0.2              httpuv_1.6.17          rentrez_1.2.4         
-#&gt;  [58] promises_1.5.0         grid_4.6.1             stringdist_0.9.17     
-#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
-#&gt;  [64] rscopus_0.9.0          ca_0.72                data.table_1.18.6.1   
-#&gt;  [67] hms_1.1.4              xml2_1.6.0             utf8_1.2.6            
-#&gt;  [70] ggrepel_0.9.8          pillar_1.11.1          later_1.4.8           
-#&gt;  [73] tweenr_2.0.3           lattice_0.22-9         bit_4.6.0             
-#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [79] knitr_1.52             gridExtra_2.3.1        bookdown_0.48         
-#&gt;  [82] crul_1.6.0             xfun_0.62              graphlayouts_1.2.5    
-#&gt;  [85] DT_0.34.0              humaniformat_0.6.0     visNetwork_2.1.4      
-#&gt;  [88] stringi_1.8.9          qpdf_1.4.1             yaml_2.3.12           
-#&gt;  [91] evaluate_1.0.5         httpcode_0.3.0         cli_3.6.6             
-#&gt;  [94] xtable_1.8-8           jquerylib_0.1.4        Rcpp_1.1.2            
-#&gt;  [97] readxl_1.6.0           triebeard_0.4.1        XML_3.99-0.25         
-#&gt; [100] parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
-#&gt; [103] viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0      jsonlite_2.0.0         magrittr_2.0.5        
+#&gt;   [6] farver_2.1.2           rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3            memoise_2.0.1         
+#&gt;  [11] askpass_1.2.1          base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1  curl_8.1.0            
+#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10            bslib_0.12.0           htmlwidgets_1.6.4     
+#&gt;  [21] tokenizers_0.3.0       plyr_1.8.9             httr2_1.3.0            plotly_4.12.1          cachem_1.1.0          
+#&gt;  [26] dimensionsR_0.0.3      mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-5          
+#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0           digest_0.6.39          shinycssloaders_1.1.0 
+#&gt;  [36] rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1       timechange_0.4.0      
+#&gt;  [41] polyclip_1.10-7        httr_1.4.9             compiler_4.6.1         here_1.0.2             bit64_4.8.6           
+#&gt;  [46] withr_3.0.3            S7_0.2.2               viridis_0.6.5          ggforce_0.5.0          MASS_7.3-65           
+#&gt;  [51] bibliometrixData_0.3.0 tools_4.6.1            otel_0.2.0             stopwords_2.3          zip_3.0.2             
+#&gt;  [56] httpuv_1.6.17          rentrez_1.2.4          promises_1.5.0         grid_4.6.1             stringdist_0.9.17     
+#&gt;  [61] generics_0.1.4         gtable_0.3.6           tzdb_0.5.0             rscopus_0.9.0          ca_0.72               
+#&gt;  [66] data.table_1.18.6.1    hms_1.1.4              xml2_1.6.0             utf8_1.2.6             ggrepel_0.9.8         
+#&gt;  [71] pillar_1.11.1          later_1.4.8            tweenr_2.0.3           lattice_0.22-9         bit_4.6.0             
+#&gt;  [76] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5          knitr_1.52             gridExtra_2.3.1       
+#&gt;  [81] bookdown_0.48          crul_1.6.0             xfun_0.62              graphlayouts_1.2.5     DT_0.34.0             
+#&gt;  [86] humaniformat_0.6.0     visNetwork_2.1.4       stringi_1.8.9          qpdf_1.4.1             yaml_2.3.12           
+#&gt;  [91] evaluate_1.0.5         httpcode_0.3.0         cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
+#&gt;  [96] Rcpp_1.1.2             readxl_1.6.0           triebeard_0.4.1        XML_3.99-0.25          parallel_4.6.1        
+#&gt; [101] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3      scales_1.4.0           openxlsx_4.2.9        
 #&gt; [106] rlang_1.3.0            fastmatch_1.1-8</code></pre>
 </div>
 </div>

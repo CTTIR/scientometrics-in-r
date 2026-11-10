@@ -196,7 +196,7 @@
 <h2>
 <span class="header-section-number">21.2</span> Setup<a aria-label="anchor" class="anchor" href="#textmine-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb325"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb323"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda</a></span><span class="op">)</span></span>
@@ -228,7 +228,7 @@
 <h3>
 <span class="header-section-number">21.4.1</span> Building a text corpus<a aria-label="anchor" class="anchor" href="#building-a-text-corpus"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb324"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="st">"S148561398"</span>,</span>
@@ -246,22 +246,22 @@
 <span>  <span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Documents with abstracts: {nrow(text_df)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Documents with abstracts: 130</code></pre>
-<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Documents with abstracts: 138</code></pre>
+<div class="sourceCode" id="cb326"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">corp</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/corpus.html">corpus</a></span><span class="op">(</span><span class="va">text_df</span>, docid_field <span class="op">=</span> <span class="st">"doc_id"</span>, text_field <span class="op">=</span> <span class="st">"text"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://quanteda.io/reference/docvars.html">docvars</a></span><span class="op">(</span><span class="va">corp</span>, <span class="st">"year"</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">text_df</span><span class="op">$</span><span class="va">year</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Corpus size: {ndoc(corp)} documents\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Corpus size: 130 documents</code></pre>
-<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Corpus size: 138 documents</code></pre>
+<div class="sourceCode" id="cb328"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Total tokens: {sum(ntoken(corp))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Total tokens: 32111</code></pre>
+<pre><code>#&gt; Total tokens: 33265</code></pre>
 </div>
 <div class="section level3" id="tokenisation-and-preprocessing" number="21.4.2">
 <h3>
 <span class="header-section-number">21.4.2</span> Tokenisation and preprocessing<a aria-label="anchor" class="anchor" href="#tokenisation-and-preprocessing"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb330"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">toks</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/tokens.html">tokens</a></span><span class="op">(</span><span class="va">corp</span>,</span>
 <span>               remove_punct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>               remove_numbers <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -273,22 +273,22 @@
 <span>  <span class="fu"><a href="https://quanteda.io/reference/tokens_wordstem.html">tokens_wordstem</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Tokens after preprocessing: {sum(ntoken(toks))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Tokens after preprocessing: 16208</code></pre>
+<pre><code>#&gt; Tokens after preprocessing: 16863</code></pre>
 </div>
 <div class="section level3" id="document-feature-matrix" number="21.4.3">
 <h3>
 <span class="header-section-number">21.4.3</span> Document-feature matrix<a aria-label="anchor" class="anchor" href="#document-feature-matrix"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb332"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfmat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/dfm.html">dfm</a></span><span class="op">(</span><span class="va">toks</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://quanteda.io/reference/dfm_trim.html">dfm_trim</a></span><span class="op">(</span>min_termfreq <span class="op">=</span> <span class="fl">5</span>, min_docfreq <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"DFM dimensions: {nrow(dfmat)} docs x {ncol(dfmat)} features\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; DFM dimensions: 130 docs x 675 features</code></pre>
-<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
+<pre><code>#&gt; DFM dimensions: 138 docs x 696 features</code></pre>
+<div class="sourceCode" id="cb334"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Sparsity: {scales::percent(sparsity(dfmat))}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Sparsity: 91%</code></pre>
-<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
+<pre><code>#&gt; Sparsity: 92%</code></pre>
+<div class="sourceCode" id="cb336"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/topfeatures.html">topfeatures</a></span><span class="op">(</span><span class="va">dfmat</span>, <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tibble.tidyverse.org/reference/enframe.html">enframe</a></span><span class="op">(</span>name <span class="op">=</span> <span class="st">"term"</span>, value <span class="op">=</span> <span class="st">"frequency"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>term <span class="op">=</span> <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span><span class="op">(</span><span class="va">term</span>, <span class="va">frequency</span><span class="op">)</span><span class="op">)</span></span>
@@ -308,7 +308,7 @@ Figure 21.1: Top 20 most frequent terms in the Scientometrics corpus.
 <h3>
 <span class="header-section-number">21.4.4</span> TF-IDF weighting<a aria-label="anchor" class="anchor" href="#tf-idf-weighting"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb337"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dfmat_tfidf</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/dfm_tfidf.html">dfm_tfidf</a></span><span class="op">(</span><span class="va">dfmat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">tfidf_by_year</span> <span class="op">&lt;-</span> <span class="va">text_df</span> <span class="op">|&gt;</span></span>
@@ -786,116 +786,116 @@ Figure 21.1: Top 20 most frequent terms in the Scientometrics corpus.
 <th class="gt_group_heading" colspan="2" id="a2019" scope="colgroup">2019</th>
 </tr>
 <tr class="gt_row_group_first">
-<td class="gt_row gt_left" headers="a2019 term">journal</td>
-<td class="gt_row gt_right" headers="a2019 tfidf">20.2</td>
-</tr>
-<tr>
 <td class="gt_row gt_left" headers="a2019 term">econom</td>
-<td class="gt_row gt_right" headers="a2019 tfidf">18.6</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">19.0</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2019 term">manuscript</td>
-<td class="gt_row gt_right" headers="a2019 tfidf">16.6</td>
+<td class="gt_row gt_left" headers="a2019 term">journal</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">17.6</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="a2019 term">score</td>
-<td class="gt_row gt_right" headers="a2019 tfidf">16.6</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">17.6</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="a2019 term">doctor</td>
-<td class="gt_row gt_right" headers="a2019 tfidf">16.4</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">16.6</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="a2019 term">emerg</td>
+<td class="gt_row gt_right" headers="a2019 tfidf">16.6</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th class="gt_group_heading" colspan="2" id="a2020" scope="colgroup">2020</th>
 </tr>
 <tr class="gt_row_group_first">
 <td class="gt_row gt_left" headers="a2020 term">lis</td>
-<td class="gt_row gt_right" headers="a2020 tfidf">24.6</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">24.9</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="a2020 term">citat</td>
-<td class="gt_row gt_right" headers="a2020 tfidf">19.5</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">19.6</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2020 term">classifi</td>
-<td class="gt_row gt_right" headers="a2020 tfidf">15.7</td>
+<td class="gt_row gt_left" headers="a2020 term">journal</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">15.8</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2020 term">machin</td>
-<td class="gt_row gt_right" headers="a2020 tfidf">13.9</td>
+<td class="gt_row gt_left" headers="a2020 term">topic</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">15.5</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2020 term">practic</td>
-<td class="gt_row gt_right" headers="a2020 tfidf">13.6</td>
+<td class="gt_row gt_left" headers="a2020 term">paper</td>
+<td class="gt_row gt_right" headers="a2020 tfidf">15.2</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th class="gt_group_heading" colspan="2" id="a2021" scope="colgroup">2021</th>
 </tr>
 <tr class="gt_row_group_first">
-<td class="gt_row gt_left" headers="a2021 term">retract</td>
-<td class="gt_row gt_right" headers="a2021 tfidf">40.8</td>
+<td class="gt_row gt_left" headers="a2021 term">book</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">39.9</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="a2021 term">hold</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">36.8</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="a2021 term">librari</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">31.1</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="a2021 term">journal</td>
-<td class="gt_row gt_right" headers="a2021 tfidf">28.9</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">31.0</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2021 term">book</td>
-<td class="gt_row gt_right" headers="a2021 tfidf">24.6</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="a2021 term">sars-cov-2</td>
-<td class="gt_row gt_right" headers="a2021 tfidf">24.2</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="a2021 term">review</td>
-<td class="gt_row gt_right" headers="a2021 tfidf">23.4</td>
+<td class="gt_row gt_left" headers="a2021 term">h-index</td>
+<td class="gt_row gt_right" headers="a2021 tfidf">25.9</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th class="gt_group_heading" colspan="2" id="a2022" scope="colgroup">2022</th>
 </tr>
 <tr class="gt_row_group_first">
-<td class="gt_row gt_left" headers="a2022 term">journal</td>
-<td class="gt_row gt_right" headers="a2022 tfidf">29.5</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="a2022 term">p</td>
-<td class="gt_row gt_right" headers="a2022 tfidf">25.7</td>
-</tr>
-<tr>
-<td class="gt_row gt_left" headers="a2022 term">public</td>
-<td class="gt_row gt_right" headers="a2022 tfidf">25.6</td>
-</tr>
-<tr>
 <td class="gt_row gt_left" headers="a2022 term">citat</td>
-<td class="gt_row gt_right" headers="a2022 tfidf">25.5</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">32.7</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="a2022 term">journal</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">31.6</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="a2022 term">preprint</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">26.6</td>
+</tr>
+<tr>
+<td class="gt_row gt_left" headers="a2022 term">network</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">24.9</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="a2022 term">problem</td>
-<td class="gt_row gt_right" headers="a2022 tfidf">24.4</td>
+<td class="gt_row gt_right" headers="a2022 tfidf">23.9</td>
 </tr>
 <tr class="gt_group_heading_row">
 <th class="gt_group_heading" colspan="2" id="a2023" scope="colgroup">2023</th>
 </tr>
 <tr class="gt_row_group_first">
-<td class="gt_row gt_left" headers="a2023 term">mention</td>
-<td class="gt_row gt_right" headers="a2023 tfidf">31.7</td>
+<td class="gt_row gt_left" headers="a2023 term">journal</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">29.8</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2023 term">polici</td>
-<td class="gt_row gt_right" headers="a2023 tfidf">22.0</td>
+<td class="gt_row gt_left" headers="a2023 term">articl</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">23.4</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2023 term">document</td>
-<td class="gt_row gt_right" headers="a2023 tfidf">14.5</td>
+<td class="gt_row gt_left" headers="a2023 term">signal</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">16.6</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2023 term">academ</td>
-<td class="gt_row gt_right" headers="a2023 tfidf">13.1</td>
+<td class="gt_row gt_left" headers="a2023 term">countri</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">16.6</td>
 </tr>
 <tr>
-<td class="gt_row gt_left" headers="a2023 term">open</td>
-<td class="gt_row gt_right" headers="a2023 tfidf">12.7</td>
+<td class="gt_row gt_left" headers="a2023 term">collabor</td>
+<td class="gt_row gt_right" headers="a2023 tfidf">15.9</td>
 </tr>
 </tbody>
 </table></div>
@@ -905,7 +905,7 @@ Figure 21.1: Top 20 most frequent terms in the Scientometrics corpus.
 <h3>
 <span class="header-section-number">21.4.5</span> Term frequency over time<a aria-label="anchor" class="anchor" href="#term-frequency-over-time"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb340"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb338"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">target_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"bibliometr"</span>, <span class="st">"open"</span>, <span class="st">"network"</span>, <span class="st">"impact"</span>, <span class="st">"collabor"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">freq_by_year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">text_df</span><span class="op">$</span><span class="va">year</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">yr</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1023,7 +1023,7 @@ Figure 21.2: Relative frequency of selected terms over time.
 <h2>
 <span class="header-section-number">21.13</span> Session info<a aria-label="anchor" class="anchor" href="#textmine-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb341"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb339"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
@@ -1034,10 +1034,9 @@ Figure 21.2: Relative frequency of selected terms over time.
 #&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #&gt; 
 #&gt; locale:
-#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
-#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
-#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
-#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8        LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8   
+#&gt;  [6] LC_MESSAGES=C.UTF-8    LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C           LC_TELEPHONE=C        
+#&gt; [11] LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #&gt; 
 #&gt; time zone: UTC
 #&gt; tzcode source: system (glibc)
@@ -1046,58 +1045,37 @@ Figure 21.2: Relative frequency of selected terms over time.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] quanteda.textstats_0.97.2 visNetwork_2.1.4         
-#&gt;  [3] ggraph_2.2.2              tidygraph_1.3.1          
-#&gt;  [5] igraph_2.3.4              quanteda_4.5.1           
-#&gt;  [7] pdftools_3.9.1            arrow_26.0.0             
-#&gt;  [9] bibliometrix_5.5.0        RefManageR_1.4.0         
-#&gt; [11] bib2df_1.1.2.0            rcrossref_1.2.1          
-#&gt; [13] gt_1.4.0                  tidytext_0.4.3           
-#&gt; [15] glue_1.8.1                openalexR_3.1.2          
-#&gt; [17] lubridate_1.9.5           forcats_1.0.1            
-#&gt; [19] stringr_1.6.0             dplyr_1.2.1              
-#&gt; [21] purrr_1.2.2               readr_2.2.0              
-#&gt; [23] tidyr_1.3.2               tibble_3.3.1             
+#&gt;  [1] quanteda.textstats_0.97.2 visNetwork_2.1.4          ggraph_2.2.2              tidygraph_1.3.1          
+#&gt;  [5] igraph_2.3.4              quanteda_4.5.1            pdftools_3.9.1            arrow_26.0.0             
+#&gt;  [9] bibliometrix_5.5.0        RefManageR_1.4.0          bib2df_1.1.2.0            rcrossref_1.2.1          
+#&gt; [13] gt_1.4.0                  tidytext_0.4.3            glue_1.8.1                openalexR_3.1.2          
+#&gt; [17] lubridate_1.9.5           forcats_1.0.1             stringr_1.6.0             dplyr_1.2.1              
+#&gt; [21] purrr_1.2.2               readr_2.2.0               tidyr_1.3.2               tibble_3.3.1             
 #&gt; [25] ggplot2_4.0.3             tidyverse_2.0.0          
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
-#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         farver_2.1.2          
-#&gt;   [7] rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [10] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6       
-#&gt;  [13] htmltools_0.5.9        contentanalysis_1.1.1  curl_8.1.0            
-#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [19] bslib_0.12.0           htmlwidgets_1.6.4      tokenizers_0.3.0      
-#&gt;  [22] plyr_1.8.9             httr2_1.3.0            plotly_4.12.1         
-#&gt;  [25] cachem_1.1.0           dimensionsR_0.0.3      mime_0.13             
-#&gt;  [28] lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-5          
-#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0          
-#&gt;  [34] digest_0.6.39          patchwork_1.3.2        shinycssloaders_1.1.0 
-#&gt;  [37] rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3        
-#&gt;  [40] urltools_1.7.3.1       timechange_0.4.0       polyclip_1.10-7       
-#&gt;  [43] httr_1.4.9             compiler_4.6.1         here_1.0.2            
-#&gt;  [46] bit64_4.8.6            withr_3.0.3            S7_0.2.2              
-#&gt;  [49] viridis_0.6.5          ggforce_0.5.0          MASS_7.3-65           
-#&gt;  [52] bibliometrixData_0.3.0 tools_4.6.1            otel_0.2.0            
-#&gt;  [55] stopwords_2.3          zip_3.0.2              httpuv_1.6.17         
-#&gt;  [58] rentrez_1.2.4          promises_1.5.0         grid_4.6.1            
-#&gt;  [61] stringdist_0.9.17      generics_0.1.4         gtable_0.3.6          
-#&gt;  [64] tzdb_0.5.0             rscopus_0.9.0          ca_0.72               
-#&gt;  [67] data.table_1.18.6.1    hms_1.1.4              xml2_1.6.0            
-#&gt;  [70] utf8_1.2.6             ggrepel_0.9.8          pillar_1.11.1         
-#&gt;  [73] nsyllable_1.0.1        vroom_1.7.1            later_1.4.8           
-#&gt;  [76] tweenr_2.0.3           lattice_0.22-9         bit_4.6.0             
-#&gt;  [79] tidyselect_1.2.1       miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [82] knitr_1.52             gridExtra_2.3.1        bookdown_0.48         
-#&gt;  [85] crul_1.6.0             xfun_0.62              graphlayouts_1.2.5    
-#&gt;  [88] DT_0.34.0              humaniformat_0.6.0     stringi_1.8.9         
-#&gt;  [91] qpdf_1.4.1             yaml_2.3.12            evaluate_1.0.5        
-#&gt;  [94] httpcode_0.3.0         cli_3.6.6              xtable_1.8-8          
-#&gt;  [97] jquerylib_0.1.4        Rcpp_1.1.2             readxl_1.6.0          
-#&gt; [100] triebeard_0.4.1        XML_3.99-0.25          parallel_4.6.1        
-#&gt; [103] assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3     
-#&gt; [106] scales_1.4.0           crayon_1.5.3           openxlsx_4.2.9        
-#&gt; [109] rlang_1.3.0            fastmatch_1.1-8</code></pre>
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0      jsonlite_2.0.0         magrittr_2.0.5        
+#&gt;   [6] farver_2.1.2           rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3            memoise_2.0.1         
+#&gt;  [11] askpass_1.2.1          base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1  curl_8.1.0            
+#&gt;  [16] janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10            bslib_0.12.0           htmlwidgets_1.6.4     
+#&gt;  [21] tokenizers_0.3.0       plyr_1.8.9             httr2_1.3.0            plotly_4.12.1          cachem_1.1.0          
+#&gt;  [26] dimensionsR_0.0.3      mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3        Matrix_1.7-5          
+#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0           digest_0.6.39          patchwork_1.3.2       
+#&gt;  [36] shinycssloaders_1.1.0  rprojroot_2.1.1        SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1      
+#&gt;  [41] timechange_0.4.0       polyclip_1.10-7        httr_1.4.9             compiler_4.6.1         here_1.0.2            
+#&gt;  [46] bit64_4.8.6            withr_3.0.3            S7_0.2.2               viridis_0.6.5          ggforce_0.5.0         
+#&gt;  [51] MASS_7.3-65            bibliometrixData_0.3.0 tools_4.6.1            otel_0.2.0             stopwords_2.3         
+#&gt;  [56] zip_3.0.2              httpuv_1.6.17          rentrez_1.2.4          promises_1.5.0         grid_4.6.1            
+#&gt;  [61] stringdist_0.9.17      generics_0.1.4         gtable_0.3.6           tzdb_0.5.0             rscopus_0.9.0         
+#&gt;  [66] ca_0.72                data.table_1.18.6.1    hms_1.1.4              xml2_1.6.0             utf8_1.2.6            
+#&gt;  [71] ggrepel_0.9.8          pillar_1.11.1          nsyllable_1.0.1        vroom_1.7.1            later_1.4.8           
+#&gt;  [76] tweenr_2.0.3           lattice_0.22-9         bit_4.6.0              tidyselect_1.2.1       miniUI_0.1.2          
+#&gt;  [81] downlit_0.4.5          knitr_1.52             gridExtra_2.3.1        bookdown_0.48          crul_1.6.0            
+#&gt;  [86] xfun_0.62              graphlayouts_1.2.5     DT_0.34.0              humaniformat_0.6.0     stringi_1.8.9         
+#&gt;  [91] qpdf_1.4.1             yaml_2.3.12            evaluate_1.0.5         httpcode_0.3.0         cli_3.6.6             
+#&gt;  [96] xtable_1.8-8           jquerylib_0.1.4        Rcpp_1.1.2             readxl_1.6.0           triebeard_0.4.1       
+#&gt; [101] XML_3.99-0.25          parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2          viridisLite_0.4.3     
+#&gt; [106] scales_1.4.0           crayon_1.5.3           openxlsx_4.2.9         rlang_1.3.0            fastmatch_1.1-8</code></pre>
 </div>
 </div>
 <!-- Dark/light mode toggle -->

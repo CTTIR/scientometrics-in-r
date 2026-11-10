@@ -182,7 +182,7 @@
 <p><a href="https://github.com/CTTIR/scientometrics-in-r" target="_blank"><img align="right" alt="" class="cover" src="images/cover-corrected.png" width="250"/></a> Welcome to <strong>“Scientometrics in R: Bibliometrics, Network Science, and Research Evaluation”</strong>.</p>
 <p>This is a working guide to scientometrics in R for researchers, librarians, research administrators, and data scientists who want to study scholarly communication quantitatively. It walks the full pipeline — from pulling records out of OpenAlex, Crossref, and PubMed, through computing the standard indicators (h-index, MNCS, journal metrics), to building co-authorship and co-citation networks, applying text and topic models to scientific corpora, and packaging the results into reproducible reports and dashboards.</p>
 <p>The book assumes a working knowledge of R at the tidyverse level and basic statistics. No prior scientometric experience is needed — the early chapters lay the conceptual and ethical foundations, and each later chapter starts with a concrete research question and ends with a callout on responsible use grounded in the Leiden Manifesto and DORA.</p>
-<p>All examples run against free, open data; no Web of Science or Scopus subscription is required. Small sample datasets ship with the companion R package <code>scientometricsInR</code>; everything else is fetched live from public APIs. The book does <em>not</em> cover proprietary platforms (InCites, SciVal), manual screening workflows for systematic reviews, or qualitative sociology of science.</p>
+<p>All examples run against free, open data; no Web of Science or Scopus subscription is required. Small synthetic sample datasets are stored under <code>data/</code> in the source repository; everything else is fetched live from public APIs. The book does <em>not</em> cover proprietary platforms (InCites, SciVal), manual screening workflows for systematic reviews, or qualitative sociology of science.</p>
 <p><br/></p>
 <div class="section level2 unnumbered" id="open-source-repository">
 <h2>Open Source Repository<a aria-label="anchor" class="anchor" href="#open-source-repository"><i class="fas fa-link"></i></a>
@@ -199,7 +199,7 @@
 <li>
 <strong>Linear or lookup.</strong> Read front to back, or use the <a href="find-your-method.html#find-your-method">Find Your Method navigator</a> to jump to the chapter that answers your question.</li>
 <li>
-<strong>Code.</strong> Reusable helpers live in the companion R package <code>scientometricsInR</code> and in <code>R/</code> in the source repository; every chapter shows the full chunk it depends on.</li>
+<strong>Code.</strong> Reusable helper functions live in <code>R/</code> in the source repository, and chapters load them with <code><a href="https://rdrr.io/r/base/source.html">source()</a></code>; every chapter shows the full chunk it depends on.</li>
 <li>
 <strong>Downloads.</strong> The side panel lists whole-book and chapter files that are available in the current build.</li>
 <li>

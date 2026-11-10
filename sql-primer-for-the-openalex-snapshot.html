@@ -193,16 +193,16 @@
 <span class="header-section-number">B.2</span> Loading the snapshot<a aria-label="anchor" class="anchor" href="#loading-the-snapshot"><i class="fas fa-link"></i></a>
 </h2>
 <p>OpenAlex provides scripts to load the snapshot into PostgreSQL. After loading:</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb583-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-1" tabindex="-1"></a><span class="co">-- Count total works</span></span>
-<span id="cb583-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-2" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> openalex.works;</span>
-<span id="cb583-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-3" tabindex="-1"></a></span>
-<span id="cb583-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-4" tabindex="-1"></a><span class="co">-- Recent articles with citation counts</span></span>
-<span id="cb583-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-5" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">id</span>, display_name, publication_year, cited_by_count</span>
-<span id="cb583-6"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-6" tabindex="-1"></a><span class="kw">FROM</span> openalex.works</span>
-<span id="cb583-7"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-7" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">type</span> <span class="op">=</span> <span class="st">'article'</span></span>
-<span id="cb583-8"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-8" tabindex="-1"></a>  <span class="kw">AND</span> publication_year <span class="op">&gt;=</span> <span class="dv">2020</span></span>
-<span id="cb583-9"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-9" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> cited_by_count <span class="kw">DESC</span></span>
-<span id="cb583-10"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-10" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">100</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb581-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-1" tabindex="-1"></a><span class="co">-- Count total works</span></span>
+<span id="cb581-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-2" tabindex="-1"></a><span class="kw">SELECT</span> <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">FROM</span> openalex.works;</span>
+<span id="cb581-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-3" tabindex="-1"></a></span>
+<span id="cb581-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-4" tabindex="-1"></a><span class="co">-- Recent articles with citation counts</span></span>
+<span id="cb581-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-5" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">id</span>, display_name, publication_year, cited_by_count</span>
+<span id="cb581-6"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-6" tabindex="-1"></a><span class="kw">FROM</span> openalex.works</span>
+<span id="cb581-7"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-7" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">type</span> <span class="op">=</span> <span class="st">'article'</span></span>
+<span id="cb581-8"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-8" tabindex="-1"></a>  <span class="kw">AND</span> publication_year <span class="op">&gt;=</span> <span class="dv">2020</span></span>
+<span id="cb581-9"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-9" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> cited_by_count <span class="kw">DESC</span></span>
+<span id="cb581-10"><a href="sql-primer-for-the-openalex-snapshot.html#cb581-10" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">100</span>;</span></code></pre></div>
 </div>
 <div class="section level2" id="common-queries" number="44.3">
 <h2>
@@ -212,49 +212,49 @@
 <h3>
 <span class="header-section-number">B.3.1</span> Publication counts by year<a aria-label="anchor" class="anchor" href="#publication-counts-by-year"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb584"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb584-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-1" tabindex="-1"></a><span class="kw">SELECT</span> publication_year, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_works</span>
-<span id="cb584-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-2" tabindex="-1"></a><span class="kw">FROM</span> openalex.works</span>
-<span id="cb584-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-3" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">type</span> <span class="op">=</span> <span class="st">'article'</span></span>
-<span id="cb584-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-4" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> publication_year</span>
-<span id="cb584-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-5" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> publication_year;</span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb582-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb582-1" tabindex="-1"></a><span class="kw">SELECT</span> publication_year, <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> n_works</span>
+<span id="cb582-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb582-2" tabindex="-1"></a><span class="kw">FROM</span> openalex.works</span>
+<span id="cb582-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb582-3" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">type</span> <span class="op">=</span> <span class="st">'article'</span></span>
+<span id="cb582-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb582-4" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> publication_year</span>
+<span id="cb582-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb582-5" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> publication_year;</span></code></pre></div>
 </div>
 <div class="section level3" id="top-institutions-by-output" number="44.3.2">
 <h3>
 <span class="header-section-number">B.3.2</span> Top institutions by output<a aria-label="anchor" class="anchor" href="#top-institutions-by-output"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb585"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb585-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-1" tabindex="-1"></a><span class="kw">SELECT</span> i.display_name, <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> w.<span class="kw">id</span>) <span class="kw">AS</span> n_works</span>
-<span id="cb585-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-2" tabindex="-1"></a><span class="kw">FROM</span> openalex.works w</span>
-<span id="cb585-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-3" tabindex="-1"></a><span class="kw">JOIN</span> openalex.works_authorships wa <span class="kw">ON</span> w.<span class="kw">id</span> <span class="op">=</span> wa.work_id</span>
-<span id="cb585-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-4" tabindex="-1"></a><span class="kw">JOIN</span> openalex.works_authorships_institutions wai</span>
-<span id="cb585-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-5" tabindex="-1"></a>  <span class="kw">ON</span> wa.work_id <span class="op">=</span> wai.work_id <span class="kw">AND</span> wa.author_position <span class="op">=</span> wai.author_position</span>
-<span id="cb585-6"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-6" tabindex="-1"></a><span class="kw">JOIN</span> openalex.institutions i <span class="kw">ON</span> wai.institution_id <span class="op">=</span> i.<span class="kw">id</span></span>
-<span id="cb585-7"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-7" tabindex="-1"></a><span class="kw">WHERE</span> w.publication_year <span class="op">=</span> <span class="dv">2023</span></span>
-<span id="cb585-8"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-8" tabindex="-1"></a>  <span class="kw">AND</span> w.<span class="kw">type</span> <span class="op">=</span> <span class="st">'article'</span></span>
-<span id="cb585-9"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-9" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> i.display_name</span>
-<span id="cb585-10"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-10" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n_works <span class="kw">DESC</span></span>
-<span id="cb585-11"><a href="sql-primer-for-the-openalex-snapshot.html#cb585-11" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">20</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb583"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb583-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-1" tabindex="-1"></a><span class="kw">SELECT</span> i.display_name, <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> w.<span class="kw">id</span>) <span class="kw">AS</span> n_works</span>
+<span id="cb583-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-2" tabindex="-1"></a><span class="kw">FROM</span> openalex.works w</span>
+<span id="cb583-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-3" tabindex="-1"></a><span class="kw">JOIN</span> openalex.works_authorships wa <span class="kw">ON</span> w.<span class="kw">id</span> <span class="op">=</span> wa.work_id</span>
+<span id="cb583-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-4" tabindex="-1"></a><span class="kw">JOIN</span> openalex.works_authorships_institutions wai</span>
+<span id="cb583-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-5" tabindex="-1"></a>  <span class="kw">ON</span> wa.work_id <span class="op">=</span> wai.work_id <span class="kw">AND</span> wa.author_position <span class="op">=</span> wai.author_position</span>
+<span id="cb583-6"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-6" tabindex="-1"></a><span class="kw">JOIN</span> openalex.institutions i <span class="kw">ON</span> wai.institution_id <span class="op">=</span> i.<span class="kw">id</span></span>
+<span id="cb583-7"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-7" tabindex="-1"></a><span class="kw">WHERE</span> w.publication_year <span class="op">=</span> <span class="dv">2023</span></span>
+<span id="cb583-8"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-8" tabindex="-1"></a>  <span class="kw">AND</span> w.<span class="kw">type</span> <span class="op">=</span> <span class="st">'article'</span></span>
+<span id="cb583-9"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-9" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> i.display_name</span>
+<span id="cb583-10"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-10" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n_works <span class="kw">DESC</span></span>
+<span id="cb583-11"><a href="sql-primer-for-the-openalex-snapshot.html#cb583-11" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">20</span>;</span></code></pre></div>
 </div>
 <div class="section level3" id="co-authorship-pairs" number="44.3.3">
 <h3>
 <span class="header-section-number">B.3.3</span> Co-authorship pairs<a aria-label="anchor" class="anchor" href="#co-authorship-pairs"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb586"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb586-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-1" tabindex="-1"></a><span class="kw">SELECT</span> a1.author_id <span class="kw">AS</span> author_a,</span>
-<span id="cb586-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-2" tabindex="-1"></a>       a2.author_id <span class="kw">AS</span> author_b,</span>
-<span id="cb586-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-3" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> a1.work_id) <span class="kw">AS</span> n_collabs</span>
-<span id="cb586-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-4" tabindex="-1"></a><span class="kw">FROM</span> openalex.works_authorships a1</span>
-<span id="cb586-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-5" tabindex="-1"></a><span class="kw">JOIN</span> openalex.works_authorships a2</span>
-<span id="cb586-6"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-6" tabindex="-1"></a>  <span class="kw">ON</span> a1.work_id <span class="op">=</span> a2.work_id <span class="kw">AND</span> a1.author_id <span class="op">&lt;</span> a2.author_id</span>
-<span id="cb586-7"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-7" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> a1.author_id, a2.author_id</span>
-<span id="cb586-8"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-8" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> a1.work_id) <span class="op">&gt;=</span> <span class="dv">5</span></span>
-<span id="cb586-9"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-9" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n_collabs <span class="kw">DESC</span></span>
-<span id="cb586-10"><a href="sql-primer-for-the-openalex-snapshot.html#cb586-10" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">100</span>;</span></code></pre></div>
+<div class="sourceCode" id="cb584"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb584-1"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-1" tabindex="-1"></a><span class="kw">SELECT</span> a1.author_id <span class="kw">AS</span> author_a,</span>
+<span id="cb584-2"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-2" tabindex="-1"></a>       a2.author_id <span class="kw">AS</span> author_b,</span>
+<span id="cb584-3"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-3" tabindex="-1"></a>       <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> a1.work_id) <span class="kw">AS</span> n_collabs</span>
+<span id="cb584-4"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-4" tabindex="-1"></a><span class="kw">FROM</span> openalex.works_authorships a1</span>
+<span id="cb584-5"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-5" tabindex="-1"></a><span class="kw">JOIN</span> openalex.works_authorships a2</span>
+<span id="cb584-6"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-6" tabindex="-1"></a>  <span class="kw">ON</span> a1.work_id <span class="op">=</span> a2.work_id <span class="kw">AND</span> a1.author_id <span class="op">&lt;</span> a2.author_id</span>
+<span id="cb584-7"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-7" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> a1.author_id, a2.author_id</span>
+<span id="cb584-8"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-8" tabindex="-1"></a><span class="kw">HAVING</span> <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> a1.work_id) <span class="op">&gt;=</span> <span class="dv">5</span></span>
+<span id="cb584-9"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-9" tabindex="-1"></a><span class="kw">ORDER</span> <span class="kw">BY</span> n_collabs <span class="kw">DESC</span></span>
+<span id="cb584-10"><a href="sql-primer-for-the-openalex-snapshot.html#cb584-10" tabindex="-1"></a><span class="kw">LIMIT</span> <span class="dv">100</span>;</span></code></pre></div>
 </div>
 </div>
 <div class="section level2" id="connecting-from-r" number="44.4">
 <h2>
 <span class="header-section-number">B.4</span> Connecting from R<a aria-label="anchor" class="anchor" href="#connecting-from-r"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb587"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb585"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dbi.r-dbi.org">DBI</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rpostgres.r-dbi.org">RPostgres</a></span><span class="op">)</span></span>
 <span></span>
