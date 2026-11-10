@@ -7,17 +7,17 @@
 <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <title>Chapter 42 Case Study 5: Detecting Emerging Topics | Scientometrics in R</title>
 <meta content="R. Heller" name="author"/>
-<meta content="42.1 Objective Identify emerging topics in scientometrics research (2015–2023) using keyword burst detection and topic modelling, and validate findings against known developments in the field. ..." name="description"/>
+<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30   42.1 Objective Identify emerging topics in scientometrics research (2015–2023) using keyword burst detection and topic modelling, and..." name="description"/>
 <meta content="bookdown 0.48 with bs4_book()" name="generator"/>
 <meta content="Chapter 42 Case Study 5: Detecting Emerging Topics | Scientometrics in R" property="og:title"/>
 <meta content="book" property="og:type"/>
 <meta content="https://cttir.github.io/scientometrics-in-r/case-study-5-detecting-emerging-topics.html" property="og:url"/>
-<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" property="og:image"/>
-<meta content="42.1 Objective Identify emerging topics in scientometrics research (2015–2023) using keyword burst detection and topic modelling, and validate findings against known developments in the field. ..." property="og:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover-corrected.png" property="og:image"/>
+<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30   42.1 Objective Identify emerging topics in scientometrics research (2015–2023) using keyword burst detection and topic modelling, and..." property="og:description"/>
 <meta content="summary" name="twitter:card"/>
 <meta content="Chapter 42 Case Study 5: Detecting Emerging Topics | Scientometrics in R" name="twitter:title"/>
-<meta content="42.1 Objective Identify emerging topics in scientometrics research (2015–2023) using keyword burst detection and topic modelling, and validate findings against known developments in the field. ..." name="twitter:description"/>
-<meta content="https://cttir.github.io/scientometrics-in-r/images/cover.png" name="twitter:image"/>
+<meta content="R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30   42.1 Objective Identify emerging topics in scientometrics research (2015–2023) using keyword burst detection and topic modelling, and..." name="twitter:description"/>
+<meta content="https://cttir.github.io/scientometrics-in-r/images/cover-corrected.png" name="twitter:image"/>
 <!-- JS --><script crossorigin="anonymous" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script><script crossorigin="anonymous" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js"></script><script crossorigin="anonymous" src="https://kit.fontawesome.com/6ecbd6c532.js"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport"/>
 <link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet"/>
 <script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><link href="libs/Inter-0.4.10/font.css" rel="stylesheet"/>
@@ -174,6 +174,11 @@
 <h1>
 <span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics<a aria-label="anchor" class="anchor" href="#case-study-5-detecting-emerging-topics"><i class="fas fa-link"></i></a>
 </h1><nav aria-label="Book and chapter downloads" class="book-downloads book-downloads--unified"><div class="book-download-group"><span class="book-download-label">Entire book</span><a aria-label="Download entire book as PDF" download="" href="scientometrics-in-r.pdf" title="Download entire book as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download entire book as EPUB" download="" href="scientometrics-in-r.epub" title="Download entire book as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div><div class="book-download-group"><span class="book-download-label">This chapter</span><a aria-label="Download this chapter as PDF" download="" href="downloads/chapters/case-study-5-detecting-emerging-topics.pdf" title="Download this chapter as PDF"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M14 2H5v20h14V7z"></path><path d="M14 2v6h5M8 13h8M8 17h6"></path></svg><span>PDF</span></a><a aria-label="Download this chapter as EPUB" download="" href="downloads/chapters/case-study-5-detecting-emerging-topics.epub" title="Download this chapter as EPUB"><svg aria-hidden="true" focusable="false" viewbox="0 0 24 24"><path d="M3 4h7a3 3 0 0 1 3 3v14a3 3 0 0 0-3-3H3zM21 4h-5a3 3 0 0 0-3 3v14a3 3 0 0 1 3-3h5z"></path></svg><span>EPUB</span></a></div></nav>
+<!-- page-provenance:start -->
+<div class="page-provenance">
+<p><em>R. Heller · Date: 2026-05-09 · Last changed: 2026-10-30</em></p>
+</div>
+<!-- page-provenance:end -->
 <div class="section level2" id="objective-4" number="42.1">
 <h2>
 <span class="header-section-number">42.1</span> Objective<a aria-label="anchor" class="anchor" href="#objective-4"><i class="fas fa-link"></i></a>
@@ -380,7 +385,11 @@ Figure 42.4: Topic prevalence over time.
 <div class="chapter-nav">
 <div class="prev"><a href="case-study-4-gender-gap-in-scientific-publishing.html"><span class="header-section-number">41</span> Case Study 4: Gender Gap in Scientific Publishing</a></div>
 <div class="next"><a href="r-setup-renv-and-docker.html"><span class="header-section-number">A</span> R Setup, renv, and Docker</a></div>
-</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+</div>
+<!-- verified-downloads:start -->
+
+<!-- verified-downloads:end -->
+</main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
 <nav aria-label="On this page" data-toggle="toc" id="toc"><h2>On this page</h2>
 <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#case-study-5-detecting-emerging-topics"><span class="header-section-number">42</span> Case Study 5: Detecting Emerging Topics</a></li>
@@ -494,7 +503,7 @@ Figure 42.4: Topic prevalence over time.
 <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-09.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
