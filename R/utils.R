@@ -7,7 +7,6 @@
 #' @param df A data frame with a `doi` column.
 #' @return A data frame of the same class as `df` with one row per DOI plus
 #'   all rows without a DOI.
-#' @export
 #' @examples
 #' records <- data.frame(
 #'   doi = c("10.1000/a", "10.1000/b", "10.1000/a", NA),
@@ -32,8 +31,7 @@ dedupe_by_doi <- function(df) {
 #' @return A single integer: the h-index.
 #' @references Hirsch, J. E. (2005). An index to quantify an individual's
 #'   scientific research output. *Proceedings of the National Academy of
-#'   Sciences*, 102(46), 16569--16572. \doi{10.1073/pnas.0507655102}.
-#' @export
+#'   Sciences*, 102(46), 16569--16572. <https://doi.org/10.1073/pnas.0507655102>.
 #' @examples
 #' compute_h_index(c(10, 8, 5, 4, 3))
 #' compute_h_index(integer(0))
@@ -58,7 +56,6 @@ compute_h_index <- function(citations) {
 #'   (same length as `citations`).
 #' @return A numeric vector of normalised citation scores; `NA` where the
 #'   field mean is zero.
-#' @export
 #' @examples
 #' field_normalize(c(20, 5, 3), c(10, 10, 0))
 field_normalize <- function(citations, field_means) {
@@ -77,8 +74,6 @@ field_normalize <- function(citations, field_means) {
 #'
 #' @param df A data frame with columns `cited_by_count`, `field`, and `year`.
 #' @return The input data frame with added `field_mean` and `mncs` columns.
-#' @importFrom rlang .data
-#' @export
 #' @examples
 #' papers <- data.frame(
 #'   cited_by_count = c(10, 5, 20, 8),
@@ -110,7 +105,6 @@ compute_mncs <- function(df) {
 #'   vertex attribute, display names in `label` and `display_name`, and distinct
 #'   jointly authored work counts in the `weight` edge attribute. Use `label`
 #'   for human-readable plot labels; different authors may share a display name.
-#' @export
 #' @examples
 #' works <- tibble::tibble(
 #'   id = c("W1", "W2"),
@@ -186,8 +180,7 @@ build_coauth_graph <- function(works) {
 #'   analysed.
 #' @references Kleinberg, J. (2003). Bursty and hierarchical structure in
 #'   streams. *Data Mining and Knowledge Discovery*, 7(4), 373--397.
-#'   \doi{10.1023/A:1024940629314}.
-#' @export
+#'   <https://doi.org/10.1023/A:1024940629314>.
 #' @examples
 #' # "preprints" appears every 40 days, with a dense spell from day 300.
 #' dates <- as.Date("2020-01-01") +

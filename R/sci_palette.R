@@ -5,7 +5,6 @@
 #'
 #' @param n Number of colours to return.
 #' @return A character vector of hex colour codes.
-#' @export
 #' @examples
 #' palette_sci(4)
 palette_sci <- function(n = 6) {
@@ -18,7 +17,6 @@ palette_sci <- function(n = 6) {
 #' @param base_family Font family. Defaults to the PDF rendering font when set,
 #'   otherwise the graphics device's default family.
 #' @return A ggplot2 theme object.
-#' @export
 #' @examples
 #' library(ggplot2)
 #' ggplot(mtcars, aes(wt, mpg)) +

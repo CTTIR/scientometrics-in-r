@@ -15,8 +15,7 @@
 #' @return A tibble with `keyword`, `score` and `frequency` columns.
 #' @references Rose, S., Engel, D., Cramer, N. and Cowley, W. (2010).
 #'   Automatic Keyword Extraction from Individual Documents.
-#'   \doi{10.1002/9780470689646.ch1}.
-#' @export
+#'   <https://doi.org/10.1002/9780470689646.ch1>.
 #' @examples
 #' rake_keywords("red apple and red apple pie. apple", "and", 3)
 rake_keywords <- function(text, stopwords, n_keywords = 10L) {

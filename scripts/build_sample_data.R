@@ -14,6 +14,6 @@ openalex_sample <- oa_fetch(
   options = list(sample = 200, seed = 42)
 )
 
-usethis::use_data(openalex_sample, overwrite = TRUE)
+save(openalex_sample, file = "data/openalex_sample.rda", compress = "xz")
 
 cat("Sample datasets built and saved to data/\n")

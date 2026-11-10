@@ -38,5 +38,5 @@ crispr_corpus_mini <- tibble(
   )
 )
 
-usethis::use_data(crispr_corpus_mini, overwrite = TRUE)
+save(crispr_corpus_mini, file = "data/crispr_corpus_mini.rda", compress = "xz")
 cat("Created data/crispr_corpus_mini.rda\n")

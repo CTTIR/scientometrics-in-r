@@ -43,13 +43,14 @@ script_arg <- grep("^--file=", commandArgs(trailingOnly = FALSE), value = TRUE)
 if (length(script_arg) != 1L) stop("Run this installer with Rscript --vanilla.")
 script_path <- normalizePath(sub("^--file=", "", script_arg), mustWork = TRUE)
 repo <- dirname(dirname(script_path))
+# DESCRIPTION (bookdown project metadata) lists the packages used by R/ helpers.
 description <- read.dcf(file.path(repo, "DESCRIPTION"))
-companion_deps <- trimws(unlist(strsplit(
+helper_deps <- trimws(unlist(strsplit(
   paste(description[1L, intersect(c("Depends", "Imports"), colnames(description))],
         collapse = ","), ",", fixed = TRUE
 )))
-companion_deps <- sub("[[:space:]]*\\(.*\\)$", "", companion_deps)
-companion_deps <- setdiff(companion_deps, c("", "R"))
+helper_deps <- sub("[[:space:]]*\\(.*\\)$", "", helper_deps)
+helper_deps <- setdiff(helper_deps, c("", "R"))
 
 # Direct requirements of evaluated chunks in _bookdown.yml, their sourced R
 # helpers, and the configured bookdown output formats. Keep these explicit so
@@ -78,7 +79,7 @@ optional_deps <- c(
   "reticulate", "rsconnect", "udpipe", "umap", "cachem", "colorBlindness",
   "crosstalk", "ggrepel", "httr2", "janitor", "lubridate", "memoise", "slam"
 )
-required <- sort(unique(c(book_deps, companion_deps)))
+required <- sort(unique(c(book_deps, helper_deps)))
 optional_deps <- sort(setdiff(optional_deps, required))
 packages <- if ("--include-optional" %in% args) {
   c(required, optional_deps)
@@ -86,7 +87,7 @@ packages <- if ("--include-optional" %in% args) {
 if ("--list" %in% args) {
   write.table(data.frame(
     package = packages,
-    scope = ifelse(packages %in% required, "book/companion", "optional example")
+    scope = ifelse(packages %in% required, "book/helpers", "optional example")
   ), row.names = FALSE, quote = FALSE, sep = "\t")
   quit(status = 0L)
 }

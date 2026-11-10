@@ -30,5 +30,5 @@ rows <- lapply(journals, function(j) {
 
 journal_portfolio_demo <- dplyr::bind_rows(rows)
 
-usethis::use_data(journal_portfolio_demo, overwrite = TRUE)
+save(journal_portfolio_demo, file = "data/journal_portfolio_demo.rda", compress = "xz")
 cat("Created data/journal_portfolio_demo.rda\n")

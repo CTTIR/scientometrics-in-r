@@ -141,7 +141,7 @@ options(
   openalexR.mailto = "raban.heller@outlook.com",
   # fetch_openalex() caches in tempdir() by default; the book keeps its
   # exact-query caches with the sources.
-  scientometricsInR.cache_dir = "_freeze/openalex_cache"
+  sci.openalex_cache_dir = "_freeze/openalex_cache"
 )
 
 set.seed(42)

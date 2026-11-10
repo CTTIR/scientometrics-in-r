@@ -35,5 +35,5 @@ openalex_sample <- tibble(
   referenced_works_count = rpois(n, lambda = 30)
 )
 
-usethis::use_data(openalex_sample, overwrite = TRUE)
+save(openalex_sample, file = "data/openalex_sample.rda", compress = "xz")
 cat("Created data/openalex_sample.rda\n")
