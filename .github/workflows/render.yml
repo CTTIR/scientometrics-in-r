@@ -78,6 +78,11 @@ jobs:
           Rscript --vanilla scripts/install-book-deps.R \
             --repos=https://packagemanager.posit.co/cran/__linux__/noble/latest
 
+      - name: Test the book's helper functions in R/
+        run: |
+          Rscript --vanilla -e 'if (!requireNamespace("testthat", quietly = TRUE)) install.packages("testthat", repos = "https://packagemanager.posit.co/cran/__linux__/noble/latest")'
+          Rscript --vanilla -e 'testthat::test_dir("tests/testthat")'
+
       - uses: r-lib/actions/setup-tinytex@v2
 
       - name: Check PDF, HTML and EPUB format isolation

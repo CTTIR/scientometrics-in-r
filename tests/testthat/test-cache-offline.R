@@ -3,7 +3,7 @@ test_that("cached provider results can be reproduced offline without requests", 
   on.exit(unlink(cache, recursive=TRUE),add=TRUE)
   fixture <- tibble::tibble(id="synthetic-provider-fixture")
   calls <- 0L
-  local_mocked_bindings(.fetch_openalex_remote=function(...) {calls <<- calls+1L; fixture}, sci_rate_limit=function(...) invisible(NULL))
+  local_helper_bindings(.fetch_openalex_remote=function(...) {calls <<- calls+1L; fixture}, sci_rate_limit=function(...) invisible(NULL))
   result <- fetch_openalex(entity="works",search="fixture",cache_dir=cache)
   expect_identical(result,fixture)
   expect_equal(calls,1L)
@@ -19,7 +19,7 @@ test_that("cached provider results can be reproduced offline without requests", 
 
 test_that("missing and unreadable offline caches fail without creating provider data", {
   cache <- tempfile("missing-cache-")
-  local_mocked_bindings(.fetch_openalex_remote=function(...) stop("network must not run"))
+  local_helper_bindings(.fetch_openalex_remote=function(...) stop("network must not run"))
   expect_error(fetch_openalex(cache_dir=cache,offline=TRUE),"cache missing")
   expect_false(dir.exists(cache))
   dir.create(cache); on.exit(unlink(cache,recursive=TRUE),add=TRUE)
@@ -42,7 +42,7 @@ test_that("exhausted provider HTTP warnings cannot become empty successful datas
   saveRDS(fixture,file)
   Sys.setFileTime(file,Sys.time()-3600*24*30)
   calls <- 0L
-  local_mocked_bindings(.fetch_openalex_remote=function(...) {
+  local_helper_bindings(.fetch_openalex_remote=function(...) {
     calls <<- calls+1L
     warning(structure(list(message="HTTP status 429: retries exhausted",call=NULL),
                       class=c("openalexR_http_warning","warning","condition")))
@@ -56,11 +56,11 @@ test_that("exhausted provider HTTP warnings cannot become empty successful datas
 })
 
 test_that("the default cache is in tempdir() unless an option selects another path", {
-  previous <- options(scientometricsInR.cache_dir = NULL)
+  previous <- options(sci.openalex_cache_dir = NULL)
   on.exit(options(previous), add = TRUE)
-  local_mocked_bindings(.fetch_openalex_remote = function(...) stop("network must not run"))
+  local_helper_bindings(.fetch_openalex_remote = function(...) stop("network must not run"))
   expect_error(fetch_openalex(offline = TRUE), file.path(tempdir(), "openalex_cache"), fixed = TRUE)
-  options(scientometricsInR.cache_dir = file.path(tempdir(), "book-cache"))
+  options(sci.openalex_cache_dir = file.path(tempdir(), "book-cache"))
   expect_error(fetch_openalex(offline = TRUE), file.path(tempdir(), "book-cache"), fixed = TRUE)
   expect_false(dir.exists(file.path(tempdir(), "book-cache")))
 })
