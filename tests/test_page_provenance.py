@@ -39,6 +39,32 @@ class ProvenanceTest(unittest.TestCase):
             module.refresh()
             self.assertIn('Date: 2025-01-06 · Last changed: 2025-04-07', chapter.read_text())
             self.assertIn('Last changed: 2025-04-07', (root/'style/provenance.tex').read_text())
+            git('add', 'chapter.Rmd'); git('commit', '-m', 'Refresh notes', day='2025-04-08')
+            main = git('rev-parse', '--abbrev-ref', 'HEAD').decode().strip()
+            # A merge that adopts a branch's page credits the branch commit.
+            git('checkout', '-b', 'branch')
+            chapter.write_text(chapter.read_text().replace('Revised text.', 'Branch text.'))
+            git('commit', '-am', 'Edit on a branch', day='2025-05-05')
+            git('checkout', main)
+            git('merge', '--no-ff', '-m', 'Merge branch', 'branch', day='2025-06-02')
+            module.refresh()
+            self.assertIn('Last changed: 2025-05-05', chapter.read_text())
+            git('commit', '-am', 'Refresh notes', day='2025-06-03')
+            # A merge that writes new content is the change; later note-only
+            # commits are not.
+            git('checkout', '-b', 'other', main + '~1')
+            (root / 'other.txt').write_text('other\n')
+            git('add', 'other.txt'); git('commit', '-m', 'Unrelated branch', day='2025-06-09')
+            git('checkout', main)
+            git('merge', '--no-ff', '--no-commit', 'other', day='2025-07-07')
+            chapter.write_text(chapter.read_text().replace('Branch text.', 'Merged text.'))
+            git('commit', '-am', 'Integrate branch', day='2025-07-07')
+            module.refresh()
+            git('commit', '-am', 'Refresh notes', day='2025-08-04')
+            module.refresh()
+            merged = chapter.read_text()
+            self.assertIn('Date: 2025-01-06 · Last changed: 2025-07-07', merged)
+            module.refresh(); self.assertEqual(merged, chapter.read_text())
 
 if __name__ == '__main__':
     unittest.main()

@@ -3,6 +3,11 @@
 
 Dates describe committed source revisions, not the render. Provenance-only
 commits are excluded when identifying the last content change. Full Git history is required for creation dates.
+
+The last change is searched along the first-parent line, so a merge that brings
+new content counts as the change it makes. When a merge only adopts a branch's
+version of a page, the search continues on that branch to credit the commit that
+wrote it.
 """
 from datetime import date
 from pathlib import Path
@@ -26,6 +31,30 @@ def content(text):
             parts[1] = re.sub(r"^(?:date|date-modified):.*\n", "", parts[1], flags=re.M)
             text = "---".join(parts)
     return text
+
+def revision(commit, relative):
+    try:
+        return content(git("show", commit + ":" + relative))
+    except subprocess.CalledProcessError:
+        return None  # Absent in this revision, e.g. before a rename.
+
+def last_change(relative, start="HEAD"):
+    for row in git("log", "--first-parent", "--format=%H %as %P", start, "--", relative).splitlines():
+        commit, day, *parents = row.split()
+        current = revision(commit, relative)
+        if current is not None and parents and current == revision(parents[0], relative):
+            continue  # Only the page note or its date changed.
+        for branch in parents[1:]:
+            if current is not None and current == revision(branch, relative):
+                return last_change(relative, branch)
+        return day
+    return None
+
+def source_dates(relative):
+    dates = git("log", "--follow", "--format=%as", "--", relative).splitlines()
+    first = dates[-1] if dates else date.today().isoformat()
+    last = last_change(relative) or first
+    return first, max(first, last)
 
 def refresh():
     if git("rev-parse", "--is-shallow-repository") == "true":
@@ -58,19 +87,8 @@ def refresh():
             offset += len(line)
         if not heading:
             continue
-        history = git("log", "--follow", "--format=%H %as", "--", relative).splitlines()
-        dates = [row.split()[1] for row in history]
-        first, last = (dates[-1], dates[0]) if dates else (date.today().isoformat(),) * 2
-        for i in range(len(history) - 1):
-            current = history[i].split()[0]
-            previous = history[i + 1].split()[0]
-            try:
-                if content(git("show", current + ":" + relative)) != content(git("show", previous + ":" + relative)):
-                    break
-            except subprocess.CalledProcessError:
-                break  # A historical rename; keep the recorded revision date.
-            last = dates[i + 1]
-        note = ("\n<!-- page-provenance:start -->\n"
+        first, last = source_dates(relative)
+        note =("\n<!-- page-provenance:start -->\n"
                 "::: {.page-provenance}\n"
                 f"*R. Heller · Date: {first} · Last changed: {last}*\n"
                 ":::\n<!-- page-provenance:end -->\n")
