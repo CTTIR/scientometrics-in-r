@@ -13,5 +13,9 @@ palette_sci(n = 6)
 A character vector of hex colour codes.
 }
 \description{
-Scientometrics in R colour palette
+Returns \code{n} colours from the colour-blind-friendly 'viridis' palette
+(option \code{"D"}) used for the book's figures.
+}
+\examples{
+palette_sci(4)
 }

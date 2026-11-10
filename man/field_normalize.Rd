@@ -13,9 +13,13 @@ field_normalize(citations, field_means)
 (same length as \code{citations}).}
 }
 \value{
-A numeric vector of normalized citation scores.
+A numeric vector of normalised citation scores; \code{NA} where the
+field mean is zero.
 }
 \description{
 Computes the Mean Normalized Citation Score by dividing each paper's
 citation count by the field mean for its publication year.
+}
+\examples{
+field_normalize(c(20, 5, 3), c(10, 10, 0))
 }

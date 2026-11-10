@@ -21,3 +21,14 @@ for human-readable plot labels; different authors may share a display name.
 Constructs an undirected, weighted co-authorship graph from a data frame
 of works with author information.
 }
+\examples{
+works <- tibble::tibble(
+  id = c("W1", "W2"),
+  authorships = list(
+    tibble::tibble(id = c("A1", "A2"), display_name = c("Ada", "Ben")),
+    tibble::tibble(id = c("A1", "A2", "A3"), display_name = c("Ada", "Ben", "Cy"))
+  )
+)
+g <- build_coauth_graph(works)
+igraph::as_data_frame(g, what = "edges")
+}

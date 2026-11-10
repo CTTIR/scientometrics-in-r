@@ -16,9 +16,26 @@ kleinberg_bursts(keywords, dates, top_n = 50, gamma = 1)
 \item{gamma}{Difficulty of transitioning between states (default 1.0).}
 }
 \value{
-A data frame with columns \code{keyword}, \code{level}, \code{start}, and \code{end}.
+A data frame with one row per burst state and the columns \code{level},
+\code{start} and \code{end} from \code{\link[bursts:kleinberg]{bursts::kleinberg()}} (in days since the keyword's
+first occurrence) plus \code{keyword}. It has no rows if no keyword can be
+analysed.
 }
 \description{
-Applies Kleinberg's burst detection algorithm to a time series of keyword
-frequencies. Requires the \code{bursts} package.
+Applies Kleinberg's burst detection algorithm (Kleinberg 2003), as
+implemented in \code{\link[bursts:kleinberg]{bursts::kleinberg()}}, to the publication dates of the most
+frequent keywords. Keywords with fewer than three dated occurrences are
+skipped.
+}
+\examples{
+# "preprints" appears every 40 days, with a dense spell from day 300.
+dates <- as.Date("2020-01-01") +
+  c(seq(0, 720, by = 40), 300:314, seq(0, 720, by = 60))
+keywords <- rep(c("preprints", "open access"), c(34, 13))
+kleinberg_bursts(keywords, dates)
+}
+\references{
+Kleinberg, J. (2003). Bursty and hierarchical structure in
+streams. \emph{Data Mining and Knowledge Discovery}, 7(4), 373--397.
+\doi{10.1023/A:1024940629314}.
 }

@@ -7,11 +7,21 @@
 compute_h_index(citations)
 }
 \arguments{
-\item{citations}{An integer vector of citation counts.}
+\item{citations}{A numeric vector of citation counts, one per publication.}
 }
 \value{
 A single integer: the h-index.
 }
 \description{
-Compute the h-index from a citation vector
+The h-index is the largest number h such that h publications have at
+least h citations each (Hirsch 2005).
+}
+\examples{
+compute_h_index(c(10, 8, 5, 4, 3))
+compute_h_index(integer(0))
+}
+\references{
+Hirsch, J. E. (2005). An index to quantify an individual's
+scientific research output. \emph{Proceedings of the National Academy of
+Sciences}, 102(46), 16569--16572. \doi{10.1073/pnas.0507655102}.
 }

@@ -10,9 +10,17 @@ compute_mncs(df)
 \item{df}{A data frame with columns \code{cited_by_count}, \code{field}, and \code{year}.}
 }
 \value{
-The input data frame with an added \code{mncs} column.
+The input data frame with added \code{field_mean} and \code{mncs} columns.
 }
 \description{
 Wrapper around \code{\link[=field_normalize]{field_normalize()}} that computes the MNCS for a data frame
 containing citation counts, field identifiers, and publication years.
+}
+\examples{
+papers <- data.frame(
+  cited_by_count = c(10, 5, 20, 8),
+  field = c("A", "A", "B", "B"),
+  year = 2020
+)
+compute_mncs(papers)
 }

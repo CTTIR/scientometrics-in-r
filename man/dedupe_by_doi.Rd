@@ -10,9 +10,18 @@ dedupe_by_doi(df)
 \item{df}{A data frame with a \code{doi} column.}
 }
 \value{
-A deduplicated tibble.
+A data frame of the same class as \code{df} with one row per DOI plus
+all rows without a DOI.
 }
 \description{
 Removes duplicate rows based on the \code{doi} column, keeping the first
-occurrence. Rows with missing DOIs are always kept.
+occurrence. Rows with missing or empty DOIs are always kept and placed
+after the deduplicated rows.
+}
+\examples{
+records <- data.frame(
+  doi = c("10.1000/a", "10.1000/b", "10.1000/a", NA),
+  title = c("A", "B", "A (duplicate)", "No DOI")
+)
+dedupe_by_doi(records)
 }
