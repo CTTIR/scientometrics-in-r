@@ -134,8 +134,6 @@ Rscript --vanilla scripts/build-download-manifest.R
 ```
 
 EPUB packaging validates internal links and bundles the citation and licence files.
-Per-chapter PDFs are optional: run `Rscript --vanilla scripts/render-chapter-pdfs.R`
-and regenerate the manifest. Its nonzero exit reports incomplete chapter builds.
 
 The historical `renv.lock` and Docker restore path have not been qualified for
 the current book. The dependency script installs missing package names rather
@@ -209,12 +207,12 @@ not the day the site is built. Then validate the actual downloadable artifacts:
 python3 scripts/update-page-provenance.py
 Rscript -e 'bookdown::render_book("index.Rmd", output_format = "all")'
 Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub
-python3 scripts/split-chapter-pdfs.py
 Rscript scripts/build-download-manifest.R
 python3 scripts/finalize-book.py
 python3 scripts/check-book.py
 ```
 
 The final check fails on missing author/date notes, broken local links or anchors,
-and missing or unreadable whole-book PDF/EPUB files. Chapter downloads reuse the
-whole-book PDF’s bookmarks instead of executing every chapter a second time.
+and missing or unreadable whole-book PDF/EPUB files. CI then builds and checks
+the chapter PDF and EPUB downloads in `docs/downloads/chapters/` with
+`scripts/build-downloads-ci.sh`.

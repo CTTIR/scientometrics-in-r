@@ -9,16 +9,11 @@ build_download_manifest <- function(repo_root = ".") {
     info <- file.info(file.path(out_dir, relative_path))
     !is.na(info$size) && !isTRUE(info$isdir) && info$size > 0
   }
-  manifest <- list(book = list(), chapters = list())
+  # Chapter downloads are linked from the panel under each chapter title.
+  manifest <- list(book = list())
   for (format in c("pdf", "epub")) {
     relative_path <- paste0(config$book_filename, ".", format)
     if (present(relative_path)) manifest$book[[format]] <- relative_path
-  }
-  sources <- config$rmd_files
-  sources <- sources[grepl("^(chapters|case-studies|appendices)/", sources)]
-  for (source in sources) {
-    relative_path <- paste0("pdf-chapters/", sub("\\.Rmd$", ".pdf", basename(source)))
-    if (present(relative_path)) manifest$chapters[[source]] <- relative_path
   }
   destination <- file.path(out_dir, "downloads.json")
   temporary <- tempfile("downloads-", tmpdir = out_dir, fileext = ".json")
@@ -27,8 +22,7 @@ build_download_manifest <- function(repo_root = ".") {
   if (!file.rename(temporary, destination)) {
     stop("Could not publish the download inventory.", call. = FALSE)
   }
-  message("Download inventory: ", length(manifest$book), " book formats; ",
-          length(manifest$chapters), " chapter PDFs.")
+  message("Download inventory: ", length(manifest$book), " book formats.")
   invisible(manifest)
 }
 

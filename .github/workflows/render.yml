@@ -122,9 +122,6 @@ jobs:
           java -jar "$epubcheck_dir/epubcheck-5.4.0/epubcheck.jar" \
             --failonwarnings docs/scientometrics-in-r.epub
 
-      - name: Extract verified chapter PDFs
-        run: python3 scripts/split-chapter-pdfs.py
-
       - name: Inventory available downloads
         run: Rscript scripts/build-download-manifest.R
 
@@ -132,7 +129,6 @@ jobs:
         run: |
           python3 tests/test_page_provenance.py
           python3 tests/test_book_delivery.py
-          python3 tests/test_split_chapter_pdfs.py
           Rscript tests/test_setup_cache.R
           python3 scripts/finalize-book.py docs
           python3 scripts/check-book.py docs

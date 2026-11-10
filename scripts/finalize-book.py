@@ -23,10 +23,6 @@ def finalize(root, name):
         text=MARKER.sub('',page.read_text())
         if '</main>' not in text: continue
         paths=[(pdf,'Entire book (PDF)'),(epub,'Entire book (EPUB)')]
-        chapter=root/'pdf-chapters'/(page.stem+'.pdf')
-        if chapter.exists():
-            if not len(PdfReader(chapter).pages): raise ValueError(f'Empty chapter PDF: {chapter}')
-            paths.append((chapter,'This chapter (PDF)'))
         links=' · '.join('<a href="'+html.escape(os.path.relpath(p,page.parent).replace(os.sep,'/'),quote=True)+'">'+label+'</a>' for p,label in paths)
         fallback=''
         if 'class="page-provenance"' not in text:
