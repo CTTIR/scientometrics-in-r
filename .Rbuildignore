@@ -63,3 +63,4 @@
 ^scientometrics-in-r\.(knit\.md|utf8\.md|tex|pdf|epub|aux|bbl|blg|toc|out|lof|lot|fls|fdb_latexmk|xdv|synctex\.gz)$
 
 ^LICENSE-CODE$
+^tests/test_[^/]+\.(R|py)$
