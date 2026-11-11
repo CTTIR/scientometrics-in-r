@@ -189,7 +189,7 @@
 <h2>
 <span class="header-section-number">40.2</span> Setup<a aria-label="anchor" class="anchor" href="#setup-2"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb552"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://juliasilge.github.io/tidytext/">tidytext</a></span><span class="op">)</span></span>
@@ -207,7 +207,7 @@
 <span class="header-section-number">40.3</span> Data acquisition<a aria-label="anchor" class="anchor" href="#data-acquisition-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>The source identifiers resolve to <a href="https://api.openalex.org/sources/S148561398">Scientometrics</a>, <a href="https://api.openalex.org/sources/S205292342">Journal of Informetrics</a>, and the <a href="https://api.openalex.org/sources/S4210197613">Journal of the Association for Information Science and Technology</a> (JASIST). These OpenAlex source records were checked on 2026-10-30. Historical titles of JASIST have separate source records and should not be substituted for this recent publication window.</p>
-<div class="sourceCode" id="cb553"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="op">(</span></span>
 <span>  <span class="op">~</span><span class="va">short_name</span>,        <span class="op">~</span><span class="va">source_id</span>,</span>
 <span>  <span class="st">"Scientometrics"</span>,   <span class="st">"S148561398"</span>,</span>
@@ -215,7 +215,7 @@
 <span>  <span class="st">"JASIST"</span>,           <span class="st">"S4210197613"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Request up to 300 randomly sampled articles per journal from 2018-2023, using a fixed seed. These samples do not measure the journals’ total output. The seed stabilises sampling within an OpenAlex snapshot; later database updates can change the returned records and citation counts. Preserve the returned works and cache files with any reported analysis.</p>
-<div class="sourceCode" id="cb554"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fetch_journal</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">sid</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>    entity <span class="op">=</span> <span class="st">"works"</span>,</span>
@@ -247,7 +247,7 @@
 <span class="header-section-number">40.4</span> Citation distributions in the samples<a aria-label="anchor" class="anchor" href="#citation-distributions-in-the-samples"><i class="fas fa-link"></i></a>
 </h2>
 <p><code>cited_by_count</code> is the cumulative number of citations recorded when the data were retrieved, including citations received after 2023. It does not restrict citing papers to the sampled publication years. The h-index below describes only the returned sample, and all summaries remain unnormalised for field and publication year.</p>
-<div class="sourceCode" id="cb555"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_works</span> <span class="op">&lt;-</span> <span class="va">journal_data</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>works <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map2.html">map2</a></span><span class="op">(</span><span class="va">works</span>, <span class="va">short_name</span>, \<span class="op">(</span><span class="va">w</span>, <span class="va">n</span><span class="op">)</span> <span class="va">w</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>journal <span class="op">=</span> <span class="va">n</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/pull.html">pull</a></span><span class="op">(</span><span class="va">works</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -264,7 +264,7 @@
 Figure 40.1: Cumulative citation distributions in the sampled articles, with one added before log scaling.
 </p>
 </div>
-<div class="sourceCode" id="cb556"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
@@ -741,22 +741,22 @@ Figure 40.1: Cumulative citation distributions in the sampled articles, with one
 <tr>
 <td class="gt_row gt_left" headers="journal">J. Informetrics</td>
 <td class="gt_row gt_right" headers="sampled_articles">300</td>
-<td class="gt_row gt_right" headers="mean_cites">28.7</td>
-<td class="gt_row gt_right" headers="median_cites">18.0</td>
-<td class="gt_row gt_right" headers="sample_h_index">49</td>
+<td class="gt_row gt_right" headers="mean_cites">32.7</td>
+<td class="gt_row gt_right" headers="median_cites">19</td>
+<td class="gt_row gt_right" headers="sample_h_index">51</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="journal">JASIST</td>
 <td class="gt_row gt_right" headers="sampled_articles">300</td>
-<td class="gt_row gt_right" headers="mean_cites">29.1</td>
-<td class="gt_row gt_right" headers="median_cites">18.5</td>
-<td class="gt_row gt_right" headers="sample_h_index">48</td>
+<td class="gt_row gt_right" headers="mean_cites">27.9</td>
+<td class="gt_row gt_right" headers="median_cites">18</td>
+<td class="gt_row gt_right" headers="sample_h_index">47</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="journal">Scientometrics</td>
 <td class="gt_row gt_right" headers="sampled_articles">300</td>
-<td class="gt_row gt_right" headers="mean_cites">41.6</td>
-<td class="gt_row gt_right" headers="median_cites">18.0</td>
+<td class="gt_row gt_right" headers="mean_cites">42.9</td>
+<td class="gt_row gt_right" headers="median_cites">18</td>
 <td class="gt_row gt_right" headers="sample_h_index">43</td>
 </tr>
 </tbody>
@@ -768,7 +768,7 @@ Figure 40.1: Cumulative citation distributions in the sampled articles, with one
 <span class="header-section-number">40.5</span> Publication-cohort comparison<a aria-label="anchor" class="anchor" href="#publication-cohort-comparison"><i class="fas fa-link"></i></a>
 </h2>
 <p>The following plot compares different publication cohorts at retrieval. Older cohorts have had more time to receive citations, and their composition may also differ. It is not a trajectory following the same articles over time, so it cannot establish citation-aging curves or citation half-lives. That requires time-resolved citation counts and an explicit observation window.</p>
-<div class="sourceCode" id="cb557"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cohorts</span> <span class="op">&lt;-</span> <span class="va">all_works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>mean_cites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">cited_by_count</span><span class="op">)</span>, sampled_articles <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span></span>
@@ -793,7 +793,7 @@ Figure 40.2: Mean cumulative citations by publication year in each journal sampl
 <span class="header-section-number">40.6</span> Topical coverage<a aria-label="anchor" class="anchor" href="#topical-coverage"><i class="fas fa-link"></i></a>
 </h2>
 <p>Count each article once per assigned topic. The flattened <code>topics</code> table also contains the topics’ parent subfields, fields, and domains; retain only topic identifiers (<code>T...</code>). An article can contribute to several topics, while articles without topic assignments do not contribute to this chart; topic counts therefore need not sum to the number of sampled articles.</p>
-<div class="sourceCode" id="cb558"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">topic_data</span> <span class="op">&lt;-</span> <span class="va">all_works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">id</span>, <span class="va">journal</span>, <span class="va">topics</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">topics</span>, names_sep <span class="op">=</span> <span class="st">"_"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -808,7 +808,7 @@ Figure 40.2: Mean cumulative citations by publication year in each journal sampl
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice_max</a></span><span class="op">(</span><span class="va">n</span>, n <span class="op">=</span> <span class="fl">10</span>, with_ties <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">ungroup</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb559"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">top_topics</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>topic <span class="op">=</span> <span class="fu"><a href="https://juliasilge.github.io/tidytext/reference/reorder_within.html">reorder_within</a></span><span class="op">(</span><span class="va">topic</span>, <span class="va">n</span>, <span class="va">journal</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">n</span>, y <span class="op">=</span> <span class="va">topic</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
@@ -877,13 +877,6 @@ Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -891,13 +884,9 @@ Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -967,7 +956,7 @@ Figure 40.3: Up to 10 most frequent assigned topics in each journal sample.
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

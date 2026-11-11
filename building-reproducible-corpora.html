@@ -289,23 +289,23 @@
 <span></span>
 <span><span class="va">top_institutions</span></span></code></pre></div>
 <pre><code>#&gt; # A tibble: 15 × 2
-#&gt;    institution                                          n
-#&gt;    &lt;chr&gt;                                            &lt;int&gt;
-#&gt;  1 Hong Kong Baptist University                        11
-#&gt;  2 Universidade Federal do Rio Grande                  10
-#&gt;  3 Aga Khan University                                  9
-#&gt;  4 Gansu University of Traditional Chinese Medicine     9
-#&gt;  5 Fudan University                                     8
-#&gt;  6 Imam Mohammad ibn Saud Islamic University            8
-#&gt;  7 Universiti Putra Malaysia                            8
-#&gt;  8 University of Engineering and Technology Lahore      8
-#&gt;  9 Canadian Forest Service                              7
-#&gt; 10 Guangzhou University of Chinese Medicine             7
-#&gt; 11 Hong Kong Polytechnic University                     7
-#&gt; 12 Natural Resources Canada                             7
-#&gt; 13 Northwestern Polytechnical University                7
-#&gt; 14 Tianjin University                                   7
-#&gt; 15 Universidade Federal Fluminense                      7</code></pre>
+#&gt;    institution                                         n
+#&gt;    &lt;chr&gt;                                           &lt;int&gt;
+#&gt;  1 Sumy State University                              12
+#&gt;  2 University of Bologna                              10
+#&gt;  3 Universidade Federal de Santa Catarina              9
+#&gt;  4 Magyar Agrár- és Élettudományi Egyetem              8
+#&gt;  5 University of Engineering and Technology Lahore     8
+#&gt;  6 Fourth Hospital of Hebei Medical University         7
+#&gt;  7 Guangzhou University of Chinese Medicine            7
+#&gt;  8 Northwestern Polytechnical University               7
+#&gt;  9 Universidade Federal Fluminense                     7
+#&gt; 10 University of Coimbra                               7
+#&gt; 11 University of Rome Tor Vergata                      7
+#&gt; 12 Yangzhou University                                 7
+#&gt; 13 Beijing University of Chinese Medicine              6
+#&gt; 14 Charles Sturt University                            6
+#&gt; 15 Chitkara University                                 6</code></pre>
 </div>
 <div class="section level3" id="saving-as-parquet" number="7.4.5">
 <h3>
@@ -524,13 +524,6 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -538,13 +531,9 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -628,7 +617,7 @@ Figure 7.1: Top 15 institutions by publication count in the sample corpus.
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

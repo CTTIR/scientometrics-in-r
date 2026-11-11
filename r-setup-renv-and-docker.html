@@ -193,8 +193,8 @@ requires Pandoc; PDF output additionally needs XeLaTeX/TinyTeX and R with Cairo 
 may require a C/C++ toolchain and system libraries; the Linux dependencies are
 listed in <code>.github/workflows/render.yml</code>.</p>
 <p>From the repository root, install and check the book’s R dependencies:</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb575-1"><a href="r-setup-renv-and-docker.html#cb575-1" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R</span>
-<span id="cb575-2"><a href="r-setup-renv-and-docker.html#cb575-2" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R <span class="at">--check</span></span></code></pre></div>
+<div class="sourceCode" id="cb577"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb577-1"><a href="r-setup-renv-and-docker.html#cb577-1" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R</span>
+<span id="cb577-2"><a href="r-setup-renv-and-docker.html#cb577-2" tabindex="-1"></a><span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/install-book-deps.R <span class="at">--check</span></span></code></pre></div>
 <p>The installer installs missing packages from current CRAN and checks that their
 namespaces load. It does not restore historical versions or certify an immutable
 software environment. <code>--check</code> performs no installation or network access;
@@ -222,14 +222,14 @@ that restoring the historical lockfile will reproduce the current validated
 candidate.</p>
 <p>The following is an optional restoration example for a project whose lockfile
 you have independently validated, rather than a required setup step for this book:</p>
-<div class="sourceCode" id="cb576"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb578"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"renv"</span><span class="op">)</span></span>
 <span><span class="fu">renv</span><span class="fu">::</span><span class="fu">restore</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>Restoration attempts to install the recorded versions; success also depends on
 compatible R, system libraries and available package sources. In a development
 environment, add a package and deliberately update the lockfile only after
 validating the resulting environment:</p>
-<div class="sourceCode" id="cb577"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb579"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">renv</span><span class="fu">::</span><span class="fu">install</span><span class="op">(</span><span class="st">"newpackage"</span><span class="op">)</span> <span class="co"># Replace with the intended package name.</span></span>
 <span><span class="fu">renv</span><span class="fu">::</span><span class="fu">snapshot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>A software lockfile does not freeze live API results. Exact reproduction also
@@ -335,8 +335,8 @@ for the current book. It also downloads an amd64 Quarto package, so other
 architectures need a compatible recipe. Docker does not remove the need to
 validate the lockfile, system dependencies, API access and resulting outputs.</p>
 <p>For a deliberate evaluation of that recipe, build it and inspect its R version:</p>
-<div class="sourceCode" id="cb578"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb578-1"><a href="r-setup-renv-and-docker.html#cb578-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> scientometrics-in-r .</span>
-<span id="cb578-2"><a href="r-setup-renv-and-docker.html#cb578-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> scientometrics-in-r R <span class="at">--version</span></span></code></pre></div>
+<div class="sourceCode" id="cb580"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb580-1"><a href="r-setup-renv-and-docker.html#cb580-1" tabindex="-1"></a><span class="ex">docker</span> build <span class="at">-t</span> scientometrics-in-r .</span>
+<span id="cb580-2"><a href="r-setup-renv-and-docker.html#cb580-2" tabindex="-1"></a><span class="ex">docker</span> run <span class="at">--rm</span> scientometrics-in-r R <span class="at">--version</span></span></code></pre></div>
 <p>The image’s default command calls <code><a href="https://pkgs.rstudio.com/bookdown/reference/render_book.html">bookdown::render_book()</a></code> for all formats; it
 does not launch RStudio Server. Successful construction and execution of this
 historical image are not claimed here. Use the current first-use path above
@@ -349,12 +349,12 @@ for the locally validated candidate.</p>
 <p>This repository is configured for <strong>bookdown</strong>, with <code>_bookdown.yml</code> and
 <code>_output.yml</code>. From the repository root, render HTML and refresh its download
 manifest:</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb579-1"><a href="r-setup-renv-and-docker.html#cb579-1" tabindex="-1"></a><span class="va">SCIENTOMETRICS_REBUILD_CHUNKS</span><span class="op">=</span>1 <span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'</span></span>
-<span id="cb579-2"><a href="r-setup-renv-and-docker.html#cb579-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/build-download-manifest.R</span></code></pre></div>
+<div class="sourceCode" id="cb581"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb581-1"><a href="r-setup-renv-and-docker.html#cb581-1" tabindex="-1"></a><span class="va">SCIENTOMETRICS_REBUILD_CHUNKS</span><span class="op">=</span>1 <span class="va">RENV_CONFIG_AUTOLOADER_ENABLED</span><span class="op">=</span>false <span class="ex">Rscript</span> <span class="at">--vanilla</span> <span class="at">-e</span> <span class="st">'bookdown::render_book("index.Rmd", output_format = "bookdown::bs4_book")'</span></span>
+<span id="cb581-2"><a href="r-setup-renv-and-docker.html#cb581-2" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">--vanilla</span> scripts/build-download-manifest.R</span></code></pre></div>
 <p><code>SCIENTOMETRICS_REBUILD_CHUNKS=1</code> re-executes analysis chunks while retaining
 exact-query provider caches. Missing provider caches still require API access.
 The configured output directory is <code>docs/</code>. Serve it locally, for example:</p>
-<div class="sourceCode" id="cb580"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb580-1"><a href="r-setup-renv-and-docker.html#cb580-1" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8000 <span class="at">--directory</span> docs</span></code></pre></div>
+<div class="sourceCode" id="cb582"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb582-1"><a href="r-setup-renv-and-docker.html#cb582-1" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> http.server 8000 <span class="at">--directory</span> docs</span></code></pre></div>
 <p>Then visit <code>http://localhost:8000</code>. PDF additionally needs XeLaTeX/TinyTeX;
 <code>output_format = "all"</code> requests HTML, PDF and EPUB. Before distribution, run
 <code>Rscript --vanilla scripts/repair-epub.R docs/scientometrics-in-r.epub</code> to validate
@@ -395,13 +395,6 @@ working through those separate examples.</p>
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -409,13 +402,9 @@ working through those separate examples.</p>
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -482,7 +471,7 @@ working through those separate examples.</p>
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

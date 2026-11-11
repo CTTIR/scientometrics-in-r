@@ -197,7 +197,7 @@ observations. Chapter <a href="gender-and-equity-analysis.html#gender-objectives
 <h2>
 <span class="header-section-number">41.2</span> Setup<a aria-label="anchor" class="anchor" href="#setup-3"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb560"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://gt.rstudio.com">gt</a></span><span class="op">)</span></span>
@@ -212,7 +212,7 @@ observations. Chapter <a href="gender-and-equity-analysis.html#gender-objectives
 The names are placeholders, and repeated names do not establish shared author
 identity. Each row created below is an authorship record, not a distinct person.
 This example makes no API request.</p>
-<div class="sourceCode" id="cb561"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works_example</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  work_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"example-a1"</span>, <span class="st">"example-a2"</span>, <span class="st">"example-a3"</span>,</span>
 <span>              <span class="st">"example-b1"</span>, <span class="st">"example-b2"</span>, <span class="st">"example-b3"</span><span class="op">)</span>,</span>
@@ -231,7 +231,7 @@ This example makes no API request.</p>
 <code>morgan</code> to B. These arbitrary categories have <strong>no demographic meaning</strong>.
 Every other name is explicitly unmatched. Dropping unmatched records would
 change both the denominator and the question answered by a proportion.</p>
-<div class="sourceCode" id="cb562"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">authors_example</span> <span class="op">&lt;-</span> <span class="va">works_example</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest_longer.html">unnest_longer</a></span><span class="op">(</span><span class="va">first_names</span>, values_to <span class="op">=</span> <span class="st">"first_name"</span>, indices_to <span class="op">=</span> <span class="st">"author_order"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">work_id</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -737,7 +737,7 @@ change both the denominator and the question answered by a proportion.</p>
 <h2>
 <span class="header-section-number">41.5</span> Lookup categories by fictional journal<a aria-label="anchor" class="anchor" href="#lookup-categories-by-fictional-journal"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb563"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journal_summary</span> <span class="op">&lt;-</span> <span class="va">authors_example</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">lookup_category</span>, .drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -765,7 +765,7 @@ Figure 41.1: Arbitrary lookup categories among all synthetic authorship records 
 recorded order does not by itself establish seniority or contribution: the
 interpretation depends on authorship conventions. The following proportions
 retain unmatched records within every observed journal/position group.</p>
-<div class="sourceCode" id="cb564"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb566"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">position_summary_example</span> <span class="op">&lt;-</span> <span class="va">authors_example</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">position</span>, <span class="va">lookup_category</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">position</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -796,7 +796,7 @@ an identifier. For each fictional journal/year, the denominator includes all
 first- or single-author records. Each group has only one such record here, so
 coverage is either zero or one. This illustrates denominator accounting; it
 supplies no evidence about a demographic trend.</p>
-<div class="sourceCode" id="cb565"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb567"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">coverage_by_year</span> <span class="op">&lt;-</span> <span class="va">authors_example</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">position</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"first"</span>, <span class="st">"single"</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">journal</span>, <span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -886,13 +886,6 @@ temporal progress can be drawn from it.</p>
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -900,13 +893,9 @@ temporal progress can be drawn from it.</p>
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -977,7 +966,7 @@ temporal progress can be drawn from it.</p>
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

@@ -250,17 +250,18 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="va">n_papers</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">author_prod</span></span></code></pre></div>
-<pre><code>#&gt; # A tibble: 8 × 2
+<pre><code>#&gt; # A tibble: 9 × 2
 #&gt;   n_papers n_authors
 #&gt;      &lt;int&gt;     &lt;int&gt;
-#&gt; 1        1       871
-#&gt; 2        2       168
-#&gt; 3        3        28
-#&gt; 4        4        11
-#&gt; 5        5         5
-#&gt; 6        6         4
-#&gt; 7       10         2
-#&gt; 8       12         1</code></pre>
+#&gt; 1        1       881
+#&gt; 2        2       159
+#&gt; 3        3        29
+#&gt; 4        4        10
+#&gt; 5        5         6
+#&gt; 6        6         8
+#&gt; 7        8         2
+#&gt; 8       10         1
+#&gt; 9       12         2</code></pre>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lotka_c</span> <span class="op">&lt;-</span> <span class="va">author_prod</span><span class="op">$</span><span class="va">n_authors</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span></span>
@@ -529,13 +530,6 @@ Figure 2.4: Annual publication counts for sampled works, illustrating the growth
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -543,13 +537,9 @@ Figure 2.4: Annual publication counts for sampled works, illustrating the growth
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -632,7 +622,7 @@ Figure 2.4: Annual publication counts for sampled works, illustrating the growth
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

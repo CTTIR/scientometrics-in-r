@@ -200,13 +200,6 @@ the table of contents to find the page you are looking for.</p>
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -214,13 +207,9 @@ the table of contents to find the page you are looking for.</p>
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -263,7 +252,7 @@ the table of contents to find the page you are looking for.</p>
 <div class="empty"></div>
 </div>
 <!-- verified-downloads:start -->
-<p class="page-provenance"><small>R. Heller · Date: 2026-05-09 · Last changed: 2026-11-10</small></p><nav class="book-download-footer" aria-label="Book downloads"><p><a href="scientometrics-in-r.pdf">Entire book (PDF)</a> · <a href="scientometrics-in-r.epub">Entire book (EPUB)</a></p></nav>
+<p class="page-provenance"><small>R. Heller · Date: 2026-05-09 · Last changed: 2026-11-11</small></p><nav class="book-download-footer" aria-label="Book downloads"><p><a href="scientometrics-in-r.pdf">Entire book (PDF)</a> · <a href="scientometrics-in-r.epub">Entire book (EPUB)</a></p></nav>
 <!-- verified-downloads:end -->
 </main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     </div>
@@ -274,7 +263,7 @@ the table of contents to find the page you are looking for.</p>
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 
   <div class="col-12 col-md-6 mt-3">
-    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+    <p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
   </div>
 
   <div class="col-12 col-md-6 mt-3">

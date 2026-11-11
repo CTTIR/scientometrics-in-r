@@ -195,7 +195,7 @@ after completing the worked example.</p>
 Swap the search term and fetch a fresh sample. Comparing the publication trend
 and top journals reveals how different fields vary in volume, growth rate, and
 journal concentration.</p>
-<div class="sourceCode" id="cb590"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -219,7 +219,7 @@ increases and a broader spread across journals compared to a niche field like
 scientometrics.</p>
 <p><strong>2. Uncited works.</strong>
 Filter to zero-citation records and examine the year distribution.</p>
-<div class="sourceCode" id="cb591"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">cited_by_count</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -233,7 +233,7 @@ Filter to zero-citation records and examine the year distribution.</p>
 accumulate citations — a window effect.</p>
 <p><strong>3. Open Access status.</strong>
 Compute yearly OA proportions to reveal the trend.</p>
-<div class="sourceCode" id="cb592"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -248,7 +248,7 @@ Compute yearly OA proportions to reveal the trend.</p>
 the growth of gold OA journals.</p>
 <p><strong>4. Growth curve.</strong>
 Plot annual counts on a log scale; linearity implies exponential growth.</p>
-<div class="sourceCode" id="cb593"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">publication_year</span> <span class="op">&gt;=</span> <span class="fl">2000</span>, <span class="va">publication_year</span> <span class="op">&lt;=</span> <span class="fl">2023</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -266,7 +266,7 @@ approximately exponential, consistent with Price’s law.</p>
 </h2>
 <p><strong>1. Lotka exponent.</strong>
 Fit a linear model in log-log space to estimate the exponent.</p>
-<div class="sourceCode" id="cb594"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">author_prod</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -290,7 +290,7 @@ Fit a linear model in log-log space to estimate the exponent.</p>
 range from 1.5 to 3.5, depending on the field and time window.</p>
 <p><strong>2. Bradford zones.</strong>
 Divide journals into three zones of roughly equal article counts.</p>
-<div class="sourceCode" id="cb595"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journal_counts</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">so</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cum <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html">cumsum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span>,</span>
@@ -307,7 +307,7 @@ many. The ratio between successive zone sizes should approximate Bradford’s
 multiplier.</p>
 <p><strong>3. Your field’s Zipf distribution.</strong>
 Extract title words and plot rank vs. frequency on log-log axes.</p>
-<div class="sourceCode" id="cb596"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://juliasilge.github.io/tidytext/">tidytext</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">word_freq</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -328,7 +328,7 @@ law. Domain-specific terms dominate the top ranks.</p>
 <p><strong>4. Matthew Effect simulation.</strong>
 Simulate preferential attachment and compare the resulting distribution to
 Lotka’s law.</p>
-<div class="sourceCode" id="cb597"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20260509</span><span class="op">)</span></span>
 <span><span class="va">n_authors</span> <span class="op">&lt;-</span> <span class="fl">100</span></span>
 <span><span class="va">papers</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="va">n_authors</span><span class="op">)</span></span>
@@ -356,7 +356,7 @@ resembling Lotka’s law, illustrating the Matthew Effect.</p>
 <p><strong>1. Leiden Manifesto audit.</strong>
 This is a qualitative exercise. Evaluate a real hiring policy against the ten
 principles.</p>
-<div class="sourceCode" id="cb598"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># No code required. Suggested structure:</span></span>
 <span><span class="co"># For each of the 10 Leiden Manifesto principles:</span></span>
 <span><span class="co">#   1. State the principle</span></span>
@@ -368,7 +368,7 @@ principles.</p>
 principles 6 (field variation) and 7 (qualitative portfolio assessment).</p>
 <p><strong>2. Self-citation across fields.</strong>
 Compare self-citation rates between two different fields.</p>
-<div class="sourceCode" id="cb599"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -390,7 +390,7 @@ Compare self-citation rates between two different fields.</p>
 some fields is structural (smaller communities) rather than manipulative.</p>
 <p><strong>3. DORA compliance check.</strong>
 A research exercise using the DORA signatory database.</p>
-<div class="sourceCode" id="cb600"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># No code required. Visit https://sfdora.org/signers/</span></span>
 <span><span class="co"># Select three major funders and compare their grant evaluation</span></span>
 <span><span class="co"># criteria against DORA commitments:</span></span>
@@ -401,7 +401,7 @@ A research exercise using the DORA signatory database.</p>
 revealing a gap between stated commitments and implementation.</p>
 <p><strong>4. Goodhart’s Law thought experiment.</strong>
 Propose a new indicator and analyse potential gaming strategies.</p>
-<div class="sourceCode" id="cb601"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example indicator: "Replication Impact Score"</span></span>
 <span><span class="co">#   = fraction of a researcher's papers that have been independently replicated</span></span>
 <span><span class="co">#</span></span>
@@ -421,7 +421,7 @@ denominator. Indicator design must anticipate behavioural responses.</p>
 </h2>
 <p><strong>1. Coverage gap analysis.</strong>
 Query the same DOIs in OpenAlex and Crossref and compare.</p>
-<div class="sourceCode" id="cb602"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rcrossref/">rcrossref</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -448,7 +448,7 @@ Query the same DOIs in OpenAlex and Crossref and compare.</p>
 Crossref data, but abstract availability may differ.</p>
 <p><strong>2. Disciplinary bias.</strong>
 Compare indexed works across contrasting fields.</p>
-<div class="sourceCode" id="cb603"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb605"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">fields</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span> biology <span class="op">=</span> <span class="st">"https://openalex.org/C86803240"</span>,</span>
 <span> philosophy <span class="op">=</span> <span class="st">"https://openalex.org/C138885662"</span></span>
@@ -465,7 +465,7 @@ Compare indexed works across contrasting fields.</p>
 reflecting the historical journal-centricity of bibliometric databases.</p>
 <p><strong>3. Citation count concordance.</strong>
 Correlate citation counts from two sources.</p>
-<div class="sourceCode" id="cb604"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rcrossref/">rcrossref</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">comparison</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -490,7 +490,7 @@ Correlate citation counts from two sources.</p>
 arise from coverage scope and update frequency.</p>
 <p><strong>4. Preprint tracking.</strong>
 Check whether bioRxiv DOIs appear in OpenAlex with published links.</p>
-<div class="sourceCode" id="cb605"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb607"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">biorxiv_dois</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span> <span class="st">"10.1101/2023.01.01.123456"</span>,</span>
 <span> <span class="st">"10.1101/2023.02.15.234567"</span></span>
@@ -511,7 +511,7 @@ Check whether bioRxiv DOIs appear in OpenAlex with published links.</p>
 linked to a published version depends on recency and field.</p>
 <p><strong>5. Source selection exercise.</strong>
 This is a qualitative exercise requiring no code.</p>
-<div class="sourceCode" id="cb606"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Recommended answer structure:</span></span>
 <span><span class="co"># 1. OpenAlex: free, broad coverage, good for large-scale analysis</span></span>
 <span><span class="co">#    - Limitation: may under-represent regional journals</span></span>
@@ -533,7 +533,7 @@ with a regional index maximises both coverage and reproducibility.</p>
 </h2>
 <p><strong>1. Fetch works by institution.</strong>
 Find your institution in OpenAlex and retrieve its works.</p>
-<div class="sourceCode" id="cb607"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb609"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -553,7 +553,7 @@ Find your institution in OpenAlex and retrieve its works.</p>
 in regional or non-English journals tend to have lower DOI rates.</p>
 <p><strong>2. Compare Crossref metadata.</strong>
 Retrieve the same work from both APIs and compare.</p>
-<div class="sourceCode" id="cb608"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/rcrossref/">rcrossref</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">sample_doi</span> <span class="op">&lt;-</span> <span class="va">inst_works</span><span class="op">$</span><span class="va">doi</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
@@ -572,7 +572,7 @@ Retrieve the same work from both APIs and compare.</p>
 citation graph. Crossref counts only DOI-based citations; OpenAlex resolves more.</p>
 <p><strong>3. Build a multi-year corpus.</strong>
 Fetch all works from a journal across multiple years.</p>
-<div class="sourceCode" id="cb609"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb611"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journal_works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span> entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span> primary_location.source.id <span class="op">=</span> <span class="st">"S4210174107"</span>,  <span class="co"># example journal ID</span></span>
@@ -599,7 +599,7 @@ growing.</p>
 </h2>
 <p><strong>1. Export and parse.</strong>
 Parse a BibTeX file from Google Scholar using <code>bib2df</code>.</p>
-<div class="sourceCode" id="cb610"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/bib2df/">bib2df</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -612,7 +612,7 @@ Parse a BibTeX file from Google Scholar using <code>bib2df</code>.</p>
 making them less useful for text-based analyses.</p>
 <p><strong>2. Format comparison.</strong>
 Parse the same records from CSV and RIS formats and compare fields.</p>
-<div class="sourceCode" id="cb611"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb613"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bibliometrix.org">bibliometrix</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">csv_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://readr.tidyverse.org/reference/read_delim.html">read_csv</a></span><span class="op">(</span><span class="st">"scopus_export.csv"</span><span class="op">)</span></span>
@@ -628,7 +628,7 @@ Parse the same records from CSV and RIS formats and compare fields.</p>
 keywords that CSV exports may omit; CSVs are easier to manipulate in R.</p>
 <p><strong>3. Standardization function.</strong>
 Write a reusable function to normalise columns.</p>
-<div class="sourceCode" id="cb612"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">standardise_biblio</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">{</span></span>
 <span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>   doi       <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">DI</span> <span class="op"><a href="https://rdrr.io/r/base/Control.html">%||%</a></span> <span class="cn">NA_character_</span>,</span>
@@ -650,7 +650,7 @@ input format, improving reproducibility.</p>
 </h2>
 <p><strong>1. DOI coverage by year.</strong>
 Compute the DOI coverage rate per publication year.</p>
-<div class="sourceCode" id="cb613"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -665,7 +665,7 @@ Compute the DOI coverage rate per publication year.</p>
 became standard practice after the mid-2000s.</p>
 <p><strong>2. Name variants.</strong>
 Detect potential author name duplicates.</p>
-<div class="sourceCode" id="cb614"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/markvanderloo/stringdist">stringdist</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">author_names</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -687,7 +687,7 @@ matching, and shared co-author overlap. OpenAlex author IDs help but are not
 always correct.</p>
 <p><strong>3. ROR lookup.</strong>
 Use the ROR API to resolve institutions.</p>
-<div class="sourceCode" id="cb615"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://httr2.r-lib.org">httr2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">top_insts</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -717,7 +717,7 @@ alone can produce false positives for common institutional names.</p>
 </h2>
 <p><strong>1. Extract and compare.</strong>
 Download a PDF, extract text, and compare the abstract.</p>
-<div class="sourceCode" id="cb616"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ropensci.r-universe.dev/pdftools">pdftools</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -737,7 +737,7 @@ footer noise. The OpenAlex abstract (from publisher metadata) is typically
 cleaner.</p>
 <p><strong>2. Section detection.</strong>
 Write a function to split extracted text into sections.</p>
-<div class="sourceCode" id="cb617"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">split_sections</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">text</span><span class="op">)</span> <span class="op">{</span></span>
 <span> <span class="va">lines</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://stringr.tidyverse.org/reference/str_split.html">str_split</a></span><span class="op">(</span><span class="va">text</span>, <span class="st">"\n"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span> <span class="co"># Match numbered headings like "1. Introduction" or "2 Methods"</span></span>
@@ -764,7 +764,7 @@ Write a function to split extracted text into sections.</p>
 materials, and non-standard numbering all break simple regex patterns.</p>
 <p><strong>3. Table extraction.</strong>
 Extract a table from a PDF using <code>tabulizer</code>.</p>
-<div class="sourceCode" id="cb618"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># tabulapdf needs Java (rJava); shown for reference, not executed.</span></span>
 <span><span class="co"># Install: install.packages("tabulapdf"); requires a working Java runtime.</span></span>
 <span></span>
@@ -784,7 +784,7 @@ whitespace trimming, and removal of empty or merged-cell artefact rows.</p>
 </h2>
 <p><strong>1. Lotka’s law.</strong>
 Fit Lotka’s law using <code>bibliometrix</code>.</p>
-<div class="sourceCode" id="cb619"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bibliometrix.org">bibliometrix</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -797,7 +797,7 @@ Fit Lotka’s law using <code>bibliometrix</code>.</p>
 observed distribution is consistent with the theoretical inverse-square law.</p>
 <p><strong>2. Bradford’s law.</strong>
 Identify core, mid, and peripheral journal zones.</p>
-<div class="sourceCode" id="cb620"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bibliometrix.org">bibliometrix</a></span><span class="op">)</span></span>
 <span></span>
@@ -813,7 +813,7 @@ Identify core, mid, and peripheral journal zones.</p>
 for a disproportionate share of articles — Bradford’s law in action.</p>
 <p><strong>3. Three-field exploration.</strong>
 Use country instead of author name on the left field.</p>
-<div class="sourceCode" id="cb621"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bibliometrix.org">bibliometrix</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/bibliometrix/man/threeFieldsPlot.html">threeFieldsPlot</a></span><span class="op">(</span><span class="va">bib_df</span>, fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU_CO"</span>, <span class="st">"SO"</span>, <span class="st">"DE"</span><span class="op">)</span>,</span>
@@ -822,7 +822,7 @@ Use country instead of author name on the left field.</p>
 patterns: certain countries cluster around specific journals and keywords.</p>
 <p><strong>4. Annual growth rate.</strong>
 Compute the compound annual growth rate (CAGR).</p>
-<div class="sourceCode" id="cb622"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annual</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">publication_year</span> <span class="op">&gt;=</span> <span class="fl">2010</span>, <span class="va">publication_year</span> <span class="op">&lt;=</span> <span class="fl">2023</span><span class="op">)</span></span>
@@ -842,7 +842,7 @@ growth.</p>
 </h2>
 <p><strong>1. Career h-index.</strong>
 Compute h-index, g-index, and m-quotient for a specific author.</p>
-<div class="sourceCode" id="cb623"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -872,7 +872,7 @@ Compute h-index, g-index, and m-quotient for a specific author.</p>
 papers, and the m-quotient adjusts for career length.</p>
 <p><strong>2. Self-citation sensitivity.</strong>
 Pseudocode for removing self-citations from the h-index.</p>
-<div class="sourceCode" id="cb624"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Pseudocode:</span></span>
 <span><span class="co"># 1. For each paper by the author, fetch its citing works</span></span>
 <span><span class="co"># 2. Check if any citing work shares the same author ID</span></span>
@@ -895,7 +895,7 @@ Pseudocode for removing self-citations from the h-index.</p>
 requires verified author matches and citation records; no universal change is assumed.</p>
 <p><strong>3. Empirical resampling of sample ratios.</strong>
 Hold the empirical year reference fixed and resample its observed ratios.</p>
-<div class="sourceCode" id="cb625"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20260509</span><span class="op">)</span></span>
 <span><span class="va">ratios</span> <span class="op">&lt;-</span> <span class="va">works_normalized</span><span class="op">$</span><span class="va">ncs</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">works_normalized</span><span class="op">$</span><span class="va">ncs</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">ratios</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">1L</span><span class="op">)</span></span>
@@ -906,7 +906,7 @@ chosen empirical reference. It ignores uncertainty in that reference and does
 not establish world-normalized impact or a population confidence interval.</p>
 <p><strong>4. Normalization and ranks.</strong>
 Compare the within-sample mean ratio and percentile selection share by year.</p>
-<div class="sourceCode" id="cb626"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">yearly_indicators</span> <span class="op">&lt;-</span> <span class="va">works_with_pct</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
@@ -926,7 +926,7 @@ not rank field-normalized impact; that requires a justified external reference.<
 <p><strong>1. Cohort sensitivity.</strong>
 Use the verified source table and helper from Chapter 11. This code performs a
 new provider request unless that exact query is already cached.</p>
-<div class="sourceCode" id="cb627"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wider_cohort</span> <span class="op">&lt;-</span> <span class="fu">fetch_journal_works</span><span class="op">(</span><span class="va">journals</span><span class="op">$</span><span class="va">source_id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="fl">2019</span>, <span class="fl">2022</span><span class="op">)</span></span>
 <span><span class="fu">summarise_journal_records</span><span class="op">(</span><span class="va">wider_cohort</span><span class="op">)</span></span>
 <span><span class="va">journal_summary</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">source_id</span> <span class="op">==</span> <span class="va">journals</span><span class="op">$</span><span class="va">source_id</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
@@ -936,7 +936,7 @@ one direction. CiteScore requires citations received within its specified
 four-year interval and eligible document types in both numerator and denominator.
 Changing a publication-date filter alone supplies neither requirement.</p>
 <p><strong>2. Descriptive association.</strong></p>
-<div class="sourceCode" id="cb628"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">complete_pairs</span> <span class="op">&lt;-</span> <span class="va">journal_summary</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="va">mean_cumulative_citations</span>, <span class="va">median_recorded_references</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/drop_na.html">drop_na</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -952,7 +952,7 @@ constant observations leave it unavailable. Its sign and magnitude depend on
 the retrieved data. It neither measures citation potential on the citing side
 nor demonstrates field normalisation or agreement with SNIP.</p>
 <p><strong>3. Missing-data denominator.</strong></p>
-<div class="sourceCode" id="cb629"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">invented_records</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"example-1"</span>, <span class="st">"example-2"</span>, <span class="st">"example-3"</span><span class="op">)</span>,</span>
 <span>  cited_by_count <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">20</span>, <span class="cn">NA_real_</span><span class="op">)</span>,</span>
@@ -983,7 +983,7 @@ self-citation threshold or empirical result follows from this chapter’s data.<
 </h2>
 <p><strong>1. Profile comparison.</strong>
 Compare two researchers on multiple indicators.</p>
-<div class="sourceCode" id="cb630"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -1006,7 +1006,7 @@ frequently but with less consistent impact; high mean citations suggest a few
 highly cited papers.</p>
 <p><strong>2. ORCID validation.</strong>
 Compare works fetched by OpenAlex ID vs. ORCID filtering.</p>
-<div class="sourceCode" id="cb631"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oa_by_id</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span>entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>                     author.id <span class="op">=</span> <span class="st">"A5023888391"</span><span class="op">)</span></span>
 <span></span>
@@ -1025,7 +1025,7 @@ Compare works fetched by OpenAlex ID vs. ORCID filtering.</p>
 disambiguation errors, and delayed metadata updates.</p>
 <p><strong>3. Name variant detection.</strong>
 Search for a common name and assess disambiguation.</p>
-<div class="sourceCode" id="cb632"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">wang_wei</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span>entity <span class="op">=</span> <span class="st">"authors"</span>,</span>
 <span>                     search <span class="op">=</span> <span class="st">"Wang Wei"</span><span class="op">)</span></span>
 <span></span>
@@ -1045,7 +1045,7 @@ Search for a common name and assess disambiguation.</p>
 affiliation and ORCID are the most reliable disambiguation features.</p>
 <p><strong>4. Fractional productivity.</strong>
 Recompute productivity using fractional counting.</p>
-<div class="sourceCode" id="cb633"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">author_works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span>entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>                         author.id <span class="op">=</span> <span class="st">"A5023888391"</span><span class="op">)</span></span>
 <span></span>
@@ -1065,7 +1065,7 @@ Recompute productivity using fractional counting.</p>
 collaborate broadly see a larger gap between full and fractional counts.</p>
 <p><strong>5. Self-citation ratio.</strong>
 Estimate the fraction of self-citations for an author.</p>
-<div class="sourceCode" id="cb634"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">target_author</span> <span class="op">&lt;-</span> <span class="st">"A5023888391"</span></span>
 <span></span>
 <span><span class="co"># Sample a subset of the author's works</span></span>
@@ -1094,7 +1094,7 @@ may signal strategic self-citation behaviour.</p>
 </h2>
 <p><strong>1. Country-level analysis.</strong>
 Aggregate by country using full and fractional counts.</p>
-<div class="sourceCode" id="cb635"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">country_counts</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
@@ -1122,7 +1122,7 @@ Switzerland, Singapore) show a larger ratio, meaning full counting inflates
 their apparent output.</p>
 <p><strong>2. PP(top 10%) by institution.</strong>
 Compute the proportion of papers in the top 10% most cited.</p>
-<div class="sourceCode" id="cb636"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute year-specific 90th percentile thresholds</span></span>
 <span><span class="va">thresholds</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1150,7 +1150,7 @@ institution has a few extremely highly cited outliers.</p>
 <p><strong>3. Collaboration intensity.</strong>
 Relate the number of institutional affiliations per paper to counting method
 effects.</p>
-<div class="sourceCode" id="cb637"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">collab_intensity</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">authorships</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">institutions</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1186,7 +1186,7 @@ collaboration intensity are more inflated by full counting.</p>
 </h2>
 <p><strong>1. Half-life comparison.</strong>
 Compare citation half-lives between a mathematics and a biomedical journal.</p>
-<div class="sourceCode" id="cb638"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -1216,7 +1216,7 @@ Compare citation half-lives between a mathematics and a biomedical journal.</p>
 than mathematics journals (8-12 years) because of faster publication cycles.</p>
 <p><strong>2. Price index computation.</strong>
 Compute the fraction of references less than 5 years old.</p>
-<div class="sourceCode" id="cb639"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># For papers with reference data available</span></span>
 <span><span class="va">sample_papers</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">publication_year</span> <span class="op">==</span> <span class="fl">2020</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1238,7 +1238,7 @@ Compute the fraction of references less than 5 years old.</p>
 literature.</p>
 <p><strong>3. Sleeping beauty detection.</strong>
 Identify delayed-recognition papers.</p>
-<div class="sourceCode" id="cb640"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sleeping</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">publication_year</span> <span class="op">&lt;=</span> <span class="fl">2018</span>,</span>
 <span>        <span class="va">cited_by_count</span> <span class="op">&gt;=</span> <span class="fl">20</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1263,7 +1263,7 @@ often represent ahead-of-their-time ideas that gained traction only after a
 paradigm shift.</p>
 <p><strong>4. Median vs. mean aging.</strong>
 Replot aging curves using median citations.</p>
-<div class="sourceCode" id="cb641"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aging_comparison</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>age <span class="op">=</span> <span class="fl">2024</span> <span class="op">-</span> <span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1285,7 +1285,7 @@ up by highly cited outliers. Median is more robust for skewed distributions.</p>
 Use the Scientometrics sample fetched in Chapter 14. Its publication dates span
 2013–2018; the following cohorts end in 2018 and remain within that retrieved
 range. These are current cumulative citation summaries for subsets of a sample.</p>
-<div class="sourceCode" id="cb642"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cohort_end</span> <span class="op">&lt;-</span> <span class="fl">2018</span></span>
 <span><span class="va">cohort_lengths</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">cohort_summaries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map_dfr.html">map_dfr</a></span><span class="op">(</span><span class="va">cohort_lengths</span>, <span class="kw">function</span><span class="op">(</span><span class="va">length_years</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1316,7 +1316,7 @@ citation windows. Missing citation counts remain outside the observed denominato
 </h2>
 <p><strong>1. Fractional counting.</strong>
 Weight edges by 1/(k-1) where k is the number of authors.</p>
-<div class="sourceCode" id="cb643"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -1343,7 +1343,7 @@ Weight edges by 1/(k-1) where k is the number of authors.</p>
 papers. Authors primarily involved in large teams may drop in rank.</p>
 <p><strong>2. Temporal slicing.</strong>
 Build yearly networks and track structural evolution.</p>
-<div class="sourceCode" id="cb644"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">yearly_stats</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_map.html">group_map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">df</span>, <span class="va">key</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1372,7 +1372,7 @@ becomes more common; the number of components may decrease as the field becomes
 more connected.</p>
 <p><strong>3. Betweenness vs. degree.</strong>
 Compare centrality measures for the giant component.</p>
-<div class="sourceCode" id="cb645"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g</span> <span class="op">&lt;-</span> <span class="fu">build_coauth_graph</span><span class="op">(</span><span class="va">works</span><span class="op">)</span></span>
 <span><span class="va">gc</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/subgraph.html">induced_subgraph</a></span><span class="op">(</span><span class="va">g</span>, <span class="fu"><a href="https://r.igraph.org/reference/components.html">components</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">membership</span> <span class="op">==</span></span>
 <span>                         <span class="fu"><a href="https://rdrr.io/r/base/which.min.html">which.max</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/components.html">components</a></span><span class="op">(</span><span class="va">g</span><span class="op">)</span><span class="op">$</span><span class="va">csize</span><span class="op">)</span><span class="op">)</span></span>
@@ -1391,7 +1391,7 @@ Compare centrality measures for the giant component.</p>
 connect otherwise separate groups — they may be interdisciplinary researchers.</p>
 <p><strong>4. Resolution parameter.</strong>
 Vary the Leiden resolution and compare community counts.</p>
-<div class="sourceCode" id="cb646"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">resolutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span><span class="op">)</span></span>
@@ -1415,7 +1415,7 @@ higher resolution reveals tight collaborative teams.</p>
 <p><strong>1. Cosine normalisation.</strong>
 Normalise co-citation strengths by the geometric mean of individual citation
 counts.</p>
-<div class="sourceCode" id="cb647"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb649"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -1435,7 +1435,7 @@ counts.</p>
 highly cited, surfacing topically related pairs that raw counts miss.</p>
 <p><strong>2. Temporal co-citation.</strong>
 Split the corpus into two periods and build separate networks.</p>
-<div class="sourceCode" id="cb648"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">periods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span> early <span class="op">=</span> <span class="va">works</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">publication_year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">2020</span><span class="op">:</span><span class="fl">2021</span><span class="op">)</span>,</span>
 <span> late  <span class="op">=</span> <span class="va">works</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">publication_year</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fl">2022</span><span class="op">:</span><span class="fl">2023</span><span class="op">)</span></span>
@@ -1461,7 +1461,7 @@ Split the corpus into two periods and build separate networks.</p>
 field; new pairs emerging in the later period may signal research-front shifts.</p>
 <p><strong>3. Bibliographic coupling by year.</strong>
 Track modularity and fragmentation of the intellectual structure.</p>
-<div class="sourceCode" id="cb649"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb651"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">yearly_bc</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_map.html">group_map</a></span><span class="op">(</span>\<span class="op">(</span><span class="va">df</span>, <span class="va">key</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1487,7 +1487,7 @@ Track modularity and fragmentation of the intellectual structure.</p>
 increasing modularity suggests specialisation and fragmentation.</p>
 <p><strong>4. Identifying research fronts.</strong>
 Label communities using top title words.</p>
-<div class="sourceCode" id="cb650"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb652"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://juliasilge.github.io/tidytext/">tidytext</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">bc_comm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/cluster_leiden.html">cluster_leiden</a></span><span class="op">(</span><span class="va">g_bc</span>, resolution <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span>
@@ -1515,7 +1515,7 @@ correspond to recognisable subfields or research themes.</p>
 </h2>
 <p><strong>1. Author keywords vs. concepts.</strong>
 Build and compare two co-occurrence networks.</p>
-<div class="sourceCode" id="cb651"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb653"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -1549,7 +1549,7 @@ Build and compare two co-occurrence networks.</p>
 concepts are more standardised but coarser.</p>
 <p><strong>2. Temporal evolution.</strong>
 Track the top keywords by degree over time.</p>
-<div class="sourceCode" id="cb652"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb654"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">yearly_top_kw</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">keywords</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -1575,7 +1575,7 @@ Track the top keywords by degree over time.</p>
 signalling evolving research interests.</p>
 <p><strong>3. Strategic diagram.</strong>
 Plot clusters on a density-centrality plane.</p>
-<div class="sourceCode" id="cb653"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb655"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">comm</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/cluster_leiden.html">cluster_leiden</a></span><span class="op">(</span><span class="va">g_kw</span>, resolution <span class="op">=</span> <span class="fl">1.0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/V.html">V</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">community</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/communities.html">membership</a></span><span class="op">(</span><span class="va">comm</span><span class="op">)</span></span>
 <span></span>
@@ -1603,7 +1603,7 @@ Plot clusters on a density-centrality plane.</p>
 centrality); lower-left clusters are peripheral or emerging topics.</p>
 <p><strong>4. Normalisation comparison.</strong>
 Compare raw and association-strength-normalised networks.</p>
-<div class="sourceCode" id="cb654"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb656"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Association strength: w_ij / (w_i * w_j / 2m)</span></span>
 <span><span class="va">total_weight</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="fu"><a href="https://r.igraph.org/reference/E.html">E</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span><span class="op">)</span></span>
 <span><span class="va">node_strength</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://r.igraph.org/reference/strength.html">strength</a></span><span class="op">(</span><span class="va">g_kw</span><span class="op">)</span></span>
@@ -1630,7 +1630,7 @@ terms, elevating more specific and meaningful keyword pairs.</p>
 </h2>
 <p><strong>1. Alpha sensitivity.</strong>
 Run the disparity filter across multiple alpha values.</p>
-<div class="sourceCode" id="cb655"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb657"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -1660,7 +1660,7 @@ network; very high values retain noise. Typical values of 0.05-0.10 balance
 signal and connectivity.</p>
 <p><strong>2. Threshold vs. disparity.</strong>
 Compare two backbone extraction methods using NMI.</p>
-<div class="sourceCode" id="cb656"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb658"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Threshold filtering: keep edges above median weight</span></span>
@@ -1683,7 +1683,7 @@ strong connections. NMI values below 0.7 indicate meaningfully different
 community structures.</p>
 <p><strong>3. Hierarchical structure.</strong>
 Check whether communities at different resolutions are nested.</p>
-<div class="sourceCode" id="cb657"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb659"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">resolutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1.0</span>, <span class="fl">2.0</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">memberships</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">resolutions</span>, \<span class="op">(</span><span class="va">r</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1707,7 +1707,7 @@ Partial nesting suggests a hierarchical thematic structure with some cross-
 cutting topics.</p>
 <p><strong>4. Weighted vs. unweighted community detection.</strong>
 Remove weights and compare results.</p>
-<div class="sourceCode" id="cb658"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb660"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">g_unweighted</span> <span class="op">&lt;-</span> <span class="va">g_bb</span></span>
 <span><span class="fu"><a href="https://r.igraph.org/reference/E.html">E</a></span><span class="op">(</span><span class="va">g_unweighted</span><span class="op">)</span><span class="op">$</span><span class="va">weight</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span></span>
@@ -1728,7 +1728,7 @@ strong ones.</p>
 </h2>
 <p><strong>1. Multi-institution overlay.</strong>
 Overlay two institutions on the same base map.</p>
-<div class="sourceCode" id="cb659"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb661"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggrepel.slowkow.com/">ggrepel</a></span><span class="op">)</span></span>
 <span></span>
@@ -1752,7 +1752,7 @@ Overlay two institutions on the same base map.</p>
 areas reveal institutional specialisation.</p>
 <p><strong>2. Temporal overlay.</strong>
 Compare the same institution’s profile across two time periods.</p>
-<div class="sourceCode" id="cb660"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb662"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">periods</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span> early <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2018-01-01"</span>, <span class="st">"2019-12-31"</span><span class="op">)</span>,</span>
 <span> late  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"2022-01-01"</span>, <span class="st">"2023-12-31"</span><span class="op">)</span></span>
@@ -1778,7 +1778,7 @@ Compare the same institution’s profile across two time periods.</p>
 suggest declining focus or strategic reorientation.</p>
 <p><strong>3. Country-level overlay.</strong>
 Compare a small and a large country’s publication profiles.</p>
-<div class="sourceCode" id="cb661"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb663"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">countries</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"SG"</span>, <span class="st">"US"</span><span class="op">)</span>  <span class="co"># Singapore vs. United States</span></span>
 <span></span>
 <span><span class="va">country_profiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">countries</span>, \<span class="op">(</span><span class="va">cc</span><span class="op">)</span> <span class="op">{</span></span>
@@ -1809,7 +1809,7 @@ diagonal in selected areas); large countries are more evenly distributed.</p>
 </h2>
 <p><strong>1. Layout comparison.</strong>
 Apply five layouts and compare quality and speed.</p>
-<div class="sourceCode" id="cb662"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb664"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -1834,7 +1834,7 @@ Apply five layouts and compare quality and speed.</p>
 for small networks; DRL scales to large graphs but can produce chaotic layouts.</p>
 <p><strong>2. Interactive filtering.</strong>
 Create a filterable <code>visNetwork</code> visualisation.</p>
-<div class="sourceCode" id="cb663"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb665"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://datastorm-open.github.io/visNetwork/">visNetwork</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">nodes_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
@@ -1854,7 +1854,7 @@ Create a filterable <code>visNetwork</code> visualisation.</p>
 and explore inter-community bridges.</p>
 <p><strong>3. Gephi round-trip.</strong>
 Export to GraphML for use in Gephi.</p>
-<div class="sourceCode" id="cb664"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb666"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Export</span></span>
@@ -1869,7 +1869,7 @@ Export to GraphML for use in Gephi.</p>
 separation; R workflows are more reproducible and automatable.</p>
 <p><strong>4. Colour-blind check.</strong>
 Test colour distinguishability with increasing community counts.</p>
-<div class="sourceCode" id="cb665"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb667"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://ggraph.data-imaginist.com">ggraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://sjmgarnier.github.io/viridis/">viridis</a></span><span class="op">)</span></span>
 <span></span>
@@ -1899,7 +1899,7 @@ beyond that, consider shape or faceting as supplementary channels.</p>
 </h2>
 <p><strong>1. Bigram analysis.</strong>
 Build a DFM from bigrams.</p>
-<div class="sourceCode" id="cb666"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb668"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -1916,7 +1916,7 @@ Build a DFM from bigrams.</p>
 “citation_analysis” that single words miss.</p>
 <p><strong>2. Lexical diversity.</strong>
 Compute the type-token ratio (TTR) per year.</p>
-<div class="sourceCode" id="cb667"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb669"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda.textstats</a></span><span class="op">)</span></span>
 <span></span>
@@ -1947,7 +1947,7 @@ Compute the type-token ratio (TTR) per year.</p>
 TTR suggests diversifying terminology.</p>
 <p><strong>3. Keyness analysis.</strong>
 Identify terms that distinguish a specific year.</p>
-<div class="sourceCode" id="cb668"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb670"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda.textstats</a></span><span class="op">)</span></span>
 <span></span>
@@ -1971,7 +1971,7 @@ Identify terms that distinguish a specific year.</p>
 terms related to LLMs and AI may dominate.</p>
 <p><strong>4. Preprocessing sensitivity.</strong>
 Compare analyses with and without stemming.</p>
-<div class="sourceCode" id="cb669"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb671"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">toks_nostem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://quanteda.io/reference/tokens.html">tokens</a></span><span class="op">(</span><span class="va">corp</span>, remove_punct <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://quanteda.io/reference/tokens_tolower.html">tokens_tolower</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://quanteda.io/reference/tokens_select.html">tokens_remove</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/stopwords/man/stopwords.html">stopwords</a></span><span class="op">(</span><span class="st">"en"</span><span class="op">)</span><span class="op">)</span></span>
@@ -1995,7 +1995,7 @@ are often more interpretable.</p>
 </h2>
 <p><strong>1. K selection.</strong>
 Fit LDA models with multiple values of K and compare coherence.</p>
-<div class="sourceCode" id="cb670"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb672"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">topicmodels</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20260509</span><span class="op">)</span></span>
@@ -2030,7 +2030,7 @@ Fit LDA models with multiple values of K and compare coherence.</p>
 interpretability. There is rarely a single “correct” K.</p>
 <p><strong>2. STM with journal covariate.</strong>
 Fit a Structural Topic Model with journal as a prevalence covariate.</p>
-<div class="sourceCode" id="cb671"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb673"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://www.structuraltopicmodel.com/">stm</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20260509</span><span class="op">)</span></span>
 <span></span>
@@ -2056,7 +2056,7 @@ Fit a Structural Topic Model with journal as a prevalence covariate.</p>
 specialisation; shared topics indicate cross-cutting themes.</p>
 <p><strong>3. Topic labelling.</strong>
 Read top documents per topic to assign labels.</p>
-<div class="sourceCode" id="cb672"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb674"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">topicmodels</span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2078,7 +2078,7 @@ Read top documents per topic to assign labels.</p>
 reading representative documents is essential for meaningful labels.</p>
 <p><strong>4. LDA vs. STM comparison.</strong>
 Compare topics from both models.</p>
-<div class="sourceCode" id="cb673"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb675"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Extract top terms for each model</span></span>
 <span><span class="va">lda_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/terms.html">terms</a></span><span class="op">(</span><span class="va">best_model</span>, <span class="fl">10</span><span class="op">)</span></span>
 <span><span class="va">stm_terms</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/stm/man/labelTopics.html">labelTopics</a></span><span class="op">(</span><span class="va">stm_fit</span>, n <span class="op">=</span> <span class="fl">10</span><span class="op">)</span><span class="op">$</span><span class="va">prob</span></span>
@@ -2104,7 +2104,7 @@ prevalence to shift over time, producing more temporally coherent topics.</p>
 </h2>
 <p><strong>1. Precision and recall.</strong>
 Evaluate RAKE keywords against author keywords.</p>
-<div class="sourceCode" id="cb674"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb676"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bnosac.github.io/udpipe/en/index.html">udpipe</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2136,7 +2136,7 @@ and authors conceptualise keywords differently. Recall is also limited because
 author keywords often include broad terms not in the abstract.</p>
 <p><strong>2. Bigram keywords.</strong>
 Score bigrams by TF-IDF.</p>
-<div class="sourceCode" id="cb675"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://juliasilge.github.io/tidytext/">tidytext</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2158,7 +2158,7 @@ Score bigrams by TF-IDF.</p>
 evaluation” are invisible to unigram methods but highly informative.</p>
 <p><strong>3. Keyword enrichment.</strong>
 Use extracted keywords to build a co-word network for keyword-poor papers.</p>
-<div class="sourceCode" id="cb676"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb678"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://bnosac.github.io/udpipe/en/index.html">udpipe</a></span><span class="op">)</span></span>
 <span></span>
@@ -2194,7 +2194,7 @@ keyword assignments.</p>
 </h2>
 <p><strong>1. Weighted averaging.</strong>
 Use TF-IDF weights for document embedding computation.</p>
-<div class="sourceCode" id="cb677"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb679"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bnosac/word2vec">word2vec</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://juliasilge.github.io/tidytext/">tidytext</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
@@ -2226,7 +2226,7 @@ Use TF-IDF weights for document embedding computation.</p>
 tighter, more meaningful clusters in the UMAP projection.</p>
 <p><strong>2. K-means clustering.</strong>
 Apply k-means to embeddings and compare with LDA topics.</p>
-<div class="sourceCode" id="cb678"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb680"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">20260509</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">embedding_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">doc_embeddings</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span><span class="op">(</span><span class="op">-</span><span class="va">id</span><span class="op">)</span><span class="op">)</span></span>
@@ -2248,7 +2248,7 @@ overlapping but not identical structure because they model different aspects of
 the data.</p>
 <p><strong>3. Pre-trained embeddings.</strong>
 Use SPECTER embeddings via reticulate.</p>
-<div class="sourceCode" id="cb679"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb681"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/reticulate/">reticulate</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Requires Python with transformers installed</span></span>
@@ -2273,7 +2273,7 @@ Use SPECTER embeddings via reticulate.</p>
 semantics better than generic word2vec, especially for similarity search.</p>
 <p><strong>4. Analogy test.</strong>
 Test analogical reasoning in the word2vec model.</p>
-<div class="sourceCode" id="cb680"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb682"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bnosac/word2vec">word2vec</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Test: "journal" - "article" + "book" ≈ ?</span></span>
@@ -2299,7 +2299,7 @@ analogies, reflecting the training corpus.</p>
 </h2>
 <p><strong>1. Relative burst detection.</strong>
 Use proportional frequencies instead of absolute counts.</p>
-<div class="sourceCode" id="cb681"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb683"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Compute keyword proportions by year</span></span>
@@ -2326,7 +2326,7 @@ Use proportional frequencies instead of absolute counts.</p>
 some terms that burst in absolute counts may be merely riding overall growth.</p>
 <p><strong>2. Emergence by journal.</strong>
 Compare emerging keywords across two journals.</p>
-<div class="sourceCode" id="cb682"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb684"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Scientometrics"</span>, <span class="st">"PLOS ONE"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">journal_bursts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">journals</span>, \<span class="op">(</span><span class="va">j</span><span class="op">)</span> <span class="op">{</span></span>
@@ -2353,7 +2353,7 @@ Compare emerging keywords across two journals.</p>
 terms may overlap only for broad methodological advances.</p>
 <p><strong>3. Novelty scoring.</strong>
 Compute document novelty using cosine distance to prior-year centroids.</p>
-<div class="sourceCode" id="cb683"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb685"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://quanteda.io">quanteda</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2391,7 +2391,7 @@ territory; stable scores indicate incremental progress within established
 paradigms.</p>
 <p><strong>4. Validation.</strong>
 Manually validate burst-detected emerging terms.</p>
-<div class="sourceCode" id="cb684"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb686"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Select 5 terms identified as "emerging"</span></span>
 <span><span class="va">emerging_terms</span> <span class="op">&lt;-</span> <span class="va">bursts_relative</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">strength</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2422,7 +2422,7 @@ qualitative sources reduces false positives and increases confidence.</p>
 </h2>
 <p><strong>1. OA citation advantage.</strong>
 Compare citations for OA vs. closed-access papers across journals.</p>
-<div class="sourceCode" id="cb685"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb687"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2449,7 +2449,7 @@ magnitude. Self-selection (better papers go OA) may partially explain the
 effect.</p>
 <p><strong>2. Temporal attention.</strong>
 Track citation accumulation over time for early-attention papers.</p>
-<div class="sourceCode" id="cb686"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb688"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">recent_works</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">publication_year</span> <span class="op">==</span> <span class="fl">2022</span>, <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">counts_by_year</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -2477,7 +2477,7 @@ Track citation accumulation over time for early-attention papers.</p>
 consistent with cumulative advantage (Matthew Effect) in citations.</p>
 <p><strong>3. Cross-field comparison.</strong>
 Compare citation distributions and reference list lengths across fields.</p>
-<div class="sourceCode" id="cb687"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb689"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">biomed</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span>entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>                   primary_location.source.id <span class="op">=</span> <span class="st">"S49861241"</span>,</span>
 <span>                   from_publication_date <span class="op">=</span> <span class="st">"2020-01-01"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2513,7 +2513,7 @@ across fields.</p>
 </h2>
 <p><strong>1. Cross-journal OA comparison.</strong>
 Compare OA rates across three journals in different disciplines.</p>
-<div class="sourceCode" id="cb688"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb690"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2539,7 +2539,7 @@ Compare OA rates across three journals in different disciplines.</p>
 eLife, etc.), while sociology and mathematics lag behind.</p>
 <p><strong>2. Temporal OA growth.</strong>
 Track the year-over-year OA growth rate.</p>
-<div class="sourceCode" id="cb689"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb691"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">oa_growth</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="va">is_oa</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">publication_year</span>, name <span class="op">=</span> <span class="st">"n_oa"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2554,7 +2554,7 @@ Track the year-over-year OA growth rate.</p>
 mandates and Plan S implementation.</p>
 <p><strong>3. OA and collaboration.</strong>
 Test whether author count predicts OA status.</p>
-<div class="sourceCode" id="cb690"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb692"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>n_authors <span class="op">=</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map_int</a></span><span class="op">(</span><span class="va">author</span>, <span class="va">nrow</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span>n_authors <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">pmin</a></span><span class="op">(</span><span class="va">n_authors</span>, <span class="fl">10</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2573,7 +2573,7 @@ mandate it.</p>
 </h2>
 <p><strong>1. Denominator comparison.</strong>
 Use the explicitly synthetic <code>lookup_records</code> from Chapter 28.</p>
-<div class="sourceCode" id="cb691"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb693"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_records</span> <span class="op">&lt;-</span> <span class="va">lookup_records</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">lookup_category</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>share <span class="op">=</span> <span class="va">n</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">)</span></span>
@@ -2587,7 +2587,7 @@ Use the explicitly synthetic <code>lookup_records</code> from Chapter 28.</p>
 A is one third and B one sixth; among matched records, A is two thirds and B one
 third. None of these arbitrary category shares measures gender representation.</p>
 <p><strong>2. Position audit.</strong></p>
-<div class="sourceCode" id="cb692"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb694"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">position_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">author_position</span><span class="op">)</span></span>
 <span><span class="va">position_summary</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">author_position</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2609,7 +2609,7 @@ recover them. No citation-gap or gender-equity conclusion follows from this exer
 </h2>
 <p><strong>1. Retraction rate by field.</strong>
 Compare retraction rates across fields, normalised by corpus size.</p>
-<div class="sourceCode" id="cb693"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb695"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -2637,7 +2637,7 @@ per 1,000) than in computer science, partly reflecting different scrutiny levels
 and reproducibility challenges.</p>
 <p><strong>2. Citation trajectory.</strong>
 Examine when a retracted paper’s citations were received.</p>
-<div class="sourceCode" id="cb694"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb696"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">retracted_paper</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span>entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>                            doi <span class="op">=</span> <span class="st">"10.xxxx/retracted-example"</span><span class="op">)</span></span>
 <span></span>
@@ -2655,7 +2655,7 @@ Examine when a retracted paper’s citations were received.</p>
 indicating that the retraction notice does not always reach citing authors.</p>
 <p><strong>3. Retraction-citation correlation.</strong>
 Test whether pre-retraction citation count predicts post-retraction citations.</p>
-<div class="sourceCode" id="cb695"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb697"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Assuming a set of retracted papers with known retraction years</span></span>
 <span><span class="va">retracted_set</span> <span class="op">&lt;-</span> <span class="va">retracted_works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://tidyr.tidyverse.org/reference/unnest.html">unnest</a></span><span class="op">(</span><span class="va">counts_by_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2681,7 +2681,7 @@ continue to be cited after retraction — the “retraction paradox.”</p>
 </h2>
 <p><strong>1. Funder co-occurrence.</strong>
 Identify frequently co-occurring funder pairs.</p>
-<div class="sourceCode" id="cb696"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb698"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">funder_pairs</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate-joins.html">inner_join</a></span><span class="op">(</span></span>
@@ -2699,7 +2699,7 @@ once per sampled work. An empty result means no co-funding pair was observed in
 this sample; it is not evidence that the funders never collaborate.</p>
 <p><strong>2. Funder portfolios.</strong>
 Prepare a bounded comparison for two funders observed in the sample.</p>
-<div class="sourceCode" id="cb697"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb699"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">funder_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">funder_counts</span><span class="op">$</span><span class="va">funder_id</span>, <span class="fl">2</span><span class="op">)</span></span>
@@ -2723,7 +2723,7 @@ Do not substitute invented identifiers or infer strategic priorities from a
 small journal sample.</p>
 <p><strong>3. Temporal trends.</strong>
 Track funding acknowledgement coverage over time.</p>
-<div class="sourceCode" id="cb698"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb700"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">funding_trend</span> <span class="op">&lt;-</span> <span class="va">funding_works</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>publication_year <span class="op">=</span> <span class="fu">lubridate</span><span class="fu">::</span><span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">publication_year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -2749,7 +2749,7 @@ and report sparse groups and missing publication years.</p>
 Use two journals represented in the Chapter 31 sample. Keep the common sample
 threshold when comparing them, and report the publication years and observed
 sample sizes. These are descriptive sample summaries, not journal rankings.</p>
-<div class="sourceCode" id="cb699"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb701"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">selected_journals</span> <span class="op">&lt;-</span> <span class="va">works_citations</span> <span class="op">|&gt;</span></span>
@@ -2859,7 +2859,7 @@ sample and institutional top-decile shares cannot replace those inputs.</p>
 </h2>
 <p><strong>1. Interaction sensitivity.</strong>
 Use the complete sampled records in <code>cohort_data</code> from Chapter 32.</p>
-<div class="sourceCode" id="cb700"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb702"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">unadjusted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cited_by_count</span> <span class="op">~</span> <span class="va">is_oa</span> <span class="op">*</span> <span class="va">recent_cohort</span>, data <span class="op">=</span> <span class="va">cohort_data</span><span class="op">)</span></span>
 <span><span class="va">adjusted</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cited_by_count</span> <span class="op">~</span> <span class="va">is_oa</span> <span class="op">*</span> <span class="va">recent_cohort</span> <span class="op">+</span> <span class="va">referenced_works_count</span>,</span>
 <span>               data <span class="op">=</span> <span class="va">cohort_data</span><span class="op">)</span></span>
@@ -2870,7 +2870,7 @@ specifications. A difference between them indicates specification sensitivity;
 it does not identify an OA treatment effect or by itself establish the size or
 direction of omitted-variable bias.</p>
 <p><strong>2. Boundary sensitivity.</strong></p>
-<div class="sourceCode" id="cb701"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb703"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alternative</span> <span class="op">&lt;-</span> <span class="va">cohort_data</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>cohort_2018 <span class="op">=</span> <span class="va">year</span> <span class="op">&gt;=</span> <span class="fl">2018</span><span class="op">)</span></span>
 <span><span class="va">alternative_model</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">cited_by_count</span> <span class="op">~</span> <span class="va">is_oa</span> <span class="op">*</span> <span class="va">cohort_2018</span> <span class="op">+</span></span>
 <span>                         <span class="va">referenced_works_count</span>, data <span class="op">=</span> <span class="va">alternative</span><span class="op">)</span></span>
@@ -2881,7 +2881,7 @@ placebo intervention test. Neither a significant nor a non-significant interacti
 establishes parallel counterfactual trends; these data contain different cohorts’
 cumulative citations at retrieval, not annual outcomes around a policy change.</p>
 <p><strong>3. Comparison audit.</strong></p>
-<div class="sourceCode" id="cb702"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">matched</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">control_id</span>, name <span class="op">=</span> <span class="st">"times_used"</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html">arrange</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/desc.html">desc</a></span><span class="op">(</span><span class="va">times_used</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">oa_papers</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">matched</span><span class="op">)</span></span></code></pre></div>
 <p>The original within-year draw can reuse a closed-access paper for multiple OA
@@ -2898,7 +2898,7 @@ account of identification and inference assumptions.</p>
 <p><strong>1. DAS detection.</strong>
 Screen available abstracts for candidate data/code availability mentions, then
 manually validate candidates against full texts and linked resources.</p>
-<div class="sourceCode" id="cb703"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">das_keywords</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"data availability"</span>, <span class="st">"code availability"</span>,</span>
@@ -2920,7 +2920,7 @@ so the match rate is neither a validated DAS rate nor a guaranteed lower bound.
 Inspect full texts and validate precision/recall on an annotated sample.</p>
 <p><strong>2. Cross-journal comparison.</strong>
 Compare metadata completeness and OA rates across journals.</p>
-<div class="sourceCode" id="cb704"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journal_ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S148561398"</span>, <span class="st">"S205292342"</span>, <span class="st">"S4210197613"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">journal_quality</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">map</a></span><span class="op">(</span><span class="va">journal_ids</span>, \<span class="op">(</span><span class="va">jid</span><span class="op">)</span> <span class="op">{</span></span>
@@ -2943,7 +2943,7 @@ Compare metadata completeness and OA rates across journals.</p>
 properties. Inspect actual output and coverage; no association is assumed.</p>
 <p><strong>3. Temporal trends.</strong>
 Track recorded access status and abstract coverage by publication cohort.</p>
-<div class="sourceCode" id="cb705"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">metadata_trends</span> <span class="op">&lt;-</span> <span class="va">works_repro</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
@@ -2968,7 +2968,7 @@ not adoption histories or measures of data/code sharing and reproducibility.</p>
 </h2>
 <p><strong>1. Build a pipeline.</strong>
 Create a <code>_targets.R</code> file for a bibliometric workflow.</p>
-<div class="sourceCode" id="cb706"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/targets/">targets</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># _targets.R content:</span></span>
@@ -3007,7 +3007,7 @@ Create a <code>_targets.R</code> file for a bibliometric workflow.</p>
 dependency-based pipelines.</p>
 <p><strong>2. renv snapshot.</strong>
 Demonstrate dependency management with renv.</p>
-<div class="sourceCode" id="cb707"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Step 1: Initialise renv</span></span>
 <span><span class="co"># renv::init()</span></span>
 <span></span>
@@ -3030,7 +3030,7 @@ Demonstrate dependency management with renv.</p>
 exact reproducibility of package versions across machines and time.</p>
 <p><strong>3. Branching.</strong>
 Use dynamic branching to analyse multiple journals in parallel.</p>
-<div class="sourceCode" id="cb708"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/targets/">targets</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># _targets.R with dynamic branching:</span></span>
@@ -3066,7 +3066,7 @@ journal is processed independently and can run in parallel with
 </h2>
 <p><strong>1. Multi-page dashboard.</strong>
 Create a Quarto dashboard with two pages.</p>
-<div class="sourceCode" id="cb709"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save as dashboard.qmd:</span></span>
 <span><span class="co"># ---</span></span>
 <span><span class="co"># title: "Bibliometric Dashboard"</span></span>
@@ -3101,7 +3101,7 @@ Create a Quarto dashboard with two pages.</p>
 tabs and row/column-level headings (<code>##</code>) for layout.</p>
 <p><strong>2. Linked brushing.</strong>
 Use plotly selection to filter a DT table.</p>
-<div class="sourceCode" id="cb710"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/crosstalk/">crosstalk</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/rstudio/DT">DT</a></span><span class="op">)</span></span>
@@ -3122,7 +3122,7 @@ Use plotly selection to filter a DT table.</p>
 htmlwidget that supports it, without needing Shiny.</p>
 <p><strong>3. Custom tooltips.</strong>
 Add informative hover text to a plotly chart.</p>
-<div class="sourceCode" id="cb711"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://plotly-r.com">plotly</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span></span>
@@ -3146,7 +3146,7 @@ context-rich information on hover, improving dashboard usability.</p>
 </h2>
 <p><strong>1. Institutional template.</strong>
 Create a parameterized report for institutional profiles.</p>
-<div class="sourceCode" id="cb712"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save as inst_profile.qmd:</span></span>
 <span><span class="co"># ---</span></span>
 <span><span class="co"># title: "Institutional Profile"</span></span>
@@ -3197,7 +3197,7 @@ Create a parameterized report for institutional profiles.</p>
 batch rendering generates a portfolio of reports efficiently.</p>
 <p><strong>2. Batch rendering.</strong>
 Render the template for multiple journals.</p>
-<div class="sourceCode" id="cb713"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb715"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/quarto-dev/quarto-r">quarto</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">journals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
@@ -3222,7 +3222,7 @@ Render the template for multiple journals.</p>
 templates scales to hundreds of reports with minimal code.</p>
 <p><strong>3. Conditional content.</strong>
 Add a warning when the sample is too small.</p>
-<div class="sourceCode" id="cb714"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb716"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># In the parameterized .qmd file:</span></span>
 <span><span class="co">#</span></span>
 <span><span class="co"># ```{r}</span></span>
@@ -3247,7 +3247,7 @@ switching — essential for robust automated reports that handle edge cases.</p>
 </h2>
 <p><strong>1. Add network tab.</strong>
 Extend the app with a co-authorship network visualisation.</p>
-<div class="sourceCode" id="cb715"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb717"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://datastorm-open.github.io/visNetwork/">visNetwork</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://r.igraph.org/">igraph</a></span><span class="op">)</span></span>
@@ -3285,7 +3285,7 @@ Extend the app with a co-authorship network visualisation.</p>
 overwhelming the visualisation with hyper-authored papers.</p>
 <p><strong>2. Caching.</strong>
 Implement server-side caching for repeated queries.</p>
-<div class="sourceCode" id="cb716"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb718"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/">shiny</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://memoise.r-lib.org">memoise</a></span><span class="op">)</span></span>
 <span></span>
@@ -3311,7 +3311,7 @@ Implement server-side caching for repeated queries.</p>
 never hits the API twice. Use <code><a href="https://cachem.r-lib.org/reference/cache_disk.html">cachem::cache_disk()</a></code> for production apps.</p>
 <p><strong>3. Deployment.</strong>
 Deploy to shinyapps.io.</p>
-<div class="sourceCode" id="cb717"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb719"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Step 1: Install rsconnect</span></span>
 <span><span class="co"># install.packages("rsconnect")</span></span>
 <span></span>
@@ -3338,7 +3338,7 @@ results, very large corpora) should be handled gracefully with validation
 messages.</p>
 <p><strong>4. biblioshiny comparison.</strong>
 Run biblioshiny and compare features.</p>
-<div class="sourceCode" id="cb718"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb720"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://www.bibliometrix.org">bibliometrix</a></span><span class="op">)</span></span>
 <span><span class="co"># biblioshiny()</span></span>
 <span></span>
@@ -3389,13 +3389,6 @@ workflows with specific analytical requirements.</p>
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -3403,13 +3396,9 @@ workflows with specific analytical requirements.</p>
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -3508,7 +3497,7 @@ workflows with specific analytical requirements.</p>
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

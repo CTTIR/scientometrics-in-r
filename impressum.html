@@ -184,7 +184,7 @@
 <p>Source code released under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.</p>
 <p>Published online: <a class="uri" href="https://cttir.github.io/scientometrics-in-r/">https://cttir.github.io/scientometrics-in-r/</a>
 Source repository: <a class="uri" href="https://github.com/CTTIR/scientometrics-in-r">https://github.com/CTTIR/scientometrics-in-r</a></p>
-<p>Version: 0.1.0 · Build date: 2026-11-10</p>
+<p>Version: 0.1.0 · Build date: 2026-11-11</p>
 <div class="section level2 unnumbered" id="suggested-citation">
 <h2>Suggested citation<a aria-label="anchor" class="anchor" href="#suggested-citation"><i class="fas fa-link"></i></a>
 </h2>
@@ -232,13 +232,6 @@ Source repository: <a class="uri" href="https://github.com/CTTIR/scientometrics-
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -246,13 +239,9 @@ Source repository: <a class="uri" href="https://github.com/CTTIR/scientometrics-
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -317,7 +306,7 @@ Source repository: <a class="uri" href="https://github.com/CTTIR/scientometrics-
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

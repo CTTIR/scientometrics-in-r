@@ -196,7 +196,7 @@
 <h2>
 <span class="header-section-number">36.2</span> Setup<a aria-label="anchor" class="anchor" href="#paramreport-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb510"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -226,7 +226,7 @@
 <span class="header-section-number">36.4.1</span> Defining parameters<a aria-label="anchor" class="anchor" href="#defining-parameters"><i class="fas fa-link"></i></a>
 </h3>
 <p>A parameterized Quarto document starts with parameters in the YAML header:</p>
-<div class="sourceCode" id="cb511"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example YAML header (not executable R):</span></span>
 <span><span class="co">#</span></span>
 <span><span class="co"># ---</span></span>
@@ -242,12 +242,12 @@
 <h3>
 <span class="header-section-number">36.4.2</span> Using parameters in code<a aria-label="anchor" class="anchor" href="#using-parameters-in-code"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb512"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb514"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">journal_id</span> <span class="op">&lt;-</span> <span class="st">"S148561398"</span></span>
 <span><span class="va">journal_name</span> <span class="op">&lt;-</span> <span class="st">"Scientometrics"</span></span>
 <span><span class="va">start_year</span> <span class="op">&lt;-</span> <span class="fl">2020</span></span>
 <span><span class="va">end_year</span> <span class="op">&lt;-</span> <span class="fl">2023</span></span></code></pre></div>
-<div class="sourceCode" id="cb513"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  primary_location.source.id <span class="op">=</span> <span class="va">journal_id</span>,</span>
@@ -259,10 +259,10 @@
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Journal: {journal_name}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Journal: Scientometrics</code></pre>
-<div class="sourceCode" id="cb515"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Period: {start_year}--{end_year}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Period: 2020--2023</code></pre>
-<div class="sourceCode" id="cb517"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Articles retrieved: {nrow(works)}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Articles retrieved: 300</code></pre>
 </div>
@@ -270,7 +270,7 @@
 <h3>
 <span class="header-section-number">36.4.3</span> Automated summary statistics<a aria-label="anchor" class="anchor" href="#automated-summary-statistics"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb519"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">summary_stats</span> <span class="op">&lt;-</span> <span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span></span>
 <span>    total_articles <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -744,7 +744,7 @@
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">mean_citations</td>
-<td class="gt_row gt_right" headers="Value">37.9</td>
+<td class="gt_row gt_right" headers="Value">43</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">median_citations</td>
@@ -752,11 +752,11 @@
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">h_index</td>
-<td class="gt_row gt_right" headers="Value">40</td>
+<td class="gt_row gt_right" headers="Value">41</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">oa_rate</td>
-<td class="gt_row gt_right" headers="Value">56.7</td>
+<td class="gt_row gt_right" headers="Value">54</td>
 </tr>
 </tbody>
 </table></div>
@@ -766,7 +766,7 @@
 <h3>
 <span class="header-section-number">36.4.4</span> Parameterized figure<a aria-label="anchor" class="anchor" href="#parameterized-figure"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb520"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">works</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span><span class="op">(</span>year <span class="op">=</span> <span class="fu"><a href="https://lubridate.tidyverse.org/reference/year.html">year</a></span><span class="op">(</span><span class="va">publication_date</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -786,7 +786,7 @@ Figure 36.1: Annual publication count for the selected journal.
 <h3>
 <span class="header-section-number">36.4.5</span> Batch rendering<a aria-label="anchor" class="anchor" href="#batch-rendering"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb521"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb523"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Render for multiple journals:</span></span>
 <span><span class="va">journals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
 <span>  journal_id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S148561398"</span>, <span class="st">"S202381698"</span>, <span class="st">"S137773608"</span><span class="op">)</span>,</span>
@@ -893,7 +893,7 @@ Figure 36.1: Annual publication count for the selected journal.
 <h2>
 <span class="header-section-number">36.13</span> Session info<a aria-label="anchor" class="anchor" href="#paramreport-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb522"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb524"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
@@ -904,9 +904,10 @@ Figure 36.1: Annual publication count for the selected journal.
 #&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #&gt; 
 #&gt; locale:
-#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8        LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8   
-#&gt;  [6] LC_MESSAGES=C.UTF-8    LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C           LC_TELEPHONE=C        
-#&gt; [11] LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #&gt; 
 #&gt; time zone: UTC
 #&gt; tzcode source: system (glibc)
@@ -915,41 +916,65 @@ Figure 36.1: Annual publication count for the selected journal.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] DT_0.34.0                 plotly_4.12.1             uwot_0.2.5                Matrix_1.7-5             
-#&gt;  [5] word2vec_0.4.1            stm_1.3.8                 topicmodels_0.2-17        quanteda.textstats_0.97.2
-#&gt;  [9] visNetwork_2.1.4          ggraph_2.2.2              tidygraph_1.3.1           igraph_2.3.4             
-#&gt; [13] quanteda_4.5.1            pdftools_3.9.1            arrow_26.0.0              bibliometrix_5.5.0       
-#&gt; [17] RefManageR_1.4.0          bib2df_1.1.2.0            rcrossref_1.2.1           gt_1.4.0                 
-#&gt; [21] tidytext_0.4.3            glue_1.8.1                openalexR_3.1.2           lubridate_1.9.5          
-#&gt; [25] forcats_1.0.1             stringr_1.6.0             dplyr_1.2.1               purrr_1.2.2              
-#&gt; [29] readr_2.2.0               tidyr_1.3.2               tibble_3.3.1              ggplot2_4.0.3            
+#&gt;  [1] DT_0.34.0                 plotly_4.12.1            
+#&gt;  [3] uwot_0.2.5                Matrix_1.7-5             
+#&gt;  [5] word2vec_0.4.1            stm_1.3.8                
+#&gt;  [7] topicmodels_0.2-17        quanteda.textstats_0.97.2
+#&gt;  [9] visNetwork_2.1.4          ggraph_2.2.2             
+#&gt; [11] tidygraph_1.3.1           igraph_2.3.4             
+#&gt; [13] quanteda_4.5.1            pdftools_3.9.1           
+#&gt; [15] arrow_26.0.0              bibliometrix_5.5.0       
+#&gt; [17] RefManageR_1.4.0          bib2df_1.1.2.0           
+#&gt; [19] rcrossref_1.2.1           gt_1.4.0                 
+#&gt; [21] tidytext_0.4.3            glue_1.8.1               
+#&gt; [23] openalexR_3.1.2           lubridate_1.9.5          
+#&gt; [25] forcats_1.0.1             stringr_1.6.0            
+#&gt; [27] dplyr_1.2.1               purrr_1.2.2              
+#&gt; [29] readr_2.2.0               tidyr_1.3.2              
+#&gt; [31] tibble_3.3.1              ggplot2_4.0.3            
 #&gt; [33] tidyverse_2.0.0          
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0      jsonlite_2.0.0         magrittr_2.0.5        
-#&gt;   [6] modeltools_0.2-25      farver_2.1.2           rmarkdown_2.32         fs_2.1.0               vctrs_0.7.3           
-#&gt;  [11] memoise_2.0.1          askpass_1.2.1          base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1 
-#&gt;  [16] curl_8.1.0             broom_1.0.13           janeaustenr_1.0.0      cellranger_1.1.0       sass_0.4.10           
-#&gt;  [21] bslib_0.12.0           htmlwidgets_1.6.4      tokenizers_0.3.0       plyr_1.8.9             httr2_1.3.0           
-#&gt;  [26] cachem_1.1.0           dimensionsR_0.0.3      mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
-#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0           digest_0.6.39          patchwork_1.3.2       
-#&gt;  [36] shinycssloaders_1.1.0  rprojroot_2.1.1        RSpectra_0.16-2        crosstalk_1.2.2        SnowballC_0.7.1       
-#&gt;  [41] labeling_0.4.3         urltools_1.7.3.1       timechange_0.4.0       mgcv_1.9-4             polyclip_1.10-7       
-#&gt;  [46] httr_1.4.9             compiler_4.6.1         here_1.0.2             bit64_4.8.6            withr_3.0.3           
-#&gt;  [51] backports_1.5.1        S7_0.2.2               viridis_0.6.5          ggforce_0.5.0          MASS_7.3-65           
-#&gt;  [56] bibliometrixData_0.3.0 tools_4.6.1            otel_0.2.0             stopwords_2.3          zip_3.0.2             
-#&gt;  [61] httpuv_1.6.17          rentrez_1.2.4          nlme_3.1-169           promises_1.5.0         grid_4.6.1            
-#&gt;  [66] stringdist_0.9.17      reshape2_1.4.5         generics_0.1.4         gtable_0.3.6           tzdb_0.5.0            
-#&gt;  [71] rscopus_0.9.0          ca_0.72                data.table_1.18.6.1    hms_1.1.4              xml2_1.6.0            
-#&gt;  [76] utf8_1.2.6             ggrepel_0.9.8          pillar_1.11.1          nsyllable_1.0.1        vroom_1.7.1           
-#&gt;  [81] later_1.4.8            splines_4.6.1          tweenr_2.0.3           lattice_0.22-9         FNN_1.1.4.1           
-#&gt;  [86] bit_4.6.0              tidyselect_1.2.1       tm_0.7-20              miniUI_0.1.2           downlit_0.4.5         
-#&gt;  [91] knitr_1.52             gridExtra_2.3.1        NLP_0.3-3              bookdown_0.48          stats4_4.6.1          
-#&gt;  [96] crul_1.6.0             xfun_0.62              graphlayouts_1.2.5     matrixStats_1.5.0      humaniformat_0.6.0    
-#&gt; [101] stringi_1.8.9          qpdf_1.4.1             yaml_2.3.12            evaluate_1.0.5         httpcode_0.3.0        
-#&gt; [106] cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4        Rcpp_1.1.2             readxl_1.6.0          
-#&gt; [111] triebeard_0.4.1        XML_3.99-0.25          parallel_4.6.1         assertthat_0.2.1       pubmedR_1.0.2         
-#&gt; [116] slam_0.1-56            viridisLite_0.4.3      scales_1.4.0           crayon_1.5.3           openxlsx_4.2.9        
+#&gt;   [1] bibtex_0.5.3           RColorBrewer_1.1-3     rstudioapi_0.19.0     
+#&gt;   [4] jsonlite_2.0.0         magrittr_2.0.5         modeltools_0.2-25     
+#&gt;   [7] farver_2.1.2           rmarkdown_2.32         fs_2.1.0              
+#&gt;  [10] vctrs_0.7.3            memoise_2.0.1          askpass_1.2.1         
+#&gt;  [13] base64enc_0.1-6        htmltools_0.5.9        contentanalysis_1.1.1 
+#&gt;  [16] curl_8.1.0             broom_1.0.13           janeaustenr_1.0.0     
+#&gt;  [19] cellranger_1.1.0       sass_0.4.10            bslib_0.12.0          
+#&gt;  [22] htmlwidgets_1.6.4      tokenizers_0.3.0       plyr_1.8.9            
+#&gt;  [25] httr2_1.3.0            cachem_1.1.0           dimensionsR_0.0.3     
+#&gt;  [28] mime_0.13              lifecycle_1.0.5        pkgconfig_2.0.3       
+#&gt;  [31] R6_2.6.1               fastmap_1.2.0          shiny_1.14.0          
+#&gt;  [34] digest_0.6.39          patchwork_1.3.2        shinycssloaders_1.1.0 
+#&gt;  [37] rprojroot_2.1.1        RSpectra_0.16-2        crosstalk_1.2.2       
+#&gt;  [40] SnowballC_0.7.1        labeling_0.4.3         urltools_1.7.3.1      
+#&gt;  [43] timechange_0.4.0       mgcv_1.9-4             polyclip_1.10-7       
+#&gt;  [46] httr_1.4.9             compiler_4.6.1         here_1.0.2            
+#&gt;  [49] bit64_4.8.6            withr_3.0.3            backports_1.5.1       
+#&gt;  [52] S7_0.2.2               viridis_0.6.5          ggforce_0.5.0         
+#&gt;  [55] MASS_7.3-65            bibliometrixData_0.3.0 tools_4.6.1           
+#&gt;  [58] otel_0.2.0             stopwords_2.3          zip_3.0.2             
+#&gt;  [61] httpuv_1.6.17          rentrez_1.2.4          nlme_3.1-169          
+#&gt;  [64] promises_1.5.0         grid_4.6.1             stringdist_0.9.17     
+#&gt;  [67] reshape2_1.4.5         generics_0.1.4         gtable_0.3.6          
+#&gt;  [70] tzdb_0.5.0             rscopus_0.9.0          ca_0.72               
+#&gt;  [73] data.table_1.18.6.1    hms_1.1.4              xml2_1.6.0            
+#&gt;  [76] utf8_1.2.6             ggrepel_0.9.8          pillar_1.11.1         
+#&gt;  [79] nsyllable_1.0.1        vroom_1.7.1            later_1.4.8           
+#&gt;  [82] splines_4.6.1          tweenr_2.0.3           lattice_0.22-9        
+#&gt;  [85] FNN_1.1.4.1            bit_4.6.0              tidyselect_1.2.1      
+#&gt;  [88] tm_0.7-20              miniUI_0.1.2           downlit_0.4.5         
+#&gt;  [91] knitr_1.52             gridExtra_2.3.1        NLP_0.3-3             
+#&gt;  [94] bookdown_0.48          stats4_4.6.1           crul_1.6.0            
+#&gt;  [97] xfun_0.62              graphlayouts_1.2.5     matrixStats_1.5.0     
+#&gt; [100] humaniformat_0.6.0     stringi_1.8.9          qpdf_1.4.1            
+#&gt; [103] yaml_2.3.12            evaluate_1.0.5         httpcode_0.3.0        
+#&gt; [106] cli_3.6.6              xtable_1.8-8           jquerylib_0.1.4       
+#&gt; [109] Rcpp_1.1.2             readxl_1.6.0           triebeard_0.4.1       
+#&gt; [112] XML_3.99-0.25          parallel_4.6.1         assertthat_0.2.1      
+#&gt; [115] pubmedR_1.0.2          slam_0.1-56            viridisLite_0.4.3     
+#&gt; [118] scales_1.4.0           crayon_1.5.3           openxlsx_4.2.9        
 #&gt; [121] rlang_1.3.0            fastmatch_1.1-8</code></pre>
 </div>
 </div>
@@ -982,13 +1007,6 @@ Figure 36.1: Annual publication count for the selected journal.
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -996,13 +1014,9 @@ Figure 36.1: Annual publication count for the selected journal.
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -1085,7 +1099,7 @@ Figure 36.1: Annual publication count for the selected journal.
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>

@@ -196,7 +196,7 @@
 <h2>
 <span class="header-section-number">12.2</span> Setup<a aria-label="anchor" class="anchor" href="#author-setup"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://docs.ropensci.org/openalexR">openalexR</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://glue.tidyverse.org/">glue</a></span><span class="op">)</span></span>
@@ -227,7 +227,7 @@
 <span class="header-section-number">12.4.1</span> Retrieving an author entity<a aria-label="anchor" class="anchor" href="#retrieving-an-author-entity"><i class="fas fa-link"></i></a>
 </h3>
 <p>We retrieve the OpenAlex profile for a well-known scientometrician.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">author_entity</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"authors"</span>,</span>
 <span>  search <span class="op">=</span> <span class="st">"Ludo Waltman"</span>,</span>
@@ -237,24 +237,24 @@
 <span><span class="va">author_info</span> <span class="op">&lt;-</span> <span class="va">author_entity</span> <span class="op">|&gt;</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/slice.html">slice</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Name: {author_info$display_name}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; Name: Ludo Waltman</code></pre>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"OpenAlex ID: {author_info$id}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; OpenAlex ID: https://openalex.org/A5027467000</code></pre>
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"ORCID: {author_info$orcid}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; ORCID: https://orcid.org/0000-0001-8249-1752</code></pre>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Works count: {author_info$works_count}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Works count: 478</code></pre>
 <div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Works count: {author_info$works_count}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>#&gt; Works count: 479</code></pre>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"Cited by count: {author_info$cited_by_count}\n"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; Cited by count: 59184</code></pre>
+<pre><code>#&gt; Cited by count: 59811</code></pre>
 </div>
 <div class="section level3" id="fetching-the-authors-works" number="12.4.2">
 <h3>
 <span class="header-section-number">12.4.2</span> Fetching the author’s works<a aria-label="anchor" class="anchor" href="#fetching-the-authors-works"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">author_works</span> <span class="op">&lt;-</span> <span class="fu">fetch_openalex</span><span class="op">(</span></span>
 <span>  entity <span class="op">=</span> <span class="st">"works"</span>,</span>
 <span>  author.id <span class="op">=</span> <span class="va">author_info</span><span class="op">$</span><span class="va">id</span>,</span>
@@ -273,7 +273,7 @@
 <h3>
 <span class="header-section-number">12.4.3</span> Author-level statistics<a aria-label="anchor" class="anchor" href="#author-level-statistics"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">h_idx</span> <span class="op">&lt;-</span> <span class="fu">compute_h_index</span><span class="op">(</span><span class="va">works_slim</span><span class="op">$</span><span class="va">cited_by_count</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">stats</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://tibble.tidyverse.org/reference/tibble.html">tibble</a></span><span class="op">(</span></span>
@@ -753,7 +753,7 @@
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">Total citations</td>
-<td class="gt_row gt_right" headers="Value">30264</td>
+<td class="gt_row gt_right" headers="Value">30453</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">h-index</td>
@@ -761,7 +761,7 @@
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">Mean citations/paper</td>
-<td class="gt_row gt_right" headers="Value">145</td>
+<td class="gt_row gt_right" headers="Value">146</td>
 </tr>
 <tr>
 <td class="gt_row gt_left" headers="Metric">Median citations/paper</td>
@@ -783,7 +783,7 @@
 <h3>
 <span class="header-section-number">12.4.4</span> Publication timeline<a aria-label="anchor" class="anchor" href="#publication-timeline"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">annual</span> <span class="op">&lt;-</span> <span class="va">works_slim</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span><span class="op">(</span><span class="va">year</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span><span class="op">(</span>n_pubs <span class="op">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span><span class="op">(</span><span class="op">)</span>, cites <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span><span class="op">(</span><span class="va">cited_by_count</span><span class="op">)</span>, .groups <span class="op">=</span> <span class="st">"drop"</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -811,7 +811,7 @@ Figure 12.1: Annual publication output and cumulative citation count.
 <h3>
 <span class="header-section-number">12.4.5</span> Top venues<a aria-label="anchor" class="anchor" href="#top-venues"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">venue_counts</span> <span class="op">&lt;-</span> <span class="va">works_slim</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span><span class="op">(</span><span class="va">source_display_name</span><span class="op">)</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/count.html">count</a></span><span class="op">(</span><span class="va">source_display_name</span>, sort <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -832,7 +832,7 @@ Figure 12.2: Top 10 venues by number of publications for this author.
 <h3>
 <span class="header-section-number">12.4.6</span> Checking for name variants<a aria-label="anchor" class="anchor" href="#checking-for-name-variants"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="st">"display_name_alternatives"</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">author_info</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="st">"Known name variants:\n"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">author_info</span><span class="op">$</span><span class="va">display_name_alternatives</span><span class="op">)</span></span>
@@ -841,9 +841,10 @@ Figure 12.2: Top 10 venues by number of publications for this author.
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code>#&gt; Known name variants:
 #&gt; [[1]]
-#&gt;  [1] "L Waltman"             "L. Waltman"            "LUDO WALTMAN"          "Ludo Waltman"         
-#&gt;  [5] "Ludo Waltman, Waltman" "Ludo Waltmann"         "Waltman L."            "Waltman, L."          
-#&gt;  [9] "Waltman, L.R."         "Waltman, LR (Ludo)"    "Waltman, Ludo"         "Waltmann, Ludo"</code></pre>
+#&gt;  [1] "L Waltman"             "L. Waltman"            "LUDO WALTMAN"         
+#&gt;  [4] "Ludo Waltman"          "Ludo Waltman, Waltman" "Ludo Waltmann"        
+#&gt;  [7] "Waltman L."            "Waltman, L."           "Waltman, L.R."        
+#&gt; [10] "Waltman, LR (Ludo)"    "Waltman, Ludo"         "Waltmann, Ludo"</code></pre>
 </div>
 </div>
 <div class="section level2" id="author-diagnostics" number="12.5">
@@ -947,7 +948,7 @@ Figure 12.2: Top 10 venues by number of publications for this author.
 <h2>
 <span class="header-section-number">12.13</span> Session info<a aria-label="anchor" class="anchor" href="#author-sessioninfo"><i class="fas fa-link"></i></a>
 </h2>
-<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/sessionInfo.html">sessionInfo</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <pre><code>#&gt; R version 4.6.1 (2026-06-24)
 #&gt; Platform: x86_64-pc-linux-gnu
@@ -958,9 +959,10 @@ Figure 12.2: Top 10 venues by number of publications for this author.
 #&gt; LAPACK: /usr/lib/x86_64-linux-gnu/openblas-pthread/libopenblasp-r0.3.26.so;  LAPACK version 3.12.0
 #&gt; 
 #&gt; locale:
-#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8        LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8   
-#&gt;  [6] LC_MESSAGES=C.UTF-8    LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C           LC_TELEPHONE=C        
-#&gt; [11] LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
+#&gt;  [1] LC_CTYPE=C.UTF-8       LC_NUMERIC=C           LC_TIME=C.UTF-8       
+#&gt;  [4] LC_COLLATE=C.UTF-8     LC_MONETARY=C.UTF-8    LC_MESSAGES=C.UTF-8   
+#&gt;  [7] LC_PAPER=C.UTF-8       LC_NAME=C              LC_ADDRESS=C          
+#&gt; [10] LC_TELEPHONE=C         LC_MEASUREMENT=C.UTF-8 LC_IDENTIFICATION=C   
 #&gt; 
 #&gt; time zone: UTC
 #&gt; tzcode source: system (glibc)
@@ -969,33 +971,49 @@ Figure 12.2: Top 10 venues by number of publications for this author.
 #&gt; [1] stats     graphics  grDevices utils     datasets  methods   base     
 #&gt; 
 #&gt; other attached packages:
-#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0 RefManageR_1.4.0   bib2df_1.1.2.0    
-#&gt;  [7] rcrossref_1.2.1    gt_1.4.0           tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
-#&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2        readr_2.2.0        tidyr_1.3.2       
-#&gt; [19] tibble_3.3.1       ggplot2_4.0.3      tidyverse_2.0.0   
+#&gt;  [1] quanteda_4.5.1     pdftools_3.9.1     arrow_26.0.0       bibliometrix_5.5.0
+#&gt;  [5] RefManageR_1.4.0   bib2df_1.1.2.0     rcrossref_1.2.1    gt_1.4.0          
+#&gt;  [9] tidytext_0.4.3     glue_1.8.1         openalexR_3.1.2    lubridate_1.9.5   
+#&gt; [13] forcats_1.0.1      stringr_1.6.0      dplyr_1.2.1        purrr_1.2.2       
+#&gt; [17] readr_2.2.0        tidyr_1.3.2        tibble_3.3.1       ggplot2_4.0.3     
+#&gt; [21] tidyverse_2.0.0   
 #&gt; 
 #&gt; loaded via a namespace (and not attached):
-#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0           rlang_1.3.0            magrittr_2.0.5        
-#&gt;   [6] otel_0.2.0             compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0         pkgconfig_2.0.3       
-#&gt;  [11] fastmap_1.2.0          labeling_0.4.3         ca_0.72                utf8_1.2.6             promises_1.5.0        
-#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0              xfun_0.62              cachem_1.1.0          
-#&gt;  [21] jsonlite_2.0.0         SnowballC_0.7.1        later_1.4.8            parallel_4.6.1         stopwords_2.3         
-#&gt;  [26] R6_2.6.1               bslib_0.12.0           stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
-#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2             bookdown_0.48          knitr_1.52            
-#&gt;  [36] triebeard_0.4.1        base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17          Matrix_1.7-5          
-#&gt;  [41] igraph_2.3.4           timechange_0.4.0       tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
-#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5          miniUI_0.1.2           humaniformat_0.6.0    
-#&gt;  [51] curl_8.1.0             qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9             shiny_1.14.0          
-#&gt;  [56] withr_3.0.3            S7_0.2.2               askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
-#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1          janeaustenr_1.0.0      DT_0.34.0             
-#&gt;  [66] plotly_4.12.1          generics_0.1.4         rprojroot_2.1.1        hms_1.1.4              scales_1.4.0          
-#&gt;  [71] xtable_1.8-8           contentanalysis_1.1.1  tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
-#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0               visNetwork_2.1.4       fastmatch_1.1-8       
-#&gt;  [81] grid_4.6.1             bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0          dimensionsR_0.0.3     
-#&gt;  [86] bibliometrixData_0.3.0 cli_3.6.6              viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
-#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8          crul_1.6.0             htmlwidgets_1.6.4     
-#&gt;  [96] farver_2.1.2           memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5        httr_1.4.9            
-#&gt; [101] here_1.0.2             mime_0.13              bit64_4.8.6</code></pre>
+#&gt;   [1] gridExtra_2.3.1        httr2_1.3.0            readxl_1.6.0          
+#&gt;   [4] rlang_1.3.0            magrittr_2.0.5         otel_0.2.0            
+#&gt;   [7] compiler_4.6.1         vctrs_0.7.3            httpcode_0.3.0        
+#&gt;  [10] pkgconfig_2.0.3        fastmap_1.2.0          labeling_0.4.3        
+#&gt;  [13] ca_0.72                utf8_1.2.6             promises_1.5.0        
+#&gt;  [16] rmarkdown_2.32         tzdb_0.5.0             bit_4.6.0             
+#&gt;  [19] xfun_0.62              cachem_1.1.0           jsonlite_2.0.0        
+#&gt;  [22] SnowballC_0.7.1        later_1.4.8            parallel_4.6.1        
+#&gt;  [25] stopwords_2.3          R6_2.6.1               bslib_0.12.0          
+#&gt;  [28] stringi_1.8.9          RColorBrewer_1.1-3     cellranger_1.1.0      
+#&gt;  [31] jquerylib_0.1.4        assertthat_0.2.1       Rcpp_1.1.2            
+#&gt;  [34] bookdown_0.48          knitr_1.52             triebeard_0.4.1       
+#&gt;  [37] base64enc_0.1-6        rentrez_1.2.4          httpuv_1.6.17         
+#&gt;  [40] Matrix_1.7-5           igraph_2.3.4           timechange_0.4.0      
+#&gt;  [43] tidyselect_1.2.1       stringdist_0.9.17      pubmedR_1.0.2         
+#&gt;  [46] rstudioapi_0.19.0      yaml_2.3.12            viridis_0.6.5         
+#&gt;  [49] miniUI_0.1.2           humaniformat_0.6.0     curl_8.1.0            
+#&gt;  [52] qpdf_1.4.1             lattice_0.22-9         plyr_1.8.9            
+#&gt;  [55] shiny_1.14.0           withr_3.0.3            S7_0.2.2              
+#&gt;  [58] askpass_1.2.1          evaluate_1.0.5         zip_3.0.2             
+#&gt;  [61] xml2_1.6.0             shinycssloaders_1.1.0  pillar_1.11.1         
+#&gt;  [64] janeaustenr_1.0.0      DT_0.34.0              plotly_4.12.1         
+#&gt;  [67] generics_0.1.4         rprojroot_2.1.1        hms_1.1.4             
+#&gt;  [70] scales_1.4.0           xtable_1.8-8           contentanalysis_1.1.1 
+#&gt;  [73] tools_4.6.1            data.table_1.18.6.1    tokenizers_0.3.0      
+#&gt;  [76] openxlsx_4.2.9         XML_3.99-0.25          fs_2.1.0              
+#&gt;  [79] visNetwork_2.1.4       fastmatch_1.1-8        grid_4.6.1            
+#&gt;  [82] bibtex_0.5.3           urltools_1.7.3.1       rscopus_0.9.0         
+#&gt;  [85] dimensionsR_0.0.3      bibliometrixData_0.3.0 cli_3.6.6             
+#&gt;  [88] viridisLite_0.4.3      downlit_0.4.5          gtable_0.3.6          
+#&gt;  [91] sass_0.4.10            digest_0.6.39          ggrepel_0.9.8         
+#&gt;  [94] crul_1.6.0             htmlwidgets_1.6.4      farver_2.1.2          
+#&gt;  [97] memoise_2.0.1          htmltools_0.5.9        lifecycle_1.0.5       
+#&gt; [100] httr_1.4.9             here_1.0.2             mime_0.13             
+#&gt; [103] bit64_4.8.6</code></pre>
 </div>
 </div>
 <!-- Dark/light mode toggle -->
@@ -1027,13 +1045,6 @@ Figure 12.2: Top 10 venues by number of publications for this author.
     var extraList = document.querySelector(".book-extra ul.list-unstyled");
     if (!extraList) return;
 
-    var src = document.getElementById("book-source");
-    var sourcePath = null;
-    if (src && src.href) {
-      var match = src.href.match(/blob\/[^/]+\/(.+\.Rmd)$/);
-      if (match) sourcePath = decodeURIComponent(match[1]);
-    }
-
     fetch("downloads.json", { cache: "no-cache" })
       .then(function (response) {
         return response.ok ? response.json() : null;
@@ -1041,13 +1052,9 @@ Figure 12.2: Top 10 venues by number of publications for this author.
       .then(function (inventory) {
         if (!inventory) return;
         var book = inventory.book || {};
-        var chapters = inventory.chapters || {};
         var links = [];
         if (book.pdf) links.push(["book-pdf-full", book.pdf, "Entire book (PDF)"]);
         if (book.epub) links.push(["book-epub-full", book.epub, "Entire book (EPUB)"]);
-        if (sourcePath && chapters[sourcePath]) {
-          links.push(["book-pdf-chapter", chapters[sourcePath], "This chapter (PDF)"]);
-        }
         if (!links.length) return;
 
         function insertLinks(list, suffix) {
@@ -1131,7 +1138,7 @@ Figure 12.2: Top 10 venues by number of publications for this author.
 </div> <!-- .container -->
 <footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
 <div class="col-12 col-md-6 mt-3">
-<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-10.</p>
+<p>"<strong>Scientometrics in R</strong>: Bibliometrics, Network Science, and Research Evaluation" was written by R. Heller. It was last built on 2026-11-11.</p>
 </div>
 <div class="col-12 col-md-6 mt-3">
 <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
