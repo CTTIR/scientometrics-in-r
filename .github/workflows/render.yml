@@ -122,6 +122,10 @@ jobs:
           java -jar "$epubcheck_dir/epubcheck-5.4.0/epubcheck.jar" \
             --failonwarnings docs/scientometrics-in-r.epub
 
+      # The LaTeX source is a build intermediate, not a published download.
+      - name: Keep the LaTeX source off the site
+        run: find docs -name '*.tex' -print -delete
+
       - name: Inventory available downloads
         run: Rscript scripts/build-download-manifest.R
 

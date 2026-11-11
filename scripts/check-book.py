@@ -24,7 +24,8 @@ def check(root, book, downloads=True):
     root=root.resolve(); pages={p:Page(p.read_text(errors='replace')) for p in root.rglob('*.html')}
     errors=[]; refs=0
     if not (root/'index.html').is_file(): errors.append(['index.html','missing landing page'])
-    # Chapter downloads live in downloads/chapters/, not the retired split.
+    # Build intermediates and the retired chapter split stay off the site.
+    errors+=[[str(p.relative_to(root)),'unpublished build file'] for p in sorted(root.rglob('*.tex'))]
     if (root/'pdf-chapters').exists(): errors.append(['pdf-chapters','retired chapter PDF folder'])
     for file,page in pages.items():
         relative=str(file.relative_to(root))

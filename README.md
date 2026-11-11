@@ -213,6 +213,7 @@ python3 scripts/check-book.py
 ```
 
 The final check fails on missing author/date notes, broken local links or anchors,
-and missing or unreadable whole-book PDF/EPUB files. CI then builds and checks
-the chapter PDF and EPUB downloads in `docs/downloads/chapters/` with
+missing or unreadable whole-book PDF/EPUB files, and LaTeX sources left in `docs/`
+(delete `docs/*.tex` first; the LaTeX file is a build intermediate). CI then builds
+and checks the chapter PDF and EPUB downloads in `docs/downloads/chapters/` with
 `scripts/build-downloads-ci.sh`.
