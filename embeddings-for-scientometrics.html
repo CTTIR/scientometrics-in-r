@@ -283,17 +283,17 @@
 <span><span class="op">}</span></span></code></pre></div>
 <pre><code>#&gt; Nearest neighbours of 'citation':
 #&gt; $citation
-#&gt;       term1        term2 similarity rank
-#&gt; 1  citation   allocating      0.729    1
-#&gt; 2  citation        tests      0.717    2
-#&gt; 3  citation      indexes      0.692    3
-#&gt; 4  citation   facilitate      0.692    4
-#&gt; 5  citation    dependent      0.691    5
-#&gt; 6  citation        power      0.690    6
-#&gt; 7  citation   percentile      0.690    7
-#&gt; 8  citation           ir      0.686    8
-#&gt; 9  citation standardized      0.684    9
-#&gt; 10 citation     wilcoxon      0.684   10</code></pre>
+#&gt;       term1      term2 similarity rank
+#&gt; 1  citation allocating      0.737    1
+#&gt; 2  citation    indices      0.722    2
+#&gt; 3  citation   contexts      0.706    3
+#&gt; 4  citation percentile      0.696    4
+#&gt; 5  citation  collected      0.691    5
+#&gt; 6  citation    indexes      0.690    6
+#&gt; 7  citation normalised      0.681    7
+#&gt; 8  citation        asn      0.679    8
+#&gt; 9  citation      basis      0.679    9
+#&gt; 10 citation      tests      0.678   10</code></pre>
 </div>
 <div class="section level3" id="computing-document-embeddings-via-mean-pooling" number="24.4.3">
 <h3>
@@ -369,7 +369,7 @@ Figure 24.1: UMAP projection of document embeddings, coloured by publication yea
 <code class="sourceCode R"><span><span class="fu"><a href="https://purrr.tidyverse.org/reference/map.html">walk</a></span><span class="op">(</span><span class="va">top_similar</span>, \<span class="op">(</span><span class="va">i</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/cat.html">cat</a></span><span class="op">(</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html">glue</a></span><span class="op">(</span><span class="st">"  [{round(sims[i], 3)}] {text_df_valid$title[i]}\n"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span></code></pre></div>
-<pre><code>#&gt; [0.874] Scientific eminence and scientific hierarchy: bibliometric prediction of fellowship in the Australian Academy of Science[0.865] A qualitative and quantitative analysis of open citations to retracted articles: the Wakefield 1998 et al.'s case[0.862] Publishing volumes in major databases related to Covid-19[0.857] The link between countries’ economic and scientific wealth has a complex dependence on technological activity and research policy[0.848] The relationship between usage and citations in an open access mega-journal</code></pre>
+<pre><code>#&gt; [0.871] Scientific eminence and scientific hierarchy: bibliometric prediction of fellowship in the Australian Academy of Science[0.863] A qualitative and quantitative analysis of open citations to retracted articles: the Wakefield 1998 et al.'s case[0.862] Publishing volumes in major databases related to Covid-19[0.856] The link between countries’ economic and scientific wealth has a complex dependence on technological activity and research policy[0.85] Academic social networks metrics: an effective indicator for university performance?</code></pre>
 </div>
 <div class="section level3" id="embedding-clusters-vs.-citation-impact" number="24.4.6">
 <h3>
